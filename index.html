@@ -136,6 +136,9 @@
   .entry .what .talk-title { font-family: "Source Serif 4", Georgia, serif; font-style: italic; color: var(--ink); }
   .entry .what .award { color: var(--accent); font-weight: 600; }
   .news { display: inline-block; margin-top: 0.2rem; font-size: 0.92rem; }
+  /* Chặn bôi đen chữ; link và nút vẫn bấm được. Riêng chân trang (email) vẫn bôi đen được. */
+  body { -webkit-user-select: none; user-select: none; }
+  footer, footer a { -webkit-user-select: text; user-select: text; }
 </style>
 </head>
 <body>
