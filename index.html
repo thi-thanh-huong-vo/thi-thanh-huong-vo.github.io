@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thi Thanh Huong Vo — Ga₂O₃ Researcher</title>
+<meta name="description" content="Thi Thanh Huong Vo — researcher in β-Ga₂O₃ Schottky barrier diodes, reliability, and X-ray detection. CV, publications, ORCID and LinkedIn.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fcfcfd;
+    --ink: #1d2230;
+    --muted: #5d6475;
+    --rule: #e3e5ec;
+    --accent: #4a3f8c;      /* deep-UV violet: β-Ga₂O₃ absorbs near 250–260 nm */
+    --accent-soft: #eeecf7;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #15171e; --ink: #e6e7ec; --muted: #9ea3b3;
+      --rule: #2b2f3b; --accent: #a99df0; --accent-soft: #252338;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #15171e; --ink: #e6e7ec; --muted: #9ea3b3;
+    --rule: #2b2f3b; --accent: #a99df0; --accent-soft: #252338;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem; line-height: 1.6;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.25rem 4rem; }
+  h1, h2, .serif { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; }
+  a { color: var(--accent); text-underline-offset: 0.18em; }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* Header */
+  header { padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  .formula {
+    font-family: "Source Serif 4", Georgia, serif; font-style: italic;
+    color: var(--accent); font-size: 1.05rem; margin: 0 0 0.75rem;
+  }
+  h1 { font-size: clamp(2.1rem, 7vw, 2.9rem); font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+  .role { color: var(--muted); margin: 0.75rem 0 0; font-size: 1.05rem; max-width: 36rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 0.95rem; border: 1px solid var(--rule); border-radius: 6px;
+    color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    background: transparent; min-height: 44px;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .btn.primary:hover { opacity: 0.9; color: var(--paper); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+
+  /* Sections */
+  section { padding-top: 2.5rem; }
+  h2 { font-size: 1.45rem; font-weight: 600; margin: 0 0 1rem; }
+  h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+  p { margin: 0 0 1rem; }
+  .lead { font-family: "Source Serif 4", Georgia, serif; font-size: 1.12rem; line-height: 1.7; }
+
+  ol.pubs { list-style: none; padding: 0; margin: 0; counter-reset: pub; }
+  ol.pubs li { position: relative; padding: 0 0 1rem 2.4rem; }
+  ol.pubs li::before {
+    counter-increment: pub; content: counter(pub);
+    position: absolute; left: 0; top: 0.1rem; width: 1.7rem; text-align: right;
+    color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums;
+  }
+  .pub-title { display: block; }
+  .pub-meta { display: block; color: var(--muted); font-size: 0.92rem; }
+  .pub-meta em { font-family: "Source Serif 4", Georgia, serif; }
+  .tag {
+    display: inline-block; font-size: 0.78rem; padding: 0.05rem 0.45rem; margin-left: 0.3rem;
+    border-radius: 4px; background: var(--accent-soft); color: var(--accent); vertical-align: 1px;
+  }
+
+  .entry { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.25rem 1.25rem; padding-bottom: 1.1rem; }
+  .entry .when { color: var(--muted); font-size: 0.92rem; font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
+  .entry .what strong { font-weight: 600; }
+  .entry .what span { display: block; color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 34rem) {
+    main { padding-top: 2.5rem; }
+    .entry { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem 1.5rem; }
+  .skills div strong { display: block; font-weight: 600; margin-bottom: 0.15rem; }
+  .skills div span { color: var(--muted); font-size: 0.95rem; }
+
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <p class="formula">β-Ga₂O₃ · wide-bandgap semiconductors</p>
+  <h1>Thi Thanh Huong Vo</h1>
+  <p class="role">Researcher in Ga₂O₃ Schottky barrier diodes: reliability, trap dynamics, high-temperature behavior and X-ray detection. Currently seeking a PhD position in Materials Science and Engineering.</p>
+  <nav class="links" aria-label="Profiles and contact">
+    <a class="btn primary" href="CV.pdf" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+      Download CV
+    </a>
+    <a class="btn" href="https://orcid.org/0009-0002-2561-954X" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#A6CE39"/><path fill="#fff" d="M8.1 7.2a.9.9 0 110 1.8.9.9 0 010-1.8zM7.4 10h1.4v7.2H7.4zM10.6 10h3.1c3 0 4.3 2.1 4.3 3.6 0 1.7-1.3 3.6-4.3 3.6h-3.1zm1.4 1.3v4.6h1.6c2.2 0 2.8-1.4 2.8-2.3 0-1.1-.7-2.3-2.8-2.3z"/></svg>
+      ORCID
+    </a>
+    <a class="btn" href="https://www.linkedin.com/in/thanhhuongvo/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#0A66C2"/><path fill="#fff" d="M6.9 9.4h2.4V18H6.9zM8.1 5.6a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zM10.8 9.4h2.3v1.2c.3-.6 1.1-1.4 2.4-1.4 2.5 0 3 1.7 3 3.8V18h-2.4v-4.4c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3V18h-2.4z"/></svg>
+      LinkedIn
+    </a>
+    <a class="btn" href="mailto:vohuong2702@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      Email
+    </a>
+  </nav>
+</header>
+
+<section aria-labelledby="about">
+  <h2 id="about">Research</h2>
+  <p class="lead">My work connects experiment and TCAD simulation to understand how Ga₂O₃ Schottky barrier diodes behave under heat, pulsed bias and radiation. I study capacitance–voltage behavior from 300 to 673 K, reverse low-bias conduction and trap dynamics with pulsed current and single-voltage-pulse methods, and apply Ga₂O₃ diodes and thin films as sensitive X-ray detectors.</p>
+  <p>Keywords: wide-bandgap semiconductors, reliability, electrical and optoelectronic characterization.</p>
+</section>
+
+<section aria-labelledby="pubs">
+  <h2 id="pubs">Journal publications</h2>
+
+  <h3>Electrical characterization and power devices</h3>
+  <ol class="pubs">
+    <li><span class="pub-title">Recent advances in Ga₂O₃ Schottky diodes for high-temperature power and optoelectronic devices</span>
+      <span class="pub-meta"><em>Progress in Quantum Electronics</em>, 2026 <span class="tag">1st author</span> <span class="tag">Review</span></span></li>
+    <li><span class="pub-title">Direct probing of trap dynamics in β-Ga₂O₃ Schottky barrier diodes using single-voltage-pulse characterization</span>
+      <span class="pub-meta"><em>Advanced Science</em>, 2025 <span class="tag">1st author</span></span></li>
+    <li><span class="pub-title">Investigating reverse low-bias conduction mechanisms in Ga₂O₃ Schottky barrier diodes using pulsed current methods</span>
+      <span class="pub-meta"><em>ACS Applied Electronic Materials</em>, 2025 <span class="tag">1st author</span></span></li>
+    <li><span class="pub-title">Correlation between experimental and modeled capacitance–voltage characteristics of Ga₂O₃ Schottky barrier diode in temperature range of 300–673 K</span>
+      <span class="pub-meta"><em>Physica B: Condensed Matter</em>, 2025 <span class="tag">1st author</span></span></li>
+    <li><span class="pub-title">Temperature-dependent capacitance–voltage characteristics of β-Ga₂O₃ Schottky barrier diodes with (001) epitaxial grown layer using MOCVD</span>
+      <span class="pub-meta"><em>Materials Science in Semiconductor Processing</em>, 2024 <span class="tag">1st author</span></span></li>
+  </ol>
+
+  <h3>X-ray detection</h3>
+  <ol class="pubs">
+    <li><span class="pub-title">Soft X-ray shielding characteristics of natural wood films with varying densities evaluated using a Ga₂O₃ Schottky diode detector</span>
+      <span class="pub-meta"><em>Applied Physics Letters</em>, 2026 <span class="tag">1st author</span></span></li>
+    <li><span class="pub-title">Performance NiCo/β-Ga₂O₃ Schottky interfaces for low-dose X-ray detection and imaging</span>
+      <span class="pub-meta"><em>ACS Photonics</em>, 2026 <span class="tag">Co-author</span></span></li>
+    <li><span class="pub-title">Thermally stable X-ray detector using β-Ga₂O₃ Schottky barrier diodes in extreme environments</span>
+      <span class="pub-meta"><em>Applied Materials Today</em>, 2025 <span class="tag">Co-author</span></span></li>
+    <li><span class="pub-title">High-sensitivity X-ray detection of stacked A4 sheets using Ga₂O₃ Schottky barrier diodes: toward low-dose imaging and material discrimination</span>
+      <span class="pub-meta"><em>Applied Physics Letters</em>, 2025 <span class="tag">1st author</span></span></li>
+    <li><span class="pub-title">Charge neutral point shift of a 700 nm-thick α-Ga₂O₃ thin-film detector under soft X-ray irradiation</span>
+      <span class="pub-meta"><em>ACS Applied Electronic Materials</em>, 2024 <span class="tag">1st author</span></span></li>
+    <li><span class="pub-title">Investigating the impact of source-to-detector distance via neutral point modulation in Ga₂O₃ MSM X-ray detectors</span>
+      <span class="pub-meta"><em>Applied Physics Letters</em>, submitted <span class="tag">1st author</span></span></li>
+  </ol>
+  <p>Full and up-to-date list on <a href="https://orcid.org/0009-0002-2561-954X" target="_blank" rel="noopener">ORCID</a>.</p>
+
+  <h3>Conference proceedings</h3>
+  <ol class="pubs">
+    <li><span class="pub-title">Gallium oxide: an emerging semiconductor for next-generation power electronics</span>
+      <span class="pub-meta"><em>ACVYS</em>, 2025</span></li>
+    <li><span class="pub-title">Time dependence of charge neutral point of thin α-Ga₂O₃ under 5 kV soft X-ray</span>
+      <span class="pub-meta"><em>ACVYS</em>, 2024</span></li>
+  </ol>
+</section>
+
+<section aria-labelledby="awards">
+  <h2 id="awards">Awards</h2>
+  <div class="entry">
+    <div class="when">2025</div>
+    <div class="what"><strong>Best oral presentation</strong>, 11th Annual Conference of Vietnamese Young Scientists
+      <span>Gallium oxide: an emerging semiconductor for next-generation power and diode applications</span></div>
+  </div>
+  <div class="entry">
+    <div class="when">2024</div>
+    <div class="what"><strong>Outstanding Young Researcher Award</strong>, 11th Asia-Pacific Workshop on Widegap Semiconductors (APWS 2024)
+      <span>Charge neutral point shift of α-Ga₂O₃ thin film upon soft X-ray irradiation</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="edu">
+  <h2 id="edu">Education</h2>
+  <div class="entry">
+    <div class="when">2022 – 2025</div>
+    <div class="what"><strong>M.Sc., Materials Science and Engineering</strong>, Korea Aerospace University, Republic of Korea
+      <span>Major in drone materials and components · GPA 4.0/4.5</span>
+      <span>Thesis: Investigation of the temperature dependence of Ga₂O₃ Schottky barrier diode characteristics (C-V-T and experiment–simulation correlation at high temperature)</span></div>
+  </div>
+  <div class="entry">
+    <div class="when">2015 – 2019</div>
+    <div class="what"><strong>B.Ed., Physics Teacher Education</strong>, Ho Chi Minh City University of Education, Vietnam
+      <span>GPA 3.25/4.0 · Thesis: Time evolution of nuclear wave-packets in vibrating molecules</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="exp">
+  <h2 id="exp">Experience</h2>
+  <div class="entry">
+    <div class="when">2022 – now</div>
+    <div class="what"><strong>Researcher</strong>, Korea Aerospace University, Republic of Korea</div>
+  </div>
+  <div class="entry">
+    <div class="when">2021 – 2022</div>
+    <div class="what"><strong>Researcher</strong>, High-tech Institute, Nguyen Tat Thanh University, Vietnam</div>
+  </div>
+  <div class="entry">
+    <div class="when">2018 – 2021</div>
+    <div class="what"><strong>Physics and mathematics teacher</strong>, high schools and education centers in Ho Chi Minh City, Vietnam
+      <span>Vo Truong Toan and Gia Dinh High Schools, Giang Hang Education Center, Soroban Linear Thinking Center; co-creator and content writer at Trang Education Video</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="skills">
+  <h2 id="skills">Skills</h2>
+  <div class="skills">
+    <div><strong>Experiment</strong><span>Electrical (I-V, C-V, pulsed), photonics, spectroscopy</span></div>
+    <div><strong>Simulation</strong><span>TCAD, MATLAB, AutoCAD</span></div>
+    <div><strong>Data analysis</strong><span>Origin, MATLAB, LaTeX, Microsoft Office</span></div>
+    <div><strong>Languages</strong><span>Vietnamese (native), English</span></div>
+  </div>
+</section>
+
+<footer>
+  Gyeonggi, Republic of Korea · <a href="mailto:vohuong2702@gmail.com">vohuong2702@gmail.com</a>
+</footer>
+
+</main>
+</body>
+</html>
