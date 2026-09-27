@@ -17,6 +17,8 @@
     --rule: #e3e5ec;
     --accent: #4a3f8c;      /* deep-UV violet: β-Ga₂O₃ absorbs near 250–260 nm */
     --accent-soft: #eeecf7;
+    --band-head: #eeecf6;
+    --band-alt: #edf0f6;
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -25,26 +27,45 @@
     :root:not([data-theme="light"]) {
       --paper: #15171e; --ink: #e6e7ec; --muted: #9ea3b3;
       --rule: #2b2f3b; --accent: #a99df0; --accent-soft: #252338;
+      --band-head: #1e1c2c; --band-alt: #1a1d26;
     }
   }
   :root[data-theme="dark"] {
     --paper: #15171e; --ink: #e6e7ec; --muted: #9ea3b3;
     --rule: #2b2f3b; --accent: #a99df0; --accent-soft: #252338;
+    --band-head: #1e1c2c; --band-alt: #1a1d26;
   }
   *, *::before, *::after { box-sizing: inherit; }
   html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
   body {
+    overflow-x: clip;
     margin: 0; background: var(--paper); color: var(--ink);
     font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif;
     font-size: 1rem; line-height: 1.6;
   }
-  main { max-width: 44rem; margin: 0 auto; padding: 3.5rem 1.25rem 4rem; }
+  main { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem 4rem; }
   h1, h2, .serif { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; }
   a { color: var(--accent); text-underline-offset: 0.18em; }
   a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
   /* Header */
-  header { padding-bottom: 2rem; border-bottom: 1px solid var(--rule); }
+  /* Full-width colour bands: content stays centred, background spans the screen */
+  header, section {
+    margin-inline: calc(50% - 50vw);
+    padding-inline: calc(50vw - 50%);
+  }
+  header { background: var(--band-head); padding-top: 3.5rem; padding-bottom: 2.5rem; }
+  section:nth-of-type(even) { background: var(--band-alt); }
+  .intro { display: flex; align-items: center; gap: 1.75rem; }
+  .avatar {
+    width: 136px; height: 136px; flex: none; border-radius: 50%;
+    object-fit: cover; border: 4px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--rule);
+  }
+  @media (max-width: 34rem) {
+    .intro { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+    .avatar { width: 112px; height: 112px; }
+  }
   .formula {
     font-family: "Source Serif 4", Georgia, serif; font-style: italic;
     color: var(--accent); font-size: 1.05rem; margin: 0 0 0.75rem;
@@ -64,7 +85,7 @@
   .btn svg { width: 18px; height: 18px; flex: none; }
 
   /* Sections */
-  section { padding-top: 2.5rem; }
+  section { padding-top: 2.5rem; padding-bottom: 1.5rem; }
   h2 { font-size: 1.45rem; font-weight: 600; margin: 0 0 1rem; }
   h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--muted); }
   p { margin: 0 0 1rem; }
@@ -90,7 +111,7 @@
   .entry .what strong { font-weight: 600; }
   .entry .what span { display: block; color: var(--muted); font-size: 0.95rem; }
   @media (max-width: 34rem) {
-    main { padding-top: 2.5rem; }
+    header { padding-top: 2.5rem; }
     .entry { grid-template-columns: 1fr; gap: 0; }
   }
 
@@ -98,7 +119,7 @@
   .skills div strong { display: block; font-weight: 600; margin-bottom: 0.15rem; }
   .skills div span { color: var(--muted); font-size: 0.95rem; }
 
-  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
+  footer { padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
   .pub-title a { color: var(--ink); text-decoration-color: var(--rule); }
   .pub-title a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .news { display: inline-block; margin-top: 0.2rem; font-size: 0.92rem; }
@@ -108,8 +129,13 @@
 <main>
 
 <header>
-  <p class="formula">β-Ga₂O₃ · wide-bandgap semiconductors</p>
-  <h1>Thi Thanh Huong Vo</h1>
+  <div class="intro">
+    <img class="avatar" src="photo.jpg" alt="Portrait of Thi Thanh Huong Vo" width="136" height="136">
+    <div>
+      <p class="formula">β-Ga₂O₃ · wide-bandgap semiconductors</p>
+      <h1>Thi Thanh Huong Vo</h1>
+    </div>
+  </div>
   <p class="role">Materials researcher working on Ga₂O₃ Schottky barrier diodes: reliability, trap dynamics, high-temperature behavior and X-ray detection.</p>
   <nav class="links" aria-label="Profiles and contact">
     <a class="btn primary" href="CV.pdf" download>
@@ -138,8 +164,8 @@
 
 <section aria-labelledby="research">
   <h2 id="research">Research</h2>
-  <p>My work connects experiment and TCAD simulation to understand how Ga₂O₃ Schottky barrier diodes behave under heat, pulsed bias and radiation. I study capacitance–voltage behavior from 300 to 673 K, reverse low-bias conduction and trap dynamics with pulsed current and single-voltage-pulse methods, and apply Ga₂O₃ diodes and thin films as sensitive X-ray detectors.</p>
-  <p>Keywords: wide-bandgap semiconductors, reliability, electrical and optoelectronic characterization.</p>
+  <p class="lead">My work connects experiment and TCAD simulation to understand how Ga₂O₃ Schottky barrier diodes behave under heat, pulsed bias and radiation. I study capacitance–voltage behavior from 300 to 673 K, reverse low-bias conduction and trap dynamics with pulsed current and single-voltage-pulse methods, and apply Ga₂O₃ diodes and thin films as sensitive X-ray detectors.</p>
+  <p class="lead">Keywords: wide-bandgap semiconductors, reliability, electrical and optoelectronic characterization.</p>
 </section>
 
 <section aria-labelledby="pubs">
