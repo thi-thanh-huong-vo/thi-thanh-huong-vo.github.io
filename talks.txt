@@ -1,0 +1,20 @@
+# DANH SÁCH HỘI NGHỊ (TALKS, PRESENTATIONS AND AWARDS)
+#
+# Mỗi hội nghị một dòng, các cột cách nhau bằng dấu |
+#   Năm | Tên hội nghị | Thành phố, Quốc gia | Oral hoặc Poster | Tên bài báo cáo | Giải thưởng | Link tin tức
+#
+# Ba cột cuối là tùy chọn, không có thì bỏ trống hoặc bỏ luôn. Ví dụ:
+#   2026 | 12th Example Conference (EXC 2026) | Seoul, Republic of Korea | Oral
+#   2026 | 12th Example Conference (EXC 2026) | Seoul, Republic of Korea | Poster | Tên bài | Best Poster Award | https://...
+#
+# Hội nghị hiển thị đúng theo thứ tự các dòng trong file (nên để mới nhất ở trên cùng).
+# Dòng tóm tắt ở mục Journal publications tự đếm số dòng "Oral" và số giải thưởng.
+# Dòng bắt đầu bằng dấu # là ghi chú, không hiển thị trên trang.
+
+2026 | 37th International Conference on the Physics of Semiconductors (ICPS 2026) | Tokyo, Japan | Oral
+2025 | 8th International Conference on Advanced Electromaterials (ICAE 2025) | Jeju, Republic of Korea | Oral
+2025 | 8th International Workshop on Ultra-Wide Bandgap Materials and Devices (IWUMD 2025) | Wrocław, Poland | Poster
+2025 | 11th Annual Conference of Vietnamese Young Scientists (ACVYS 2025) | | Oral | Gallium oxide: an emerging semiconductor for next-generation power and diode applications | Best oral presentation award | https://kaunews.kau.ac.kr/pages/people.php?searchkey=&searchvalue=&code=s1201&page=&selstrdate=&selenddate=&mode=read&seq=3279
+2025 | KIEEME Conference | Republic of Korea | Poster
+2024 | 11th Asia-Pacific Workshop on Widegap Semiconductors (APWS 2024) | Busan, Republic of Korea | Oral | Charge neutral point shift of α-Ga₂O₃ thin film upon soft X-ray irradiation | Outstanding Young Researcher Award | https://kaunews.kau.ac.kr/pages/research.php?searchkey=&searchvalue=&code=s1501&page=&selstrdate=&selenddate=&mode=read&seq=2709
+2023 | KIEEME Conference | Republic of Korea | Poster
