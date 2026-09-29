@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Thi-Thanh-Huong Vo — Ga₂O₃ Researcher</title>
-<meta name="description" content="Thi-Thanh-Huong Vo (published as Thanh Huong Vo) — researcher in β-Ga₂O₃ Schottky barrier diodes, reliability, and X-ray detection. CV, publications, ORCID and LinkedIn.">
+<meta name="description" content="Thi-Thanh-Huong Vo (published as Thanh Huong Vo) — researcher in Ga₂O₃ devices, reliability, extreme environments and X-ray detection. CV, publications, ORCID and LinkedIn.">
 <link rel="canonical" href="https://thi-thanh-huong-vo.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://thi-thanh-huong-vo.github.io/">
 <meta property="og:title" content="Thi-Thanh-Huong Vo | Ga₂O₃ Researcher">
-<meta property="og:description" content="Materials researcher working on Ga₂O₃ Schottky barrier diodes: reliability, trap dynamics, high-temperature behavior and X-ray detection. Publications, talks and contact.">
+<meta property="og:description" content="Materials researcher working on Ga₂O₃ devices: reliability, trap dynamics, device behavior in extreme environments and X-ray detection. Publications, talks and contact.">
 <meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
@@ -64,7 +64,7 @@
     margin-inline: calc(50% - 50vw);
     padding-inline: calc(50vw - 50%);
   }
-  header { background: var(--band-head); padding-top: 3.5rem; padding-bottom: 2.5rem; }
+  header { background: var(--band-head); padding-top: 1.25rem; padding-bottom: 2.5rem; }
   .intro { display: flex; align-items: center; gap: 1.75rem; }
   .avatar {
     width: 136px; height: 136px; flex: none; border-radius: 50%;
@@ -122,7 +122,7 @@
   .entry .what .tag { display: inline-block; color: var(--accent); font-size: 0.78rem; }
   .entry .what span { display: block; color: var(--muted); font-size: 0.95rem; }
   @media (max-width: 34rem) {
-    header { padding-top: 2.5rem; }
+    header { padding-top: 1rem; }
     .entry { grid-template-columns: 1fr; gap: 0; }
   }
 
@@ -136,6 +136,13 @@
   .entry .what .talk-title { font-family: "Source Serif 4", Georgia, serif; font-style: italic; color: var(--ink); }
   .entry .what .award { color: var(--accent); font-weight: 600; }
   .news { display: inline-block; margin-top: 0.2rem; font-size: 0.92rem; }
+  .lang-switch { display: flex; justify-content: flex-end; gap: 0.25rem; margin-bottom: 0.75rem; }
+  .lang-switch button {
+    font: inherit; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 0.3rem 0.7rem; min-height: 36px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--rule); background: var(--paper); color: var(--muted);
+  }
+  .lang-switch button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
   /* Chặn bôi đen chữ; link và nút vẫn bấm được. Riêng chân trang (email) vẫn bôi đen được. */
   body { -webkit-user-select: none; user-select: none; }
   footer, footer a { -webkit-user-select: text; user-select: text; }
@@ -145,6 +152,10 @@
 <main>
 
 <header>
+  <div class="lang-switch" role="group" aria-label="Language">
+    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang="vi" aria-pressed="false">VI</button>
+  </div>
   <div class="intro">
     <img class="avatar" src="photo.jpg" alt="Portrait of Thi-Thanh-Huong Vo" width="136" height="136">
     <div>
@@ -153,7 +164,7 @@
       <p class="pubname">Published as Thanh Huong Vo</p>
     </div>
   </div>
-  <p class="role">Materials researcher working on Ga₂O₃ Schottky barrier diodes: reliability, trap dynamics, high-temperature behavior and X-ray detection.</p>
+  <p class="role">Materials researcher working on Ga₂O₃ devices: reliability, trap dynamics, device behavior in extreme environments and X-ray detection.</p>
   <nav class="links" aria-label="Profiles and contact">
     <a class="btn primary" href="mailto:vohuong2702@gmail.com?subject=CV%20request&amp;body=Dear%20Ms.%20Vo%2C%0A%0AI%20visited%20your%20website%20and%20I%20am%20interested%20in%20your%20research%20on%20Ga2O3%20devices.%20Could%20you%20please%20share%20a%20copy%20of%20your%20CV%20with%20me%3F%0A%0AThank%20you%2C%20and%20best%20regards%2C">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
@@ -176,13 +187,13 @@
 
 <section aria-labelledby="aboutme">
   <h2 id="aboutme">About me</h2>
-  <p class="lead">I grew up in Vietnam wanting to understand how things work, and that question has taken me from a physics classroom in Ho Chi Minh City to semiconductor research abroad. I started as a physics teacher, then chose to move on my own and begin again as a researcher. My work explores how gallium oxide devices behave under heat, electrical stress and radiation. I learn fast, work hard, and rarely stop at the first answer, because I want to become an engineer whose work ends up in real devices.</p>
+  <p class="lead">I grew up in Vietnam wanting to understand how things work, and that question has taken me from a physics classroom in Ho Chi Minh City to semiconductor research abroad. I started as a physics teacher, then chose to move on my own and begin again as a researcher. My work explores how gallium oxide devices behave in extreme environments: extreme temperatures, electrical stress and radiation. I learn fast, work hard, and rarely stop at the first answer, because I want to become an engineer whose work ends up in real devices.</p>
   <p class="lead">Outside the lab, I read to nourish my mind and the way I connect with people, travel to see the world through other eyes, and cook because it teaches me to take care of myself.</p>
 </section>
 
 <section aria-labelledby="research">
   <h2 id="research">Research</h2>
-  <p class="lead">Combining experiment with TCAD simulation, I study the capacitance–voltage behavior of Ga₂O₃ Schottky barrier diodes from 300 to 673 K, probe reverse low-bias conduction and trap dynamics with pulsed current and single-voltage-pulse methods, and apply Ga₂O₃ diodes and thin films as sensitive X-ray detectors.</p>
+  <p class="lead">Combining experiment with TCAD simulation, I study how Ga₂O₃ devices behave across temperatures from 80 to 673 K, probe reverse low-bias conduction and trap dynamics with pulsed current and single-voltage-pulse methods, and apply Ga₂O₃ devices and thin films as sensitive X-ray detectors.</p>
   <p class="lead">Keywords: wide-bandgap semiconductors, reliability, electrical and optoelectronic characterization.</p>
 </section>
 
@@ -325,6 +336,111 @@
 
 </main>
 <script>
+/* EN / VI language switch. Paper titles, journal names, conference names and talk titles stay in English. */
+(function () {
+  var VI = {
+    "Ga₂O₃ wide-bandgap semiconductor": "Bán dẫn vùng cấm rộng Ga₂O₃",
+    "Published as Thanh Huong Vo": "Tên trên các công bố: Thanh Huong Vo",
+    "Materials researcher working on Ga₂O₃ devices: reliability, trap dynamics, device behavior in extreme environments and X-ray detection.": "Nhà nghiên cứu vật liệu về linh kiện Ga₂O₃: độ tin cậy, động học bẫy (trap dynamics), hoạt động trong môi trường khắc nghiệt và phát hiện tia X.",
+    "Request CV": "Yêu cầu CV",
+    "About me": "Về tôi",
+    "I grew up in Vietnam wanting to understand how things work, and that question has taken me from a physics classroom in Ho Chi Minh City to semiconductor research abroad. I started as a physics teacher, then chose to move on my own and begin again as a researcher. My work explores how gallium oxide devices behave in extreme environments: extreme temperatures, electrical stress and radiation. I learn fast, work hard, and rarely stop at the first answer, because I want to become an engineer whose work ends up in real devices.": "Từ bục giảng vật lý ở Thành phố Hồ Chí Minh đến phòng thí nghiệm bán dẫn ở nước ngoài, tôi đã tự mình đi từng bước trên con đường nghiên cứu. Tôi tìm hiểu cách linh kiện gallium oxide ứng xử trong môi trường khắc nghiệt: nhiệt độ cực đoan, ứng suất điện và bức xạ. Học nhanh, chịu khó và không dừng lại ở câu trả lời đầu tiên, tôi mong trở thành một kỹ sư có những nghiên cứu được ứng dụng vào linh kiện thực tế.",
+    "Outside the lab, I read to nourish my mind and the way I connect with people, travel to see the world through other eyes, and cook because it teaches me to take care of myself.": "Ngoài phòng thí nghiệm, sách giúp tôi nuôi dưỡng tâm hồn, những chuyến đi mở rộng tầm nhìn, còn căn bếp dạy tôi yêu thương chính mình.",
+    "Research": "Nghiên cứu",
+    "Combining experiment with TCAD simulation, I study how Ga₂O₃ devices behave across temperatures from 80 to 673 K, probe reverse low-bias conduction and trap dynamics with pulsed current and single-voltage-pulse methods, and apply Ga₂O₃ devices and thin films as sensitive X-ray detectors.": "Kết hợp thực nghiệm với mô phỏng TCAD, tôi nghiên cứu hoạt động của linh kiện Ga₂O₃ trong dải nhiệt độ từ 80 đến 673 K, khảo sát cơ chế dẫn ở phân cực ngược điện áp thấp và động học bẫy bằng phương pháp dòng xung và xung điện áp đơn (single-voltage-pulse), đồng thời ứng dụng linh kiện và màng mỏng Ga₂O₃ làm đầu dò tia X có độ nhạy cao.",
+    "Keywords: wide-bandgap semiconductors, reliability, electrical and optoelectronic characterization.": "Từ khóa: bán dẫn vùng cấm rộng, độ tin cậy, phân tích đặc tính điện và quang điện tử.",
+    "Journal publications": "Bài báo khoa học",
+    "Electrical characterization and power devices": "Đặc tính điện và linh kiện công suất",
+    "X-ray and UV detection": "Phát hiện tia X và tia UV",
+    "1st author": "Tác giả thứ nhất",
+    "Co-first author": "Đồng tác giả thứ nhất",
+    "Co-author": "Đồng tác giả",
+    "Review": "Bài tổng quan",
+    "Full and up-to-date list on": "Danh sách đầy đủ và cập nhật nhất trên",
+    "Conference proceedings": "Kỷ yếu hội nghị",
+    "Talks, presentations and awards": "Báo cáo hội nghị và giải thưởng",
+    "Oral": "Báo cáo miệng",
+    "Poster": "Poster",
+    "Tokyo, Japan": "Tokyo, Nhật Bản",
+    "Jeju, Republic of Korea": "Jeju, Hàn Quốc",
+    "Wrocław, Poland": "Wrocław, Ba Lan",
+    "Busan, Republic of Korea": "Busan, Hàn Quốc",
+    "Republic of Korea": "Hàn Quốc",
+    "Best oral presentation award": "Giải Báo cáo miệng xuất sắc nhất",
+    "Outstanding Young Researcher Award": "Giải Nhà nghiên cứu trẻ xuất sắc",
+    "Read the news (KAU Channel K)": "Đọc tin tức (KAU Channel K)",
+    "Education": "Học vấn",
+    "M.Sc., Materials Science and Engineering": "Thạc sĩ Khoa học và Kỹ thuật Vật liệu",
+    ", Korea Aerospace University, Republic of Korea": ", Đại học Hàng không Vũ trụ Hàn Quốc (Korea Aerospace University), Hàn Quốc",
+    "Major in drone materials and components · GPA 4.0/4.5": "Chuyên ngành vật liệu và linh kiện drone · GPA 4.0/4.5",
+    "Thesis: Investigation of the temperature dependence of Ga₂O₃ Schottky barrier diode characteristics (C-V-T and experiment–simulation correlation at high temperature)": "Luận văn: Khảo sát sự phụ thuộc nhiệt độ của các đặc tính diode Schottky Ga₂O₃ (C-V-T và tương quan giữa thực nghiệm và mô phỏng ở nhiệt độ cao)",
+    "B.Ed., Physics Teacher Education": "Cử nhân Sư phạm Vật lý",
+    ", Ho Chi Minh City University of Education, Vietnam": ", Trường Đại học Sư phạm Thành phố Hồ Chí Minh, Việt Nam",
+    "GPA 3.25/4.0 · Thesis: Time evolution of nuclear wave-packets in vibrating molecules": "GPA 3.25/4.0 · Khóa luận: Sự tiến triển theo thời gian của bó sóng hạt nhân trong phân tử dao động",
+    "Experience": "Kinh nghiệm",
+    "2022 – now": "2022 – nay",
+    "Researcher": "Nghiên cứu viên",
+    ", High-tech Institute, Nguyen Tat Thanh University, Vietnam": ", Viện Kỹ thuật Công nghệ cao, Trường Đại học Nguyễn Tất Thành, Việt Nam",
+    "Physics and mathematics teacher": "Giáo viên Vật lý và Toán",
+    ", high schools and education centers in Ho Chi Minh City, Vietnam": ", các trường THPT và trung tâm giáo dục tại Thành phố Hồ Chí Minh, Việt Nam",
+    "Vo Truong Toan and Gia Dinh High Schools, Giang Hang Education Center, Soroban Linear Thinking Center; co-creator and content writer at Trang Education Video": "Trường THPT Võ Trường Toản và THPT Gia Định, Giang Hang Education Center, Soroban Linear Thinking Center; đồng sáng tạo và biên soạn nội dung tại Trang Education Video",
+    "Teaching taught me to explain complex physics clearly, a skill I now use in every talk and paper.": "Những năm đứng lớp đã dạy tôi cách giải thích vật lý phức tạp một cách rõ ràng, kỹ năng tôi dùng trong mọi bài báo cáo và bài báo.",
+    "Skills": "Kỹ năng",
+    "Device simulation": "Mô phỏng linh kiện",
+    "Synopsys Sentaurus TCAD: device modeling and simulated C-V characteristics compared with experiment": "Synopsys Sentaurus TCAD: mô hình hóa linh kiện và mô phỏng đặc tính C-V, so sánh với thực nghiệm",
+    "Electrical characterization": "Phân tích đặc tính điện",
+    "Keithley 4200A-SCS: I-V, C-V-T and pulsed I-V, in dark and under illumination": "Keithley 4200A-SCS: I-V, C-V-T và pulsed I-V, trong tối và dưới chiếu sáng",
+    "Temperature-dependent measurement": "Đo lường phụ thuộc nhiệt độ",
+    "80–673 K using Nextron micro probe systems (ceramic heater and liquid-nitrogen-cooled stages) under vacuum, 10⁻⁴–10⁻⁵ hPa": "80–673 K với hệ micro probe Nextron (bệ gia nhiệt gốm và bệ làm lạnh bằng nitơ lỏng) trong chân không 10⁻⁴–10⁻⁵ hPa",
+    "Optoelectronic and radiation response": "Đáp ứng quang điện và bức xạ",
+    "X-ray response; wavelength-dependent photoresponse from 200 to 1200 nm with a xenon source, monochromator and calibrated power meter": "Đáp ứng tia X; đáp ứng quang theo bước sóng từ 200 đến 1200 nm với nguồn sáng xenon, máy đơn sắc và máy đo công suất đã hiệu chuẩn",
+    "Data analysis": "Phân tích dữ liệu",
+    "Languages": "Ngôn ngữ",
+    "Vietnamese (native), English": "Tiếng Việt (bản ngữ), tiếng Anh",
+    "Gyeonggi, Republic of Korea ·": "Gyeonggi, Hàn Quốc ·"
+  };
+  var MAIL_VI = 'mailto:vohuong2702@gmail.com?subject=' + encodeURIComponent('Xin CV') + '&body=' +
+    encodeURIComponent('Chào chị Hương,\n\nTôi đã xem trang web của chị và quan tâm đến các nghiên cứu về linh kiện Ga2O3. Chị có thể gửi giúp tôi bản CV được không?\n\nCảm ơn chị và trân trọng,');
+  var current = 'en';
+  var root = document.querySelector('main');
+  function walk(fn) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())) fn(n);
+  }
+  function apply(lang) {
+    current = lang;
+    walk(function (n) {
+      if (n.__en === undefined) n.__en = n.nodeValue;
+      var key = n.__en.replace(/\s+/g, ' ').trim();
+      if (!key) return;
+      if (lang === 'vi' && VI[key]) {
+        var lead = n.__en.match(/^\s*/)[0], tail = n.__en.match(/\s*$/)[0];
+        n.nodeValue = lead + VI[key] + tail;
+      } else {
+        n.nodeValue = n.__en;
+      }
+    });
+    document.documentElement.lang = lang;
+    var req = document.querySelector('.btn.primary');
+    if (req) {
+      if (!req.dataset.en) req.dataset.en = req.getAttribute('href');
+      req.setAttribute('href', lang === 'vi' ? MAIL_VI : req.dataset.en);
+    }
+    document.querySelectorAll('.lang-switch button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+  document.querySelectorAll('.lang-switch button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  window.__applyLang = function () { apply(current); };
+  var saved = 'en';
+  try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+  apply(saved === 'vi' ? 'vi' : 'en');
+})();
+</script>
+<script>
 /* Publications are read from publications.txt. Missing title / journal / year are fetched from Crossref by DOI.
    If anything fails, the list already written in this page stays visible. */
 (function () {
@@ -391,7 +507,7 @@
       });
       frag.appendChild(ol);
     });
-    if (frag.childNodes.length) { box.innerHTML = ''; box.appendChild(frag); }
+    if (frag.childNodes.length) { box.innerHTML = ''; box.appendChild(frag); if (window.__applyLang) window.__applyLang(); }
   }
   fetch('publications.txt', { cache: 'no-cache' })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
