@@ -1,0 +1,31 @@
+# DANH SÁCH BÀI BÁO (JOURNAL PUBLICATIONS)
+#
+# Cách thêm bài mới: thêm MỘT dòng dưới đúng nhóm, theo mẫu
+#   DOI | vai trò
+# Ví dụ:
+#   10.1063/5.0304649 | 1st author
+# Tên bài, tên tạp chí và năm sẽ được lấy TỰ ĐỘNG từ Crossref.
+#
+# Vai trò: 1st author, Co-first author, Co-author... Có thể ghi nhiều nhãn, cách nhau bằng dấu phẩy
+# (ví dụ: 1st author, Review).
+#
+# Muốn tự ghi thay cho thông tin tự động (ví dụ tên bài bị hiển thị không đẹp), thêm các cột sau, theo thứ tự:
+#   DOI | vai trò | tên bài | tên tạp chí | năm
+# Cột nào để trống thì cột đó được lấy tự động.
+#
+# Dòng bắt đầu bằng ## là tên nhóm lĩnh vực. Bài hiển thị đúng theo thứ tự các dòng trong file.
+# Dòng bắt đầu bằng một dấu # là ghi chú, không hiển thị trên trang.
+
+## Electrical characterization and power devices
+10.1016/j.pquantelec.2026.100658 | 1st author, Review | Gallium oxide Schottky barrier diodes for extreme-temperature power and optoelectronic devices | Progress in Quantum Electronics | 2026
+10.1002/advs.202518859 | 1st author | Direct probing of trap dynamics in β-Ga₂O₃ Schottky barrier diodes using single-voltage-pulse characterization | Advanced Science | 2026
+10.1021/acsaelm.5c00134 | 1st author | Investigating reverse low-bias conduction mechanisms in Ga₂O₃ Schottky barrier diodes using pulsed current methods | ACS Applied Electronic Materials | 2025
+10.1016/j.physb.2025.416950 | 1st author | Correlation between experimental and modeled capacitance–voltage characteristics of Ga₂O₃ Schottky barrier diode in temperature range of 300–673 K | Physica B: Condensed Matter | 2025
+10.1016/j.mssp.2024.108130 | 1st author | Temperature-dependent capacitance–voltage characteristics of β-Ga₂O₃ Schottky barrier diodes with (001) epitaxial grown layer using MOCVD | Materials Science in Semiconductor Processing | 2024
+
+## X-ray and UV detection
+10.1016/j.surfin.2026.109657 | Co-author | Ultrawide bandgap NiCo/β-Ga₂O₃ Schottky detectors for solar-blind UV response, low-dose X-ray detection, and X-ray imaging | Surfaces and Interfaces | 2026
+10.1063/5.0304649 | 1st author | Soft X-ray shielding characteristics of natural wood films with varying densities evaluated using a Ga₂O₃ Schottky diode detector | Applied Physics Letters | 2026
+10.1016/j.apmt.2025.102936 | Co-author | Thermally stable X-ray detector using β-Ga₂O₃ Schottky barrier diodes in extreme environments | Applied Materials Today | 2025
+10.1063/5.0283387 | Co-first author | High-sensitivity X-ray detection of stacked A4 sheets using Ga₂O₃ Schottky barrier diodes: toward low-dose imaging and material discrimination | Applied Physics Letters | 2025
+10.1021/acsaelm.4c00928 | 1st author | Charge neutral point shift of a 700 nm-thick α-Ga₂O₃ thin-film detector under soft X-ray irradiation | ACS Applied Electronic Materials | 2024
