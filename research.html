@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Research vision · Thi-Thanh-Huong Vo — Ga₂O₃ Researcher</title>
+<meta name="description" content="Research vision of Thi-Thanh-Huong Vo: turning intrinsic defects in Ga₂O₃ into function, from optoelectronic synapses to low-dose soft X-ray detection, through junction design of two-terminal devices.">
+<link rel="canonical" href="https://thi-thanh-huong-vo.github.io/research.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thi-thanh-huong-vo.github.io/research.html">
+<meta property="og:title" content="Research vision | Thi-Thanh-Huong Vo">
+<meta property="og:description" content="Turning the imperfections of Ga₂O₃ into function: optoelectronic synapses, low-dose soft X-ray detection and junction design of two-terminal devices.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Thi-Thanh-Huong Vo, materials researcher in Ga₂O₃ wide-bandgap semiconductors">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fcfcfd;
+    --ink: #1d2230;
+    --muted: #5d6475;
+    --rule: #e3e5ec;
+    --accent: #4a3f8c;      /* deep-UV violet: β-Ga₂O₃ absorbs near 250–260 nm */
+    --accent-soft: #eeecf7;
+    --band-head: #eeecf6;
+    --band-alt: #edf0f6;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #15171e; --ink: #e6e7ec; --muted: #9ea3b3;
+      --rule: #2b2f3b; --accent: #a99df0; --accent-soft: #252338;
+      --band-head: #1e1c2c; --band-alt: #1a1d26;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #15171e; --ink: #e6e7ec; --muted: #9ea3b3;
+    --rule: #2b2f3b; --accent: #a99df0; --accent-soft: #252338;
+    --band-head: #1e1c2c; --band-alt: #1a1d26;
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+  body {
+    overflow-x: clip;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem; line-height: 1.6;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  h1, h2, .serif { font-family: "Source Serif 4", Georgia, "Times New Roman", serif; }
+  a { color: var(--accent); text-underline-offset: 0.18em; }
+  a:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* Header */
+  /* Full-width colour bands: content stays centred, background spans the screen */
+  header, section {
+    margin-inline: calc(50% - 50vw);
+    padding-inline: calc(50vw - 50%);
+  }
+  header { background: var(--band-head); padding-top: 1.25rem; padding-bottom: 2.5rem; }
+  .intro { display: flex; align-items: center; gap: 1.75rem; }
+  .avatar {
+    width: 136px; height: 136px; flex: none; border-radius: 50%;
+    object-fit: cover; border: 4px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--rule);
+  }
+  @media (max-width: 34rem) {
+    .intro { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+    .avatar { width: 112px; height: 112px; }
+  }
+  .formula {
+    font-family: "Source Serif 4", Georgia, serif; font-style: italic;
+    color: var(--accent); font-size: 1.05rem; margin: 0 0 0.75rem;
+  }
+  h1 { font-size: clamp(2.1rem, 7vw, 2.9rem); font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+  .pubname { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.95rem; }
+  .role { color: var(--muted); margin: 0.75rem 0 0; font-size: 1.05rem; max-width: 36rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 0.75rem; border: 1px solid var(--rule); border-radius: 6px;
+    color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    background: transparent; min-height: 44px;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .btn.primary:hover { opacity: 0.9; color: var(--paper); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+
+  /* Sections */
+  section { padding-top: 2.5rem; padding-bottom: 1.5rem; }
+  h2 { font-size: 1.45rem; font-weight: 600; margin: 0 0 1rem; }
+  h3 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--muted); }
+  p { margin: 0 0 1rem; }
+  .lead { font-family: "Source Serif 4", Georgia, serif; font-size: 1.12rem; line-height: 1.7; }
+
+  ol.pubs { list-style: none; padding: 0; margin: 0; counter-reset: pub; }
+  ol.pubs li { position: relative; padding: 0 0 1rem 2.4rem; }
+  ol.pubs li::before {
+    counter-increment: pub; content: counter(pub);
+    position: absolute; left: 0; top: 0.1rem; width: 1.7rem; text-align: right;
+    color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums;
+  }
+  .pub-title { display: block; }
+  .pub-meta { display: block; color: var(--muted); font-size: 0.92rem; }
+  .pub-meta em { font-family: "Source Serif 4", Georgia, serif; }
+  .tag {
+    display: inline-block; font-size: 0.78rem; padding: 0.05rem 0.45rem; margin-left: 0.3rem;
+    border-radius: 4px; background: var(--accent-soft); color: var(--accent); vertical-align: 1px;
+  }
+
+  .entry { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.25rem 1.25rem; padding-bottom: 1.1rem; }
+  .entry .when { color: var(--muted); font-size: 0.92rem; font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
+  .entry .what strong { font-weight: 600; }
+  .entry .what .tag { display: inline-block; color: var(--accent); font-size: 0.78rem; }
+  .entry .what span { display: block; color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 34rem) {
+    header { padding-top: 1rem; }
+    .entry { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem 1.5rem; }
+  .skills div strong { display: block; font-weight: 600; margin-bottom: 0.15rem; }
+  .skills div span { color: var(--muted); font-size: 0.95rem; }
+
+  footer { padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.88rem; }
+  .pub-title a { color: var(--ink); text-decoration-color: var(--rule); }
+  .pub-title a:hover { color: var(--accent); text-decoration-color: var(--accent); }
+  .entry .what .talk-title { font-family: "Source Serif 4", Georgia, serif; font-style: italic; color: var(--ink); }
+  .entry .what .award { color: var(--accent); font-weight: 600; }
+  .news { display: inline-block; margin-top: 0.2rem; font-size: 0.92rem; }
+  .stats { margin: -0.25rem 0 1rem; color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+  .lang-switch { display: flex; justify-content: flex-end; gap: 0.25rem; margin-bottom: 0.75rem; }
+  .lang-switch button {
+    font: inherit; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 0.3rem 0.7rem; min-height: 36px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--rule); background: var(--paper); color: var(--muted);
+  }
+  .lang-switch button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  /* Chặn bôi đen chữ; link và nút vẫn bấm được. Riêng chân trang (email) vẫn bôi đen được. */
+  body { -webkit-user-select: none; user-select: none; }
+  footer, footer a { -webkit-user-select: text; user-select: text; }
+  /* Căn đều hai bên cho các đoạn văn */
+  .lead, .role { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
+  .back { display: inline-block; margin-bottom: 1.25rem; font-size: 0.95rem; text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+  .topbar .lang-switch { margin-bottom: 0; }
+  .subtitle { font-family: "Source Serif 4", Georgia, serif; font-style: italic; color: var(--accent); font-size: 1.2rem; margin: 0.6rem 0 0; }
+  h3.dir { font-family: "Source Serif 4", Georgia, serif; font-size: 1.12rem; color: var(--ink); margin: 1.75rem 0 0.5rem; }
+  ul.build { padding-left: 1.2rem; margin: 0; }
+  ul.build li { margin-bottom: 0.75rem; }
+  ul.build li span { display: block; color: var(--muted); font-size: 0.92rem; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <div class="topbar">
+    <a class="back" href="./">← Thi-Thanh-Huong Vo</a>
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="vi" aria-pressed="false">VI</button>
+    </div>
+  </div>
+  <p class="formula">Ga₂O₃ wide-bandgap semiconductor</p>
+  <h1>Research vision</h1>
+  <p class="subtitle">Turning the imperfections of Ga₂O₃ into function</p>
+</header>
+
+<section aria-labelledby="motivation">
+  <h2 id="motivation">Motivation</h2>
+  <p class="lead">Gallium oxide is best known for power devices that block high voltages with low leakage, and for solar-blind UV detection. Working with Ga₂O₃ devices, I have come to see a wider potential. The intrinsic defects that are usually treated as a problem to suppress also give the material a rich response to light and radiation. My long-term goal is to understand these defects well enough to design with them, rather than against them.</p>
+</section>
+
+<section aria-labelledby="directions">
+  <h2 id="directions">Research directions</h2>
+  <h3 class="dir">Optoelectronic synapses</h3>
+  <p class="lead">Defect states inside the wide bandgap allow Ga₂O₃ devices to respond to light far below the bandgap energy, including visible light, and to hold that response over time. With the right device design, this memory-like behavior could be tuned to mimic synaptic functions, opening a path toward light-driven neuromorphic hardware on a robust wide-bandgap platform.</p>
+  <h3 class="dir">Soft X-ray detection through electrical signatures</h3>
+  <p class="lead">Conventional X-ray detectors typically rely on high photon energies and thick absorbing layers. My work shows that Ga₂O₃ devices carry characteristic features in their electrical response, such as the shift of a minimum-current point, that can distinguish soft X-rays at low dose. I want to develop this into a detection principle that works with thin devices and low radiation exposure, making X-ray sensing and imaging safer.</p>
+</section>
+
+<section aria-labelledby="approach">
+  <h2 id="approach">Approach: from characterization to junction design</h2>
+  <p class="lead">Much of my work so far has used devices fabricated on commercial wafers. This let me focus on device physics, but it limited my control over the layer structure. My goal is to close this loop: design the junction with TCAD simulation, fabricate it, verify it through electrical and optoelectronic characterization, and feed the results back into the design. I will focus on two-terminal devices, such as Schottky and heterojunction diodes, whose simple structure makes them well suited to scalable arrays for both imaging and neuromorphic applications.</p>
+</section>
+
+<section aria-labelledby="build">
+  <h2 id="build">Building on my work</h2>
+  <ul class="build">
+    <li><a href="https://doi.org/10.1002/advs.202518859" target="_blank" rel="noopener">Direct probing of trap dynamics</a> <span>Measuring how traps capture and release charge: the basis for defect-based functions.</span></li>
+    <li><a href="https://doi.org/10.1021/acsaelm.5c00134" target="_blank" rel="noopener">Reverse low-bias conduction mechanisms</a> <span>How defects shape leakage and transport at the junction.</span></li>
+    <li><a href="https://doi.org/10.1021/acsaelm.4c00928" target="_blank" rel="noopener">Charge neutral point shift under soft X-ray</a> <span>The electrical signature behind low-dose soft X-ray discrimination.</span></li>
+    <li><a href="https://doi.org/10.1063/5.0283387" target="_blank" rel="noopener">X-ray detection of stacked A4 sheets</a> and <a href="https://doi.org/10.1063/5.0304649" target="_blank" rel="noopener">soft X-ray shielding of wood films</a> <span>Toward low-dose imaging and material discrimination.</span></li>
+    <li><a href="https://doi.org/10.1016/j.physb.2025.416950" target="_blank" rel="noopener">Experimental and modeled C-V from 300 to 673 K</a> <span>Linking TCAD simulation with measurement: the starting point for junction design.</span></li>
+  </ul>
+</section>
+
+<section aria-labelledby="impact">
+  <h2 id="impact">Expected impact</h2>
+  <p class="lead">Together, these directions aim to extend Ga₂O₃ beyond power switching toward devices that sense, remember and image, while turning the junction itself into a designable element rather than a fixed starting point.</p>
+</section>
+
+<footer>
+  <a href="./">thi-thanh-huong-vo.github.io</a> · <a href="mailto:vohuong2702@gmail.com">vohuong2702@gmail.com</a>
+</footer>
+
+</main>
+<script>
+/* EN / VI language switch. Paper titles, journal names, conference names and talk titles stay in English. */
+(function () {
+  var VI = {
+  "← Thi-Thanh-Huong Vo": "← Thi-Thanh-Huong Vo",
+  "Research vision": "Tầm nhìn nghiên cứu",
+  "Turning the imperfections of Ga₂O₃ into function": "Biến những khiếm khuyết của Ga₂O₃ thành chức năng",
+  "Motivation": "Động lực",
+  "Gallium oxide is best known for power devices that block high voltages with low leakage, and for solar-blind UV detection. Working with Ga₂O₃ devices, I have come to see a wider potential. The intrinsic defects that are usually treated as a problem to suppress also give the material a rich response to light and radiation. My long-term goal is to understand these defects well enough to design with them, rather than against them.": "Gallium oxide được biết đến nhiều nhất qua các linh kiện công suất chịu điện áp cao với dòng rò thấp, và qua khả năng phát hiện tia UV vùng solar-blind. Trong quá trình làm việc với linh kiện Ga₂O₃, tôi nhận ra vật liệu này còn nhiều tiềm năng hơn thế. Chính các sai hỏng nội tại (intrinsic defects), vốn thường bị xem là vấn đề cần loại bỏ, lại mang đến cho vật liệu khả năng đáp ứng phong phú với ánh sáng và bức xạ. Mục tiêu lâu dài của tôi là hiểu đủ sâu về các sai hỏng này để thiết kế dựa vào chúng, thay vì chống lại chúng.",
+  "Research directions": "Hướng nghiên cứu",
+  "Optoelectronic synapses": "Synapse quang điện tử",
+  "Defect states inside the wide bandgap allow Ga₂O₃ devices to respond to light far below the bandgap energy, including visible light, and to hold that response over time. With the right device design, this memory-like behavior could be tuned to mimic synaptic functions, opening a path toward light-driven neuromorphic hardware on a robust wide-bandgap platform.": "Các trạng thái sai hỏng nằm trong vùng cấm rộng cho phép linh kiện Ga₂O₃ đáp ứng với ánh sáng có năng lượng thấp hơn nhiều so với độ rộng vùng cấm, kể cả ánh sáng khả kiến, và duy trì đáp ứng đó theo thời gian. Với thiết kế linh kiện phù hợp, đặc tính giống như trí nhớ này có thể được điều chỉnh để mô phỏng chức năng của synapse, mở ra hướng phát triển phần cứng neuromorphic điều khiển bằng ánh sáng trên nền vật liệu vùng cấm rộng bền vững.",
+  "Soft X-ray detection through electrical signatures": "Phát hiện tia X mềm qua dấu hiệu điện đặc trưng",
+  "Conventional X-ray detectors typically rely on high photon energies and thick absorbing layers. My work shows that Ga₂O₃ devices carry characteristic features in their electrical response, such as the shift of a minimum-current point, that can distinguish soft X-rays at low dose. I want to develop this into a detection principle that works with thin devices and low radiation exposure, making X-ray sensing and imaging safer.": "Các đầu dò tia X truyền thống thường phụ thuộc vào photon năng lượng cao và lớp hấp thụ dày. Các nghiên cứu của tôi cho thấy linh kiện Ga₂O₃ có những đặc điểm riêng trong đáp ứng điện, chẳng hạn sự dịch chuyển của điểm dòng cực tiểu, cho phép phân biệt tia X mềm ở liều thấp. Tôi muốn phát triển điều này thành một nguyên lý phát hiện hoạt động với linh kiện mỏng và mức phơi nhiễm bức xạ thấp, giúp việc cảm biến và chụp ảnh bằng tia X an toàn hơn.",
+  "Approach: from characterization to junction design": "Cách tiếp cận: từ phân tích đặc tính đến thiết kế tiếp giáp",
+  "Much of my work so far has used devices fabricated on commercial wafers. This let me focus on device physics, but it limited my control over the layer structure. My goal is to close this loop: design the junction with TCAD simulation, fabricate it, verify it through electrical and optoelectronic characterization, and feed the results back into the design. I will focus on two-terminal devices, such as Schottky and heterojunction diodes, whose simple structure makes them well suited to scalable arrays for both imaging and neuromorphic applications.": "Phần lớn các nghiên cứu của tôi đến nay sử dụng linh kiện chế tạo trên wafer thương mại. Điều này giúp tôi tập trung vào vật lý linh kiện, nhưng lại hạn chế khả năng kiểm soát cấu trúc lớp. Mục tiêu của tôi là khép kín vòng lặp: thiết kế tiếp giáp bằng mô phỏng TCAD, chế tạo, kiểm chứng bằng phân tích đặc tính điện và quang điện tử, rồi đưa kết quả trở lại để hoàn thiện thiết kế. Tôi sẽ tập trung vào linh kiện hai cực, như diode Schottky và diode dị thể, vì cấu trúc đơn giản của chúng rất phù hợp để mở rộng thành các mảng linh kiện cho cả ứng dụng chụp ảnh lẫn neuromorphic.",
+  "Building on my work": "Nền tảng từ các nghiên cứu của tôi",
+  "Direct probing of trap dynamics": "Đo trực tiếp động học bẫy",
+  "Measuring how traps capture and release charge: the basis for defect-based functions.": "Đo cách các bẫy bắt và giải phóng điện tích: nền tảng cho các chức năng dựa trên sai hỏng.",
+  "Reverse low-bias conduction mechanisms": "Cơ chế dẫn ở phân cực ngược điện áp thấp",
+  "How defects shape leakage and transport at the junction.": "Sai hỏng ảnh hưởng thế nào đến dòng rò và quá trình dẫn tại tiếp giáp.",
+  "Charge neutral point shift under soft X-ray": "Dịch chuyển điểm trung hòa điện tích dưới tia X mềm",
+  "The electrical signature behind low-dose soft X-ray discrimination.": "Dấu hiệu điện đứng sau khả năng phân biệt tia X mềm ở liều thấp.",
+  "X-ray detection of stacked A4 sheets": "Phát hiện tia X qua các tờ giấy A4 xếp chồng",
+  "and": "và",
+  "soft X-ray shielding of wood films": "che chắn tia X mềm bằng màng gỗ",
+  "Toward low-dose imaging and material discrimination.": "Hướng tới chụp ảnh liều thấp và phân biệt vật liệu.",
+  "Experimental and modeled C-V from 300 to 673 K": "Đặc tính C-V thực nghiệm và mô phỏng từ 300 đến 673 K",
+  "Linking TCAD simulation with measurement: the starting point for junction design.": "Kết nối mô phỏng TCAD với đo lường: điểm khởi đầu cho thiết kế tiếp giáp.",
+  "Expected impact": "Tác động dự kiến",
+  "Together, these directions aim to extend Ga₂O₃ beyond power switching toward devices that sense, remember and image, while turning the junction itself into a designable element rather than a fixed starting point.": "Cùng nhau, các hướng nghiên cứu này hướng tới việc mở rộng Ga₂O₃ vượt ra ngoài vai trò chuyển mạch công suất, trở thành những linh kiện có thể cảm biến, ghi nhớ và tạo ảnh, đồng thời biến chính tiếp giáp thành một yếu tố có thể thiết kế, thay vì chỉ là điểm xuất phát cố định.",
+  "Ga₂O₃ wide-bandgap semiconductor": "Bán dẫn vùng cấm rộng Ga₂O₃"
+};
+  var MAIL_VI = 'mailto:vohuong2702@gmail.com?subject=' + encodeURIComponent('Xin CV') + '&body=' +
+    encodeURIComponent('Chào chị Hương,\n\nTôi đã xem trang web của chị và quan tâm đến các nghiên cứu về linh kiện Ga2O3. Chị có thể gửi giúp tôi bản CV được không?\n\nCảm ơn chị và trân trọng,');
+  var COUNTRY = {
+    "republic of korea": "Hàn Quốc", "south korea": "Hàn Quốc", "korea": "Hàn Quốc", "japan": "Nhật Bản",
+    "vietnam": "Việt Nam", "viet nam": "Việt Nam", "china": "Trung Quốc", "taiwan": "Đài Loan", "hong kong": "Hồng Kông",
+    "singapore": "Singapore", "thailand": "Thái Lan", "malaysia": "Malaysia", "indonesia": "Indonesia", "philippines": "Philippines",
+    "india": "Ấn Độ", "usa": "Hoa Kỳ", "united states": "Hoa Kỳ", "united states of america": "Hoa Kỳ", "canada": "Canada",
+    "australia": "Úc", "united kingdom": "Vương quốc Anh", "uk": "Vương quốc Anh", "germany": "Đức", "france": "Pháp",
+    "italy": "Ý", "spain": "Tây Ban Nha", "portugal": "Bồ Đào Nha", "netherlands": "Hà Lan", "belgium": "Bỉ",
+    "switzerland": "Thụy Sĩ", "austria": "Áo", "sweden": "Thụy Điển", "norway": "Na Uy", "denmark": "Đan Mạch",
+    "finland": "Phần Lan", "poland": "Ba Lan", "czech republic": "Cộng hòa Séc", "czechia": "Cộng hòa Séc",
+    "hungary": "Hungary", "greece": "Hy Lạp", "turkey": "Thổ Nhĩ Kỳ", "israel": "Israel", "united arab emirates": "Các Tiểu vương quốc Ả Rập Thống nhất"
+  };
+  function placeVI(place) {
+    var parts = place.split(',');
+    var last = parts[parts.length - 1].trim();
+    var vi = COUNTRY[last.toLowerCase()];
+    if (!vi) return null;
+    parts[parts.length - 1] = (parts.length > 1 ? ' ' : '') + vi;
+    return parts.join(',');
+  }
+  var current = 'en';
+  var root = document.querySelector('main');
+  function walk(fn) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())) fn(n);
+  }
+  function apply(lang) {
+    current = lang;
+    walk(function (n) {
+      if (n.__en === undefined) n.__en = n.nodeValue;
+      var key = n.__en.replace(/\s+/g, ' ').trim();
+      if (!key) return;
+      var vi = VI[key];
+      if (!vi && n.parentNode && n.parentNode.classList && n.parentNode.classList.contains('place')) vi = placeVI(key);
+      if (lang === 'vi' && vi) {
+        var lead = n.__en.match(/^\s*/)[0], tail = n.__en.match(/\s*$/)[0];
+        n.nodeValue = lead + vi + tail;
+      } else {
+        n.nodeValue = n.__en;
+      }
+    });
+    document.documentElement.lang = lang;
+    var req = document.querySelector('.btn.primary');
+    if (req) {
+      if (!req.dataset.en) req.dataset.en = req.getAttribute('href');
+      req.setAttribute('href', lang === 'vi' ? MAIL_VI : req.dataset.en);
+    }
+    document.querySelectorAll('.lang-switch button').forEach(function (b) {
+      b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
+    });
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+    renderStats();
+  }
+  function en(node) { return (node.__en !== undefined ? node.__en : node.nodeValue).trim(); }
+  function tagText(t) { return Array.prototype.map.call(t.childNodes, function (c) { return c.nodeType === 3 ? en(c) : ''; }).join('').trim(); }
+  function renderStats() {
+    var box = document.getElementById('stats');
+    if (!box) return;
+    var lis = document.querySelectorAll('#journal-list ol.pubs li');
+    var papers = lis.length, first = 0;
+    Array.prototype.forEach.call(lis, function (li) {
+      var tags = Array.prototype.map.call(li.querySelectorAll('.tag'), tagText);
+      if (tags.some(function (t) { return /^(1st author|co-first author)$/i.test(t); })) first++;
+    });
+    var orals = Array.prototype.filter.call(document.querySelectorAll('#talks ~ .entry .tag, section[aria-labelledby="talks"] .tag'), function (t) { return tagText(t) === 'Oral'; });
+    var oral = new Set(orals).size;
+    var awards = document.querySelectorAll('section[aria-labelledby="talks"] .award').length;
+    var txt;
+    if (current === 'vi') {
+      txt = papers + ' bài báo khoa học (' + first + ' bài là tác giả thứ nhất hoặc đồng tác giả thứ nhất) · ' + oral + ' báo cáo miệng · ' + awards + ' giải thưởng';
+    } else {
+      txt = papers + ' journal paper' + (papers === 1 ? '' : 's') + ' (' + first + ' as first or co-first author) · ' +
+            oral + ' oral talk' + (oral === 1 ? '' : 's') + ' · ' + awards + ' award' + (awards === 1 ? '' : 's');
+    }
+    box.textContent = txt;
+  }
+  document.querySelectorAll('.lang-switch button').forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  window.__applyLang = function () { apply(current); };
+  var saved = 'en';
+  try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+  apply(saved === 'vi' ? 'vi' : 'en');
+})();
+</script>
+</body>
+</html>
