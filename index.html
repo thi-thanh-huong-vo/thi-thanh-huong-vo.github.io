@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Thi-Thanh-Huong Vo — Ga₂O₃ Researcher</title>
-<meta name="description" content="Thi-Thanh-Huong Vo (published as Thanh Huong Vo) — researcher in Ga₂O₃ devices, reliability, and X-ray detection. CV, publications, ORCID and LinkedIn.">
+<meta name="description" content="Thi-Thanh-Huong Vo (published as Thanh Huong Vo) — researcher in β-Ga₂O₃ Schottky barrier diodes, reliability, and X-ray detection. CV, publications, ORCID and LinkedIn.">
 <link rel="canonical" href="https://thi-thanh-huong-vo.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://thi-thanh-huong-vo.github.io/">
 <meta property="og:title" content="Thi-Thanh-Huong Vo | Ga₂O₃ Researcher">
-<meta property="og:description" content="Materials researcher working on Ga₂O₃ devices: reliability, trap dynamics, temperature behavior and X-ray detection. Publications, talks and contact.">
+<meta property="og:description" content="Materials researcher working on Ga₂O₃ Schottky barrier diodes: reliability, trap dynamics, high-temperature behavior and X-ray detection. Publications, talks and contact.">
 <meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
@@ -153,7 +153,7 @@
       <p class="pubname">Published as Thanh Huong Vo</p>
     </div>
   </div>
-  <p class="role">Materials researcher working on Ga₂O₃ devices: reliability, trap dynamics, temperature behavior and X-ray detection.</p>
+  <p class="role">Materials researcher working on Ga₂O₃ Schottky barrier diodes: reliability, trap dynamics, high-temperature behavior and X-ray detection.</p>
   <nav class="links" aria-label="Profiles and contact">
     <a class="btn primary" href="mailto:vohuong2702@gmail.com?subject=CV%20request&amp;body=Dear%20Ms.%20Vo%2C%0A%0AI%20visited%20your%20website%20and%20I%20am%20interested%20in%20your%20research%20on%20Ga2O3%20devices.%20Could%20you%20please%20share%20a%20copy%20of%20your%20CV%20with%20me%3F%0A%0AThank%20you%2C%20and%20best%20regards%2C">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
@@ -189,6 +189,7 @@
 <section aria-labelledby="pubs">
   <h2 id="pubs">Journal publications</h2>
 
+  <div id="journal-list">
   <h3>Electrical characterization and power devices</h3>
   <ol class="pubs">
     <li><span class="pub-title"><a href="https://doi.org/10.1016/j.pquantelec.2026.100658" target="_blank" rel="noopener">Gallium oxide Schottky barrier diodes for extreme-temperature power and optoelectronic devices</a></span>
@@ -216,6 +217,7 @@
     <li><span class="pub-title"><a href="https://doi.org/10.1021/acsaelm.4c00928" target="_blank" rel="noopener">Charge neutral point shift of a 700 nm-thick α-Ga₂O₃ thin-film detector under soft X-ray irradiation</a></span>
       <span class="pub-meta"><em>ACS Applied Electronic Materials</em>, 2024 <span class="tag">1st author</span></span></li>
   </ol>
+  </div>
   <p>Full and up-to-date list on <a href="https://orcid.org/0009-0002-2561-954X" target="_blank" rel="noopener">ORCID</a>.</p>
 
   <h3>Conference proceedings</h3>
@@ -277,7 +279,7 @@
     <div class="when">2022 – 2025</div>
     <div class="what"><strong>M.Sc., Materials Science and Engineering</strong>, Korea Aerospace University, Republic of Korea
       <span>Major in drone materials and components · GPA 4.0/4.5</span>
-      <span>Thesis: Investigation of the temperature dependence of Ga₂O₃ Schottky barrier diode characteristics (C-V-T and experiment–simulation correlation at high and low temperature)</span></div>
+      <span>Thesis: Investigation of the temperature dependence of Ga₂O₃ Schottky barrier diode characteristics (C-V-T and experiment–simulation correlation at high temperature)</span></div>
   </div>
   <div class="entry">
     <div class="when">2015 – 2019</div>
@@ -322,5 +324,85 @@
 </footer>
 
 </main>
+<script>
+/* Publications are read from publications.txt. Missing title / journal / year are fetched from Crossref by DOI.
+   If anything fails, the list already written in this page stays visible. */
+(function () {
+  var box = document.getElementById('journal-list');
+  if (!box || !window.fetch) return;
+  var SUB = { '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄', '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉' };
+  var SUP = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹', '+': '⁺', '-': '⁻' };
+  function cleanTitle(t) {
+    t = String(t || '')
+      .replace(/<sub>\s*([0-9]+)\s*<\/sub>/gi, function (_, d) { return d.split('').map(function (c) { return SUB[c]; }).join(''); })
+      .replace(/<sup>\s*([0-9+\-]+)\s*<\/sup>/gi, function (_, d) { return d.split('').map(function (c) { return SUP[c] || c; }).join(''); })
+      .replace(/<[^>]+>/g, '');
+    var el = document.createElement('textarea'); el.innerHTML = t;
+    return el.value.replace(/\s+/g, ' ').trim();
+  }
+  function parse(text) {
+    var groups = [], cur = null;
+    text.split(/\r?\n/).forEach(function (raw) {
+      var line = raw.trim();
+      if (!line) return;
+      if (line.indexOf('##') === 0) { cur = { name: line.replace(/^#+/, '').trim(), items: [] }; groups.push(cur); return; }
+      if (line.charAt(0) === '#') return;
+      var p = line.split('|').map(function (x) { return x.trim(); });
+      var doi = p[0].replace(/^https?:\/\/(dx\.)?doi\.org\//i, '');
+      if (!doi) return;
+      if (!cur) { cur = { name: '', items: [] }; groups.push(cur); }
+      cur.items.push({ doi: doi, tags: (p[1] || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean),
+                       title: p[2] || '', journal: p[3] || '', year: p[4] || '' });
+    });
+    return groups;
+  }
+  function crossref(item) {
+    if (item.title && item.journal && item.year) return Promise.resolve(item);
+    return fetch('https://api.crossref.org/works/' + encodeURIComponent(item.doi))
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) {
+        var m = j.message || {};
+        var d = (m['published-print'] || m['published-online'] || m.issued || {})['date-parts'];
+        item.title = item.title || cleanTitle((m.title || [])[0]);
+        item.journal = item.journal || cleanTitle((m['container-title'] || [])[0]);
+        item.year = item.year || (d && d[0] && d[0][0] ? String(d[0][0]) : '');
+        return item;
+      })
+      .catch(function () { return item; });
+  }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function render(groups) {
+    var frag = document.createDocumentFragment();
+    groups.forEach(function (g) {
+      if (!g.items.length) return;
+      if (g.name) frag.appendChild(el('h3', null, g.name));
+      var ol = el('ol', 'pubs');
+      g.items.forEach(function (it) {
+        var li = el('li');
+        var t = el('span', 'pub-title');
+        var a = el('a', null, it.title || ('DOI: ' + it.doi));
+        a.href = 'https://doi.org/' + it.doi; a.target = '_blank'; a.rel = 'noopener';
+        t.appendChild(a); li.appendChild(t);
+        var meta = el('span', 'pub-meta');
+        if (it.journal) meta.appendChild(el('em', null, it.journal));
+        if (it.year) meta.appendChild(document.createTextNode((it.journal ? ', ' : '') + it.year + ' '));
+        it.tags.forEach(function (tag) { meta.appendChild(el('span', 'tag', tag)); meta.appendChild(document.createTextNode(' ')); });
+        li.appendChild(meta); ol.appendChild(li);
+      });
+      frag.appendChild(ol);
+    });
+    if (frag.childNodes.length) { box.innerHTML = ''; box.appendChild(frag); }
+  }
+  fetch('publications.txt', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function (text) {
+      var groups = parse(text);
+      var all = [];
+      groups.forEach(function (g) { g.items.forEach(function (it) { all.push(crossref(it)); }); });
+      return Promise.all(all).then(function () { render(groups); });
+    })
+    .catch(function () { /* keep the list written in the page */ });
+})();
+</script>
 </body>
 </html>
