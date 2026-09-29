@@ -136,6 +136,7 @@
   .entry .what .talk-title { font-family: "Source Serif 4", Georgia, serif; font-style: italic; color: var(--ink); }
   .entry .what .award { color: var(--accent); font-weight: 600; }
   .news { display: inline-block; margin-top: 0.2rem; font-size: 0.92rem; }
+  .stats { margin: -0.25rem 0 1rem; color: var(--accent); font-weight: 600; font-size: 0.95rem; }
   .lang-switch { display: flex; justify-content: flex-end; gap: 0.25rem; margin-bottom: 0.75rem; }
   .lang-switch button {
     font: inherit; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em;
@@ -147,7 +148,7 @@
   body { -webkit-user-select: none; user-select: none; }
   footer, footer a { -webkit-user-select: text; user-select: text; }
   /* Căn đều hai bên cho các đoạn văn */
-  .lead, .role, .entry .what span:not(.tag):not(.award) { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
+  .lead, .role { text-align: justify; -webkit-hyphens: auto; hyphens: auto; }
 </style>
 </head>
 <body>
@@ -201,6 +202,7 @@
 
 <section aria-labelledby="pubs">
   <h2 id="pubs">Journal publications</h2>
+  <p class="stats" id="stats">10 journal papers (8 as first or co-first author) · 4 oral talks · 2 awards</p>
 
   <div id="journal-list">
   <h3>Electrical characterization and power devices</h3>
@@ -244,45 +246,47 @@
 
 <section aria-labelledby="talks">
   <h2 id="talks">Talks, presentations and awards</h2>
+  <div id="talk-list">
   <div class="entry">
     <div class="when">2026</div>
     <div class="what"><strong>37th International Conference on the Physics of Semiconductors (ICPS 2026)</strong> <span class="tag">Oral</span>
-      <span>Tokyo, Japan</span></div>
+      <span class="place">Tokyo, Japan</span></div>
   </div>
   <div class="entry">
     <div class="when">2025</div>
     <div class="what"><strong>8th International Conference on Advanced Electromaterials (ICAE 2025)</strong> <span class="tag">Oral</span>
-      <span>Jeju, Republic of Korea</span></div>
+      <span class="place">Jeju, Republic of Korea</span></div>
   </div>
   <div class="entry">
     <div class="when">2025</div>
     <div class="what"><strong>8th International Workshop on Ultra-Wide Bandgap Materials and Devices (IWUMD 2025)</strong> <span class="tag">Poster</span>
-      <span>Wrocław, Poland</span></div>
+      <span class="place">Wrocław, Poland</span></div>
   </div>
   <div class="entry">
     <div class="when">2025</div>
     <div class="what"><strong>11th Annual Conference of Vietnamese Young Scientists (ACVYS 2025)</strong> <span class="tag">Oral</span>
       <span class="talk-title">Gallium oxide: an emerging semiconductor for next-generation power and diode applications</span>
       <span class="award">Best oral presentation award</span>
-      <a class="news" href="https://kaunews.kau.ac.kr/pages/people.php?searchkey=&amp;searchvalue=&amp;code=s1201&amp;page=&amp;selstrdate=&amp;selenddate=&amp;mode=read&amp;seq=3279" target="_blank" rel="noopener">Read the news (KAU Channel K)</a></div>
+      <a class="news" href="https://kaunews.kau.ac.kr/pages/people.php?searchkey=&amp;searchvalue=&amp;code=s1201&amp;page=&amp;selstrdate=&amp;selenddate=&amp;mode=read&amp;seq=3279" target="_blank" rel="noopener">Read the news</a></div>
   </div>
   <div class="entry">
     <div class="when">2025</div>
     <div class="what"><strong>KIEEME Conference</strong> <span class="tag">Poster</span>
-      <span>Republic of Korea</span></div>
+      <span class="place">Republic of Korea</span></div>
   </div>
   <div class="entry">
     <div class="when">2024</div>
     <div class="what"><strong>11th Asia-Pacific Workshop on Widegap Semiconductors (APWS 2024)</strong> <span class="tag">Oral</span>
-      <span>Busan, Republic of Korea</span>
+      <span class="place">Busan, Republic of Korea</span>
       <span class="talk-title">Charge neutral point shift of α-Ga₂O₃ thin film upon soft X-ray irradiation</span>
       <span class="award">Outstanding Young Researcher Award</span>
-      <a class="news" href="https://kaunews.kau.ac.kr/pages/research.php?searchkey=&amp;searchvalue=&amp;code=s1501&amp;page=&amp;selstrdate=&amp;selenddate=&amp;mode=read&amp;seq=2709" target="_blank" rel="noopener">Read the news (KAU Channel K)</a></div>
+      <a class="news" href="https://kaunews.kau.ac.kr/pages/research.php?searchkey=&amp;searchvalue=&amp;code=s1501&amp;page=&amp;selstrdate=&amp;selenddate=&amp;mode=read&amp;seq=2709" target="_blank" rel="noopener">Read the news</a></div>
   </div>
   <div class="entry">
     <div class="when">2023</div>
     <div class="what"><strong>KIEEME Conference</strong> <span class="tag">Poster</span>
-      <span>Republic of Korea</span></div>
+      <span class="place">Republic of Korea</span></div>
+  </div>
   </div>
 </section>
 
@@ -292,12 +296,14 @@
     <div class="when">2022 – 2025</div>
     <div class="what"><strong>Dual M.Sc. degrees: Materials Science and Engineering; Smart Air Mobility</strong>, Korea Aerospace University, Republic of Korea
       <span>Major in drone materials and components · GPA 4.0/4.5</span>
+      <span class="advisor">Advisor: <a href="https://scholar.google.co.kr/citations?hl=en&amp;user=uU1R0hAAAAAJ" target="_blank" rel="noopener">Prof. Wan Sik Hwang</a>, Semiconductor Materials &amp; Device Laboratory</span>
       <span>Thesis: Investigation of the temperature dependence of Ga₂O₃ Schottky barrier diode characteristics (C-V-T and experiment–simulation correlation at high temperature)</span></div>
   </div>
   <div class="entry">
     <div class="when">2015 – 2019</div>
     <div class="what"><strong>B.Ed., Physics Teacher Education</strong>, Ho Chi Minh City University of Education, Vietnam
-      <span>GPA 3.25/4.0 · Thesis: Time evolution of nuclear wave-packets in vibrating molecules</span></div>
+      <span>GPA 3.25/4.0 · Thesis: Time evolution of nuclear wave-packets in vibrating molecules</span>
+      <span class="advisor">Advisor: <a href="https://scholar.google.com/citations?user=9H8Lm0UAAAAJ&amp;hl=vi" target="_blank" rel="noopener">Assoc. Prof. Ngoc-Loan Phan, D.Sc.</a></span></div>
   </div>
 </section>
 
@@ -305,7 +311,7 @@
   <h2 id="exp">Experience</h2>
   <div class="entry">
     <div class="when">2022 – now</div>
-    <div class="what"><strong>Researcher</strong>, Korea Aerospace University, Republic of Korea</div>
+    <div class="what"><strong>Researcher</strong>, Semiconductor Materials &amp; Device Laboratory, Korea Aerospace University, Republic of Korea</div>
   </div>
   <div class="entry">
     <div class="when">2021 – 2022</div>
@@ -370,7 +376,7 @@
     "Republic of Korea": "Hàn Quốc",
     "Best oral presentation award": "Giải Báo cáo miệng xuất sắc nhất",
     "Outstanding Young Researcher Award": "Giải Nhà nghiên cứu trẻ xuất sắc",
-    "Read the news (KAU Channel K)": "Đọc tin tức (KAU Channel K)",
+    "Read the news": "Đọc tin tức",
     "Education": "Học vấn",
     "Dual M.Sc. degrees: Materials Science and Engineering; Smart Air Mobility": "Song bằng Thạc sĩ: Khoa học và Kỹ thuật Vật liệu; Smart Air Mobility (Di chuyển hàng không thông minh)",
     ", Korea Aerospace University, Republic of Korea": ", Đại học Hàng không Vũ trụ Hàn Quốc (Korea Aerospace University), Hàn Quốc",
@@ -399,10 +405,33 @@
     "Data analysis": "Phân tích dữ liệu",
     "Languages": "Ngôn ngữ",
     "Vietnamese (native), English": "Tiếng Việt (bản ngữ), tiếng Anh",
-    "Gyeonggi, Republic of Korea ·": "Gyeonggi, Hàn Quốc ·"
+    "Gyeonggi, Republic of Korea ·": "Gyeonggi, Hàn Quốc ·",
+    "Advisor:": "Người hướng dẫn:",
+    "Prof. Wan Sik Hwang": "GS. Wan Sik Hwang",
+    "Assoc. Prof. Ngoc-Loan Phan, D.Sc.": "PGS. TSKH. Phan Thị Ngọc Loan",
+    ", Semiconductor Materials & Device Laboratory, Korea Aerospace University, Republic of Korea": ", Semiconductor Materials & Device Laboratory, Đại học Hàng không Vũ trụ Hàn Quốc, Hàn Quốc"
   };
   var MAIL_VI = 'mailto:vohuong2702@gmail.com?subject=' + encodeURIComponent('Xin CV') + '&body=' +
     encodeURIComponent('Chào chị Hương,\n\nTôi đã xem trang web của chị và quan tâm đến các nghiên cứu về linh kiện Ga2O3. Chị có thể gửi giúp tôi bản CV được không?\n\nCảm ơn chị và trân trọng,');
+  var COUNTRY = {
+    "republic of korea": "Hàn Quốc", "south korea": "Hàn Quốc", "korea": "Hàn Quốc", "japan": "Nhật Bản",
+    "vietnam": "Việt Nam", "viet nam": "Việt Nam", "china": "Trung Quốc", "taiwan": "Đài Loan", "hong kong": "Hồng Kông",
+    "singapore": "Singapore", "thailand": "Thái Lan", "malaysia": "Malaysia", "indonesia": "Indonesia", "philippines": "Philippines",
+    "india": "Ấn Độ", "usa": "Hoa Kỳ", "united states": "Hoa Kỳ", "united states of america": "Hoa Kỳ", "canada": "Canada",
+    "australia": "Úc", "united kingdom": "Vương quốc Anh", "uk": "Vương quốc Anh", "germany": "Đức", "france": "Pháp",
+    "italy": "Ý", "spain": "Tây Ban Nha", "portugal": "Bồ Đào Nha", "netherlands": "Hà Lan", "belgium": "Bỉ",
+    "switzerland": "Thụy Sĩ", "austria": "Áo", "sweden": "Thụy Điển", "norway": "Na Uy", "denmark": "Đan Mạch",
+    "finland": "Phần Lan", "poland": "Ba Lan", "czech republic": "Cộng hòa Séc", "czechia": "Cộng hòa Séc",
+    "hungary": "Hungary", "greece": "Hy Lạp", "turkey": "Thổ Nhĩ Kỳ", "israel": "Israel", "united arab emirates": "Các Tiểu vương quốc Ả Rập Thống nhất"
+  };
+  function placeVI(place) {
+    var parts = place.split(',');
+    var last = parts[parts.length - 1].trim();
+    var vi = COUNTRY[last.toLowerCase()];
+    if (!vi) return null;
+    parts[parts.length - 1] = (parts.length > 1 ? ' ' : '') + vi;
+    return parts.join(',');
+  }
   var current = 'en';
   var root = document.querySelector('main');
   function walk(fn) {
@@ -415,9 +444,11 @@
       if (n.__en === undefined) n.__en = n.nodeValue;
       var key = n.__en.replace(/\s+/g, ' ').trim();
       if (!key) return;
-      if (lang === 'vi' && VI[key]) {
+      var vi = VI[key];
+      if (!vi && n.parentNode && n.parentNode.classList && n.parentNode.classList.contains('place')) vi = placeVI(key);
+      if (lang === 'vi' && vi) {
         var lead = n.__en.match(/^\s*/)[0], tail = n.__en.match(/\s*$/)[0];
-        n.nodeValue = lead + VI[key] + tail;
+        n.nodeValue = lead + vi + tail;
       } else {
         n.nodeValue = n.__en;
       }
@@ -432,6 +463,30 @@
       b.setAttribute('aria-pressed', b.dataset.lang === lang ? 'true' : 'false');
     });
     try { localStorage.setItem('lang', lang); } catch (e) {}
+    renderStats();
+  }
+  function en(node) { return (node.__en !== undefined ? node.__en : node.nodeValue).trim(); }
+  function tagText(t) { return Array.prototype.map.call(t.childNodes, function (c) { return c.nodeType === 3 ? en(c) : ''; }).join('').trim(); }
+  function renderStats() {
+    var box = document.getElementById('stats');
+    if (!box) return;
+    var lis = document.querySelectorAll('#journal-list ol.pubs li');
+    var papers = lis.length, first = 0;
+    Array.prototype.forEach.call(lis, function (li) {
+      var tags = Array.prototype.map.call(li.querySelectorAll('.tag'), tagText);
+      if (tags.some(function (t) { return /^(1st author|co-first author)$/i.test(t); })) first++;
+    });
+    var orals = Array.prototype.filter.call(document.querySelectorAll('#talks ~ .entry .tag, section[aria-labelledby="talks"] .tag'), function (t) { return tagText(t) === 'Oral'; });
+    var oral = new Set(orals).size;
+    var awards = document.querySelectorAll('section[aria-labelledby="talks"] .award').length;
+    var txt;
+    if (current === 'vi') {
+      txt = papers + ' bài báo khoa học (' + first + ' bài là tác giả thứ nhất hoặc đồng tác giả thứ nhất) · ' + oral + ' báo cáo miệng · ' + awards + ' giải thưởng';
+    } else {
+      txt = papers + ' journal paper' + (papers === 1 ? '' : 's') + ' (' + first + ' as first or co-first author) · ' +
+            oral + ' oral talk' + (oral === 1 ? '' : 's') + ' · ' + awards + ' award' + (awards === 1 ? '' : 's');
+    }
+    box.textContent = txt;
   }
   document.querySelectorAll('.lang-switch button').forEach(function (b) {
     b.addEventListener('click', function () { apply(b.dataset.lang); });
@@ -518,6 +573,40 @@
       var all = [];
       groups.forEach(function (g) { g.items.forEach(function (it) { all.push(crossref(it)); }); });
       return Promise.all(all).then(function () { render(groups); });
+    })
+    .catch(function () { /* keep the list written in the page */ });
+})();
+</script>
+<script>
+/* Talks are read from talks.txt. If loading fails, the list written in this page stays visible. */
+(function () {
+  var box = document.getElementById('talk-list');
+  if (!box || !window.fetch) return;
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  fetch('talks.txt', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(function (text) {
+      var frag = document.createDocumentFragment(), count = 0;
+      text.split(/\r?\n/).forEach(function (raw) {
+        var line = raw.trim();
+        if (!line || line.charAt(0) === '#') return;
+        var p = line.split('|').map(function (x) { return x.trim(); });
+        if (!p[1]) return;
+        var entry = el('div', 'entry');
+        entry.appendChild(el('div', 'when', p[0] || ''));
+        var what = el('div', 'what');
+        what.appendChild(el('strong', null, p[1]));
+        if (p[3]) { what.appendChild(document.createTextNode(' ')); what.appendChild(el('span', 'tag', p[3])); }
+        if (p[2]) what.appendChild(el('span', 'place', p[2]));
+        if (p[4]) what.appendChild(el('span', 'talk-title', p[4]));
+        if (p[5]) what.appendChild(el('span', 'award', p[5]));
+        if (p[6] && /^https?:\/\//i.test(p[6])) {
+          var a = el('a', 'news', 'Read the news'); a.href = p[6]; a.target = '_blank'; a.rel = 'noopener';
+          what.appendChild(a);
+        }
+        entry.appendChild(what); frag.appendChild(entry); count++;
+      });
+      if (count) { box.innerHTML = ''; box.appendChild(frag); if (window.__applyLang) window.__applyLang(); }
     })
     .catch(function () { /* keep the list written in the page */ });
 })();
