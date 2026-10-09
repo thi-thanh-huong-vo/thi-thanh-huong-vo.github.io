@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Khuếch tán trong chất rắn" data-title-en="Diffusion in solids">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khuếch tán trong chất rắn · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Định luật Fick, cơ chế vacancy và interstitial, đưa tạp chất vào bán dẫn.">
+<meta property="og:title" content="Khuếch tán trong chất rắn">
+<meta property="og:description" content="Định luật Fick, cơ chế vacancy và interstitial, đưa tạp chất vào bán dẫn.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="../">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="./"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 3</span><span class="l-en">Part 1 · Lesson 3</span></p>
+  <h1><span class="l-vi">Khuếch tán trong chất rắn</span><span class="l-en">Diffusion in solids</span></h1>
+  <p class="sub"><span class="l-vi">Định luật Fick, cơ chế vacancy và interstitial, đưa tạp chất vào bán dẫn.</span><span class="l-en">Fick's laws, vacancy and interstitial mechanisms, introducing dopants into semiconductors.</span></p>
+</header>
+<div class="l-vi">
+
+<p class="lead">Nhỏ một giọt mực vào cốc nước, mực sẽ lan dần cho đến khi cả cốc có màu đồng đều. Trong chất rắn, nguyên tử cũng "lan" như vậy, chỉ chậm hơn rất nhiều. Khuếch tán là cơ chế nền tảng để pha tạp bán dẫn, và cũng là nguyên nhân khiến linh kiện xuống cấp ở nhiệt độ cao.</p>
+
+<h2>1. Khuếch tán là gì?</h2>
+<p>Khuếch tán (diffusion, từ tiếng Latin <em>diffundere</em>, "lan ra") là sự <strong>di chuyển tổng thể</strong> của vật chất từ vùng nồng độ cao đến vùng nồng độ thấp, tức là đi xuôi theo gradient nồng độ. Ở cấp độ nguyên tử, mỗi nguyên tử chuyển động ngẫu nhiên; chính sự chênh lệch số lượng giữa hai vùng tạo ra dòng tổng thể.</p>
+<p>Để một nguyên tử trong mạng tinh thể nhảy được sang vị trí khác cần hai điều kiện: <strong>có vị trí trống bên cạnh</strong>, và <strong>đủ năng lượng để phá vỡ liên kết</strong> và vượt qua rào thế.</p>
+<p>Một ví dụ quen thuộc ngoài ngành bán dẫn là <strong>tôi bề mặt thép</strong> (case hardening): nung nóng chi tiết thép trong môi trường giàu carbon để carbon khuếch tán xen kẽ vào lớp bề mặt. Bánh răng khi đó cứng ở ngoài để chống mài mòn, nhưng vẫn dẻo ở trong để chịu va đập.</p>
+
+<h2>2. Các dạng khuếch tán trong chất rắn</h2>
+<ul>
+<li><strong>Khuếch tán tương hỗ</strong> (inter-diffusion): trong hợp kim, nguyên tử của hai loại cùng di chuyển ngược chiều nhau, ranh giới sắc nét ban đầu dần trở thành vùng chuyển tiếp trơn.</li>
+<li><strong>Tự khuếch tán</strong> (self-diffusion): ngay cả trong chất rắn đơn nguyên tố, các nguyên tử cùng loại vẫn liên tục đổi chỗ cho nhau, có thể theo dõi bằng đồng vị đánh dấu.</li>
+</ul>
+
+<h2>3. Động lực học nguyên tử: vì sao khuếch tán phụ thuộc mạnh vào nhiệt độ?</h2>
+<p>Trong tinh thể, mỗi nút mạng có thể xem như đáy một giếng thế. Chỉ ở 0 K nguyên tử mới đứng yên; ở nhiệt độ hữu hạn, nó dao động quanh vị trí cân bằng với tần số cỡ \(\nu_0 \sim 10^{13}\ \text{s}^{-1}\). Muốn nhảy sang giếng bên cạnh, nguyên tử phải vượt rào thế \(E_a\). Xác suất có đủ năng lượng tuân theo phân bố Boltzmann, nên tần suất nhảy:</p>
+$$\Gamma = \nu_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
+<p>Hệ quả là hệ số khuếch tán có dạng Arrhenius:</p>
+$$D = D_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
+<p>Với tạp chất pha tạp trong Si, \(E_a\) điển hình khoảng 3,5–4 eV. Ở nhiệt độ phòng (\(kT \approx 0{,}026\) eV), \(D\) gần như bằng 0; ở 1000–1100 °C, \(D\) đủ lớn để tạp chất di chuyển được vài trăm nanomet trong vài chục phút. Đây là lý do pha tạp bằng khuếch tán phải thực hiện ở nhiệt độ rất cao, và cũng là lý do các bước nhiệt sau đó phải được kiểm soát (gọi là "thermal budget") để tạp chất không lan quá xa.</p>
+
+<h2>4. Cơ chế khuếch tán</h2>
+<figure><svg viewBox="0 0 600 260" class="fig-svg" role="img">
+<defs><marker id="ah3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<text x="150" y="22" class="nt" text-anchor="middle">(a) Cơ chế vacancy</text>
+<circle cx="70" cy="60" r="15" class="atom"/><circle cx="110" cy="60" r="15" class="atom"/><circle cx="150" cy="60" r="15" class="atom"/><circle cx="190" cy="60" r="15" class="atom"/><circle cx="230" cy="60" r="15" class="atom"/><circle cx="70" cy="100" r="15" class="atom"/><circle cx="110" cy="100" r="15" class="atom"/><circle cx="150" cy="100" r="15" class="imp"/><circle cx="190" cy="100" r="15" class="vac"/><circle cx="230" cy="100" r="15" class="atom"/><circle cx="70" cy="140" r="15" class="atom"/><circle cx="110" cy="140" r="15" class="atom"/><circle cx="150" cy="140" r="15" class="atom"/><circle cx="190" cy="140" r="15" class="atom"/><circle cx="230" cy="140" r="15" class="atom"/><circle cx="70" cy="180" r="15" class="atom"/><circle cx="110" cy="180" r="15" class="atom"/><circle cx="150" cy="180" r="15" class="atom"/><circle cx="190" cy="180" r="15" class="atom"/><circle cx="230" cy="180" r="15" class="atom"/>
+<path d="M152,82 Q170,62 186,82" class="arr" marker-end="url(#ah3)"/>
+<text x="450" y="22" class="nt" text-anchor="middle">(b) Cơ chế interstitial</text>
+<circle cx="370" cy="60" r="15" class="atom"/><circle cx="410" cy="60" r="15" class="atom"/><circle cx="450" cy="60" r="15" class="atom"/><circle cx="490" cy="60" r="15" class="atom"/><circle cx="530" cy="60" r="15" class="atom"/><circle cx="370" cy="100" r="15" class="atom"/><circle cx="410" cy="100" r="15" class="atom"/><circle cx="450" cy="100" r="15" class="atom"/><circle cx="490" cy="100" r="15" class="atom"/><circle cx="530" cy="100" r="15" class="atom"/><circle cx="370" cy="140" r="15" class="atom"/><circle cx="410" cy="140" r="15" class="atom"/><circle cx="450" cy="140" r="15" class="atom"/><circle cx="490" cy="140" r="15" class="atom"/><circle cx="530" cy="140" r="15" class="atom"/><circle cx="370" cy="180" r="15" class="atom"/><circle cx="410" cy="180" r="15" class="atom"/><circle cx="450" cy="180" r="15" class="atom"/><circle cx="490" cy="180" r="15" class="atom"/><circle cx="530" cy="180" r="15" class="atom"/>
+<circle cx="410" cy="120" r="7" class="imp"/>
+<path d="M418,124 Q430,138 444,124" class="arr" marker-end="url(#ah3)"/>
+<circle cx="450" cy="120" r="7" class="vac"/>
+<circle cx="80" cy="245" r="6" class="imp"/><text x="92" y="249" class="ns">tạp chất</text>
+<circle cx="170" cy="245" r="7" class="vac"/><text x="183" y="249" class="ns">vị trí trống</text>
+<circle cx="380" cy="245" r="6" class="imp"/><text x="392" y="249" class="ns">nguyên tử xen kẽ (nhỏ)</text>
+</svg><figcaption>Hình 1. (a) Nguyên tử thay thế nhảy vào vacancy bên cạnh. (b) Nguyên tử nhỏ nhảy từ khe này sang khe kế tiếp giữa các nút mạng.</figcaption></figure>
+<h3>Cơ chế vacancy</h3>
+<p>Nguyên tử đổi chỗ với một vacancy bên cạnh. Đây là cơ chế quan trọng của <strong>tạp chất thay thế</strong> (substitutional), như B, P, As trong Si, những tạp chất thực sự đóng vai trò donor hay acceptor. Tốc độ khuếch tán phụ thuộc vào nồng độ vacancy (bản thân nó cũng tăng theo hàm mũ với nhiệt độ) và năng lượng cần để nhảy.</p>
+<p>Vì sao vacancy lại quan trọng? Để một nguyên tử thay thế <strong>đổi chỗ trực tiếp</strong> với nguyên tử chủ bên cạnh, cần phá vỡ ít nhất sáu liên kết trong mạng kim cương của Si. Nếu bên cạnh đã có sẵn một vacancy, chỉ cần phá ba liên kết. Năng lượng thấp hơn nhiều, nên cơ chế vacancy chiếm ưu thế.</p>
+<h3>Cơ chế interstitial</h3>
+<p>Các nguyên tử nhỏ (H, C, N, O) và nhiều kim loại chuyển tiếp (Cu, Fe, Au...) di chuyển qua các khe giữa nút mạng, không cần vacancy. Rào thế thấp hơn nên chúng khuếch tán <strong>nhanh hơn nhiều</strong> so với tạp chất thay thế. Tuy nhiên ở vị trí xen kẽ, chúng thường không đóng góp trực tiếp vào việc pha tạp, mà ngược lại, kim loại xen kẽ có thể tạo mức năng lượng sâu (deep level) làm giảm thời gian sống hạt tải. Trên thực tế, nhiều tạp chất trong Si khuếch tán theo cơ chế kết hợp, có sự tham gia của cả vacancy và nguyên tử Si tự xen kẽ (self-interstitial).</p>
+
+<h2>5. Định luật Fick</h2>
+<p><strong>Định luật Fick thứ nhất</strong>: thông lượng nguyên tử tỉ lệ với gradient nồng độ, chiều ngược với gradient:</p>
+$$J = -D\,\frac{\partial C}{\partial x}$$
+<p>Kết hợp với định luật bảo toàn vật chất ta có <strong>định luật Fick thứ hai</strong>, mô tả nồng độ thay đổi theo thời gian (với \(D\) không đổi):</p>
+$$\frac{\partial C}{\partial t} = D\,\frac{\partial^2 C}{\partial x^2}$$
+<p>Đại lượng \(\sqrt{Dt}\) có thứ nguyên chiều dài, gọi là <strong>độ dài khuếch tán</strong>: thang đo quãng đường tạp chất lan vào sau thời gian \(t\). Muốn tạp chất đi sâu gấp đôi, phải tăng thời gian lên bốn lần.</p>
+<h3>Hai nghiệm quan trọng trong công nghệ</h3>
+<p><strong>Nguồn không đổi</strong> (constant source, bước "pre-deposition"): bề mặt được giữ ở nồng độ \(C_s\) (thường bằng độ hòa tan cực đại của tạp chất):</p>
+$$C(x,t) = C_s\,\mathrm{erfc}\!\left(\frac{x}{2\sqrt{Dt}}\right)$$
+<p><strong>Nguồn giới hạn</strong> (limited source, bước "drive-in"): một lượng tạp chất cố định \(Q\) (cm⁻²) đã có ở bề mặt, sau đó được ủ nhiệt để đẩy sâu vào trong:</p>
+$$C(x,t) = \frac{Q}{\sqrt{\pi D t}}\exp\!\left(-\frac{x^2}{4Dt}\right)$$
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="220.0" y1="255" x2="220.0" y2="260" class="ax"/><text x="220.0" y="275" class="tk" text-anchor="middle">1</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">2</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">3</text><line x1="55" y1="255" x2="60" y2="255" class="ax"/><line x1="60" y1="255" x2="540" y2="255" class="grid"/><text x="51" y="259" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">0.25</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">0.5</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">0.75</text><line x1="55" y1="20" x2="60" y2="20" class="ax"/><line x1="60" y1="20" x2="540" y2="20" class="grid"/><text x="51" y="24" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Độ sâu x / √(Dt)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">C(x) chuẩn hóa</text><path d="M60.0,20.0 L68.0,26.6 L76.0,33.2 L84.0,39.9 L92.0,46.4 L100.0,53.0 L108.0,59.5 L116.0,65.9 L124.0,72.3 L132.0,78.7 L140.0,84.9 L148.0,91.1 L156.0,97.2 L164.0,103.2 L172.0,109.2 L180.0,115.0 L188.0,120.7 L196.0,126.3 L204.0,131.7 L212.0,137.1 L220.0,142.3 L228.0,147.4 L236.0,152.4 L244.0,157.2 L252.0,161.9 L260.0,166.5 L268.0,170.9 L276.0,175.2 L284.0,179.3 L292.0,183.3 L300.0,187.1 L308.0,190.8 L316.0,194.4 L324.0,197.8 L332.0,201.1 L340.0,204.3 L348.0,207.3 L356.0,210.2 L364.0,212.9 L372.0,215.5 L380.0,218.0 L388.0,220.4 L396.0,222.7 L404.0,224.8 L412.0,226.8 L420.0,228.8 L428.0,230.6 L436.0,232.3 L444.0,233.9 L452.0,235.4 L460.0,236.9 L468.0,238.2 L476.0,239.5 L484.0,240.7 L492.0,241.8 L500.0,242.8 L508.0,243.8 L516.0,244.7 L524.0,245.5 L532.0,246.3 L540.0,247.0" class="s1" fill="none"/><path d="M60.0,20.0 L68.0,20.1 L76.0,20.6 L84.0,21.3 L92.0,22.3 L100.0,23.6 L108.0,25.2 L116.0,27.1 L124.0,29.2 L132.0,31.6 L140.0,34.2 L148.0,37.1 L156.0,40.2 L164.0,43.6 L172.0,47.1 L180.0,50.8 L188.0,54.7 L196.0,58.8 L204.0,63.1 L212.0,67.5 L220.0,72.0 L228.0,76.6 L236.0,81.3 L244.0,86.2 L252.0,91.0 L260.0,96.0 L268.0,101.0 L276.0,106.0 L284.0,111.0 L292.0,116.1 L300.0,121.1 L308.0,126.1 L316.0,131.1 L324.0,136.0 L332.0,140.9 L340.0,145.7 L348.0,150.5 L356.0,155.1 L364.0,159.7 L372.0,164.2 L380.0,168.5 L388.0,172.8 L396.0,177.0 L404.0,181.0 L412.0,184.9 L420.0,188.7 L428.0,192.4 L436.0,195.9 L444.0,199.3 L452.0,202.6 L460.0,205.7 L468.0,208.8 L476.0,211.6 L484.0,214.4 L492.0,217.0 L500.0,219.5 L508.0,221.9 L516.0,224.2 L524.0,226.3 L532.0,228.3 L540.0,230.2" class="s2" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">nguồn không đổi (erfc)</text><line x1="390" y1="46" x2="414" y2="46" class="s2"/><text x="420" y="50" class="tk">nguồn giới hạn (Gauss)</text></svg><figcaption>Hình 2. Hai profile khuếch tán theo độ sâu chuẩn hóa x/√(Dt), cả hai được chuẩn hóa về 1 tại bề mặt.</figcaption></figure>
+<p>Trong quy trình truyền thống, hai bước được kết hợp: pre-deposition để đưa một lượng tạp chất xác định vào lớp mỏng sát bề mặt, rồi drive-in để đạt độ sâu tiếp giáp mong muốn. Độ sâu tiếp giáp \(x_j\) là nơi nồng độ tạp chất khuếch tán bằng nồng độ nền của đế.</p>
+
+<h2>6. Đưa tạp chất vào bán dẫn</h2>
+<h3>Khuếch tán từ nguồn</h3>
+<ul>
+<li><strong>Nguồn rắn:</strong> các tấm BN hoặc B₂O₃ đặt xen kẽ với wafer trong lò; ở nhiệt độ cao, tạp chất bay hơi và lắng lên wafer.</li>
+<li><strong>Nguồn lỏng:</strong> POCl₃ (cho P) hoặc BBr₃ (cho B), dẫn hơi vào lò bằng khí mang qua bình sục (bubbler).</li>
+<li><strong>Nguồn khí:</strong> PH₃, B₂H₆, AsH₃, rất độc nên cần hệ thống an toàn nghiêm ngặt.</li>
+</ul>
+<h3>Cấy ion (ion implantation)</h3>
+<p>Ion tạp chất được gia tốc và bắn trực tiếp vào wafer. Profile ban đầu có dạng gần Gauss quanh độ sâu xuyên trung bình (projected range \(R_p\)), phụ thuộc năng lượng ion. Ưu điểm: kiểm soát chính xác liều lượng và độ sâu, làm được ở nhiệt độ thấp, dùng mặt nạ dễ dàng. Đây là phương pháp chủ đạo trong công nghệ hiện đại.</p>
+<p>Nhược điểm: va chạm của ion <strong>phá hủy mạng tinh thể</strong>, liều cao có thể biến lớp bề mặt thành vô định hình, và phần lớn ion dừng ở vị trí xen kẽ, chưa hoạt động điện. Vì vậy luôn cần bước <strong>ủ kích hoạt</strong> (activation annealing) để phục hồi mạng tinh thể và đưa tạp chất vào vị trí thay thế. Trong quá trình ủ, tạp chất lại khuếch tán và <strong>phân bố lại</strong>, nên kỹ thuật ủ nhanh (RTA, spike, laser anneal) được phát triển để kích hoạt tạp chất mà hạn chế khuếch tán.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Với β-Ga₂O₃, pha tạp loại n thường dùng Si hoặc Sn thay thế Ga. Khuếch tán nhiệt truyền thống ít được dùng; thay vào đó, pha tạp được đưa vào trong quá trình mọc màng (MOCVD, HVPE, MBE) hoặc bằng cấy ion Si, sau đó ủ kích hoạt ở khoảng 900–1100 °C trong khí N₂ (Sasaki và cộng sự, 2013). Thách thức lớn là β-Ga₂O₃ <strong>gần như chưa có pha tạp loại p hiệu quả</strong>, vì lỗ trống có xu hướng tự bẫy và các acceptor như Mg, N tạo mức năng lượng rất sâu. Vì vậy Mg và N được dùng chủ yếu để tạo lớp bán cách điện hoặc lớp chặn dòng.</p>
+<p>Khuếch tán cũng liên quan trực tiếp đến độ tin cậy: ở nhiệt độ cao, sai hỏng điểm như oxygen vacancy và tạp chất có thể di chuyển, làm thay đổi phân bố bẫy gần tiếp giáp Schottky. Hiểu khuếch tán giúp giải thích vì sao đặc tính C-V và dòng rò của linh kiện Ga₂O₃ thay đổi theo nhiệt độ và thời gian hoạt động.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>W. D. Callister, D. G. Rethwisch, <em>Materials Science and Engineering: An Introduction</em>, Wiley.</li>
+<li>P. Shewmon, <em>Diffusion in Solids</em>, 2nd ed., Springer (2016).</li>
+<li>K. Sasaki et al., "Si-ion implantation doping in β-Ga₂O₃ and its application to fabrication of low-resistance ohmic contacts," <em>Applied Physics Express</em> 6, 086502 (2013).</li>
+</ol>
+
+</div>
+<div class="l-en">
+<p class="lead">Drop ink into a glass of water and it slowly spreads until the whole glass is evenly colored. Atoms in a solid spread in the same way, only far more slowly. Diffusion is the basis of semiconductor doping, and also a reason devices degrade at high temperature.</p>
+
+<h2>1. What is diffusion?</h2>
+<p>Diffusion (from the Latin <em>diffundere</em>, "to spread out") is the <strong>net movement</strong> of matter from a region of high concentration to one of low concentration, that is, down a concentration gradient. At the atomic scale each atom moves randomly; the imbalance in numbers between two regions produces the net flux.</p>
+<p>For an atom in a crystal lattice to jump to another site, two conditions must be met: <strong>an empty adjacent site</strong>, and <strong>enough energy to break bonds</strong> and overcome the barrier.</p>
+<p>A familiar example outside semiconductors is <strong>case hardening of steel</strong>: heating a steel part in a carbon-rich environment so that carbon diffuses interstitially into the surface. A gear treated this way is hard on the outside to resist wear, yet tough on the inside to absorb shocks.</p>
+
+<h2>2. Types of diffusion in solids</h2>
+<ul>
+<li><strong>Inter-diffusion:</strong> in an alloy, two kinds of atoms move in opposite directions, and an initially sharp boundary becomes a smooth transition region.</li>
+<li><strong>Self-diffusion:</strong> even in a pure element, atoms of the same kind constantly exchange places, which can be traced with labeled isotopes.</li>
+</ul>
+
+<h2>3. Atomic dynamics: why diffusion depends so strongly on temperature</h2>
+<p>In a crystal, each lattice site can be pictured as the bottom of a potential well. Only at 0 K is an atom at rest; at finite temperature it vibrates around its equilibrium position at a frequency of order \(\nu_0 \sim 10^{13}\ \text{s}^{-1}\). To jump into the neighboring well it must overcome a barrier \(E_a\). The probability of having enough energy follows the Boltzmann distribution, so the jump rate is:</p>
+$$\Gamma = \nu_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
+<p>Consequently the diffusion coefficient takes an Arrhenius form:</p>
+$$D = D_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
+<p>For common dopants in Si, \(E_a\) is typically about 3.5–4 eV. At room temperature (\(kT \approx 0.026\) eV), \(D\) is essentially zero; at 1000–1100 °C, it is large enough for dopants to move a few hundred nanometers in tens of minutes. This is why diffusion doping is done at very high temperature, and why later thermal steps must be controlled (the "thermal budget") so dopants do not spread too far.</p>
+
+<h2>4. Diffusion mechanisms</h2>
+<figure><svg viewBox="0 0 600 260" class="fig-svg" role="img">
+<defs><marker id="ah3e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<text x="150" y="22" class="nt" text-anchor="middle">(a) Vacancy mechanism</text>
+<circle cx="70" cy="60" r="15" class="atom"/><circle cx="110" cy="60" r="15" class="atom"/><circle cx="150" cy="60" r="15" class="atom"/><circle cx="190" cy="60" r="15" class="atom"/><circle cx="230" cy="60" r="15" class="atom"/><circle cx="70" cy="100" r="15" class="atom"/><circle cx="110" cy="100" r="15" class="atom"/><circle cx="150" cy="100" r="15" class="imp"/><circle cx="190" cy="100" r="15" class="vac"/><circle cx="230" cy="100" r="15" class="atom"/><circle cx="70" cy="140" r="15" class="atom"/><circle cx="110" cy="140" r="15" class="atom"/><circle cx="150" cy="140" r="15" class="atom"/><circle cx="190" cy="140" r="15" class="atom"/><circle cx="230" cy="140" r="15" class="atom"/><circle cx="70" cy="180" r="15" class="atom"/><circle cx="110" cy="180" r="15" class="atom"/><circle cx="150" cy="180" r="15" class="atom"/><circle cx="190" cy="180" r="15" class="atom"/><circle cx="230" cy="180" r="15" class="atom"/>
+<path d="M152,82 Q170,62 186,82" class="arr" marker-end="url(#ah3e)"/>
+<text x="450" y="22" class="nt" text-anchor="middle">(b) Interstitial mechanism</text>
+<circle cx="370" cy="60" r="15" class="atom"/><circle cx="410" cy="60" r="15" class="atom"/><circle cx="450" cy="60" r="15" class="atom"/><circle cx="490" cy="60" r="15" class="atom"/><circle cx="530" cy="60" r="15" class="atom"/><circle cx="370" cy="100" r="15" class="atom"/><circle cx="410" cy="100" r="15" class="atom"/><circle cx="450" cy="100" r="15" class="atom"/><circle cx="490" cy="100" r="15" class="atom"/><circle cx="530" cy="100" r="15" class="atom"/><circle cx="370" cy="140" r="15" class="atom"/><circle cx="410" cy="140" r="15" class="atom"/><circle cx="450" cy="140" r="15" class="atom"/><circle cx="490" cy="140" r="15" class="atom"/><circle cx="530" cy="140" r="15" class="atom"/><circle cx="370" cy="180" r="15" class="atom"/><circle cx="410" cy="180" r="15" class="atom"/><circle cx="450" cy="180" r="15" class="atom"/><circle cx="490" cy="180" r="15" class="atom"/><circle cx="530" cy="180" r="15" class="atom"/>
+<circle cx="410" cy="120" r="7" class="imp"/>
+<path d="M418,124 Q430,138 444,124" class="arr" marker-end="url(#ah3e)"/>
+<circle cx="450" cy="120" r="7" class="vac"/>
+<circle cx="80" cy="245" r="6" class="imp"/><text x="92" y="249" class="ns">impurity</text>
+<circle cx="170" cy="245" r="7" class="vac"/><text x="183" y="249" class="ns">vacancy</text>
+<circle cx="380" cy="245" r="6" class="imp"/><text x="392" y="249" class="ns">interstitial atom (small)</text>
+</svg><figcaption>Figure 1. (a) A substitutional atom jumps into a neighboring vacancy. (b) A small atom hops from one interstitial site to the next between lattice sites.</figcaption></figure>
+<h3>Vacancy mechanism</h3>
+<p>An atom exchanges places with an adjacent vacancy. This is the key mechanism for <strong>substitutional</strong> impurities such as B, P and As in Si, the impurities that actually act as donors or acceptors. The diffusion rate depends on the vacancy concentration (which itself rises exponentially with temperature) and on the energy needed for the jump.</p>
+<p>Why do vacancies matter so much? For a substitutional atom to <strong>directly exchange</strong> with a neighboring host atom, at least six bonds must be broken in the diamond lattice of Si. If a vacancy is already next to it, only three bonds must be broken. The much lower energy makes the vacancy mechanism dominant.</p>
+<h3>Interstitial mechanism</h3>
+<p>Small atoms (H, C, N, O) and many transition metals (Cu, Fe, Au...) move through the spaces between lattice sites without needing vacancies. Their barrier is lower, so they diffuse <strong>much faster</strong> than substitutional impurities. On interstitial sites, however, they usually do not contribute directly to doping; interstitial metals can instead create deep levels that shorten carrier lifetime. In practice, many dopants in Si diffuse by combined mechanisms involving both vacancies and Si self-interstitials.</p>
+
+<h2>5. Fick's laws</h2>
+<p><strong>Fick's first law</strong>: the atomic flux is proportional to the concentration gradient and points down the gradient:</p>
+$$J = -D\,\frac{\partial C}{\partial x}$$
+<p>Combining it with conservation of matter gives <strong>Fick's second law</strong>, which describes how concentration changes over time (for constant \(D\)):</p>
+$$\frac{\partial C}{\partial t} = D\,\frac{\partial^2 C}{\partial x^2}$$
+<p>The quantity \(\sqrt{Dt}\) has units of length and is called the <strong>diffusion length</strong>: the scale of how far dopants spread after time \(t\). To push dopants twice as deep, the time must be four times longer.</p>
+<h3>Two key solutions for processing</h3>
+<p><strong>Constant source</strong> ("pre-deposition"): the surface is held at concentration \(C_s\) (usually the solid solubility limit):</p>
+$$C(x,t) = C_s\,\mathrm{erfc}\!\left(\frac{x}{2\sqrt{Dt}}\right)$$
+<p><strong>Limited source</strong> ("drive-in"): a fixed dose \(Q\) (cm⁻²) already at the surface is annealed to push it deeper:</p>
+$$C(x,t) = \frac{Q}{\sqrt{\pi D t}}\exp\!\left(-\frac{x^2}{4Dt}\right)$$
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="220.0" y1="255" x2="220.0" y2="260" class="ax"/><text x="220.0" y="275" class="tk" text-anchor="middle">1</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">2</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">3</text><line x1="55" y1="255" x2="60" y2="255" class="ax"/><line x1="60" y1="255" x2="540" y2="255" class="grid"/><text x="51" y="259" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">0.25</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">0.5</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">0.75</text><line x1="55" y1="20" x2="60" y2="20" class="ax"/><line x1="60" y1="20" x2="540" y2="20" class="grid"/><text x="51" y="24" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Depth x / √(Dt)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">normalized C(x)</text><path d="M60.0,20.0 L68.0,26.6 L76.0,33.2 L84.0,39.9 L92.0,46.4 L100.0,53.0 L108.0,59.5 L116.0,65.9 L124.0,72.3 L132.0,78.7 L140.0,84.9 L148.0,91.1 L156.0,97.2 L164.0,103.2 L172.0,109.2 L180.0,115.0 L188.0,120.7 L196.0,126.3 L204.0,131.7 L212.0,137.1 L220.0,142.3 L228.0,147.4 L236.0,152.4 L244.0,157.2 L252.0,161.9 L260.0,166.5 L268.0,170.9 L276.0,175.2 L284.0,179.3 L292.0,183.3 L300.0,187.1 L308.0,190.8 L316.0,194.4 L324.0,197.8 L332.0,201.1 L340.0,204.3 L348.0,207.3 L356.0,210.2 L364.0,212.9 L372.0,215.5 L380.0,218.0 L388.0,220.4 L396.0,222.7 L404.0,224.8 L412.0,226.8 L420.0,228.8 L428.0,230.6 L436.0,232.3 L444.0,233.9 L452.0,235.4 L460.0,236.9 L468.0,238.2 L476.0,239.5 L484.0,240.7 L492.0,241.8 L500.0,242.8 L508.0,243.8 L516.0,244.7 L524.0,245.5 L532.0,246.3 L540.0,247.0" class="s1" fill="none"/><path d="M60.0,20.0 L68.0,20.1 L76.0,20.6 L84.0,21.3 L92.0,22.3 L100.0,23.6 L108.0,25.2 L116.0,27.1 L124.0,29.2 L132.0,31.6 L140.0,34.2 L148.0,37.1 L156.0,40.2 L164.0,43.6 L172.0,47.1 L180.0,50.8 L188.0,54.7 L196.0,58.8 L204.0,63.1 L212.0,67.5 L220.0,72.0 L228.0,76.6 L236.0,81.3 L244.0,86.2 L252.0,91.0 L260.0,96.0 L268.0,101.0 L276.0,106.0 L284.0,111.0 L292.0,116.1 L300.0,121.1 L308.0,126.1 L316.0,131.1 L324.0,136.0 L332.0,140.9 L340.0,145.7 L348.0,150.5 L356.0,155.1 L364.0,159.7 L372.0,164.2 L380.0,168.5 L388.0,172.8 L396.0,177.0 L404.0,181.0 L412.0,184.9 L420.0,188.7 L428.0,192.4 L436.0,195.9 L444.0,199.3 L452.0,202.6 L460.0,205.7 L468.0,208.8 L476.0,211.6 L484.0,214.4 L492.0,217.0 L500.0,219.5 L508.0,221.9 L516.0,224.2 L524.0,226.3 L532.0,228.3 L540.0,230.2" class="s2" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">constant source (erfc)</text><line x1="390" y1="46" x2="414" y2="46" class="s2"/><text x="420" y="50" class="tk">limited source (Gaussian)</text></svg><figcaption>Figure 2. The two diffusion profiles versus normalized depth x/√(Dt), both normalized to 1 at the surface.</figcaption></figure>
+<p>In traditional processing, the two steps are combined: pre-deposition introduces a defined dose into a thin surface layer, then drive-in reaches the target junction depth. The junction depth \(x_j\) is where the diffused dopant concentration equals the background doping of the substrate.</p>
+
+<h2>6. Introducing dopants into semiconductors</h2>
+<h3>Diffusion from a source</h3>
+<ul>
+<li><strong>Solid sources:</strong> BN or B₂O₃ plates placed between wafers in the furnace; at high temperature the dopant evaporates and deposits on the wafers.</li>
+<li><strong>Liquid sources:</strong> POCl₃ (for P) or BBr₃ (for B), carried into the furnace as vapor by a carrier gas through a bubbler.</li>
+<li><strong>Gas sources:</strong> PH₃, B₂H₆, AsH₃, highly toxic and requiring strict safety systems.</li>
+</ul>
+<h3>Ion implantation</h3>
+<p>Dopant ions are accelerated and shot directly into the wafer. The as-implanted profile is roughly Gaussian around the projected range \(R_p\), set by the ion energy. Advantages: precise control of dose and depth, low process temperature, easy masking. It is the dominant method in modern technology.</p>
+<p>Drawbacks: ion collisions <strong>damage the crystal lattice</strong>, high doses can amorphize the surface layer, and most ions come to rest on interstitial sites where they are not electrically active. An <strong>activation anneal</strong> is therefore always needed to repair the lattice and move dopants onto substitutional sites. During the anneal, dopants diffuse again and <strong>redistribute</strong>, which is why rapid annealing techniques (RTA, spike, laser anneal) were developed to activate dopants while limiting diffusion.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>In β-Ga₂O₃, n-type doping usually uses Si or Sn substituting for Ga. Conventional thermal diffusion is rarely used; instead, dopants are introduced during film growth (MOCVD, HVPE, MBE) or by Si ion implantation followed by activation annealing at about 900–1100 °C in N₂ (Sasaki et al., 2013). A major challenge is that β-Ga₂O₃ has <strong>no effective p-type doping yet</strong>, because holes tend to self-trap and acceptors such as Mg and N form very deep levels. Mg and N are therefore used mainly to create semi-insulating or current-blocking layers.</p>
+<p>Diffusion also bears directly on reliability: at high temperature, point defects such as oxygen vacancies and impurities can migrate, changing the trap distribution near the Schottky junction. Understanding diffusion helps explain why the C-V characteristics and leakage current of Ga₂O₃ devices change with temperature and operating time.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>W. D. Callister, D. G. Rethwisch, <em>Materials Science and Engineering: An Introduction</em>, Wiley.</li>
+<li>P. Shewmon, <em>Diffusion in Solids</em>, 2nd ed., Springer (2016).</li>
+<li>K. Sasaki et al., "Si-ion implantation doping in β-Ga₂O₃ and its application to fabrication of low-resistance ohmic contacts," <em>Applied Physics Express</em> 6, 086502 (2013).</li>
+</ol>
+</div>
+<nav class="pager"><a href="silicon-wafer.html">← <span class="l-vi">Tinh thể Si: từ thạch anh đến wafer</span><span class="l-en">Silicon crystals: from quartzite to wafer</span></a><a class="n" href="./"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này. Bản tiếng Anh đang được chuẩn bị.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

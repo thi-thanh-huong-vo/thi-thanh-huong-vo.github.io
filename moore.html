@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Định luật Moore và Dennard scaling" data-title-en="Moore's law and Dennard scaling">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Định luật Moore và Dennard scaling · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Vì sao linh kiện ngày càng nhỏ, rẻ và nhanh hơn, và vì sao xu hướng ấy đang chậm lại.">
+<meta property="og:title" content="Định luật Moore và Dennard scaling">
+<meta property="og:description" content="Vì sao linh kiện ngày càng nhỏ, rẻ và nhanh hơn, và vì sao xu hướng ấy đang chậm lại.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="../">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="./"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 1</span><span class="l-en">Part 1 · Lesson 1</span></p>
+  <h1><span class="l-vi">Định luật Moore và Dennard scaling</span><span class="l-en">Moore's law and Dennard scaling</span></h1>
+  <p class="sub"><span class="l-vi">Vì sao linh kiện ngày càng nhỏ, rẻ và nhanh hơn, và vì sao xu hướng ấy đang chậm lại.</span><span class="l-en">Why devices kept getting smaller, cheaper and faster, and why that trend is slowing down.</span></p>
+</header>
+<div class="l-vi">
+
+<p class="lead">Năm 1965, Gordon Moore nhận thấy số linh kiện trên một chip tích hợp tăng gấp đôi sau mỗi khoảng thời gian cố định. Nhận xét này về sau trở thành "kim chỉ nam" của cả ngành bán dẫn trong hơn nửa thế kỷ.</p>
+
+<h2>1. Định luật Moore: một quy luật kinh tế, không phải vật lý</h2>
+<p>Phát biểu quen thuộc nhất: <em>số transistor trên một mạch tích hợp tăng gấp đôi khoảng mỗi hai năm</em>. Moore ban đầu (1965) dự đoán chu kỳ một năm, rồi điều chỉnh thành hai năm vào năm 1975. Nếu gọi \(N_0\) là số transistor tại năm \(t_0\) và \(T\) là chu kỳ nhân đôi, ta có:</p>
+$$N(t) = N_0 \, 2^{(t - t_0)/T}, \qquad T \approx 2\ \text{năm}$$
+<p>Bộ vi xử lý Intel 4004 (1971) có khoảng 2.300 transistor. Áp dụng công thức với \(T = 2\) năm, đến 2021 con số này phải tăng khoảng \(2^{25} \approx 3{,}4 \times 10^7\) lần, tức cỡ \(10^{11}\) transistor, gần đúng với các chip lớn nhất hiện nay.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="540" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="70.0" y1="255" x2="70.0" y2="260" class="ax"/><text x="70.0" y="275" class="tk" text-anchor="middle">1970</text><line x1="164.0" y1="255" x2="164.0" y2="260" class="ax"/><text x="164.0" y="275" class="tk" text-anchor="middle">1980</text><line x1="258.0" y1="255" x2="258.0" y2="260" class="ax"/><text x="258.0" y="275" class="tk" text-anchor="middle">1990</text><line x1="352.0" y1="255" x2="352.0" y2="260" class="ax"/><text x="352.0" y="275" class="tk" text-anchor="middle">2000</text><line x1="446.0" y1="255" x2="446.0" y2="260" class="ax"/><text x="446.0" y="275" class="tk" text-anchor="middle">2010</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">2020</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">3</tspan></text><line x1="65" y1="196.25" x2="70" y2="196.25" class="ax"/><line x1="70" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="61" y="200.25" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">5</tspan></text><line x1="65" y1="137.5" x2="70" y2="137.5" class="ax"/><line x1="70" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="61" y="141.5" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">7</tspan></text><line x1="65" y1="78.75" x2="70" y2="78.75" class="ax"/><line x1="70" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="61" y="82.75" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">9</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">11</tspan></text><text x="305.0" y="294" class="lab" text-anchor="middle">Năm</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Số transistor / chip (log)</text><path d="M79.4,244.4 L88.8,240.0 L98.2,235.5 L107.6,231.1 L117.0,226.7 L126.4,222.3 L135.8,217.8 L145.2,213.4 L154.6,209.0 L164.0,204.6 L173.4,200.2 L182.8,195.7 L192.2,191.3 L201.6,186.9 L211.0,182.5 L220.4,178.1 L229.8,173.6 L239.2,169.2 L248.6,164.8 L258.0,160.4 L267.4,155.9 L276.8,151.5 L286.2,147.1 L295.6,142.7 L305.0,138.3 L314.4,133.8 L323.8,129.4 L333.2,125.0 L342.6,120.6 L352.0,116.2 L361.4,111.7 L370.8,107.3 L380.2,102.9 L389.6,98.5 L399.0,94.0 L408.4,89.6 L417.8,85.2 L427.2,80.8 L436.6,76.4 L446.0,71.9 L455.4,67.5 L464.8,63.1 L474.2,58.7 L483.6,54.3 L493.0,49.8 L502.4,45.4 L511.8,41.0 L521.2,36.6 L530.6,32.1 L540.0,27.7" class="s1" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">nhân đôi mỗi 2 năm</text></svg><figcaption>Hình 1. Đường nhân đôi lý tưởng xuất phát từ 2.300 transistor năm 1971 với chu kỳ 2 năm (thang log). Hình vẽ minh họa xu hướng, không phải dữ liệu thực tế.</figcaption></figure>
+<p>Điều quan trọng cần hiểu: đây là một <strong>quan sát thực nghiệm</strong> gắn với kinh nghiệm sản xuất và đầu tư, không phải một định luật vật lý. Nó đúng được lâu như vậy vì cả ngành chủ động lên kế hoạch để nó đúng, thông qua các lộ trình công nghệ như ITRS.</p>
+
+<h2>2. Vòng tuần hoàn thành công</h2>
+<p>Định luật Moore vận hành như một vòng lặp tự củng cố: thu nhỏ transistor giúp tăng hiệu năng trên mỗi đồng chi phí, sản phẩm tốt hơn mở rộng thị trường, doanh thu lớn hơn được tái đầu tư vào công nghệ thu nhỏ thế hệ tiếp theo.</p>
+<figure><svg viewBox="0 0 520 260" class="fig-svg" role="img">
+  <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+  <rect x="185" y="10" width="150" height="46" rx="8" class="node"/><text x="260" y="38" class="nt" text-anchor="middle">Thu nhỏ transistor</text>
+  <rect x="355" y="107" width="155" height="46" rx="8" class="node"/><text x="432" y="128" class="nt" text-anchor="middle">Hiệu năng tốt hơn</text><text x="432" y="144" class="ns" text-anchor="middle">trên mỗi đồng chi phí</text>
+  <rect x="185" y="204" width="150" height="46" rx="8" class="node"/><text x="260" y="232" class="nt" text-anchor="middle">Thị trường mở rộng</text>
+  <rect x="10" y="107" width="150" height="46" rx="8" class="node"/><text x="85" y="135" class="nt" text-anchor="middle">Đầu tư</text>
+  <path d="M335,40 Q420,50 430,105" class="arr" marker-end="url(#ah)"/><path d="M430,155 Q420,215 337,225" class="arr" marker-end="url(#ah)"/>
+  <path d="M185,225 Q100,215 88,157" class="arr" marker-end="url(#ah)"/><path d="M88,105 Q100,45 183,35" class="arr" marker-end="url(#ah)"/>
+</svg><figcaption>Hình 2. Vòng tuần hoàn thành công của ngành bán dẫn.</figcaption></figure>
+<p>Hai hệ quả kinh tế chính: chi phí trên một đơn vị diện tích chip được giữ gần như không đổi, trong khi số transistor trên chip tăng lên, nên <strong>giá thành mỗi transistor giảm</strong> liên tục. Chi phí sản xuất một wafer thực ra tăng theo từng thế hệ công nghệ, nhưng mật độ transistor tăng hơn gấp đôi đủ để bù lại.</p>
+
+<h2>3. Vì sao "nhỏ hơn" lại "tốt hơn"?</h2>
+<h3>Nhiều linh kiện hơn trong cùng thể tích</h3>
+<p>Khi kích thước đặc trưng giảm \(\lambda\) lần, số đối tượng chứa được trong cùng một thể tích tăng theo \(\lambda^3\), trên cùng một diện tích tăng theo \(\lambda^2\). Giảm kích thước 100 lần nghĩa là chứa được nhiều hơn \(100^3 = 10^6\) lần trong cùng thể tích. Với chip phẳng, mật độ transistor tăng theo \(\lambda^2\): mỗi thế hệ công nghệ giảm kích thước khoảng \(0{,}7\) lần thì diện tích mỗi transistor giảm khoảng một nửa, đúng với nhịp nhân đôi của Moore.</p>
+<h3>Hiệu suất sản xuất (yield) cao hơn</h3>
+<p>Sai hỏng trên wafer phân bố ngẫu nhiên. Nếu mật độ sai hỏng là \(D_0\) (số sai hỏng trên cm²) và mỗi die có diện tích \(A\), mô hình Poisson cho xác suất một die không chứa sai hỏng nào:</p>
+$$Y = e^{-D_0 A}$$
+<p>Die càng nhỏ thì càng ít khả năng "dính" sai hỏng. Ví dụ, cùng 5 sai hỏng trên một wafer: chia wafer thành 138 die nhỏ thì tối đa 5 die hỏng, hiệu suất khoảng 96%; chia thành 16 die lớn thì hiệu suất chỉ còn khoảng 69%. Mô hình Poisson là gần đúng đơn giản nhất; thực tế sai hỏng thường tập trung thành cụm nên người ta dùng các mô hình hiệu chỉnh như Murphy hay negative binomial.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="255" x2="180.0" y2="260" class="ax"/><text x="180.0" y="275" class="tk" text-anchor="middle">1</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">2</text><line x1="420.0" y1="255" x2="420.0" y2="260" class="ax"/><text x="420.0" y="275" class="tk" text-anchor="middle">3</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">4</text><line x1="55" y1="255" x2="60" y2="255" class="ax"/><line x1="60" y1="255" x2="540" y2="255" class="grid"/><text x="51" y="259" class="tk" text-anchor="end">0%</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">25%</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">50%</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">75%</text><line x1="55" y1="20" x2="60" y2="20" class="ax"/><line x1="60" y1="20" x2="540" y2="20" class="grid"/><text x="51" y="24" class="tk" text-anchor="end">100%</text><text x="300.0" y="294" class="lab" text-anchor="middle">Diện tích die A (cm²)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Hiệu suất Y</text><path d="M60.0,20.0 L66.0,21.2 L72.0,22.3 L78.0,23.5 L84.0,24.7 L90.0,25.8 L96.0,26.9 L102.0,28.1 L108.0,29.2 L114.0,30.3 L120.0,31.5 L126.0,32.6 L132.0,33.7 L138.0,34.8 L144.0,35.9 L150.0,37.0 L156.0,38.1 L162.0,39.1 L168.0,40.2 L174.0,41.3 L180.0,42.4 L186.0,43.4 L192.0,44.5 L198.0,45.5 L204.0,46.6 L210.0,47.6 L216.0,48.6 L222.0,49.7 L228.0,50.7 L234.0,51.7 L240.0,52.7 L246.0,53.7 L252.0,54.7 L258.0,55.7 L264.0,56.7 L270.0,57.7 L276.0,58.7 L282.0,59.7 L288.0,60.7 L294.0,61.6 L300.0,62.6 L306.0,63.6 L312.0,64.5 L318.0,65.5 L324.0,66.4 L330.0,67.3 L336.0,68.3 L342.0,69.2 L348.0,70.1 L354.0,71.1 L360.0,72.0 L366.0,72.9 L372.0,73.8 L378.0,74.7 L384.0,75.6 L390.0,76.5 L396.0,77.4 L402.0,78.3 L408.0,79.2 L414.0,80.0 L420.0,80.9 L426.0,81.8 L432.0,82.6 L438.0,83.5 L444.0,84.4 L450.0,85.2 L456.0,86.1 L462.0,86.9 L468.0,87.7 L474.0,88.6 L480.0,89.4 L486.0,90.2 L492.0,91.0 L498.0,91.9 L504.0,92.7 L510.0,93.5 L516.0,94.3 L522.0,95.1 L528.0,95.9 L534.0,96.7 L540.0,97.5" class="s1" fill="none"/><path d="M60.0,20.0 L66.0,25.8 L72.0,31.5 L78.0,37.0 L84.0,42.4 L90.0,47.6 L96.0,52.7 L102.0,57.7 L108.0,62.6 L114.0,67.3 L120.0,72.0 L126.0,76.5 L132.0,80.9 L138.0,85.2 L144.0,89.4 L150.0,93.5 L156.0,97.5 L162.0,101.4 L168.0,105.2 L174.0,108.9 L180.0,112.5 L186.0,116.0 L192.0,119.4 L198.0,122.8 L204.0,126.0 L210.0,129.2 L216.0,132.3 L222.0,135.3 L228.0,138.3 L234.0,141.2 L240.0,144.0 L246.0,146.7 L252.0,149.4 L258.0,152.0 L264.0,154.6 L270.0,157.0 L276.0,159.5 L282.0,161.8 L288.0,164.1 L294.0,166.4 L300.0,168.5 L306.0,170.7 L312.0,172.8 L318.0,174.8 L324.0,176.8 L330.0,178.7 L336.0,180.6 L342.0,182.4 L348.0,184.2 L354.0,186.0 L360.0,187.7 L366.0,189.3 L372.0,191.0 L378.0,192.5 L384.0,194.1 L390.0,195.6 L396.0,197.0 L402.0,198.5 L408.0,199.9 L414.0,201.2 L420.0,202.6 L426.0,203.9 L432.0,205.1 L438.0,206.4 L444.0,207.6 L450.0,208.7 L456.0,209.9 L462.0,211.0 L468.0,212.1 L474.0,213.1 L480.0,214.2 L486.0,215.2 L492.0,216.2 L498.0,217.1 L504.0,218.0 L510.0,219.0 L516.0,219.9 L522.0,220.7 L528.0,221.6 L534.0,222.4 L540.0,223.2" class="s2" fill="none"/><path d="M60.0,20.0 L66.0,31.5 L72.0,42.4 L78.0,52.7 L84.0,62.6 L90.0,72.0 L96.0,80.9 L102.0,89.4 L108.0,97.5 L114.0,105.2 L120.0,112.5 L126.0,119.4 L132.0,126.0 L138.0,132.3 L144.0,138.3 L150.0,144.0 L156.0,149.4 L162.0,154.6 L168.0,159.5 L174.0,164.1 L180.0,168.5 L186.0,172.8 L192.0,176.8 L198.0,180.6 L204.0,184.2 L210.0,187.7 L216.0,191.0 L222.0,194.1 L228.0,197.0 L234.0,199.9 L240.0,202.6 L246.0,205.1 L252.0,207.6 L258.0,209.9 L264.0,212.1 L270.0,214.2 L276.0,216.2 L282.0,218.0 L288.0,219.9 L294.0,221.6 L300.0,223.2 L306.0,224.7 L312.0,226.2 L318.0,227.6 L324.0,229.0 L330.0,230.2 L336.0,231.4 L342.0,232.6 L348.0,233.7 L354.0,234.7 L360.0,235.7 L366.0,236.7 L372.0,237.5 L378.0,238.4 L384.0,239.2 L390.0,240.0 L396.0,240.7 L402.0,241.4 L408.0,242.1 L414.0,242.7 L420.0,243.3 L426.0,243.9 L432.0,244.4 L438.0,244.9 L444.0,245.4 L450.0,245.9 L456.0,246.3 L462.0,246.8 L468.0,247.2 L474.0,247.5 L480.0,247.9 L486.0,248.2 L492.0,248.6 L498.0,248.9 L504.0,249.2 L510.0,249.5 L516.0,249.7 L522.0,250.0 L528.0,250.2 L534.0,250.5 L540.0,250.7" class="s3" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">D₀ = 0.1 cm⁻²</text><line x1="390" y1="46" x2="414" y2="46" class="s2"/><text x="420" y="50" class="tk">D₀ = 0.5 cm⁻²</text><line x1="390" y1="64" x2="414" y2="64" class="s3"/><text x="420" y="68" class="tk">D₀ = 1.0 cm⁻²</text></svg><figcaption>Hình 3. Hiệu suất theo mô hình Poisson giảm nhanh khi diện tích die hoặc mật độ sai hỏng tăng.</figcaption></figure>
+
+<h2>4. Dennard scaling: thu nhỏ với điện trường không đổi</h2>
+<p>Năm 1974, Robert Dennard và cộng sự tại IBM đưa ra bộ quy tắc thu nhỏ MOSFET. Ý tưởng cốt lõi: nếu mọi kích thước và điện áp cùng giảm \(\lambda\) lần, còn nồng độ pha tạp tăng \(\lambda\) lần, thì <strong>điện trường bên trong linh kiện giữ nguyên</strong>, nên linh kiện vẫn hoạt động như cũ, chỉ nhỏ hơn.</p>
+<div class="tablewrap"><table>
+<tr><th>Đại lượng</th><th>Hệ số thu nhỏ</th><th>Giải thích</th></tr>
+<tr><td>Kích thước \(L, W, t_{ox}\)</td><td>\(1/\lambda\)</td><td>Giả thiết ban đầu</td></tr>
+<tr><td>Nồng độ pha tạp \(N_A\)</td><td>\(\lambda\)</td><td>Giữ độ rộng vùng nghèo tỉ lệ với kích thước</td></tr>
+<tr><td>Điện áp \(V\)</td><td>\(1/\lambda\)</td><td>Giữ \(E = V/L\) không đổi</td></tr>
+<tr><td>Dòng điện \(I\)</td><td>\(1/\lambda\)</td><td>\(I \propto (W/L)\,C_{ox}\,V^2\), với \(C_{ox} \propto \lambda\)</td></tr>
+<tr><td>Điện dung \(C\)</td><td>\(1/\lambda\)</td><td>\(C = \varepsilon A/t_{ox}\): \(\lambda^{-2}/\lambda^{-1}\)</td></tr>
+<tr><td>Thời gian trễ \(\tau = CV/I\)</td><td>\(1/\lambda\)</td><td>Mạch nhanh hơn \(\lambda\) lần</td></tr>
+<tr><td>Công suất mỗi transistor \(P = VI\)</td><td>\(1/\lambda^2\)</td><td></td></tr>
+<tr><td><strong>Mật độ công suất \(P/A\)</strong></td><td><strong>1</strong></td><td>\(\lambda^{-2}/\lambda^{-2}\): chip không nóng hơn</td></tr>
+</table></div>
+<p>Dòng cuối cùng là điều kỳ diệu của Dennard scaling: thu nhỏ giúp chip nhanh hơn, nhỏ hơn, tiêu thụ ít năng lượng hơn trên mỗi phép tính, mà <strong>nhiệt sinh ra trên mỗi cm² không đổi</strong>. Mọi thứ đều tốt lên khi thu nhỏ.</p>
+
+<h2>5. Sự kết thúc của Dennard scaling</h2>
+<p>Từ khoảng giữa những năm 2000, quy tắc Dennard không còn giữ được, vì hai giới hạn vật lý:</p>
+<ul>
+<li><strong>Điện áp không thể giảm tiếp theo tỉ lệ.</strong> Dòng dưới ngưỡng (subthreshold) của MOSFET giảm theo hàm mũ với độ dốc tối thiểu khoảng \(\ln 10 \cdot kT/q \approx 60\ \text{mV/decade}\) ở nhiệt độ phòng (\(kT/q \approx 26\ \text{mV}\)). Giảm điện áp nguồn thì phải giảm điện áp ngưỡng, kéo theo dòng rò ở trạng thái tắt tăng theo hàm mũ. Vì vậy điện áp nguồn chỉ giảm chậm, kém xa tỉ lệ \(1/\lambda\).</li>
+<li><strong>Dòng rò xuyên hầm qua lớp oxide.</strong> Khi lớp SiO₂ của cổng chỉ còn vài nanomet, electron xuyên hầm lượng tử qua lớp cách điện, gây dòng rò cổng đáng kể.</li>
+</ul>
+<p>Khi điện áp không giảm theo kịp kích thước, mật độ công suất tăng lên theo mỗi thế hệ. Kết quả là xung nhịp bộ vi xử lý gần như chững lại từ khoảng năm 2005, và ngành chuyển sang chip đa nhân.</p>
+
+<h2>6. Ngành bán dẫn tiếp tục thế nào?</h2>
+<p>Thay vì chỉ thu nhỏ hình học, ngành chuyển sang ba hướng:</p>
+<ul>
+<li><strong>Vật liệu mới:</strong> strained Si và SiGe để tăng độ linh động (mobility), high-k/metal gate thay SiO₂ để giảm dòng rò cổng mà vẫn giữ điện dung cao.</li>
+<li><strong>Cấu trúc ba chiều:</strong> từ planar FET sang FinFET (cổng bao ba mặt kênh), rồi Gate-All-Around với nanosheet (cổng bao toàn bộ kênh), để cổng kiểm soát kênh tốt hơn và giảm dòng rò.</li>
+<li><strong>Tích hợp hệ thống:</strong> xếp chồng 3D và tích hợp dị thể (heterogeneous integration), ghép nhiều chip chuyên biệt trong một gói.</li>
+</ul>
+<p>Tóm lại, "thời hoàng kim" của Moore và Dennard đã qua, nhưng tinh thần của nó vẫn còn: đổi mới vật liệu, cấu trúc và hệ thống để tiếp tục cải thiện hiệu năng trên mỗi đơn vị chi phí và năng lượng.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Định luật Moore nói về <em>logic</em>: thu nhỏ để tăng mật độ. Với <em>điện tử công suất</em>, câu chuyện khác hẳn. Linh kiện công suất phải chịu điện áp hàng trăm đến hàng nghìn volt, nên không thể thu nhỏ tùy ý; giới hạn nằm ở <strong>điện trường đánh thủng</strong> của vật liệu. Đây là lý do các vật liệu vùng cấm rộng như SiC, GaN và vùng cấm siêu rộng như β-Ga₂O₃ (E<sub>g</sub> ≈ 4,8 eV) được quan tâm: điện trường đánh thủng cao cho phép lớp trôi (drift layer) mỏng hơn và pha tạp cao hơn ở cùng điện áp, giảm điện trở khi dẫn. Có thể xem đây là một dạng "scaling" khác, dựa trên vật liệu thay vì hình học.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>G. E. Moore, "Cramming more components onto integrated circuits," <em>Electronics</em> 38(8), 114–117 (1965).</li>
+<li>G. E. Moore, "Progress in digital integrated electronics," <em>IEDM Technical Digest</em>, 11–13 (1975).</li>
+<li>R. H. Dennard et al., "Design of ion-implanted MOSFET's with very small physical dimensions," <em>IEEE Journal of Solid-State Circuits</em> SC-9(5), 256–268 (1974).</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007).</li>
+</ol>
+
+</div>
+<div class="l-en">
+<p class="lead">In 1965, Gordon Moore noticed that the number of components on an integrated circuit doubled at a regular interval. That observation went on to guide the entire semiconductor industry for more than half a century.</p>
+
+<h2>1. Moore's law: an economic rule, not a law of physics</h2>
+<p>The familiar statement: <em>the number of transistors on an integrated circuit doubles about every two years</em>. Moore originally (1965) predicted a one-year cycle and revised it to two years in 1975. With \(N_0\) transistors in year \(t_0\) and a doubling period \(T\):</p>
+$$N(t) = N_0 \, 2^{(t - t_0)/T}, \qquad T \approx 2\ \text{years}$$
+<p>The Intel 4004 (1971) had about 2,300 transistors. With \(T = 2\) years, by 2021 that number grows by \(2^{25} \approx 3.4 \times 10^7\), giving roughly \(10^{11}\) transistors, close to the largest chips today.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="540" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="70.0" y1="255" x2="70.0" y2="260" class="ax"/><text x="70.0" y="275" class="tk" text-anchor="middle">1970</text><line x1="164.0" y1="255" x2="164.0" y2="260" class="ax"/><text x="164.0" y="275" class="tk" text-anchor="middle">1980</text><line x1="258.0" y1="255" x2="258.0" y2="260" class="ax"/><text x="258.0" y="275" class="tk" text-anchor="middle">1990</text><line x1="352.0" y1="255" x2="352.0" y2="260" class="ax"/><text x="352.0" y="275" class="tk" text-anchor="middle">2000</text><line x1="446.0" y1="255" x2="446.0" y2="260" class="ax"/><text x="446.0" y="275" class="tk" text-anchor="middle">2010</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">2020</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">3</tspan></text><line x1="65" y1="196.25" x2="70" y2="196.25" class="ax"/><line x1="70" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="61" y="200.25" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">5</tspan></text><line x1="65" y1="137.5" x2="70" y2="137.5" class="ax"/><line x1="70" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="61" y="141.5" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">7</tspan></text><line x1="65" y1="78.75" x2="70" y2="78.75" class="ax"/><line x1="70" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="61" y="82.75" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">9</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">11</tspan></text><text x="305.0" y="294" class="lab" text-anchor="middle">Year</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Transistors per chip (log)</text><path d="M79.4,244.4 L88.8,240.0 L98.2,235.5 L107.6,231.1 L117.0,226.7 L126.4,222.3 L135.8,217.8 L145.2,213.4 L154.6,209.0 L164.0,204.6 L173.4,200.2 L182.8,195.7 L192.2,191.3 L201.6,186.9 L211.0,182.5 L220.4,178.1 L229.8,173.6 L239.2,169.2 L248.6,164.8 L258.0,160.4 L267.4,155.9 L276.8,151.5 L286.2,147.1 L295.6,142.7 L305.0,138.3 L314.4,133.8 L323.8,129.4 L333.2,125.0 L342.6,120.6 L352.0,116.2 L361.4,111.7 L370.8,107.3 L380.2,102.9 L389.6,98.5 L399.0,94.0 L408.4,89.6 L417.8,85.2 L427.2,80.8 L436.6,76.4 L446.0,71.9 L455.4,67.5 L464.8,63.1 L474.2,58.7 L483.6,54.3 L493.0,49.8 L502.4,45.4 L511.8,41.0 L521.2,36.6 L530.6,32.1 L540.0,27.7" class="s1" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">doubling every 2 years</text></svg><figcaption>Figure 1. Ideal doubling trend starting from 2,300 transistors in 1971 with a 2-year period (log scale). Illustrative, not measured data.</figcaption></figure>
+<p>The key point: this is an <strong>empirical observation</strong> tied to manufacturing experience and investment, not a physical law. It held for so long because the whole industry planned for it to hold, through technology roadmaps such as the ITRS.</p>
+
+<h2>2. The virtuous success cycle</h2>
+<p>Moore's law works as a self-reinforcing loop: smaller transistors give better performance per unit cost, better products grow the market, and larger revenue is reinvested in the next generation of scaling.</p>
+<figure><svg viewBox="0 0 520 260" class="fig-svg" role="img">
+  <defs><marker id="ahe" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+  <rect x="185" y="10" width="150" height="46" rx="8" class="node"/><text x="260" y="38" class="nt" text-anchor="middle">Transistor scaling</text>
+  <rect x="355" y="107" width="155" height="46" rx="8" class="node"/><text x="432" y="128" class="nt" text-anchor="middle">Better performance</text><text x="432" y="144" class="ns" text-anchor="middle">per unit cost</text>
+  <rect x="185" y="204" width="150" height="46" rx="8" class="node"/><text x="260" y="232" class="nt" text-anchor="middle">Market growth</text>
+  <rect x="10" y="107" width="150" height="46" rx="8" class="node"/><text x="85" y="135" class="nt" text-anchor="middle">Investment</text>
+  <path d="M335,40 Q420,50 430,105" class="arr" marker-end="url(#ahe)"/><path d="M430,155 Q420,215 337,225" class="arr" marker-end="url(#ahe)"/>
+  <path d="M185,225 Q100,215 88,157" class="arr" marker-end="url(#ahe)"/><path d="M88,105 Q100,45 183,35" class="arr" marker-end="url(#ahe)"/>
+</svg><figcaption>Figure 2. The virtuous success cycle of the semiconductor industry.</figcaption></figure>
+<p>Two economic consequences follow: the cost per unit chip area stays roughly constant while the number of transistors per chip grows, so the <strong>cost per transistor falls</strong> steadily. Wafer processing cost actually rises with each technology node, but the more-than-twofold increase in transistor density more than compensates.</p>
+
+<h2>3. Why is smaller better?</h2>
+<h3>More objects in the same volume</h3>
+<p>Shrinking the feature size by a factor \(\lambda\) fits \(\lambda^3\) times more objects in the same volume and \(\lambda^2\) times more on the same area. Shrinking by 100 times gives \(100^3 = 10^6\) times more objects per volume. For planar chips, transistor density scales as \(\lambda^2\): each node shrinks dimensions by about \(0.7\), halving the area per transistor, which matches Moore's doubling.</p>
+<h3>Higher yield</h3>
+<p>Defects land on a wafer at random. With defect density \(D_0\) (defects per cm²) and die area \(A\), the Poisson model gives the probability that a die contains no defect:</p>
+$$Y = e^{-D_0 A}$$
+<p>Smaller dies are less likely to catch a defect. With the same 5 defects on a wafer, cutting it into 138 small dies loses at most 5 dies, a yield of about 96%; cutting it into 16 large dies drops the yield to about 69%. The Poisson model is the simplest approximation; real defects tend to cluster, so refined models such as Murphy's or the negative binomial are used in practice.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="255" x2="180.0" y2="260" class="ax"/><text x="180.0" y="275" class="tk" text-anchor="middle">1</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">2</text><line x1="420.0" y1="255" x2="420.0" y2="260" class="ax"/><text x="420.0" y="275" class="tk" text-anchor="middle">3</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">4</text><line x1="55" y1="255" x2="60" y2="255" class="ax"/><line x1="60" y1="255" x2="540" y2="255" class="grid"/><text x="51" y="259" class="tk" text-anchor="end">0%</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">25%</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">50%</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">75%</text><line x1="55" y1="20" x2="60" y2="20" class="ax"/><line x1="60" y1="20" x2="540" y2="20" class="grid"/><text x="51" y="24" class="tk" text-anchor="end">100%</text><text x="300.0" y="294" class="lab" text-anchor="middle">Die area A (cm²)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Yield Y</text><path d="M60.0,20.0 L66.0,21.2 L72.0,22.3 L78.0,23.5 L84.0,24.7 L90.0,25.8 L96.0,26.9 L102.0,28.1 L108.0,29.2 L114.0,30.3 L120.0,31.5 L126.0,32.6 L132.0,33.7 L138.0,34.8 L144.0,35.9 L150.0,37.0 L156.0,38.1 L162.0,39.1 L168.0,40.2 L174.0,41.3 L180.0,42.4 L186.0,43.4 L192.0,44.5 L198.0,45.5 L204.0,46.6 L210.0,47.6 L216.0,48.6 L222.0,49.7 L228.0,50.7 L234.0,51.7 L240.0,52.7 L246.0,53.7 L252.0,54.7 L258.0,55.7 L264.0,56.7 L270.0,57.7 L276.0,58.7 L282.0,59.7 L288.0,60.7 L294.0,61.6 L300.0,62.6 L306.0,63.6 L312.0,64.5 L318.0,65.5 L324.0,66.4 L330.0,67.3 L336.0,68.3 L342.0,69.2 L348.0,70.1 L354.0,71.1 L360.0,72.0 L366.0,72.9 L372.0,73.8 L378.0,74.7 L384.0,75.6 L390.0,76.5 L396.0,77.4 L402.0,78.3 L408.0,79.2 L414.0,80.0 L420.0,80.9 L426.0,81.8 L432.0,82.6 L438.0,83.5 L444.0,84.4 L450.0,85.2 L456.0,86.1 L462.0,86.9 L468.0,87.7 L474.0,88.6 L480.0,89.4 L486.0,90.2 L492.0,91.0 L498.0,91.9 L504.0,92.7 L510.0,93.5 L516.0,94.3 L522.0,95.1 L528.0,95.9 L534.0,96.7 L540.0,97.5" class="s1" fill="none"/><path d="M60.0,20.0 L66.0,25.8 L72.0,31.5 L78.0,37.0 L84.0,42.4 L90.0,47.6 L96.0,52.7 L102.0,57.7 L108.0,62.6 L114.0,67.3 L120.0,72.0 L126.0,76.5 L132.0,80.9 L138.0,85.2 L144.0,89.4 L150.0,93.5 L156.0,97.5 L162.0,101.4 L168.0,105.2 L174.0,108.9 L180.0,112.5 L186.0,116.0 L192.0,119.4 L198.0,122.8 L204.0,126.0 L210.0,129.2 L216.0,132.3 L222.0,135.3 L228.0,138.3 L234.0,141.2 L240.0,144.0 L246.0,146.7 L252.0,149.4 L258.0,152.0 L264.0,154.6 L270.0,157.0 L276.0,159.5 L282.0,161.8 L288.0,164.1 L294.0,166.4 L300.0,168.5 L306.0,170.7 L312.0,172.8 L318.0,174.8 L324.0,176.8 L330.0,178.7 L336.0,180.6 L342.0,182.4 L348.0,184.2 L354.0,186.0 L360.0,187.7 L366.0,189.3 L372.0,191.0 L378.0,192.5 L384.0,194.1 L390.0,195.6 L396.0,197.0 L402.0,198.5 L408.0,199.9 L414.0,201.2 L420.0,202.6 L426.0,203.9 L432.0,205.1 L438.0,206.4 L444.0,207.6 L450.0,208.7 L456.0,209.9 L462.0,211.0 L468.0,212.1 L474.0,213.1 L480.0,214.2 L486.0,215.2 L492.0,216.2 L498.0,217.1 L504.0,218.0 L510.0,219.0 L516.0,219.9 L522.0,220.7 L528.0,221.6 L534.0,222.4 L540.0,223.2" class="s2" fill="none"/><path d="M60.0,20.0 L66.0,31.5 L72.0,42.4 L78.0,52.7 L84.0,62.6 L90.0,72.0 L96.0,80.9 L102.0,89.4 L108.0,97.5 L114.0,105.2 L120.0,112.5 L126.0,119.4 L132.0,126.0 L138.0,132.3 L144.0,138.3 L150.0,144.0 L156.0,149.4 L162.0,154.6 L168.0,159.5 L174.0,164.1 L180.0,168.5 L186.0,172.8 L192.0,176.8 L198.0,180.6 L204.0,184.2 L210.0,187.7 L216.0,191.0 L222.0,194.1 L228.0,197.0 L234.0,199.9 L240.0,202.6 L246.0,205.1 L252.0,207.6 L258.0,209.9 L264.0,212.1 L270.0,214.2 L276.0,216.2 L282.0,218.0 L288.0,219.9 L294.0,221.6 L300.0,223.2 L306.0,224.7 L312.0,226.2 L318.0,227.6 L324.0,229.0 L330.0,230.2 L336.0,231.4 L342.0,232.6 L348.0,233.7 L354.0,234.7 L360.0,235.7 L366.0,236.7 L372.0,237.5 L378.0,238.4 L384.0,239.2 L390.0,240.0 L396.0,240.7 L402.0,241.4 L408.0,242.1 L414.0,242.7 L420.0,243.3 L426.0,243.9 L432.0,244.4 L438.0,244.9 L444.0,245.4 L450.0,245.9 L456.0,246.3 L462.0,246.8 L468.0,247.2 L474.0,247.5 L480.0,247.9 L486.0,248.2 L492.0,248.6 L498.0,248.9 L504.0,249.2 L510.0,249.5 L516.0,249.7 L522.0,250.0 L528.0,250.2 L534.0,250.5 L540.0,250.7" class="s3" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">D₀ = 0.1 cm⁻²</text><line x1="390" y1="46" x2="414" y2="46" class="s2"/><text x="420" y="50" class="tk">D₀ = 0.5 cm⁻²</text><line x1="390" y1="64" x2="414" y2="64" class="s3"/><text x="420" y="68" class="tk">D₀ = 1.0 cm⁻²</text></svg><figcaption>Figure 3. Poisson yield falls quickly as die area or defect density increases.</figcaption></figure>
+
+<h2>4. Dennard scaling: shrinking at constant field</h2>
+<p>In 1974, Robert Dennard and colleagues at IBM proposed a set of MOSFET scaling rules. The core idea: if all dimensions and voltages shrink by \(\lambda\) while doping increases by \(\lambda\), the <strong>internal electric field stays the same</strong>, so the device behaves the same way, only smaller.</p>
+<div class="tablewrap"><table>
+<tr><th>Quantity</th><th>Scaling factor</th><th>Reason</th></tr>
+<tr><td>Dimensions \(L, W, t_{ox}\)</td><td>\(1/\lambda\)</td><td>Starting assumption</td></tr>
+<tr><td>Doping \(N_A\)</td><td>\(\lambda\)</td><td>Keeps depletion width proportional to size</td></tr>
+<tr><td>Voltage \(V\)</td><td>\(1/\lambda\)</td><td>Keeps \(E = V/L\) constant</td></tr>
+<tr><td>Current \(I\)</td><td>\(1/\lambda\)</td><td>\(I \propto (W/L)\,C_{ox}\,V^2\), with \(C_{ox} \propto \lambda\)</td></tr>
+<tr><td>Capacitance \(C\)</td><td>\(1/\lambda\)</td><td>\(C = \varepsilon A/t_{ox}\): \(\lambda^{-2}/\lambda^{-1}\)</td></tr>
+<tr><td>Delay \(\tau = CV/I\)</td><td>\(1/\lambda\)</td><td>Circuits run \(\lambda\) times faster</td></tr>
+<tr><td>Power per transistor \(P = VI\)</td><td>\(1/\lambda^2\)</td><td></td></tr>
+<tr><td><strong>Power density \(P/A\)</strong></td><td><strong>1</strong></td><td>\(\lambda^{-2}/\lambda^{-2}\): the chip gets no hotter</td></tr>
+</table></div>
+<p>The last row is the magic of Dennard scaling: shrinking makes chips faster, smaller and more energy-efficient per operation, while the <strong>heat generated per cm² stays constant</strong>. Everything gets better when the device is scaled.</p>
+
+<h2>5. The end of Dennard scaling</h2>
+<p>From the mid-2000s, Dennard's rules could no longer be followed, because of two physical limits:</p>
+<ul>
+<li><strong>Voltage cannot keep scaling.</strong> MOSFET subthreshold current falls exponentially with a minimum swing of about \(\ln 10 \cdot kT/q \approx 60\ \text{mV/decade}\) at room temperature (\(kT/q \approx 26\ \text{mV}\)). Lowering the supply voltage requires lowering the threshold voltage, which raises off-state leakage exponentially. The supply voltage has therefore scaled far more slowly than \(1/\lambda\).</li>
+<li><strong>Tunneling leakage through the gate oxide.</strong> Once the SiO₂ gate dielectric is only a few nanometers thick, electrons tunnel through it, causing significant gate leakage.</li>
+</ul>
+<p>When voltage no longer keeps pace with dimensions, power density rises with every node. As a result, processor clock frequencies largely stalled around 2005, and the industry moved to multi-core chips.</p>
+
+<h2>6. How does the industry keep going?</h2>
+<p>Instead of geometric scaling alone, the industry moved in three directions:</p>
+<ul>
+<li><strong>New materials:</strong> strained Si and SiGe to boost mobility; high-k/metal gate stacks replacing SiO₂ to cut gate leakage while keeping high capacitance.</li>
+<li><strong>Three-dimensional structures:</strong> from planar FETs to FinFETs (gate on three sides of the channel), then Gate-All-Around nanosheets (gate surrounding the channel), for better gate control and lower leakage.</li>
+<li><strong>System integration:</strong> 3D stacking and heterogeneous integration of specialized chips in one package.</li>
+</ul>
+<p>In short, the golden days of Moore and Dennard are over, but the spirit remains: innovating in materials, structures and systems to keep improving performance per unit of cost and energy.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Moore's law is about <em>logic</em>: shrinking to increase density. In <em>power electronics</em> the story is different. Power devices must block hundreds to thousands of volts, so they cannot be shrunk freely; the limit is the material's <strong>breakdown field</strong>. This is why wide-bandgap SiC and GaN, and ultra-wide bandgap β-Ga₂O₃ (E<sub>g</sub> ≈ 4.8 eV), attract so much interest: a higher breakdown field allows a thinner, more heavily doped drift layer at the same voltage, reducing on-resistance. It is a different kind of "scaling", driven by materials rather than geometry.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>G. E. Moore, "Cramming more components onto integrated circuits," <em>Electronics</em> 38(8), 114–117 (1965).</li>
+<li>G. E. Moore, "Progress in digital integrated electronics," <em>IEDM Technical Digest</em>, 11–13 (1975).</li>
+<li>R. H. Dennard et al., "Design of ion-implanted MOSFET's with very small physical dimensions," <em>IEEE Journal of Solid-State Circuits</em> SC-9(5), 256–268 (1974).</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007).</li>
+</ol>
+</div>
+<nav class="pager"><a href="./">← <span class="l-vi">Mục lục</span><span class="l-en">Contents</span></a><a class="n" href="silicon-wafer.html"><span class="l-vi">Tinh thể Si: từ thạch anh đến wafer</span><span class="l-en">Silicon crystals: from quartzite to wafer</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này. Bản tiếng Anh đang được chuẩn bị.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

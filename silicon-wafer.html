@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Tinh thể Si: từ thạch anh đến wafer" data-title-en="Silicon crystals: from quartzite to wafer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tinh thể Si: từ thạch anh đến wafer · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Các dạng chất rắn, tinh chế Si, phương pháp Czochralski và Float Zone, các loại wafer.">
+<meta property="og:title" content="Tinh thể Si: từ thạch anh đến wafer">
+<meta property="og:description" content="Các dạng chất rắn, tinh chế Si, phương pháp Czochralski và Float Zone, các loại wafer.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="../">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="./"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 2</span><span class="l-en">Part 1 · Lesson 2</span></p>
+  <h1><span class="l-vi">Tinh thể Si: từ thạch anh đến wafer</span><span class="l-en">Silicon crystals: from quartzite to wafer</span></h1>
+  <p class="sub"><span class="l-vi">Các dạng chất rắn, tinh chế Si, phương pháp Czochralski và Float Zone, các loại wafer.</span><span class="l-en">Forms of solids, Si purification, Czochralski and Float Zone growth, wafer types.</span></p>
+</header>
+<div class="l-vi">
+
+<p class="lead">Si là nguyên tố phổ biến thứ hai trong vỏ Trái Đất, chiếm khoảng 26% khối lượng, chỉ sau oxy. Nhưng nó hầu như không tồn tại ở dạng nguyên chất. Để có một wafer Si đơn tinh thể với độ tinh khiết "chín số 9" trở lên, cần một chuỗi quy trình hóa học và luyện kim rất công phu.</p>
+
+<h2>1. Bán dẫn trong bảng tuần hoàn</h2>
+<p>Bán dẫn có thể là nguyên tố đơn chất nhóm IV (Si, Ge), hợp chất IV–IV (SiC), III–V (GaAs, InSb, GaN), II–VI (ZnSe, CdTe), hay oxide như Ga₂O₃. Ngoài wafer Si, ngành công nghiệp còn dùng nhiều loại đế khác: SOI (silicon-on-insulator), sapphire (Al₂O₃), SiC, GaN epitaxial, thạch anh, MgO, SrTiO₃... Tuy vậy, phần lớn mạch tích hợp vẫn được chế tạo trên <strong>wafer Si đơn tinh thể</strong>.</p>
+
+<h2>2. Transistor đầu tiên</h2>
+<p>Ngày 16/12/1947, tại Bell Laboratories, John Bardeen và Walter Brattain, trong nhóm do William Shockley dẫn dắt, chế tạo thành công transistor tiếp điểm (point-contact transistor) đầu tiên. Vật liệu bán dẫn khi đó là <strong>germanium</strong>, không phải Si. Trước transistor, chức năng khuếch đại và đóng ngắt dòng điện chỉ có thể thực hiện bằng đèn chân không (vacuum tube), cồng kềnh và tốn điện. Cái tên <em>transistor</em> ghép từ <em>transfer resistor</em>.</p>
+
+<h2>3. Ba dạng chất rắn</h2>
+<div class="tablewrap"><table>
+<tr><th>Dạng</th><th>Trật tự nguyên tử</th><th>Ví dụ và ứng dụng</th></tr>
+<tr><td><strong>Đơn tinh thể</strong> (single-crystalline)</td><td>Trật tự tuần hoàn trên toàn khối</td><td>Wafer Si, Ge cho vi mạch</td></tr>
+<tr><td><strong>Đa tinh thể</strong> (polycrystalline)</td><td>Nhiều hạt tinh thể, ngăn cách bởi biên hạt</td><td>Poly-Si cho điện cực cổng MOSFET, pin mặt trời</td></tr>
+<tr><td><strong>Vô định hình</strong> (amorphous)</td><td>Chỉ có trật tự gần, không có trật tự xa</td><td>a-Si:H, IGZO, ITO cho màn hình, pin màng mỏng</td></tr>
+</table></div>
+<h3>Poly-Si</h3>
+<p>Điện trở suất, độ linh động và nồng độ hạt tải của poly-Si phụ thuộc mạnh vào <strong>kích thước hạt</strong>. Biên hạt chứa nhiều liên kết treo (dangling bond) tạo trạng thái bẫy, đóng vai trò <strong>tâm tái hợp</strong> (recombination center) và rào thế cản trở dòng hạt tải. Vì vậy pin mặt trời poly-Si có hiệu suất tăng theo kích thước hạt, nhưng vẫn được dùng rộng rãi nhờ giá rẻ hơn nhiều so với đơn tinh thể.</p>
+<h3>a-Si</h3>
+<p>Si vô định hình có mật độ liên kết treo rất cao, khiến tính chất quang dẫn kém. Giải pháp là đưa hydro vào trong quá trình chế tạo (a-Si:H): nguyên tử H "bịt" các liên kết treo, giảm mạnh mật độ trạng thái sai hỏng. a-Si:H có hiệu suất thấp nhưng rẻ, dễ phủ trên diện tích lớn và không chứa kim loại nặng độc hại như Cd hay Pb, nên được dùng trong pin màng mỏng, máy tính bỏ túi dùng năng lượng mặt trời và transistor màng mỏng cho màn hình.</p>
+
+<h2>4. Từ thạch anh đến polysilicon</h2>
+<figure><svg viewBox="0 0 600 190" class="fig-svg" role="img">
+  <defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+  <rect x="5" y="20" width="130" height="58" rx="8" class="node"/><text x="70" y="45" class="nt" text-anchor="middle">Thạch anh</text><text x="70" y="63" class="ns" text-anchor="middle">SiO₂</text>
+  <rect x="160" y="20" width="130" height="58" rx="8" class="node"/><text x="225" y="45" class="nt" text-anchor="middle">Si luyện kim</text><text x="225" y="63" class="ns" text-anchor="middle">98–99%</text>
+  <rect x="315" y="20" width="130" height="58" rx="8" class="node"/><text x="380" y="45" class="nt" text-anchor="middle">Trichlorosilane</text><text x="380" y="63" class="ns" text-anchor="middle">HSiCl₃, chưng cất</text>
+  <rect x="470" y="20" width="125" height="58" rx="8" class="node"/><text x="532" y="45" class="nt" text-anchor="middle">Polysilicon</text><text x="532" y="63" class="ns" text-anchor="middle">bán dẫn cấp</text>
+  <rect x="315" y="120" width="130" height="58" rx="8" class="node"/><text x="380" y="145" class="nt" text-anchor="middle">Thỏi đơn tinh thể</text><text x="380" y="163" class="ns" text-anchor="middle">CZ hoặc FZ</text>
+  <rect x="160" y="120" width="130" height="58" rx="8" class="node"/><text x="225" y="145" class="nt" text-anchor="middle">Wafer</text><text x="225" y="163" class="ns" text-anchor="middle">cắt, mài, đánh bóng</text>
+  <path d="M135,49H158" class="arr" marker-end="url(#ah2)"/><path d="M290,49H313" class="arr" marker-end="url(#ah2)"/><path d="M445,49H468" class="arr" marker-end="url(#ah2)"/>
+  <path d="M532,78 V149 H447" class="arr" marker-end="url(#ah2)"/><path d="M315,149H292" class="arr" marker-end="url(#ah2)"/>
+</svg><figcaption>Hình 1. Chuỗi sản xuất wafer Si đơn tinh thể.</figcaption></figure>
+<h3>Bước 1: Si luyện kim (metallurgical-grade Si)</h3>
+<p>Thạch anh (gần như SiO₂ tinh khiết) được nung chảy trong lò hồ quang với điện cực nhúng (submerged-electrode arc furnace) ở khoảng 1900 °C cùng nguồn carbon (than đá, than cốc, dăm gỗ). Carbon khử SiO₂, CO thoát ra ở pha khí:</p>
+$$\mathrm{SiO_2 + 2C \rightarrow Si + 2CO}$$
+<p>Si thu được có độ tinh khiết 98–99%, đủ cho luyện kim nhưng còn rất xa yêu cầu của bán dẫn.</p>
+<h3>Bước 2: Quy trình Siemens</h3>
+<p>Bột Si luyện kim phản ứng với HCl ở nhiệt độ cao (có xúc tác) tạo trichlorosilane, một chất lỏng dễ bay hơi:</p>
+$$\mathrm{Si + 3HCl \rightarrow HSiCl_3 + H_2}$$
+<p>Ưu điểm then chốt: HSiCl₃ là chất lỏng nên có thể <strong>tinh chế bằng chưng cất phân đoạn</strong> đến độ tinh khiết cực cao, loại bỏ tạp chất kim loại vốn có nhiệt độ sôi khác. Sau đó HSiCl₃ được hóa hơi, trộn với H₂ và phân hủy trên các thanh Si nung nóng (lắng đọng hơi hóa học, CVD). Si lắng đọng lên thanh, còn Cl và H giải hấp trở lại pha khí. Sản phẩm là <strong>polysilicon cấp bán dẫn</strong>, độ tinh khiết có thể đạt 9N đến 11N (99,9999999% trở lên).</p>
+
+<h2>5. Nuôi đơn tinh thể</h2>
+<h3>Phương pháp Czochralski (CZ)</h3>
+<p>Do Jan Czochralski phát minh năm 1916 khi nghiên cứu tốc độ kết tinh của kim loại. Polysilicon (cùng tạp chất pha tạp) được nung chảy trong nồi thạch anh (quartz crucible) ở trên 1414 °C. Một mầm tinh thể (seed) có định hướng xác định được nhúng vào bề mặt chất lỏng, rồi vừa quay vừa kéo lên chậm. Si kết tinh theo đúng mạng của mầm, tạo thành thỏi (ingot) đơn tinh thể. Phần lớn Si thương mại hiện nay là Si Czochralski.</p>
+<p>Thỏi CZ gồm các phần: <strong>mầm</strong> (seed), <strong>cổ</strong> (neck, phần thắt nhỏ giúp loại bỏ lệch mạng lan từ mầm và tránh sốc nhiệt), <strong>vai</strong> (shoulder, chuyển tiếp lên đường kính mong muốn), <strong>thân</strong> (body, phần được cắt thành wafer) và <strong>chóp cuối</strong> (end cone, giảm sốc nhiệt khi tách khỏi chất lỏng).</p>
+<p>Nhược điểm: chất lỏng Si tiếp xúc với nồi thạch anh và hòa tan một phần SiO₂, nên Si CZ chứa <strong>nồng độ oxy tương đối cao</strong> (cỡ 10¹⁷–10¹⁸ cm⁻³). Oxy không hoàn toàn có hại: các kết tủa oxy bên trong wafer có thể bẫy tạp chất kim loại (internal gettering) và tăng độ bền cơ học của wafer.</p>
+<h3>Hệ số phân bố và sự phân tách tạp chất</h3>
+<p>Khi kết tinh, tạp chất không phân bố đều giữa pha rắn và pha lỏng. Hệ số phân bố cân bằng (segregation coefficient):</p>
+$$k_0 = \frac{C_s}{C_l}$$
+<p>Với hầu hết tạp chất trong Si, \(k_0 < 1\): tạp chất "thích" ở lại pha lỏng hơn. Trong quá trình kéo, pha lỏng giàu dần tạp chất, nên nồng độ trong tinh thể tăng dọc theo chiều dài thỏi. Nếu pha lỏng được trộn đều, nồng độ tại phần đã đông đặc \(f\) tuân theo phương trình Scheil:</p>
+$$C_s(f) = k_0\, C_0\, (1 - f)^{k_0 - 1}$$
+<p>với \(C_0\) là nồng độ ban đầu trong chất lỏng. Giá trị \(k_0\) điển hình trong Si: B ≈ 0,8, P ≈ 0,35, As ≈ 0,3, Sb ≈ 0,023. Vì B có \(k_0\) gần 1 nên wafer pha tạp B đồng đều hơn nhiều so với Sb.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60" y1="255" x2="60" y2="260" class="ax"/><text x="60" y="275" class="tk" text-anchor="middle">0</text><line x1="156.0" y1="255" x2="156.0" y2="260" class="ax"/><text x="156.0" y="275" class="tk" text-anchor="middle">0.2</text><line x1="252.0" y1="255" x2="252.0" y2="260" class="ax"/><text x="252.0" y="275" class="tk" text-anchor="middle">0.4</text><line x1="348.0" y1="255" x2="348.0" y2="260" class="ax"/><text x="348.0" y="275" class="tk" text-anchor="middle">0.6</text><line x1="444.0" y1="255" x2="444.0" y2="260" class="ax"/><text x="444.0" y="275" class="tk" text-anchor="middle">0.8</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">1</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0.01</text><line x1="55" y1="161.0" x2="60" y2="161.0" class="ax"/><line x1="60" y1="161.0" x2="540" y2="161.0" class="grid"/><text x="51" y="165.0" class="tk" text-anchor="end">0.1</text><line x1="55" y1="67.0" x2="60" y2="67.0" class="ax"/><line x1="60" y1="67.0" x2="540" y2="67.0" class="grid"/><text x="51" y="71.0" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Phần đã đông đặc f</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Cₛ / C₀ (log)</text><path d="M60.0,76.1 L64.8,76.0 L69.6,75.9 L74.4,75.9 L79.2,75.8 L84.0,75.7 L88.8,75.6 L93.6,75.5 L98.4,75.4 L103.2,75.3 L108.0,75.2 L112.8,75.2 L117.6,75.1 L122.4,75.0 L127.2,74.9 L132.0,74.8 L136.8,74.7 L141.6,74.6 L146.4,74.5 L151.2,74.4 L156.0,74.3 L160.8,74.2 L165.6,74.1 L170.4,74.0 L175.2,73.9 L180.0,73.8 L184.8,73.7 L189.6,73.5 L194.4,73.4 L199.2,73.3 L204.0,73.2 L208.8,73.1 L213.6,73.0 L218.4,72.8 L223.2,72.7 L228.0,72.6 L232.8,72.5 L237.6,72.3 L242.4,72.2 L247.2,72.1 L252.0,71.9 L256.8,71.8 L261.6,71.7 L266.4,71.5 L271.2,71.4 L276.0,71.2 L280.8,71.1 L285.6,70.9 L290.4,70.8 L295.2,70.6 L300.0,70.5 L304.8,70.3 L309.6,70.1 L314.4,69.9 L319.2,69.8 L324.0,69.6 L328.8,69.4 L333.6,69.2 L338.4,69.0 L343.2,68.8 L348.0,68.6 L352.8,68.4 L357.6,68.2 L362.4,68.0 L367.2,67.8 L372.0,67.5 L376.8,67.3 L381.6,67.1 L386.4,66.8 L391.2,66.5 L396.0,66.3 L400.8,66.0 L405.6,65.7 L410.4,65.4 L415.2,65.1 L420.0,64.8 L424.8,64.5 L429.6,64.1 L434.4,63.7 L439.2,63.4 L444.0,63.0 L448.8,62.6 L453.6,62.1 L458.4,61.6 L463.2,61.1 L468.0,60.6 L472.8,60.1 L477.6,59.5 L482.4,58.8 L487.2,58.1 L492.0,57.3 L496.8,56.4 L501.6,55.5 L506.4,54.4 L511.2,53.1 L516.0,51.7" class="s1" fill="none"/><path d="M60.0,109.9 L64.8,109.6 L69.6,109.3 L74.4,109.0 L79.2,108.8 L84.0,108.5 L88.8,108.2 L93.6,107.9 L98.4,107.6 L103.2,107.4 L108.0,107.1 L112.8,106.8 L117.6,106.5 L122.4,106.2 L127.2,105.9 L132.0,105.5 L136.8,105.2 L141.6,104.9 L146.4,104.6 L151.2,104.3 L156.0,103.9 L160.8,103.6 L165.6,103.3 L170.4,102.9 L175.2,102.6 L180.0,102.2 L184.8,101.9 L189.6,101.5 L194.4,101.1 L199.2,100.8 L204.0,100.4 L208.8,100.0 L213.6,99.6 L218.4,99.2 L223.2,98.8 L228.0,98.4 L232.8,98.0 L237.6,97.6 L242.4,97.2 L247.2,96.7 L252.0,96.3 L256.8,95.9 L261.6,95.4 L266.4,94.9 L271.2,94.5 L276.0,94.0 L280.8,93.5 L285.6,93.0 L290.4,92.5 L295.2,92.0 L300.0,91.5 L304.8,90.9 L309.6,90.4 L314.4,89.8 L319.2,89.3 L324.0,88.7 L328.8,88.1 L333.6,87.5 L338.4,86.8 L343.2,86.2 L348.0,85.5 L352.8,84.9 L357.6,84.2 L362.4,83.5 L367.2,82.7 L372.0,82.0 L376.8,81.2 L381.6,80.4 L386.4,79.6 L391.2,78.8 L396.0,77.9 L400.8,77.0 L405.6,76.1 L410.4,75.1 L415.2,74.1 L420.0,73.1 L424.8,72.0 L429.6,70.9 L434.4,69.7 L439.2,68.4 L444.0,67.2 L448.8,65.8 L453.6,64.4 L458.4,62.8 L463.2,61.2 L468.0,59.5 L472.8,57.7 L477.6,55.7 L482.4,53.6 L487.2,51.3 L492.0,48.8 L496.8,46.0 L501.6,42.8 L506.4,39.3 L511.2,35.2 L516.0,30.4" class="s2" fill="none"/><path d="M60.0,221.0 L64.8,220.6 L69.6,220.2 L74.4,219.8 L79.2,219.4 L84.0,219.0 L88.8,218.5 L93.6,218.1 L98.4,217.7 L103.2,217.2 L108.0,216.8 L112.8,216.3 L117.6,215.9 L122.4,215.4 L127.2,215.0 L132.0,214.5 L136.8,214.0 L141.6,213.6 L146.4,213.1 L151.2,212.6 L156.0,212.1 L160.8,211.6 L165.6,211.1 L170.4,210.6 L175.2,210.1 L180.0,209.5 L184.8,209.0 L189.6,208.4 L194.4,207.9 L199.2,207.3 L204.0,206.8 L208.8,206.2 L213.6,205.6 L218.4,205.0 L223.2,204.4 L228.0,203.8 L232.8,203.2 L237.6,202.6 L242.4,201.9 L247.2,201.3 L252.0,200.6 L256.8,200.0 L261.6,199.3 L266.4,198.6 L271.2,197.9 L276.0,197.2 L280.8,196.4 L285.6,195.7 L290.4,194.9 L295.2,194.1 L300.0,193.4 L304.8,192.5 L309.6,191.7 L314.4,190.9 L319.2,190.0 L324.0,189.1 L328.8,188.3 L333.6,187.3 L338.4,186.4 L343.2,185.4 L348.0,184.5 L352.8,183.4 L357.6,182.4 L362.4,181.3 L367.2,180.2 L372.0,179.1 L376.8,178.0 L381.6,176.8 L386.4,175.6 L391.2,174.3 L396.0,173.0 L400.8,171.6 L405.6,170.2 L410.4,168.8 L415.2,167.3 L420.0,165.7 L424.8,164.1 L429.6,162.4 L434.4,160.6 L439.2,158.8 L444.0,156.8 L448.8,154.8 L453.6,152.6 L458.4,150.3 L463.2,147.9 L468.0,145.3 L472.8,142.6 L477.6,139.6 L482.4,136.4 L487.2,133.0 L492.0,129.2 L496.8,125.0 L501.6,120.3 L506.4,114.9 L511.2,108.8 L516.0,101.5" class="s3" fill="none"/><line x1="80" y1="137.5" x2="104" y2="137.5" class="s1"/><text x="110" y="141.5" class="tk">B, k₀ = 0.8</text><line x1="80" y1="155.5" x2="104" y2="155.5" class="s2"/><text x="110" y="159.5" class="tk">P, k₀ = 0.35</text><line x1="80" y1="173.5" x2="104" y2="173.5" class="s3"/><text x="110" y="177.5" class="tk">Sb, k₀ = 0.023</text></svg><figcaption>Hình 2. Phân bố tạp chất dọc thỏi CZ theo phương trình Scheil. Tạp chất có k₀ nhỏ phân tách mạnh, nồng độ tăng nhanh về cuối thỏi.</figcaption></figure>
+<h3>Phương pháp vùng nóng chảy di động (Float Zone, FZ)</h3>
+<p>Một thanh polysilicon được giữ thẳng đứng, một cuộn cảm ứng tần số cao làm nóng chảy một vùng hẹp, rồi vùng nóng chảy này được dịch chuyển dọc thanh, bắt đầu từ mầm tinh thể. Phía sau vùng nóng chảy, Si kết tinh thành đơn tinh thể. Ban đầu kỹ thuật này dùng để tinh chế (zone refining): vì \(k_0 < 1\), tạp chất bị vùng lỏng "quét" dần về cuối thanh.</p>
+<p>Ưu điểm lớn nhất: chất lỏng <strong>không tiếp xúc với nồi chứa</strong>, chỉ tiếp xúc chân không hoặc khí trơ, nên Si FZ có nồng độ oxy và tạp chất rất thấp. Si FZ được dùng cho linh kiện công suất và đầu dò bức xạ, nơi cần điện trở suất cao và thời gian sống hạt tải dài. Hạn chế: vùng lỏng được giữ chủ yếu nhờ sức căng bề mặt (kết hợp lực điện từ của cuộn cảm), nên rất khó làm thỏi đường kính lớn; FZ hiếm khi dùng cho đường kính trên khoảng 150–200 mm.</p>
+<div class="tablewrap"><table>
+<tr><th></th><th>Czochralski (CZ)</th><th>Float Zone (FZ)</th></tr>
+<tr><td>Nồi chứa</td><td>Có (thạch anh)</td><td>Không</td></tr>
+<tr><td>Nồng độ oxy</td><td>Cao</td><td>Rất thấp</td></tr>
+<tr><td>Đường kính tối đa</td><td>300 mm (sản xuất), 450 mm (thử nghiệm)</td><td>Khoảng 150–200 mm</td></tr>
+<tr><td>Chi phí</td><td>Thấp hơn</td><td>Cao hơn</td></tr>
+<tr><td>Ứng dụng chính</td><td>Vi mạch, bộ nhớ</td><td>Linh kiện công suất, đầu dò</td></tr>
+</table></div>
+
+<h2>6. Wafer</h2>
+<p>Thỏi đơn tinh thể được mài tròn, tạo mặt phẳng định hướng (flat) hoặc khía (notch), cắt thành lát bằng cưa dây, rồi mài, khắc và đánh bóng. Đường kính wafer tăng dần qua các thế hệ để giảm giá thành mỗi chip:</p>
+<div class="tablewrap"><table>
+<tr><th>Đường kính</th><th>Độ dày điển hình</th></tr>
+<tr><td>100 mm (4 inch)</td><td>525 µm</td></tr>
+<tr><td>150 mm (6 inch)</td><td>675 µm</td></tr>
+<tr><td>200 mm (8 inch)</td><td>725 µm</td></tr>
+<tr><td>300 mm (12 inch)</td><td>775 µm</td></tr>
+</table></div>
+<p>Wafer lớn hơn cần dày hơn để đủ bền cơ học. Thông số quan trọng khi đặt mua wafer gồm: cấp (prime, test), định hướng tinh thể ((100), (110), (111)), loại và tạp chất pha tạp (p: B; n: P, As, Sb), điện trở suất, độ dày, bề mặt mặt sau. Có hai loại chính: <strong>wafer đánh bóng</strong> (một hoặc hai mặt) và <strong>wafer epitaxy</strong>, có thêm một lớp đơn tinh thể mọc trên bề mặt với nồng độ pha tạp được kiểm soát chính xác.</p>
+<p>So với Si, các vật liệu như sapphire, SiC hay GaN khó nuôi thành thỏi lớn hơn nhiều: số wafer trên mỗi thỏi ít hơn và giá mỗi wafer cao hơn hàng chục đến hàng trăm lần. SiC và GaN không thể nuôi từ pha lỏng ở áp suất thường như Si, nên phải dùng phương pháp thăng hoa hoặc nuôi từ pha hơi, chậm và tốn kém.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Đây chính là một lợi thế lớn của β-Ga₂O₃ so với SiC và GaN: β-Ga₂O₃ <strong>có thể nuôi đơn tinh thể từ pha nóng chảy</strong>, tương tự Si. Các phương pháp đã được phát triển gồm Czochralski (Galazka và cộng sự), Edge-defined Film-fed Growth (EFG, Kuramata và cộng sự), Float Zone quang học và Bridgman. Nhờ đó wafer β-Ga₂O₃ có tiềm năng giá thành thấp và đường kính lớn.</p>
+<p>Điểm khó riêng: Ga₂O₃ nóng chảy ở khoảng 1800 °C và dễ bị phân hủy, mất oxy ở nhiệt độ cao, nên cần kiểm soát chặt khí quyển chứa oxy và vật liệu nồi (thường là iridium). Đây cũng là một nguồn gốc của sai hỏng điểm như oxygen vacancy trong tinh thể, liên quan trực tiếp đến các bẫy (trap) ảnh hưởng tới đặc tính linh kiện.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>Z. Galazka et al., "Czochralski growth and characterization of β-Ga₂O₃ single crystals," <em>Crystal Research and Technology</em> 45, 1229 (2010).</li>
+<li>A. Kuramata et al., "High-quality β-Ga₂O₃ single crystals grown by edge-defined film-fed growth," <em>Japanese Journal of Applied Physics</em> 55, 1202A2 (2016).</li>
+</ol>
+
+</div>
+<div class="l-en">
+<p class="lead">Silicon is the second most abundant element in the Earth's crust, about 26% by weight, after oxygen. Yet it almost never occurs in elemental form. Turning it into a single-crystal wafer of "nine nines" purity or better takes a demanding chain of chemical and metallurgical steps.</p>
+
+<h2>1. Semiconductors in the periodic table</h2>
+<p>Semiconductors include group-IV elements (Si, Ge), IV–IV compounds (SiC), III–V compounds (GaAs, InSb, GaN), II–VI compounds (ZnSe, CdTe) and oxides such as Ga₂O₃. Besides Si, industry uses many other substrates: SOI (silicon-on-insulator), sapphire (Al₂O₃), SiC, epitaxial GaN, quartz, MgO, SrTiO₃ and more. Still, most integrated circuits are built on <strong>single-crystal Si wafers</strong>.</p>
+
+<h2>2. The first transistor</h2>
+<p>On December 16, 1947, at Bell Laboratories, John Bardeen and Walter Brattain, in the group led by William Shockley, demonstrated the first point-contact transistor. The semiconductor was <strong>germanium</strong>, not Si. Before the transistor, amplification and switching could only be done with vacuum tubes, which were bulky and power-hungry. The name <em>transistor</em> comes from <em>transfer resistor</em>.</p>
+
+<h2>3. Three forms of solids</h2>
+<div class="tablewrap"><table>
+<tr><th>Form</th><th>Atomic order</th><th>Examples and uses</th></tr>
+<tr><td><strong>Single-crystalline</strong></td><td>Periodic order throughout</td><td>Si and Ge wafers for ICs</td></tr>
+<tr><td><strong>Polycrystalline</strong></td><td>Many grains separated by grain boundaries</td><td>Poly-Si for MOSFET gates, solar cells</td></tr>
+<tr><td><strong>Amorphous</strong></td><td>Short-range order only</td><td>a-Si:H, IGZO, ITO for displays and thin-film solar cells</td></tr>
+</table></div>
+<h3>Poly-Si</h3>
+<p>The resistivity, mobility and carrier concentration of poly-Si depend strongly on <strong>grain size</strong>. Grain boundaries contain many dangling bonds that form trap states, acting as <strong>recombination centers</strong> and potential barriers to carrier transport. Poly-Si solar cell efficiency therefore increases with grain size, but poly-Si remains widely used because it is much cheaper than single crystals.</p>
+<h3>a-Si</h3>
+<p>Amorphous Si has a very high density of dangling bonds, giving poor photoconductivity. The solution is to incorporate hydrogen during deposition (a-Si:H): H atoms passivate dangling bonds and sharply reduce the defect density. a-Si:H has low efficiency but is cheap, easy to deposit over large areas and free of toxic heavy metals such as Cd or Pb, so it is used in thin-film solar panels, solar-powered calculators and display thin-film transistors.</p>
+
+<h2>4. From quartzite to polysilicon</h2>
+<figure><svg viewBox="0 0 600 190" class="fig-svg" role="img">
+  <defs><marker id="ah2e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+  <rect x="5" y="20" width="130" height="58" rx="8" class="node"/><text x="70" y="45" class="nt" text-anchor="middle">Quartzite</text><text x="70" y="63" class="ns" text-anchor="middle">SiO₂</text>
+  <rect x="160" y="20" width="130" height="58" rx="8" class="node"/><text x="225" y="45" class="nt" text-anchor="middle">Metallurgical Si</text><text x="225" y="63" class="ns" text-anchor="middle">98–99%</text>
+  <rect x="315" y="20" width="130" height="58" rx="8" class="node"/><text x="380" y="45" class="nt" text-anchor="middle">Trichlorosilane</text><text x="380" y="63" class="ns" text-anchor="middle">HSiCl₃, distillation</text>
+  <rect x="470" y="20" width="125" height="58" rx="8" class="node"/><text x="532" y="45" class="nt" text-anchor="middle">Polysilicon</text><text x="532" y="63" class="ns" text-anchor="middle">semiconductor grade</text>
+  <rect x="315" y="120" width="130" height="58" rx="8" class="node"/><text x="380" y="145" class="nt" text-anchor="middle">Single-crystal ingot</text><text x="380" y="163" class="ns" text-anchor="middle">CZ or FZ</text>
+  <rect x="160" y="120" width="130" height="58" rx="8" class="node"/><text x="225" y="145" class="nt" text-anchor="middle">Wafer</text><text x="225" y="163" class="ns" text-anchor="middle">slice, lap, polish</text>
+  <path d="M135,49H158" class="arr" marker-end="url(#ah2e)"/><path d="M290,49H313" class="arr" marker-end="url(#ah2e)"/><path d="M445,49H468" class="arr" marker-end="url(#ah2e)"/>
+  <path d="M532,78 V149 H447" class="arr" marker-end="url(#ah2e)"/><path d="M315,149H292" class="arr" marker-end="url(#ah2e)"/>
+</svg><figcaption>Figure 1. The production chain of single-crystal Si wafers.</figcaption></figure>
+<h3>Step 1: Metallurgical-grade Si</h3>
+<p>Quartzite (nearly pure SiO₂) is melted in a submerged-electrode arc furnace at about 1900 °C with a carbon source (coal, coke, wood chips). Carbon reduces SiO₂ and CO leaves as a gas:</p>
+$$\mathrm{SiO_2 + 2C \rightarrow Si + 2CO}$$
+<p>The resulting Si is 98–99% pure: fine for metallurgy, far from semiconductor requirements.</p>
+<h3>Step 2: The Siemens process</h3>
+<p>Metallurgical Si powder reacts with HCl at elevated temperature (with a catalyst) to form trichlorosilane, a volatile liquid:</p>
+$$\mathrm{Si + 3HCl \rightarrow HSiCl_3 + H_2}$$
+<p>The key advantage: HSiCl₃ is a liquid, so it can be <strong>purified by fractional distillation</strong> to extreme purity, separating metallic impurities with different boiling points. The HSiCl₃ is then evaporated, mixed with H₂ and decomposed on heated Si rods (chemical vapor deposition). Si deposits on the rods while Cl and H desorb back into the gas. The product is <strong>semiconductor-grade polysilicon</strong>, with purity of 9N to 11N (99.9999999% or better).</p>
+
+<h2>5. Growing single crystals</h2>
+<h3>Czochralski (CZ) growth</h3>
+<p>Invented by Jan Czochralski in 1916 while studying the crystallization rates of metals. Polysilicon (with dopants) is melted in a quartz crucible above 1414 °C. A seed crystal of defined orientation is dipped into the melt surface, then slowly pulled up while rotating. Si solidifies following the seed lattice, forming a single-crystal ingot. Most commercial Si today is Czochralski Si.</p>
+<p>A CZ ingot has a <strong>seed</strong>, a <strong>neck</strong> (a narrow section that eliminates dislocations propagating from the seed and prevents thermal shock), a <strong>shoulder</strong> (the transition to the target diameter), the <strong>body</strong> (sliced into wafers) and an <strong>end cone</strong> (reducing thermal shock when separating from the melt).</p>
+<p>Drawback: the Si melt is in contact with the quartz crucible and dissolves some SiO₂, so CZ Si contains a <strong>relatively high oxygen concentration</strong> (around 10¹⁷–10¹⁸ cm⁻³). Oxygen is not purely harmful: oxygen precipitates inside the wafer can trap metallic impurities (internal gettering) and strengthen the wafer mechanically.</p>
+<h3>Segregation coefficient and dopant distribution</h3>
+<p>During solidification, impurities do not distribute evenly between solid and liquid. The equilibrium segregation coefficient is:</p>
+$$k_0 = \frac{C_s}{C_l}$$
+<p>For most impurities in Si, \(k_0 < 1\): they prefer to stay in the liquid. As the crystal is pulled, the melt becomes enriched, so the concentration in the crystal rises along the ingot. For a well-mixed melt, the concentration at solidified fraction \(f\) follows the Scheil equation:</p>
+$$C_s(f) = k_0\, C_0\, (1 - f)^{k_0 - 1}$$
+<p>where \(C_0\) is the initial melt concentration. Typical \(k_0\) values in Si: B ≈ 0.8, P ≈ 0.35, As ≈ 0.3, Sb ≈ 0.023. Because B has \(k_0\) close to 1, B-doped wafers are far more uniform than Sb-doped ones.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60" y1="255" x2="60" y2="260" class="ax"/><text x="60" y="275" class="tk" text-anchor="middle">0</text><line x1="156.0" y1="255" x2="156.0" y2="260" class="ax"/><text x="156.0" y="275" class="tk" text-anchor="middle">0.2</text><line x1="252.0" y1="255" x2="252.0" y2="260" class="ax"/><text x="252.0" y="275" class="tk" text-anchor="middle">0.4</text><line x1="348.0" y1="255" x2="348.0" y2="260" class="ax"/><text x="348.0" y="275" class="tk" text-anchor="middle">0.6</text><line x1="444.0" y1="255" x2="444.0" y2="260" class="ax"/><text x="444.0" y="275" class="tk" text-anchor="middle">0.8</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">1</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0.01</text><line x1="55" y1="161.0" x2="60" y2="161.0" class="ax"/><line x1="60" y1="161.0" x2="540" y2="161.0" class="grid"/><text x="51" y="165.0" class="tk" text-anchor="end">0.1</text><line x1="55" y1="67.0" x2="60" y2="67.0" class="ax"/><line x1="60" y1="67.0" x2="540" y2="67.0" class="grid"/><text x="51" y="71.0" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Fraction solidified f</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Cₛ / C₀ (log)</text><path d="M60.0,76.1 L64.8,76.0 L69.6,75.9 L74.4,75.9 L79.2,75.8 L84.0,75.7 L88.8,75.6 L93.6,75.5 L98.4,75.4 L103.2,75.3 L108.0,75.2 L112.8,75.2 L117.6,75.1 L122.4,75.0 L127.2,74.9 L132.0,74.8 L136.8,74.7 L141.6,74.6 L146.4,74.5 L151.2,74.4 L156.0,74.3 L160.8,74.2 L165.6,74.1 L170.4,74.0 L175.2,73.9 L180.0,73.8 L184.8,73.7 L189.6,73.5 L194.4,73.4 L199.2,73.3 L204.0,73.2 L208.8,73.1 L213.6,73.0 L218.4,72.8 L223.2,72.7 L228.0,72.6 L232.8,72.5 L237.6,72.3 L242.4,72.2 L247.2,72.1 L252.0,71.9 L256.8,71.8 L261.6,71.7 L266.4,71.5 L271.2,71.4 L276.0,71.2 L280.8,71.1 L285.6,70.9 L290.4,70.8 L295.2,70.6 L300.0,70.5 L304.8,70.3 L309.6,70.1 L314.4,69.9 L319.2,69.8 L324.0,69.6 L328.8,69.4 L333.6,69.2 L338.4,69.0 L343.2,68.8 L348.0,68.6 L352.8,68.4 L357.6,68.2 L362.4,68.0 L367.2,67.8 L372.0,67.5 L376.8,67.3 L381.6,67.1 L386.4,66.8 L391.2,66.5 L396.0,66.3 L400.8,66.0 L405.6,65.7 L410.4,65.4 L415.2,65.1 L420.0,64.8 L424.8,64.5 L429.6,64.1 L434.4,63.7 L439.2,63.4 L444.0,63.0 L448.8,62.6 L453.6,62.1 L458.4,61.6 L463.2,61.1 L468.0,60.6 L472.8,60.1 L477.6,59.5 L482.4,58.8 L487.2,58.1 L492.0,57.3 L496.8,56.4 L501.6,55.5 L506.4,54.4 L511.2,53.1 L516.0,51.7" class="s1" fill="none"/><path d="M60.0,109.9 L64.8,109.6 L69.6,109.3 L74.4,109.0 L79.2,108.8 L84.0,108.5 L88.8,108.2 L93.6,107.9 L98.4,107.6 L103.2,107.4 L108.0,107.1 L112.8,106.8 L117.6,106.5 L122.4,106.2 L127.2,105.9 L132.0,105.5 L136.8,105.2 L141.6,104.9 L146.4,104.6 L151.2,104.3 L156.0,103.9 L160.8,103.6 L165.6,103.3 L170.4,102.9 L175.2,102.6 L180.0,102.2 L184.8,101.9 L189.6,101.5 L194.4,101.1 L199.2,100.8 L204.0,100.4 L208.8,100.0 L213.6,99.6 L218.4,99.2 L223.2,98.8 L228.0,98.4 L232.8,98.0 L237.6,97.6 L242.4,97.2 L247.2,96.7 L252.0,96.3 L256.8,95.9 L261.6,95.4 L266.4,94.9 L271.2,94.5 L276.0,94.0 L280.8,93.5 L285.6,93.0 L290.4,92.5 L295.2,92.0 L300.0,91.5 L304.8,90.9 L309.6,90.4 L314.4,89.8 L319.2,89.3 L324.0,88.7 L328.8,88.1 L333.6,87.5 L338.4,86.8 L343.2,86.2 L348.0,85.5 L352.8,84.9 L357.6,84.2 L362.4,83.5 L367.2,82.7 L372.0,82.0 L376.8,81.2 L381.6,80.4 L386.4,79.6 L391.2,78.8 L396.0,77.9 L400.8,77.0 L405.6,76.1 L410.4,75.1 L415.2,74.1 L420.0,73.1 L424.8,72.0 L429.6,70.9 L434.4,69.7 L439.2,68.4 L444.0,67.2 L448.8,65.8 L453.6,64.4 L458.4,62.8 L463.2,61.2 L468.0,59.5 L472.8,57.7 L477.6,55.7 L482.4,53.6 L487.2,51.3 L492.0,48.8 L496.8,46.0 L501.6,42.8 L506.4,39.3 L511.2,35.2 L516.0,30.4" class="s2" fill="none"/><path d="M60.0,221.0 L64.8,220.6 L69.6,220.2 L74.4,219.8 L79.2,219.4 L84.0,219.0 L88.8,218.5 L93.6,218.1 L98.4,217.7 L103.2,217.2 L108.0,216.8 L112.8,216.3 L117.6,215.9 L122.4,215.4 L127.2,215.0 L132.0,214.5 L136.8,214.0 L141.6,213.6 L146.4,213.1 L151.2,212.6 L156.0,212.1 L160.8,211.6 L165.6,211.1 L170.4,210.6 L175.2,210.1 L180.0,209.5 L184.8,209.0 L189.6,208.4 L194.4,207.9 L199.2,207.3 L204.0,206.8 L208.8,206.2 L213.6,205.6 L218.4,205.0 L223.2,204.4 L228.0,203.8 L232.8,203.2 L237.6,202.6 L242.4,201.9 L247.2,201.3 L252.0,200.6 L256.8,200.0 L261.6,199.3 L266.4,198.6 L271.2,197.9 L276.0,197.2 L280.8,196.4 L285.6,195.7 L290.4,194.9 L295.2,194.1 L300.0,193.4 L304.8,192.5 L309.6,191.7 L314.4,190.9 L319.2,190.0 L324.0,189.1 L328.8,188.3 L333.6,187.3 L338.4,186.4 L343.2,185.4 L348.0,184.5 L352.8,183.4 L357.6,182.4 L362.4,181.3 L367.2,180.2 L372.0,179.1 L376.8,178.0 L381.6,176.8 L386.4,175.6 L391.2,174.3 L396.0,173.0 L400.8,171.6 L405.6,170.2 L410.4,168.8 L415.2,167.3 L420.0,165.7 L424.8,164.1 L429.6,162.4 L434.4,160.6 L439.2,158.8 L444.0,156.8 L448.8,154.8 L453.6,152.6 L458.4,150.3 L463.2,147.9 L468.0,145.3 L472.8,142.6 L477.6,139.6 L482.4,136.4 L487.2,133.0 L492.0,129.2 L496.8,125.0 L501.6,120.3 L506.4,114.9 L511.2,108.8 L516.0,101.5" class="s3" fill="none"/><line x1="80" y1="137.5" x2="104" y2="137.5" class="s1"/><text x="110" y="141.5" class="tk">B, k₀ = 0.8</text><line x1="80" y1="155.5" x2="104" y2="155.5" class="s2"/><text x="110" y="159.5" class="tk">P, k₀ = 0.35</text><line x1="80" y1="173.5" x2="104" y2="173.5" class="s3"/><text x="110" y="177.5" class="tk">Sb, k₀ = 0.023</text></svg><figcaption>Figure 2. Dopant distribution along a CZ ingot from the Scheil equation. Impurities with small k₀ segregate strongly and pile up toward the end of the ingot.</figcaption></figure>
+<h3>Float Zone (FZ) growth</h3>
+<p>A polysilicon rod is held vertically; an RF induction coil melts a narrow zone, which is moved along the rod starting from a seed crystal. Behind the molten zone, Si recrystallizes as a single crystal. The technique was first used for purification (zone refining): because \(k_0 < 1\), the molten zone sweeps impurities toward the end of the rod.</p>
+<p>Its main advantage: the melt <strong>never touches a crucible</strong>, only vacuum or inert gas, so FZ Si has very low oxygen and impurity levels. FZ Si is used for power devices and radiation detectors, where high resistivity and long carrier lifetime matter. The limitation: the molten zone is held mainly by surface tension (assisted by the coil's electromagnetic force), making large diameters difficult; FZ is rarely used above about 150–200 mm.</p>
+<div class="tablewrap"><table>
+<tr><th></th><th>Czochralski (CZ)</th><th>Float Zone (FZ)</th></tr>
+<tr><td>Crucible</td><td>Yes (quartz)</td><td>No</td></tr>
+<tr><td>Oxygen content</td><td>High</td><td>Very low</td></tr>
+<tr><td>Maximum diameter</td><td>300 mm (production), 450 mm (development)</td><td>About 150–200 mm</td></tr>
+<tr><td>Cost</td><td>Lower</td><td>Higher</td></tr>
+<tr><td>Main applications</td><td>Logic, memory</td><td>Power devices, detectors</td></tr>
+</table></div>
+
+<h2>6. Wafers</h2>
+<p>The ingot is ground to diameter, given an orientation flat or notch, sliced with a wire saw, then lapped, etched and polished. Wafer diameters have grown over the generations to lower the cost per chip:</p>
+<div class="tablewrap"><table>
+<tr><th>Diameter</th><th>Typical thickness</th></tr>
+<tr><td>100 mm (4 inch)</td><td>525 µm</td></tr>
+<tr><td>150 mm (6 inch)</td><td>675 µm</td></tr>
+<tr><td>200 mm (8 inch)</td><td>725 µm</td></tr>
+<tr><td>300 mm (12 inch)</td><td>775 µm</td></tr>
+</table></div>
+<p>Larger wafers must be thicker to remain mechanically robust. Key specifications include grade (prime, test), crystal orientation ((100), (110), (111)), conductivity type and dopant (p: B; n: P, As, Sb), resistivity, thickness and backside finish. The two main types are <strong>polished wafers</strong> (one or both sides) and <strong>epitaxial wafers</strong>, with an additional single-crystal layer grown on top at precisely controlled doping.</p>
+<p>Compared with Si, sapphire, SiC and GaN are much harder to grow into large ingots: fewer wafers per ingot and wafer prices tens to hundreds of times higher. SiC and GaN cannot be grown from the melt at normal pressure like Si, so they rely on sublimation or vapor-phase growth, which is slow and costly.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>This is a major advantage of β-Ga₂O₃ over SiC and GaN: β-Ga₂O₃ <strong>can be grown as a single crystal from the melt</strong>, much like Si. Demonstrated methods include Czochralski (Galazka et al.), edge-defined film-fed growth (EFG, Kuramata et al.), optical float zone and Bridgman. This gives β-Ga₂O₃ wafers the potential for low cost and large diameters.</p>
+<p>The particular challenge: Ga₂O₃ melts at about 1800 °C and tends to decompose and lose oxygen at high temperature, so the oxygen-containing atmosphere and crucible material (usually iridium) must be tightly controlled. This is also one origin of point defects such as oxygen vacancies, which relate directly to the traps that affect device characteristics.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>Z. Galazka et al., "Czochralski growth and characterization of β-Ga₂O₃ single crystals," <em>Crystal Research and Technology</em> 45, 1229 (2010).</li>
+<li>A. Kuramata et al., "High-quality β-Ga₂O₃ single crystals grown by edge-defined film-fed growth," <em>Japanese Journal of Applied Physics</em> 55, 1202A2 (2016).</li>
+</ol>
+</div>
+<nav class="pager"><a href="moore.html">← <span class="l-vi">Định luật Moore và Dennard scaling</span><span class="l-en">Moore's law and Dennard scaling</span></a><a class="n" href="diffusion.html"><span class="l-vi">Khuếch tán trong chất rắn</span><span class="l-en">Diffusion in solids</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này. Bản tiếng Anh đang được chuẩn bị.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>
