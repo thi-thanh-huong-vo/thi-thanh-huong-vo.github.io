@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Mô hình oxy hóa Deal–Grove" data-title-en="The Deal–Grove oxidation model">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Deal–Grove oxidation model · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Si consumption, the three oxidant fluxes, linear and parabolic regimes.">
+<meta property="og:title" content="The Deal–Grove oxidation model">
+<meta property="og:description" content="Si consumption, the three oxidant fluxes, linear and parabolic regimes.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 2</span><span class="l-en">Part 4 · Lesson 2</span></p>
+  <h1><span class="l-vi">Mô hình oxy hóa Deal–Grove</span><span class="l-en">The Deal–Grove oxidation model</span></h1>
+  <p class="sub"><span class="l-vi">Lượng Si bị tiêu thụ, ba dòng chất oxy hóa, chế độ tuyến tính và parabol.</span><span class="l-en">Si consumption, the three oxidant fluxes, linear and parabolic regimes.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Khi oxide dày lên, chất oxy hóa phải đi một quãng đường ngày càng xa để tới được Si. Mô hình Deal–Grove (1965) diễn tả trực giác này bằng một phương trình đơn giản đáng ngạc nhiên, và đến nay vẫn là nền tảng để tính độ dày oxide.</p>
+
+<h2>1. Si bị tiêu thụ bao nhiêu?</h2>
+<p>Oxy hóa xảy ra tại <strong>mặt phân cách Si/SiO₂</strong>, không phải trên bề mặt oxide: chất oxy hóa khuếch tán xuyên qua oxide đã có để phản ứng với Si bên dưới. Vì SiO₂ chiếm thể tích lớn hơn lượng Si bị tiêu thụ, mặt phân cách dịch chuyển vào trong Si còn bề mặt oxide nâng lên. Bảo toàn số nguyên tử Si cho:</p>
+$$x_{Si} = \frac{N_{ox}}{N_{Si}}\,x_{ox} = \frac{2{,}3\times10^{22}}{5{,}0\times10^{22}}\,x_{ox} \approx 0{,}46\,x_{ox}$$
+<p>Mọc 100 nm oxide tiêu thụ khoảng 46 nm Si; nói cách khác, 1 µm Si bị oxy hóa tạo ra khoảng 2,17 µm SiO₂.</p>
+<figure><svg viewBox="0 0 540 210" class="fig-svg" role="img">
+<text x="120" y="20" class="nt" text-anchor="middle">Trước oxy hóa</text>
+<rect x="40" y="90" width="160" height="100" class="atom"/><text x="120" y="145" class="nt" text-anchor="middle">Si</text>
+<line x1="20" y1="90" x2="470" y2="90" class="vac"/><text x="215" y="84" class="ns" text-anchor="middle">bề mặt ban đầu</text>
+<text x="370" y="20" class="nt" text-anchor="middle">Sau oxy hóa</text>
+<rect x="290" y="40" width="160" height="92" class="node"/><text x="370" y="72" class="nt" text-anchor="middle">SiO₂</text><text x="370" y="92" class="ns" text-anchor="middle">x₀</text>
+<rect x="290" y="132" width="160" height="58" class="atom"/><text x="370" y="166" class="nt" text-anchor="middle">Si</text>
+<text x="460" y="68" class="ns">0,54 x₀</text><text x="460" y="116" class="ns">0,46 x₀</text>
+</svg><figcaption>Hình 1. Khoảng 46% độ dày oxide nằm dưới bề mặt Si ban đầu và 54% nằm phía trên.</figcaption></figure>
+
+<h2>2. Ba dòng chất oxy hóa</h2>
+<p>Ở trạng thái dừng, ba thông lượng nối tiếp nhau phải bằng nhau:</p>
+<ol>
+<li><strong>Vận chuyển từ pha khí tới bề mặt oxide</strong>: \(F_1 = h_g\,(C^* - C_0)\), với \(C^*\) là nồng độ cân bằng của chất oxy hóa trong oxide (tỉ lệ áp suất riêng phần theo định luật Henry) và \(C_0\) nồng độ tại bề mặt oxide.</li>
+<li><strong>Khuếch tán qua oxide</strong> (định luật Fick): \(F_2 = D\,(C_0 - C_i)/x_{ox}\).</li>
+<li><strong>Phản ứng tại mặt phân cách</strong>: \(F_3 = k_s\,C_i\).</li>
+</ol>
+<p>Cho \(F_1 = F_2 = F_3\), và tốc độ mọc bằng \(F_3/N_1\), với \(N_1\) là số phân tử chất oxy hóa cần cho một đơn vị thể tích oxide (2,3×10²² cm⁻³ với O₂, gấp đôi với H₂O), ta thu được:</p>
+$$x_{ox}^2 + A\,x_{ox} = B\,(t + \tau)$$
+<p>với \(B = 2DC^*/N_1\) là <strong>hằng số tốc độ parabol</strong>, \(B/A \approx k_s C^*/N_1\) là <strong>hằng số tốc độ tuyến tính</strong>, và \(\tau\) tính cho oxide có sẵn \(x_i\) ở thời điểm đầu: \(\tau = (x_i^2 + A x_i)/B\). Nghiệm:</p>
+$$x_{ox} = \frac{A}{2}\left[\sqrt{1 + \frac{t+\tau}{A^2/4B}} - 1\right]$$
+
+<h2>3. Hai chế độ giới hạn</h2>
+<ul>
+<li><strong>Oxide mỏng, thời gian ngắn</strong> (giới hạn bởi phản ứng): \(x_{ox} \approx \dfrac{B}{A}(t + \tau)\). Độ dày tăng tuyến tính; tốc độ do phản ứng bề mặt quyết định, nên phụ thuộc định hướng tinh thể.</li>
+<li><strong>Oxide dày, thời gian dài</strong> (giới hạn bởi khuếch tán): \(x_{ox}^2 \approx B\,t\). Độ dày tăng theo căn bậc hai thời gian; tốc độ do khuếch tán qua oxide quyết định, nên không phụ thuộc định hướng.</li>
+</ul>
+<p>Cả hai hằng số tuân theo quy luật Arrhenius. Theo các hằng số thường dùng cho Si (100): với oxy hóa khô, \(B\) có năng lượng kích hoạt khoảng 1,23 eV và \(B/A\) khoảng 2,0 eV; với oxy hóa ướt, các giá trị tương ứng khoảng 0,78 eV và 2,05 eV.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="255" x2="180.0" y2="260" class="ax"/><text x="180.0" y="275" class="tk" text-anchor="middle">1</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">2</text><line x1="420.0" y1="255" x2="420.0" y2="260" class="ax"/><text x="420.0" y="275" class="tk" text-anchor="middle">3</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">4</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">0.3</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">0.6</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">0.9</text><line x1="55" y1="20.0" x2="60" y2="20.0" class="ax"/><line x1="60" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="51" y="24.0" class="tk" text-anchor="end">1.2</text><text x="300.0" y="294" class="lab" text-anchor="middle">Thời gian (giờ)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Độ dày oxide (µm)</text><path d="M60.0,255.0 L64.8,246.6 L69.6,240.0 L74.4,234.3 L79.2,229.3 L84.0,224.7 L88.8,220.4 L93.6,216.5 L98.4,212.8 L103.2,209.2 L108.0,205.9 L112.8,202.7 L117.6,199.6 L122.4,196.6 L127.2,193.8 L132.0,191.0 L136.8,188.3 L141.6,185.7 L146.4,183.2 L151.2,180.7 L156.0,178.3 L160.8,175.9 L165.6,173.6 L170.4,171.4 L175.2,169.2 L180.0,167.0 L184.8,164.9 L189.6,162.8 L194.4,160.7 L199.2,158.7 L204.0,156.7 L208.8,154.8 L213.6,152.9 L218.4,151.0 L223.2,149.1 L228.0,147.3 L232.8,145.4 L237.6,143.6 L242.4,141.9 L247.2,140.1 L252.0,138.4 L256.8,136.7 L261.6,135.0 L266.4,133.4 L271.2,131.7 L276.0,130.1 L280.8,128.5 L285.6,126.9 L290.4,125.3 L295.2,123.8 L300.0,122.2 L304.8,120.7 L309.6,119.2 L314.4,117.7 L319.2,116.2 L324.0,114.7 L328.8,113.3 L333.6,111.8 L338.4,110.4 L343.2,109.0 L348.0,107.5 L352.8,106.1 L357.6,104.8 L362.4,103.4 L367.2,102.0 L372.0,100.7 L376.8,99.3 L381.6,98.0 L386.4,96.7 L391.2,95.3 L396.0,94.0 L400.8,92.7 L405.6,91.4 L410.4,90.2 L415.2,88.9 L420.0,87.6 L424.8,86.4 L429.6,85.1 L434.4,83.9 L439.2,82.6 L444.0,81.4 L448.8,80.2 L453.6,79.0 L458.4,77.8 L463.2,76.6 L468.0,75.4 L472.8,74.2 L477.6,73.1 L482.4,71.9 L487.2,70.7 L492.0,69.6 L496.8,68.4 L501.6,67.3 L506.4,66.2 L511.2,65.0 L516.0,63.9 L520.8,62.8 L525.6,61.7 L530.4,60.6 L535.2,59.5 L540.0,58.4" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,253.0 L69.6,251.1 L74.4,249.3 L79.2,247.5 L84.0,245.7 L88.8,244.0 L93.6,242.3 L98.4,240.6 L103.2,239.0 L108.0,237.4 L112.8,235.9 L117.6,234.3 L122.4,232.8 L127.2,231.3 L132.0,229.9 L136.8,228.5 L141.6,227.0 L146.4,225.7 L151.2,224.3 L156.0,222.9 L160.8,221.6 L165.6,220.3 L170.4,219.0 L175.2,217.7 L180.0,216.4 L184.8,215.2 L189.6,214.0 L194.4,212.7 L199.2,211.5 L204.0,210.3 L208.8,209.1 L213.6,208.0 L218.4,206.8 L223.2,205.7 L228.0,204.5 L232.8,203.4 L237.6,202.3 L242.4,201.2 L247.2,200.1 L252.0,199.0 L256.8,197.9 L261.6,196.9 L266.4,195.8 L271.2,194.8 L276.0,193.7 L280.8,192.7 L285.6,191.7 L290.4,190.7 L295.2,189.7 L300.0,188.7 L304.8,187.7 L309.6,186.7 L314.4,185.7 L319.2,184.7 L324.0,183.8 L328.8,182.8 L333.6,181.9 L338.4,180.9 L343.2,180.0 L348.0,179.0 L352.8,178.1 L357.6,177.2 L362.4,176.3 L367.2,175.4 L372.0,174.5 L376.8,173.6 L381.6,172.7 L386.4,171.8 L391.2,170.9 L396.0,170.1 L400.8,169.2 L405.6,168.3 L410.4,167.5 L415.2,166.6 L420.0,165.8 L424.8,164.9 L429.6,164.1 L434.4,163.2 L439.2,162.4 L444.0,161.6 L448.8,160.7 L453.6,159.9 L458.4,159.1 L463.2,158.3 L468.0,157.5 L472.8,156.7 L477.6,155.9 L482.4,155.1 L487.2,154.3 L492.0,153.5 L496.8,152.7 L501.6,151.9 L506.4,151.2 L511.2,150.4 L516.0,149.6 L520.8,148.9 L525.6,148.1 L530.4,147.3 L535.2,146.6 L540.0,145.8" class="s2" fill="none"/><path d="M60.0,255.0 L64.8,254.4 L69.6,253.9 L74.4,253.3 L79.2,252.8 L84.0,252.3 L88.8,251.8 L93.6,251.4 L98.4,250.9 L103.2,250.5 L108.0,250.0 L112.8,249.6 L117.6,249.2 L122.4,248.8 L127.2,248.4 L132.0,248.0 L136.8,247.6 L141.6,247.2 L146.4,246.8 L151.2,246.5 L156.0,246.1 L160.8,245.8 L165.6,245.4 L170.4,245.1 L175.2,244.7 L180.0,244.4 L184.8,244.1 L189.6,243.7 L194.4,243.4 L199.2,243.1 L204.0,242.8 L208.8,242.5 L213.6,242.2 L218.4,241.9 L223.2,241.6 L228.0,241.3 L232.8,241.0 L237.6,240.7 L242.4,240.4 L247.2,240.1 L252.0,239.9 L256.8,239.6 L261.6,239.3 L266.4,239.0 L271.2,238.8 L276.0,238.5 L280.8,238.2 L285.6,238.0 L290.4,237.7 L295.2,237.4 L300.0,237.2 L304.8,236.9 L309.6,236.7 L314.4,236.4 L319.2,236.2 L324.0,235.9 L328.8,235.7 L333.6,235.4 L338.4,235.2 L343.2,235.0 L348.0,234.7 L352.8,234.5 L357.6,234.3 L362.4,234.0 L367.2,233.8 L372.0,233.6 L376.8,233.3 L381.6,233.1 L386.4,232.9 L391.2,232.7 L396.0,232.4 L400.8,232.2 L405.6,232.0 L410.4,231.8 L415.2,231.6 L420.0,231.4 L424.8,231.1 L429.6,230.9 L434.4,230.7 L439.2,230.5 L444.0,230.3 L448.8,230.1 L453.6,229.9 L458.4,229.7 L463.2,229.5 L468.0,229.3 L472.8,229.1 L477.6,228.9 L482.4,228.7 L487.2,228.5 L492.0,228.3 L496.8,228.1 L501.6,227.9 L506.4,227.7 L511.2,227.5 L516.0,227.3 L520.8,227.1 L525.6,226.9 L530.4,226.7 L535.2,226.5 L540.0,226.3" class="s3" fill="none"/><line x1="80" y1="30" x2="104" y2="30" class="s1"/><text x="110" y="34" class="tk">Ướt, 1000 °C</text><line x1="80" y1="48" x2="104" y2="48" class="s2"/><text x="110" y="52" class="tk">Ướt, 900 °C</text><line x1="80" y1="66" x2="104" y2="66" class="s3"/><text x="110" y="70" class="tk">Khô, 1000 °C</text></svg><figcaption>Hình 2. Độ dày oxide theo thời gian, tính bằng mô hình Deal–Grove với các hằng số tiêu biểu cho Si (100) (Plummer và cộng sự). Oxy hóa ướt nhanh hơn oxy hóa khô nhiều lần.</figcaption></figure>
+<p>Ví dụ: ở 1000 °C, oxy hóa ướt trong 1 giờ tạo khoảng 0,45 µm oxide, trong khi oxy hóa khô chỉ tạo khoảng 0,05 µm.</p>
+
+<h2>4. Giới hạn của mô hình</h2>
+<p>Mô hình Deal–Grove mô tả rất tốt oxide dày hơn khoảng 20–30 nm. Với oxy hóa khô, giai đoạn đầu diễn ra nhanh bất thường so với dự đoán, nên người ta dùng giá trị \(\tau\) hiệu dụng tương ứng một lớp oxide ban đầu khoảng 20–25 nm. Với oxide cổng chỉ vài nanomet, cần các mô hình hiệu chỉnh (ví dụ Massoud). Mô hình cũng không tính tới ứng suất trên bề mặt cong, ảnh hưởng của pha tạp nặng hay của clo, những yếu tố sẽ được bàn ở các bài sau.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Ý tưởng của Deal–Grove, chia quá trình thành các bước nối tiếp rồi cân bằng thông lượng ở trạng thái dừng, rất hữu ích ngoài phạm vi oxy hóa Si. Cùng cách lập luận được dùng khi phân tích sự mọc màng hay sự hình thành lớp phản ứng tại mặt phân cách kim loại/Ga₂O₃ khi ủ tiếp xúc, nơi quá trình có thể bị giới hạn bởi phản ứng hoặc bởi khuếch tán tùy nhiệt độ và độ dày lớp.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. E. Deal, A. S. Grove, "General relationship for the thermal oxidation of silicon," <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>H. Z. Massoud, J. D. Plummer, E. A. Irene, "Thermal oxidation of silicon in dry oxygen," <em>Journal of the Electrochemical Society</em> 132, 2685 (1985).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">As the oxide thickens, the oxidant must travel farther and farther to reach the Si. The Deal–Grove model (1965) captures this intuition with a surprisingly simple equation, and it remains the foundation for calculating oxide thickness today.</p>
+
+<h2>1. How much Si is consumed?</h2>
+<p>Oxidation happens at the <strong>Si/SiO₂ interface</strong>, not at the oxide surface: the oxidant diffuses through the existing oxide to react with the Si below. Because SiO₂ occupies more volume than the Si consumed, the interface moves into the Si while the oxide surface rises. Conserving Si atoms gives:</p>
+$$x_{Si} = \frac{N_{ox}}{N_{Si}}\,x_{ox} = \frac{2.3\times10^{22}}{5.0\times10^{22}}\,x_{ox} \approx 0.46\,x_{ox}$$
+<p>Growing 100 nm of oxide consumes about 46 nm of Si; equivalently, oxidizing 1 µm of Si yields about 2.17 µm of SiO₂.</p>
+<figure><svg viewBox="0 0 540 210" class="fig-svg" role="img">
+<text x="120" y="20" class="nt" text-anchor="middle">Before oxidation</text>
+<rect x="40" y="90" width="160" height="100" class="atom"/><text x="120" y="145" class="nt" text-anchor="middle">Si</text>
+<line x1="20" y1="90" x2="470" y2="90" class="vac"/><text x="215" y="84" class="ns" text-anchor="middle">original surface</text>
+<text x="370" y="20" class="nt" text-anchor="middle">After oxidation</text>
+<rect x="290" y="40" width="160" height="92" class="node"/><text x="370" y="72" class="nt" text-anchor="middle">SiO₂</text><text x="370" y="92" class="ns" text-anchor="middle">x₀</text>
+<rect x="290" y="132" width="160" height="58" class="atom"/><text x="370" y="166" class="nt" text-anchor="middle">Si</text>
+<text x="460" y="68" class="ns">0.54 x₀</text><text x="460" y="116" class="ns">0.46 x₀</text>
+</svg><figcaption>Figure 1. About 46% of the oxide thickness lies below the original Si surface and 54% above it.</figcaption></figure>
+
+<h2>2. Three oxidant fluxes</h2>
+<p>In steady state, three fluxes in series must be equal:</p>
+<ol>
+<li><strong>Gas-phase transport to the oxide surface</strong>: \(F_1 = h_g\,(C^* - C_0)\), where \(C^*\) is the equilibrium oxidant concentration in the oxide (proportional to partial pressure by Henry's law) and \(C_0\) the concentration at the oxide surface.</li>
+<li><strong>Diffusion through the oxide</strong> (Fick's law): \(F_2 = D\,(C_0 - C_i)/x_{ox}\).</li>
+<li><strong>Reaction at the interface</strong>: \(F_3 = k_s\,C_i\).</li>
+</ol>
+<p>Setting \(F_1 = F_2 = F_3\), with growth rate \(F_3/N_1\), where \(N_1\) is the number of oxidant molecules per unit volume of oxide (2.3×10²² cm⁻³ for O₂, twice that for H₂O), gives:</p>
+$$x_{ox}^2 + A\,x_{ox} = B\,(t + \tau)$$
+<p>where \(B = 2DC^*/N_1\) is the <strong>parabolic rate constant</strong>, \(B/A \approx k_s C^*/N_1\) the <strong>linear rate constant</strong>, and \(\tau\) accounts for an initial oxide \(x_i\): \(\tau = (x_i^2 + A x_i)/B\). The solution is:</p>
+$$x_{ox} = \frac{A}{2}\left[\sqrt{1 + \frac{t+\tau}{A^2/4B}} - 1\right]$$
+
+<h2>3. Two limiting regimes</h2>
+<ul>
+<li><strong>Thin oxide, short time</strong> (reaction-limited): \(x_{ox} \approx \dfrac{B}{A}(t + \tau)\). Thickness grows linearly; the rate is set by the surface reaction and therefore depends on crystal orientation.</li>
+<li><strong>Thick oxide, long time</strong> (diffusion-limited): \(x_{ox}^2 \approx B\,t\). Thickness grows with the square root of time; the rate is set by diffusion through the oxide and is orientation-independent.</li>
+</ul>
+<p>Both constants follow Arrhenius behavior. With commonly used constants for (100) Si: for dry oxidation, \(B\) has an activation energy of about 1.23 eV and \(B/A\) about 2.0 eV; for wet oxidation, about 0.78 eV and 2.05 eV.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="255" x2="180.0" y2="260" class="ax"/><text x="180.0" y="275" class="tk" text-anchor="middle">1</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">2</text><line x1="420.0" y1="255" x2="420.0" y2="260" class="ax"/><text x="420.0" y="275" class="tk" text-anchor="middle">3</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">4</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">0.3</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">0.6</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">0.9</text><line x1="55" y1="20.0" x2="60" y2="20.0" class="ax"/><line x1="60" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="51" y="24.0" class="tk" text-anchor="end">1.2</text><text x="300.0" y="294" class="lab" text-anchor="middle">Time (h)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Oxide thickness (µm)</text><path d="M60.0,255.0 L64.8,246.6 L69.6,240.0 L74.4,234.3 L79.2,229.3 L84.0,224.7 L88.8,220.4 L93.6,216.5 L98.4,212.8 L103.2,209.2 L108.0,205.9 L112.8,202.7 L117.6,199.6 L122.4,196.6 L127.2,193.8 L132.0,191.0 L136.8,188.3 L141.6,185.7 L146.4,183.2 L151.2,180.7 L156.0,178.3 L160.8,175.9 L165.6,173.6 L170.4,171.4 L175.2,169.2 L180.0,167.0 L184.8,164.9 L189.6,162.8 L194.4,160.7 L199.2,158.7 L204.0,156.7 L208.8,154.8 L213.6,152.9 L218.4,151.0 L223.2,149.1 L228.0,147.3 L232.8,145.4 L237.6,143.6 L242.4,141.9 L247.2,140.1 L252.0,138.4 L256.8,136.7 L261.6,135.0 L266.4,133.4 L271.2,131.7 L276.0,130.1 L280.8,128.5 L285.6,126.9 L290.4,125.3 L295.2,123.8 L300.0,122.2 L304.8,120.7 L309.6,119.2 L314.4,117.7 L319.2,116.2 L324.0,114.7 L328.8,113.3 L333.6,111.8 L338.4,110.4 L343.2,109.0 L348.0,107.5 L352.8,106.1 L357.6,104.8 L362.4,103.4 L367.2,102.0 L372.0,100.7 L376.8,99.3 L381.6,98.0 L386.4,96.7 L391.2,95.3 L396.0,94.0 L400.8,92.7 L405.6,91.4 L410.4,90.2 L415.2,88.9 L420.0,87.6 L424.8,86.4 L429.6,85.1 L434.4,83.9 L439.2,82.6 L444.0,81.4 L448.8,80.2 L453.6,79.0 L458.4,77.8 L463.2,76.6 L468.0,75.4 L472.8,74.2 L477.6,73.1 L482.4,71.9 L487.2,70.7 L492.0,69.6 L496.8,68.4 L501.6,67.3 L506.4,66.2 L511.2,65.0 L516.0,63.9 L520.8,62.8 L525.6,61.7 L530.4,60.6 L535.2,59.5 L540.0,58.4" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,253.0 L69.6,251.1 L74.4,249.3 L79.2,247.5 L84.0,245.7 L88.8,244.0 L93.6,242.3 L98.4,240.6 L103.2,239.0 L108.0,237.4 L112.8,235.9 L117.6,234.3 L122.4,232.8 L127.2,231.3 L132.0,229.9 L136.8,228.5 L141.6,227.0 L146.4,225.7 L151.2,224.3 L156.0,222.9 L160.8,221.6 L165.6,220.3 L170.4,219.0 L175.2,217.7 L180.0,216.4 L184.8,215.2 L189.6,214.0 L194.4,212.7 L199.2,211.5 L204.0,210.3 L208.8,209.1 L213.6,208.0 L218.4,206.8 L223.2,205.7 L228.0,204.5 L232.8,203.4 L237.6,202.3 L242.4,201.2 L247.2,200.1 L252.0,199.0 L256.8,197.9 L261.6,196.9 L266.4,195.8 L271.2,194.8 L276.0,193.7 L280.8,192.7 L285.6,191.7 L290.4,190.7 L295.2,189.7 L300.0,188.7 L304.8,187.7 L309.6,186.7 L314.4,185.7 L319.2,184.7 L324.0,183.8 L328.8,182.8 L333.6,181.9 L338.4,180.9 L343.2,180.0 L348.0,179.0 L352.8,178.1 L357.6,177.2 L362.4,176.3 L367.2,175.4 L372.0,174.5 L376.8,173.6 L381.6,172.7 L386.4,171.8 L391.2,170.9 L396.0,170.1 L400.8,169.2 L405.6,168.3 L410.4,167.5 L415.2,166.6 L420.0,165.8 L424.8,164.9 L429.6,164.1 L434.4,163.2 L439.2,162.4 L444.0,161.6 L448.8,160.7 L453.6,159.9 L458.4,159.1 L463.2,158.3 L468.0,157.5 L472.8,156.7 L477.6,155.9 L482.4,155.1 L487.2,154.3 L492.0,153.5 L496.8,152.7 L501.6,151.9 L506.4,151.2 L511.2,150.4 L516.0,149.6 L520.8,148.9 L525.6,148.1 L530.4,147.3 L535.2,146.6 L540.0,145.8" class="s2" fill="none"/><path d="M60.0,255.0 L64.8,254.4 L69.6,253.9 L74.4,253.3 L79.2,252.8 L84.0,252.3 L88.8,251.8 L93.6,251.4 L98.4,250.9 L103.2,250.5 L108.0,250.0 L112.8,249.6 L117.6,249.2 L122.4,248.8 L127.2,248.4 L132.0,248.0 L136.8,247.6 L141.6,247.2 L146.4,246.8 L151.2,246.5 L156.0,246.1 L160.8,245.8 L165.6,245.4 L170.4,245.1 L175.2,244.7 L180.0,244.4 L184.8,244.1 L189.6,243.7 L194.4,243.4 L199.2,243.1 L204.0,242.8 L208.8,242.5 L213.6,242.2 L218.4,241.9 L223.2,241.6 L228.0,241.3 L232.8,241.0 L237.6,240.7 L242.4,240.4 L247.2,240.1 L252.0,239.9 L256.8,239.6 L261.6,239.3 L266.4,239.0 L271.2,238.8 L276.0,238.5 L280.8,238.2 L285.6,238.0 L290.4,237.7 L295.2,237.4 L300.0,237.2 L304.8,236.9 L309.6,236.7 L314.4,236.4 L319.2,236.2 L324.0,235.9 L328.8,235.7 L333.6,235.4 L338.4,235.2 L343.2,235.0 L348.0,234.7 L352.8,234.5 L357.6,234.3 L362.4,234.0 L367.2,233.8 L372.0,233.6 L376.8,233.3 L381.6,233.1 L386.4,232.9 L391.2,232.7 L396.0,232.4 L400.8,232.2 L405.6,232.0 L410.4,231.8 L415.2,231.6 L420.0,231.4 L424.8,231.1 L429.6,230.9 L434.4,230.7 L439.2,230.5 L444.0,230.3 L448.8,230.1 L453.6,229.9 L458.4,229.7 L463.2,229.5 L468.0,229.3 L472.8,229.1 L477.6,228.9 L482.4,228.7 L487.2,228.5 L492.0,228.3 L496.8,228.1 L501.6,227.9 L506.4,227.7 L511.2,227.5 L516.0,227.3 L520.8,227.1 L525.6,226.9 L530.4,226.7 L535.2,226.5 L540.0,226.3" class="s3" fill="none"/><line x1="80" y1="30" x2="104" y2="30" class="s1"/><text x="110" y="34" class="tk">Wet, 1000 °C</text><line x1="80" y1="48" x2="104" y2="48" class="s2"/><text x="110" y="52" class="tk">Wet, 900 °C</text><line x1="80" y1="66" x2="104" y2="66" class="s3"/><text x="110" y="70" class="tk">Dry, 1000 °C</text></svg><figcaption>Figure 2. Oxide thickness versus time from the Deal–Grove model with typical constants for (100) Si (Plummer et al.). Wet oxidation is many times faster than dry.</figcaption></figure>
+<p>For example, at 1000 °C one hour of wet oxidation grows about 0.45 µm of oxide, while dry oxidation grows only about 0.05 µm.</p>
+
+<h2>4. Limits of the model</h2>
+<p>The Deal–Grove model describes oxides thicker than about 20–30 nm very well. In dry oxidation, the initial stage is anomalously fast compared with the prediction, so an effective \(\tau\) corresponding to an initial oxide of about 20–25 nm is used. For gate oxides only a few nanometers thick, refined models (for example Massoud's) are needed. The model also ignores stress on curved surfaces and the effects of heavy doping or chlorine, which are discussed in later lessons.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The Deal–Grove idea of splitting a process into series steps and balancing fluxes in steady state is useful well beyond Si oxidation. The same reasoning applies when analyzing film growth or the formation of interfacial reaction layers at metal/Ga₂O₃ contacts during annealing, where the process may be reaction-limited or diffusion-limited depending on temperature and layer thickness.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. E. Deal, A. S. Grove, "General relationship for the thermal oxidation of silicon," <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>H. Z. Massoud, J. D. Plummer, E. A. Irene, "Thermal oxidation of silicon in dry oxygen," <em>Journal of the Electrochemical Society</em> 132, 2685 (1985).</li>
+</ol>
+</div>
+<nav class="pager"><a href="sio2.html">← <span class="l-vi">SiO₂ và oxy hóa nhiệt</span><span class="l-en">SiO₂ and thermal oxidation</span></a><a class="n" href="oxide-quality.html"><span class="l-vi">Chất lượng và độ dày oxide</span><span class="l-en">Oxide quality and thickness</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

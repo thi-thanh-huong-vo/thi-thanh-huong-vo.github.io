@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thiết bị RTP và đo nhiệt độ" data-title-en="RTP equipment and temperature measurement">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RTP equipment and temperature measurement · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Heating methods, halogen lamps, thermocouples, pyrometry, acoustic sensing and uniformity.">
+<meta property="og:title" content="RTP equipment and temperature measurement">
+<meta property="og:description" content="Heating methods, halogen lamps, thermocouples, pyrometry, acoustic sensing and uniformity.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 3</span><span class="l-en">Part 3 · Lesson 3</span></p>
+  <h1><span class="l-vi">Thiết bị RTP và đo nhiệt độ</span><span class="l-en">RTP equipment and temperature measurement</span></h1>
+  <p class="sub"><span class="l-vi">Phương pháp gia nhiệt, đèn halogen, cặp nhiệt, hỏa kế, đo âm học và độ đồng đều.</span><span class="l-en">Heating methods, halogen lamps, thermocouples, pyrometry, acoustic sensing and uniformity.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Mọi vấn đề của RTP rốt cuộc đều quy về một đại lượng: nhiệt độ của wafer. Đo nó thế nào, giữ nó đồng đều ra sao, và lặp lại nó từ wafer này sang wafer khác là ba thách thức chính của thiết bị RTP.</p>
+
+<h2>1. Các phương pháp gia nhiệt</h2>
+<ul>
+<li><strong>Lò susceptor</strong>: susceptor là vật liệu hấp thụ năng lượng điện từ và chuyển thành nhiệt. Lò thông thường không hợp với ủ thời gian ngắn: wafer nóng từ mép vào trong, và dù thời gian ủ ngắn, các đoạn tăng giảm nhiệt dài vẫn gây khuếch tán đáng kể.</li>
+<li><strong>Lò chuông</strong> (bell-jar furnace): wafer được nâng vào vùng nóng có gradient nhiệt độ theo chiều dọc; nhiệt độ được chọn bằng vị trí.</li>
+<li><strong>Đèn sợi đốt</strong> (incandescent lamp), phổ biến nhất: dãy đèn halogen tungsten chiếu bức xạ lên một hoặc cả hai mặt wafer. Nhiều cảm biến nhiệt độ và thuật toán dựa trên mô hình điều khiển công suất từng nhóm đèn trong chu trình. Wafer đặt trên các chốt thạch anh, vật liệu bền hóa học và dẫn nhiệt kém, để giảm thất thoát nhiệt qua tiếp xúc.</li>
+<li><strong>Đèn hồ quang</strong> (arc lamp): phổ ngắn hơn, được Si hấp thụ qua cơ chế vùng cấm.</li>
+</ul>
+
+<h2>2. Đèn halogen tungsten</h2>
+<p>Đèn sợi đốt phát sáng nhờ sợi tungsten bị dòng điện nung tới nhiệt độ rất cao; bóng thủy tinh hoặc thạch anh chứa khí trơ hoặc chân không để sợi không bị oxy hóa. Trong đèn thường, tungsten bay hơi bám lên mặt trong bóng, làm bóng đen dần và sợi mỏng đi đến khi đứt.</p>
+<p>Đèn <strong>halogen</strong> thêm một lượng nhỏ halogen (iốt hoặc brom) vào khí trơ. Tungsten bay hơi kết hợp với halogen tạo halide dễ bay hơi; halide khuếch tán về sợi nóng, bị phân hủy và trả tungsten lại cho sợi. Chu trình tái sinh halogen này kéo dài tuổi thọ đèn và giữ bóng sạch, cho phép sợi làm việc ở nhiệt độ cao hơn.</p>
+<p>Một điểm đáng chú ý: wafer Si không pha tạp ở nhiệt độ phòng chỉ hấp thụ photon có năng lượng lớn hơn vùng cấm (bước sóng dưới khoảng 1,1 µm), nên ban đầu chỉ thu được một phần nhỏ năng lượng tới. Khi wafer nóng lên, hấp thụ hạt tải tự do tăng và quá trình gia nhiệt tăng tốc.</p>
+
+<h2>3. Đo nhiệt độ</h2>
+<h3>Cặp nhiệt điện tiếp xúc trực tiếp</h3>
+<ul>
+<li>Phụ thuộc diện tích tiếp xúc nên khó lặp lại.</li>
+<li>Có thể gây nhiễm bẩn kim loại; cặp nhiệt bị suy giảm sau nhiều lần dùng.</li>
+<li>Trở kháng nhiệt ở chỗ tiếp xúc gây chênh lệch nhiệt độ giữa wafer và cặp nhiệt; nhiệt thất thoát qua dây làm nguội cục bộ, gây ứng suất và bất đồng đều.</li>
+</ul>
+<h3>Wafer giám sát gắn cặp nhiệt</h3>
+<p>Tránh được vấn đề tiếp xúc không ổn định, nhưng là phép đo gián tiếp: không có gì bảo đảm wafer giám sát và wafer xử lý có cùng nhiệt độ.</p>
+<h3>Hỏa kế quang học (pyrometer)</h3>
+<p>Đo bức xạ do chính wafer nóng phát ra, phần lớn hệ thương mại đo trong dải hồng ngoại giữa (khoảng 3–6 µm). Ưu điểm: không tiếp xúc, nhanh và lặp lại tốt. Thách thức chính:</p>
+<ul>
+<li><strong>Độ phát xạ</strong> phụ thuộc vật liệu, độ nhám bề mặt, nhiệt độ và bước sóng. Độ phát xạ của Si trần đã biết rõ, nhưng khi có màng mọc hoặc lắng đọng trong quá trình xử lý, độ phát xạ thay đổi theo màng đó.</li>
+<li><strong>Bức xạ nhiễu</strong> từ đèn và ống thạch anh nóng. Cần thiết kế hệ và chọn dải bước sóng đo cẩn thận để hạn chế ánh sáng lạc.</li>
+</ul>
+<p>Vì wafer hầu như không tiếp xúc vật gì, cơ chế truyền nhiệt chính khi nung và làm nguội là bức xạ; dẫn nhiệt không đáng kể, đối lưu chỉ góp phần nếu ủ trong khí.</p>
+<h3>Đo nhiệt độ bằng âm học</h3>
+<p>Vận tốc âm trong Si thay đổi tuyến tính theo nhiệt độ. Sóng âm được phát qua một chốt đỡ thạch anh và thu ở chốt khác; thời gian truyền cho biết nhiệt độ, không phụ thuộc độ phát xạ.</p>
+
+<h2>4. Thiết kế buồng và độ đồng đều</h2>
+<p>Mép wafer mất nhiệt nhiều hơn vì có thêm diện tích bức xạ ra ngoài, nên công suất chiếu vào vùng mép phải lớn hơn để giữ nhiệt độ đồng đều. Khí N₂ được dùng để làm mát đèn và mặt ngoài ống thạch anh. Hệ RTP thương mại có thể giữ nhiệt độ tâm wafer trong khoảng ±2 °C với quy trình wafer trần như ủ sau cấy, nhưng nhiệt độ tuyệt đối thường kém chắc chắn hơn do sai số độ phát xạ.</p>
+<p>Nếu nhiệt độ trên wafer không đồng đều khi gia nhiệt nhanh, ứng suất nhiệt có thể gây <strong>lệch trượt</strong> (slip dislocation) trong tinh thể. Độ dày wafer và các lớp kim loại cũng ảnh hưởng tới đáp ứng nhiệt.</p>
+
+<h2>5. Lớp phủ bảo vệ khi ủ bán dẫn hợp chất</h2>
+<p>Với GaAs, As dễ bay hơi khỏi bề mặt khi ủ, nên người ta phủ lớp Si₃N₄ hoặc SiOₓNᵧ để ngăn As thoát ra. Si₃N₄ bảo vệ được tới khoảng 900 °C, SiO₂ tới khoảng 850 °C. Lớp phủ có thể khó loại bỏ, và chênh lệch hệ số giãn nở nhiệt có thể gây lệch trượt. Một giải pháp thay thế là ủ không phủ trong susceptor graphite thiết kế riêng, cho bề mặt tốt hơn và ít hạt bụi hơn.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Ga₂O₃ đối mặt với vấn đề tương tự GaAs: ở nhiệt độ cao, bề mặt có thể mất oxy và tạo các sản phẩm bay hơi như Ga₂O. Vì vậy khí quyển chứa oxy, hoặc lớp phủ bảo vệ như SiO₂ hay SiNₓ, được dùng khi ủ nhiệt độ cao. Đo nhiệt độ bằng hỏa kế cũng khó hơn vì Ga₂O₃ trong suốt trong dải hồng ngoại, nên hỏa kế có thể "nhìn" xuyên qua mẫu thay vì đo bề mặt.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>R. B. Fair, <em>Rapid Thermal Processing: Science and Technology</em>, Academic Press (1993).</li>
+<li>S. M. Sze (ed.), <em>VLSI Technology</em>, 2nd ed., McGraw-Hill (1988).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Every RTP problem ultimately comes down to one quantity: wafer temperature. How to measure it, how to keep it uniform, and how to reproduce it from wafer to wafer are the three main challenges of RTP equipment.</p>
+
+<h2>1. Heating methods</h2>
+<ul>
+<li><strong>Susceptor furnace</strong>: a susceptor is a material that absorbs electromagnetic energy and converts it to heat. Conventional furnaces are ill-suited to short anneals: wafers heat from the edges inward, and even if the anneal is short, the long ramps cause significant diffusion.</li>
+<li><strong>Bell-jar furnace</strong>: the wafer is raised into a heated zone with a vertical temperature gradient; temperature is selected by position.</li>
+<li><strong>Incandescent lamps</strong>, the most common: banks of tungsten-halogen lamps radiate onto one or both wafer faces. Multiple temperature sensors and model-based algorithms control the power of each lamp zone during the cycle. The wafer rests on quartz pins, which are chemically stable and poorly conducting, to minimize contact heat loss.</li>
+<li><strong>Arc lamps</strong>: shorter-wavelength spectra, absorbed by Si through band-gap absorption.</li>
+</ul>
+
+<h2>2. Tungsten-halogen lamps</h2>
+<p>An incandescent lamp glows because an electric current heats a tungsten filament to a very high temperature; the glass or quartz bulb holds inert gas or vacuum so the filament does not oxidize. In ordinary lamps, evaporated tungsten deposits on the inner bulb wall, blackening it while the filament thins until it breaks.</p>
+<p>A <strong>halogen</strong> lamp adds a small amount of halogen (iodine or bromine) to the inert gas. Evaporated tungsten combines with the halogen to form volatile halides, which diffuse back to the hot filament, decompose and redeposit the tungsten. This halogen regenerative cycle extends lamp life and keeps the bulb clean, letting the filament run hotter.</p>
+<p>A notable point: an undoped Si wafer at room temperature absorbs only photons above its bandgap (wavelengths below about 1.1 µm), so initially it captures only a small fraction of the incident energy. As the wafer heats up, free-carrier absorption rises and heating accelerates.</p>
+
+<h2>3. Temperature measurement</h2>
+<h3>Thermocouples in direct contact</h3>
+<ul>
+<li>Depend on contact area, so repeatability is poor.</li>
+<li>Can cause metal contamination; the thermocouple degrades with repeated use.</li>
+<li>Thermal impedance at the contact creates a temperature difference between wafer and thermocouple; heat loss through the leads cools the wafer locally, causing stress and nonuniformity.</li>
+</ul>
+<h3>Monitor wafer with embedded thermocouple</h3>
+<p>Avoids inconsistent contact, but it is an indirect measurement: there is no guarantee the monitor and process wafers are at the same temperature.</p>
+<h3>Optical pyrometry</h3>
+<p>Measures radiation emitted by the hot wafer itself; most commercial systems use a mid-infrared band (about 3–6 µm). Advantages: non-contact, fast and reproducible. Main challenges:</p>
+<ul>
+<li><strong>Emissivity</strong> depends on material, surface finish, temperature and wavelength. Bare-Si emissivity is well documented, but when films grow or deposit during processing, the emissivity changes toward that of the film.</li>
+<li><strong>Stray radiation</strong> from lamps and hot quartz. Careful system design and choice of detection band are needed to minimize stray light.</li>
+</ul>
+<p>Because the wafer barely touches anything, radiation is the main heat-transfer mechanism for heating and cooling; conduction is negligible, and convection contributes only when annealing in gas.</p>
+<h3>Acoustic thermometry</h3>
+<p>The speed of sound in Si varies linearly with temperature. An acoustic wave is launched through one quartz support pin and detected at another; the transit time gives the temperature, independent of emissivity.</p>
+
+<h2>4. Chamber design and uniformity</h2>
+<p>The wafer edge loses more heat because it has extra radiating area, so more radiant power must be directed to the edge to keep the temperature uniform. N₂ cools the lamps and the outer surface of the quartz tube. Commercial RTP systems can hold the wafer-center temperature to about ±2 °C for bare-wafer processes such as implant anneals, but the absolute temperature is usually less certain because of emissivity errors.</p>
+<p>If temperature is not uniform across the wafer during fast ramps, thermal stress can create <strong>slip dislocations</strong> in the crystal. Wafer thickness and metal layers also affect the thermal response.</p>
+
+<h2>5. Capping layers for compound semiconductors</h2>
+<p>For GaAs, As readily evaporates from the surface during annealing, so Si₃N₄ or SiOₓNᵧ caps are used to prevent As loss. Si₃N₄ protects up to about 900 °C, SiO₂ up to about 850 °C. Caps can be hard to remove, and thermal-expansion mismatch can cause slip. An alternative is capless annealing in a specially designed graphite susceptor, giving better surfaces and fewer particles.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Ga₂O₃ faces a problem similar to GaAs: at high temperature the surface can lose oxygen and form volatile species such as Ga₂O. Oxygen-containing ambients or protective caps such as SiO₂ or SiNₓ are therefore used for high-temperature anneals. Pyrometry is also harder because Ga₂O₃ is transparent in the infrared, so a pyrometer may "see" through the sample rather than measuring its surface.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>R. B. Fair, <em>Rapid Thermal Processing: Science and Technology</em>, Academic Press (1993).</li>
+<li>S. M. Sze (ed.), <em>VLSI Technology</em>, 2nd ed., McGraw-Hill (1988).</li>
+</ol>
+</div>
+<nav class="pager"><a href="rtp.html">← <span class="l-vi">Xử lý nhiệt nhanh (RTP) và ứng dụng</span><span class="l-en">Rapid thermal processing and its applications</span></a><a class="n" href="sio2.html"><span class="l-vi">SiO₂ và oxy hóa nhiệt</span><span class="l-en">SiO₂ and thermal oxidation</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

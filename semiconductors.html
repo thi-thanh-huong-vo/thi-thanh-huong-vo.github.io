@@ -65,6 +65,9 @@
   .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
   .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
   .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .quizcard{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:1rem 1.2rem;margin:1.75rem 0 .5rem}
+  .quizcard p{margin:0;text-align:left}.quizcard .qt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.15rem;color:var(--accent);margin-bottom:.25rem}
+  .qbtn{background:var(--accent);color:var(--paper)!important;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-weight:600;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -80,11 +83,35 @@
 <p class="lead">Mỗi con chip trong điện thoại của bạn bắt đầu từ một khối đá thạch anh. Hành trình từ hạt cát đến linh kiện đi qua vật lý chất rắn, hóa học, kỹ thuật vật liệu và cả kinh tế học. Trang này là nơi tôi ghi lại hành trình ấy theo cách mình hiểu, với công thức đủ chặt để dùng trong nghiên cứu và ví dụ đủ gần để dễ hình dung.</p>
 <p class="box" style="text-align:left">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University.</p>
 <p>Mỗi bài có phần <strong>Góc nhìn Ga₂O₃</strong>, liên hệ kiến thức nền tảng với bán dẫn vùng cấm siêu rộng (ultra-wide bandgap) mà tôi đang nghiên cứu. Thuật ngữ chuyên ngành được giữ nguyên tiếng Anh để thuận tiện tra cứu tài liệu.</p>
+<div class="quizcard"><div><p class="qt">Kiểm tra kiến thức</p><p>10 câu hỏi trắc nghiệm ngẫu nhiên từ ngân hàng 100 câu, bao quát tất cả các bài. Mỗi lần làm lại sẽ gặp những câu khác.</p></div><a class="qbtn" href="quiz.html">Làm bài quiz →</a></div>
 <h2>Phần 1. Nền tảng của công nghệ bán dẫn</h2>
 <ol class="toc">
   <li><a href="moore.html">Định luật Moore và Dennard scaling</a><span>Vì sao linh kiện ngày càng nhỏ, rẻ và nhanh hơn, và vì sao xu hướng ấy đang chậm lại.</span></li>
   <li><a href="silicon-wafer.html">Tinh thể Si: từ thạch anh đến wafer</a><span>Các dạng chất rắn, tinh chế Si, phương pháp Czochralski và Float Zone, các loại wafer.</span></li>
   <li><a href="diffusion.html">Khuếch tán trong chất rắn</a><span>Định luật Fick, cơ chế vacancy và interstitial, đưa tạp chất vào bán dẫn.</span></li>
+</ol>
+<h2>Phần 2. Cấy ion</h2>
+<ol class="toc">
+  <li><a href="ion-implantation.html">Cấy ion: nguyên lý và ứng dụng</a><span>Pha tạp n và p, so sánh với khuếch tán, cổng tự căn chỉnh và các bước cấy trong CMOS.</span></li>
+  <li><a href="implant-physics.html">Vật lý cấy ion</a><span>Liều và năng lượng, profile Gauss, cơ chế hãm hạt nhân và điện tử, hiệu ứng kênh.</span></li>
+  <li><a href="implanter.html">Hệ thống cấy ion</a><span>Nguồn ion, nam châm phân tích, gia tốc, quét chùm và các vấn đề thường gặp.</span></li>
+</ol>
+<h2>Phần 3. Ủ nhiệt và xử lý nhiệt nhanh</h2>
+<ol class="toc">
+  <li><a href="activation-anneal.html">Ủ kích hoạt và truyền nhiệt</a><span>Phục hồi hư hỏng do cấy, ba cơ chế truyền nhiệt, sự hấp thụ bức xạ của Si và thermal budget.</span></li>
+  <li><a href="rtp.html">Xử lý nhiệt nhanh (RTP) và ứng dụng</a><span>Ưu điểm của RTP, spike anneal, RTA, RTO, RTN, salicide và kích hoạt vượt độ hòa tan.</span></li>
+  <li><a href="rtp-system.html">Thiết bị RTP và đo nhiệt độ</a><span>Phương pháp gia nhiệt, đèn halogen, cặp nhiệt, hỏa kế, đo âm học và độ đồng đều.</span></li>
+</ol>
+<h2>Phần 4. Oxy hóa nhiệt</h2>
+<ol class="toc">
+  <li><a href="sio2.html">SiO₂ và oxy hóa nhiệt</a><span>Cấu trúc và tính chất của SiO₂, các ứng dụng, oxy hóa khô và ướt, chu trình lò oxy hóa.</span></li>
+  <li><a href="deal-grove.html">Mô hình oxy hóa Deal–Grove</a><span>Lượng Si bị tiêu thụ, ba dòng chất oxy hóa, chế độ tuyến tính và parabol.</span></li>
+  <li><a href="oxide-quality.html">Chất lượng và độ dày oxide</a><span>Bốn loại điện tích oxide, đánh thủng và TDDB, ellipsometry, màu oxide và EOT.</span></li>
+</ol>
+<h2>Phần 5. Cách ly và các yếu tố ảnh hưởng đến oxy hóa</h2>
+<ol class="toc">
+  <li><a href="isolation.html">Cách ly linh kiện: LOCOS và STI</a><span>Quy trình LOCOS, mỏ chim, quy trình STI và thách thức ở kích thước nhỏ.</span></li>
+  <li><a href="oxidation-factors.html">Các yếu tố ảnh hưởng đến oxy hóa nhiệt</a><span>Chất oxy hóa, nhiệt độ, áp suất, định hướng tinh thể, pha tạp, phân bố lại tạp chất và hình học.</span></li>
 </ol>
 <p style="margin-top:1.5rem;color:var(--muted)">Các phần tiếp theo sẽ được bổ sung dần.</p>
 
@@ -94,15 +121,39 @@
 <p class="lead">Every chip in your phone begins as a lump of quartzite. The journey from sand to device runs through solid-state physics, chemistry, materials engineering and even economics. This is where I write that journey down as I understand it, with equations rigorous enough to use in research and examples close enough to picture.</p>
 <p class="box" style="text-align:left">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University.</p>
 <p>Each lesson ends with a <strong>Ga₂O₃ perspective</strong> that connects the fundamentals to the ultra-wide bandgap semiconductor I work on.</p>
+<div class="quizcard"><div><p class="qt">Test your knowledge</p><p>10 random multiple-choice questions from a bank of 100, covering every lesson. Each retry brings different questions.</p></div><a class="qbtn" href="quiz.html">Take the quiz →</a></div>
 <h2>Part 1. Foundations of semiconductor technology</h2>
 <ol class="toc">
   <li><a href="moore.html">Moore's law and Dennard scaling</a><span>Why devices kept getting smaller, cheaper and faster, and why that trend is slowing down.</span></li>
   <li><a href="silicon-wafer.html">Silicon crystals: from quartzite to wafer</a><span>Forms of solids, Si purification, Czochralski and Float Zone growth, wafer types.</span></li>
   <li><a href="diffusion.html">Diffusion in solids</a><span>Fick's laws, vacancy and interstitial mechanisms, introducing dopants into semiconductors.</span></li>
 </ol>
+<h2>Part 2. Ion implantation</h2>
+<ol class="toc">
+  <li><a href="ion-implantation.html">Ion implantation: fundamentals and applications</a><span>n- and p-type doping, comparison with diffusion, the self-aligned gate and CMOS implant steps.</span></li>
+  <li><a href="implant-physics.html">Ion implantation physics</a><span>Dose and energy, Gaussian profiles, nuclear and electronic stopping, channeling.</span></li>
+  <li><a href="implanter.html">Ion implantation systems</a><span>Ion source, analyzer magnet, acceleration, beam scanning and common issues.</span></li>
+</ol>
+<h2>Part 3. Annealing and rapid thermal processing</h2>
+<ol class="toc">
+  <li><a href="activation-anneal.html">Activation annealing and heat transfer</a><span>Repairing implant damage, three heat-transfer mechanisms, radiation absorption in Si and thermal budget.</span></li>
+  <li><a href="rtp.html">Rapid thermal processing and its applications</a><span>Advantages of RTP, spike annealing, RTA, RTO, RTN, salicide and activation beyond solubility.</span></li>
+  <li><a href="rtp-system.html">RTP equipment and temperature measurement</a><span>Heating methods, halogen lamps, thermocouples, pyrometry, acoustic sensing and uniformity.</span></li>
+</ol>
+<h2>Part 4. Thermal oxidation</h2>
+<ol class="toc">
+  <li><a href="sio2.html">SiO₂ and thermal oxidation</a><span>Structure and properties of SiO₂, its uses, dry and wet oxidation, the furnace cycle.</span></li>
+  <li><a href="deal-grove.html">The Deal–Grove oxidation model</a><span>Si consumption, the three oxidant fluxes, linear and parabolic regimes.</span></li>
+  <li><a href="oxide-quality.html">Oxide quality and thickness</a><span>Four oxide charges, breakdown and TDDB, ellipsometry, oxide color and EOT.</span></li>
+</ol>
+<h2>Part 5. Isolation and factors affecting oxidation</h2>
+<ol class="toc">
+  <li><a href="isolation.html">Device isolation: LOCOS and STI</a><span>The LOCOS process, the bird's beak, the STI process and its scaling challenges.</span></li>
+  <li><a href="oxidation-factors.html">Factors affecting thermal oxidation</a><span>Oxidant, temperature, pressure, orientation, doping, dopant redistribution and geometry.</span></li>
+</ol>
 <p style="margin-top:1.5rem;color:var(--muted)">More parts will be added over time.</p>
 </div>
-<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này. Bản tiếng Anh đang được chuẩn bị.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
 </main>
 <script>
 (function(){

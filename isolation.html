@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Cách ly linh kiện: LOCOS và STI" data-title-en="Device isolation: LOCOS and STI">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Device isolation: LOCOS and STI · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The LOCOS process, the bird's beak, the STI process and its scaling challenges.">
+<meta property="og:title" content="Device isolation: LOCOS and STI">
+<meta property="og:description" content="The LOCOS process, the bird's beak, the STI process and its scaling challenges.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 5 · Bài 1</span><span class="l-en">Part 5 · Lesson 1</span></p>
+  <h1><span class="l-vi">Cách ly linh kiện: LOCOS và STI</span><span class="l-en">Device isolation: LOCOS and STI</span></h1>
+  <p class="sub"><span class="l-vi">Quy trình LOCOS, mỏ chim, quy trình STI và thách thức ở kích thước nhỏ.</span><span class="l-en">The LOCOS process, the bird's beak, the STI process and its scaling challenges.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Trên một con chip có hàng tỉ transistor đứng sát nhau. Nếu không được cách ly, dòng điện sẽ rò từ linh kiện này sang linh kiện kia và các transistor ký sinh sẽ bật lên ngoài ý muốn. Oxide nhiệt là vật liệu cách ly chính, và cách đặt nó vào giữa các linh kiện đã thay đổi theo từng thế hệ công nghệ.</p>
+
+<h2>1. LOCOS: oxy hóa cục bộ</h2>
+<p>LOCOS (local oxidation of silicon) là kỹ thuật cách ly chủ đạo trong nhiều thập kỷ:</p>
+<ol>
+<li>Mọc một lớp oxide rất mỏng, cỡ 10 nm, gọi là <strong>pad oxide</strong>, để giảm ứng suất cơ học giữa Si₃N₄ và Si.</li>
+<li>Lắng đọng lớp <strong>Si₃N₄</strong>. Nitride là rào cản với chất oxy hóa, vì O₂ và H₂O khuếch tán qua nó rất chậm.</li>
+<li>Khắc nitride theo hoa văn: nitride còn lại che vùng hoạt động (nơi đặt transistor).</li>
+<li>Oxy hóa nhiệt: oxide dày (field oxide) chỉ mọc ở vùng không có nitride.</li>
+<li>Loại bỏ nitride.</li>
+</ol>
+<p>Ưu điểm: quy trình đơn giản và oxide chất lượng cao. Vì SiO₂ chiếm thể tích lớn hơn Si bị tiêu thụ, field oxide nhô lên trên mặt Si ban đầu và lún xuống dưới.</p>
+<h3>Mỏ chim (bird's beak)</h3>
+<p>Pad oxide dưới mép nitride tạo một đường khuếch tán cho chất oxy hóa đi ngang. Oxide vì thế mọc lấn vào dưới mép nitride, đẩy mép nitride cong lên, tạo hình dạng giống mỏ chim. Chiều dài và chiều cao mỏ chim phụ thuộc mạnh vào độ dày nitride và pad oxide: nitride dày hơn và pad oxide mỏng hơn làm mỏ chim ngắn hơn, nhưng gây ứng suất lớn hơn.</p>
+<p>Nhược điểm chính của LOCOS là mỏ chim chiếm mất một phần diện tích vùng hoạt động. Khi kích thước linh kiện giảm, phần diện tích mất đi này trở nên không chấp nhận được. Các biến thể như LOCOS lõm hoàn toàn (fully recessed LOCOS) hay poly-buffered LOCOS giảm được mỏ chim nhưng không loại bỏ hẳn.</p>
+<figure><svg viewBox="0 0 600 210" class="fig-svg" role="img">
+<text x="145" y="20" class="nt" text-anchor="middle">LOCOS</text>
+<rect x="10" y="100" width="270" height="95" class="atom"/>
+<path d="M60,100 Q90,100 115,80 L175,80 Q200,100 230,100 Q200,104 175,130 L115,130 Q90,104 60,100Z" class="node"/>
+<rect x="10" y="88" width="62" height="10" fill="var(--s2)"/><rect x="218" y="88" width="62" height="10" fill="var(--s2)"/>
+<text x="145" y="110" class="ns" text-anchor="middle">SiO₂</text>
+<path d="M64,96 L90,94" class="arr"/><text x="40" y="60" class="ns">mỏ chim</text><path d="M60,64 L78,92" class="arr"/>
+<text x="250" y="80" class="ns" text-anchor="middle">Si₃N₄</text>
+<text x="455" y="20" class="nt" text-anchor="middle">STI</text>
+<rect x="320" y="100" width="270" height="95" class="atom"/>
+<path d="M415,100 L425,160 L485,160 L495,100Z" class="node"/><text x="455" y="135" class="ns" text-anchor="middle">SiO₂</text>
+<text x="455" y="88" class="ns" text-anchor="middle">rãnh, lấp oxide CVD</text>
+<text x="145" y="208" class="ns" text-anchor="middle">oxide lấn sang vùng hoạt động</text>
+<text x="455" y="208" class="ns" text-anchor="middle">biên dốc, không có mỏ chim</text>
+</svg><figcaption>Hình 1. So sánh mặt cắt định tính của LOCOS và STI.</figcaption></figure>
+
+<h2>2. STI: cách ly bằng rãnh nông</h2>
+<p>STI (shallow trench isolation) là kỹ thuật được ưa chuộng từ khoảng thế hệ 0,25 µm trở đi:</p>
+<ol>
+<li>Mọc pad oxide, lắng đọng nitride làm mặt nạ và lớp dừng mài.</li>
+<li><strong>Khắc rãnh nông</strong> vào đế Si bằng khắc khô.</li>
+<li>Oxy hóa nhiệt một lớp oxide lót mỏng (liner) để làm tròn góc rãnh và tạo mặt phân cách tốt; khác LOCOS, quá trình oxy hóa dừng ở lớp mỏng này.</li>
+<li><strong>Lấp đầy rãnh</strong> bằng oxide lắng đọng (CVD, ví dụ HDP-CVD).</li>
+<li>Mài phẳng hóa cơ (CMP), dừng trên nitride, rồi loại bỏ nitride.</li>
+</ol>
+<p>STI loại bỏ hoàn toàn mỏ chim, có biên dốc và cho phép vùng cách ly nhỏ hơn nhiều, đồng thời bề mặt phẳng thuận lợi cho quang khắc các lớp sau.</p>
+
+<h2>3. Thách thức của STI hiện đại</h2>
+<ul>
+<li>Khi kích thước dưới 20 nm, tỉ lệ chiều sâu/chiều rộng của rãnh có thể tới 20:1, khiến việc lấp đầy không có lỗ rỗng rất khó.</li>
+<li>Biến động chiều rộng rãnh, ví dụ do kỹ thuật đa mẫu (double patterning), không còn bỏ qua được.</li>
+<li>Chiều sâu rãnh không đồng đều, phụ thuộc mật độ hoa văn cục bộ (loading effect).</li>
+<li>Kích thước tới hạn của đường và chiều sâu rãnh phải được kiểm soát rất chặt.</li>
+</ul>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Linh kiện β-Ga₂O₃ không dùng LOCOS hay STI vì không có oxide nhiệt tự nhiên. Cách ly thường được thực hiện bằng <strong>khắc mesa</strong> (loại bỏ lớp kênh dẫn quanh linh kiện) hoặc bằng <strong>cấy ion</strong> N, Mg hay các ion gây hư hỏng để tạo vùng điện trở cao. Đế Ga₂O₃ pha Fe bán cách điện cũng giúp cách ly theo chiều dọc.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. Wolf, <em>Silicon Processing for the VLSI Era</em>, Vol. 2, Lattice Press.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A chip carries billions of transistors packed side by side. Without isolation, current would leak from one device to the next and parasitic transistors would turn on unintentionally. Thermal oxide is the main isolation material, and the way it is placed between devices has changed with each technology generation.</p>
+
+<h2>1. LOCOS: local oxidation</h2>
+<p>LOCOS (local oxidation of silicon) was the dominant isolation technique for decades:</p>
+<ol>
+<li>Grow a very thin oxide, about 10 nm, called the <strong>pad oxide</strong>, to relieve mechanical stress between Si₃N₄ and Si.</li>
+<li>Deposit a <strong>Si₃N₄</strong> layer. Nitride is an oxidation barrier because O₂ and H₂O diffuse through it very slowly.</li>
+<li>Pattern the nitride: the remaining nitride covers the active areas (where transistors go).</li>
+<li>Thermal oxidation: thick field oxide grows only where there is no nitride.</li>
+<li>Strip the nitride.</li>
+</ol>
+<p>Advantages: a simple process and high-quality oxide. Because SiO₂ occupies more volume than the Si consumed, the field oxide rises above the original Si surface and sinks below it.</p>
+<h3>The bird's beak</h3>
+<p>The pad oxide under the nitride edge provides a lateral diffusion path for the oxidant. Oxide therefore grows under the nitride edge, bending it upward into a shape resembling a bird's beak. Its length and height depend strongly on the nitride and pad-oxide thicknesses: thicker nitride and thinner pad oxide shorten the beak but increase stress.</p>
+<p>The main drawback of LOCOS is that the bird's beak consumes part of the active area. As devices shrink, this lost area becomes unacceptable. Variants such as fully recessed LOCOS or poly-buffered LOCOS reduce the beak but do not eliminate it.</p>
+<figure><svg viewBox="0 0 600 210" class="fig-svg" role="img">
+<text x="145" y="20" class="nt" text-anchor="middle">LOCOS</text>
+<rect x="10" y="100" width="270" height="95" class="atom"/>
+<path d="M60,100 Q90,100 115,80 L175,80 Q200,100 230,100 Q200,104 175,130 L115,130 Q90,104 60,100Z" class="node"/>
+<rect x="10" y="88" width="62" height="10" fill="var(--s2)"/><rect x="218" y="88" width="62" height="10" fill="var(--s2)"/>
+<text x="145" y="110" class="ns" text-anchor="middle">SiO₂</text>
+<path d="M64,96 L90,94" class="arr"/><text x="40" y="60" class="ns">bird's beak</text><path d="M60,64 L78,92" class="arr"/>
+<text x="250" y="80" class="ns" text-anchor="middle">Si₃N₄</text>
+<text x="455" y="20" class="nt" text-anchor="middle">STI</text>
+<rect x="320" y="100" width="270" height="95" class="atom"/>
+<path d="M415,100 L425,160 L485,160 L495,100Z" class="node"/><text x="455" y="135" class="ns" text-anchor="middle">SiO₂</text>
+<text x="455" y="88" class="ns" text-anchor="middle">trench, CVD oxide fill</text>
+<text x="145" y="208" class="ns" text-anchor="middle">oxide encroaches on active area</text>
+<text x="455" y="208" class="ns" text-anchor="middle">steep edges, no bird's beak</text>
+</svg><figcaption>Figure 1. Qualitative cross-sections of LOCOS and STI.</figcaption></figure>
+
+<h2>2. STI: shallow trench isolation</h2>
+<p>STI has been the preferred technique from roughly the 0.25 µm generation onward:</p>
+<ol>
+<li>Grow pad oxide and deposit nitride as a mask and polish stop.</li>
+<li><strong>Etch shallow trenches</strong> into the Si substrate by dry etching.</li>
+<li>Thermally grow a thin liner oxide to round the trench corners and form a good interface; unlike LOCOS, oxidation stops at this thin layer.</li>
+<li><strong>Fill the trench</strong> with deposited oxide (CVD, for example HDP-CVD).</li>
+<li>Planarize by chemical-mechanical polishing (CMP), stopping on the nitride, then strip the nitride.</li>
+</ol>
+<p>STI completely avoids the bird's beak, has steep edges and allows much smaller isolation regions, while the flat surface eases lithography of later layers.</p>
+
+<h2>3. Challenges of modern STI</h2>
+<ul>
+<li>Below 20 nm, the trench aspect ratio can reach 20:1, making void-free filling very difficult.</li>
+<li>Trench-width variation, for example from double patterning, is no longer negligible.</li>
+<li>Trench depth becomes nonuniform, depending on local pattern density (loading effect).</li>
+<li>The line critical dimension and trench depth must be tightly controlled.</li>
+</ul>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>β-Ga₂O₃ devices do not use LOCOS or STI because there is no native thermal oxide. Isolation is usually achieved by <strong>mesa etching</strong> (removing the conducting channel layer around the device) or by <strong>ion implantation</strong> of N, Mg or damage-creating species to form highly resistive regions. Semi-insulating Fe-doped Ga₂O₃ substrates also help with vertical isolation.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. Wolf, <em>Silicon Processing for the VLSI Era</em>, Vol. 2, Lattice Press.</li>
+</ol>
+</div>
+<nav class="pager"><a href="oxide-quality.html">← <span class="l-vi">Chất lượng và độ dày oxide</span><span class="l-en">Oxide quality and thickness</span></a><a class="n" href="oxidation-factors.html"><span class="l-vi">Các yếu tố ảnh hưởng đến oxy hóa nhiệt</span><span class="l-en">Factors affecting thermal oxidation</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

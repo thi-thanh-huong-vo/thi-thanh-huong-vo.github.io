@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Các yếu tố ảnh hưởng đến oxy hóa nhiệt" data-title-en="Factors affecting thermal oxidation">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factors affecting thermal oxidation · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Oxidant, temperature, pressure, orientation, doping, dopant redistribution and geometry.">
+<meta property="og:title" content="Factors affecting thermal oxidation">
+<meta property="og:description" content="Oxidant, temperature, pressure, orientation, doping, dopant redistribution and geometry.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 5 · Bài 2</span><span class="l-en">Part 5 · Lesson 2</span></p>
+  <h1><span class="l-vi">Các yếu tố ảnh hưởng đến oxy hóa nhiệt</span><span class="l-en">Factors affecting thermal oxidation</span></h1>
+  <p class="sub"><span class="l-vi">Chất oxy hóa, nhiệt độ, áp suất, định hướng tinh thể, pha tạp, phân bố lại tạp chất và hình học.</span><span class="l-en">Oxidant, temperature, pressure, orientation, doping, dopant redistribution and geometry.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Mô hình Deal–Grove cho ta khung tính toán, nhưng tốc độ oxy hóa thực tế còn chịu ảnh hưởng của nhiều yếu tố: loại chất oxy hóa, nhiệt độ, áp suất, định hướng tinh thể, nồng độ pha tạp, hình dạng bề mặt và bản chất vật liệu. Ngược lại, oxy hóa cũng làm thay đổi phân bố tạp chất trong Si.</p>
+
+<h2>1. Các yếu tố quy trình</h2>
+<h3>Chất oxy hóa</h3>
+<ul>
+<li><strong>Oxy hóa khô</strong> (O₂ tinh khiết): kiểm soát độ dày chính xác trong khoảng vài đến khoảng 100 nm, chất lượng vật liệu tốt nhất.</li>
+<li><strong>Oxy hóa ướt</strong> (hơi H₂O): rất nhanh, đó là ưu điểm lớn nhất; oxide xốp hơn một chút và chất lượng điện thấp hơn.</li>
+<li><strong>Thêm HCl hoặc Cl₂</strong>: clo bắt giữ ion kim loại và ion kiềm như Na⁺, giảm sai hỏng và cải thiện dòng rò oxide cổng, đồng thời làm sạch lò. Clo cũng làm tăng nhẹ tốc độ oxy hóa; thêm H₂O vào O₂ làm oxide dày hơn rõ rệt.</li>
+</ul>
+<h3>Nhiệt độ</h3>
+<p>Tốc độ oxy hóa tăng rất mạnh theo nhiệt độ, vì hệ số khuếch tán của O₂ và H₂O trong SiO₂ cũng như tốc độ phản ứng tại mặt phân cách đều tăng theo hàm mũ. Phương trình Arrhenius mô tả điều này:</p>
+$$k = k_0 \exp\!\left(-\frac{E_a}{k_B T}\right) \quad\Longrightarrow\quad \ln k = \ln k_0 - \frac{E_a}{k_B}\cdot\frac{1}{T}$$
+<p>Vẽ \(\ln k\) theo \(1/T\) cho một đường thẳng có độ dốc \(-E_a/k_B\), từ đó suy ra năng lượng kích hoạt. Phương trình Arrhenius đơn giản nhưng chính xác đáng kinh ngạc, và nên được xem là một quan hệ thực nghiệm. Nó mô tả nhiều quá trình nhiệt: hệ số khuếch tán, nồng độ vacancy, tốc độ dão (creep) và vô số phản ứng khác.</p>
+<h3>Áp suất</h3>
+<p>Theo định luật Henry, nồng độ chất oxy hóa trong oxide \(C^*\) tỉ lệ với áp suất riêng phần, nên cả \(B\) và \(B/A\) xấp xỉ tỉ lệ với áp suất. <strong>Oxy hóa áp suất cao</strong> cho phép mọc oxide nhanh hơn, hoặc mọc cùng độ dày ở nhiệt độ thấp hơn, giảm khuếch tán tạp chất và hạn chế dịch chuyển tiếp giáp.</p>
+<h3>Định hướng tinh thể</h3>
+<p>Si (111) oxy hóa nhanh hơn Si (100); (110) nằm giữa. Khác biệt nằm ở hằng số tuyến tính \(B/A\), vì phản ứng bề mặt phụ thuộc mật độ nguyên tử Si và liên kết sẵn sàng phản ứng trên từng mặt tinh thể; với Deal–Grove, \(B/A\) của (111) lớn hơn (100) khoảng 1,7 lần. Hằng số parabol \(B\) gần như không phụ thuộc định hướng vì đó là quá trình khuếch tán qua oxide vô định hình. Do đó ảnh hưởng của định hướng rõ nhất với oxide mỏng. Mặt (100) được dùng cho MOS không chỉ vì oxy hóa chậm hơn mà chủ yếu vì có mật độ bẫy mặt phân cách thấp nhất.</p>
+
+<h2>2. Các yếu tố vật liệu</h2>
+<h3>Pha tạp nặng</h3>
+<p>Tạp chất chỉ ảnh hưởng đáng kể tới tốc độ oxy hóa khi nồng độ rất cao, cỡ 10²⁰ cm⁻³ trở lên:</p>
+<ul>
+<li>Pha tạp nặng tạo nhiều sai hỏng điểm (vacancy) ở Si, làm Si dễ phản ứng hơn: tăng \(B/A\). Hiệu ứng này rõ với P.</li>
+<li>Tạp chất đi vào oxide làm lỏng cấu trúc, giảm khối lượng riêng, giúp chất oxy hóa khuếch tán dễ hơn: tăng \(B\). Hiệu ứng này rõ với B khi nồng độ bề mặt vượt khoảng 10²⁰ cm⁻³.</li>
+</ul>
+<p>Oxy hóa nhanh hơn ở vùng pha tạp nặng có thể được tận dụng để oxy hóa chọn lọc, nhưng cũng phải tính tới trong các bước khắc: oxide dày hơn ở vùng đó đồng nghĩa với lượng vật liệu bị loại bỏ khác đi.</p>
+<h3>Phân bố lại tạp chất</h3>
+<p>Khi mặt phân cách Si/SiO₂ tiến vào Si, oxide "nuốt" phần Si chứa tạp chất. Tạp chất phân bố lại cho tới khi tỉ lệ nồng độ hai bên mặt phân cách bằng tỉ lệ độ hòa tan, gọi là <strong>hệ số phân tách</strong>:</p>
+$$m = \frac{C_{Si}}{C_{SiO_2}}$$
+<ul>
+<li><strong>\(m > 1\)</strong> (P, As): oxide đẩy tạp chất ra, tạp chất tích tụ trong Si ngay dưới mặt phân cách, đạt cực đại tại mặt phân cách nếu tạp chất khuếch tán chậm trong oxide. Nếu tạp chất lại khuếch tán nhanh trong oxide (như Ga), nó bị lấy đi nhanh khỏi mặt phân cách, và nồng độ tại đó dù lớn hơn trong oxide vẫn thấp hơn nồng độ khối.</li>
+<li><strong>\(m < 1\)</strong> (B, \(m \approx 0{,}3\)): oxide hút tạp chất, nồng độ trong Si giảm gần mặt phân cách. B đi vào oxide còn làm yếu cấu trúc thủy tinh; trong môi trường hydro, B khuếch tán nhanh trong oxide nên sự suy giảm càng mạnh.</li>
+</ul>
+<figure><svg viewBox="0 0 560 240" class="fig-svg" role="img"><text x="140" y="20" class="nt" text-anchor="middle">m > 1 (P, As)</text><line x1="100" y1="35" x2="100" y2="200" class="ax"/><text x="60" y="215" class="ns" text-anchor="middle">SiO₂</text><text x="180" y="215" class="ns" text-anchor="middle">Si</text><line x1="100" y1="120" x2="260" y2="120" class="vac"/><text x="258" y="113" class="ns" text-anchor="end">C nền</text><path d="M20,170 L100,170 M100,60 Q125,115 180,120 L260,120" class="s1" fill="none"/><text x="420" y="20" class="nt" text-anchor="middle">m < 1 (B)</text><line x1="380" y1="35" x2="380" y2="200" class="ax"/><text x="340" y="215" class="ns" text-anchor="middle">SiO₂</text><text x="460" y="215" class="ns" text-anchor="middle">Si</text><line x1="380" y1="120" x2="540" y2="120" class="vac"/><text x="538" y="113" class="ns" text-anchor="end">C nền</text><path d="M300,80 L380,80 M380,175 Q405,125 460,120 L540,120" class="s1" fill="none"/></svg><figcaption>Hình 1. Phân bố định tính của tạp chất quanh mặt phân cách sau oxy hóa với tạp chất khuếch tán chậm trong oxide.</figcaption></figure>
+<p>Sự suy giảm B ở bề mặt có thể làm thay đổi điện áp ngưỡng hoặc điện trở tiếp xúc, nên cần được tính trong thiết kế quy trình.</p>
+
+<h3>Ảnh hưởng hình học: góc và bề mặt cong</h3>
+<p>Khi Si bị oxy hóa, thể tích tăng; oxide mới hình thành ở mặt phân cách đẩy oxide cũ ra ngoài, và oxide cũ phải sắp xếp lại bằng dòng chảy nhớt. Trên bề mặt phẳng điều này dễ dàng, nhưng ở <strong>góc lồi và góc lõm</strong> ứng suất tích tụ, làm chậm cả khuếch tán lẫn phản ứng, nên oxide ở góc mỏng hơn. Hiệu ứng nghiêm trọng hơn khi oxy hóa ở nhiệt độ thấp; ở khoảng 1200 °C, oxide đủ "chảy" để giải phóng ứng suất và hiệu ứng gần như biến mất. Đây là lý do góc rãnh STI được làm tròn bằng oxide lót mọc ở nhiệt độ cao.</p>
+<h3>Oxide có sẵn</h3>
+<p>Vùng đã có sẵn oxide sẽ mọc thêm ít hơn và tiêu thụ ít Si hơn so với vùng Si trần trong cùng bước oxy hóa, vì chất oxy hóa phải đi qua lớp oxide dày hơn. Kết quả là bề mặt Si dưới oxide xuất hiện các bậc, cần tính tới khi thiết kế các bước oxy hóa liên tiếp.</p>
+<h3>Oxy hóa poly-Si</h3>
+<p>Oxy hóa poly-Si quan trọng trong nhiều cấu trúc: oxide mỏng giữa các lớp poly trong bộ nhớ EEPROM, oxy hóa nút poly trong DRAM, và tái oxy hóa cổng poly. Biên hạt chứa nhiều sai hỏng và ứng suất nên bị oxy hóa nhanh hơn lòng hạt, làm tốc độ tổng thể lớn hơn Si đơn tinh thể và mặt phân cách oxide/poly gồ ghề hơn khi oxide dày lên. Với poly-Si không pha tạp ở dưới 1000 °C, tốc độ oxy hóa ban đầu lớn hơn cả Si (100) lẫn (111).</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Khái niệm hệ số phân tách và phân bố lại tạp chất tại mặt phân cách cũng xuất hiện ở các cấu trúc điện môi/Ga₂O₃: khi lắng đọng SiO₂ rồi ủ nhiệt, Si từ điện môi có thể khuếch tán vào bề mặt Ga₂O₃ và hoạt động như donor, tạo một lớp pha tạp ngoài ý muốn ở mặt phân cách. Hiện tượng này ảnh hưởng tới điện tích mặt phân cách và cần được tính tới khi phân tích đặc tính C-V.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>A. S. Grove, O. Leistiko, C. T. Sah, "Redistribution of acceptor and donor impurities during thermal oxidation of silicon," <em>Journal of Applied Physics</em> 35, 2695 (1964).</li>
+<li>D.-B. Kao et al., "Two-dimensional thermal oxidation of silicon," <em>IEEE Transactions on Electron Devices</em> 34, 1008 (1987).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The Deal–Grove model provides the computational framework, but the real oxidation rate depends on many factors: the oxidant, temperature, pressure, crystal orientation, doping, surface geometry and the material itself. Conversely, oxidation also changes the dopant distribution in Si.</p>
+
+<h2>1. Process factors</h2>
+<h3>Oxidant species</h3>
+<ul>
+<li><strong>Dry oxidation</strong> (pure O₂): accurate thickness control from a few to about 100 nm, the best material quality.</li>
+<li><strong>Wet oxidation</strong> (H₂O vapor): very fast, its biggest advantage; the oxide is slightly more porous with lower electrical quality.</li>
+<li><strong>Adding HCl or Cl₂</strong>: chlorine captures metal and alkali ions such as Na⁺, reducing defects and improving gate-oxide leakage, while also cleaning the furnace. Chlorine also slightly increases the oxidation rate; adding H₂O to O₂ gives clearly thicker oxide.</li>
+</ul>
+<h3>Temperature</h3>
+<p>The oxidation rate rises steeply with temperature, because the diffusivity of O₂ and H₂O in SiO₂ and the interface reaction rate both increase exponentially. The Arrhenius equation describes this:</p>
+$$k = k_0 \exp\!\left(-\frac{E_a}{k_B T}\right) \quad\Longrightarrow\quad \ln k = \ln k_0 - \frac{E_a}{k_B}\cdot\frac{1}{T}$$
+<p>Plotting \(\ln k\) against \(1/T\) gives a straight line with slope \(-E_a/k_B\), from which the activation energy is extracted. The Arrhenius equation is simple yet remarkably accurate, and is best seen as an empirical relationship. It describes many thermally activated processes: diffusion coefficients, vacancy populations, creep rates and countless reactions.</p>
+<h3>Pressure</h3>
+<p>By Henry's law, the oxidant concentration in the oxide \(C^*\) is proportional to partial pressure, so both \(B\) and \(B/A\) scale roughly with pressure. <strong>High-pressure oxidation</strong> grows oxide faster, or the same thickness at lower temperature, reducing dopant diffusion and junction movement.</p>
+<h3>Crystal orientation</h3>
+<p>(111) Si oxidizes faster than (100) Si, with (110) in between. The difference lies in the linear constant \(B/A\), because the surface reaction depends on the density of Si atoms and available bonds on each crystal face; in Deal–Grove terms, \(B/A\) for (111) is about 1.7 times that for (100). The parabolic constant \(B\) is nearly orientation-independent because it reflects diffusion through amorphous oxide. Orientation effects are therefore strongest for thin oxides. (100) is used for MOS not mainly because it oxidizes more slowly, but because it has the lowest interface-trap density.</p>
+
+<h2>2. Material factors</h2>
+<h3>Heavy doping</h3>
+<p>Dopants significantly affect the oxidation rate only at very high concentrations, around 10²⁰ cm⁻³ or more:</p>
+<ul>
+<li>Heavy doping creates many point defects (vacancies) in Si, making it more reactive: \(B/A\) increases. This effect is pronounced for P.</li>
+<li>Dopants entering the oxide loosen its structure and lower its density, easing oxidant diffusion: \(B\) increases. This effect is pronounced for B when its surface concentration exceeds about 10²⁰ cm⁻³.</li>
+</ul>
+<p>Faster oxidation of heavily doped regions can be exploited for selective oxidation, but must also be considered in etching steps: thicker oxide in those regions means a different amount of material is removed.</p>
+<h3>Dopant redistribution</h3>
+<p>As the Si/SiO₂ interface advances into Si, the oxide "swallows" doped Si. Dopants redistribute until the concentration ratio across the interface equals the ratio of solubilities, called the <strong>segregation coefficient</strong>:</p>
+$$m = \frac{C_{Si}}{C_{SiO_2}}$$
+<ul>
+<li><strong>\(m > 1\)</strong> (P, As): the oxide rejects the dopant, which piles up in Si just below the interface, peaking at the interface if the dopant diffuses slowly in oxide. If the dopant instead diffuses quickly in oxide (such as Ga), it is rapidly removed from the interface, and the concentration there, though higher than in the oxide, is still below the bulk value.</li>
+<li><strong>\(m < 1\)</strong> (B, \(m \approx 0.3\)): the oxide takes up the dopant, and the Si concentration drops near the interface. B entering the oxide also weakens the glassy structure; in a hydrogen ambient, B diffuses quickly in the oxide and depletion is even stronger.</li>
+</ul>
+<figure><svg viewBox="0 0 560 240" class="fig-svg" role="img"><text x="140" y="20" class="nt" text-anchor="middle">m > 1 (P, As)</text><line x1="100" y1="35" x2="100" y2="200" class="ax"/><text x="60" y="215" class="ns" text-anchor="middle">SiO₂</text><text x="180" y="215" class="ns" text-anchor="middle">Si</text><line x1="100" y1="120" x2="260" y2="120" class="vac"/><text x="258" y="113" class="ns" text-anchor="end">C bulk</text><path d="M20,170 L100,170 M100,60 Q125,115 180,120 L260,120" class="s1" fill="none"/><text x="420" y="20" class="nt" text-anchor="middle">m < 1 (B)</text><line x1="380" y1="35" x2="380" y2="200" class="ax"/><text x="340" y="215" class="ns" text-anchor="middle">SiO₂</text><text x="460" y="215" class="ns" text-anchor="middle">Si</text><line x1="380" y1="120" x2="540" y2="120" class="vac"/><text x="538" y="113" class="ns" text-anchor="end">C bulk</text><path d="M300,80 L380,80 M380,175 Q405,125 460,120 L540,120" class="s1" fill="none"/></svg><figcaption>Figure 1. Qualitative dopant distribution around the interface after oxidation, for dopants that diffuse slowly in oxide.</figcaption></figure>
+<p>Surface B depletion can shift threshold voltages or contact resistance, so it must be accounted for in process design.</p>
+
+<h3>Geometry: corners and curved surfaces</h3>
+<p>When Si oxidizes, its volume expands; new oxide formed at the interface pushes the old oxide outward, which must rearrange by viscous flow. This is easy on flat surfaces, but at <strong>convex and concave corners</strong> stress builds up, slowing both diffusion and reaction, so oxide at corners is thinner. The effect is more severe for low-temperature oxidation; around 1200 °C the oxide flows enough to relieve stress and the effect nearly disappears. This is why STI trench corners are rounded by a high-temperature liner oxidation.</p>
+<h3>Pre-existing oxide</h3>
+<p>Regions already covered with oxide grow less new oxide and consume less Si than bare regions during the same oxidation, because the oxidant must cross a thicker layer. The result is steps in the Si surface under the oxide, which must be considered when designing successive oxidations.</p>
+<h3>Oxidation of poly-Si</h3>
+<p>Poly-Si oxidation matters in many structures: thin interpoly oxides in EEPROMs, oxidation of poly plugs in DRAMs, and gate re-oxidation. Grain boundaries contain many defects and much stress, so they oxidize faster than grain interiors, giving an overall rate higher than single-crystal Si and an oxide/poly interface that roughens as the oxide thickens. For undoped poly-Si below 1000 °C, the initial oxidation rate exceeds that of both (100) and (111) Si.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Segregation and interfacial dopant redistribution also appear in dielectric/Ga₂O₃ structures: when SiO₂ is deposited and then annealed, Si from the dielectric can diffuse into the Ga₂O₃ surface and act as a donor, forming an unintended doped layer at the interface. This affects the interface charge and must be considered when analyzing C-V characteristics.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>A. S. Grove, O. Leistiko, C. T. Sah, "Redistribution of acceptor and donor impurities during thermal oxidation of silicon," <em>Journal of Applied Physics</em> 35, 2695 (1964).</li>
+<li>D.-B. Kao et al., "Two-dimensional thermal oxidation of silicon," <em>IEEE Transactions on Electron Devices</em> 34, 1008 (1987).</li>
+</ol>
+</div>
+<nav class="pager"><a href="isolation.html">← <span class="l-vi">Cách ly linh kiện: LOCOS và STI</span><span class="l-en">Device isolation: LOCOS and STI</span></a><a class="n" href="quiz.html"><span class="l-vi">Kiểm tra kiến thức</span><span class="l-en">Test your knowledge</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Xử lý nhiệt nhanh (RTP) và ứng dụng" data-title-en="Rapid thermal processing and its applications">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rapid thermal processing and its applications · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Advantages of RTP, spike annealing, RTA, RTO, RTN, salicide and activation beyond solubility.">
+<meta property="og:title" content="Rapid thermal processing and its applications">
+<meta property="og:description" content="Advantages of RTP, spike annealing, RTA, RTO, RTN, salicide and activation beyond solubility.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 2</span><span class="l-en">Part 3 · Lesson 2</span></p>
+  <h1><span class="l-vi">Xử lý nhiệt nhanh (RTP) và ứng dụng</span><span class="l-en">Rapid thermal processing and its applications</span></h1>
+  <p class="sub"><span class="l-vi">Ưu điểm của RTP, spike anneal, RTA, RTO, RTN, salicide và kích hoạt vượt độ hòa tan.</span><span class="l-en">Advantages of RTP, spike annealing, RTA, RTO, RTN, salicide and activation beyond solubility.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Xử lý nhiệt nhanh (rapid thermal processing, RTP) ra đời từ một mâu thuẫn: cần nhiệt độ cao để kích hoạt tạp chất và loại bỏ sai hỏng, nhưng cần thời gian ngắn để tạp chất không kịp khuếch tán. Từ bước ủ sau cấy, RTP đã trở thành công cụ cho cả oxy hóa, nitride hóa và tạo silicide.</p>
+
+<h2>1. So sánh thermal budget</h2>
+<figure><svg viewBox="0 0 560 280" class="fig-svg" role="img"><line x1="55" y1="235" x2="540" y2="235" class="ax"/><line x1="55" y1="235" x2="55" y2="20" class="ax"/><line x1="50" y1="208.125" x2="55" y2="208.125" class="ax"/><line x1="55" y1="208.125" x2="540" y2="208.125" class="grid"/><text x="46" y="212.125" class="tk" text-anchor="end">400</text><line x1="50" y1="154.375" x2="55" y2="154.375" class="ax"/><line x1="55" y1="154.375" x2="540" y2="154.375" class="grid"/><text x="46" y="158.375" class="tk" text-anchor="end">600</text><line x1="50" y1="100.625" x2="55" y2="100.625" class="ax"/><line x1="55" y1="100.625" x2="540" y2="100.625" class="grid"/><text x="46" y="104.625" class="tk" text-anchor="end">800</text><line x1="50" y1="46.875" x2="55" y2="46.875" class="ax"/><line x1="55" y1="46.875" x2="540" y2="46.875" class="grid"/><text x="46" y="50.875" class="tk" text-anchor="end">1000</text><text x="297.5" y="274" class="lab" text-anchor="middle">Thời gian (tương đối)</text><text x="14" y="127.5" class="lab" text-anchor="middle" transform="rotate(-90 14 127.5)">Nhiệt độ (°C)</text><path d="M55.0,208.1 L58.9,208.1 L62.8,208.1 L66.6,208.1 L70.5,208.1 L74.4,208.1 L78.3,208.1 L82.2,208.1 L86.0,208.1 L89.9,208.1 L93.8,208.1 L106.9,192.0 L120.0,175.9 L133.1,159.8 L146.2,143.6 L159.3,127.5 L172.4,111.4 L185.5,95.2 L198.6,79.1 L211.7,63.0 L224.8,46.9 L239.3,46.9 L253.8,46.9 L268.4,46.9 L282.9,46.9 L297.5,46.9 L312.1,46.9 L326.6,46.9 L341.1,46.9 L355.7,46.9 L370.2,46.9 L383.3,63.0 L396.4,79.1 L409.5,95.2 L422.6,111.4 L435.7,127.5 L448.8,143.6 L461.9,159.8 L475.0,175.9 L488.1,192.0 L501.2,208.1 L505.1,208.1 L509.0,208.1 L512.8,208.1 L516.7,208.1 L520.6,208.1 L524.5,208.1 L528.4,208.1 L532.2,208.1 L536.1,208.1 L540.0,208.1" class="s2" fill="none"/><path d="M249.0,208.1 L250.5,190.7 L251.9,173.2 L253.4,155.7 L254.8,138.2 L256.3,120.8 L257.7,103.3 L259.2,85.8 L260.6,68.4 L262.1,50.9 L263.5,33.4 L265.0,33.4 L266.5,33.4 L267.9,33.4 L269.4,33.4 L270.8,33.4 L272.3,33.4 L273.7,33.4 L275.2,33.4 L276.6,33.4 L278.1,33.4 L281.0,50.9 L283.9,68.4 L286.8,85.8 L289.7,103.3 L292.6,120.8 L295.6,138.2 L298.5,155.7 L301.4,173.2 L304.3,190.7 L307.2,208.1" class="s1" fill="none"/><line x1="400" y1="35" x2="424" y2="35" class="s2"/><text x="430" y="39" class="tk">Lò nung</text><line x1="400" y1="53" x2="424" y2="53" class="s1"/><text x="430" y="57" class="tk">RTP</text></svg><figcaption>Hình 1. Chu trình nhiệt định tính của lò nung và RTP. Diện tích "thừa" dưới đường lò nung, nhất là ở các đoạn tăng giảm nhiệt chậm, là phần thermal budget mà RTP loại bỏ.</figcaption></figure>
+<p>RTP xử lý từng wafer trong vài giây với kiểm soát thermal budget chính xác. Đây là quá trình <strong>không cân bằng</strong>: khó mô hình hóa nhưng rất hấp dẫn, vì cho phép đạt nhiệt độ cao trong khi tổng \(Dt\) nhỏ. Tốc độ gia nhiệt cao đạt được nhờ đèn công suất lớn hoặc laser. Làm nguội nhanh giúp giảm khuếch tán nhưng có thể gây sốc nhiệt.</p>
+
+<h2>2. Ưu điểm của RTP</h2>
+<ul>
+<li>Gia nhiệt và làm nguội nhanh, cỡ hàng trăm °C/s.</li>
+<li>Kiểm soát thời gian chính xác đến cỡ 0,1 s.</li>
+<li>Giảm thiểu thermal budget.</li>
+<li>Buồng nhỏ nên đổi khí xử lý nhanh; có thể gia nhiệt nhiều chu kỳ.</li>
+<li>Thành buồng lạnh (cold wall) nên ít nhiễm bẩn.</li>
+<li>Dễ tự động hóa, chiếm ít diện tích phòng sạch, tiêu thụ ít điện vì không cần duy trì nhiệt khi chờ.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th>Lò nung</th><th>RTP</th></tr>
+<tr><td>Theo mẻ</td><td>Từng wafer</td></tr>
+<tr><td>Thành nóng (nhiễm bẩn)</td><td>Thành lạnh</td></tr>
+<tr><td>Thời gian dài, dT/dt nhỏ</td><td>Thời gian ngắn, dT/dt lớn</td></tr>
+<tr><td>Đo nhiệt độ môi trường lò</td><td>Đo nhiệt độ chính wafer</td></tr>
+<tr><td>Vấn đề: hạt bụi, năng suất với lò đứng</td><td>Vấn đề: độ đồng đều, độ lặp lại, ứng suất và sốc nhiệt, đo nhiệt độ</td></tr>
+</table></div>
+
+<h2>3. Spike anneal</h2>
+<p>Trong spike anneal, wafer được nâng lên nhiệt độ đỉnh rồi hạ xuống ngay, không có thời gian giữ nhiệt. So sánh profile hóa học đo bằng SIMS (secondary ion mass spectrometry) với profile hạt tải đo bằng SRP (spreading resistance profiling) cho phép đánh giá đồng thời độ kích hoạt và độ khuếch tán. Các kỹ thuật cực nhanh hơn nữa như flash anneal và laser anneal (cỡ mili giây hoặc ngắn hơn) được phát triển cho tiếp giáp siêu nông.</p>
+
+<h2>4. Các ứng dụng của RTP</h2>
+<h3>Ủ nhiệt nhanh (RTA)</h3>
+<p>Câu hỏi trung tâm: làm sao loại bỏ hư hỏng do cấy, giữ độ linh động cao và dòng rò tiếp giáp thấp, mà vẫn giữ được độ sâu tiếp giáp yêu cầu? RTA là câu trả lời cho tiếp giáp nông. Một vấn đề đặc trưng là <strong>hiệu ứng hoa văn</strong>: vùng có cấu trúc và màng khác nhau hấp thụ bức xạ khác nhau, nên nhiệt độ cục bộ khác nhau. Ví dụ, poly-Si nằm trên vùng STI có thể bị quá nhiệt trong khi vùng nguồn/máng và cổng không bị ảnh hưởng.</p>
+<h3>Oxy hóa nhiệt nhanh (RTO)</h3>
+<p>Để tạo oxide cực mỏng có kiểm soát, một cách là giảm nhiệt độ để làm chậm tốc độ oxy hóa, nhưng điện tích cố định và mật độ trạng thái bề mặt có xu hướng tăng khi nhiệt độ mọc thấp. RTO cho phép mọc oxide mỏng chất lượng cao ở nhiệt độ cao trong thời gian ngắn; cũng có thể pha loãng O₂ bằng Ar để làm chậm phản ứng. Khuếch tán tạp chất trong đế vẫn cần được chú ý.</p>
+<h3>Nitride hóa nhiệt nhanh (RTN)</h3>
+<p>Mọc oxide trong môi trường NO hoặc N₂O tạo oxide pha nitơ (oxynitride). Màng mọc trong N₂O có độ tin cậy tốt hơn và <strong>chống thấm B</strong> tốt hơn so với màng mọc trong O₂. B nhỏ hơn P và As, nên từ cổng poly-Si pha tạp p⁺ có thể khuếch tán xuyên qua oxide cổng mỏng xuống kênh khi ủ kích hoạt trên khoảng 850 °C, làm dịch điện áp ngưỡng. Một lớp oxynitride rất mỏng ở mặt phân cách đủ để ngăn hiện tượng này. Nitơ trong màng cũng làm chậm tốc độ oxy hóa, có lẽ vì giảm hệ số khuếch tán của O₂ trong điện môi.</p>
+<h3>Silicide và salicide</h3>
+<p>Silicide (TiSi₂, CoSi₂, NiSi...) có điện trở thấp, tương thích tốt với Si, dễ khắc khô và tạo tiếp xúc tốt. Kim loại được phủ lên Si rồi phản ứng khi nung nhiệt, chiếu laser hoặc trộn bằng chùm ion. Trong quy trình <strong>salicide</strong> (self-aligned silicide), kim loại chỉ phản ứng ở nơi tiếp xúc với Si, nên cổng poly-Si, nguồn và máng được silicide hóa đồng thời mà không cần mặt nạ; kim loại chưa phản ứng trên spacer oxide được khắc chọn lọc.</p>
+<h3>Ủ sau lắng đọng (PDA)</h3>
+<p>Dùng để làm đặc và giảm sai hỏng trong các điện môi high-k sau khi lắng đọng.</p>
+
+<h2>5. Kích hoạt vượt độ hòa tan</h2>
+<p>Do không cân bằng, RTP có thể tạo profile hoạt động điện <strong>vượt quá độ hòa tan rắn</strong>. Ví dụ, As có thể được kích hoạt tới khoảng 3×10²¹ cm⁻³, cao gấp nhiều lần độ hòa tan cân bằng, nếu chỉ ủ trong vài mili giây: nguyên tử As không đủ thời gian để kết tụ thành cụm không hoạt động. Tuy nhiên, các trạng thái giả bền này có thể mất hoạt tính trong các bước nhiệt sau, và nếu kích hoạt không hoàn toàn, As dư có thể tạo mức năng lượng sâu, trở thành tâm sinh/tái hợp gây dòng rò nếu nằm gần tiếp giáp p-n.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>RTA được dùng rộng rãi cho linh kiện Ga₂O₃, ví dụ ủ tạo tiếp xúc ohmic Ti/Au sau khi lắng đọng kim loại, hay ủ sau lắng đọng các lớp điện môi như Al₂O₃ để giảm bẫy ở mặt phân cách. Vì Ga₂O₃ có thể mất oxy ở nhiệt độ cao, khí quyển ủ (N₂, O₂ hay hỗn hợp) ảnh hưởng tới nồng độ oxygen vacancy gần bề mặt, và do đó tới chiều cao rào Schottky và dòng rò.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. Wolf, R. N. Tauber, <em>Silicon Processing for the VLSI Era</em>, Vol. 1, Lattice Press.</li>
+<li>R. B. Fair, <em>Rapid Thermal Processing: Science and Technology</em>, Academic Press (1993).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Rapid thermal processing (RTP) was born from a conflict: high temperature is needed to activate dopants and remove defects, but short time is needed so dopants have no chance to diffuse. From post-implant annealing, RTP has grown into a tool for oxidation, nitridation and silicide formation.</p>
+
+<h2>1. Comparing thermal budgets</h2>
+<figure><svg viewBox="0 0 560 280" class="fig-svg" role="img"><line x1="55" y1="235" x2="540" y2="235" class="ax"/><line x1="55" y1="235" x2="55" y2="20" class="ax"/><line x1="50" y1="208.125" x2="55" y2="208.125" class="ax"/><line x1="55" y1="208.125" x2="540" y2="208.125" class="grid"/><text x="46" y="212.125" class="tk" text-anchor="end">400</text><line x1="50" y1="154.375" x2="55" y2="154.375" class="ax"/><line x1="55" y1="154.375" x2="540" y2="154.375" class="grid"/><text x="46" y="158.375" class="tk" text-anchor="end">600</text><line x1="50" y1="100.625" x2="55" y2="100.625" class="ax"/><line x1="55" y1="100.625" x2="540" y2="100.625" class="grid"/><text x="46" y="104.625" class="tk" text-anchor="end">800</text><line x1="50" y1="46.875" x2="55" y2="46.875" class="ax"/><line x1="55" y1="46.875" x2="540" y2="46.875" class="grid"/><text x="46" y="50.875" class="tk" text-anchor="end">1000</text><text x="297.5" y="274" class="lab" text-anchor="middle">Time (relative)</text><text x="14" y="127.5" class="lab" text-anchor="middle" transform="rotate(-90 14 127.5)">Temperature (°C)</text><path d="M55.0,208.1 L58.9,208.1 L62.8,208.1 L66.6,208.1 L70.5,208.1 L74.4,208.1 L78.3,208.1 L82.2,208.1 L86.0,208.1 L89.9,208.1 L93.8,208.1 L106.9,192.0 L120.0,175.9 L133.1,159.8 L146.2,143.6 L159.3,127.5 L172.4,111.4 L185.5,95.2 L198.6,79.1 L211.7,63.0 L224.8,46.9 L239.3,46.9 L253.8,46.9 L268.4,46.9 L282.9,46.9 L297.5,46.9 L312.1,46.9 L326.6,46.9 L341.1,46.9 L355.7,46.9 L370.2,46.9 L383.3,63.0 L396.4,79.1 L409.5,95.2 L422.6,111.4 L435.7,127.5 L448.8,143.6 L461.9,159.8 L475.0,175.9 L488.1,192.0 L501.2,208.1 L505.1,208.1 L509.0,208.1 L512.8,208.1 L516.7,208.1 L520.6,208.1 L524.5,208.1 L528.4,208.1 L532.2,208.1 L536.1,208.1 L540.0,208.1" class="s2" fill="none"/><path d="M249.0,208.1 L250.5,190.7 L251.9,173.2 L253.4,155.7 L254.8,138.2 L256.3,120.8 L257.7,103.3 L259.2,85.8 L260.6,68.4 L262.1,50.9 L263.5,33.4 L265.0,33.4 L266.5,33.4 L267.9,33.4 L269.4,33.4 L270.8,33.4 L272.3,33.4 L273.7,33.4 L275.2,33.4 L276.6,33.4 L278.1,33.4 L281.0,50.9 L283.9,68.4 L286.8,85.8 L289.7,103.3 L292.6,120.8 L295.6,138.2 L298.5,155.7 L301.4,173.2 L304.3,190.7 L307.2,208.1" class="s1" fill="none"/><line x1="400" y1="35" x2="424" y2="35" class="s2"/><text x="430" y="39" class="tk">Furnace</text><line x1="400" y1="53" x2="424" y2="53" class="s1"/><text x="430" y="57" class="tk">RTP</text></svg><figcaption>Figure 1. Qualitative temperature cycles of a furnace and RTP. The "excess" area under the furnace curve, especially during slow ramps, is the thermal budget that RTP removes.</figcaption></figure>
+<p>RTP processes single wafers in seconds with precise thermal-budget control. It is a <strong>non-equilibrium</strong> process: hard to model but very attractive, because it reaches high temperature while keeping total \(Dt\) small. High ramp rates are achieved with high-intensity lamps or lasers. Fast cooling limits diffusion but can cause thermal shock.</p>
+
+<h2>2. Advantages of RTP</h2>
+<ul>
+<li>Fast heating and cooling, up to hundreds of °C/s.</li>
+<li>Process time control to about 0.1 s.</li>
+<li>Minimized thermal budget.</li>
+<li>A small chamber allows fast gas changes; multi-cycle heating is possible.</li>
+<li>Cold-wall processing means less contamination.</li>
+<li>Easy automation, small cleanroom footprint, and low power use because there is no idle heating.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th>Furnace</th><th>RTP</th></tr>
+<tr><td>Batch</td><td>Single wafer</td></tr>
+<tr><td>Hot wall (contamination)</td><td>Cold wall</td></tr>
+<tr><td>Long time, small dT/dt</td><td>Short time, large dT/dt</td></tr>
+<tr><td>Measures the furnace ambient</td><td>Measures the wafer itself</td></tr>
+<tr><td>Issues: particles, throughput of vertical furnaces</td><td>Issues: uniformity, repeatability, stress and thermal shock, temperature measurement</td></tr>
+</table></div>
+
+<h2>3. Spike annealing</h2>
+<p>In a spike anneal, the wafer is ramped to a peak temperature and immediately cooled, with no hold time. Comparing the chemical profile from SIMS (secondary ion mass spectrometry) with the carrier profile from SRP (spreading resistance profiling) evaluates activation and diffusion together. Even faster techniques such as flash and laser annealing (milliseconds or shorter) were developed for ultra-shallow junctions.</p>
+
+<h2>4. Applications of RTP</h2>
+<h3>Rapid thermal annealing (RTA)</h3>
+<p>The central question: how can implant damage be removed, with good mobility and low junction leakage, while preserving the required junction depth? RTA is the answer for shallow junctions. A characteristic problem is the <strong>pattern effect</strong>: regions with different structures and films absorb radiation differently, so local temperatures differ. For example, poly-Si over STI can overheat while the source/drain and gate regions are unaffected.</p>
+<h3>Rapid thermal oxidation (RTO)</h3>
+<p>One way to grow controlled ultrathin oxides is to lower the temperature to slow oxidation, but fixed charge and interface-state density tend to rise as growth temperature falls. RTO grows thin, high-quality oxides at high temperature for short times; O₂ can also be diluted with Ar to slow the reaction. Dopant diffusion in the substrate remains a concern.</p>
+<h3>Rapid thermal nitridation (RTN)</h3>
+<p>Growing oxide in NO or N₂O produces nitrided oxides (oxynitrides). N₂O-grown films have better reliability and <strong>resist boron penetration</strong> better than O₂-grown films. B is smaller than P and As, so from a p⁺ poly-Si gate it can diffuse through a thin gate oxide into the channel during activation anneals above about 850 °C, shifting the threshold voltage. An ultrathin oxynitride interlayer is enough to suppress this. Nitrogen in the film also slows oxidation, presumably by reducing the O₂ diffusivity in the dielectric.</p>
+<h3>Silicide and salicide</h3>
+<p>Silicides (TiSi₂, CoSi₂, NiSi...) offer low resistance, good compatibility with Si, easy dry etching and good contacts. Metal is deposited on Si and reacted by thermal heating, laser irradiation or ion-beam mixing. In the <strong>salicide</strong> (self-aligned silicide) process, metal reacts only where it touches Si, so the poly-Si gate, source and drain are silicided simultaneously without a mask; unreacted metal on the oxide spacers is selectively etched.</p>
+<h3>Post-deposition annealing (PDA)</h3>
+<p>Used to densify high-k dielectrics and reduce their defects after deposition.</p>
+
+<h2>5. Activation beyond solubility</h2>
+<p>Because it is non-equilibrium, RTP can produce electrically active profiles <strong>above the solid solubility</strong>. For example, As can be activated to about 3×10²¹ cm⁻³, several times its equilibrium solubility, with anneals of a few milliseconds: As atoms lack the time to form inactive clusters. These metastable states, however, can deactivate during later thermal steps, and if activation is incomplete, excess As can form deep levels that act as generation/recombination centers, causing leakage near p-n junctions.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>RTA is widely used for Ga₂O₃ devices, for example to form Ti/Au ohmic contacts after metal deposition, or as a post-deposition anneal for dielectrics such as Al₂O₃ to reduce interface traps. Because Ga₂O₃ can lose oxygen at high temperature, the anneal ambient (N₂, O₂ or a mixture) affects the near-surface oxygen-vacancy concentration, and therefore the Schottky barrier height and leakage current.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. Wolf, R. N. Tauber, <em>Silicon Processing for the VLSI Era</em>, Vol. 1, Lattice Press.</li>
+<li>R. B. Fair, <em>Rapid Thermal Processing: Science and Technology</em>, Academic Press (1993).</li>
+</ol>
+</div>
+<nav class="pager"><a href="activation-anneal.html">← <span class="l-vi">Ủ kích hoạt và truyền nhiệt</span><span class="l-en">Activation annealing and heat transfer</span></a><a class="n" href="rtp-system.html"><span class="l-vi">Thiết bị RTP và đo nhiệt độ</span><span class="l-en">RTP equipment and temperature measurement</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Hệ thống cấy ion" data-title-en="Ion implantation systems">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ion implantation systems · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Ion source, analyzer magnet, acceleration, beam scanning and common issues.">
+<meta property="og:title" content="Ion implantation systems">
+<meta property="og:description" content="Ion source, analyzer magnet, acceleration, beam scanning and common issues.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 3</span><span class="l-en">Part 2 · Lesson 3</span></p>
+  <h1><span class="l-vi">Hệ thống cấy ion</span><span class="l-en">Ion implantation systems</span></h1>
+  <p class="sub"><span class="l-vi">Nguồn ion, nam châm phân tích, gia tốc, quét chùm và các vấn đề thường gặp.</span><span class="l-en">Ion source, analyzer magnet, acceleration, beam scanning and common issues.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Máy cấy ion là một máy gia tốc hạt thu nhỏ: tạo ion, chọn đúng loại ion, gia tốc đến năng lượng mong muốn rồi quét đều lên wafer. Mỗi bộ phận đều ảnh hưởng trực tiếp tới độ chính xác của liều và profile.</p>
+
+<h2>1. Cấu trúc tổng quát</h2>
+<figure><svg viewBox="0 0 620 200" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<rect x="5" y="70" width="95" height="56" rx="8" class="node"/><text x="52" y="94" class="nt" text-anchor="middle">Nguồn ion</text><text x="52" y="111" class="ns" text-anchor="middle">BF₃, PH₃, AsH₃</text>
+<rect x="125" y="70" width="95" height="56" rx="8" class="node"/><text x="172" y="94" class="nt" text-anchor="middle">Trích xuất</text><text x="172" y="111" class="ns" text-anchor="middle">15–40 kV</text>
+<path d="M245,126 A70,70 0 0,1 315,56" class="arr" style="stroke-width:10;opacity:.25"/>
+<text x="285" y="150" class="nt" text-anchor="middle">Nam châm phân tích</text><text x="285" y="167" class="ns" text-anchor="middle">chọn theo m/q</text>
+<rect x="335" y="30" width="20" height="16" class="node"/><rect x="335" y="62" width="20" height="16" class="node"/><text x="345" y="22" class="ns" text-anchor="middle">khe chọn</text>
+<rect x="375" y="26" width="105" height="56" rx="8" class="node"/><text x="427" y="50" class="nt" text-anchor="middle">Gia tốc</text><text x="427" y="67" class="ns" text-anchor="middle">đến năng lượng E</text>
+<rect x="505" y="26" width="110" height="56" rx="8" class="node"/><text x="560" y="50" class="nt" text-anchor="middle">Buồng wafer</text><text x="560" y="67" class="ns" text-anchor="middle">quét, đếm liều</text>
+<path d="M100,98H123" class="arr" marker-end="url(#mv)"/><path d="M220,98 Q250,98 262,85" class="arr" marker-end="url(#mv)"/><path d="M312,54H373" class="arr" marker-end="url(#mv)"/><path d="M480,54H503" class="arr" marker-end="url(#mv)"/>
+</svg><figcaption>Hình 1. Các khối chính của một máy cấy ion.</figcaption></figure>
+<h3>Nguồn ion</h3>
+<p>Khí nguồn như BF₃, PH₃, AsH₃ được đưa vào buồng ion hóa. Sợi đốt tungsten nóng phát xạ electron nhiệt; electron va chạm với phân tử khí, vừa phân ly vừa ion hóa chúng. Ví dụ BF₃ tạo ra hỗn hợp B⁺, BF⁺, BF₂⁺, F⁺... với tỉ lệ khác nhau. Có thể dùng năng lượng RF hoặc vi sóng thay cho sợi đốt để tăng hiệu suất ion hóa và tuổi thọ nguồn.</p>
+<h3>Trích xuất</h3>
+<p>Điện áp trích xuất (khoảng 15–40 kV) kéo ion ra khỏi buồng nguồn. Chùm ion lúc này vẫn là hỗn hợp nhiều loại ion nguyên tử và phân tử.</p>
+<h3>Nam châm phân tích</h3>
+<p>Ion có điện tích \(q\), khối lượng \(m\), được gia tốc qua điện áp \(V\), khi bay trong từ trường \(B\) sẽ chuyển động tròn với bán kính:</p>
+$$r = \frac{mv}{qB} = \frac{1}{B}\sqrt{\frac{2mV}{q}}$$
+<p>Bán kính phụ thuộc tỉ số \(m/q\). Bằng cách chỉnh \(B\), chỉ loại ion mong muốn có đúng bán kính để đi qua khe chọn; các ion khác va vào thành và bị loại. Đây cũng là nguyên lý của khối phổ kế và của phương pháp tách đồng vị điện từ. Nhờ đó chùm ion tới wafer rất "sạch" về thành phần.</p>
+<div class="box"><p class="t">Hỏi đáp: vì sao không dùng ¹⁰B⁺ cho tiếp giáp sâu?</p>
+<p>¹⁰B nhẹ hơn ¹¹B nên ở cùng năng lượng sẽ đi sâu hơn. Nhưng trong B tự nhiên chỉ khoảng 20% là ¹⁰B, nên dòng ¹⁰B⁺ chỉ bằng khoảng 1/4 dòng ¹¹B⁺. Để đạt cùng liều phải cấy lâu gấp bốn lần, năng suất giảm mạnh. Tăng năng lượng ¹¹B⁺ là giải pháp kinh tế hơn.</p></div>
+<h3>Gia tốc sau phân tích</h3>
+<p>Các điện cực cao áp tăng (hoặc đôi khi giảm) năng lượng ion đến giá trị cần cho độ sâu tiếp giáp. Dòng chùm được điều chỉnh bằng các cánh chắn.</p>
+<h3>Buồng wafer và quét chùm</h3>
+<p>Đường kính chùm chỉ cỡ 25 mm, trong khi wafer từ 200 mm trở lên, nên phải quét chùm, di chuyển wafer, hoặc cả hai: đĩa quay mang nhiều wafer (spin disk), bánh xe quay (spin wheel), hoặc quét từng wafer (single-wafer scan). Liều được đo bằng cốc Faraday, đếm điện tích của ion tới.</p>
+
+<h2>2. Các vấn đề thường gặp</h2>
+<ul>
+<li><strong>Hiệu ứng che khuất</strong> (shadowing): khi cấy nghiêng, các cấu trúc cao như cổng che một phía, làm hai bên nguồn và máng không đối xứng. Đặc tính I-V của transistor có thể khác nhau khi đổi vai trò nguồn và máng.</li>
+<li><strong>Tích điện</strong> (charging): ion tới mang điện dương. Wafer nối đất kém, hoặc có các lớp cách điện như SiO₂, photoresist, sẽ tích điện dương, làm lệch chùm và có thể gây đánh thủng điện môi. Giải pháp: phun electron (electron shower) hoặc plasma flood để trung hòa.</li>
+<li><strong>Hạt bụi</strong>: hạt rơi lên wafer trước khi cấy sẽ che vùng bên dưới. Nguyên nhân thường do thao tác wafer, quy trình hút chân không, kẹp wafer và khí xả không được lọc.</li>
+<li><strong>Nhiễm bẩn kim loại</strong>: chùm ion sau phân tích vốn sạch, nhưng ở cuối đường chùm, nguyên tử kim loại từ thành buồng, giá đỡ, kẹp có thể bị bắn ra và cấy vào Si.</li>
+<li><strong>Nhiễm bẩn năng lượng</strong>: một phần ion có năng lượng khác dự kiến (ví dụ ion trung hòa hóa trước khi giảm tốc), nghiêm trọng hơn khi cấy năng lượng thấp, tạo đuôi profile không mong muốn.</li>
+<li><strong>Nhiễm chéo</strong>: sau nhiều lần cấy, bề mặt trong máy bão hòa tạp chất; khi đổi khí nguồn, nguyên tử cũ có thể bị phún xạ và cấy vào wafer.</li>
+</ul>
+
+<h2>3. Độ đồng đều</h2>
+<p>Độ đồng đều của liều được kiểm tra bằng bản đồ điện trở tấm \(R_s\) trên toàn wafer. Một quan sát thú vị: liều càng cao thì độ đồng đều càng tốt, vì hư hỏng mạng tích lũy làm mất kênh và giảm channeling. Tích điện mạnh trên toàn wafer làm vùng trung tâm nhận liều thấp hơn dự kiến; tích điện cục bộ gây bất đồng đều cục bộ. Góc nghiêng và xoay cần được tối ưu cho từng điều kiện cấy.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>β-Ga₂O₃ là vật liệu cách điện tốt khi không pha tạp hoặc khi đế được pha Fe để bán cách điện, nên vấn đề <strong>tích điện</strong> khi cấy ion càng cần chú ý. Ngoài ra, khi so sánh liều cấy với nồng độ hạt tải đo được bằng C-V hay Hall, cần nhớ rằng chỉ một phần tạp chất được kích hoạt sau ủ.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>H. Xiao, <em>Introduction to Semiconductor Manufacturing Technology</em>, 2nd ed., SPIE Press (2012).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">An ion implanter is a miniature particle accelerator: it creates ions, selects the right species, accelerates them to the desired energy and scans them uniformly over the wafer. Every component directly affects the accuracy of dose and profile.</p>
+
+<h2>1. Overall layout</h2>
+<figure><svg viewBox="0 0 620 200" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<rect x="5" y="70" width="95" height="56" rx="8" class="node"/><text x="52" y="94" class="nt" text-anchor="middle">Ion source</text><text x="52" y="111" class="ns" text-anchor="middle">BF₃, PH₃, AsH₃</text>
+<rect x="125" y="70" width="95" height="56" rx="8" class="node"/><text x="172" y="94" class="nt" text-anchor="middle">Extraction</text><text x="172" y="111" class="ns" text-anchor="middle">15–40 kV</text>
+<path d="M245,126 A70,70 0 0,1 315,56" class="arr" style="stroke-width:10;opacity:.25"/>
+<text x="285" y="150" class="nt" text-anchor="middle">Analyzer magnet</text><text x="285" y="167" class="ns" text-anchor="middle">selects m/q</text>
+<rect x="335" y="30" width="20" height="16" class="node"/><rect x="335" y="62" width="20" height="16" class="node"/><text x="345" y="22" class="ns" text-anchor="middle">slit</text>
+<rect x="375" y="26" width="105" height="56" rx="8" class="node"/><text x="427" y="50" class="nt" text-anchor="middle">Acceleration</text><text x="427" y="67" class="ns" text-anchor="middle">to energy E</text>
+<rect x="505" y="26" width="110" height="56" rx="8" class="node"/><text x="560" y="50" class="nt" text-anchor="middle">End station</text><text x="560" y="67" class="ns" text-anchor="middle">scan, dosimetry</text>
+<path d="M100,98H123" class="arr" marker-end="url(#me)"/><path d="M220,98 Q250,98 262,85" class="arr" marker-end="url(#me)"/><path d="M312,54H373" class="arr" marker-end="url(#me)"/><path d="M480,54H503" class="arr" marker-end="url(#me)"/>
+</svg><figcaption>Figure 1. Main blocks of an ion implanter.</figcaption></figure>
+<h3>Ion source</h3>
+<p>A source gas such as BF₃, PH₃ or AsH₃ enters the ionization chamber. A hot tungsten filament emits thermal electrons that collide with gas molecules, both dissociating and ionizing them. BF₃, for example, yields a mixture of B⁺, BF⁺, BF₂⁺, F⁺ and more in varying amounts. RF or microwave power can replace the filament to improve ionization efficiency and source lifetime.</p>
+<h3>Extraction</h3>
+<p>An extraction voltage (about 15–40 kV) pulls ions out of the source chamber. The beam is still a mixture of atomic and molecular ions.</p>
+<h3>Analyzer magnet</h3>
+<p>An ion of charge \(q\) and mass \(m\), accelerated through a voltage \(V\), moves on a circle in a magnetic field \(B\) with radius:</p>
+$$r = \frac{mv}{qB} = \frac{1}{B}\sqrt{\frac{2mV}{q}}$$
+<p>The radius depends on \(m/q\). By tuning \(B\), only the desired species has the right radius to pass through the resolving slit; the others hit the walls and are removed. This is the same principle as a mass spectrometer and electromagnetic isotope separation. The beam reaching the wafer is therefore very pure.</p>
+<div class="box"><p class="t">Q&amp;A: why not use ¹⁰B⁺ for deep junctions?</p>
+<p>¹⁰B is lighter than ¹¹B, so at the same energy it goes deeper. But only about 20% of natural boron is ¹⁰B, so the ¹⁰B⁺ beam current is only about 1/4 of the ¹¹B⁺ current. Reaching the same dose would take four times longer, sharply reducing throughput. Raising the ¹¹B⁺ energy is the more economical choice.</p></div>
+<h3>Post-acceleration</h3>
+<p>High-voltage electrodes raise (or sometimes lower) the ion energy to the value needed for the junction depth. Beam current is adjusted with variable vanes.</p>
+<h3>End station and beam scanning</h3>
+<p>The beam is only about 25 mm across while wafers are 200 mm or larger, so the beam, the wafer or both must be scanned: spin disks carrying many wafers, spin wheels, or single-wafer scanning. Dose is measured with a Faraday cup that counts the charge of incoming ions.</p>
+
+<h2>2. Common issues</h2>
+<ul>
+<li><strong>Shadowing</strong>: with tilted implants, tall features such as gates shade one side, making source and drain asymmetric. A transistor's I-V characteristics can differ when source and drain are swapped.</li>
+<li><strong>Charging</strong>: incoming ions are positive. A poorly grounded wafer, or one with insulating layers such as SiO₂ or photoresist, charges up positively, deflecting the beam and possibly causing dielectric breakdown. Solution: an electron shower or plasma flood to neutralize the charge.</li>
+<li><strong>Particles</strong>: particles landing before implantation shadow the area beneath. Typical causes are wafer handling, pump-down procedures, clamping and unfiltered vent gas.</li>
+<li><strong>Metal contamination</strong>: the analyzed beam is clean, but near the end of the beamline, metal atoms sputtered from chamber walls, holders and clips can be recoiled into the Si.</li>
+<li><strong>Energy contamination</strong>: some ions arrive with an unintended energy (for example, ions neutralized before deceleration), more severe at low energy, creating unwanted profile tails.</li>
+<li><strong>Cross-contamination</strong>: after many implants, internal surfaces saturate with dopant; after a source-gas change, old atoms can be sputtered and implanted.</li>
+</ul>
+
+<h2>3. Uniformity</h2>
+<p>Dose uniformity is checked by mapping sheet resistance \(R_s\) across the wafer. An interesting observation: higher doses give better uniformity, because accumulated lattice damage destroys channels and reduces channeling. Severe wafer-wide charging makes the center receive a lower dose than intended; local charging causes local nonuniformity. Tilt and twist must be optimized for each implant condition.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>β-Ga₂O₃ is a good insulator when undoped or when the substrate is Fe-doped to be semi-insulating, so <strong>charging</strong> during implantation deserves extra attention. Also, when comparing the implanted dose with carrier concentrations measured by C-V or Hall, remember that only part of the dopants are activated after annealing.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>H. Xiao, <em>Introduction to Semiconductor Manufacturing Technology</em>, 2nd ed., SPIE Press (2012).</li>
+</ol>
+</div>
+<nav class="pager"><a href="implant-physics.html">← <span class="l-vi">Vật lý cấy ion</span><span class="l-en">Ion implantation physics</span></a><a class="n" href="activation-anneal.html"><span class="l-vi">Ủ kích hoạt và truyền nhiệt</span><span class="l-en">Activation annealing and heat transfer</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

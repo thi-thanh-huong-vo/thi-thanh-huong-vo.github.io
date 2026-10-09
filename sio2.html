@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="SiO₂ và oxy hóa nhiệt" data-title-en="SiO₂ and thermal oxidation">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SiO₂ and thermal oxidation · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Structure and properties of SiO₂, its uses, dry and wet oxidation, the furnace cycle.">
+<meta property="og:title" content="SiO₂ and thermal oxidation">
+<meta property="og:description" content="Structure and properties of SiO₂, its uses, dry and wet oxidation, the furnace cycle.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 1</span><span class="l-en">Part 4 · Lesson 1</span></p>
+  <h1><span class="l-vi">SiO₂ và oxy hóa nhiệt</span><span class="l-en">SiO₂ and thermal oxidation</span></h1>
+  <p class="sub"><span class="l-vi">Cấu trúc và tính chất của SiO₂, các ứng dụng, oxy hóa khô và ướt, chu trình lò oxy hóa.</span><span class="l-en">Structure and properties of SiO₂, its uses, dry and wet oxidation, the furnace cycle.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Nếu phải chọn một lý do duy nhất giải thích vì sao Si thống trị công nghiệp bán dẫn, câu trả lời có lẽ không nằm ở Si mà ở oxide của nó. SiO₂ mọc nhiệt trên Si là một chất cách điện gần như hoàn hảo, với mặt phân cách ổn định mà hiếm vật liệu nào khác có được.</p>
+
+<h2>1. Vì sao SiO₂ quan trọng?</h2>
+<p>Si tạo được một oxide tự nhiên chất lượng rất cao, có hệ số giãn nở nhiệt tương đối gần với Si nên ít nứt vỡ khi wafer nóng lên và nguội đi. Phần lớn các bán dẫn khác không tạo được oxide đủ tốt để dùng trong linh kiện. Ngoài vi điện tử, SiO₂ còn là vật liệu trung tâm của sợi quang; các sai hỏng điểm trong SiO₂, sinh ra khi chế tạo hoặc khi bị bức xạ ion hóa, ảnh hưởng mạnh tới tính chất quang và điện.</p>
+
+<h2>2. Cấu trúc của SiO₂ vô định hình</h2>
+<p>Đơn vị cơ bản là một khối tứ diện: một nguyên tử Si ở tâm, bốn nguyên tử O ở bốn đỉnh. Trong thạch anh (tinh thể), các tứ diện sắp xếp tuần hoàn; trong SiO₂ mọc nhiệt, chúng nối với nhau qua các nguyên tử O cầu nối nhưng góc liên kết thay đổi ngẫu nhiên, tạo mạng <strong>vô định hình</strong>. Vì vậy SiO₂ nhiệt có khối lượng riêng khoảng 2,20 g/cm³, thấp hơn thạch anh (2,65 g/cm³). Tạp chất thay thế vị trí Si như B và P được gọi là <strong>chất tạo mạng</strong> (network former); chúng thường có trong oxide lắng đọng như BPSG hơn là trong oxide nhiệt.</p>
+
+<h2>3. Tính chất nổi bật</h2>
+<div class="tablewrap"><table>
+<tr><th>Tính chất</th><th>Giá trị điển hình</th></tr>
+<tr><td>Điện trở suất</td><td>Rất cao, &gt; 10¹⁶ Ω·cm</td></tr>
+<tr><td>Độ rộng vùng cấm</td><td>Khoảng 9 eV</td></tr>
+<tr><td>Điện trường đánh thủng</td><td>&gt; 10 MV/cm</td></tr>
+<tr><td>Hằng số điện môi</td><td>3,9</td></tr>
+<tr><td>Mật độ phân tử</td><td>Khoảng 2,3×10²² phân tử/cm³</td></tr>
+</table></div>
+<p>Thêm vào đó là mặt phân cách Si/SiO₂ ổn định, lặp lại được, và oxide mọc đồng đều trên mọi bề mặt Si lộ ra.</p>
+
+<h2>4. SiO₂ được dùng ở đâu?</h2>
+<ul>
+<li><strong>Thụ động hóa bề mặt</strong>: bảo vệ bề mặt khỏi nhiễm bẩn hóa học và trầy xước trong quá trình chế tạo; có thể dùng làm lớp hy sinh rồi loại bỏ.</li>
+<li><strong>Mặt nạ pha tạp</strong>: hầu hết tạp chất (B, P, As, Sb) khuếch tán trong SiO₂ chậm hơn nhiều so với trong Si, nên SiO₂ chặn chúng khỏi tới bề mặt Si. Ngoại lệ là Ga và một số kim loại như Cu, Au khuếch tán nhanh trong oxide.</li>
+<li><strong>Cách ly linh kiện</strong>: field oxide (LOCOS) hoặc oxide lấp rãnh (STI).</li>
+<li><strong>Điện môi giữa các lớp kim loại</strong> (interlayer dielectric, ILD).</li>
+<li><strong>Điện môi cổng MOS</strong> và điện môi tụ điện: độ dày được chọn chính xác để cổng cảm ứng điện tích vào kênh bên dưới.</li>
+</ul>
+<p>Mỗi ứng dụng cần một độ dày khác nhau, từ vài nanomet cho oxide cổng tới hàng trăm nanomet hay micromet cho oxide cách ly và mặt nạ.</p>
+
+<h2>5. Oxy hóa nhiệt</h2>
+<p>Bề mặt Si có ái lực rất mạnh với oxy: năng lượng tự do Gibbs tạo thành SiO₂ âm lớn, nên phản ứng thuận lợi về mặt nhiệt động. Ở nhiệt độ cao trong môi trường oxy hóa, Si dễ dàng chuyển thành SiO₂. Oxide này vừa cách điện tốt, vừa chặn khuếch tán tạp chất, lại dễ khắc bằng hóa chất (HF) để tạo hoa văn. Chính tổ hợp tính chất này đưa Si lên vị trí thống trị.</p>
+<h3>Oxy hóa khô và ướt</h3>
+<p>Oxy hóa thường thực hiện ở 900–1100 °C:</p>
+$$\text{Khô:}\quad \mathrm{Si + O_2 \rightarrow SiO_2} \qquad\qquad \text{Ướt:}\quad \mathrm{Si + 2H_2O \rightarrow SiO_2 + 2H_2}$$
+<ul>
+<li><strong>Oxy hóa khô</strong> (O₂): chậm, oxide đặc, chất lượng cao nhất, dùng cho oxide cổng MOS.</li>
+<li><strong>Oxy hóa ướt</strong> (hơi H₂O): nhanh hơn nhiều, dùng cho oxide dày (vài trăm nanomet tới khoảng 1 µm) làm mặt nạ hoặc cách ly. Lý do: H₂O có độ hòa tan trong SiO₂ cao hơn O₂ hàng trăm lần.</li>
+</ul>
+
+<h2>6. Lò oxy hóa và chu trình</h2>
+<p>Oxy hóa được thực hiện trong ống thạch anh của lò ngang hoặc đứng; cần tránh nhiễm Na, K từ môi trường vì chúng là ion linh động trong oxide. Lò luôn được giữ ở hoặc gần nhiệt độ làm việc với dòng N₂ chảy qua khi không sử dụng. Một chu trình điển hình:</p>
+<ol>
+<li><strong>Đưa wafer vào</strong> ở nhiệt độ thấp để giảm ứng suất nhiệt và cong vênh, trong N₂ có thêm một ít O₂ để tránh tạo nitride trên bề mặt.</li>
+<li><strong>Tăng nhiệt</strong> có kiểm soát.</li>
+<li><strong>Oxy hóa</strong> khô hoặc ướt; kiểm soát độ dày là quan trọng nhất.</li>
+<li><strong>Ủ trong N₂</strong> ở nhiệt độ oxy hóa trong một thời gian xác định để giảm điện tích cố định.</li>
+<li><strong>Hạ nhiệt</strong> chậm để giảm ứng suất, giảm trạng thái bề mặt, rồi đưa wafer ra.</li>
+</ol>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Đây là điểm khác biệt căn bản: <strong>Ga₂O₃ đã là một oxide</strong>, không thể "oxy hóa nhiệt" để tạo lớp cách điện tự nhiên như Si. Điện môi cổng cho MOSFET Ga₂O₃ (Al₂O₃, SiO₂, HfO₂...) phải được lắng đọng bằng ALD, PECVD hay sputtering, và chất lượng mặt phân cách điện môi/Ga₂O₃ trở thành một thách thức lớn về bẫy và độ ổn định điện áp ngưỡng.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">If one had to pick a single reason why Si dominates the semiconductor industry, the answer might lie not in Si but in its oxide. Thermally grown SiO₂ on Si is a nearly perfect insulator with a stable interface that few other materials can match.</p>
+
+<h2>1. Why does SiO₂ matter?</h2>
+<p>Si forms a native oxide of very high quality, with a thermal expansion coefficient close enough to that of Si that it rarely cracks as the wafer heats and cools. Most other semiconductors do not form oxides good enough for device use. Beyond microelectronics, SiO₂ is central to optical fibers; point defects in SiO₂, introduced during fabrication or by ionizing radiation, strongly affect its optical and electrical properties.</p>
+
+<h2>2. Structure of amorphous SiO₂</h2>
+<p>The basic unit is a tetrahedron: one Si atom at the center and four O atoms at the corners. In quartz (crystalline), the tetrahedra are arranged periodically; in thermal SiO₂, they connect through bridging O atoms with randomly varying bond angles, forming an <strong>amorphous</strong> network. Thermal SiO₂ therefore has a density of about 2.20 g/cm³, lower than quartz (2.65 g/cm³). Impurities substituting for Si, such as B and P, are called <strong>network formers</strong>; they are usually found in deposited oxides such as BPSG rather than in thermal oxides.</p>
+
+<h2>3. Key properties</h2>
+<div class="tablewrap"><table>
+<tr><th>Property</th><th>Typical value</th></tr>
+<tr><td>Resistivity</td><td>Very high, &gt; 10¹⁶ Ω·cm</td></tr>
+<tr><td>Bandgap</td><td>About 9 eV</td></tr>
+<tr><td>Breakdown field</td><td>&gt; 10 MV/cm</td></tr>
+<tr><td>Dielectric constant</td><td>3.9</td></tr>
+<tr><td>Molecular density</td><td>About 2.3×10²² molecules/cm³</td></tr>
+</table></div>
+<p>Add to this a stable, reproducible Si/SiO₂ interface and conformal oxide growth on every exposed Si surface.</p>
+
+<h2>4. Where is SiO₂ used?</h2>
+<ul>
+<li><strong>Surface passivation</strong>: protects the surface from chemical contamination and scratches during processing; can serve as a sacrificial layer to be removed later.</li>
+<li><strong>Doping mask</strong>: most dopants (B, P, As, Sb) diffuse much more slowly in SiO₂ than in Si, so SiO₂ blocks them from reaching the Si surface. Exceptions are Ga and some metals such as Cu and Au, which diffuse quickly in oxide.</li>
+<li><strong>Device isolation</strong>: field oxide (LOCOS) or trench-fill oxide (STI).</li>
+<li><strong>Interlayer dielectric</strong> (ILD) between metal levels.</li>
+<li><strong>MOS gate dielectric</strong> and capacitor dielectric: the thickness is chosen precisely so the gate induces charge in the channel below.</li>
+</ul>
+<p>Each application needs a different thickness, from a few nanometers for gate oxides to hundreds of nanometers or microns for isolation and masking oxides.</p>
+
+<h2>5. Thermal oxidation</h2>
+<p>The Si surface has a very strong affinity for oxygen: the Gibbs free energy of SiO₂ formation is strongly negative, so the reaction is thermodynamically favorable. At high temperature in an oxidizing ambient, Si readily converts to SiO₂. This oxide insulates well, blocks dopant diffusion, and is easily etched by chemicals (HF) for patterning. This combination of properties put Si in its dominant position.</p>
+<h3>Dry and wet oxidation</h3>
+<p>Oxidation is usually done at 900–1100 °C:</p>
+$$\text{Dry:}\quad \mathrm{Si + O_2 \rightarrow SiO_2} \qquad\qquad \text{Wet:}\quad \mathrm{Si + 2H_2O \rightarrow SiO_2 + 2H_2}$$
+<ul>
+<li><strong>Dry oxidation</strong> (O₂): slow, dense, highest-quality oxide, used for MOS gate oxides.</li>
+<li><strong>Wet oxidation</strong> (H₂O vapor): much faster, used for thick oxides (hundreds of nanometers to about 1 µm) for masking or isolation. The reason: H₂O is hundreds of times more soluble in SiO₂ than O₂.</li>
+</ul>
+
+<h2>6. Oxidation furnace and cycle</h2>
+<p>Oxidation takes place in the quartz tube of a horizontal or vertical furnace; Na and K contamination must be avoided because they are mobile ions in the oxide. The furnace is kept at or near the process temperature with N₂ flowing when idle. A typical cycle:</p>
+<ol>
+<li><strong>Push</strong> the wafers in at low temperature to reduce thermal stress and warpage, in N₂ with a little O₂ to prevent surface nitride formation.</li>
+<li><strong>Ramp up</strong> in a controlled way.</li>
+<li><strong>Oxidize</strong> dry or wet; thickness control is what matters most.</li>
+<li><strong>Anneal in N₂</strong> at the oxidation temperature for a set time to reduce fixed charge.</li>
+<li><strong>Ramp down</strong> slowly to reduce stress and surface states, then pull the wafers out.</li>
+</ol>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Here lies a fundamental difference: <strong>Ga₂O₃ is already an oxide</strong>, so it cannot be "thermally oxidized" to form a native insulator as Si can. Gate dielectrics for Ga₂O₃ MOSFETs (Al₂O₃, SiO₂, HfO₂...) must be deposited by ALD, PECVD or sputtering, and the quality of the dielectric/Ga₂O₃ interface becomes a major challenge for traps and threshold-voltage stability.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>
+</ol>
+</div>
+<nav class="pager"><a href="rtp-system.html">← <span class="l-vi">Thiết bị RTP và đo nhiệt độ</span><span class="l-en">RTP equipment and temperature measurement</span></a><a class="n" href="deal-grove.html"><span class="l-vi">Mô hình oxy hóa Deal–Grove</span><span class="l-en">The Deal–Grove oxidation model</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

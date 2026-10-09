@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Chất lượng và độ dày oxide" data-title-en="Oxide quality and thickness">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oxide quality and thickness · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Four oxide charges, breakdown and TDDB, ellipsometry, oxide color and EOT.">
+<meta property="og:title" content="Oxide quality and thickness">
+<meta property="og:description" content="Four oxide charges, breakdown and TDDB, ellipsometry, oxide color and EOT.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 3</span><span class="l-en">Part 4 · Lesson 3</span></p>
+  <h1><span class="l-vi">Chất lượng và độ dày oxide</span><span class="l-en">Oxide quality and thickness</span></h1>
+  <p class="sub"><span class="l-vi">Bốn loại điện tích oxide, đánh thủng và TDDB, ellipsometry, màu oxide và EOT.</span><span class="l-en">Four oxide charges, breakdown and TDDB, ellipsometry, oxide color and EOT.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Một lớp oxide tốt không chỉ cần đúng độ dày, mà còn phải "sạch" về điện: ít điện tích, ít bẫy, và chịu được điện trường cao trong suốt tuổi thọ linh kiện. Bài này trình bày cách phân loại điện tích trong oxide, cách đánh giá độ bền điện môi và các phương pháp đo độ dày.</p>
+
+<h2>1. Bốn loại điện tích trong oxide</h2>
+<div class="tablewrap"><table>
+<tr><th>Loại</th><th>Vị trí và nguồn gốc</th><th>Giảm thiểu bằng</th></tr>
+<tr><td><strong>Bẫy mặt phân cách</strong> \(Q_{it}\)</td><td>Ngay tại mặt Si/SiO₂, từ liên kết treo của Si; có thể trao đổi điện tích với Si tùy điện áp</td><td>Ủ trong khí chứa H₂ (forming gas)</td></tr>
+<tr><td><strong>Điện tích cố định</strong> \(Q_f\)</td><td>Lớp oxide mỏng sát mặt phân cách, liên quan Si chưa oxy hóa hoàn toàn; thường dương</td><td>Ủ trong khí trơ sau oxy hóa, hạ nhiệt hợp lý</td></tr>
+<tr><td><strong>Điện tích bẫy trong oxide</strong> \(Q_{ot}\)</td><td>Electron hoặc lỗ trống bị bẫy trong khối oxide do bức xạ hoặc ứng suất điện</td><td>Ủ nhiệt, quy trình ít gây hư hỏng</td></tr>
+<tr><td><strong>Ion linh động</strong> \(Q_m\)</td><td>Ion kiềm như Na⁺, K⁺ di chuyển trong oxide dưới điện trường, gây trôi điện áp ngưỡng</td><td>Vệ sinh sạch, thêm HCl khi oxy hóa</td></tr>
+</table></div>
+<p>Liên kết treo ở mặt phân cách có thể được "bịt" bằng nguyên tử H. Tuy nhiên liên kết Si–H tương đối yếu, có thể bị phá dưới ứng suất điện hoặc bức xạ ion hóa, để lại bẫy hoặc trạng thái tích điện mới. Đây là một cơ chế suy giảm độ tin cậy quan trọng.</p>
+
+<h2>2. Đánh giá độ bền điện môi</h2>
+<p>Phương pháp điện là cách hữu ích nhất để đánh giá chất lượng oxide. Phép đo đơn giản nhất là <strong>điện áp (điện trường) đánh thủng</strong>. Đo trên nhiều tụ điện rồi vẽ biểu đồ tần suất (histogram) cho cái nhìn bậc nhất về chất lượng và mật độ sai hỏng:</p>
+<ul>
+<li><strong>Đánh thủng ngoại lai</strong> (extrinsic) ở điện trường thấp: do lỗ kim (pinhole), hạt bụi, nhiễm bẩn, vùng mỏng cục bộ.</li>
+<li><strong>Đánh thủng nội tại</strong> (intrinsic) ở điện trường cao, quanh 10 MV/cm hoặc hơn: giới hạn của chính vật liệu.</li>
+</ul>
+<h3>Điện tích tới đánh thủng</h3>
+<p>Trong phép thử đánh thủng phụ thuộc thời gian (time-dependent dielectric breakdown, TDDB), oxide chịu ứng suất ngay dưới điện trường đánh thủng, theo chế độ dòng không đổi (CCS) hoặc áp không đổi (CVS). <strong>Điện tích tới đánh thủng</strong> \(Q_{BD}\) là tích phân dòng điện từ lúc bắt đầu tới ngay trước khi đánh thủng:</p>
+$$Q_{BD} = \int_0^{t_{BD}} J(t)\,dt$$
+<p>Trong quá trình ứng suất, điện tích bị bẫy dần trong oxide, làm thay đổi điện trường nội và dòng điện.</p>
+<h3>Mô hình thấm (percolation)</h3>
+<p>Ở điện áp cao, electron trong oxide thu đủ năng lượng để gây ion hóa va chạm, tạo lỗ trống và sinh dần các bẫy. Khi các bẫy phân bố ngẫu nhiên đủ dày để tạo thành một "đường thấm" nối hai điện cực, dòng điện tăng vọt và oxide bị đánh thủng. Oxide gồm các vùng chắc chắn và vùng yếu; vùng yếu có thể mỏng hơn hoặc chứa sai hỏng dễ bẫy điện tích. Mô hình này giải thích vì sao oxide càng mỏng thì càng dễ đánh thủng và vì sao thời gian đánh thủng có tính thống kê (phân bố Weibull).</p>
+
+<h2>3. Đo độ dày oxide</h2>
+<div class="tablewrap"><table>
+<tr><th>Loại độ dày</th><th>Phương pháp</th><th>Đặc điểm</th></tr>
+<tr><td>Vật lý</td><td>Máy đo biên dạng dùng mũi dò (profiler), AFM</td><td>Cần tạo bậc oxide bằng mặt nạ và khắc; phá hủy, thường cần wafer thử riêng</td></tr>
+<tr><td>Hình ảnh</td><td>TEM, SEM mặt cắt</td><td>Rất chính xác, nhất là TEM cho oxide mỏng; phá hủy và tốn kém</td></tr>
+<tr><td>Quang học</td><td>Ellipsometry, màu oxide</td><td>Không phá hủy, nhanh, đo bản đồ được</td></tr>
+<tr><td>Điện</td><td>C-V, EOT</td><td>Độ dày "hiệu dụng" theo hành vi điện</td></tr>
+</table></div>
+<h3>Ellipsometry</h3>
+<p>Chiếu ánh sáng phân cực lên mẫu và đo sự thay đổi trạng thái phân cực của ánh sáng phản xạ, biểu diễn bằng hai góc \(\Psi\) và \(\Delta\). So với mô hình quang học của hệ màng, ta suy ra độ dày và chiết suất. Phương pháp không phá hủy, nhưng thường cần oxide mọc trên Si trần và vì chùm sáng khá lớn nên thường đo trên wafer chưa có hoa văn; có thể đo nhiều điểm để lập bản đồ độ dày.</p>
+<h3>Màu oxide</h3>
+<p>Màu của wafer phủ oxide đến từ giao thoa giữa ánh sáng phản xạ ở mặt oxide và ở mặt Si bên dưới. Với tia sáng chiếu vuông góc, giao thoa tăng cường xảy ra khi:</p>
+$$2\,n\,d = m\,\lambda, \qquad m = 1, 2, 3, \ldots$$
+<p>với \(n \approx 1{,}46\) là chiết suất SiO₂ và \(d\) độ dày (bỏ qua độ lệch pha khi phản xạ). Vì vậy mỗi độ dày làm nổi bật một số bước sóng, cho màu đặc trưng, và màu lặp lại theo chu kỳ khi độ dày tăng. Đối chiếu với bảng màu cho phép ước lượng nhanh độ dày; nghiêng wafer sẽ thấy màu thay đổi vì quãng đường quang thay đổi theo góc. Cùng nguyên lý giao thoa, lớp SiO₂ khoảng 285–300 nm trên Si được dùng để nhìn thấy và đếm số lớp graphene bằng kính hiển vi quang học thông qua phổ tương phản (Ni và cộng sự, 2007).</p>
+<h3>Độ dày oxide tương đương (EOT)</h3>
+<p>Với điện môi high-k, độ dày oxide tương đương là độ dày SiO₂ cho cùng điện dung:</p>
+$$\mathrm{EOT} = t_{\text{high-}k}\,\frac{\varepsilon_{SiO_2}}{\varepsilon_{\text{high-}k}} = t_{\text{high-}k}\,\frac{3{,}9}{k}$$
+<p>Ví dụ, 4 nm HfO₂ (\(k \approx 20\)) có EOT khoảng 0,8 nm: điện dung như oxide rất mỏng nhưng lớp vật lý đủ dày để giảm mạnh dòng xuyên hầm.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Cách phân loại điện tích oxide của Si được áp dụng gần như nguyên vẹn cho các cấu trúc MOS trên Ga₂O₃, nhưng mật độ bẫy mặt phân cách thường cao hơn nhiều, và vùng cấm rộng của Ga₂O₃ khiến nhiều bẫy sâu có hằng số thời gian rất dài. Hệ quả là đường C-V bị trễ (hysteresis) và phụ thuộc tần số, đòi hỏi các kỹ thuật như đo xung hay đo C-V dưới chiếu sáng UV để đánh giá đầy đủ.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. E. Deal, "Standardized terminology for oxide charges associated with thermally oxidized silicon," <em>IEEE Transactions on Electron Devices</em> 27, 606 (1980).</li>
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006).</li>
+<li>Z. H. Ni et al., "Graphene thickness determination using reflection and contrast spectroscopy," <em>Nano Letters</em> 7, 2758 (2007).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A good oxide needs more than the right thickness: it must be electrically "clean", with little charge, few traps, and the ability to withstand high fields over the device lifetime. This lesson covers how oxide charges are classified, how dielectric strength is evaluated, and how thickness is measured.</p>
+
+<h2>1. Four types of oxide charge</h2>
+<div class="tablewrap"><table>
+<tr><th>Type</th><th>Location and origin</th><th>Reduced by</th></tr>
+<tr><td><strong>Interface traps</strong> \(Q_{it}\)</td><td>Right at the Si/SiO₂ interface, from Si dangling bonds; can exchange charge with Si depending on bias</td><td>Annealing in H₂-containing forming gas</td></tr>
+<tr><td><strong>Fixed charge</strong> \(Q_f\)</td><td>A thin oxide layer near the interface, related to incompletely oxidized Si; usually positive</td><td>Inert post-oxidation anneal, proper cool-down</td></tr>
+<tr><td><strong>Oxide trapped charge</strong> \(Q_{ot}\)</td><td>Electrons or holes trapped in the oxide bulk by radiation or electrical stress</td><td>Annealing, low-damage processing</td></tr>
+<tr><td><strong>Mobile ions</strong> \(Q_m\)</td><td>Alkali ions such as Na⁺ and K⁺ that drift under field, shifting the threshold voltage</td><td>Clean processing, HCl during oxidation</td></tr>
+</table></div>
+<p>Interface dangling bonds can be capped by hydrogen atoms. The Si–H bond is relatively weak, however, and can be broken by electrical stress or ionizing radiation, leaving a new trap or charged state. This is an important reliability degradation mechanism.</p>
+
+<h2>2. Evaluating dielectric strength</h2>
+<p>Electrical techniques are the most useful way to characterize oxide quality. The simplest measurement is the <strong>breakdown voltage (field)</strong>. Measuring many capacitors and plotting a histogram gives a first-order picture of quality and defect density:</p>
+<ul>
+<li><strong>Extrinsic breakdown</strong> at low fields: from pinholes, particles, contamination and locally thin spots.</li>
+<li><strong>Intrinsic breakdown</strong> at high fields, around 10 MV/cm or more: the limit of the material itself.</li>
+</ul>
+<h3>Charge to breakdown</h3>
+<p>In time-dependent dielectric breakdown (TDDB) tests, the oxide is stressed just below its breakdown field, under constant current (CCS) or constant voltage (CVS). The <strong>charge to breakdown</strong> \(Q_{BD}\) is the integrated current from the start until just before breakdown:</p>
+$$Q_{BD} = \int_0^{t_{BD}} J(t)\,dt$$
+<p>During stress, charge is gradually trapped in the oxide, changing the internal field and the current.</p>
+<h3>Percolation model</h3>
+<p>At high voltage, electrons in the oxide gain enough energy for impact ionization, creating holes and gradually generating traps. When randomly placed traps become dense enough to form a "percolation path" between the electrodes, the current jumps and the oxide breaks down. The oxide consists of robust and weak regions; weak regions may be physically thinner or contain defects that easily trap charge. This model explains why thinner oxides break down more easily and why breakdown times are statistical (Weibull distribution).</p>
+
+<h2>3. Measuring oxide thickness</h2>
+<div class="tablewrap"><table>
+<tr><th>Thickness type</th><th>Method</th><th>Notes</th></tr>
+<tr><td>Physical</td><td>Stylus profiler, AFM</td><td>Requires an oxide step made by masking and etching; destructive, usually a dedicated test wafer</td></tr>
+<tr><td>Image-based</td><td>Cross-sectional TEM, SEM</td><td>Very accurate, especially TEM for thin oxides; destructive and costly</td></tr>
+<tr><td>Optical</td><td>Ellipsometry, oxide color</td><td>Non-destructive, fast, can be mapped</td></tr>
+<tr><td>Electrical</td><td>C-V, EOT</td><td>"Effective" thickness from electrical behavior</td></tr>
+</table></div>
+<h3>Ellipsometry</h3>
+<p>Polarized light is directed at the sample and the change in polarization of the reflected light is measured, expressed by two angles \(\Psi\) and \(\Delta\). Fitting an optical model of the film stack yields thickness and refractive index. The method is non-destructive, but it usually needs oxide grown on bare Si and, because the beam is fairly large, is usually done on unpatterned wafers; many points can be measured to map thickness.</p>
+<h3>Oxide color</h3>
+<p>The color of an oxidized wafer comes from interference between light reflected at the oxide surface and at the underlying Si. At normal incidence, constructive interference occurs when:</p>
+$$2\,n\,d = m\,\lambda, \qquad m = 1, 2, 3, \ldots$$
+<p>where \(n \approx 1.46\) is the refractive index of SiO₂ and \(d\) the thickness (ignoring reflection phase shifts). Each thickness therefore enhances certain wavelengths, giving a characteristic color that repeats periodically as thickness grows. Comparing with a color chart gives a quick estimate; tilting the wafer changes the color because the optical path changes with angle. By the same interference principle, about 285–300 nm of SiO₂ on Si is used to see and count graphene layers under an optical microscope through contrast spectra (Ni et al., 2007).</p>
+<h3>Equivalent oxide thickness (EOT)</h3>
+<p>For high-k dielectrics, the equivalent oxide thickness is the SiO₂ thickness that gives the same capacitance:</p>
+$$\mathrm{EOT} = t_{\text{high-}k}\,\frac{\varepsilon_{SiO_2}}{\varepsilon_{\text{high-}k}} = t_{\text{high-}k}\,\frac{3.9}{k}$$
+<p>For example, 4 nm of HfO₂ (\(k \approx 20\)) has an EOT of about 0.8 nm: the capacitance of a very thin oxide with a physical layer thick enough to cut tunneling current sharply.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The Si oxide-charge classification carries over almost directly to MOS structures on Ga₂O₃, but interface trap densities are usually much higher, and Ga₂O₃'s wide bandgap gives many deep traps very long time constants. The result is C-V hysteresis and frequency dispersion, which call for techniques such as pulsed measurements or C-V under UV illumination for a complete evaluation.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. E. Deal, "Standardized terminology for oxide charges associated with thermally oxidized silicon," <em>IEEE Transactions on Electron Devices</em> 27, 606 (1980).</li>
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006).</li>
+<li>Z. H. Ni et al., "Graphene thickness determination using reflection and contrast spectroscopy," <em>Nano Letters</em> 7, 2758 (2007).</li>
+</ol>
+</div>
+<nav class="pager"><a href="deal-grove.html">← <span class="l-vi">Mô hình oxy hóa Deal–Grove</span><span class="l-en">The Deal–Grove oxidation model</span></a><a class="n" href="isolation.html"><span class="l-vi">Cách ly linh kiện: LOCOS và STI</span><span class="l-en">Device isolation: LOCOS and STI</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

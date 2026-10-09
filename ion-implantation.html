@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Cấy ion: nguyên lý và ứng dụng" data-title-en="Ion implantation: fundamentals and applications">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ion implantation: fundamentals and applications · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="n- and p-type doping, comparison with diffusion, the self-aligned gate and CMOS implant steps.">
+<meta property="og:title" content="Ion implantation: fundamentals and applications">
+<meta property="og:description" content="n- and p-type doping, comparison with diffusion, the self-aligned gate and CMOS implant steps.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 1</span><span class="l-en">Part 2 · Lesson 1</span></p>
+  <h1><span class="l-vi">Cấy ion: nguyên lý và ứng dụng</span><span class="l-en">Ion implantation: fundamentals and applications</span></h1>
+  <p class="sub"><span class="l-vi">Pha tạp n và p, so sánh với khuếch tán, cổng tự căn chỉnh và các bước cấy trong CMOS.</span><span class="l-en">n- and p-type doping, comparison with diffusion, the self-aligned gate and CMOS implant steps.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Một MOSFET hiện đại chứa nhiều vùng pha tạp khác nhau: giếng, vùng điều chỉnh điện áp ngưỡng, vùng halo, vùng mở rộng nguồn/máng và vùng nguồn/máng sâu. Mỗi vùng cần đúng một lượng tạp chất ở đúng một độ sâu. Cấy ion (ion implantation) là công cụ cho phép làm điều đó một cách chính xác và lặp lại được.</p>
+
+<h2>1. Bán dẫn loại n và loại p</h2>
+<p>Trong mạng Si, mỗi nguyên tử liên kết cộng hóa trị với bốn nguyên tử lân cận. Thay một nguyên tử Si bằng nguyên tử nhóm V (P, As, Sb), electron thứ năm liên kết yếu và dễ bị ion hóa thành electron tự do: đó là <strong>donor</strong>, tạo bán dẫn loại n. Thay bằng nguyên tử nhóm III (B), thiếu một electron để hoàn thành liên kết, tạo ra lỗ trống: đó là <strong>acceptor</strong>, tạo bán dẫn loại p.</p>
+<p>Lượng tạp chất có thể hòa tan vào Si bị giới hạn bởi <strong>độ hòa tan rắn</strong> (solid solubility), phụ thuộc nhiệt độ. Với As và P, giới hạn này cỡ 10²¹ cm⁻³ ở nhiệt độ xử lý điển hình; với B thấp hơn một chút. Vượt quá giới hạn này, tạp chất có xu hướng kết tụ và không còn hoạt động điện.</p>
+
+<h2>2. Hai cách pha tạp: khuếch tán và cấy ion</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>Khuếch tán nhiệt</th><th>Cấy ion</th></tr>
+<tr><td>Nguyên lý</td><td>Tạp chất đi vào từ bề mặt nhờ nhiệt</td><td>Ion được gia tốc và bắn vào wafer</td></tr>
+<tr><td>Kiểm soát liều và độ sâu</td><td>Không độc lập: cả hai cùng do nhiệt độ và thời gian quyết định</td><td>Độc lập: liều do dòng ion × thời gian, độ sâu do năng lượng ion</td></tr>
+<tr><td>Hướng</td><td>Đẳng hướng, lan cả sang ngang dưới mặt nạ</td><td>Dị hướng, ít lan ngang</td></tr>
+<tr><td>Nhiệt độ</td><td>Cao (900–1200 °C)</td><td>Gần nhiệt độ phòng, cần ủ sau đó</td></tr>
+<tr><td>Mặt nạ</td><td>SiO₂</td><td>Photoresist, SiO₂, Si₃N₄, poly-Si</td></tr>
+<tr><td>Hạn chế</td><td>Khó tạo tiếp giáp nông</td><td>Gây hư hỏng mạng tinh thể, thiết bị đắt</td></tr>
+</table></div>
+<p>Khuếch tán là phương pháp pha tạp đầu tiên của công nghiệp bán dẫn, thực hiện trong lò nhiệt độ cao với mặt nạ SiO₂. Cấy ion ra đời từ nghiên cứu vật lý hạt nhân những năm 1950 và được đưa vào sản xuất từ giữa thập niên 1970, nhanh chóng thay thế khuếch tán ở hầu hết các bước pha tạp. Khuếch tán ngày nay chủ yếu còn được dùng cho bước "drive-in" sau cấy ion.</p>
+
+<h2>3. Cổng tự căn chỉnh (self-aligned gate)</h2>
+<p>Một lợi thế lớn của cấy ion là khả năng <strong>tự căn chỉnh</strong>. Nếu cổng kim loại được chế tạo sau vùng nguồn/máng, chỉ cần một sai lệch nhỏ khi căn mặt nạ là cổng sẽ không phủ đúng kênh, gây vùng kênh không được cổng điều khiển hoặc điện dung chồng lấn lớn. Với cổng poly-Si làm trước, chính cổng đóng vai trò mặt nạ khi cấy nguồn/máng: ion chỉ đi vào hai bên cổng, nên mép nguồn/máng luôn trùng mép cổng mà không cần mặt nạ quang riêng. Poly-Si chịu được nhiệt độ ủ cao, điều mà cổng nhôm thời kỳ đầu không làm được.</p>
+
+<h2>4. Các bước cấy ion trong CMOS</h2>
+<div class="tablewrap"><table>
+<tr><th>Bước cấy</th><th>Mục đích</th><th>Đặc điểm</th></tr>
+<tr><td>Giếng (well)</td><td>Tạo giếng n và giếng p, cách ly và pha tạp nền</td><td>Sâu, năng lượng cao</td></tr>
+<tr><td>Điều chỉnh V<sub>th</sub></td><td>Chỉnh điện áp ngưỡng ở vùng kênh ngay dưới oxide cổng</td><td>Nông, năng lượng thấp</td></tr>
+<tr><td>Halo / pocket</td><td>Chống đánh thủng xuyên (punch-through), giảm hiệu ứng kênh ngắn</td><td>Cấy nghiêng ở mép cổng</td></tr>
+<tr><td>Mở rộng nguồn/máng (LDD)</td><td>Giảm điện trường đỉnh ở mép máng, hạn chế hot carrier</td><td>Nông, tự căn theo mép cổng</td></tr>
+<tr><td>Nguồn/máng sâu</td><td>Vùng tiếp xúc pha tạp mạnh n⁺/p⁺</td><td>Liều cao, tự căn theo spacer</td></tr>
+</table></div>
+
+<h2>5. An toàn hóa chất</h2>
+<p>Hầu hết nguồn tạp chất đều nguy hiểm: AsH₃, PH₃, B₂H₆ vừa cực độc vừa dễ cháy nổ; BF₃ ăn mòn; bản thân P, B, As, Sb cũng độc. Nguyên tắc khi có sự cố: rời khỏi khu vực trước, để người được đào tạo xử lý.</p>
+
+<h2>6. Xu hướng: tiếp giáp siêu nông</h2>
+<p>Khi kênh ngắn lại, độ sâu tiếp giáp nguồn/máng phải giảm theo để hạn chế hiệu ứng kênh ngắn, xuống cỡ vài chục nanomet (ultra-shallow junction, USJ). Yêu cầu đặt ra cùng lúc: nông, điện trở tấm thấp, điện trở tiếp xúc thấp và không ảnh hưởng tới profile kênh. Với tiếp giáp p⁺, ion B phải được cấy ở năng lượng cực thấp, tới dưới 1 keV. Ở năng lượng này dòng ion rất khó duy trì, nên người ta dùng ion phân tử nặng hơn như BF₂⁺: cùng năng lượng, nguyên tử B trong phân tử chỉ mang một phần nhỏ năng lượng nên đi nông hơn.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Cấy ion là kỹ thuật then chốt cho linh kiện β-Ga₂O₃. Cấy Si được dùng để tạo vùng tiếp xúc ohmic n⁺ có điện trở thấp (Sasaki và cộng sự, 2013). Ngược lại, cấy N hoặc Mg tạo ra các vùng điện trở cao, dùng làm lớp chặn dòng hoặc cách ly linh kiện, bù lại việc β-Ga₂O₃ chưa có pha tạp loại p hiệu quả để tạo tiếp giáp p-n như Si (Wong và cộng sự, 2018).</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>
+<li>K. Sasaki et al., <em>Applied Physics Express</em> 6, 086502 (2013).</li>
+<li>M. H. Wong et al., "Acceptor doping of β-Ga₂O₃ by Mg and N ion implantations," <em>Applied Physics Letters</em> 113, 102103 (2018).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A modern MOSFET contains many doped regions: wells, threshold-adjust layers, halos, source/drain extensions and deep source/drain regions. Each needs exactly the right amount of dopant at exactly the right depth. Ion implantation is the tool that does this precisely and repeatably.</p>
+
+<h2>1. n-type and p-type Si</h2>
+<p>In the Si lattice, each atom forms covalent bonds with four neighbors. Replacing a Si atom with a group-V atom (P, As, Sb) leaves a fifth electron that is weakly bound and easily ionized into a free electron: a <strong>donor</strong>, giving n-type material. Replacing it with a group-III atom (B) leaves one bond incomplete, creating a hole: an <strong>acceptor</strong>, giving p-type material.</p>
+<p>The amount of dopant that can dissolve in Si is limited by its temperature-dependent <strong>solid solubility</strong>. For As and P it is of order 10²¹ cm⁻³ at typical process temperatures; for B it is somewhat lower. Beyond this limit, dopants tend to cluster and become electrically inactive.</p>
+
+<h2>2. Two ways to dope: diffusion and implantation</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>Thermal diffusion</th><th>Ion implantation</th></tr>
+<tr><td>Principle</td><td>Dopants enter from the surface by heat</td><td>Accelerated ions are shot into the wafer</td></tr>
+<tr><td>Control of dose and depth</td><td>Not independent: both set by temperature and time</td><td>Independent: dose by ion current × time, depth by ion energy</td></tr>
+<tr><td>Directionality</td><td>Isotropic, spreads laterally under the mask</td><td>Anisotropic, little lateral spread</td></tr>
+<tr><td>Temperature</td><td>High (900–1200 °C)</td><td>Near room temperature, anneal needed afterward</td></tr>
+<tr><td>Mask</td><td>SiO₂</td><td>Photoresist, SiO₂, Si₃N₄, poly-Si</td></tr>
+<tr><td>Limitations</td><td>Hard to form shallow junctions</td><td>Lattice damage, expensive equipment</td></tr>
+</table></div>
+<p>Diffusion was the industry's first doping method, carried out in high-temperature furnaces with SiO₂ masks. Ion implantation grew out of nuclear physics research in the 1950s and entered manufacturing in the mid-1970s, quickly replacing diffusion for most doping steps. Diffusion survives mainly as the drive-in step after implantation.</p>
+
+<h2>3. The self-aligned gate</h2>
+<p>A major advantage of implantation is <strong>self-alignment</strong>. If a metal gate is formed after the source and drain, even a small mask misalignment leaves part of the channel uncovered by the gate or creates a large overlap capacitance. With a poly-Si gate formed first, the gate itself masks the source/drain implant: ions enter only on either side, so the source/drain edges always line up with the gate without an extra photomask. Poly-Si also survives the high-temperature anneal, which early aluminum gates could not.</p>
+
+<h2>4. Implant steps in CMOS</h2>
+<div class="tablewrap"><table>
+<tr><th>Implant</th><th>Purpose</th><th>Character</th></tr>
+<tr><td>Well</td><td>Forms n- and p-wells for isolation and baseline doping</td><td>Deep, high energy</td></tr>
+<tr><td>V<sub>th</sub> adjust</td><td>Sets the threshold voltage in the channel under the gate oxide</td><td>Shallow, low energy</td></tr>
+<tr><td>Halo / pocket</td><td>Suppresses punch-through and short-channel effects</td><td>Angled, at the gate edges</td></tr>
+<tr><td>Source/drain extension (LDD)</td><td>Reduces the peak field at the drain edge, limiting hot carriers</td><td>Shallow, self-aligned to the gate</td></tr>
+<tr><td>Deep source/drain</td><td>Heavily doped n⁺/p⁺ contact regions</td><td>High dose, self-aligned to the spacer</td></tr>
+</table></div>
+
+<h2>5. Chemical safety</h2>
+<p>Most dopant sources are hazardous: AsH₃, PH₃ and B₂H₆ are extremely toxic and flammable; BF₃ is corrosive; P, B, As and Sb themselves are toxic. The rule in an emergency: get out first and let trained people handle it.</p>
+
+<h2>6. Trend: ultra-shallow junctions</h2>
+<p>As channels shrink, source/drain junction depth must shrink too, to tens of nanometers (ultra-shallow junctions, USJ), to limit short-channel effects. The requirements come together: shallow, low sheet resistance, low contact resistance and no disturbance of the channel profile. For p⁺ junctions, B must be implanted at extremely low energy, below 1 keV. Beam current is hard to sustain at such energies, so heavier molecular ions such as BF₂⁺ are used: at the same energy, the B atom carries only a fraction of the energy and stops shallower.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Ion implantation is a key technique for β-Ga₂O₃ devices. Si implantation forms low-resistance n⁺ ohmic contact regions (Sasaki et al., 2013). Conversely, N or Mg implantation creates highly resistive regions used as current-blocking or isolation layers, compensating for the lack of effective p-type doping that would allow p-n junctions as in Si (Wong et al., 2018).</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>
+<li>K. Sasaki et al., <em>Applied Physics Express</em> 6, 086502 (2013).</li>
+<li>M. H. Wong et al., "Acceptor doping of β-Ga₂O₃ by Mg and N ion implantations," <em>Applied Physics Letters</em> 113, 102103 (2018).</li>
+</ol>
+</div>
+<nav class="pager"><a href="diffusion.html">← <span class="l-vi">Khuếch tán trong chất rắn</span><span class="l-en">Diffusion in solids</span></a><a class="n" href="implant-physics.html"><span class="l-vi">Vật lý cấy ion</span><span class="l-en">Ion implantation physics</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Ủ kích hoạt và truyền nhiệt" data-title-en="Activation annealing and heat transfer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activation annealing and heat transfer · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Repairing implant damage, three heat-transfer mechanisms, radiation absorption in Si and thermal budget.">
+<meta property="og:title" content="Activation annealing and heat transfer">
+<meta property="og:description" content="Repairing implant damage, three heat-transfer mechanisms, radiation absorption in Si and thermal budget.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 1</span><span class="l-en">Part 3 · Lesson 1</span></p>
+  <h1><span class="l-vi">Ủ kích hoạt và truyền nhiệt</span><span class="l-en">Activation annealing and heat transfer</span></h1>
+  <p class="sub"><span class="l-vi">Phục hồi hư hỏng do cấy, ba cơ chế truyền nhiệt, sự hấp thụ bức xạ của Si và thermal budget.</span><span class="l-en">Repairing implant damage, three heat-transfer mechanisms, radiation absorption in Si and thermal budget.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Ngay sau khi cấy, tạp chất đã nằm đúng độ sâu nhưng gần như chưa "làm việc": mạng tinh thể bị phá hỏng và phần lớn nguyên tử tạp chất đang ở sai vị trí. Ủ nhiệt là bước biến các nguyên tử đó thành donor và acceptor thực sự.</p>
+
+<h2>1. Hư hỏng do cấy ion</h2>
+<p>Mỗi ion tới va chạm với nguyên tử mạng và đánh bật chúng khỏi nút mạng, tạo ra cặp vacancy và nguyên tử xen kẽ (cặp Frenkel). Các nguyên tử bị đánh bật lại tiếp tục va chạm, tạo một "dòng thác" hư hỏng. Với liều đủ cao, đặc biệt với ion nặng, vùng bị cấy trở thành <strong>vô định hình</strong>.</p>
+
+<h2>2. Ủ kích hoạt</h2>
+<p>Một nguyên tử tạp chất chỉ hoạt động như donor hoặc acceptor khi nằm ở vị trí thay thế trong mạng đơn tinh thể và liên kết với bốn nguyên tử Si. Ủ nhiệt cung cấp năng lượng để:</p>
+<ul>
+<li><strong>Phục hồi mạng tinh thể.</strong> Với lớp vô định hình, quá trình kết tinh lại xảy ra theo cơ chế epitaxy pha rắn (solid-phase epitaxy): mặt phân cách vô định hình/tinh thể tiến dần lên bề mặt, dùng phần tinh thể bên dưới làm mầm.</li>
+<li><strong>Đưa tạp chất vào vị trí thay thế</strong>, tức kích hoạt điện.</li>
+</ul>
+<p>Mâu thuẫn cơ bản: nhiệt độ cao giúp kích hoạt tốt và giảm sai hỏng, nhưng cũng làm tạp chất <strong>khuếch tán</strong>, làm tiếp giáp sâu thêm. Ở nhiệt độ đủ cao, quá trình kích hoạt và phục hồi diễn ra nhanh hơn khuếch tán, vì chúng có năng lượng kích hoạt khác nhau. Đây là cơ sở của xử lý nhiệt nhanh (RTP): lên nhiệt độ rất cao trong thời gian rất ngắn.</p>
+
+<h2>3. Lò nung và RTA</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>Lò nung (furnace)</th><th>RTA</th></tr>
+<tr><td>Xử lý</td><td>Theo mẻ, hàng trăm wafer</td><td>Từng wafer</td></tr>
+<tr><td>Thời gian</td><td>Hàng chục phút đến giờ</td><td>Vài giây đến dưới một phút</td></tr>
+<tr><td>Tốc độ gia nhiệt</td><td>Vài °C/phút</td><td>Hàng chục đến hàng trăm °C/s</td></tr>
+<tr><td>Khuếch tán tạp chất</td><td>Đáng kể</td><td>Được hạn chế</td></tr>
+<tr><td>Kiểm soát thermal budget</td><td>Kém</td><td>Tốt</td></tr>
+</table></div>
+<div class="box"><p class="t">Hỏi đáp: vì sao lò nung không thể gia nhiệt nhanh như RTP?</p>
+<p>Lò nung có nhiệt dung rất lớn (ống thạch anh, giá đỡ, hàng trăm wafer). Muốn tăng nhiệt nhanh cần công suất rất lớn, và rất khó tăng nhanh mà không bị dao động nhiệt độ do quá đà (overshoot) rồi hụt (undershoot). Ngoài ra, wafer trong lò nóng dần từ mép vào tâm, gia nhiệt nhanh sẽ gây ứng suất nhiệt và cong vênh.</p></div>
+
+<h2>4. Ba cơ chế truyền nhiệt</h2>
+<p><strong>Dẫn nhiệt</strong> (conduction): năng lượng truyền qua dao động mạng (phonon) và va chạm phân tử. Theo định luật Fourier, thông lượng nhiệt tỉ lệ với gradient nhiệt độ:</p>
+$$q = -k\,\frac{dT}{dx}$$
+<p>với \(k\) là độ dẫn nhiệt (W/m·K).</p>
+<p><strong>Đối lưu</strong> (convection): chuyển động tập thể của chất lưu. Chênh lệch nhiệt độ chủ yếu nằm trong một lớp chất lưu mỏng sát bề mặt rắn gọi là lớp biên. Theo định luật làm nguội Newton:</p>
+$$q = h\,(T_s - T_\infty)$$
+<p>với \(h\) là hệ số truyền nhiệt đối lưu.</p>
+<p><strong>Bức xạ</strong> (radiation): truyền năng lượng bằng sóng điện từ, không cần môi trường, xảy ra cả trong chân không. Theo định luật Stefan–Boltzmann:</p>
+$$q = \varepsilon\,\sigma\,T^4, \qquad \sigma = 5{,}67\times10^{-8}\ \mathrm{W/m^2K^4}$$
+<p>với \(\varepsilon\) là độ phát xạ (emissivity) của bề mặt. Vì phụ thuộc \(T^4\), <strong>bức xạ chiếm ưu thế ở nhiệt độ cao</strong>, còn dẫn nhiệt quan trọng hơn ở nhiệt độ thấp. Trong RTP, wafer được nung chủ yếu bằng bức xạ từ đèn.</p>
+
+<h2>5. Wafer hấp thụ bức xạ như thế nào?</h2>
+<p>Bức xạ tới bề mặt wafer có thể bị phản xạ (\(\rho\)), hấp thụ (\(\alpha\)) hoặc truyền qua (\(\tau\)), với \(\alpha + \rho + \tau = 1\); với vật liệu không trong suốt, \(\tau = 0\). Ở trạng thái cân bằng nhiệt, theo định luật Kirchhoff, độ hấp thụ bằng độ phát xạ. Si hấp thụ qua hai cơ chế:</p>
+<ul>
+<li><strong>Hấp thụ vùng cấm</strong>: photon có bước sóng ngắn hơn khoảng 1,1 µm (năng lượng lớn hơn E<sub>g</sub> ≈ 1,12 eV) kích thích electron từ vùng hóa trị lên vùng dẫn. Chiếm ưu thế khi dùng đèn hồ quang (arc lamp) có phổ ngắn.</li>
+<li><strong>Hấp thụ hạt tải tự do</strong>: ở bước sóng dài, hạt tải tự do hấp thụ photon. Phụ thuộc nồng độ pha tạp và tăng mạnh theo nhiệt độ, vì Si nóng có nhiều hạt tải nội tại hơn. Quan trọng với đèn halogen tungsten có phổ hồng ngoại.</li>
+</ul>
+<p>Hệ quả: wafer Si nguội, pha tạp nhẹ gần như trong suốt với hồng ngoại xa, nhưng khi nóng lên nó hấp thụ ngày càng mạnh. Độ hấp thụ còn phụ thuộc các lớp màng và hoa văn trên bề mặt, là nguồn gốc của "hiệu ứng hoa văn" (pattern effect) trong RTP.</p>
+
+<h2>6. Thermal budget</h2>
+<p>Với khuếch tán, đại lượng quyết định là \(Dt\). Vì \(D\) phụ thuộc hàm mũ vào nhiệt độ, tổng "ngân sách nhiệt" của một chu trình nhiệt độ \(T(t)\) là:</p>
+$$(Dt)_{\text{hiệu dụng}} = \int D\big(T(t)\big)\,dt$$
+<p>Giảm thiểu thermal budget giúp hạn chế các quá trình không mong muốn như khuếch tán tạp chất, trong khi vẫn đạt được quá trình mong muốn như kích hoạt. Phân tích này giải thích vì sao RTP vượt trội lò nung: thời gian ở nhiệt độ cao rất ngắn, và các đoạn tăng giảm nhiệt chậm của lò nung đóng góp đáng kể vào \(Dt\).</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Với β-Ga₂O₃ cấy Si, ủ kích hoạt thường ở khoảng 900–1100 °C trong N₂ (Sasaki và cộng sự, 2013). Hai điểm khác biệt so với Si: thứ nhất, Ga₂O₃ có vùng cấm khoảng 4,8 eV nên <strong>trong suốt</strong> với phần lớn phổ đèn halogen; wafer pha tạp nhẹ hấp thụ kém, nên cách nung và đo nhiệt độ cần được hiệu chỉnh riêng. Thứ hai, độ dẫn nhiệt của β-Ga₂O₃ chỉ khoảng 10–27 W/m·K tùy hướng tinh thể, thấp hơn Si (khoảng 150 W/m·K) cỡ một bậc (Guo và cộng sự, 2015), điều ảnh hưởng tới cả quá trình xử lý nhiệt lẫn hiện tượng tự gia nhiệt khi linh kiện hoạt động.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>F. P. Incropera, D. P. DeWitt, <em>Fundamentals of Heat and Mass Transfer</em>, Wiley.</li>
+<li>Z. Guo et al., "Anisotropic thermal conductivity in single crystal β-gallium oxide," <em>Applied Physics Letters</em> 106, 111909 (2015).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Right after implantation, the dopants sit at the right depth but hardly "work" yet: the lattice is damaged and most dopant atoms are on the wrong sites. Annealing is the step that turns them into real donors and acceptors.</p>
+
+<h2>1. Implantation damage</h2>
+<p>Each incoming ion collides with lattice atoms and knocks them off their sites, creating vacancy–interstitial pairs (Frenkel pairs). Displaced atoms collide further, producing a damage cascade. At high enough dose, especially for heavy ions, the implanted region becomes <strong>amorphous</strong>.</p>
+
+<h2>2. Activation annealing</h2>
+<p>A dopant atom acts as a donor or acceptor only on a substitutional site in a single-crystal lattice, bonded to four Si atoms. Annealing provides the energy to:</p>
+<ul>
+<li><strong>Repair the lattice.</strong> An amorphous layer recrystallizes by solid-phase epitaxy: the amorphous/crystalline interface moves toward the surface, using the crystal below as a template.</li>
+<li><strong>Move dopants onto substitutional sites</strong>, that is, activate them electrically.</li>
+</ul>
+<p>The basic conflict: high temperature improves activation and removes defects, but also makes dopants <strong>diffuse</strong>, deepening the junction. At sufficiently high temperature, activation and repair outpace diffusion because they have different activation energies. This is the basis of rapid thermal processing (RTP): very high temperature for a very short time.</p>
+
+<h2>3. Furnace versus RTA</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>Furnace</th><th>RTA</th></tr>
+<tr><td>Processing</td><td>Batch, hundreds of wafers</td><td>Single wafer</td></tr>
+<tr><td>Time</td><td>Tens of minutes to hours</td><td>Seconds to under a minute</td></tr>
+<tr><td>Ramp rate</td><td>A few °C/min</td><td>Tens to hundreds of °C/s</td></tr>
+<tr><td>Dopant diffusion</td><td>Significant</td><td>Limited</td></tr>
+<tr><td>Thermal budget control</td><td>Poor</td><td>Good</td></tr>
+</table></div>
+<div class="box"><p class="t">Q&amp;A: why can't a furnace ramp as fast as RTP?</p>
+<p>A furnace has a huge thermal mass (quartz tube, boats, hundreds of wafers). Ramping quickly would need enormous power, and it is very hard to ramp fast without temperature overshoot and undershoot. In addition, wafers in a furnace heat from the edge inward, so fast ramps cause thermal stress and warpage.</p></div>
+
+<h2>4. Three heat-transfer mechanisms</h2>
+<p><strong>Conduction</strong>: energy transported by lattice vibrations (phonons) and molecular collisions. By Fourier's law, heat flux is proportional to the temperature gradient:</p>
+$$q = -k\,\frac{dT}{dx}$$
+<p>where \(k\) is the thermal conductivity (W/m·K).</p>
+<p><strong>Convection</strong>: collective motion of a fluid. Most of the temperature difference occurs across a thin fluid layer next to the solid surface, the boundary layer. By Newton's law of cooling:</p>
+$$q = h\,(T_s - T_\infty)$$
+<p>where \(h\) is the convective heat-transfer coefficient.</p>
+<p><strong>Radiation</strong>: energy carried by electromagnetic waves, needing no medium and working in vacuum. By the Stefan–Boltzmann law:</p>
+$$q = \varepsilon\,\sigma\,T^4, \qquad \sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$$
+<p>where \(\varepsilon\) is the surface emissivity. Because of the \(T^4\) dependence, <strong>radiation dominates at high temperature</strong>, while conduction matters more at low temperature. In RTP, wafers are heated mainly by lamp radiation.</p>
+
+<h2>5. How does a wafer absorb radiation?</h2>
+<p>Radiation reaching the wafer is reflected (\(\rho\)), absorbed (\(\alpha\)) or transmitted (\(\tau\)), with \(\alpha + \rho + \tau = 1\); for an opaque material \(\tau = 0\). In thermal equilibrium, by Kirchhoff's law, absorptivity equals emissivity. Si absorbs through two mechanisms:</p>
+<ul>
+<li><strong>Band-gap absorption</strong>: photons with wavelength shorter than about 1.1 µm (energy above E<sub>g</sub> ≈ 1.12 eV) excite electrons from the valence to the conduction band. Dominant with short-wavelength arc lamps.</li>
+<li><strong>Free-carrier absorption</strong>: at long wavelengths, free carriers absorb photons. It depends on doping and rises steeply with temperature as hot Si has more intrinsic carriers. Important for infrared tungsten-halogen lamps.</li>
+</ul>
+<p>As a result, a cold, lightly doped Si wafer is nearly transparent to far infrared, but absorbs more and more as it heats up. Absorption also depends on surface films and patterns, which is the origin of the pattern effect in RTP.</p>
+
+<h2>6. Thermal budget</h2>
+<p>For diffusion, the controlling quantity is \(Dt\). Since \(D\) depends exponentially on temperature, the total "thermal budget" of a temperature cycle \(T(t)\) is:</p>
+$$(Dt)_{\text{eff}} = \int D\big(T(t)\big)\,dt$$
+<p>Minimizing the thermal budget limits unwanted processes such as dopant diffusion while still achieving wanted ones such as activation. This analysis explains why RTP outperforms furnaces: the time at peak temperature is very short, while a furnace's slow ramps contribute substantially to \(Dt\).</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>For Si-implanted β-Ga₂O₃, activation anneals are typically around 900–1100 °C in N₂ (Sasaki et al., 2013). Two differences from Si stand out. First, Ga₂O₃ has a bandgap of about 4.8 eV, so it is <strong>transparent</strong> to most of the halogen-lamp spectrum; lightly doped wafers absorb poorly, so heating and temperature measurement need dedicated calibration. Second, β-Ga₂O₃ has a thermal conductivity of only about 10–27 W/m·K depending on crystal direction, roughly an order of magnitude below Si (about 150 W/m·K) (Guo et al., 2015), which affects both thermal processing and device self-heating.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
+<li>F. P. Incropera, D. P. DeWitt, <em>Fundamentals of Heat and Mass Transfer</em>, Wiley.</li>
+<li>Z. Guo et al., "Anisotropic thermal conductivity in single crystal β-gallium oxide," <em>Applied Physics Letters</em> 106, 111909 (2015).</li>
+</ol>
+</div>
+<nav class="pager"><a href="implanter.html">← <span class="l-vi">Hệ thống cấy ion</span><span class="l-en">Ion implantation systems</span></a><a class="n" href="rtp.html"><span class="l-vi">Xử lý nhiệt nhanh (RTP) và ứng dụng</span><span class="l-en">Rapid thermal processing and its applications</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>
