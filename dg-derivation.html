@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Dẫn xuất mô hình Deal–Grove" data-title-en="Deriving the Deal–Grove model">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deriving the Deal–Grove model · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Flux, Henry's and Fick's laws, the boundary layer, balancing three fluxes and the meaning of A, B and τ.">
+<meta property="og:title" content="Deriving the Deal–Grove model">
+<meta property="og:description" content="Flux, Henry's and Fick's laws, the boundary layer, balancing three fluxes and the meaning of A, B and τ.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 6 · Bài 1</span><span class="l-en">Part 6 · Lesson 1</span></p>
+  <h1><span class="l-vi">Dẫn xuất mô hình Deal–Grove</span><span class="l-en">Deriving the Deal–Grove model</span></h1>
+  <p class="sub"><span class="l-vi">Thông lượng, định luật Henry và Fick, lớp biên, cân bằng ba thông lượng và ý nghĩa của A, B, τ.</span><span class="l-en">Flux, Henry's and Fick's laws, the boundary layer, balancing three fluxes and the meaning of A, B and τ.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Năm 1965, Bruce Deal và Andrew Grove tại Fairchild Semiconductor công bố một mô hình chỉ dùng ba định luật quen thuộc: định luật Henry, định luật Fick và động học phản ứng bậc một. Bài này đi qua từng bước dẫn xuất, để thấy mỗi hằng số trong phương trình cuối cùng mang ý nghĩa vật lý gì.</p>
+
+<h2>1. Ba công cụ cơ bản</h2>
+<h3>Thông lượng (flux)</h3>
+<p>Trong các hiện tượng vận chuyển (truyền nhiệt, truyền khối, cơ học chất lưu), thông lượng là lượng của một đại lượng đi qua một đơn vị diện tích trong một đơn vị thời gian, có thứ nguyên [lượng]·[thời gian]⁻¹·[diện tích]⁻¹. Với oxy hóa, đó là số phân tử chất oxy hóa đi qua 1 cm² mỗi giây (cm⁻²s⁻¹). Lưu lượng nước chảy qua mặt cắt một dòng sông mỗi giây, hay lượng ánh sáng mặt trời chiếu xuống một mảnh đất mỗi giây, cũng là những dạng thông lượng.</p>
+<h3>Định luật Henry</h3>
+<p>Lượng khí hòa tan trong một chất lỏng hoặc chất rắn tỉ lệ với áp suất riêng phần của khí đó phía trên bề mặt:</p>
+$$C = H\,p$$
+<p>với \(H\) là hằng số Henry. Với oxy hóa Si, \(H\) của H₂O trong SiO₂ lớn hơn nhiều so với O₂, một lý do then chốt khiến oxy hóa ướt nhanh hơn.</p>
+<h3>Định luật Fick thứ nhất</h3>
+<p>Khuếch tán xảy ra để đáp ứng gradient nồng độ: \(F = -D\,\partial C/\partial x\). Trong oxide mỏng ở trạng thái dừng, profile nồng độ gần như tuyến tính, nên \(F = D(C_0 - C_i)/x_{ox}\).</p>
+
+<h2>2. Bức tranh vật lý</h2>
+<p>Chất oxy hóa đi từ khí tới Si qua ba bước nối tiếp:</p>
+<ol>
+<li>Từ khối khí khuếch tán qua <strong>lớp biên</strong> tới bề mặt oxide. Khí mang (N₂, Ar) chảy dọc ống lò theo dòng chảy tầng (laminar flow): các lớp khí trượt song song, không xáo trộn. Sát bề mặt wafer, vận tốc giảm về 0 và hình thành một lớp khí gần như đứng yên dày \(\delta\); chất oxy hóa phải khuếch tán qua lớp này.</li>
+<li>Hòa tan vào oxide tại bề mặt (định luật Henry), rồi khuếch tán qua oxide đã có tới mặt phân cách Si/SiO₂.</li>
+<li>Phản ứng với Si tại mặt phân cách.</li>
+</ol>
+<figure><svg viewBox="0 0 620 300" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<rect x="250" y="40" width="190" height="210" class="node"/>
+<rect x="440" y="40" width="170" height="210" class="atom"/>
+<rect x="175" y="40" width="75" height="210" fill="var(--accent-soft)" opacity=".6"/>
+<text x="95" y="30" class="nt" text-anchor="middle">Pha khí</text>
+<text x="212" y="30" class="ns" text-anchor="middle">lớp biên δ</text>
+<text x="345" y="30" class="nt" text-anchor="middle">SiO₂</text>
+<text x="525" y="30" class="nt" text-anchor="middle">Si</text>
+<path d="M20,80 L175,80 Q215,82 250,118" class="s2" fill="none"/>
+<path d="M250,96 L440,190" class="s1" fill="none"/>
+<text x="30" y="72" class="tk">C<tspan baseline-shift="sub" font-size="8">g</tspan></text><text x="232" y="132" class="tk">Cₛ</text>
+<text x="256" y="90" class="tk">C₀</text><text x="420" y="206" class="tk">Cᵢ</text>
+<line x1="250" y1="262" x2="440" y2="262" class="ax"/><text x="345" y="280" class="ns" text-anchor="middle">x<tspan baseline-shift="sub" font-size="8">ox</tspan></text>
+<path d="M150,230H205" class="arr" marker-end="url(#mv)"/><text x="177" y="222" class="nt" text-anchor="middle">F₁</text>
+<path d="M318,230H373" class="arr" marker-end="url(#mv)"/><text x="345" y="222" class="nt" text-anchor="middle">F₂</text>
+<path d="M412,230H467" class="arr" marker-end="url(#mv)"/><text x="490" y="234" class="nt">F₃</text>
+<text x="525" y="120" class="ns" text-anchor="middle">phản ứng tại</text><text x="525" y="136" class="ns" text-anchor="middle">mặt phân cách</text>
+</svg><figcaption>Hình 1. Profile nồng độ chất oxy hóa và ba thông lượng nối tiếp trong mô hình Deal–Grove.</figcaption></figure>
+
+<h2>3. Viết ba thông lượng</h2>
+<p><strong>Bước 1, vận chuyển pha khí.</strong> Với hệ số truyền khối \(h_g = D_g/\delta\):</p>
+$$F_1 = h_g\,(C_g - C_s)$$
+<p>Nồng độ trong khí liên hệ với áp suất qua phương trình khí lý tưởng \(pV = nkT\), tức \(C = p/kT\). Theo định luật Henry, nồng độ ngay trong oxide tại bề mặt là \(C_0 = H p_s = H kT\,C_s\), và nồng độ cân bằng ứng với áp suất khí khối là \(C^* = H p_g = HkT\,C_g\). Thay vào:</p>
+$$F_1 = h\,(C^* - C_0), \qquad h = \frac{h_g}{HkT}$$
+<p>\(C^*\) là đại lượng ta điều khiển trực tiếp qua áp suất khí đưa vào.</p>
+<p><strong>Bước 2, khuếch tán qua oxide:</strong></p>
+$$F_2 = D\,\frac{C_0 - C_i}{x_{ox}}$$
+<p><strong>Bước 3, phản ứng bậc một tại mặt phân cách</strong>, với hằng số tốc độ \(k_s\):</p>
+$$F_3 = k_s\,C_i$$
+
+<h2>4. Trạng thái dừng</h2>
+<p>Ở trạng thái dừng không có chất oxy hóa tích tụ ở đâu cả, nên \(F_1 = F_2 = F_3 \equiv F\). Đây là hai phương trình cho hai ẩn \(C_0\) và \(C_i\). Giải ra:</p>
+$$C_i = \frac{C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}, \qquad C_0 = \frac{\left(1 + \dfrac{k_s x_{ox}}{D}\right)C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
+<p>và thông lượng:</p>
+$$F = \frac{k_s C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
+<p>Mẫu số là tổng ba "trở kháng" nối tiếp, giống ba điện trở mắc nối tiếp: \(1/h\) của pha khí, \(x_{ox}/D\) của oxide và \(1/k_s\) của phản ứng. Trở kháng nào lớn nhất sẽ quyết định tốc độ.</p>
+
+<h2>5. Từ thông lượng tới tốc độ mọc oxide</h2>
+<p>Gọi \(N_1\) là số phân tử chất oxy hóa cần để tạo một đơn vị thể tích oxide: khoảng 2,2×10²² cm⁻³ với O₂ (một phân tử O₂ cho một phân tử SiO₂) và gấp đôi, khoảng 4,4×10²² cm⁻³, với H₂O. Tốc độ mọc:</p>
+$$\frac{dx_{ox}}{dt} = \frac{F}{N_1} = \frac{k_s C^*/N_1}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
+<p>Tách biến và tích phân từ \(x_{ox} = x_i\) tại \(t = 0\):</p>
+$$x_{ox}^2 + A\,x_{ox} = B\,(t + \tau)$$
+<p>với</p>
+$$A = 2D\left(\frac{1}{k_s} + \frac{1}{h}\right), \qquad B = \frac{2DC^*}{N_1}, \qquad \tau = \frac{x_i^2 + A x_i}{B}$$
+<p>Trong thực tế \(h\) rất lớn so với \(k_s\) (vận chuyển pha khí nhanh), nên \(A \approx 2D/k_s\) và \(B/A \approx k_s C^*/N_1\). Đại lượng \(\tau\) có ý nghĩa trực quan: đó là thời gian "ảo" mà wafer đã như ở sẵn trong lò để mọc được lớp oxide ban đầu \(x_i\).</p>
+
+<div class="box"><p class="t">Tóm tắt ý nghĩa vật lý</p>
+<ul>
+<li>\(B\) chứa \(D\) và \(C^*\): mô tả <strong>khuếch tán</strong> qua oxide.</li>
+<li>\(B/A\) chứa \(k_s\) và \(C^*\): mô tả <strong>phản ứng</strong> tại mặt phân cách.</li>
+<li>Cả hai đều tỉ lệ với \(C^*\), tức với áp suất riêng phần của chất oxy hóa.</li>
+</ul></div>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Cách lập luận "các trở kháng nối tiếp" này rất hữu ích trong nghiên cứu Ga₂O₃. Ví dụ, khi ủ một tiếp xúc Ti/Ga₂O₃, oxy từ Ga₂O₃ khuếch tán vào Ti để tạo lớp TiOₓ ở mặt phân cách; tùy nhiệt độ và độ dày lớp, quá trình có thể bị giới hạn bởi phản ứng hoặc bởi khuếch tán, và lớp này lại để lại oxygen vacancy trong Ga₂O₃ gần mặt phân cách, ảnh hưởng tới tính chất tiếp xúc.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. E. Deal, A. S. Grove, "General relationship for the thermal oxidation of silicon," <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chương 6.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">In 1965, Bruce Deal and Andrew Grove at Fairchild Semiconductor published a model built from three familiar laws: Henry's law, Fick's law and first-order reaction kinetics. This lesson walks through the derivation step by step, so that every constant in the final equation has a clear physical meaning.</p>
+
+<h2>1. Three basic tools</h2>
+<h3>Flux</h3>
+<p>In transport phenomena (heat transfer, mass transfer, fluid dynamics), flux is the amount of a quantity passing through unit area per unit time, with dimensions [quantity]·[time]⁻¹·[area]⁻¹. For oxidation, it is the number of oxidant molecules crossing 1 cm² per second (cm⁻²s⁻¹). The water flowing through a river's cross-section each second, or the sunlight falling on a patch of ground each second, are also fluxes.</p>
+<h3>Henry's law</h3>
+<p>The amount of gas dissolved in a liquid or solid is proportional to the gas's partial pressure above the surface:</p>
+$$C = H\,p$$
+<p>where \(H\) is Henry's constant. For Si oxidation, \(H\) for H₂O in SiO₂ is far larger than for O₂, a key reason wet oxidation is faster.</p>
+<h3>Fick's first law</h3>
+<p>Diffusion responds to a concentration gradient: \(F = -D\,\partial C/\partial x\). In a thin oxide at steady state the profile is nearly linear, so \(F = D(C_0 - C_i)/x_{ox}\).</p>
+
+<h2>2. The physical picture</h2>
+<p>The oxidant travels from the gas to the Si in three series steps:</p>
+<ol>
+<li>It diffuses from the bulk gas across a <strong>boundary layer</strong> to the oxide surface. The carrier gas (N₂, Ar) flows along the furnace tube in laminar flow: layers slide parallel without mixing. Next to the wafer the velocity falls to zero, forming a nearly stagnant gas layer of thickness \(\delta\) that the oxidant must diffuse across.</li>
+<li>It dissolves into the oxide at the surface (Henry's law), then diffuses through the existing oxide to the Si/SiO₂ interface.</li>
+<li>It reacts with Si at the interface.</li>
+</ol>
+<figure><svg viewBox="0 0 620 300" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<rect x="250" y="40" width="190" height="210" class="node"/>
+<rect x="440" y="40" width="170" height="210" class="atom"/>
+<rect x="175" y="40" width="75" height="210" fill="var(--accent-soft)" opacity=".6"/>
+<text x="95" y="30" class="nt" text-anchor="middle">Gas</text>
+<text x="212" y="30" class="ns" text-anchor="middle">boundary layer δ</text>
+<text x="345" y="30" class="nt" text-anchor="middle">SiO₂</text>
+<text x="525" y="30" class="nt" text-anchor="middle">Si</text>
+<path d="M20,80 L175,80 Q215,82 250,118" class="s2" fill="none"/>
+<path d="M250,96 L440,190" class="s1" fill="none"/>
+<text x="30" y="72" class="tk">C<tspan baseline-shift="sub" font-size="8">g</tspan></text><text x="232" y="132" class="tk">Cₛ</text>
+<text x="256" y="90" class="tk">C₀</text><text x="420" y="206" class="tk">Cᵢ</text>
+<line x1="250" y1="262" x2="440" y2="262" class="ax"/><text x="345" y="280" class="ns" text-anchor="middle">x<tspan baseline-shift="sub" font-size="8">ox</tspan></text>
+<path d="M150,230H205" class="arr" marker-end="url(#me)"/><text x="177" y="222" class="nt" text-anchor="middle">F₁</text>
+<path d="M318,230H373" class="arr" marker-end="url(#me)"/><text x="345" y="222" class="nt" text-anchor="middle">F₂</text>
+<path d="M412,230H467" class="arr" marker-end="url(#me)"/><text x="490" y="234" class="nt">F₃</text>
+<text x="525" y="120" class="ns" text-anchor="middle">reaction at the</text><text x="525" y="136" class="ns" text-anchor="middle">interface</text>
+</svg><figcaption>Figure 1. Oxidant concentration profile and the three series fluxes in the Deal–Grove model.</figcaption></figure>
+
+<h2>3. Writing the three fluxes</h2>
+<p><strong>Step 1, gas-phase transport.</strong> With mass-transfer coefficient \(h_g = D_g/\delta\):</p>
+$$F_1 = h_g\,(C_g - C_s)$$
+<p>Gas concentration relates to pressure through the ideal gas law \(pV = nkT\), so \(C = p/kT\). By Henry's law, the concentration just inside the oxide surface is \(C_0 = H p_s = H kT\,C_s\), and the equilibrium concentration for the bulk gas pressure is \(C^* = H p_g = HkT\,C_g\). Substituting:</p>
+$$F_1 = h\,(C^* - C_0), \qquad h = \frac{h_g}{HkT}$$
+<p>\(C^*\) is the quantity we control directly through the input gas pressure.</p>
+<p><strong>Step 2, diffusion through the oxide:</strong></p>
+$$F_2 = D\,\frac{C_0 - C_i}{x_{ox}}$$
+<p><strong>Step 3, first-order reaction at the interface</strong>, with rate constant \(k_s\):</p>
+$$F_3 = k_s\,C_i$$
+
+<h2>4. Steady state</h2>
+<p>At steady state no oxidant accumulates anywhere, so \(F_1 = F_2 = F_3 \equiv F\). These are two equations for the two unknowns \(C_0\) and \(C_i\). Solving:</p>
+$$C_i = \frac{C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}, \qquad C_0 = \frac{\left(1 + \dfrac{k_s x_{ox}}{D}\right)C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
+<p>and the flux:</p>
+$$F = \frac{k_s C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
+<p>The denominator is a sum of three series "resistances", like three resistors in series: \(1/h\) for the gas phase, \(x_{ox}/D\) for the oxide and \(1/k_s\) for the reaction. The largest resistance controls the rate.</p>
+
+<h2>5. From flux to growth rate</h2>
+<p>Let \(N_1\) be the number of oxidant molecules needed per unit volume of oxide: about 2.2×10²² cm⁻³ for O₂ (one O₂ per SiO₂ molecule) and twice that, about 4.4×10²² cm⁻³, for H₂O. The growth rate is:</p>
+$$\frac{dx_{ox}}{dt} = \frac{F}{N_1} = \frac{k_s C^*/N_1}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
+<p>Separating variables and integrating from \(x_{ox} = x_i\) at \(t = 0\):</p>
+$$x_{ox}^2 + A\,x_{ox} = B\,(t + \tau)$$
+<p>with</p>
+$$A = 2D\left(\frac{1}{k_s} + \frac{1}{h}\right), \qquad B = \frac{2DC^*}{N_1}, \qquad \tau = \frac{x_i^2 + A x_i}{B}$$
+<p>In practice \(h\) is much larger than \(k_s\) (gas transport is fast), so \(A \approx 2D/k_s\) and \(B/A \approx k_s C^*/N_1\). The quantity \(\tau\) has an intuitive meaning: it is the "virtual" time the wafer behaves as if it had already spent in the furnace to grow the initial oxide \(x_i\).</p>
+
+<div class="box"><p class="t">Physical meaning in brief</p>
+<ul>
+<li>\(B\) contains \(D\) and \(C^*\): it describes <strong>diffusion</strong> through the oxide.</li>
+<li>\(B/A\) contains \(k_s\) and \(C^*\): it describes the <strong>reaction</strong> at the interface.</li>
+<li>Both are proportional to \(C^*\), that is, to the oxidant partial pressure.</li>
+</ul></div>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>This "series resistances" reasoning is very useful in Ga₂O₃ research. When a Ti/Ga₂O₃ contact is annealed, for example, oxygen from Ga₂O₃ diffuses into Ti to form an interfacial TiOₓ layer; depending on temperature and layer thickness the process may be reaction-limited or diffusion-limited, and it leaves oxygen vacancies in the Ga₂O₃ near the interface that affect contact behavior.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. E. Deal, A. S. Grove, "General relationship for the thermal oxidation of silicon," <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chapter 6.</li>
+</ol>
+</div>
+<nav class="pager"><a href="oxidation-factors.html">← <span class="l-vi">Các yếu tố ảnh hưởng đến oxy hóa nhiệt</span><span class="l-en">Factors affecting thermal oxidation</span></a><a class="n" href="oxidation-kinetics.html"><span class="l-vi">Động học oxy hóa: hai chế độ và các hằng số</span><span class="l-en">Oxidation kinetics: two regimes and the rate constants</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

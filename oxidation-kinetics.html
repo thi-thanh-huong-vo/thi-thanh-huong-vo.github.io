@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Động học oxy hóa: hai chế độ và các hằng số" data-title-en="Oxidation kinetics: two regimes and the rate constants">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oxidation kinetics: two regimes and the rate constants · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Linear and parabolic regimes, diffusion versus reaction control, Arrhenius behavior, pressure, orientation and doping.">
+<meta property="og:title" content="Oxidation kinetics: two regimes and the rate constants">
+<meta property="og:description" content="Linear and parabolic regimes, diffusion versus reaction control, Arrhenius behavior, pressure, orientation and doping.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 6 · Bài 2</span><span class="l-en">Part 6 · Lesson 2</span></p>
+  <h1><span class="l-vi">Động học oxy hóa: hai chế độ và các hằng số</span><span class="l-en">Oxidation kinetics: two regimes and the rate constants</span></h1>
+  <p class="sub"><span class="l-vi">Chế độ tuyến tính và parabol, giới hạn bởi khuếch tán hay phản ứng, Arrhenius, áp suất, định hướng và pha tạp.</span><span class="l-en">Linear and parabolic regimes, diffusion versus reaction control, Arrhenius behavior, pressure, orientation and doping.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Phương trình Deal–Grove có hai số hạng, và tùy độ dày oxide mà số hạng này hay số hạng kia chiếm ưu thế. Hiểu hai chế độ này, cùng cách các hằng số phụ thuộc nhiệt độ, áp suất, định hướng tinh thể và pha tạp, là chìa khóa để thiết kế một bước oxy hóa.</p>
+
+<h2>1. Hai chế độ theo độ dày</h2>
+<p>Từ \(x_{ox}^2 + A x_{ox} = B(t + \tau)\):</p>
+<ul>
+<li><strong>Oxide đủ mỏng</strong> (\(t + \tau \ll A^2/4B\)): bỏ qua số hạng bậc hai,
+$$x_{ox} \approx \frac{B}{A}\,(t + \tau)$$
+Độ dày tăng tuyến tính theo thời gian; \(B/A\) gọi là <strong>hằng số tốc độ tuyến tính</strong>.</li>
+<li><strong>Oxide đủ dày</strong> (\(t \gg A^2/4B\) và \(t \gg \tau\)): bỏ qua số hạng bậc nhất,
+$$x_{ox}^2 \approx B\,t$$
+Độ dày tăng theo \(\sqrt{t}\); \(B\) gọi là <strong>hằng số tốc độ parabol</strong>.</li>
+</ul>
+
+<h2>2. Giới hạn bởi khuếch tán hay bởi phản ứng</h2>
+<p>Hai chế độ trên tương ứng với hai trường hợp giới hạn của nồng độ chất oxy hóa:</p>
+<ul>
+<li><strong>Giới hạn bởi khuếch tán</strong>: khi \(D\) rất nhỏ so với thông lượng mà phản ứng có thể tiêu thụ (\(k_s x_{ox}/D \gg 1\)), chất oxy hóa vừa tới mặt phân cách là bị tiêu thụ ngay: \(C_i \to 0\), còn \(C_0 \to C^*\). Tốc độ do khuếch tán qua oxide quyết định, tức do \(B\).</li>
+<li><strong>Giới hạn bởi phản ứng</strong>: khi \(D\) lớn (oxide mỏng), chất oxy hóa được cung cấp dồi dào tới mặt phân cách: \(C_i \approx C_0 \approx C^*\). Tốc độ do hằng số phản ứng \(k_s\) và \(C_i\) quyết định, tức do \(B/A\).</li>
+</ul>
+
+<h2>3. Hằng số phụ thuộc nhiệt độ</h2>
+<p>Cả hai hằng số tuân theo quy luật Arrhenius:</p>
+$$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left(-\frac{E_2}{kT}\right)$$
+<div class="tablewrap"><table>
+<tr><th>Môi trường</th><th>B: C₁ (µm²/h)</th><th>E₁ (eV)</th><th>B/A: C₂ (µm/h), Si (111)</th><th>E₂ (eV)</th></tr>
+<tr><td>Khô (O₂)</td><td>7,72×10²</td><td>1,23</td><td>6,23×10⁶</td><td>2,0</td></tr>
+<tr><td>Ướt (H₂O)</td><td>3,86×10²</td><td>0,78</td><td>1,63×10⁸</td><td>2,05</td></tr>
+</table></div>
+<p>Các giá trị trên (theo Plummer và cộng sự) cho \(B/A\) của Si (111); với Si (100), chia \(C_2\) cho 1,68. Năng lượng kích hoạt của \(B\) với oxy hóa khô (1,23 eV) gần với năng lượng kích hoạt khuếch tán của O₂ trong SiO₂, còn của \(B/A\) (khoảng 2 eV) gần với năng lượng phá liên kết Si–Si, phù hợp với ý nghĩa vật lý của từng hằng số.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="532" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="100.50415775718679" y1="255" x2="100.50415775718679" y2="260" class="ax"/><text x="100.50415775718679" y="275" class="tk" text-anchor="middle">1200</text><line x1="180.64098873699913" y1="255" x2="180.64098873699913" y2="260" class="ax"/><text x="180.64098873699913" y="275" class="tk" text-anchor="middle">1100</text><line x1="273.36656903618666" y1="255" x2="273.36656903618666" y2="260" class="ax"/><text x="273.36656903618666" y="275" class="tk" text-anchor="middle">1000</text><line x1="381.90011597206785" y1="255" x2="381.90011597206785" y2="260" class="ax"/><text x="381.90011597206785" y="275" class="tk" text-anchor="middle">900</text><line x1="510.6607601331053" y1="255" x2="510.6607601331053" y2="260" class="ax"/><text x="510.6607601331053" y="275" class="tk" text-anchor="middle">800</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="532" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-3</tspan></text><line x1="65" y1="176.66666666666669" x2="70" y2="176.66666666666669" class="ax"/><line x1="70" y1="176.66666666666669" x2="532" y2="176.66666666666669" class="grid"/><text x="61" y="180.66666666666669" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-2</tspan></text><line x1="65" y1="98.33333333333334" x2="70" y2="98.33333333333334" class="ax"/><line x1="70" y1="98.33333333333334" x2="532" y2="98.33333333333334" class="grid"/><text x="61" y="102.33333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-1</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="532" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">0</tspan></text><text x="301.0" y="294" class="lab" text-anchor="middle">Nhiệt độ (°C), trục theo 1000/T</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">B (µm²/h)</text><path d="M70.0,20.6 L77.7,22.1 L85.4,23.6 L93.1,25.0 L100.8,26.5 L108.5,27.9 L116.2,29.4 L123.9,30.9 L131.6,32.3 L139.3,33.8 L147.0,35.3 L154.7,36.7 L162.4,38.2 L170.1,39.6 L177.8,41.1 L185.5,42.6 L193.2,44.0 L200.9,45.5 L208.6,47.0 L216.3,48.4 L224.0,49.9 L231.7,51.3 L239.4,52.8 L247.1,54.3 L254.8,55.7 L262.5,57.2 L270.2,58.7 L277.9,60.1 L285.6,61.6 L293.3,63.0 L301.0,64.5 L308.7,66.0 L316.4,67.4 L324.1,68.9 L331.8,70.4 L339.5,71.8 L347.2,73.3 L354.9,74.7 L362.6,76.2 L370.3,77.7 L378.0,79.1 L385.7,80.6 L393.4,82.1 L401.1,83.5 L408.8,85.0 L416.5,86.4 L424.2,87.9 L431.9,89.4 L439.6,90.8 L447.3,92.3 L455.0,93.8 L462.7,95.2 L470.4,96.7 L478.1,98.2 L485.8,99.6 L493.5,101.1 L501.2,102.5 L508.9,104.0 L516.6,105.5 L524.3,106.9 L532.0,108.4" class="s1" fill="none"/><path d="M70.0,114.3 L77.7,116.6 L85.4,118.9 L93.1,121.2 L100.8,123.5 L108.5,125.8 L116.2,128.1 L123.9,130.4 L131.6,132.8 L139.3,135.1 L147.0,137.4 L154.7,139.7 L162.4,142.0 L170.1,144.3 L177.8,146.6 L185.5,148.9 L193.2,151.2 L200.9,153.5 L208.6,155.8 L216.3,158.1 L224.0,160.4 L231.7,162.7 L239.4,165.0 L247.1,167.4 L254.8,169.7 L262.5,172.0 L270.2,174.3 L277.9,176.6 L285.6,178.9 L293.3,181.2 L301.0,183.5 L308.7,185.8 L316.4,188.1 L324.1,190.4 L331.8,192.7 L339.5,195.0 L347.2,197.3 L354.9,199.6 L362.6,202.0 L370.3,204.3 L378.0,206.6 L385.7,208.9 L393.4,211.2 L401.1,213.5 L408.8,215.8 L416.5,218.1 L424.2,220.4 L431.9,222.7 L439.6,225.0 L447.3,227.3 L455.0,229.6 L462.7,231.9 L470.4,234.2 L478.1,236.6 L485.8,238.9 L493.5,241.2 L501.2,243.5 L508.9,245.8 L516.6,248.1 L524.3,250.4 L532.0,252.7" class="s3" fill="none"/><line x1="390" y1="32" x2="414" y2="32" class="s1"/><text x="420" y="36" class="tk">Ướt (H₂O)</text><line x1="390" y1="50" x2="414" y2="50" class="s3"/><text x="420" y="54" class="tk">Khô (O₂)</text></svg><figcaption>Hình 1. Hằng số parabol B theo nhiệt độ (đồ thị Arrhenius).</figcaption></figure>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="532" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="100.50415775718679" y1="255" x2="100.50415775718679" y2="260" class="ax"/><text x="100.50415775718679" y="275" class="tk" text-anchor="middle">1200</text><line x1="180.64098873699913" y1="255" x2="180.64098873699913" y2="260" class="ax"/><text x="180.64098873699913" y="275" class="tk" text-anchor="middle">1100</text><line x1="273.36656903618666" y1="255" x2="273.36656903618666" y2="260" class="ax"/><text x="273.36656903618666" y="275" class="tk" text-anchor="middle">1000</text><line x1="381.90011597206785" y1="255" x2="381.90011597206785" y2="260" class="ax"/><text x="381.90011597206785" y="275" class="tk" text-anchor="middle">900</text><line x1="510.6607601331053" y1="255" x2="510.6607601331053" y2="260" class="ax"/><text x="510.6607601331053" y="275" class="tk" text-anchor="middle">800</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="532" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-3</tspan></text><line x1="65" y1="196.25" x2="70" y2="196.25" class="ax"/><line x1="70" y1="196.25" x2="532" y2="196.25" class="grid"/><text x="61" y="200.25" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-2</tspan></text><line x1="65" y1="137.5" x2="70" y2="137.5" class="ax"/><line x1="70" y1="137.5" x2="532" y2="137.5" class="grid"/><text x="61" y="141.5" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-1</tspan></text><line x1="65" y1="78.75" x2="70" y2="78.75" class="ax"/><line x1="70" y1="78.75" x2="532" y2="78.75" class="grid"/><text x="61" y="82.75" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">0</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="532" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">1</tspan></text><text x="301.0" y="294" class="lab" text-anchor="middle">Nhiệt độ (°C), trục theo 1000/T</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">B/A (µm/h)</text><path d="M70.0,10.1 L77.7,13.0 L85.4,15.9 L93.1,18.8 L100.8,21.7 L108.5,24.6 L116.2,27.4 L123.9,30.3 L131.6,33.2 L139.3,36.1 L147.0,39.0 L154.7,41.9 L162.4,44.7 L170.1,47.6 L177.8,50.5 L185.5,53.4 L193.2,56.3 L200.9,59.2 L208.6,62.0 L216.3,64.9 L224.0,67.8 L231.7,70.7 L239.4,73.6 L247.1,76.5 L254.8,79.3 L262.5,82.2 L270.2,85.1 L277.9,88.0 L285.6,90.9 L293.3,93.8 L301.0,96.6 L308.7,99.5 L316.4,102.4 L324.1,105.3 L331.8,108.2 L339.5,111.1 L347.2,113.9 L354.9,116.8 L362.6,119.7 L370.3,122.6 L378.0,125.5 L385.7,128.4 L393.4,131.2 L401.1,134.1 L408.8,137.0 L416.5,139.9 L424.2,142.8 L431.9,145.7 L439.6,148.5 L447.3,151.4 L455.0,154.3 L462.7,157.2 L470.4,160.1 L478.1,163.0 L485.8,165.8 L493.5,168.7 L501.2,171.6 L508.9,174.5 L516.6,177.4 L524.3,180.3 L532.0,183.1" class="s1" fill="none"/><path d="M70.0,83.7 L77.7,86.5 L85.4,89.3 L93.1,92.1 L100.8,94.9 L108.5,97.7 L116.2,100.5 L123.9,103.4 L131.6,106.2 L139.3,109.0 L147.0,111.8 L154.7,114.6 L162.4,117.4 L170.1,120.2 L177.8,123.0 L185.5,125.9 L193.2,128.7 L200.9,131.5 L208.6,134.3 L216.3,137.1 L224.0,139.9 L231.7,142.7 L239.4,145.5 L247.1,148.4 L254.8,151.2 L262.5,154.0 L270.2,156.8 L277.9,159.6 L285.6,162.4 L293.3,165.2 L301.0,168.0 L308.7,170.9 L316.4,173.7 L324.1,176.5 L331.8,179.3 L339.5,182.1 L347.2,184.9 L354.9,187.7 L362.6,190.6 L370.3,193.4 L378.0,196.2 L385.7,199.0 L393.4,201.8 L401.1,204.6 L408.8,207.4 L416.5,210.2 L424.2,213.1 L431.9,215.9 L439.6,218.7 L447.3,221.5 L455.0,224.3 L462.7,227.1 L470.4,229.9 L478.1,232.7 L485.8,235.6 L493.5,238.4 L501.2,241.2 L508.9,244.0 L516.6,246.8 L524.3,249.6 L532.0,252.4" class="s3" fill="none"/><line x1="390" y1="32" x2="414" y2="32" class="s1"/><text x="420" y="36" class="tk">Ướt (H₂O)</text><line x1="390" y1="50" x2="414" y2="50" class="s3"/><text x="420" y="54" class="tk">Khô (O₂)</text></svg><figcaption>Hình 2. Hằng số tuyến tính B/A của Si (100) theo nhiệt độ.</figcaption></figure>
+<h3>Vì sao oxy hóa ướt nhanh hơn nhiều?</h3>
+<p>Cả \(B\) và \(B/A\) đều tỉ lệ với \(C^* = Hp\). Độ hòa tan (hằng số Henry) của H₂O trong SiO₂ cao hơn O₂ khoảng ba bậc độ lớn, khoảng 3×10¹⁹ so với 5×10¹⁶ cm⁻³ ở 1 atm và 1000 °C, nên dù \(D\) của H₂O nhỏ hơn và \(N_1\) gấp đôi, oxy hóa ướt vẫn nhanh hơn hàng chục lần.</p>
+
+<h2>4. Oxide mỏng và giá trị τ</h2>
+<p>Mô hình Deal–Grove khớp rất tốt với thực nghiệm, ngoại trừ oxide mỏng dưới khoảng 20 nm mọc trong O₂ khô: giai đoạn đầu mọc nhanh hơn dự đoán. Khi dùng phương trình Deal–Grove cho oxide khô mọc trên Si trần (\(x_i = 0\)), ta "giả định" \(x_i = 25\) nm, tương đương với việc dùng một giá trị \(\tau\) khác 0 để bù cho phần mọc thừa ban đầu. Với oxy hóa ướt thường lấy \(\tau = 0\).</p>
+
+<h2>5. Ảnh hưởng của áp suất</h2>
+<p>Theo mô hình, \(A = 2D(1/k_s + 1/h)\) không phụ thuộc áp suất, còn \(B\) và \(B/A\) đều tỉ lệ với \(C^*\), tức với áp suất riêng phần \(p_g\):</p>
+<ul>
+<li><strong>Oxy hóa ướt</strong>: cả \(B\) và \(B/A\) tỉ lệ tuyến tính với \(p_g\), đúng như mô hình.</li>
+<li><strong>Oxy hóa khô</strong>: \(B\) tỉ lệ tuyến tính với \(p_g\), nhưng \(B/A\) chỉ tăng theo \(p_g^n\) với \(n\) khoảng 0,7–0,8; đây là một dấu hiệu cho thấy cơ chế phản ứng phức tạp hơn mô hình bậc một.</li>
+</ul>
+<p>Oxy hóa áp suất cao vì vậy cho phép giảm nhiệt độ hoặc thời gian, hạn chế khuếch tán tạp chất.</p>
+
+<h2>6. Ảnh hưởng của định hướng tinh thể</h2>
+<p>Hằng số phản ứng \(k_s = k_{s0}\exp(-E_a/kT)\), với \(k_{s0}\) xấp xỉ tỉ lệ với số liên kết Si sẵn sàng phản ứng trên một đơn vị diện tích. Mặt (111) có nhiều liên kết như vậy hơn mặt (100), nên:</p>
+$$\left(\frac{B}{A}\right)_{(111)} \approx 1{,}68\left(\frac{B}{A}\right)_{(100)}$$
+<p>Hằng số parabol \(B\) <strong>không</strong> phụ thuộc định hướng vì nó mô tả khuếch tán qua oxide vô định hình. Vì vậy ảnh hưởng của định hướng giảm dần khi nhiệt độ cao hoặc thời gian dài, lúc oxide dày và quá trình bị khuếch tán chi phối. Ví dụ, oxy hóa ướt ở 900 °C trong 30 phút cho khoảng 71 nm trên Si (100) nhưng khoảng 109 nm trên Si (111).</p>
+
+<h2>7. Chất nào thực sự phản ứng?</h2>
+<p>Các thí nghiệm cho thấy chất khuếch tán qua oxide là phân tử O₂ (hoặc H₂O), nhưng phản ứng với Si có thể xảy ra qua một nồng độ nhỏ oxy nguyên tử phân ly ở gần mặt phân cách. Đặt điện trường qua oxide cũng có thể làm thay đổi tốc độ oxy hóa, gợi ý rằng các dạng tích điện có tham gia vào quá trình.</p>
+
+<h2>8. Ảnh hưởng của pha tạp P</h2>
+<p>Pha tạp P nặng làm tăng \(B/A\) nhưng hầu như không đổi \(B\). Hằng số tuyến tính tăng nhanh khi nồng độ bề mặt vượt khoảng 10²⁰ cm⁻³, có lẽ do mật độ sai hỏng điểm (vacancy) tăng cho phép giãn nở thể tích dễ hơn tại mặt phân cách. Vì \(B/A\) quan trọng nhất ở oxide mỏng và nhiệt độ thấp, hiệu ứng rõ nhất khi oxy hóa khô ở khoảng 900 °C: vùng pha tạp nặng có thể mọc oxide dày gấp vài lần vùng pha tạp nhẹ.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Cách tách tốc độ thành phần "phản ứng" và phần "khuếch tán" cũng giúp đọc các dữ liệu phụ thuộc nhiệt độ trong nghiên cứu Ga₂O₃. Khi vẽ một đại lượng theo 1/T (đồ thị Arrhenius) và thấy độ dốc thay đổi giữa hai vùng nhiệt độ, đó thường là dấu hiệu cơ chế chi phối đã chuyển từ cơ chế này sang cơ chế khác, ví dụ dòng rò ngược chuyển từ phát xạ nhiệt điện tử sang dẫn qua bẫy.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. E. Deal, A. S. Grove, <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chương 6.</li>
+<li>H. Z. Massoud, J. D. Plummer, E. A. Irene, <em>Journal of the Electrochemical Society</em> 132, 2685 (1985).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The Deal–Grove equation has two terms, and depending on oxide thickness one or the other dominates. Understanding these two regimes, and how the constants depend on temperature, pressure, crystal orientation and doping, is the key to designing an oxidation step.</p>
+
+<h2>1. Two regimes by thickness</h2>
+<p>From \(x_{ox}^2 + A x_{ox} = B(t + \tau)\):</p>
+<ul>
+<li><strong>Sufficiently thin oxide</strong> (\(t + \tau \ll A^2/4B\)): neglect the quadratic term,
+$$x_{ox} \approx \frac{B}{A}\,(t + \tau)$$
+Thickness grows linearly in time; \(B/A\) is the <strong>linear rate constant</strong>.</li>
+<li><strong>Sufficiently thick oxide</strong> (\(t \gg A^2/4B\) and \(t \gg \tau\)): neglect the linear term,
+$$x_{ox}^2 \approx B\,t$$
+Thickness grows as \(\sqrt{t}\); \(B\) is the <strong>parabolic rate constant</strong>.</li>
+</ul>
+
+<h2>2. Diffusion-controlled or reaction-controlled</h2>
+<p>The two regimes correspond to two limiting cases of the oxidant concentration:</p>
+<ul>
+<li><strong>Diffusion-controlled</strong>: when \(D\) is very small compared with what the reaction can consume (\(k_s x_{ox}/D \gg 1\)), oxidant reaching the interface is consumed immediately: \(C_i \to 0\) and \(C_0 \to C^*\). The rate is set by diffusion through the oxide, that is, by \(B\).</li>
+<li><strong>Reaction-controlled</strong>: when \(D\) is large (thin oxide), oxidant is supplied abundantly to the interface: \(C_i \approx C_0 \approx C^*\). The rate is set by the reaction constant \(k_s\) and \(C_i\), that is, by \(B/A\).</li>
+</ul>
+
+<h2>3. Temperature dependence of the constants</h2>
+<p>Both constants follow Arrhenius behavior:</p>
+$$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left(-\frac{E_2}{kT}\right)$$
+<div class="tablewrap"><table>
+<tr><th>Ambient</th><th>B: C₁ (µm²/h)</th><th>E₁ (eV)</th><th>B/A: C₂ (µm/h), (111) Si</th><th>E₂ (eV)</th></tr>
+<tr><td>Dry (O₂)</td><td>7.72×10²</td><td>1.23</td><td>6.23×10⁶</td><td>2.0</td></tr>
+<tr><td>Wet (H₂O)</td><td>3.86×10²</td><td>0.78</td><td>1.63×10⁸</td><td>2.05</td></tr>
+</table></div>
+<p>These values (after Plummer et al.) give \(B/A\) for (111) Si; for (100) Si, divide \(C_2\) by 1.68. The activation energy of \(B\) for dry oxidation (1.23 eV) is close to that of O₂ diffusion in SiO₂, while that of \(B/A\) (about 2 eV) is close to the Si–Si bond-breaking energy, consistent with the physical meaning of each constant.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="532" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="100.50415775718679" y1="255" x2="100.50415775718679" y2="260" class="ax"/><text x="100.50415775718679" y="275" class="tk" text-anchor="middle">1200</text><line x1="180.64098873699913" y1="255" x2="180.64098873699913" y2="260" class="ax"/><text x="180.64098873699913" y="275" class="tk" text-anchor="middle">1100</text><line x1="273.36656903618666" y1="255" x2="273.36656903618666" y2="260" class="ax"/><text x="273.36656903618666" y="275" class="tk" text-anchor="middle">1000</text><line x1="381.90011597206785" y1="255" x2="381.90011597206785" y2="260" class="ax"/><text x="381.90011597206785" y="275" class="tk" text-anchor="middle">900</text><line x1="510.6607601331053" y1="255" x2="510.6607601331053" y2="260" class="ax"/><text x="510.6607601331053" y="275" class="tk" text-anchor="middle">800</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="532" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-3</tspan></text><line x1="65" y1="176.66666666666669" x2="70" y2="176.66666666666669" class="ax"/><line x1="70" y1="176.66666666666669" x2="532" y2="176.66666666666669" class="grid"/><text x="61" y="180.66666666666669" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-2</tspan></text><line x1="65" y1="98.33333333333334" x2="70" y2="98.33333333333334" class="ax"/><line x1="70" y1="98.33333333333334" x2="532" y2="98.33333333333334" class="grid"/><text x="61" y="102.33333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-1</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="532" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">0</tspan></text><text x="301.0" y="294" class="lab" text-anchor="middle">Temperature (°C), axis in 1000/T</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">B (µm²/h)</text><path d="M70.0,20.6 L77.7,22.1 L85.4,23.6 L93.1,25.0 L100.8,26.5 L108.5,27.9 L116.2,29.4 L123.9,30.9 L131.6,32.3 L139.3,33.8 L147.0,35.3 L154.7,36.7 L162.4,38.2 L170.1,39.6 L177.8,41.1 L185.5,42.6 L193.2,44.0 L200.9,45.5 L208.6,47.0 L216.3,48.4 L224.0,49.9 L231.7,51.3 L239.4,52.8 L247.1,54.3 L254.8,55.7 L262.5,57.2 L270.2,58.7 L277.9,60.1 L285.6,61.6 L293.3,63.0 L301.0,64.5 L308.7,66.0 L316.4,67.4 L324.1,68.9 L331.8,70.4 L339.5,71.8 L347.2,73.3 L354.9,74.7 L362.6,76.2 L370.3,77.7 L378.0,79.1 L385.7,80.6 L393.4,82.1 L401.1,83.5 L408.8,85.0 L416.5,86.4 L424.2,87.9 L431.9,89.4 L439.6,90.8 L447.3,92.3 L455.0,93.8 L462.7,95.2 L470.4,96.7 L478.1,98.2 L485.8,99.6 L493.5,101.1 L501.2,102.5 L508.9,104.0 L516.6,105.5 L524.3,106.9 L532.0,108.4" class="s1" fill="none"/><path d="M70.0,114.3 L77.7,116.6 L85.4,118.9 L93.1,121.2 L100.8,123.5 L108.5,125.8 L116.2,128.1 L123.9,130.4 L131.6,132.8 L139.3,135.1 L147.0,137.4 L154.7,139.7 L162.4,142.0 L170.1,144.3 L177.8,146.6 L185.5,148.9 L193.2,151.2 L200.9,153.5 L208.6,155.8 L216.3,158.1 L224.0,160.4 L231.7,162.7 L239.4,165.0 L247.1,167.4 L254.8,169.7 L262.5,172.0 L270.2,174.3 L277.9,176.6 L285.6,178.9 L293.3,181.2 L301.0,183.5 L308.7,185.8 L316.4,188.1 L324.1,190.4 L331.8,192.7 L339.5,195.0 L347.2,197.3 L354.9,199.6 L362.6,202.0 L370.3,204.3 L378.0,206.6 L385.7,208.9 L393.4,211.2 L401.1,213.5 L408.8,215.8 L416.5,218.1 L424.2,220.4 L431.9,222.7 L439.6,225.0 L447.3,227.3 L455.0,229.6 L462.7,231.9 L470.4,234.2 L478.1,236.6 L485.8,238.9 L493.5,241.2 L501.2,243.5 L508.9,245.8 L516.6,248.1 L524.3,250.4 L532.0,252.7" class="s3" fill="none"/><line x1="390" y1="32" x2="414" y2="32" class="s1"/><text x="420" y="36" class="tk">Wet (H₂O)</text><line x1="390" y1="50" x2="414" y2="50" class="s3"/><text x="420" y="54" class="tk">Dry (O₂)</text></svg><figcaption>Figure 1. Parabolic rate constant B versus temperature (Arrhenius plot).</figcaption></figure>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="532" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="100.50415775718679" y1="255" x2="100.50415775718679" y2="260" class="ax"/><text x="100.50415775718679" y="275" class="tk" text-anchor="middle">1200</text><line x1="180.64098873699913" y1="255" x2="180.64098873699913" y2="260" class="ax"/><text x="180.64098873699913" y="275" class="tk" text-anchor="middle">1100</text><line x1="273.36656903618666" y1="255" x2="273.36656903618666" y2="260" class="ax"/><text x="273.36656903618666" y="275" class="tk" text-anchor="middle">1000</text><line x1="381.90011597206785" y1="255" x2="381.90011597206785" y2="260" class="ax"/><text x="381.90011597206785" y="275" class="tk" text-anchor="middle">900</text><line x1="510.6607601331053" y1="255" x2="510.6607601331053" y2="260" class="ax"/><text x="510.6607601331053" y="275" class="tk" text-anchor="middle">800</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="532" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-3</tspan></text><line x1="65" y1="196.25" x2="70" y2="196.25" class="ax"/><line x1="70" y1="196.25" x2="532" y2="196.25" class="grid"/><text x="61" y="200.25" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-2</tspan></text><line x1="65" y1="137.5" x2="70" y2="137.5" class="ax"/><line x1="70" y1="137.5" x2="532" y2="137.5" class="grid"/><text x="61" y="141.5" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-1</tspan></text><line x1="65" y1="78.75" x2="70" y2="78.75" class="ax"/><line x1="70" y1="78.75" x2="532" y2="78.75" class="grid"/><text x="61" y="82.75" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">0</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="532" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">1</tspan></text><text x="301.0" y="294" class="lab" text-anchor="middle">Temperature (°C), axis in 1000/T</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">B/A (µm/h)</text><path d="M70.0,10.1 L77.7,13.0 L85.4,15.9 L93.1,18.8 L100.8,21.7 L108.5,24.6 L116.2,27.4 L123.9,30.3 L131.6,33.2 L139.3,36.1 L147.0,39.0 L154.7,41.9 L162.4,44.7 L170.1,47.6 L177.8,50.5 L185.5,53.4 L193.2,56.3 L200.9,59.2 L208.6,62.0 L216.3,64.9 L224.0,67.8 L231.7,70.7 L239.4,73.6 L247.1,76.5 L254.8,79.3 L262.5,82.2 L270.2,85.1 L277.9,88.0 L285.6,90.9 L293.3,93.8 L301.0,96.6 L308.7,99.5 L316.4,102.4 L324.1,105.3 L331.8,108.2 L339.5,111.1 L347.2,113.9 L354.9,116.8 L362.6,119.7 L370.3,122.6 L378.0,125.5 L385.7,128.4 L393.4,131.2 L401.1,134.1 L408.8,137.0 L416.5,139.9 L424.2,142.8 L431.9,145.7 L439.6,148.5 L447.3,151.4 L455.0,154.3 L462.7,157.2 L470.4,160.1 L478.1,163.0 L485.8,165.8 L493.5,168.7 L501.2,171.6 L508.9,174.5 L516.6,177.4 L524.3,180.3 L532.0,183.1" class="s1" fill="none"/><path d="M70.0,83.7 L77.7,86.5 L85.4,89.3 L93.1,92.1 L100.8,94.9 L108.5,97.7 L116.2,100.5 L123.9,103.4 L131.6,106.2 L139.3,109.0 L147.0,111.8 L154.7,114.6 L162.4,117.4 L170.1,120.2 L177.8,123.0 L185.5,125.9 L193.2,128.7 L200.9,131.5 L208.6,134.3 L216.3,137.1 L224.0,139.9 L231.7,142.7 L239.4,145.5 L247.1,148.4 L254.8,151.2 L262.5,154.0 L270.2,156.8 L277.9,159.6 L285.6,162.4 L293.3,165.2 L301.0,168.0 L308.7,170.9 L316.4,173.7 L324.1,176.5 L331.8,179.3 L339.5,182.1 L347.2,184.9 L354.9,187.7 L362.6,190.6 L370.3,193.4 L378.0,196.2 L385.7,199.0 L393.4,201.8 L401.1,204.6 L408.8,207.4 L416.5,210.2 L424.2,213.1 L431.9,215.9 L439.6,218.7 L447.3,221.5 L455.0,224.3 L462.7,227.1 L470.4,229.9 L478.1,232.7 L485.8,235.6 L493.5,238.4 L501.2,241.2 L508.9,244.0 L516.6,246.8 L524.3,249.6 L532.0,252.4" class="s3" fill="none"/><line x1="390" y1="32" x2="414" y2="32" class="s1"/><text x="420" y="36" class="tk">Wet (H₂O)</text><line x1="390" y1="50" x2="414" y2="50" class="s3"/><text x="420" y="54" class="tk">Dry (O₂)</text></svg><figcaption>Figure 2. Linear rate constant B/A for (100) Si versus temperature.</figcaption></figure>
+<h3>Why is wet oxidation so much faster?</h3>
+<p>Both \(B\) and \(B/A\) are proportional to \(C^* = Hp\). The solubility (Henry's constant) of H₂O in SiO₂ is about three orders of magnitude higher than that of O₂, roughly 3×10¹⁹ versus 5×10¹⁶ cm⁻³ at 1 atm and 1000 °C, so even though H₂O has a smaller \(D\) and \(N_1\) is doubled, wet oxidation is still tens of times faster.</p>
+
+<h2>4. Thin oxides and the value of τ</h2>
+<p>The Deal–Grove model agrees very well with experiment, except for oxides thinner than about 20 nm grown in dry O₂: the initial stage grows faster than predicted. When using the Deal–Grove equations for dry oxide grown on bare Si (\(x_i = 0\)), one "assumes" \(x_i = 25\) nm, which is equivalent to using a nonzero \(\tau\) to compensate for the excess initial growth. For wet oxidation \(\tau = 0\) is usually used.</p>
+
+<h2>5. Pressure dependence</h2>
+<p>In the model, \(A = 2D(1/k_s + 1/h)\) is independent of pressure, while \(B\) and \(B/A\) are both proportional to \(C^*\), that is, to the partial pressure \(p_g\):</p>
+<ul>
+<li><strong>Wet oxidation</strong>: both \(B\) and \(B/A\) scale linearly with \(p_g\), as the model predicts.</li>
+<li><strong>Dry oxidation</strong>: \(B\) scales linearly with \(p_g\), but \(B/A\) rises only as \(p_g^n\) with \(n\) about 0.7–0.8, a sign that the reaction mechanism is more complex than first order.</li>
+</ul>
+<p>High-pressure oxidation therefore allows lower temperatures or shorter times, limiting dopant diffusion.</p>
+
+<h2>6. Crystal orientation</h2>
+<p>The reaction constant is \(k_s = k_{s0}\exp(-E_a/kT)\), with \(k_{s0}\) roughly proportional to the number of Si bonds available for reaction per unit area. The (111) face has more such bonds than (100), so:</p>
+$$\left(\frac{B}{A}\right)_{(111)} \approx 1.68\left(\frac{B}{A}\right)_{(100)}$$
+<p>The parabolic constant \(B\) does <strong>not</strong> depend on orientation, because it describes diffusion through amorphous oxide. The orientation effect therefore fades at high temperature or long times, when the oxide is thick and diffusion dominates. For example, wet oxidation at 900 °C for 30 minutes gives about 71 nm on (100) Si but about 109 nm on (111) Si.</p>
+
+<h2>7. What actually reacts?</h2>
+<p>Experiments indicate that the species diffusing through the oxide is molecular O₂ (or H₂O), but the reaction with Si may proceed through a small concentration of atomic oxygen dissociated near the interface. Applying an electric field across the oxide can also change the oxidation rate, suggesting that charged species take part.</p>
+
+<h2>8. Effect of phosphorus doping</h2>
+<p>Heavy P doping raises \(B/A\) but leaves \(B\) nearly unchanged. The linear constant rises rapidly once the surface concentration exceeds about 10²⁰ cm⁻³, probably because a higher point-defect (vacancy) density eases the volume expansion at the interface. Since \(B/A\) matters most for thin oxides and low temperatures, the effect is strongest in dry oxidation around 900 °C: heavily doped regions can grow oxide several times thicker than lightly doped ones.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Separating a rate into a "reaction" part and a "diffusion" part also helps when reading temperature-dependent data in Ga₂O₃ research. When a quantity plotted against 1/T (an Arrhenius plot) shows a change of slope between two temperature ranges, it usually means the dominant mechanism has changed, for example reverse leakage switching from thermionic emission to trap-assisted conduction.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. E. Deal, A. S. Grove, <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chapter 6.</li>
+<li>H. Z. Massoud, J. D. Plummer, E. A. Irene, <em>Journal of the Electrochemical Society</em> 132, 2685 (1985).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dg-derivation.html">← <span class="l-vi">Dẫn xuất mô hình Deal–Grove</span><span class="l-en">Deriving the Deal–Grove model</span></a><a class="n" href="oxide-calculator.html"><span class="l-vi">Tính độ dày oxide: bài tập và công cụ</span><span class="l-en">Calculating oxide thickness: worked example and calculator</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

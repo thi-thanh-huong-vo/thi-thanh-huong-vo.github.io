@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Tính độ dày oxide: bài tập và công cụ" data-title-en="Calculating oxide thickness: worked example and calculator">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculating oxide thickness: worked example and calculator · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="A two-step oxidation problem solved, plus a Deal–Grove calculator for thickness and time.">
+<meta property="og:title" content="Calculating oxide thickness: worked example and calculator">
+<meta property="og:description" content="A two-step oxidation problem solved, plus a Deal–Grove calculator for thickness and time.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  .calc{border:1px solid var(--accent);border-radius:10px;padding:1.1rem 1.2rem;margin:.5rem 0 2rem;background:var(--paper)}
+  .calc label[hidden]{display:none}
+  .calc label{display:flex;flex-direction:column;gap:.3rem;font-size:.9rem;color:var(--muted);font-weight:500}
+  .calc select,.calc input{font:inherit;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:.5rem .6rem;min-height:42px}
+  .calc select:focus,.calc input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.8rem;margin-bottom:1rem}
+  .cmode{display:flex;gap:.4rem;margin-bottom:.8rem;flex-wrap:wrap}
+  .cmode button{font:inherit;font-size:.9rem;font-weight:600;padding:.45rem .8rem;border-radius:6px;border:1px solid var(--rule);background:var(--paper);color:var(--muted);cursor:pointer;min-height:38px}
+  .cmode button.on{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .cout{margin-top:1rem;padding:.9rem 1rem;background:var(--box);border-radius:8px}
+  .cconst{font-size:.85rem;color:var(--muted);margin-bottom:.5rem;font-variant-numeric:tabular-nums}
+  .cres{display:flex;flex-direction:column;gap:.15rem;font-size:.92rem;color:var(--muted)}
+  .cres strong{font-family:"Source Serif 4",Georgia,serif;font-size:2rem;color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}
+  .csub{font-size:.92rem;margin-top:.3rem}
+  .cnote{font-size:.85rem;color:var(--muted);margin:.8rem 0 0;text-align:left}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 6 · Bài 3</span><span class="l-en">Part 6 · Lesson 3</span></p>
+  <h1><span class="l-vi">Tính độ dày oxide: bài tập và công cụ</span><span class="l-en">Calculating oxide thickness: worked example and calculator</span></h1>
+  <p class="sub"><span class="l-vi">Giải bài tập oxy hóa hai bước và công cụ tính độ dày, thời gian oxy hóa theo Deal–Grove.</span><span class="l-en">A two-step oxidation problem solved, plus a Deal–Grove calculator for thickness and time.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Lý thuyết đã đủ; giờ là lúc tính toán. Bài này giải một bài tập kinh điển gồm hai bước oxy hóa liên tiếp, và cung cấp một công cụ tính độ dày oxide dựa trên mô hình Deal–Grove để bạn tự thử.</p>
+
+<h2>1. Bài tập</h2>
+<div class="box"><p class="t">Đề bài</p>
+<p>Một wafer Si (100) có lớp oxide dày 200 nm (2000 Å) trên bề mặt.</p>
+<p>(a) Cần bao lâu để mọc lớp oxide này ở 1100 °C trong O₂ khô?</p>
+<p>(b) Wafer được đưa trở lại lò, oxy hóa ướt ở 1000 °C. Cần bao lâu để mọc thêm 300 nm oxide?</p></div>
+
+<h3>(a) Oxy hóa khô ở 1100 °C</h3>
+<p>Với \(T = 1373\) K và \(kT = 0{,}1183\) eV, dùng các hằng số Arrhenius (B/A của Si (100) bằng giá trị (111) chia 1,68):</p>
+$$B = 772\,e^{-1{,}23/0{,}1183} \approx 0{,}0236\ \mu\text{m}^2/\text{h}, \qquad \frac{B}{A} = \frac{6{,}23\times10^6}{1{,}68}\,e^{-2{,}0/0{,}1183} \approx 0{,}169\ \mu\text{m/h}$$
+<p>nên \(A = B/(B/A) \approx 0{,}140\ \mu\)m. Với oxy hóa khô trên Si trần, dùng \(x_i = 25\) nm:</p>
+$$\tau = \frac{x_i^2 + A x_i}{B} = \frac{0{,}025^2 + 0{,}140 \times 0{,}025}{0{,}0236} \approx 0{,}17\ \text{h}$$
+<p>Thời gian để đạt \(x_{ox} = 0{,}2\ \mu\)m:</p>
+$$t = \frac{x_{ox}^2 + A x_{ox}}{B} - \tau = \frac{0{,}04 + 0{,}028}{0{,}0236} - 0{,}17 \approx 2{,}7\ \text{h}$$
+<p>Kết quả này khớp với giá trị khoảng 2,8 giờ đọc từ đồ thị độ dày–thời gian tiêu chuẩn.</p>
+
+<h3>(b) Oxy hóa ướt tiếp theo ở 1000 °C</h3>
+<p>Ở 1000 °C (\(kT = 0{,}1097\) eV), oxy hóa ướt trên Si (100): \(B \approx 0{,}315\ \mu\)m²/h, \(B/A \approx 0{,}744\ \mu\)m/h, \(A \approx 0{,}424\ \mu\)m.</p>
+<p>Ý tưởng then chốt: lớp oxide 0,2 µm có sẵn làm wafer "tưởng" như nó đã ở trong lò oxy hóa ướt một khoảng thời gian \(\tau\):</p>
+$$\tau = \frac{0{,}2^2 + 0{,}424\times0{,}2}{0{,}315} \approx 0{,}40\ \text{h}$$
+<p>Tổng độ dày cuối cùng là 0,5 µm. Nếu bắt đầu từ Si trần, cần:</p>
+$$t_{0{,}5} = \frac{0{,}5^2 + 0{,}424\times0{,}5}{0{,}315} \approx 1{,}5\ \text{h}$$
+<p>Vậy thời gian cần thêm là \(1{,}5 - 0{,}4 = 1{,}1\) giờ. Lưu ý: lớp oxide ban đầu được mọc khô ở nhiệt độ khác, nhưng mô hình chỉ quan tâm tới độ dày của nó, không quan tâm nó được tạo ra như thế nào.</p>
+
+<h2>2. Công cụ tính</h2>
+<p>Chọn môi trường, định hướng, nhiệt độ và thời gian để tính độ dày oxide; hoặc nhập độ dày mong muốn để tính thời gian cần thiết. Công cụ dùng các hằng số Deal–Grove ở áp suất 1 atm, áp dụng \(x_i = 25\) nm cho oxy hóa khô trên Si trần, và cộng thêm lớp oxide có sẵn nếu bạn nhập.</p>
+</div>
+<div class="l-en">
+<p class="lead">Enough theory; time to calculate. This lesson solves a classic two-step oxidation problem and provides a Deal–Grove oxide-thickness calculator for you to try.</p>
+
+<h2>1. Worked example</h2>
+<div class="box"><p class="t">Problem</p>
+<p>A (100) Si wafer has a 200 nm (2000 Å) oxide on its surface.</p>
+<p>(a) How long did it take to grow this oxide at 1100 °C in dry oxygen?</p>
+<p>(b) The wafer is put back in the furnace in wet oxygen at 1000 °C. How long will it take to grow an additional 300 nm of oxide?</p></div>
+
+<h3>(a) Dry oxidation at 1100 °C</h3>
+<p>With \(T = 1373\) K and \(kT = 0.1183\) eV, using the Arrhenius constants (B/A for (100) Si is the (111) value divided by 1.68):</p>
+$$B = 772\,e^{-1.23/0.1183} \approx 0.0236\ \mu\text{m}^2/\text{h}, \qquad \frac{B}{A} = \frac{6.23\times10^6}{1.68}\,e^{-2.0/0.1183} \approx 0.169\ \mu\text{m/h}$$
+<p>so \(A = B/(B/A) \approx 0.140\ \mu\)m. For dry oxidation of bare Si, use \(x_i = 25\) nm:</p>
+$$\tau = \frac{x_i^2 + A x_i}{B} = \frac{0.025^2 + 0.140 \times 0.025}{0.0236} \approx 0.17\ \text{h}$$
+<p>The time to reach \(x_{ox} = 0.2\ \mu\)m:</p>
+$$t = \frac{x_{ox}^2 + A x_{ox}}{B} - \tau = \frac{0.04 + 0.028}{0.0236} - 0.17 \approx 2.7\ \text{h}$$
+<p>This agrees with the roughly 2.8 hours read from standard thickness-versus-time charts.</p>
+
+<h3>(b) Subsequent wet oxidation at 1000 °C</h3>
+<p>At 1000 °C (\(kT = 0.1097\) eV), wet oxidation of (100) Si gives \(B \approx 0.315\ \mu\)m²/h, \(B/A \approx 0.744\ \mu\)m/h and \(A \approx 0.424\ \mu\)m.</p>
+<p>The key idea: the existing 0.2 µm oxide makes the wafer "think" it has already spent a time \(\tau\) in the wet-oxidation furnace:</p>
+$$\tau = \frac{0.2^2 + 0.424\times0.2}{0.315} \approx 0.40\ \text{h}$$
+<p>The final total thickness is 0.5 µm. Starting from bare Si, that would take:</p>
+$$t_{0.5} = \frac{0.5^2 + 0.424\times0.5}{0.315} \approx 1.5\ \text{h}$$
+<p>So the additional time needed is \(1.5 - 0.4 = 1.1\) hours. Note that the initial oxide was grown dry at a different temperature, but the model only cares about its thickness, not how it was made.</p>
+
+<h2>2. Calculator</h2>
+<p>Choose the ambient, orientation, temperature and time to compute oxide thickness, or enter a target thickness to compute the required time. The calculator uses Deal–Grove constants at 1 atm, applies \(x_i = 25\) nm for dry oxidation of bare Si, and adds any pre-existing oxide you enter.</p>
+</div>
+
+<div class="calc" id="calc">
+  <div class="cgrid">
+    <label><span class="l-vi">Môi trường</span><span class="l-en">Ambient</span>
+      <select id="c-amb"><option value="wet">H₂O (wet)</option><option value="dry">O₂ (dry)</option></select></label>
+    <label><span class="l-vi">Định hướng</span><span class="l-en">Orientation</span>
+      <select id="c-ori"><option value="100">(100)</option><option value="111">(111)</option></select></label>
+    <label><span class="l-vi">Nhiệt độ (°C)</span><span class="l-en">Temperature (°C)</span>
+      <input id="c-T" type="number" min="700" max="1300" step="10" value="1000"></label>
+    <label><span class="l-vi">Oxide có sẵn (nm)</span><span class="l-en">Existing oxide (nm)</span>
+      <input id="c-xi" type="number" min="0" max="5000" step="1" value="0"></label>
+  </div>
+  <div class="cmode" role="tablist">
+    <button type="button" class="on" data-m="t2x"><span class="l-vi">Thời gian → độ dày</span><span class="l-en">Time → thickness</span></button>
+    <button type="button" data-m="x2t"><span class="l-vi">Độ dày → thời gian</span><span class="l-en">Thickness → time</span></button>
+  </div>
+  <label id="c-in-t"><span class="l-vi">Thời gian oxy hóa (phút)</span><span class="l-en">Oxidation time (min)</span>
+    <input id="c-t" type="number" min="0" step="1" value="60"></label>
+  <label id="c-in-x" hidden><span class="l-vi">Độ dày cuối cùng mong muốn (nm)</span><span class="l-en">Target final thickness (nm)</span>
+    <input id="c-x" type="number" min="1" step="1" value="500"></label>
+  <div class="cout" id="c-out" aria-live="polite"></div>
+  <p class="cnote"><span class="l-vi">Kết quả là ước lượng theo mô hình, có thể sai lệch với oxide khô rất mỏng, Si pha tạp nặng hoặc oxy hóa có HCl.</span><span class="l-en">Results are model estimates and may deviate for very thin dry oxides, heavily doped Si or HCl oxidation.</span></p>
+</div>
+<script>
+(function(){
+  var K=8.617e-5, P={dry:[772,1.23,6.23e6,2.0],wet:[386,0.78,1.63e8,2.05]}, mode='t2x';
+  function $(i){return document.getElementById(i);}
+  function consts(){
+    var p=P[$('c-amb').value], T=(+$('c-T').value)+273.15, kT=K*T;
+    var B=p[0]*Math.exp(-p[1]/kT), BA=p[2]*Math.exp(-p[3]/kT)/($('c-ori').value==='100'?1.68:1);
+    return {B:B,BA:BA,A:B/BA};
+  }
+  function f(v,d){var en=v.toFixed(d), vi=en.replace('.',',');return '<span class="l-vi">'+vi+'</span><span class="l-en">'+en+'</span>';}
+  function calc(){
+    var c=consts(), xi=Math.max(0,+$('c-xi').value||0)/1000, dry=$('c-amb').value==='dry';
+    var x0=(xi===0&&dry)?0.025:xi;
+    var tau=(x0*x0+c.A*x0)/c.B, h='';
+    h+='<div class="cconst">B = '+f(c.B,4)+' µm²/h · B/A = '+f(c.BA,4)+' µm/h · A = '+f(c.A,4)+' µm · τ = '+f(tau*60,1)+' min</div>';
+    if(mode==='t2x'){
+      var t=Math.max(0,+$('c-t').value||0)/60;
+      var x=c.A/2*(Math.sqrt(1+(t+tau)/(c.A*c.A/(4*c.B)))-1);
+      if(xi===0&&dry&&t===0)x=0;
+      var grown=Math.max(0,x-xi);
+      h+='<div class="cres"><span class="l-vi">Độ dày oxide tổng</span><span class="l-en">Total oxide thickness</span><strong>'+f(x*1000,1)+' nm</strong></div>';
+      h+='<div class="csub"><span class="l-vi">Oxide mọc thêm: </span><span class="l-en">Newly grown: </span>'+f(grown*1000,1)+' nm · <span class="l-vi">Si bị tiêu thụ: </span><span class="l-en">Si consumed: </span>'+f(0.46*grown*1000,1)+' nm</div>';
+    } else {
+      var xt=Math.max(0,+$('c-x').value||0)/1000;
+      if(xt<=xi){h+='<div class="cres"><span class="l-vi">Độ dày mong muốn phải lớn hơn oxide có sẵn.</span><span class="l-en">The target must exceed the existing oxide.</span></div>';}
+      else{
+        var tt=(xt*xt+c.A*xt)/c.B-tau;
+        h+='<div class="cres"><span class="l-vi">Thời gian cần thiết</span><span class="l-en">Required time</span><strong>'+f(tt*60,1)+' min</strong></div>';
+        h+='<div class="csub">≈ '+f(tt,2)+' h · <span class="l-vi">Si bị tiêu thụ: </span><span class="l-en">Si consumed: </span>'+f(0.46*(xt-xi)*1000,1)+' nm</div>';
+      }
+    }
+    $('c-out').innerHTML=h;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.cmode button'),function(b){b.onclick=function(){
+    mode=b.dataset.m; Array.prototype.forEach.call(document.querySelectorAll('.cmode button'),function(x){x.classList.toggle('on',x===b);});
+    $('c-in-t').hidden=mode!=='t2x'; $('c-in-x').hidden=mode==='t2x'; calc();};});
+  ['c-amb','c-ori','c-T','c-xi','c-t','c-x'].forEach(function(i){$(i).addEventListener('input',calc);});
+  calc();
+})();
+</script>
+
+<nav class="pager"><a href="oxidation-kinetics.html">← <span class="l-vi">Động học oxy hóa: hai chế độ và các hằng số</span><span class="l-en">Oxidation kinetics: two regimes and the rate constants</span></a><a class="n" href="quiz.html"><span class="l-vi">Kiểm tra kiến thức</span><span class="l-en">Test your knowledge</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>
