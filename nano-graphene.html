@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Graphene" data-title-en="Graphene">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graphene · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The 2004 discovery, making graphene visible, roll-to-roll CVD, properties, transistors, nanoribbons and (n, m) notation.">
+<meta property="og:title" content="Graphene">
+<meta property="og:description" content="The 2004 discovery, making graphene visible, roll-to-roll CVD, properties, transistors, nanoribbons and (n, m) notation.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 2</span><span class="l-en">Part 3 · Lesson 2</span></p>
+  <h1><span class="l-vi">Graphene</span><span class="l-en">Graphene</span></h1>
+  <p class="sub"><span class="l-vi">Phát hiện năm 2004, làm graphene nhìn thấy được, CVD cuộn–cuộn, tính chất, transistor, ruy băng nano và ký hiệu (n, m).</span><span class="l-en">The 2004 discovery, making graphene visible, roll-to-roll CVD, properties, transistors, nanoribbons and (n, m) notation.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Năm 2004, Andre Geim và Konstantin Novoselov dùng băng dính để bóc graphite thành từng lớp, và tách được graphene: một lớp nguyên tử carbon sắp xếp tổ ong. Sáu năm sau họ nhận giải Nobel Vật lý. Bài này xem graphene đặc biệt ở đâu, và vì sao nó chưa thay thế được silicon.</p>
+
+<h2>1. Phát hiện và làm cho graphene "nhìn thấy được"</h2>
+<p>Graphene được tách bằng cách bóc cơ học lặp đi lặp lại graphite nhiệt phân bằng băng dính. Khó khăn là tìm được mảnh đơn lớp giữa vô số mảnh dày: graphene chỉ hấp thụ khoảng 2,3 % ánh sáng. Lời giải là đặt nó lên Si phủ khoảng 300 nm SiO₂: giao thoa ánh sáng trong lớp oxit làm tăng độ tương phản, nên ngay cả đơn lớp cũng thấy được dưới kính hiển vi quang học thường. Độ dày oxit và bước sóng chiếu sáng phải được chọn phù hợp.</p>
+
+<h2>2. Sản xuất diện tích lớn</h2>
+<p>Bóc băng dính cho chất lượng cao nhưng mảnh nhỏ. Các phương pháp khác: bóc trong pha lỏng, khử graphene oxide, mọc epitaxy trên SiC, và đặc biệt là <strong>CVD trên đồng</strong>. Năm 2010, nhóm Bae và cộng sự chế tạo màng graphene 30 inch bằng CVD trên lá đồng và chuyển sang đế dẻo theo kiểu cuộn–cuộn (roll-to-roll), làm điện cực trong suốt cho màn hình cảm ứng.</p>
+
+<h2>3. Tính chất phi thường</h2>
+<ul>
+<li><strong>Điện tử</strong>: electron hành xử như hạt không khối lượng (fermion Dirac); độ linh động ở nhiệt độ phòng có thể vượt 10⁴ cm²/V·s.</li>
+<li><strong>Cơ học</strong>: mô-đun Young ~1 TPa và độ bền nội tại ~130 GPa, vật liệu bền nhất từng đo được.</li>
+<li><strong>Nhiệt</strong>: độ dẫn nhiệt ở nhiệt độ phòng cỡ vài nghìn W/m·K.</li>
+<li><strong>Quang</strong>: hấp thụ 2,3 % ánh sáng khả kiến mỗi lớp, gần như trong suốt nhưng dẫn điện.</li>
+<li>Không thấm khí, kể cả heli; mỏng nhất có thể (một nguyên tử).</li>
+</ul>
+
+<h2>4. Transistor graphene: tỉ số bật/tắt kém</h2>
+<p>Graphene <strong>không có vùng cấm</strong>: vùng dẫn và vùng hóa trị chạm nhau tại điểm Dirac. Vì vậy transistor graphene không thể tắt hẳn, tỉ số dòng bật/tắt chỉ khoảng 2–20 ở nhiệt độ phòng, quá thấp cho logic số (cần 10⁴–10⁷). Graphene vẫn hữu ích cho transistor RF, nơi không cần tắt hoàn toàn.</p>
+<p>Một cách mở vùng cấm là cắt graphene thành <strong>ruy băng nano</strong> (graphene nanoribbon, GNR): giam giữ theo chiều rộng tạo vùng cấm tỉ lệ nghịch với độ rộng, nên GNR rộng dưới 10 nm có thể đạt vùng cấm vài trăm meV. Đổi lại, mép ruy băng gồ ghề làm giảm mạnh độ linh động.</p>
+
+<h2>5. Graphene làm dây dẫn và màng lọc</h2>
+<p>Với độ dẫn cao và trong suốt, graphene làm điện cực trong suốt và dây dẫn. Màng graphene với lỗ nano được nghiên cứu cho lọc nước và khử muối: lỗ kích thước phù hợp cho nước đi qua nhưng chặn ion. Nút thắt là chế tạo tấm lớn hoàn hảo với chi phí hợp lý và quy trình thân thiện môi trường.</p>
+
+<h2>6. Ký hiệu (n, m)</h2>
+<p>Mạng tổ ong được mô tả bằng hai véc-tơ cơ sở \(\vec a_1\), \(\vec a_2\) với \(|\vec a_1| = |\vec a_2| = \sqrt{3}\,a_{C-C}\) (\(a_{C-C} \approx 1{,}42\) Å). Mọi điểm mạng ứng với một véc-tơ</p>
+$$\vec C = n\,\vec a_1 + m\,\vec a_2 \equiv (n, m)$$
+<p>Hai hướng đặc biệt: <strong>zigzag</strong> (n, 0) và <strong>armchair</strong> (n, n); các hướng còn lại gọi là chiral. Ký hiệu này sẽ trở thành "chứng minh thư" của ống nano carbon ở bài sau: cuộn tấm graphene sao cho hai đầu véc-tơ \(\vec C\) trùng nhau.</p>
+<figure><svg viewBox="0 0 620 300" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><path d="M51.0,270.3L73.0,270.3M51.0,270.3L40.0,251.2M51.0,232.2L73.0,232.2M51.0,232.2L40.0,251.2M51.0,232.2L40.0,213.1M84.0,251.2L106.0,251.2M84.0,251.2L73.0,270.3M84.0,251.2L73.0,232.2M117.0,270.3L139.0,270.3M117.0,270.3L106.0,251.2M51.0,194.1L73.0,194.1M51.0,194.1L40.0,213.1M51.0,194.1L40.0,175.0M84.0,213.1L106.0,213.1M84.0,213.1L73.0,232.2M84.0,213.1L73.0,194.1M117.0,232.2L139.0,232.2M117.0,232.2L106.0,251.2M117.0,232.2L106.0,213.1M150.0,251.2L172.0,251.2M150.0,251.2L139.0,270.3M150.0,251.2L139.0,232.2M183.0,270.3L205.0,270.3M183.0,270.3L172.0,251.2M51.0,155.9L73.0,155.9M51.0,155.9L40.0,175.0M51.0,155.9L40.0,136.9M84.0,175.0L106.0,175.0M84.0,175.0L73.0,194.1M84.0,175.0L73.0,155.9M117.0,194.1L139.0,194.1M117.0,194.1L106.0,213.1M117.0,194.1L106.0,175.0M150.0,213.1L172.0,213.1M150.0,213.1L139.0,232.2M150.0,213.1L139.0,194.1M183.0,232.2L205.0,232.2M183.0,232.2L172.0,251.2M183.0,232.2L172.0,213.1M216.0,251.2L238.0,251.2M216.0,251.2L205.0,270.3M216.0,251.2L205.0,232.2M249.0,270.3L271.0,270.3M249.0,270.3L238.0,251.2M51.0,117.8L73.0,117.8M51.0,117.8L40.0,136.9M51.0,117.8L40.0,98.8M84.0,136.9L106.0,136.9M84.0,136.9L73.0,155.9M84.0,136.9L73.0,117.8M117.0,155.9L139.0,155.9M117.0,155.9L106.0,175.0M117.0,155.9L106.0,136.9M150.0,175.0L172.0,175.0M150.0,175.0L139.0,194.1M150.0,175.0L139.0,155.9M183.0,194.1L205.0,194.1M183.0,194.1L172.0,213.1M183.0,194.1L172.0,175.0M216.0,213.1L238.0,213.1M216.0,213.1L205.0,232.2M216.0,213.1L205.0,194.1M249.0,232.2L271.0,232.2M249.0,232.2L238.0,251.2M249.0,232.2L238.0,213.1M282.0,251.2L304.0,251.2M282.0,251.2L271.0,270.3M282.0,251.2L271.0,232.2M315.0,270.3L337.0,270.3M315.0,270.3L304.0,251.2M51.0,79.7L73.0,79.7M51.0,79.7L40.0,98.8M51.0,79.7L40.0,60.7M84.0,98.8L106.0,98.8M84.0,98.8L73.0,117.8M84.0,98.8L73.0,79.7M117.0,117.8L139.0,117.8M117.0,117.8L106.0,136.9M117.0,117.8L106.0,98.8M150.0,136.9L172.0,136.9M150.0,136.9L139.0,155.9M150.0,136.9L139.0,117.8M183.0,155.9L205.0,155.9M183.0,155.9L172.0,175.0M183.0,155.9L172.0,136.9M216.0,175.0L238.0,175.0M216.0,175.0L205.0,194.1M216.0,175.0L205.0,155.9M249.0,194.1L271.0,194.1M249.0,194.1L238.0,213.1M249.0,194.1L238.0,175.0M282.0,213.1L304.0,213.1M282.0,213.1L271.0,232.2M282.0,213.1L271.0,194.1M315.0,232.2L337.0,232.2M315.0,232.2L304.0,251.2M315.0,232.2L304.0,213.1M348.0,251.2L370.0,251.2M348.0,251.2L337.0,270.3M348.0,251.2L337.0,232.2M381.0,270.3L403.0,270.3M381.0,270.3L370.0,251.2M51.0,41.6L73.0,41.6M51.0,41.6L40.0,60.7M51.0,41.6L40.0,22.6M84.0,60.7L106.0,60.7M84.0,60.7L73.0,79.7M84.0,60.7L73.0,41.6M117.0,79.7L139.0,79.7M117.0,79.7L106.0,98.8M117.0,79.7L106.0,60.7M150.0,98.8L172.0,98.8M150.0,98.8L139.0,117.8M150.0,98.8L139.0,79.7M183.0,117.8L205.0,117.8M183.0,117.8L172.0,136.9M183.0,117.8L172.0,98.8M216.0,136.9L238.0,136.9M216.0,136.9L205.0,155.9M216.0,136.9L205.0,117.8M249.0,155.9L271.0,155.9M249.0,155.9L238.0,175.0M249.0,155.9L238.0,136.9M282.0,175.0L304.0,175.0M282.0,175.0L271.0,194.1M282.0,175.0L271.0,155.9M315.0,194.1L337.0,194.1M315.0,194.1L304.0,213.1M315.0,194.1L304.0,175.0M348.0,213.1L370.0,213.1M348.0,213.1L337.0,232.2M348.0,213.1L337.0,194.1M381.0,232.2L403.0,232.2M381.0,232.2L370.0,251.2M381.0,232.2L370.0,213.1M414.0,251.2L436.0,251.2M414.0,251.2L403.0,270.3M414.0,251.2L403.0,232.2M447.0,270.3L469.0,270.3M447.0,270.3L436.0,251.2M84.0,22.6L106.0,22.6M84.0,22.6L73.0,41.6M117.0,41.6L139.0,41.6M117.0,41.6L106.0,60.7M117.0,41.6L106.0,22.6M150.0,60.7L172.0,60.7M150.0,60.7L139.0,79.7M150.0,60.7L139.0,41.6M183.0,79.7L205.0,79.7M183.0,79.7L172.0,98.8M183.0,79.7L172.0,60.7M216.0,98.8L238.0,98.8M216.0,98.8L205.0,117.8M216.0,98.8L205.0,79.7M249.0,117.8L271.0,117.8M249.0,117.8L238.0,136.9M249.0,117.8L238.0,98.8M282.0,136.9L304.0,136.9M282.0,136.9L271.0,155.9M282.0,136.9L271.0,117.8M315.0,155.9L337.0,155.9M315.0,155.9L304.0,175.0M315.0,155.9L304.0,136.9M348.0,175.0L370.0,175.0M348.0,175.0L337.0,194.1M348.0,175.0L337.0,155.9M381.0,194.1L403.0,194.1M381.0,194.1L370.0,213.1M381.0,194.1L370.0,175.0M414.0,213.1L436.0,213.1M414.0,213.1L403.0,232.2M414.0,213.1L403.0,194.1M447.0,232.2L469.0,232.2M447.0,232.2L436.0,251.2M447.0,232.2L436.0,213.1M480.0,251.2L502.0,251.2M480.0,251.2L469.0,270.3M480.0,251.2L469.0,232.2M513.0,270.3L535.0,270.3M513.0,270.3L502.0,251.2M150.0,22.6L172.0,22.6M150.0,22.6L139.0,41.6M183.0,41.6L205.0,41.6M183.0,41.6L172.0,60.7M183.0,41.6L172.0,22.6M216.0,60.7L238.0,60.7M216.0,60.7L205.0,79.7M216.0,60.7L205.0,41.6M249.0,79.7L271.0,79.7M249.0,79.7L238.0,98.8M249.0,79.7L238.0,60.7M282.0,98.8L304.0,98.8M282.0,98.8L271.0,117.8M282.0,98.8L271.0,79.7M315.0,117.8L337.0,117.8M315.0,117.8L304.0,136.9M315.0,117.8L304.0,98.8M348.0,136.9L370.0,136.9M348.0,136.9L337.0,155.9M348.0,136.9L337.0,117.8M381.0,155.9L403.0,155.9M381.0,155.9L370.0,175.0M381.0,155.9L370.0,136.9M414.0,175.0L436.0,175.0M414.0,175.0L403.0,194.1M414.0,175.0L403.0,155.9M447.0,194.1L469.0,194.1M447.0,194.1L436.0,213.1M447.0,194.1L436.0,175.0M480.0,213.1L502.0,213.1M480.0,213.1L469.0,232.2M480.0,213.1L469.0,194.1M513.0,232.2L535.0,232.2M513.0,232.2L502.0,251.2M513.0,232.2L502.0,213.1M546.0,251.2L568.0,251.2M546.0,251.2L535.0,270.3M546.0,251.2L535.0,232.2M579.0,270.3L568.0,251.2M216.0,22.6L238.0,22.6M216.0,22.6L205.0,41.6M249.0,41.6L271.0,41.6M249.0,41.6L238.0,60.7M249.0,41.6L238.0,22.6M282.0,60.7L304.0,60.7M282.0,60.7L271.0,79.7M282.0,60.7L271.0,41.6M315.0,79.7L337.0,79.7M315.0,79.7L304.0,98.8M315.0,79.7L304.0,60.7M348.0,98.8L370.0,98.8M348.0,98.8L337.0,117.8M348.0,98.8L337.0,79.7M381.0,117.8L403.0,117.8M381.0,117.8L370.0,136.9M381.0,117.8L370.0,98.8M414.0,136.9L436.0,136.9M414.0,136.9L403.0,155.9M414.0,136.9L403.0,117.8M447.0,155.9L469.0,155.9M447.0,155.9L436.0,175.0M447.0,155.9L436.0,136.9M480.0,175.0L502.0,175.0M480.0,175.0L469.0,194.1M480.0,175.0L469.0,155.9M513.0,194.1L535.0,194.1M513.0,194.1L502.0,213.1M513.0,194.1L502.0,175.0M546.0,213.1L568.0,213.1M546.0,213.1L535.0,232.2M546.0,213.1L535.0,194.1M579.0,232.2L568.0,251.2M579.0,232.2L568.0,213.1M282.0,22.6L304.0,22.6M282.0,22.6L271.0,41.6M315.0,41.6L337.0,41.6M315.0,41.6L304.0,60.7M315.0,41.6L304.0,22.6M348.0,60.7L370.0,60.7M348.0,60.7L337.0,79.7M348.0,60.7L337.0,41.6M381.0,79.7L403.0,79.7M381.0,79.7L370.0,98.8M381.0,79.7L370.0,60.7M414.0,98.8L436.0,98.8M414.0,98.8L403.0,117.8M414.0,98.8L403.0,79.7M447.0,117.8L469.0,117.8M447.0,117.8L436.0,136.9M447.0,117.8L436.0,98.8M480.0,136.9L502.0,136.9M480.0,136.9L469.0,155.9M480.0,136.9L469.0,117.8M513.0,155.9L535.0,155.9M513.0,155.9L502.0,175.0M513.0,155.9L502.0,136.9M546.0,175.0L568.0,175.0M546.0,175.0L535.0,194.1M546.0,175.0L535.0,155.9M579.0,194.1L568.0,213.1M579.0,194.1L568.0,175.0M348.0,22.6L370.0,22.6M348.0,22.6L337.0,41.6M381.0,41.6L403.0,41.6M381.0,41.6L370.0,60.7M381.0,41.6L370.0,22.6M414.0,60.7L436.0,60.7M414.0,60.7L403.0,79.7M414.0,60.7L403.0,41.6M447.0,79.7L469.0,79.7M447.0,79.7L436.0,98.8M447.0,79.7L436.0,60.7M480.0,98.8L502.0,98.8M480.0,98.8L469.0,117.8M480.0,98.8L469.0,79.7M513.0,117.8L535.0,117.8M513.0,117.8L502.0,136.9M513.0,117.8L502.0,98.8M546.0,136.9L568.0,136.9M546.0,136.9L535.0,155.9M546.0,136.9L535.0,117.8M579.0,155.9L568.0,175.0M579.0,155.9L568.0,136.9M414.0,22.6L436.0,22.6M414.0,22.6L403.0,41.6M447.0,41.6L469.0,41.6M447.0,41.6L436.0,60.7M447.0,41.6L436.0,22.6M480.0,60.7L502.0,60.7M480.0,60.7L469.0,79.7M480.0,60.7L469.0,41.6M513.0,79.7L535.0,79.7M513.0,79.7L502.0,98.8M513.0,79.7L502.0,60.7M546.0,98.8L568.0,98.8M546.0,98.8L535.0,117.8M546.0,98.8L535.0,79.7M579.0,117.8L568.0,136.9M579.0,117.8L568.0,98.8M480.0,22.6L502.0,22.6M480.0,22.6L469.0,41.6M513.0,41.6L535.0,41.6M513.0,41.6L502.0,60.7M513.0,41.6L502.0,22.6M546.0,60.7L568.0,60.7M546.0,60.7L535.0,79.7M546.0,60.7L535.0,41.6M579.0,79.7L568.0,98.8M579.0,79.7L568.0,60.7M546.0,22.6L568.0,22.6M546.0,22.6L535.0,41.6M579.0,41.6L568.0,60.7M579.0,41.6L568.0,22.6" class="grid" style="stroke-width:1.4"/><line x1="150" y1="175" x2="183.0" y2="155.9" class="arr" style="stroke-width:2.4" marker-end="url(#mv)"/><text x="161.0" y="153.9" class="nt">a₁</text><line x1="150" y1="175" x2="183.0" y2="194.1" class="arr" style="stroke-width:2.4" marker-end="url(#mv)"/><text x="187.0" y="208.1" class="nt">a₂</text><line x1="150" y1="175" x2="348.0" y2="136.9" class="arr" style="stroke-width:2.4" marker-end="url(#mv)"/><text x="318.0" y="124.9" class="nt">C = 4a₁ + 2a₂</text><line x1="150" y1="175" x2="348.0" y2="60.7" class="s2" style="stroke-dasharray:5 4"/><text x="338.0" y="54.7" class="ns" text-anchor="end">zigzag (n, 0)</text><line x1="150" y1="175" x2="474.0" y2="175.0" class="s3" style="stroke-dasharray:5 4"/><text x="478.0" y="179.0" class="ns">armchair (n, n)</text><circle cx="150" cy="175" r="5" class="atom"/></svg><figcaption>Hình 1. Mạng graphene với véc-tơ cơ sở a₁, a₂ và véc-tơ chiral C = (4, 2); các hướng zigzag và armchair.</figcaption></figure>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Graphene được dùng làm điện cực trong suốt trên Ga₂O₃ cho cảm biến UV-C: nó gần như trong suốt ở vùng tử ngoại sâu (khác với ITO hấp thụ mạnh), và tạo tiếp xúc Schottky với Ga₂O₃. Tiếp xúc graphene/Ga₂O₃ cho phép ánh sáng đi thẳng vào vùng nghèo, tăng độ nhạy.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>K. S. Novoselov et al., "Electric field effect in atomically thin carbon films," <em>Science</em> 306, 666 (2004).</li>
+<li>P. Blake et al., "Making graphene visible," <em>Applied Physics Letters</em> 91, 063124 (2007).</li>
+<li>S. Bae et al., "Roll-to-roll production of 30-inch graphene films for transparent electrodes," <em>Nature Nanotechnology</em> 5, 574 (2010).</li>
+<li>C. Lee, X. Wei, J. W. Kysar, J. Hone, "Measurement of the elastic properties and intrinsic strength of monolayer graphene," <em>Science</em> 321, 385 (2008).</li>
+<li>F. Schwierz, "Graphene transistors," <em>Nature Nanotechnology</em> 5, 487 (2010).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">In 2004 Andre Geim and Konstantin Novoselov used adhesive tape to peel graphite layer by layer and isolated graphene: a single honeycomb sheet of carbon atoms. Six years later they won the Nobel Prize in Physics. This lesson looks at what makes graphene special, and why it has not replaced silicon.</p>
+
+<h2>1. Discovery and making graphene "visible"</h2>
+<p>Graphene was isolated by repeated mechanical peeling of pyrolytic graphite with tape. The difficulty was finding monolayers among countless thick flakes: graphene absorbs only about 2.3% of light. The solution was to place it on Si with about 300 nm of SiO₂: interference in the oxide boosts contrast, so even a monolayer can be seen in an ordinary optical microscope. Oxide thickness and illumination wavelength must be chosen accordingly.</p>
+
+<h2>2. Large-area production</h2>
+<p>Tape exfoliation gives high quality but small flakes. Other routes: liquid-phase exfoliation, reduction of graphene oxide, epitaxial growth on SiC, and especially <strong>CVD on copper</strong>. In 2010 Bae and co-workers made 30-inch graphene films by CVD on copper foil and transferred them to flexible substrates in a roll-to-roll process, as transparent electrodes for touch screens.</p>
+
+<h2>3. Extraordinary properties</h2>
+<ul>
+<li><strong>Electronic</strong>: electrons behave as massless particles (Dirac fermions); room-temperature mobility can exceed 10⁴ cm²/V·s.</li>
+<li><strong>Mechanical</strong>: Young's modulus ~1 TPa and intrinsic strength ~130 GPa, the strongest material ever measured.</li>
+<li><strong>Thermal</strong>: room-temperature thermal conductivity of several thousand W/m·K.</li>
+<li><strong>Optical</strong>: absorbs 2.3% of visible light per layer, nearly transparent yet conductive.</li>
+<li>Impermeable to gases, even helium; as thin as possible (one atom).</li>
+</ul>
+
+<h2>4. Graphene transistors: a poor on/off ratio</h2>
+<p>Graphene has <strong>no bandgap</strong>: conduction and valence bands touch at the Dirac point. A graphene transistor therefore cannot switch fully off, with an on/off current ratio of only about 2–20 at room temperature, far too low for digital logic (which needs 10⁴–10⁷). Graphene remains useful for RF transistors, where full turn-off is not needed.</p>
+<p>One way to open a gap is to cut graphene into <strong>nanoribbons</strong> (GNRs): lateral confinement produces a gap inversely proportional to width, so ribbons below 10 nm wide can reach gaps of a few hundred meV. In exchange, rough ribbon edges sharply reduce mobility.</p>
+
+<h2>5. Graphene as conductor and filter</h2>
+<p>Highly conductive and transparent, graphene serves as a transparent electrode and conductor. Nanoporous graphene membranes are studied for water filtration and desalination: pores of the right size let water through but block ions. The bottleneck is making large, perfect sheets at reasonable cost and with environmentally friendly processes.</p>
+
+<h2>6. The (n, m) notation</h2>
+<p>The honeycomb lattice is described by two basis vectors \(\vec a_1\), \(\vec a_2\) with \(|\vec a_1| = |\vec a_2| = \sqrt{3}\,a_{C-C}\) (\(a_{C-C} \approx 1.42\) Å). Every lattice point corresponds to a vector</p>
+$$\vec C = n\,\vec a_1 + m\,\vec a_2 \equiv (n, m)$$
+<p>Two special directions: <strong>zigzag</strong> (n, 0) and <strong>armchair</strong> (n, n); all others are chiral. This notation becomes the "ID card" of a carbon nanotube in the next lesson: roll the graphene sheet so that the two ends of \(\vec C\) meet.</p>
+<figure><svg viewBox="0 0 620 300" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><path d="M51.0,270.3L73.0,270.3M51.0,270.3L40.0,251.2M51.0,232.2L73.0,232.2M51.0,232.2L40.0,251.2M51.0,232.2L40.0,213.1M84.0,251.2L106.0,251.2M84.0,251.2L73.0,270.3M84.0,251.2L73.0,232.2M117.0,270.3L139.0,270.3M117.0,270.3L106.0,251.2M51.0,194.1L73.0,194.1M51.0,194.1L40.0,213.1M51.0,194.1L40.0,175.0M84.0,213.1L106.0,213.1M84.0,213.1L73.0,232.2M84.0,213.1L73.0,194.1M117.0,232.2L139.0,232.2M117.0,232.2L106.0,251.2M117.0,232.2L106.0,213.1M150.0,251.2L172.0,251.2M150.0,251.2L139.0,270.3M150.0,251.2L139.0,232.2M183.0,270.3L205.0,270.3M183.0,270.3L172.0,251.2M51.0,155.9L73.0,155.9M51.0,155.9L40.0,175.0M51.0,155.9L40.0,136.9M84.0,175.0L106.0,175.0M84.0,175.0L73.0,194.1M84.0,175.0L73.0,155.9M117.0,194.1L139.0,194.1M117.0,194.1L106.0,213.1M117.0,194.1L106.0,175.0M150.0,213.1L172.0,213.1M150.0,213.1L139.0,232.2M150.0,213.1L139.0,194.1M183.0,232.2L205.0,232.2M183.0,232.2L172.0,251.2M183.0,232.2L172.0,213.1M216.0,251.2L238.0,251.2M216.0,251.2L205.0,270.3M216.0,251.2L205.0,232.2M249.0,270.3L271.0,270.3M249.0,270.3L238.0,251.2M51.0,117.8L73.0,117.8M51.0,117.8L40.0,136.9M51.0,117.8L40.0,98.8M84.0,136.9L106.0,136.9M84.0,136.9L73.0,155.9M84.0,136.9L73.0,117.8M117.0,155.9L139.0,155.9M117.0,155.9L106.0,175.0M117.0,155.9L106.0,136.9M150.0,175.0L172.0,175.0M150.0,175.0L139.0,194.1M150.0,175.0L139.0,155.9M183.0,194.1L205.0,194.1M183.0,194.1L172.0,213.1M183.0,194.1L172.0,175.0M216.0,213.1L238.0,213.1M216.0,213.1L205.0,232.2M216.0,213.1L205.0,194.1M249.0,232.2L271.0,232.2M249.0,232.2L238.0,251.2M249.0,232.2L238.0,213.1M282.0,251.2L304.0,251.2M282.0,251.2L271.0,270.3M282.0,251.2L271.0,232.2M315.0,270.3L337.0,270.3M315.0,270.3L304.0,251.2M51.0,79.7L73.0,79.7M51.0,79.7L40.0,98.8M51.0,79.7L40.0,60.7M84.0,98.8L106.0,98.8M84.0,98.8L73.0,117.8M84.0,98.8L73.0,79.7M117.0,117.8L139.0,117.8M117.0,117.8L106.0,136.9M117.0,117.8L106.0,98.8M150.0,136.9L172.0,136.9M150.0,136.9L139.0,155.9M150.0,136.9L139.0,117.8M183.0,155.9L205.0,155.9M183.0,155.9L172.0,175.0M183.0,155.9L172.0,136.9M216.0,175.0L238.0,175.0M216.0,175.0L205.0,194.1M216.0,175.0L205.0,155.9M249.0,194.1L271.0,194.1M249.0,194.1L238.0,213.1M249.0,194.1L238.0,175.0M282.0,213.1L304.0,213.1M282.0,213.1L271.0,232.2M282.0,213.1L271.0,194.1M315.0,232.2L337.0,232.2M315.0,232.2L304.0,251.2M315.0,232.2L304.0,213.1M348.0,251.2L370.0,251.2M348.0,251.2L337.0,270.3M348.0,251.2L337.0,232.2M381.0,270.3L403.0,270.3M381.0,270.3L370.0,251.2M51.0,41.6L73.0,41.6M51.0,41.6L40.0,60.7M51.0,41.6L40.0,22.6M84.0,60.7L106.0,60.7M84.0,60.7L73.0,79.7M84.0,60.7L73.0,41.6M117.0,79.7L139.0,79.7M117.0,79.7L106.0,98.8M117.0,79.7L106.0,60.7M150.0,98.8L172.0,98.8M150.0,98.8L139.0,117.8M150.0,98.8L139.0,79.7M183.0,117.8L205.0,117.8M183.0,117.8L172.0,136.9M183.0,117.8L172.0,98.8M216.0,136.9L238.0,136.9M216.0,136.9L205.0,155.9M216.0,136.9L205.0,117.8M249.0,155.9L271.0,155.9M249.0,155.9L238.0,175.0M249.0,155.9L238.0,136.9M282.0,175.0L304.0,175.0M282.0,175.0L271.0,194.1M282.0,175.0L271.0,155.9M315.0,194.1L337.0,194.1M315.0,194.1L304.0,213.1M315.0,194.1L304.0,175.0M348.0,213.1L370.0,213.1M348.0,213.1L337.0,232.2M348.0,213.1L337.0,194.1M381.0,232.2L403.0,232.2M381.0,232.2L370.0,251.2M381.0,232.2L370.0,213.1M414.0,251.2L436.0,251.2M414.0,251.2L403.0,270.3M414.0,251.2L403.0,232.2M447.0,270.3L469.0,270.3M447.0,270.3L436.0,251.2M84.0,22.6L106.0,22.6M84.0,22.6L73.0,41.6M117.0,41.6L139.0,41.6M117.0,41.6L106.0,60.7M117.0,41.6L106.0,22.6M150.0,60.7L172.0,60.7M150.0,60.7L139.0,79.7M150.0,60.7L139.0,41.6M183.0,79.7L205.0,79.7M183.0,79.7L172.0,98.8M183.0,79.7L172.0,60.7M216.0,98.8L238.0,98.8M216.0,98.8L205.0,117.8M216.0,98.8L205.0,79.7M249.0,117.8L271.0,117.8M249.0,117.8L238.0,136.9M249.0,117.8L238.0,98.8M282.0,136.9L304.0,136.9M282.0,136.9L271.0,155.9M282.0,136.9L271.0,117.8M315.0,155.9L337.0,155.9M315.0,155.9L304.0,175.0M315.0,155.9L304.0,136.9M348.0,175.0L370.0,175.0M348.0,175.0L337.0,194.1M348.0,175.0L337.0,155.9M381.0,194.1L403.0,194.1M381.0,194.1L370.0,213.1M381.0,194.1L370.0,175.0M414.0,213.1L436.0,213.1M414.0,213.1L403.0,232.2M414.0,213.1L403.0,194.1M447.0,232.2L469.0,232.2M447.0,232.2L436.0,251.2M447.0,232.2L436.0,213.1M480.0,251.2L502.0,251.2M480.0,251.2L469.0,270.3M480.0,251.2L469.0,232.2M513.0,270.3L535.0,270.3M513.0,270.3L502.0,251.2M150.0,22.6L172.0,22.6M150.0,22.6L139.0,41.6M183.0,41.6L205.0,41.6M183.0,41.6L172.0,60.7M183.0,41.6L172.0,22.6M216.0,60.7L238.0,60.7M216.0,60.7L205.0,79.7M216.0,60.7L205.0,41.6M249.0,79.7L271.0,79.7M249.0,79.7L238.0,98.8M249.0,79.7L238.0,60.7M282.0,98.8L304.0,98.8M282.0,98.8L271.0,117.8M282.0,98.8L271.0,79.7M315.0,117.8L337.0,117.8M315.0,117.8L304.0,136.9M315.0,117.8L304.0,98.8M348.0,136.9L370.0,136.9M348.0,136.9L337.0,155.9M348.0,136.9L337.0,117.8M381.0,155.9L403.0,155.9M381.0,155.9L370.0,175.0M381.0,155.9L370.0,136.9M414.0,175.0L436.0,175.0M414.0,175.0L403.0,194.1M414.0,175.0L403.0,155.9M447.0,194.1L469.0,194.1M447.0,194.1L436.0,213.1M447.0,194.1L436.0,175.0M480.0,213.1L502.0,213.1M480.0,213.1L469.0,232.2M480.0,213.1L469.0,194.1M513.0,232.2L535.0,232.2M513.0,232.2L502.0,251.2M513.0,232.2L502.0,213.1M546.0,251.2L568.0,251.2M546.0,251.2L535.0,270.3M546.0,251.2L535.0,232.2M579.0,270.3L568.0,251.2M216.0,22.6L238.0,22.6M216.0,22.6L205.0,41.6M249.0,41.6L271.0,41.6M249.0,41.6L238.0,60.7M249.0,41.6L238.0,22.6M282.0,60.7L304.0,60.7M282.0,60.7L271.0,79.7M282.0,60.7L271.0,41.6M315.0,79.7L337.0,79.7M315.0,79.7L304.0,98.8M315.0,79.7L304.0,60.7M348.0,98.8L370.0,98.8M348.0,98.8L337.0,117.8M348.0,98.8L337.0,79.7M381.0,117.8L403.0,117.8M381.0,117.8L370.0,136.9M381.0,117.8L370.0,98.8M414.0,136.9L436.0,136.9M414.0,136.9L403.0,155.9M414.0,136.9L403.0,117.8M447.0,155.9L469.0,155.9M447.0,155.9L436.0,175.0M447.0,155.9L436.0,136.9M480.0,175.0L502.0,175.0M480.0,175.0L469.0,194.1M480.0,175.0L469.0,155.9M513.0,194.1L535.0,194.1M513.0,194.1L502.0,213.1M513.0,194.1L502.0,175.0M546.0,213.1L568.0,213.1M546.0,213.1L535.0,232.2M546.0,213.1L535.0,194.1M579.0,232.2L568.0,251.2M579.0,232.2L568.0,213.1M282.0,22.6L304.0,22.6M282.0,22.6L271.0,41.6M315.0,41.6L337.0,41.6M315.0,41.6L304.0,60.7M315.0,41.6L304.0,22.6M348.0,60.7L370.0,60.7M348.0,60.7L337.0,79.7M348.0,60.7L337.0,41.6M381.0,79.7L403.0,79.7M381.0,79.7L370.0,98.8M381.0,79.7L370.0,60.7M414.0,98.8L436.0,98.8M414.0,98.8L403.0,117.8M414.0,98.8L403.0,79.7M447.0,117.8L469.0,117.8M447.0,117.8L436.0,136.9M447.0,117.8L436.0,98.8M480.0,136.9L502.0,136.9M480.0,136.9L469.0,155.9M480.0,136.9L469.0,117.8M513.0,155.9L535.0,155.9M513.0,155.9L502.0,175.0M513.0,155.9L502.0,136.9M546.0,175.0L568.0,175.0M546.0,175.0L535.0,194.1M546.0,175.0L535.0,155.9M579.0,194.1L568.0,213.1M579.0,194.1L568.0,175.0M348.0,22.6L370.0,22.6M348.0,22.6L337.0,41.6M381.0,41.6L403.0,41.6M381.0,41.6L370.0,60.7M381.0,41.6L370.0,22.6M414.0,60.7L436.0,60.7M414.0,60.7L403.0,79.7M414.0,60.7L403.0,41.6M447.0,79.7L469.0,79.7M447.0,79.7L436.0,98.8M447.0,79.7L436.0,60.7M480.0,98.8L502.0,98.8M480.0,98.8L469.0,117.8M480.0,98.8L469.0,79.7M513.0,117.8L535.0,117.8M513.0,117.8L502.0,136.9M513.0,117.8L502.0,98.8M546.0,136.9L568.0,136.9M546.0,136.9L535.0,155.9M546.0,136.9L535.0,117.8M579.0,155.9L568.0,175.0M579.0,155.9L568.0,136.9M414.0,22.6L436.0,22.6M414.0,22.6L403.0,41.6M447.0,41.6L469.0,41.6M447.0,41.6L436.0,60.7M447.0,41.6L436.0,22.6M480.0,60.7L502.0,60.7M480.0,60.7L469.0,79.7M480.0,60.7L469.0,41.6M513.0,79.7L535.0,79.7M513.0,79.7L502.0,98.8M513.0,79.7L502.0,60.7M546.0,98.8L568.0,98.8M546.0,98.8L535.0,117.8M546.0,98.8L535.0,79.7M579.0,117.8L568.0,136.9M579.0,117.8L568.0,98.8M480.0,22.6L502.0,22.6M480.0,22.6L469.0,41.6M513.0,41.6L535.0,41.6M513.0,41.6L502.0,60.7M513.0,41.6L502.0,22.6M546.0,60.7L568.0,60.7M546.0,60.7L535.0,79.7M546.0,60.7L535.0,41.6M579.0,79.7L568.0,98.8M579.0,79.7L568.0,60.7M546.0,22.6L568.0,22.6M546.0,22.6L535.0,41.6M579.0,41.6L568.0,60.7M579.0,41.6L568.0,22.6" class="grid" style="stroke-width:1.4"/><line x1="150" y1="175" x2="183.0" y2="155.9" class="arr" style="stroke-width:2.4" marker-end="url(#me)"/><text x="161.0" y="153.9" class="nt">a₁</text><line x1="150" y1="175" x2="183.0" y2="194.1" class="arr" style="stroke-width:2.4" marker-end="url(#me)"/><text x="187.0" y="208.1" class="nt">a₂</text><line x1="150" y1="175" x2="348.0" y2="136.9" class="arr" style="stroke-width:2.4" marker-end="url(#me)"/><text x="318.0" y="124.9" class="nt">C = 4a₁ + 2a₂</text><line x1="150" y1="175" x2="348.0" y2="60.7" class="s2" style="stroke-dasharray:5 4"/><text x="338.0" y="54.7" class="ns" text-anchor="end">zigzag (n, 0)</text><line x1="150" y1="175" x2="474.0" y2="175.0" class="s3" style="stroke-dasharray:5 4"/><text x="478.0" y="179.0" class="ns">armchair (n, n)</text><circle cx="150" cy="175" r="5" class="atom"/></svg><figcaption>Figure 1. The graphene lattice with basis vectors a₁, a₂ and chiral vector C = (4, 2); the zigzag and armchair directions.</figcaption></figure>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Graphene serves as a transparent electrode on Ga₂O₃ for UV-C detectors: it is nearly transparent in the deep UV (unlike ITO, which absorbs strongly), and it forms a Schottky contact with Ga₂O₃. The graphene/Ga₂O₃ contact lets light reach the depletion region directly, raising sensitivity.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>K. S. Novoselov et al., "Electric field effect in atomically thin carbon films," <em>Science</em> 306, 666 (2004).</li>
+<li>P. Blake et al., "Making graphene visible," <em>Applied Physics Letters</em> 91, 063124 (2007).</li>
+<li>S. Bae et al., "Roll-to-roll production of 30-inch graphene films for transparent electrodes," <em>Nature Nanotechnology</em> 5, 574 (2010).</li>
+<li>C. Lee, X. Wei, J. W. Kysar, J. Hone, "Measurement of the elastic properties and intrinsic strength of monolayer graphene," <em>Science</em> 321, 385 (2008).</li>
+<li>F. Schwierz, "Graphene transistors," <em>Nature Nanotechnology</em> 5, 487 (2010).</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-carbon.html">← <span class="l-vi">Thù hình carbon và lai hóa</span><span class="l-en">Carbon allotropes and hybridization</span></a><a class="n" href="nano-cnt.html"><span class="l-vi">Ống nano carbon và thang máy vũ trụ</span><span class="l-en">Carbon nanotubes and the space elevator</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

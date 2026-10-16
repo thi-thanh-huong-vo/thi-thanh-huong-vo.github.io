@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Kích thước quyết định: bề mặt và năng lượng" data-title-en="Size matters: surface and energy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Size matters: surface and energy · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="More objects, more surface, the fraction of surface atoms and applications of large surface area.">
+<meta property="og:title" content="Size matters: surface and energy">
+<meta property="og:description" content="More objects, more surface, the fraction of surface atoms and applications of large surface area.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 2</span><span class="l-en">Part 1 · Lesson 2</span></p>
+  <h1><span class="l-vi">Kích thước quyết định: bề mặt và năng lượng</span><span class="l-en">Size matters: surface and energy</span></h1>
+  <p class="sub"><span class="l-vi">Nhiều vật thể hơn, nhiều bề mặt hơn, tỉ lệ nguyên tử bề mặt và các ứng dụng của diện tích lớn.</span><span class="l-en">More objects, more surface, the fraction of surface atoms and applications of large surface area.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Vì sao vật liệu nano hành xử khác hẳn vật liệu khối? Câu trả lời đơn giản nhất nằm ở hình học: khi thu nhỏ, số lượng vật thể tăng, diện tích bề mặt tăng, và năng lượng bề mặt trở nên chi phối.</p>
+
+<h2>1. Nhiều vật thể hơn trong cùng thể tích</h2>
+<p>Chia một khối lập phương cạnh 1 cm thành các khối cạnh nhỏ hơn 100 lần: số khối tăng \(100^3 = 10^6\) lần. Tổng quát, số vật thể trong một thể tích cố định tỉ lệ với \(1/r^3\). Với linh kiện, điều này có nghĩa là nhiều chức năng hơn trên cùng một con chip: đó chính là định luật Moore. Chi phí chế tạo một wafer tăng theo cấp số nhân khi thu nhỏ, nhưng mật độ transistor tăng hơn gấp đôi, nên giá trên mỗi transistor vẫn giảm.</p>
+
+<h2>2. Nhiều bề mặt hơn, nhiều năng lượng hơn</h2>
+<p>Năng lượng bề mặt tỉ lệ với diện tích. Chia một quả cầu bán kính \(R\) thành các quả cầu nhỏ cùng tổng thể tích:</p>
+<div class="tablewrap"><table>
+<tr><th>Bán kính (cm)</th><th>Diện tích mỗi quả</th><th>Số quả</th><th>Tổng diện tích</th></tr>
+<tr><td>1</td><td>4π</td><td>1</td><td>4π</td></tr>
+<tr><td>0,5</td><td>4π × 0,25</td><td>8</td><td>2 × 4π</td></tr>
+<tr><td>0,1</td><td>4π × 0,01</td><td>1000</td><td>10 × 4π</td></tr>
+</table></div>
+<p>Tổng diện tích, và do đó tổng năng lượng bề mặt, tăng tỉ lệ với \(1/r\). Diện tích riêng (trên một đơn vị khối lượng) của quả cầu là \(3/(\rho r)\): giảm bán kính 1000 lần thì diện tích riêng tăng 1000 lần.</p>
+
+<h2>3. Tỉ lệ nguyên tử nằm ở bề mặt</h2>
+<p>Ở hạt nano, một phần lớn nguyên tử nằm ngay trên bề mặt, với số liên kết không bão hòa. Ước lượng đơn giản: nếu lớp bề mặt dày khoảng một nguyên tử (\(a \approx 0{,}3\) nm), tỉ lệ nguyên tử bề mặt của hạt cầu đường kính \(d\) là</p>
+$$f \approx 1 - \left(1 - \frac{2a}{d}\right)^3$$
+<p>Với \(d = 3\) nm, \(f \approx 49\) %: gần một nửa số nguyên tử ở bề mặt, khớp với tính toán chi tiết đã công bố. Ở 20 nm, con số này chỉ còn khoảng 9 %. Bề mặt lớn như vậy chi phối tính chất khối, đồng thời tạo ra nhiều dạng kích thích điện tử và dao động bề mặt.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="255" x2="180.0" y2="260" class="ax"/><text x="180.0" y="275" class="tk" text-anchor="middle">5</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">10</text><line x1="420.0" y1="255" x2="420.0" y2="260" class="ax"/><text x="420.0" y="275" class="tk" text-anchor="middle">15</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">20</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">25</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">50</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">75</text><line x1="55" y1="20.0" x2="60" y2="20.0" class="ax"/><line x1="60" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="51" y="24.0" class="tk" text-anchor="end">100</text><text x="300.0" y="294" class="lab" text-anchor="middle">Đường kính hạt (nm)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Nguyên tử ở bề mặt (%)</text><path d="M76.8,20.7 L79.2,23.7 L81.6,28.7 L84.0,35.0 L86.4,42.1 L88.8,49.4 L91.2,56.7 L93.6,63.8 L96.0,70.8 L98.4,77.4 L100.8,83.7 L103.2,89.6 L105.6,95.3 L108.0,100.6 L110.4,105.6 L112.8,110.4 L115.2,114.9 L117.6,119.1 L120.0,123.2 L122.4,127.0 L124.8,130.6 L127.2,134.0 L129.6,137.2 L132.0,140.3 L134.4,143.3 L136.8,146.0 L139.2,148.7 L141.6,151.3 L144.0,153.7 L146.4,156.0 L148.8,158.2 L151.2,160.3 L153.6,162.4 L156.0,164.3 L158.4,166.2 L160.8,168.0 L163.2,169.7 L165.6,171.4 L168.0,173.0 L170.4,174.5 L172.8,176.0 L175.2,177.4 L177.6,178.8 L180.0,180.1 L182.4,181.4 L184.8,182.7 L187.2,183.9 L189.6,185.0 L192.0,186.2 L194.4,187.3 L196.8,188.3 L199.2,189.4 L201.6,190.3 L204.0,191.3 L206.4,192.3 L208.8,193.2 L211.2,194.0 L213.6,194.9 L216.0,195.7 L218.4,196.6 L220.8,197.4 L223.2,198.1 L225.6,198.9 L228.0,199.6 L230.4,200.3 L232.8,201.0 L235.2,201.7 L237.6,202.3 L240.0,203.0 L242.4,203.6 L244.8,204.2 L247.2,204.8 L249.6,205.4 L252.0,206.0 L254.4,206.6 L256.8,207.1 L259.2,207.6 L261.6,208.2 L264.0,208.7 L266.4,209.2 L268.8,209.7 L271.2,210.1 L273.6,210.6 L276.0,211.1 L278.4,211.5 L280.8,212.0 L283.2,212.4 L285.6,212.8 L288.0,213.2 L290.4,213.6 L292.8,214.0 L295.2,214.4 L297.6,214.8 L300.0,215.2 L302.4,215.6 L304.8,215.9 L307.2,216.3 L309.6,216.6 L312.0,217.0 L314.4,217.3 L316.8,217.6 L319.2,218.0 L321.6,218.3 L324.0,218.6 L326.4,218.9 L328.8,219.2 L331.2,219.5 L333.6,219.8 L336.0,220.1 L338.4,220.4 L340.8,220.7 L343.2,220.9 L345.6,221.2 L348.0,221.5 L350.4,221.7 L352.8,222.0 L355.2,222.3 L357.6,222.5 L360.0,222.8 L362.4,223.0 L364.8,223.2 L367.2,223.5 L369.6,223.7 L372.0,223.9 L374.4,224.2 L376.8,224.4 L379.2,224.6 L381.6,224.8 L384.0,225.0 L386.4,225.2 L388.8,225.5 L391.2,225.7 L393.6,225.9 L396.0,226.1 L398.4,226.3 L400.8,226.5 L403.2,226.6 L405.6,226.8 L408.0,227.0 L410.4,227.2 L412.8,227.4 L415.2,227.6 L417.6,227.7 L420.0,227.9 L422.4,228.1 L424.8,228.3 L427.2,228.4 L429.6,228.6 L432.0,228.8 L434.4,228.9 L436.8,229.1 L439.2,229.2 L441.6,229.4 L444.0,229.5 L446.4,229.7 L448.8,229.8 L451.2,230.0 L453.6,230.1 L456.0,230.3 L458.4,230.4 L460.8,230.6 L463.2,230.7 L465.6,230.8 L468.0,231.0 L470.4,231.1 L472.8,231.3 L475.2,231.4 L477.6,231.5 L480.0,231.6 L482.4,231.8 L484.8,231.9 L487.2,232.0 L489.6,232.2 L492.0,232.3 L494.4,232.4 L496.8,232.5 L499.2,232.6 L501.6,232.8 L504.0,232.9 L506.4,233.0 L508.8,233.1 L511.2,233.2 L513.6,233.3 L516.0,233.4 L518.4,233.5 L520.8,233.7 L523.2,233.8 L525.6,233.9 L528.0,234.0 L530.4,234.1 L532.8,234.2 L535.2,234.3 L537.6,234.4 L540.0,234.5" class="s1" fill="none"/><circle cx="132.0" cy="140.3" r="5" class="atom"/><text x="142.0" y="132.3" class="tk">3 nm: ~50 %</text></svg><figcaption>Hình 1. Tỉ lệ nguyên tử ở bề mặt theo đường kính hạt (ước lượng với lớp bề mặt dày một nguyên tử, 0,3 nm).</figcaption></figure>
+
+<h2>4. Ứng dụng của "nhiều bề mặt hơn"</h2>
+<ul>
+<li><strong>Bộ chuyển đổi xúc tác</strong> trên ô tô: khí thải đi qua một cấu trúc tổ ong phủ hạt kim loại quý (Pt, Pd, Rh) có diện tích bề mặt rất lớn, chuyển CO, hydrocarbon và NOₓ thành khí ít độc hại hơn.</li>
+<li><strong>Bộ lọc nước</strong>: than hoạt tính có diện tích bề mặt cỡ hàng trăm đến hàng nghìn m² mỗi gam; chất bẩn bám lên bề mặt (hấp phụ). Bộ lọc gia dụng đầu tiên được Brita thương mại hóa.</li>
+<li><strong>Khẩu trang</strong>: lớp vải không dệt của khẩu trang N95, với mạng sợi mịn, lọc hạt hiệu quả hơn hầu hết các loại vải thông thường.</li>
+<li><strong>Tản nhiệt chip</strong>: khi chip ngày càng nhỏ và nhanh, nhiệt trở thành giới hạn chính; ống nano carbon với độ dẫn nhiệt rất cao được nghiên cứu làm vật liệu tản nhiệt.</li>
+</ul>
+<p>Thông điệp tóm tắt: thu nhỏ → nhiều vật thể hơn → nhiều bề mặt hơn → nhiều năng lượng hơn → vật liệu hành xử hoàn toàn khác vật liệu khối.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Tỉ lệ bề mặt/thể tích cao là con dao hai lưỡi với cảm biến Ga₂O₃. Dây nano hay màng mỏng Ga₂O₃ có độ nhạy khí và quang rất cao vì bề mặt hấp phụ oxy và tạo vùng nghèo bề mặt; nhưng chính các trạng thái bề mặt đó cũng gây ra dòng tối trôi và đáp ứng chậm (persistent photoconductivity). Thụ động hóa bề mặt vì vậy là bước then chốt.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>K. J. Klabunde et al., "Nanocrystals as stoichiometric reagents with unique surface chemistry," <em>Journal of Physical Chemistry</em> 100, 12142 (1996).</li>
+<li>G. Cao, Y. Wang, <em>Nanostructures and Nanomaterials: Synthesis, Properties, and Applications</em>, 2nd ed., World Scientific (2011), chương 2.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Why do nanomaterials behave so differently from bulk? The simplest answer is geometry: as things shrink, the number of objects grows, surface area grows, and surface energy takes over.</p>
+
+<h2>1. More objects in the same volume</h2>
+<p>Cut a 1 cm cube into cubes 100 times smaller: the number of cubes rises by \(100^3 = 10^6\). In general, the number of objects in a fixed volume scales as \(1/r^3\). For devices this means more functions on the same chip: Moore's law. Wafer cost rises exponentially with scaling, but transistor density more than doubles, so cost per transistor still falls.</p>
+
+<h2>2. More surface, more energy</h2>
+<p>Surface energy is proportional to area. Divide a sphere of radius \(R\) into smaller spheres of the same total volume:</p>
+<div class="tablewrap"><table>
+<tr><th>Radius (cm)</th><th>Area per sphere</th><th>Number</th><th>Total area</th></tr>
+<tr><td>1</td><td>4π</td><td>1</td><td>4π</td></tr>
+<tr><td>0.5</td><td>4π × 0.25</td><td>8</td><td>2 × 4π</td></tr>
+<tr><td>0.1</td><td>4π × 0.01</td><td>1000</td><td>10 × 4π</td></tr>
+</table></div>
+<p>Total area, and hence total surface energy, scales as \(1/r\). The specific surface area (per unit mass) of a sphere is \(3/(\rho r)\): cutting the radius 1000-fold raises it 1000-fold.</p>
+
+<h2>3. The fraction of atoms at the surface</h2>
+<p>In a nanoparticle, a large fraction of atoms sit right at the surface, with unsatisfied bonds. A simple estimate: if the surface layer is about one atom thick (\(a \approx 0.3\) nm), the surface fraction of a sphere of diameter \(d\) is</p>
+$$f \approx 1 - \left(1 - \frac{2a}{d}\right)^3$$
+<p>For \(d = 3\) nm, \(f \approx 49\%\): nearly half the atoms are at the surface, matching published detailed calculations. At 20 nm the figure drops to about 9%. Such large surfaces dominate bulk properties and give rise to many electronic and vibrational surface excitations.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="255" x2="180.0" y2="260" class="ax"/><text x="180.0" y="275" class="tk" text-anchor="middle">5</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">10</text><line x1="420.0" y1="255" x2="420.0" y2="260" class="ax"/><text x="420.0" y="275" class="tk" text-anchor="middle">15</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">20</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">25</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">50</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">75</text><line x1="55" y1="20.0" x2="60" y2="20.0" class="ax"/><line x1="60" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="51" y="24.0" class="tk" text-anchor="end">100</text><text x="300.0" y="294" class="lab" text-anchor="middle">Particle diameter (nm)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Atoms at the surface (%)</text><path d="M76.8,20.7 L79.2,23.7 L81.6,28.7 L84.0,35.0 L86.4,42.1 L88.8,49.4 L91.2,56.7 L93.6,63.8 L96.0,70.8 L98.4,77.4 L100.8,83.7 L103.2,89.6 L105.6,95.3 L108.0,100.6 L110.4,105.6 L112.8,110.4 L115.2,114.9 L117.6,119.1 L120.0,123.2 L122.4,127.0 L124.8,130.6 L127.2,134.0 L129.6,137.2 L132.0,140.3 L134.4,143.3 L136.8,146.0 L139.2,148.7 L141.6,151.3 L144.0,153.7 L146.4,156.0 L148.8,158.2 L151.2,160.3 L153.6,162.4 L156.0,164.3 L158.4,166.2 L160.8,168.0 L163.2,169.7 L165.6,171.4 L168.0,173.0 L170.4,174.5 L172.8,176.0 L175.2,177.4 L177.6,178.8 L180.0,180.1 L182.4,181.4 L184.8,182.7 L187.2,183.9 L189.6,185.0 L192.0,186.2 L194.4,187.3 L196.8,188.3 L199.2,189.4 L201.6,190.3 L204.0,191.3 L206.4,192.3 L208.8,193.2 L211.2,194.0 L213.6,194.9 L216.0,195.7 L218.4,196.6 L220.8,197.4 L223.2,198.1 L225.6,198.9 L228.0,199.6 L230.4,200.3 L232.8,201.0 L235.2,201.7 L237.6,202.3 L240.0,203.0 L242.4,203.6 L244.8,204.2 L247.2,204.8 L249.6,205.4 L252.0,206.0 L254.4,206.6 L256.8,207.1 L259.2,207.6 L261.6,208.2 L264.0,208.7 L266.4,209.2 L268.8,209.7 L271.2,210.1 L273.6,210.6 L276.0,211.1 L278.4,211.5 L280.8,212.0 L283.2,212.4 L285.6,212.8 L288.0,213.2 L290.4,213.6 L292.8,214.0 L295.2,214.4 L297.6,214.8 L300.0,215.2 L302.4,215.6 L304.8,215.9 L307.2,216.3 L309.6,216.6 L312.0,217.0 L314.4,217.3 L316.8,217.6 L319.2,218.0 L321.6,218.3 L324.0,218.6 L326.4,218.9 L328.8,219.2 L331.2,219.5 L333.6,219.8 L336.0,220.1 L338.4,220.4 L340.8,220.7 L343.2,220.9 L345.6,221.2 L348.0,221.5 L350.4,221.7 L352.8,222.0 L355.2,222.3 L357.6,222.5 L360.0,222.8 L362.4,223.0 L364.8,223.2 L367.2,223.5 L369.6,223.7 L372.0,223.9 L374.4,224.2 L376.8,224.4 L379.2,224.6 L381.6,224.8 L384.0,225.0 L386.4,225.2 L388.8,225.5 L391.2,225.7 L393.6,225.9 L396.0,226.1 L398.4,226.3 L400.8,226.5 L403.2,226.6 L405.6,226.8 L408.0,227.0 L410.4,227.2 L412.8,227.4 L415.2,227.6 L417.6,227.7 L420.0,227.9 L422.4,228.1 L424.8,228.3 L427.2,228.4 L429.6,228.6 L432.0,228.8 L434.4,228.9 L436.8,229.1 L439.2,229.2 L441.6,229.4 L444.0,229.5 L446.4,229.7 L448.8,229.8 L451.2,230.0 L453.6,230.1 L456.0,230.3 L458.4,230.4 L460.8,230.6 L463.2,230.7 L465.6,230.8 L468.0,231.0 L470.4,231.1 L472.8,231.3 L475.2,231.4 L477.6,231.5 L480.0,231.6 L482.4,231.8 L484.8,231.9 L487.2,232.0 L489.6,232.2 L492.0,232.3 L494.4,232.4 L496.8,232.5 L499.2,232.6 L501.6,232.8 L504.0,232.9 L506.4,233.0 L508.8,233.1 L511.2,233.2 L513.6,233.3 L516.0,233.4 L518.4,233.5 L520.8,233.7 L523.2,233.8 L525.6,233.9 L528.0,234.0 L530.4,234.1 L532.8,234.2 L535.2,234.3 L537.6,234.4 L540.0,234.5" class="s1" fill="none"/><circle cx="132.0" cy="140.3" r="5" class="atom"/><text x="142.0" y="132.3" class="tk">3 nm: ~50%</text></svg><figcaption>Figure 1. Fraction of atoms at the surface versus particle diameter (estimate with a one-atom, 0.3 nm surface layer).</figcaption></figure>
+
+<h2>4. Putting "more surface" to work</h2>
+<ul>
+<li><strong>Catalytic converters</strong>: exhaust passes through a honeycomb coated with precious-metal particles (Pt, Pd, Rh) of very high surface area, converting CO, hydrocarbons and NOₓ into less harmful gases.</li>
+<li><strong>Water filters</strong>: activated carbon has hundreds to thousands of m² of surface per gram; contaminants stick to the surface (adsorption). The first home water filter was commercialized by Brita.</li>
+<li><strong>Face masks</strong>: the nonwoven layer of an N95 respirator, with its network of fine fibers, filters particles better than most common fabrics.</li>
+<li><strong>Chip cooling</strong>: as chips get smaller and faster, heat becomes the main limit; carbon nanotubes with very high thermal conductivity are studied as heat-spreading materials.</li>
+</ul>
+<p>Summary: go smaller → more objects → more surface → more energy → materials behave completely unlike their bulk counterparts.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>A high surface-to-volume ratio is a double-edged sword for Ga₂O₃ sensors. Ga₂O₃ nanowires and thin films are very sensitive to gases and light because their surfaces adsorb oxygen and form surface depletion; but the same surface states cause drifting dark current and slow response (persistent photoconductivity). Surface passivation is therefore a key step.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>K. J. Klabunde et al., "Nanocrystals as stoichiometric reagents with unique surface chemistry," <em>Journal of Physical Chemistry</em> 100, 12142 (1996).</li>
+<li>G. Cao, Y. Wang, <em>Nanostructures and Nanomaterials: Synthesis, Properties, and Applications</em>, 2nd ed., World Scientific (2011), chapter 2.</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-intro.html">← <span class="l-vi">Công nghệ nano là gì?</span><span class="l-en">What is nanotechnology?</span></a><a class="n" href="nano-classification.html"><span class="l-vi">Phân loại vật liệu nano: 0D đến 3D</span><span class="l-en">Classifying nanomaterials: 0D to 3D</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

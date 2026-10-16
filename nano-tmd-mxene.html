@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="TMD và MXene" data-title-en="TMDs and MXenes">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TMDs and MXenes · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="MoS₂ and the 2H/1T phases, the indirect-to-direct gap transition, advantages of 2D electronics, vdW heterostructures and MXenes.">
+<meta property="og:title" content="TMDs and MXenes">
+<meta property="og:description" content="MoS₂ and the 2H/1T phases, the indirect-to-direct gap transition, advantages of 2D electronics, vdW heterostructures and MXenes.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 4</span><span class="l-en">Part 3 · Lesson 4</span></p>
+  <h1><span class="l-vi">TMD và MXene</span><span class="l-en">TMDs and MXenes</span></h1>
+  <p class="sub"><span class="l-vi">MoS₂ và các pha 2H/1T, chuyển vùng cấm xiên sang thẳng, ưu điểm của điện tử 2D, dị chất van der Waals và MXene.</span><span class="l-en">MoS₂ and the 2H/1T phases, the indirect-to-direct gap transition, advantages of 2D electronics, vdW heterostructures and MXenes.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Graphene mở ra cả một "vũ trụ 2D", nhưng lại thiếu vùng cấm. Các dichalcogenide kim loại chuyển tiếp (TMD) như MoS₂ lấp chỗ trống đó: chúng là bán dẫn chỉ dày vài nguyên tử. Bài này cũng giới thiệu MXene, họ vật liệu 2D kim loại mới nhất.</p>
+
+<h2>1. TMD là gì</h2>
+<p>TMD là bán dẫn mỏng cỡ nguyên tử có công thức <strong>MX₂</strong>, với M là kim loại chuyển tiếp (Mo, W, ...) và X là chalcogen (S, Se, Te). Giống graphite, tinh thể TMD khối gồm các đơn lớp liên kết với nhau bằng lực van der Waals; mỗi đơn lớp là một "bánh kẹp" X–M–X dày khoảng 6,5 Å với MoS₂. Liên kết cộng hóa trị mạnh trong lớp và yếu giữa các lớp cũng là lý do MoS₂ được dùng làm chất bôi trơn khô.</p>
+
+<h2>2. Pha 2H và 1T</h2>
+<p>Hai pha cấu trúc phổ biến: <strong>lăng trụ tam giác (2H)</strong> và <strong>bát diện (1T)</strong>. Pha bền nhiệt động là 2H hoặc 1T tùy vật liệu, nhưng pha kia thường có thể tạo được dưới dạng giả bền. Với MoS₂, pha 2H là bán dẫn, còn pha 1T có tính kim loại; chuyển pha cục bộ 2H → 1T được dùng để tạo tiếp xúc điện trở thấp.</p>
+
+<h2>3. Từ vùng cấm xiên sang vùng cấm thẳng</h2>
+<p>Vị trí các mép vùng dẫn và vùng hóa trị thay đổi khi số lớp giảm. MoS₂ khối là bán dẫn <strong>vùng cấm xiên</strong> khoảng 1,3 eV; khi mỏng dần, vùng cấm xiên mở rộng, và ở đơn lớp vật liệu trở thành bán dẫn <strong>vùng cấm thẳng</strong> khoảng 1,9 eV. Hiệu suất phát quang của đơn lớp vì vậy tăng hàng nghìn lần so với khối.</p>
+<figure><svg viewBox="0 0 560 280" class="fig-svg" role="img"><line x1="60" y1="235" x2="540" y2="235" class="ax"/><line x1="60" y1="235" x2="60" y2="20" class="ax"/><line x1="60" y1="235.0" x2="540" y2="235.0" class="grid"/><text x="52" y="239.0" class="tk" text-anchor="end">0</text><line x1="60" y1="186.1" x2="540" y2="186.1" class="grid"/><text x="52" y="190.1" class="tk" text-anchor="end">0.5</text><line x1="60" y1="137.3" x2="540" y2="137.3" class="grid"/><text x="52" y="141.3" class="tk" text-anchor="end">1</text><line x1="60" y1="88.4" x2="540" y2="88.4" class="grid"/><text x="52" y="92.4" class="tk" text-anchor="end">1.5</text><line x1="60" y1="39.5" x2="540" y2="39.5" class="grid"/><text x="52" y="43.5" class="tk" text-anchor="end">2</text><rect x="79.2" y="49.3" width="57.6" height="185.7" style="fill:var(--accent)"/><text x="108.0" y="43.3" class="tk" text-anchor="middle">1.90</text><text x="108.0" y="253" class="tk" text-anchor="middle">1L</text><rect x="175.2" y="78.6" width="57.6" height="156.4" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="204.0" y="72.6" class="tk" text-anchor="middle">1.60</text><text x="204.0" y="253" class="tk" text-anchor="middle">2L</text><rect x="271.2" y="88.4" width="57.6" height="146.6" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="300.0" y="82.4" class="tk" text-anchor="middle">1.50</text><text x="300.0" y="253" class="tk" text-anchor="middle">3L</text><rect x="367.2" y="96.2" width="57.6" height="138.8" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="396.0" y="90.2" class="tk" text-anchor="middle">1.42</text><text x="396.0" y="253" class="tk" text-anchor="middle">4L</text><rect x="463.2" y="108.9" width="57.6" height="126.1" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="492.0" y="102.9" class="tk" text-anchor="middle">1.29</text><text x="492.0" y="253" class="tk" text-anchor="middle">Khối</text><text x="14" y="127.5" class="lab" text-anchor="middle" transform="rotate(-90 14 127.5)">Vùng cấm (eV)</text><rect x="350" y="22" width="12" height="12" style="fill:var(--accent)"/><text x="368" y="32" class="tk">vùng cấm thẳng</text><rect x="350" y="40" width="12" height="12" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="368" y="50" class="tk">vùng cấm xiên</text></svg><figcaption>Hình 1. Vùng cấm của MoS₂ theo số lớp (giá trị xấp xỉ theo phép đo quang).</figcaption></figure>
+<p>TMD được mọc diện tích lớn bằng CVD, và có thể mọc các cấu trúc dị chất ngang hoặc dọc giữa hai TMD khác nhau.</p>
+
+<h2>4. Vì sao 2D hấp dẫn cho điện tử ở giới hạn thu nhỏ</h2>
+<ul>
+<li><strong>Bền vững khi thu nhỏ</strong>: khi vật liệu 3D mỏng dưới khoảng 10 nm, vùng cấm tăng đột ngột và độ linh động giảm mạnh do tán xạ bề mặt. Vật liệu 2D đã ở giới hạn mỏng nhất nên giữ được tính chất.</li>
+<li><strong>Điều khiển tĩnh điện tuyệt vời</strong>: trong bán dẫn 3D, điện tích bị giam trong khoảng ~1,2 nm và khó đặt sát bề mặt; trong 2D, electron và lỗ trống chỉ trong ~0,3 nm. Cổng điều khiển kênh hiệu quả hơn, cho điện dung cổng cao, dòng lớn và hiệu năng cao.</li>
+<li><strong>Không có liên kết treo</strong>: không có liên kết ngoài mặt phẳng nên ít bẫy mặt phân cách; mặt phân cách "nguyên sơ", không có ứng suất như trong epitaxy dị chất 3D.</li>
+</ul>
+<p>Xếp chồng các vật liệu 2D khác nhau (graphene, hBN, TMD, ...) như các viên gạch Lego tạo ra <strong>cấu trúc dị chất van der Waals</strong> mà không cần khớp mạng, mở ra những tính chất không có trong bán dẫn 3D.</p>
+
+<h2>5. MXene</h2>
+<p>MXene là họ vật liệu 2D vô cơ gồm các lớp dày vài nguyên tử của <strong>carbide, nitride hoặc carbonitride kim loại chuyển tiếp</strong>, được mô tả lần đầu năm 2011. Chúng được tạo bằng cách khắc chọn lọc lớp A (thường là Al) khỏi pha MAX khối, ví dụ Ti₃AlC₂ → Ti₃C₂Tₓ, với Tₓ là các nhóm bề mặt –OH, –O, –F.</p>
+<p>MXene kết hợp <strong>độ dẫn điện kiểu kim loại</strong> của carbide kim loại chuyển tiếp với tính <strong>ưa nước</strong> nhờ bề mặt kết thúc bằng hydroxyl hoặc oxy. Ứng dụng: lưu trữ năng lượng (siêu tụ, pin), che chắn nhiễu điện từ, điện cực trong suốt, cảm biến, lọc nước và xúc tác.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Tính chất "không có liên kết treo" của vật liệu 2D gợi ý một hướng thú vị cho Ga₂O₃: dùng hBN hay TMD làm lớp điện môi hoặc lớp tiếp xúc trên màng nano β-Ga₂O₃, giảm bẫy mặt phân cách vốn là vấn đề lớn của MOSFET Ga₂O₃. MXene với công thoát điều chỉnh được cũng đang được thử làm điện cực Schottky và ohmic cho Ga₂O₃.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>K. F. Mak, C. Lee, J. Hone, J. Shan, T. F. Heinz, "Atomically thin MoS₂: a new direct-gap semiconductor," <em>Physical Review Letters</em> 105, 136805 (2010).</li>
+<li>S. Manzeli, D. Ovchinnikov, D. Pasquier, O. V. Yazyev, A. Kis, "2D transition metal dichalcogenides," <em>Nature Reviews Materials</em> 2, 17033 (2017).</li>
+<li>D. Jena, "Tunneling transistors based on graphene and 2-D crystals," <em>Proceedings of the IEEE</em> 101, 1585 (2013).</li>
+<li>A. K. Geim, I. V. Grigorieva, "Van der Waals heterostructures," <em>Nature</em> 499, 419 (2013).</li>
+<li>M. Naguib et al., "Two-dimensional nanocrystals produced by exfoliation of Ti₃AlC₂," <em>Advanced Materials</em> 23, 4248 (2011).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Graphene opened a whole "2D universe" but lacks a bandgap. Transition metal dichalcogenides (TMDs) such as MoS₂ fill that gap: they are semiconductors only a few atoms thick. This lesson also introduces MXenes, the newest family of metallic 2D materials.</p>
+
+<h2>1. What TMDs are</h2>
+<p>TMDs are atomically thin semiconductors of formula <strong>MX₂</strong>, where M is a transition metal (Mo, W, ...) and X a chalcogen (S, Se, Te). Like graphite, bulk TMD crystals are monolayers bound by van der Waals attraction; each monolayer is an X–M–X "sandwich" about 6.5 Å thick for MoS₂. Strong in-plane covalent bonds and weak interlayer bonding are also why MoS₂ is a dry lubricant.</p>
+
+<h2>2. The 2H and 1T phases</h2>
+<p>Two common structural phases: <strong>trigonal prismatic (2H)</strong> and <strong>octahedral (1T)</strong>. The thermodynamically stable phase is 2H or 1T depending on the material, but the other can often be made as a metastable phase. For MoS₂, 2H is semiconducting while 1T is metallic; local 2H → 1T conversion is used to make low-resistance contacts.</p>
+
+<h2>3. From indirect to direct bandgap</h2>
+<p>The positions of the conduction and valence band edges shift as the layer count falls. Bulk MoS₂ is an <strong>indirect</strong> semiconductor with a gap of about 1.3 eV; as it thins, the indirect gap widens, and the monolayer becomes a <strong>direct</strong> semiconductor with a gap of about 1.9 eV. The monolayer's luminescence efficiency is therefore thousands of times higher than bulk.</p>
+<figure><svg viewBox="0 0 560 280" class="fig-svg" role="img"><line x1="60" y1="235" x2="540" y2="235" class="ax"/><line x1="60" y1="235" x2="60" y2="20" class="ax"/><line x1="60" y1="235.0" x2="540" y2="235.0" class="grid"/><text x="52" y="239.0" class="tk" text-anchor="end">0</text><line x1="60" y1="186.1" x2="540" y2="186.1" class="grid"/><text x="52" y="190.1" class="tk" text-anchor="end">0.5</text><line x1="60" y1="137.3" x2="540" y2="137.3" class="grid"/><text x="52" y="141.3" class="tk" text-anchor="end">1</text><line x1="60" y1="88.4" x2="540" y2="88.4" class="grid"/><text x="52" y="92.4" class="tk" text-anchor="end">1.5</text><line x1="60" y1="39.5" x2="540" y2="39.5" class="grid"/><text x="52" y="43.5" class="tk" text-anchor="end">2</text><rect x="79.2" y="49.3" width="57.6" height="185.7" style="fill:var(--accent)"/><text x="108.0" y="43.3" class="tk" text-anchor="middle">1.90</text><text x="108.0" y="253" class="tk" text-anchor="middle">1L</text><rect x="175.2" y="78.6" width="57.6" height="156.4" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="204.0" y="72.6" class="tk" text-anchor="middle">1.60</text><text x="204.0" y="253" class="tk" text-anchor="middle">2L</text><rect x="271.2" y="88.4" width="57.6" height="146.6" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="300.0" y="82.4" class="tk" text-anchor="middle">1.50</text><text x="300.0" y="253" class="tk" text-anchor="middle">3L</text><rect x="367.2" y="96.2" width="57.6" height="138.8" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="396.0" y="90.2" class="tk" text-anchor="middle">1.42</text><text x="396.0" y="253" class="tk" text-anchor="middle">4L</text><rect x="463.2" y="108.9" width="57.6" height="126.1" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="492.0" y="102.9" class="tk" text-anchor="middle">1.29</text><text x="492.0" y="253" class="tk" text-anchor="middle">Bulk</text><text x="14" y="127.5" class="lab" text-anchor="middle" transform="rotate(-90 14 127.5)">Bandgap (eV)</text><rect x="350" y="22" width="12" height="12" style="fill:var(--accent)"/><text x="368" y="32" class="tk">direct gap</text><rect x="350" y="40" width="12" height="12" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="368" y="50" class="tk">indirect gap</text></svg><figcaption>Figure 1. MoS₂ bandgap versus number of layers (approximate values from optical measurements).</figcaption></figure>
+<p>TMDs are grown over large areas by CVD, and lateral or vertical heterostructures between two different TMDs can be grown directly.</p>
+
+<h2>4. Why 2D appeals for electronics at the scaling limit</h2>
+<ul>
+<li><strong>Robust under scaling</strong>: when 3D materials are thinned below about 10 nm, the bandgap jumps and mobility drops sharply from surface scattering. 2D materials are already at the thinnest limit and keep their properties.</li>
+<li><strong>Excellent electrostatic control</strong>: in 3D semiconductors charge is confined to ~1.2 nm and hard to place near the surface; in 2D, electrons and holes sit within ~0.3 nm. The gate controls the channel more effectively, giving high gate capacitance, high current and high performance.</li>
+<li><strong>No dangling bonds</strong>: no out-of-plane bonds means few interface traps; interfaces are "pristine", without the strain of 3D heteroepitaxy.</li>
+</ul>
+<p>Stacking different 2D materials (graphene, hBN, TMDs, ...) like Lego bricks creates <strong>van der Waals heterostructures</strong> without lattice matching, opening properties unavailable in 3D semiconductors.</p>
+
+<h2>5. MXenes</h2>
+<p>MXenes are a family of 2D inorganic materials made of few-atom-thick layers of <strong>transition metal carbides, nitrides or carbonitrides</strong>, first described in 2011. They are made by selectively etching the A layer (usually Al) out of a bulk MAX phase, e.g. Ti₃AlC₂ → Ti₃C₂Tₓ, where Tₓ are surface groups –OH, –O, –F.</p>
+<p>MXenes combine the <strong>metallic conductivity</strong> of transition metal carbides with a <strong>hydrophilic</strong> character from their hydroxyl- or oxygen-terminated surfaces. Applications: energy storage (supercapacitors, batteries), electromagnetic interference shielding, transparent electrodes, sensors, water purification and catalysis.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The "no dangling bonds" property of 2D materials suggests an interesting direction for Ga₂O₃: using hBN or TMDs as dielectric or contact layers on β-Ga₂O₃ nanomembranes to reduce interface traps, a major problem for Ga₂O₃ MOSFETs. MXenes with tunable work functions are also being tried as Schottky and ohmic electrodes on Ga₂O₃.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>K. F. Mak, C. Lee, J. Hone, J. Shan, T. F. Heinz, "Atomically thin MoS₂: a new direct-gap semiconductor," <em>Physical Review Letters</em> 105, 136805 (2010).</li>
+<li>S. Manzeli, D. Ovchinnikov, D. Pasquier, O. V. Yazyev, A. Kis, "2D transition metal dichalcogenides," <em>Nature Reviews Materials</em> 2, 17033 (2017).</li>
+<li>D. Jena, "Tunneling transistors based on graphene and 2-D crystals," <em>Proceedings of the IEEE</em> 101, 1585 (2013).</li>
+<li>A. K. Geim, I. V. Grigorieva, "Van der Waals heterostructures," <em>Nature</em> 499, 419 (2013).</li>
+<li>M. Naguib et al., "Two-dimensional nanocrystals produced by exfoliation of Ti₃AlC₂," <em>Advanced Materials</em> 23, 4248 (2011).</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-cnt.html">← <span class="l-vi">Ống nano carbon và thang máy vũ trụ</span><span class="l-en">Carbon nanotubes and the space elevator</span></a><a class="n" href="nano-xray-ga2o3.html"><span class="l-vi">Nghiên cứu điển hình: cảm biến tia X α-Ga₂O₃</span><span class="l-en">Case study: α-Ga₂O₃ X-ray detectors</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

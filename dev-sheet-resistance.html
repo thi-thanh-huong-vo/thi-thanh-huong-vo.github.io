@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Phép đo bốn đầu dò và điện trở tấm" data-title-en="Four-point probe and sheet resistance">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four-point probe and sheet resistance · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Why four probes, sheet resistance in Ω/□ and the formulas for thick samples and thin films.">
+<meta property="og:title" content="Four-point probe and sheet resistance">
+<meta property="og:description" content="Why four probes, sheet resistance in Ω/□ and the formulas for thick samples and thin films.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 1</span><span class="l-en">Part 2 · Lesson 1</span></p>
+  <h1><span class="l-vi">Phép đo bốn đầu dò và điện trở tấm</span><span class="l-en">Four-point probe and sheet resistance</span></h1>
+  <p class="sub"><span class="l-vi">Vì sao cần bốn đầu dò, điện trở tấm Ω/□ và công thức cho mẫu dày và màng mỏng.</span><span class="l-en">Why four probes, sheet resistance in Ω/□ and the formulas for thick samples and thin films.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Đo điện trở nghe có vẻ là phép đo đơn giản nhất trong phòng thí nghiệm. Nhưng với màng mỏng và linh kiện bán dẫn, chính dây đo và điểm tiếp xúc có thể đóng góp nhiều hơn cả mẫu. Phép đo bốn đầu dò ra đời để giải quyết vấn đề này.</p>
+
+<h2>1. Hạn chế của phép đo hai đầu dò</h2>
+<p>Với hai đầu dò, dòng điện và điện áp đi qua cùng một cặp tiếp xúc, nên điện trở đo được là tổng:</p>
+$$R_T = \frac{V}{I} = 2R_P + 2R_C + 2R_{SP} + R_{DUT}$$
+<p>với \(R_P\) là điện trở đầu dò, \(R_C\) điện trở tiếp xúc giữa đầu dò và mẫu, \(R_{SP}\) điện trở lan tỏa (spreading) ngay dưới đầu dò, và \(R_{DUT}\) điện trở thực của mẫu. Kết quả luôn lớn hơn giá trị thật, và không thể tách riêng \(R_{DUT}\).</p>
+
+<h2>2. Phép đo bốn đầu dò (kỹ thuật Kelvin)</h2>
+<p>Ý tưởng: tách đường dòng và đường đo áp. Dòng \(I\) được cấp qua hai đầu dò ngoài; điện áp \(V\) được đo giữa hai đầu dò trong bằng vôn kế trở kháng rất cao, nên gần như không có dòng chảy qua các tiếp xúc đo áp, và \(R_P\), \(R_C\), \(R_{SP}\) không còn ảnh hưởng.</p>
+<figure><svg viewBox="0 0 560 220" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<rect x="40" y="130" width="480" height="40" class="atom"/><text x="280" y="192" class="ns" text-anchor="middle">Màng mỏng, độ dày t</text>
+<line x1="160" y1="62" x2="160" y2="128" class="ax" style="stroke-width:3"/><circle cx="160" cy="128" r="3" fill="var(--ink)"/><line x1="240" y1="62" x2="240" y2="128" class="ax" style="stroke-width:3"/><circle cx="240" cy="128" r="3" fill="var(--ink)"/><line x1="320" y1="62" x2="320" y2="128" class="ax" style="stroke-width:3"/><circle cx="320" cy="128" r="3" fill="var(--ink)"/><line x1="400" y1="62" x2="400" y2="128" class="ax" style="stroke-width:3"/><circle cx="400" cy="128" r="3" fill="var(--ink)"/>
+<text x="148" y="76" class="nt" text-anchor="end">1</text><text x="228" y="76" class="nt" text-anchor="end">2</text><text x="332" y="76" class="nt">3</text><text x="412" y="76" class="nt">4</text>
+<path d="M160,62 Q280,8 400,62" class="arr" fill="none"/><text x="280" y="22" class="ns" text-anchor="middle">nguồn dòng I qua đầu dò 1 và 4</text>
+<path d="M240,96 L320,96" class="s2" fill="none"/><text x="280" y="88" class="ns" text-anchor="middle">đo V</text>
+<text x="200" y="122" class="ns" text-anchor="middle">s</text><text x="280" y="122" class="ns" text-anchor="middle">s</text><text x="360" y="122" class="ns" text-anchor="middle">s</text>
+</svg><figcaption>Hình 1. Đầu dò bốn điểm thẳng hàng với khoảng cách đều s.</figcaption></figure>
+
+<h2>3. Điện trở tấm</h2>
+<p>Với màng chữ nhật dài \(L\), rộng \(W\), dày \(t\): \(R = \rho L/(tW)\). Với một hình vuông (\(L = W\)), \(L/W\) biến mất:</p>
+$$R_s = \frac{\rho}{t} \qquad \text{(đơn vị: Ω/□, "ohm trên vuông")}$$
+<p>Điện trở tấm bằng điện trở đo được của một mảnh vuông vật liệu, <strong>không phụ thuộc kích thước hình vuông</strong>, và không cần biết độ dày màng để đo nó. Vì vậy \(R_s\) rất tiện để so sánh các màng mỏng, lớp khuếch tán, lớp cấy ion, lớp epitaxy hay lớp kim loại. Một dải dẫn dài \(L\), rộng \(W\) có điện trở \(R = R_s\,(L/W)\), tức \(R_s\) nhân với "số hình vuông". Nếu biết độ dày, ta suy ra điện trở suất \(\rho = R_s\,t\), và \(R_s = 1/(\sigma t)\) tỉ lệ nghịch với tích độ dẫn–độ dày.</p>
+
+<h2>4. Công thức bốn đầu dò</h2>
+<p>Với khối bán vô hạn, dòng \(I\) từ một đầu dò lan ra theo nửa mặt cầu; điện thế tại khoảng cách \(r\) là \(V = \rho I/(2\pi r)\). Chồng chập cho bốn đầu dò cách đều \(s\) ta được:</p>
+$$\rho = 2\pi s\,\frac{V}{I} \qquad \text{(mẫu dày, } t \gg s\text{)}$$
+<p>Khi \(s = 0{,}1588\) cm, \(2\pi s = 1\) cm, nên \(\rho\) (Ω·cm) bằng đúng \(V/I\); đầu dò thương mại thường được chế tạo với khoảng cách này. Với màng mỏng (\(t \ll s\)), dòng lan theo hình trụ thay vì hình cầu:</p>
+$$R_s = \frac{\pi}{\ln 2}\,\frac{V}{I} \approx 4{,}532\,\frac{V}{I}$$
+<p>Với mẫu có kích thước hữu hạn hoặc hình dạng bất kỳ, nhân thêm hệ số hiệu chỉnh \(F\) tính đến vị trí đầu dò so với mép mẫu, độ dày, đường kính mẫu và nhiệt độ. Một lưu ý thực tế: đầu dò dùng cho màng kim loại không nên dùng chung với đầu dò đo bán dẫn, để tránh nhiễm bẩn và hỏng đầu kim.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Đầu dò bốn điểm khó dùng trực tiếp trên Ga₂O₃ pha tạp nhẹ: đầu kim tạo tiếp xúc Schottky chứ không ohmic, và lớp epitaxy thường nằm trên đế cũng dẫn điện. Vì vậy điện trở tấm của các lớp Ga₂O₃ thường được đo bằng cấu trúc van der Pauw hoặc TLM có điện cực ohmic, kết hợp với lớp đệm hoặc đế bán cách điện pha Fe để dòng không rò xuống đế.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chương 1.</li>
+<li>F. M. Smits, "Measurement of sheet resistivities with the four-point probe," <em>Bell System Technical Journal</em> 37, 711 (1958).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Measuring resistance sounds like the simplest measurement in the lab. But for thin films and semiconductor devices, the leads and contacts can contribute more than the sample itself. The four-point probe was invented to solve exactly this problem.</p>
+
+<h2>1. Limits of two-point measurement</h2>
+<p>With two probes, current and voltage share the same pair of contacts, so the measured resistance is the sum:</p>
+$$R_T = \frac{V}{I} = 2R_P + 2R_C + 2R_{SP} + R_{DUT}$$
+<p>where \(R_P\) is the probe resistance, \(R_C\) the probe–sample contact resistance, \(R_{SP}\) the spreading resistance just under the probe, and \(R_{DUT}\) the true sample resistance. The result is always higher than the true value, and \(R_{DUT}\) cannot be separated out.</p>
+
+<h2>2. Four-point (Kelvin) measurement</h2>
+<p>The idea: separate the current path from the voltage path. Current \(I\) is supplied through the two outer probes; voltage \(V\) is measured between the two inner probes with a very high-impedance voltmeter, so almost no current flows through the voltage contacts, and \(R_P\), \(R_C\), \(R_{SP}\) drop out.</p>
+<figure><svg viewBox="0 0 560 220" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
+<rect x="40" y="130" width="480" height="40" class="atom"/><text x="280" y="192" class="ns" text-anchor="middle">Thin film, thickness t</text>
+<line x1="160" y1="62" x2="160" y2="128" class="ax" style="stroke-width:3"/><circle cx="160" cy="128" r="3" fill="var(--ink)"/><line x1="240" y1="62" x2="240" y2="128" class="ax" style="stroke-width:3"/><circle cx="240" cy="128" r="3" fill="var(--ink)"/><line x1="320" y1="62" x2="320" y2="128" class="ax" style="stroke-width:3"/><circle cx="320" cy="128" r="3" fill="var(--ink)"/><line x1="400" y1="62" x2="400" y2="128" class="ax" style="stroke-width:3"/><circle cx="400" cy="128" r="3" fill="var(--ink)"/>
+<text x="148" y="76" class="nt" text-anchor="end">1</text><text x="228" y="76" class="nt" text-anchor="end">2</text><text x="332" y="76" class="nt">3</text><text x="412" y="76" class="nt">4</text>
+<path d="M160,62 Q280,8 400,62" class="arr" fill="none"/><text x="280" y="22" class="ns" text-anchor="middle">current I through probes 1 and 4</text>
+<path d="M240,96 L320,96" class="s2" fill="none"/><text x="280" y="88" class="ns" text-anchor="middle">measure V</text>
+<text x="200" y="122" class="ns" text-anchor="middle">s</text><text x="280" y="122" class="ns" text-anchor="middle">s</text><text x="360" y="122" class="ns" text-anchor="middle">s</text>
+</svg><figcaption>Figure 1. Collinear four-point probe with equal spacing s.</figcaption></figure>
+
+<h2>3. Sheet resistance</h2>
+<p>For a rectangular film of length \(L\), width \(W\) and thickness \(t\): \(R = \rho L/(tW)\). For a square (\(L = W\)), \(L/W\) cancels:</p>
+$$R_s = \frac{\rho}{t} \qquad \text{(units: Ω/□, "ohms per square")}$$
+<p>Sheet resistance equals the measured resistance of a square piece of material, <strong>independent of the size of the square</strong>, and the film thickness need not be known to measure it. This makes \(R_s\) very convenient for comparing thin films, diffused, implanted, epitaxial or metal layers. A strip of length \(L\) and width \(W\) has \(R = R_s\,(L/W)\), that is, \(R_s\) times the "number of squares". If the thickness is known, the resistivity follows as \(\rho = R_s\,t\), and \(R_s = 1/(\sigma t)\) is inversely proportional to the conductivity–thickness product.</p>
+
+<h2>4. The four-point formulas</h2>
+<p>In a semi-infinite bulk, current \(I\) from one probe spreads out hemispherically; the potential at distance \(r\) is \(V = \rho I/(2\pi r)\). Superposing the four equally spaced probes gives:</p>
+$$\rho = 2\pi s\,\frac{V}{I} \qquad \text{(thick sample, } t \gg s\text{)}$$
+<p>With \(s = 0.1588\) cm, \(2\pi s = 1\) cm, so \(\rho\) (Ω·cm) equals \(V/I\); commercial heads are often made with this spacing. For thin films (\(t \ll s\)), current spreads cylindrically rather than spherically:</p>
+$$R_s = \frac{\pi}{\ln 2}\,\frac{V}{I} \approx 4.532\,\frac{V}{I}$$
+<p>For finite or arbitrarily shaped samples, a correction factor \(F\) accounts for probe position relative to the edges, thickness, sample diameter and temperature. A practical note: probes used on metal films should not be shared with probes for semiconductors, to avoid contamination and tip damage.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The four-point probe is hard to use directly on lightly doped Ga₂O₃: the tips form Schottky rather than ohmic contacts, and the epitaxial layer often sits on a conductive substrate. Sheet resistance of Ga₂O₃ layers is therefore usually measured with van der Pauw or TLM structures with ohmic electrodes, combined with semi-insulating Fe-doped substrates or buffers so current does not leak into the substrate.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chapter 1.</li>
+<li>F. M. Smits, "Measurement of sheet resistivities with the four-point probe," <em>Bell System Technical Journal</em> 37, 711 (1958).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-energy-diagrams.html">← <span class="l-vi">Thế năng, động năng và giản đồ năng lượng</span><span class="l-en">Potential energy, kinetic energy and band diagrams</span></a><a class="n" href="dev-tlm.html"><span class="l-vi">Điện trở tiếp xúc và phương pháp TLM</span><span class="l-en">Contact resistance and the TLM method</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

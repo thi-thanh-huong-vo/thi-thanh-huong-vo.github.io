@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Bên trong một fab bán dẫn" data-title-en="Inside a semiconductor fab">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inside a semiconductor fab · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Chips in a phone, MOSFET scaling and new materials, the cleanroom and the tools of a research fab.">
+<meta property="og:title" content="Inside a semiconductor fab">
+<meta property="og:description" content="Chips in a phone, MOSFET scaling and new materials, the cleanroom and the tools of a research fab.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 5 · Bài 1</span><span class="l-en">Part 5 · Lesson 1</span></p>
+  <h1><span class="l-vi">Bên trong một fab bán dẫn</span><span class="l-en">Inside a semiconductor fab</span></h1>
+  <p class="sub"><span class="l-vi">Chip trong điện thoại, thu nhỏ MOSFET và vật liệu mới, phòng sạch và thiết bị trong một fab nghiên cứu.</span><span class="l-en">Chips in a phone, MOSFET scaling and new materials, the cleanroom and the tools of a research fab.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Mỗi chiếc điện thoại thông minh chứa hàng chục con chip khác nhau, và tất cả đều ra đời trong một nơi đặc biệt: nhà máy bán dẫn, hay "fab". Bài này giới thiệu fab từ góc nhìn của một phòng sạch đại học, nơi các nhà nghiên cứu như chúng ta chế tạo linh kiện.</p>
+
+<h2>1. Chip ở khắp nơi</h2>
+<p>Mở một chiếc điện thoại ra (các báo cáo "teardown" của iFixit hay TechInsights làm đúng việc này), ta thấy: bộ xử lý ứng dụng, bộ nhớ DRAM và NAND, chip thu GPS, chip Bluetooth/Wi-Fi, module RF đầu cuối, chip quản lý nguồn, và cảm biến quán tính MEMS (con quay hồi chuyển, gia tốc kế). Cảm biến MEMS là ví dụ hay: tuy là cấu trúc cơ học chuyển động, chúng được chế tạo bằng chính các bước quy trình bán dẫn.</p>
+
+<h2>2. Thu nhỏ MOSFET và đổi mới vật liệu</h2>
+<p>Ngành vi mạch tăng trưởng nhờ thu nhỏ MOSFET theo định luật Moore. Lý do có trong phương trình dòng bão hòa \(I_{Dsat} \propto (W/L)\,C_{ox}(V_G - V_{th})^2\): giảm \(L\) và tăng \(C_{ox}\) cho dòng lớn hơn và chuyển mạch nhanh hơn. Đến khoảng năm 2000, MOSFET được làm hoàn toàn từ vật liệu nền Si: cổng poly-Si pha tạp As (~10²⁰ cm⁻³), oxit SiO₂, đế Si (100) pha tạp boron (10¹⁵–10¹⁶ cm⁻³), với chiều dài cổng khoảng 100 nm.</p>
+<p>Sau đó, thu nhỏ đòi hỏi đổi mới vật liệu và cấu trúc:</p>
+<ul>
+<li><strong>Cổng kim loại/điện môi high-k</strong> (HKMG, từ thế hệ 45 nm): điện môi gốc Hf thay SiO₂ để giảm dòng xuyên hầm; kim loại công thoát khác nhau (ví dụ TiN cho PMOS, TiAlN cho NMOS) thay poly-Si.</li>
+<li><strong>FinFET</strong> (từ thế hệ 22 nm): kênh dựng đứng thành vây, cổng bao ba mặt.</li>
+<li><strong>Nanosheet / gate-all-around</strong>: các tấm kênh xếp chồng, cổng bao kín bốn mặt.</li>
+<li><strong>Nhiều lớp kim loại liên kết</strong>: chip hiện đại có hơn chục lớp kim loại xếp chồng phía trên transistor.</li>
+</ul>
+
+<h2>3. Phòng sạch</h2>
+<p>Hạt bụi là kẻ thù số một của hiệu suất (yield). Hiệu suất nhân dồn qua các bước: nếu mỗi bước chỉ đạt 80 %, sau 5 bước chỉ còn \(0{,}8^5 \approx 33\) %. Nhiễm bẩn còn ảnh hưởng tới chất lượng: chỉ 1 ppm Cu có thể làm \(V_{th}\) lệch khoảng 0,1 V.</p>
+<p>Độ sạch được phân loại theo <strong>Class</strong>: số hạt kích thước ≥ 0,5 µm cho phép trong một foot khối không khí. Văn phòng thông thường khoảng Class 100.000; phòng sạch đại học thường Class 1.000; fab sản xuất tiên tiến sạch hơn nhiều bậc. Một người có thể phát ra hàng triệu hạt mỗi phút, nên trang phục phòng sạch là bắt buộc. Kiểm soát nhiễm bẩn có ba tầng: (1) giữ sạch phòng (mức %); (2) làm sạch wafer, ví dụ quy trình RCA (mức ppm); (3) gettering (mức ppb).</p>
+<p>Hạ tầng phòng sạch gồm: lọc HEPA, điều hòa nhiệt độ/độ ẩm/áp suất (ví dụ 20 °C, 50 %), nước khử ion siêu tinh khiết, N₂ độ tinh khiết cao, khí nén sạch (CDA), nước làm mát quy trình (PCW), hệ thống cấp khí quy trình (SiH₄, PH₃, Cl₂, ...) và hệ thống xử lý khí thải (scrubber), chất thải lỏng.</p>
+
+<h2>4. Thiết bị trong một fab nghiên cứu</h2>
+<div class="tablewrap"><table>
+<tr><th>Nhóm quy trình</th><th>Thiết bị tiêu biểu</th></tr>
+<tr><td>Lắng đọng màng</td><td>Sputter (Ti, TiN, Al, Ni, Pt, Au...), PECVD (SiO₂, SiNₓ, 100–500 °C), LPCVD (poly-Si, SiNₓ, 650–800 °C), ALD (HfO₂, Al₂O₃, SiO₂)</td></tr>
+<tr><td>Nhiệt và hóa ướt</td><td>Lò oxi hóa khô/ướt, RTP (đến ~1150 °C, tốc độ tăng nhiệt ~25 °C/s), trạm ướt dung môi và axit/bazơ (H₂SO₄, BOE, KOH...)</td></tr>
+<tr><td>Quang khắc</td><td>Máy phủ quay, bếp nung, mask aligner (i-line 365 nm, g-line 436 nm, CD ~0,8–1 µm), máy ghi laser không mặt nạ</td></tr>
+<tr><td>Khắc khô</td><td>RIE và ICP (khí CF₄, CHF₃, SF₆, Cl₂, BCl₃), máy tẩy PR bằng plasma O₂</td></tr>
+<tr><td>Đo lường</td><td>Probe station + máy phân tích thông số, LCR meter, đầu dò bốn điểm, máy đo bậc (α-step), ellipsometer, kính hiển vi</td></tr>
+</table></div>
+<p>Để hình dung quy mô: với transistor 1 µm, có thể xếp khoảng 50 transistor ngang qua một sợi tóc (đường kính ~100 µm).</p>
+
+<h2>5. Linh kiện nào cho tương lai?</h2>
+<p>Những tiêu chí lặp đi lặp lại: công suất thấp, tốc độ cao, kích thước nhỏ, dễ thiết kế, giá rẻ, và trên hết là có giá trị về ý tưởng. Một fab đại học không cạnh tranh với fab công nghiệp về kích thước, mà là nơi thử những ý tưởng mới: cảm biến sinh học, linh kiện đeo trên da, MEMS, linh kiện năng lượng và điện tử dẻo. Trong fab có hai nhóm kỹ sư chính: kỹ sư phát triển thiết bị và kỹ sư phát triển quy trình.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Linh kiện Ga₂O₃ trong phòng thí nghiệm của chúng tôi đi qua đúng các bước này: làm sạch mẫu bằng dung môi, quang khắc với mặt nạ thiết kế bằng AutoCAD, lắng đọng kim loại bằng e-beam hoặc sputter, lift-off, và ủ nhiệt nhanh cho tiếp xúc ohmic. Khác biệt lớn nhất so với Si là mẫu thường là mảnh nhỏ thay vì wafer nguyên, nên kỹ năng thao tác bằng tay đóng vai trò quan trọng.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology: Fundamentals, Practice and Modeling</em>, Prentice Hall (2000), chương 4.</li>
+<li>K. Mistry et al., "A 45nm logic technology with high-k + metal gate transistors, strained silicon, 9 Cu interconnect layers, 193nm dry patterning, and 100% Pb-free packaging," <em>IEDM Technical Digest</em> (2007).</li>
+<li>ISO 14644-1:2015, <em>Cleanrooms and associated controlled environments — Classification of air cleanliness by particle concentration</em>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Every smartphone contains dozens of different chips, and all of them are born in a special place: the semiconductor fabrication plant, or "fab". This lesson introduces the fab from the viewpoint of a university cleanroom, where researchers like us build devices.</p>
+
+<h2>1. Chips everywhere</h2>
+<p>Open a phone (the "teardown" reports of iFixit or TechInsights do exactly this) and you find: an application processor, DRAM and NAND memory, a GPS receiver, a Bluetooth/Wi-Fi chip, an RF front-end module, a power-management chip, and MEMS inertial sensors (gyroscope, accelerometer). MEMS sensors are a nice example: although they are moving mechanical structures, they are made with the same semiconductor process steps.</p>
+
+<h2>2. MOSFET scaling and materials innovation</h2>
+<p>The IC industry grew by shrinking MOSFETs according to Moore's law. The reason is in the saturation-current equation \(I_{Dsat} \propto (W/L)\,C_{ox}(V_G - V_{th})^2\): reducing \(L\) and increasing \(C_{ox}\) gives more current and faster switching. Until about 2000, MOSFETs were made entirely of Si-based materials: As-doped poly-Si gates (~10²⁰ cm⁻³), SiO₂ oxide, boron-doped (100) Si substrates (10¹⁵–10¹⁶ cm⁻³), with gate lengths around 100 nm.</p>
+<p>After that, scaling required new materials and structures:</p>
+<ul>
+<li><strong>High-k/metal gate</strong> (HKMG, from the 45 nm node): Hf-based dielectrics replace SiO₂ to cut tunneling current; different work-function metals (e.g. TiN for PMOS, TiAlN for NMOS) replace poly-Si.</li>
+<li><strong>FinFET</strong> (from the 22 nm node): the channel stands up as a fin, with the gate wrapping three sides.</li>
+<li><strong>Nanosheet / gate-all-around</strong>: stacked channel sheets with the gate wrapping all four sides.</li>
+<li><strong>Many interconnect layers</strong>: modern chips have more than ten stacked metal layers above the transistors.</li>
+</ul>
+
+<h2>3. The cleanroom</h2>
+<p>Particles are the number-one enemy of yield. Yield compounds over steps: if each step reaches only 80%, after 5 steps just \(0.8^5 \approx 33\%\) remains. Contamination also affects quality: just 1 ppm of Cu can shift \(V_{th}\) by about 0.1 V.</p>
+<p>Cleanliness is graded by <strong>Class</strong>: the number of particles ≥ 0.5 µm allowed per cubic foot of air. A normal office is roughly Class 100,000; a university cleanroom is often Class 1,000; leading-edge production fabs are orders of magnitude cleaner. A person can shed millions of particles per minute, so cleanroom garments are mandatory. Contamination control has three tiers: (1) keeping the room clean (% level); (2) wafer cleaning, e.g. the RCA clean (ppm level); (3) gettering (ppb level).</p>
+<p>Cleanroom infrastructure includes HEPA filtration, temperature/humidity/pressure control (e.g. 20 °C, 50%), ultrapure deionized water, high-purity N₂, clean dry air (CDA), process cooling water (PCW), process gas delivery (SiH₄, PH₃, Cl₂, ...) and gas scrubbers and liquid waste handling.</p>
+
+<h2>4. Equipment in a research fab</h2>
+<div class="tablewrap"><table>
+<tr><th>Process group</th><th>Typical tools</th></tr>
+<tr><td>Thin-film deposition</td><td>Sputtering (Ti, TiN, Al, Ni, Pt, Au...), PECVD (SiO₂, SiNₓ, 100–500 °C), LPCVD (poly-Si, SiNₓ, 650–800 °C), ALD (HfO₂, Al₂O₃, SiO₂)</td></tr>
+<tr><td>Thermal and wet chemistry</td><td>Dry/wet oxidation furnaces, RTP (up to ~1150 °C, ramp ~25 °C/s), solvent and acid/base wet stations (H₂SO₄, BOE, KOH...)</td></tr>
+<tr><td>Lithography</td><td>Spin coater, hot plates, mask aligner (i-line 365 nm, g-line 436 nm, CD ~0.8–1 µm), maskless laser writer</td></tr>
+<tr><td>Dry etching</td><td>RIE and ICP (CF₄, CHF₃, SF₆, Cl₂, BCl₃), O₂ plasma resist asher</td></tr>
+<tr><td>Metrology</td><td>Probe station + parameter analyzer, LCR meter, four-point probe, stylus profiler (α-step), ellipsometer, microscopes</td></tr>
+</table></div>
+<p>For scale: with 1 µm transistors, about 50 fit across a human hair (~100 µm in diameter).</p>
+
+<h2>5. Which devices for the future?</h2>
+<p>The recurring criteria: low power, high speed, small size, easy design, low cost, and above all value as an idea. A university fab does not compete with industry on feature size; it is where new ideas are tried: biosensors, skin-mounted devices, MEMS, energy devices and flexible electronics. A fab has two main kinds of engineers: equipment development engineers and process development engineers.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The Ga₂O₃ devices in our lab go through exactly these steps: solvent cleaning, photolithography with masks designed in AutoCAD, metal deposition by e-beam or sputtering, lift-off, and rapid thermal annealing for ohmic contacts. The biggest difference from Si is that samples are often small pieces rather than full wafers, so hands-on handling skill matters a lot.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology: Fundamentals, Practice and Modeling</em>, Prentice Hall (2000), chapter 4.</li>
+<li>K. Mistry et al., "A 45nm logic technology with high-k + metal gate transistors, strained silicon, 9 Cu interconnect layers, 193nm dry patterning, and 100% Pb-free packaging," <em>IEDM Technical Digest</em> (2007).</li>
+<li>ISO 14644-1:2015, <em>Cleanrooms and associated controlled environments — Classification of air cleanliness by particle concentration</em>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-mosfet-real.html">← <span class="l-vi">MOSFET thực và hiệu ứng kênh ngắn</span><span class="l-en">Real MOSFETs and short-channel effects</span></a><a class="n" href="dev-chip-layout.html"><span class="l-vi">Bố trí chip, nút công nghệ và trễ RC</span><span class="l-en">Chip layout, technology nodes and RC delay</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên bài giảng khách mời của Hoon-Jung Oh (BIT Micro Fab Center, Yonsei University) trong học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt.</span><span class="l-en">Based on a guest lecture by Hoon-Jung Oh (BIT Micro Fab Center, Yonsei University) in the course of Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

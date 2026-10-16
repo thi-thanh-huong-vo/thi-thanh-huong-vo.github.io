@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Từ dưới lên (2): phương pháp dung dịch" data-title-en="Bottom-up (2): solution methods">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bottom-up (2): solution methods · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Colloids, coprecipitation, Ostwald ripening, hydrothermal Ga₂O₃, sol-gel, electrospinning and dip-pen lithography.">
+<meta property="og:title" content="Bottom-up (2): solution methods">
+<meta property="og:description" content="Colloids, coprecipitation, Ostwald ripening, hydrothermal Ga₂O₃, sol-gel, electrospinning and dip-pen lithography.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 3</span><span class="l-en">Part 2 · Lesson 3</span></p>
+  <h1><span class="l-vi">Từ dưới lên (2): phương pháp dung dịch</span><span class="l-en">Bottom-up (2): solution methods</span></h1>
+  <p class="sub"><span class="l-vi">Keo, đồng kết tủa, thô hóa Ostwald, thủy nhiệt Ga₂O₃, sol-gel, điện kéo sợi và quang khắc bút nhúng.</span><span class="l-en">Colloids, coprecipitation, Ostwald ripening, hydrothermal Ga₂O₃, sol-gel, electrospinning and dip-pen lithography.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Các phương pháp pha lỏng là "bếp" của nhà hóa học vật liệu: nhiệt độ thấp, thiết bị đơn giản, và có thể điều khiển kích thước, hình dạng hạt rất tinh tế. Bài này đi qua các phương pháp phổ biến nhất, kèm một quy trình tổng hợp Ga₂O₃ cụ thể.</p>
+
+<h2>1. Tổng hợp keo</h2>
+<p>Thường dùng để tạo hạt nano vàng: muối vàng bị khử trong dung dịch (ví dụ bằng citrate), tạo dung dịch quá bão hòa nguyên tử kim loại, và các nguyên tử tạo mầm thành hạt nano. Chất bao (capping agent) hấp phụ lên bề mặt giữ cho hạt không kết tụ.</p>
+
+<h2>2. Đồng kết tủa</h2>
+<p>Tạo mầm, phát triển, thô hóa và kết tụ xảy ra <strong>đồng thời</strong>. Đặc điểm:</p>
+<ul>
+<li>Sản phẩm thường là chất ít tan, hình thành ở điều kiện quá bão hòa cao, và trạng thái quá bão hòa thường do một phản ứng hóa học tạo ra.</li>
+<li>Tạo mầm là bước then chốt: rất nhiều hạt nhỏ được tạo ra.</li>
+<li>Các quá trình thứ cấp như <strong>thô hóa Ostwald</strong> (hạt lớn lớn lên bằng cách "ăn" hạt nhỏ, vì hạt nhỏ có thế hóa học cao hơn) và kết tụ ảnh hưởng mạnh tới kích thước, hình thái và tính chất sản phẩm.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th>Ưu điểm</th><th>Nhược điểm</th></tr>
+<tr><td>Đơn giản và nhanh</td><td>Không áp dụng cho chất không mang điện</td></tr>
+<tr><td>Dễ điều khiển kích thước và thành phần</td><td>Tạp chất vết cũng có thể kết tủa theo</td></tr>
+<tr><td>Nhiệt độ thấp, tiết kiệm năng lượng</td><td>Tốn thời gian (rửa, lọc)</td></tr>
+<tr><td>Dễ biến tính bề mặt hạt</td><td>Độ lặp lại giữa các mẻ kém; tốc độ kết tủa khác nhau giữa các thành phần</td></tr>
+</table></div>
+
+<h2>3. Tổng hợp thủy nhiệt</h2>
+<p>Chất phản ứng được hòa tan trong nước (hoặc dung môi khác: <em>dung môi nhiệt</em>) trong một bình kín (autoclave) và gia nhiệt. Nhiệt độ trên điểm sôi và áp suất tự sinh làm tăng độ hòa tan và tốc độ kết tinh, cho tinh thể nano có hình thái được kiểm soát.</p>
+<div class="box"><p class="t">Ví dụ: cấu trúc nano Ga₂O₃ bằng thủy nhiệt</p>
+<p>(1) Trộn Ga(NO₃)₃ trong nước khử ion với NH₄OH trong 2 giờ; (2) xử lý thủy nhiệt ở 140 °C trong 10 giờ; (3) rửa bằng nước khử ion 4 lần; (4) sấy ở 70 °C trong 6 giờ; (5) ủ ở 1000 °C trong 6 giờ; (6) khảo sát bằng kính hiển vi quang học, SEM, TEM và XRD. Sản phẩm thủy nhiệt thường là GaOOH dạng que; bước ủ nhiệt độ cao khử nước và chuyển nó thành β-Ga₂O₃ bền vững, giữ lại hình thái que.</p></div>
+
+<h2>4. Sol-gel</h2>
+<p>Các đơn phân được chuyển thành dung dịch keo (sol), làm tiền chất cho một mạng liên kết (gel) gồm các hạt rời hoặc mạng polymer. Tiền chất điển hình là <strong>alkoxide kim loại</strong>, thủy phân và ngưng tụ dần. Ví dụ: màng TiO₂ mao quản tạo từ hạt nano TiO₂ bằng sol-gel, dùng cho quang xúc tác.</p>
+
+<h2>5. Điện kéo sợi và điện phun</h2>
+<p>Điện kéo sợi dùng lực điện để kéo dung dịch hoặc polymer nóng chảy thành sợi đường kính vài trăm nm, không cần hóa chất đông tụ hay nhiệt độ cao.</p>
+<ul>
+<li>Khi điện áp đủ cao đặt lên giọt chất lỏng, lực đẩy tĩnh điện chống lại sức căng bề mặt và kéo giọt dài ra; tại một ngưỡng, một tia chất lỏng phụt ra từ đỉnh giọt, gọi là <strong>nón Taylor</strong>.</li>
+<li>Tia khô dần khi bay; điện tích di chuyển ra bề mặt sợi. Lực đẩy tĩnh điện tại các chỗ uốn nhỏ gây chuyển động "quất roi", kéo sợi mảnh thêm cho tới khi rơi lên bộ thu nối đất.</li>
+<li>Nếu lực kết dính phân tử của chất lỏng đủ cao, tia không bị đứt và tạo sợi (điện kéo sợi); nếu tia đứt thành giọt, ta có <strong>điện phun</strong>.</li>
+</ul>
+
+<h2>6. Quang khắc bút nhúng (DPN)</h2>
+<p>DPN là kỹ thuật quang khắc đầu dò quét: đầu kim AFM được phủ "mực" phân tử, và mực truyền từ đầu kim xuống bề mặt (qua khe nước ngưng tụ trong không khí) khi đầu kim tiếp xúc. Đây là kỹ thuật viết trực tiếp, in dương, với độ phân giải dưới 100 nm, nằm giao giữa từ trên xuống và từ dưới lên.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Các phương pháp pha lỏng như thủy nhiệt và sol-gel không cho màng epitaxy chất lượng linh kiện công suất, nhưng rất rẻ và tạo được diện tích bề mặt lớn: phù hợp cho cảm biến khí, quang xúc tác và cảm biến UV giá thấp từ cấu trúc nano Ga₂O₃.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>R. D. Piner, J. Zhu, F. Xu, S. Hong, C. A. Mirkin, "'Dip-pen' nanolithography," <em>Science</em> 283, 661 (1999).</li>
+<li>G. Taylor, "Disintegration of water drops in an electric field," <em>Proceedings of the Royal Society A</em> 280, 383 (1964).</li>
+<li>J. C. Yu et al., mesoporous TiO₂ films by sol-gel processing, <em>Chemistry of Materials</em> 16, 1523 (2004).</li>
+<li>Ga₂O₃ nanostructures by the hydrothermal method, <em>Nanomaterials</em> 8(8), 594 (2018).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Liquid-phase methods are the materials chemist's "kitchen": low temperatures, simple equipment, and fine control over particle size and shape. This lesson walks through the most common methods, including a concrete Ga₂O₃ synthesis recipe.</p>
+
+<h2>1. Colloidal synthesis</h2>
+<p>Commonly used for gold nanoparticles: a gold salt is reduced in solution (e.g. by citrate), producing a supersaturated solution of metal atoms that nucleate into nanoparticles. A capping agent adsorbed on the surface keeps the particles from aggregating.</p>
+
+<h2>2. Coprecipitation</h2>
+<p>Nucleation, growth, coarsening and agglomeration occur <strong>simultaneously</strong>. Characteristics:</p>
+<ul>
+<li>Products are usually sparingly soluble species formed under high supersaturation, which is usually created by a chemical reaction.</li>
+<li>Nucleation is the key step: a large number of small particles form.</li>
+<li>Secondary processes such as <strong>Ostwald ripening</strong> (large particles grow by "eating" small ones, which have higher chemical potential) and aggregation strongly affect product size, morphology and properties.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th>Advantages</th><th>Disadvantages</th></tr>
+<tr><td>Simple and rapid</td><td>Not applicable to uncharged species</td></tr>
+<tr><td>Easy control of size and composition</td><td>Trace impurities may also precipitate</td></tr>
+<tr><td>Low temperature, energy efficient</td><td>Time-consuming (washing, filtering)</td></tr>
+<tr><td>Particle surfaces easy to modify</td><td>Poor batch-to-batch reproducibility; different precipitation rates for different components</td></tr>
+</table></div>
+
+<h2>3. Hydrothermal synthesis</h2>
+<p>Reactants are dissolved in water (or another solvent: <em>solvothermal</em>) in a sealed vessel (autoclave) and heated. Temperatures above the boiling point and autogenous pressure raise solubility and crystallization rate, giving nanocrystals with controlled morphology.</p>
+<div class="box"><p class="t">Example: Ga₂O₃ nanostructures by hydrothermal synthesis</p>
+<p>(1) Mix Ga(NO₃)₃ in deionized water with NH₄OH for 2 h; (2) hydrothermal treatment at 140 °C for 10 h; (3) wash with deionized water 4 times; (4) dry at 70 °C for 6 h; (5) anneal at 1000 °C for 6 h; (6) characterize by optical microscopy, SEM, TEM and XRD. The hydrothermal product is usually rod-like GaOOH; the high-temperature anneal dehydrates it into stable β-Ga₂O₃ while keeping the rod morphology.</p></div>
+
+<h2>4. Sol-gel processing</h2>
+<p>Monomers are converted into a colloidal solution (sol) that acts as the precursor for an integrated network (gel) of discrete particles or network polymers. Typical precursors are <strong>metal alkoxides</strong>, which hydrolyze and condense step by step. Example: mesoporous TiO₂ films built from TiO₂ nanoparticles by sol-gel, used for photocatalysis.</p>
+
+<h2>5. Electrospinning and electrospraying</h2>
+<p>Electrospinning uses electric force to draw polymer solutions or melts into fibers a few hundred nm in diameter, without coagulation chemistry or high temperature.</p>
+<ul>
+<li>When a high enough voltage is applied to a droplet, electrostatic repulsion counteracts surface tension and stretches the droplet; at a critical point a jet erupts from its tip: the <strong>Taylor cone</strong>.</li>
+<li>The jet dries in flight and charge migrates to the fiber surface. Electrostatic repulsion at small bends starts a "whipping" motion that thins the fiber further until it lands on a grounded collector.</li>
+<li>If the liquid's molecular cohesion is high enough, the jet does not break and forms a fiber (electrospinning); if it breaks into droplets, the result is <strong>electrospraying</strong>.</li>
+</ul>
+
+<h2>6. Dip-pen nanolithography (DPN)</h2>
+<p>DPN is a scanning-probe lithography technique: an AFM tip is coated with a molecular "ink", which transfers to the surface (through a water meniscus condensed from the air) when the tip makes contact. It is a direct-write, positive printing technique with sub-100 nm resolution, sitting between top-down and bottom-up.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Liquid-phase methods such as hydrothermal and sol-gel synthesis do not give power-device-grade epitaxial films, but they are cheap and create large surface areas: well suited to gas sensors, photocatalysis and low-cost UV detectors made from Ga₂O₃ nanostructures.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>R. D. Piner, J. Zhu, F. Xu, S. Hong, C. A. Mirkin, "'Dip-pen' nanolithography," <em>Science</em> 283, 661 (1999).</li>
+<li>G. Taylor, "Disintegration of water drops in an electric field," <em>Proceedings of the Royal Society A</em> 280, 383 (1964).</li>
+<li>J. C. Yu et al., mesoporous TiO₂ films by sol-gel processing, <em>Chemistry of Materials</em> 16, 1523 (2004).</li>
+<li>Ga₂O₃ nanostructures by the hydrothermal method, <em>Nanomaterials</em> 8(8), 594 (2018).</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-bottom-up-vapor.html">← <span class="l-vi">Từ dưới lên (1): tự lắp ráp và pha khí</span><span class="l-en">Bottom-up (1): self-assembly and vapor phase</span></a><a class="n" href="nano-nanowires.html"><span class="l-vi">Dây nano bán dẫn</span><span class="l-en">Semiconductor nanowires</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

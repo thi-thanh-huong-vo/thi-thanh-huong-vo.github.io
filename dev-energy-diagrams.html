@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thế năng, động năng và giản đồ năng lượng" data-title-en="Potential energy, kinetic energy and band diagrams">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Potential energy, kinetic energy and band diagrams · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The eV, work function, electron affinity and the conventions for reading band diagrams.">
+<meta property="og:title" content="Potential energy, kinetic energy and band diagrams">
+<meta property="og:description" content="The eV, work function, electron affinity and the conventions for reading band diagrams.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 4</span><span class="l-en">Part 1 · Lesson 4</span></p>
+  <h1><span class="l-vi">Thế năng, động năng và giản đồ năng lượng</span><span class="l-en">Potential energy, kinetic energy and band diagrams</span></h1>
+  <p class="sub"><span class="l-vi">Đơn vị eV, công thoát, ái lực điện tử và các quy ước khi đọc giản đồ vùng năng lượng.</span><span class="l-en">The eV, work function, electron affinity and the conventions for reading band diagrams.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Giản đồ vùng năng lượng là ngôn ngữ chung của vật lý linh kiện. Trước khi vẽ được giản đồ của một tiếp giáp p-n hay MOSFET, cần hiểu rõ giản đồ ấy biểu diễn năng lượng của ai, và vì sao nó trông như "lộn ngược" so với đồ thị điện áp.</p>
+
+<h2>1. Thế năng của electron</h2>
+<p>Đặt một electron đứng yên trong chân không giữa hai bản tụ, bản trái 0 V và bản phải +5 V; điện áp tăng tuyến tính từ trái sang phải. Thế năng của electron là điện tích nhân điện áp:</p>
+$$E_{PE} = (-q)\,V(x)$$
+<p>Ở giữa hai bản, \(V = +2{,}5\) V nên \(E_{PE} = -4{,}0\times10^{-19}\) J. Để tiện, ta dùng đơn vị electron-volt: 1 eV = 1,602×10⁻¹⁹ J, nên \(E_{PE} = -2{,}5\) eV. Quy tắc rất đơn giản: electron ở điện áp \(V\) volt có thế năng \(-V\) eV. Vì vậy đồ thị thế năng của electron là <strong>ảnh phản chiếu</strong> của đồ thị điện áp.</p>
+
+<h2>2. Động năng và va chạm</h2>
+<p>Nếu electron được thả tự do, nó bị hút về bản dương, tăng động năng \(E_{KE} = \frac{1}{2}m_0v^2\) đúng bằng phần thế năng mất đi; tổng năng lượng \(E_{tot} = E_{PE} + E_{KE}\) được bảo toàn. Nhưng nếu giữa đường electron va chạm (ví dụ với phân tử khí) và mất hết động năng, tổng năng lượng giảm. Với rất nhiều va chạm, động năng trung bình luôn nhỏ, phần lớn năng lượng biến thành nhiệt, và \(E_{tot} \approx E_{PE}\).</p>
+
+<h2>3. Electron trong kim loại và công thoát</h2>
+<p>Electron dẫn trong kim loại di chuyển được nhưng vẫn bị các ion dương hút giữ. Năng lượng cần để đưa một electron dẫn ra chân không là <strong>công thoát</strong> \(\Phi\): Pt 5,65 eV; Au 5,1 eV; W 4,5 eV; Al 4,3 eV; Cs 2,1 eV. So với electron đứng yên trong chân không ở cùng điện thế, electron trong kim loại có năng lượng thấp hơn đúng bằng công thoát; mức năng lượng của electron trong chân không gọi là <strong>mức chân không</strong>.</p>
+<p>Khi đặt điện áp lên một thanh kim loại, electron bị gia tốc nhưng chỉ đi được quãng đường tự do trung bình cỡ nanomet trước khi tán xạ. Động năng thêm từ điện trường vì vậy rất nhỏ, tổng năng lượng gần bằng thế năng, và phần năng lượng mất đi tỏa thành nhiệt Joule.</p>
+
+<h2>4. Quy ước của giản đồ vùng năng lượng</h2>
+<ul>
+<li>Giản đồ vùng năng lượng là giản đồ năng lượng <strong>của electron</strong>, năng lượng tăng từ dưới lên trên.</li>
+<li>Electron trong vùng dẫn có xu hướng ở trạng thái năng lượng thấp gần đáy vùng dẫn \(E_C\).</li>
+<li>Lỗ trống mang điện dương nên năng lượng của nó tăng <strong>từ trên xuống</strong>. Lỗ trống trong vùng hóa trị vì vậy tập trung ở trạng thái năng lượng thấp của chúng, tức gần đỉnh vùng hóa trị \(E_V\).</li>
+<li>Dưới điện trường, vùng năng lượng nghiêng. Electron "lăn xuống dốc" theo chiều ngược điện trường; lỗ trống "nổi lên" theo chiều điện trường. Hai dòng cùng chiều vì điện tích trái dấu.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th></th><th>Electron</th><th>Lỗ trống</th></tr>
+<tr><td>Vị trí</td><td>Đáy vùng dẫn</td><td>Đỉnh vùng hóa trị</td></tr>
+<tr><td>Điện tích</td><td>−q</td><td>+q</td></tr>
+<tr><td>Khối lượng hiệu dụng</td><td>\(m_n^*\)</td><td>\(m_p^*\)</td></tr>
+<tr><td>Năng lượng tăng</td><td>Lên trên</td><td>Xuống dưới</td></tr>
+</table></div>
+<p>Một mẹo dùng nhiều nhất: đường \(E_C\) (hay mức chân không) có hình dạng giống hệt đồ thị \(-V(x)\). Muốn biết vùng năng lượng uốn thế nào, chỉ cần biết điện thế phân bố ra sao.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Các khái niệm công thoát và mức chân không quyết định chiều cao rào Schottky của tiếp xúc kim loại/Ga₂O₃. Ái lực electron của β-Ga₂O₃ khoảng 4,0 eV, nên kim loại có công thoát lớn như Pt hay Ni được chọn làm điện cực Schottky, còn Ti có công thoát nhỏ thường dùng cho tiếp xúc ohmic.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. O. Kasap, <em>Principles of Electronic Materials and Devices</em>, McGraw-Hill.</li>
+<li>R. F. Pierret, <em>Semiconductor Device Fundamentals</em>, Addison-Wesley.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Energy band diagrams are the common language of device physics. Before drawing one for a p-n junction or a MOSFET, it pays to understand exactly whose energy the diagram shows, and why it looks "upside down" compared with a voltage plot.</p>
+
+<h2>1. Potential energy of an electron</h2>
+<p>Place a stationary electron in vacuum between two capacitor plates, the left at 0 V and the right at +5 V; the voltage rises linearly from left to right. The electron's potential energy is its charge times the voltage:</p>
+$$E_{PE} = (-q)\,V(x)$$
+<p>Halfway between the plates, \(V = +2.5\) V, so \(E_{PE} = -4.0\times10^{-19}\) J. For convenience we use the electron-volt: 1 eV = 1.602×10⁻¹⁹ J, so \(E_{PE} = -2.5\) eV. The rule is simple: an electron at \(V\) volts has potential energy \(-V\) eV. The electron's potential-energy plot is therefore a <strong>mirror image</strong> of the voltage plot.</p>
+
+<h2>2. Kinetic energy and collisions</h2>
+<p>If the electron is free to move, it is pulled toward the positive plate, gaining kinetic energy \(E_{KE} = \frac{1}{2}m_0v^2\) exactly equal to the potential energy it loses; the total \(E_{tot} = E_{PE} + E_{KE}\) is conserved. But if it collides halfway (for example with a gas molecule) and loses all its kinetic energy, its total energy drops. With very many collisions, the average kinetic energy stays small, most of the energy turns into heat, and \(E_{tot} \approx E_{PE}\).</p>
+
+<h2>3. Electrons in a metal and the work function</h2>
+<p>Conduction electrons in a metal can move, but they are still attracted by the positive ions. The energy needed to extract a conduction electron into vacuum is the <strong>work function</strong> \(\Phi\): Pt 5.65 eV; Au 5.1 eV; W 4.5 eV; Al 4.3 eV; Cs 2.1 eV. Compared with a stationary electron in vacuum at the same potential, an electron in the metal sits lower by exactly the work function; the energy of an electron at rest in vacuum is the <strong>vacuum level</strong>.</p>
+<p>When a voltage is applied across a metal bar, electrons accelerate but travel only a mean free path of order nanometers before scattering. The extra kinetic energy from the field is therefore tiny, the total energy stays close to the potential energy, and the lost energy appears as Joule heat.</p>
+
+<h2>4. Conventions of energy band diagrams</h2>
+<ul>
+<li>An energy band diagram is an energy diagram <strong>for electrons</strong>, with energy increasing upward.</li>
+<li>Electrons in the conduction band tend to occupy the low-energy states near the bottom of the band, \(E_C\).</li>
+<li>Holes are positive, so their energy increases <strong>downward</strong>. Holes in the valence band therefore gather in their own low-energy states, near the top of the valence band, \(E_V\).</li>
+<li>Under an electric field, the bands tilt. Electrons "roll downhill" against the field; holes "float up" along the field. Both currents flow in the same direction because the charges are opposite.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th></th><th>Electrons</th><th>Holes</th></tr>
+<tr><td>Location</td><td>Bottom of the conduction band</td><td>Top of the valence band</td></tr>
+<tr><td>Charge</td><td>−q</td><td>+q</td></tr>
+<tr><td>Effective mass</td><td>\(m_n^*\)</td><td>\(m_p^*\)</td></tr>
+<tr><td>Energy increases</td><td>Upward</td><td>Downward</td></tr>
+</table></div>
+<p>The single most useful trick: \(E_C\) (or the vacuum level) has exactly the shape of \(-V(x)\). To know how the bands bend, you only need to know how the potential is distributed.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Work function and vacuum level determine the Schottky barrier height of metal/Ga₂O₃ contacts. β-Ga₂O₃ has an electron affinity of about 4.0 eV, so high-work-function metals such as Pt or Ni are chosen for Schottky electrodes, while low-work-function Ti is commonly used for ohmic contacts.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>S. O. Kasap, <em>Principles of Electronic Materials and Devices</em>, McGraw-Hill.</li>
+<li>R. F. Pierret, <em>Semiconductor Device Fundamentals</em>, Addison-Wesley.</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-semiconductor-conduction.html">← <span class="l-vi">Dẫn điện trong bán dẫn</span><span class="l-en">Electrical conduction in semiconductors</span></a><a class="n" href="dev-sheet-resistance.html"><span class="l-vi">Phép đo bốn đầu dò và điện trở tấm</span><span class="l-en">Four-point probe and sheet resistance</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

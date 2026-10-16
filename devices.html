@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Linh kiện bán dẫn" data-title-en="Semiconductor Devices">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semiconductor Devices · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="From electrons in solids to junctions, MOSFETs, memory and neuromorphic devices: 22 lessons.">
+<meta property="og:title" content="Semiconductor Devices">
+<meta property="og:description" content="From electrons in solids to junctions, MOSFETs, memory and neuromorphic devices: 22 lessons.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .quizcard{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:1rem 1.2rem;margin:1.75rem 0 .5rem}
+  .quizcard p{margin:0;text-align:left}.quizcard .qt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.15rem;color:var(--accent);margin-bottom:.25rem}
+  .qbtn{background:var(--accent);color:var(--paper)!important;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-weight:600;white-space:nowrap}
+</style>
+<style>
+  .topics{display:grid;grid-template-columns:1fr;gap:1rem;margin:1.5rem 0}
+  .topic{display:block;border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.3rem;text-decoration:none!important;color:inherit;text-align:left;transition:border-color .15s}
+  a.topic:hover{border-color:var(--accent)}
+  .topic .tn{font-family:"Source Serif 4",Georgia,serif;font-size:.95rem;color:var(--accent);margin:0}
+  .topic .tt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.3rem;margin:.15rem 0 .35rem;color:var(--ink)}
+  .topic .td{margin:0;text-align:left;color:var(--muted);font-size:.95rem}
+  .topic .tm{margin:.6rem 0 0;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .topic.soon{opacity:.6}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Chủ đề 2</span><span class="l-en">Topic 2</span></p>
+  <h1><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></h1>
+  <p class="sub"><span class="l-vi">Từ electron trong chất rắn đến tiếp giáp, MOSFET, bộ nhớ và linh kiện thần kinh: 22 bài học.</span><span class="l-en">From electrons in solids to junctions, MOSFETs, memory and neuromorphic devices: 22 lessons.</span></p>
+</header>
+<div class="l-vi">
+
+<p class="lead">Vật liệu chỉ trở nên hữu ích khi được biến thành linh kiện. Chủ đề này đi từ cách electron chuyển động trong chất rắn, qua các phép đo điện cơ bản, các loại tiếp giáp và MOSFET, đến bộ nhớ và những linh kiện lấy cảm hứng từ não bộ.</p>
+<p class="box" style="text-align:left">Biên soạn dựa trên tài liệu học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nguồn cụ thể của từng bài được ghi ở cuối bài.</p>
+<p>Mỗi bài có ví dụ tính toán bằng số và phần <strong>Góc nhìn Ga₂O₃</strong>. Nên học theo thứ tự: các bài sau dùng lại khái niệm của các bài trước.</p>
+<div class="quizcard"><div><p class="qt">Kiểm tra kiến thức</p><p>10 câu hỏi trắc nghiệm ngẫu nhiên từ ngân hàng 100 câu, bao quát tất cả các bài. Mỗi lần làm lại sẽ gặp những câu khác.</p></div><a class="qbtn" href="dev-quiz.html">Làm bài quiz →</a></div>
+<h2>Phần 1. Nền tảng: electron trong chất rắn</h2>
+<ol class="toc">
+  <li><a href="dev-conduction-metal.html">Dẫn điện trong kim loại</a><span>Định luật Ohm, điện trở suất, mô hình Drude, độ linh động và quy tắc Matthiessen.</span></li>
+  <li><a href="dev-energy-bands.html">Sự hình thành vùng năng lượng và khối lượng hiệu dụng</a><span>Từ mức năng lượng nguyên tử đến vùng năng lượng, điều kiện dẫn điện và khối lượng hiệu dụng.</span></li>
+  <li><a href="dev-semiconductor-conduction.html">Dẫn điện trong bán dẫn</a><span>Bán dẫn thuần, nᵢ theo nhiệt độ, pha tạp n và p, định luật tác dụng khối và ba vùng nhiệt độ.</span></li>
+  <li><a href="dev-energy-diagrams.html">Thế năng, động năng và giản đồ năng lượng</a><span>Đơn vị eV, công thoát, ái lực điện tử và các quy ước khi đọc giản đồ vùng năng lượng.</span></li>
+</ol>
+<h2>Phần 2. Đo điện trở và trở kháng</h2>
+<ol class="toc">
+  <li><a href="dev-sheet-resistance.html">Phép đo bốn đầu dò và điện trở tấm</a><span>Vì sao cần bốn đầu dò, điện trở tấm Ω/□ và công thức cho mẫu dày và màng mỏng.</span></li>
+  <li><a href="dev-tlm.html">Điện trở tiếp xúc và phương pháp TLM</a><span>Tách điện trở tiếp xúc, độ dài truyền, điện trở suất tiếp xúc, CTLM và hệ số R².</span></li>
+  <li><a href="dev-impedance.html">Trở kháng và phép đo điện dung</a><span>Điện trở và điện kháng, máy LCR, mô hình song song và nối tiếp, vai trò của tần số.</span></li>
+</ol>
+<h2>Phần 3. Tiếp giáp pn, Schottky và dị chất</h2>
+<ol class="toc">
+  <li><a href="dev-pn-equilibrium.html">Tiếp giáp pn ở cân bằng</a><span>Vùng điện tích không gian, điện thế tiếp xúc, điện trường, độ rộng vùng nghèo và tiếp giáp một phía.</span></li>
+  <li><a href="dev-pn-bias.html">Tiếp giáp pn khi phân cực</a><span>Giản đồ năng lượng khi phân cực, điện dung tiếp giáp, phép đo 1/C² và phương trình diode lý tưởng.</span></li>
+  <li><a href="dev-pn-nonideal.html">Diode thực: sai lệch khỏi lý thuyết đơn giản</a><span>Tiếp giáp biến đổi tuyến tính, tái hợp trong vùng nghèo, hệ số lý tưởng, tiêm mức cao và tổn hao ohmic.</span></li>
+  <li><a href="dev-schottky.html">Tiếp xúc kim loại–bán dẫn</a><span>Mô hình ái lực điện tử, chiều cao rào Schottky, phát xạ nhiệt điện tử, tiếp xúc ohmic và ghim mức Fermi.</span></li>
+  <li><a href="dev-heterojunction.html">Tiếp giáp dị chất</a><span>Ba loại sắp xếp vùng, độ lệch vùng theo EAM, khấc thế và khí electron hai chiều.</span></li>
+</ol>
+<h2>Phần 4. Tụ MOS và MOSFET</h2>
+<ol class="toc">
+  <li><a href="dev-mos-capacitor.html">Transistor và tụ MOS</a><span>Khuếch đại và chuyển mạch, cấu trúc MOSFET, ba chế độ của tụ MOS và điện thế bề mặt.</span></li>
+  <li><a href="dev-mos-cv.html">Đặc tuyến C-V của tụ MOS</a><span>Hai tụ nối tiếp, tần số thấp và cao, hiệu công thoát, điện tích oxit, điện áp ngưỡng và Dᵢₜ.</span></li>
+  <li><a href="dev-mosfet-iv.html">Đặc tuyến I-V của MOSFET</a><span>Thắt kênh, mô hình kênh dài, vùng tuyến tính và bão hòa, độ dẫn kênh và hỗ dẫn.</span></li>
+  <li><a href="dev-mosfet-real.html">MOSFET thực và hiệu ứng kênh ngắn</a><span>Suy giảm độ linh động, bão hòa vận tốc, độ dốc dưới ngưỡng, điều chỉnh điện áp ngưỡng, hiệu ứng thân và DIBL.</span></li>
+</ol>
+<h2>Phần 5. Từ linh kiện đến chip và bộ nhớ</h2>
+<ol class="toc">
+  <li><a href="dev-fab.html">Bên trong một fab bán dẫn</a><span>Chip trong điện thoại, thu nhỏ MOSFET và vật liệu mới, phòng sạch và thiết bị trong một fab nghiên cứu.</span></li>
+  <li><a href="dev-chip-layout.html">Bố trí chip, nút công nghệ và trễ RC</a><span>Word line và bit line, ô DRAM 8F²/6F²/4F², ý nghĩa của nút công nghệ và trễ dây dẫn.</span></li>
+  <li><a href="dev-memory.html">Bộ nhớ: DRAM và NAND flash</a><span>Phân loại bộ nhớ, hoạt động DRAM, ô cổng nổi, xuyên hầm FN, hệ số ghép và ISPP.</span></li>
+  <li><a href="dev-nand-reliability.html">Độ tin cậy của NAND và bộ nhớ bẫy điện tích</a><span>Độ bền chu kỳ, lưu giữ, SILC, nhiễu thao tác và nhiễu ghép, giới hạn cổng nổi, CTF và NAND 3D.</span></li>
+</ol>
+<h2>Phần 6. Linh kiện lấy cảm hứng từ não</h2>
+<ol class="toc">
+  <li><a href="dev-brain.html">Não bộ, nơ-ron và synapse</a><span>Các loại trí nhớ, cấu tạo nơ-ron, khớp thần kinh, điện thế hoạt động và tăng cường dài hạn.</span></li>
+  <li><a href="dev-memristor.html">Memristor và synapse nhân tạo</a><span>Phần tử mạch thứ tư, vòng trễ bị thắt, học kiểu Aplysia và bài toán năng lượng của AI.</span></li>
+</ol>
+
+</div>
+<div class="l-en">
+
+<p class="lead">Materials only become useful once they are turned into devices. This topic runs from how electrons move in solids, through basic electrical measurements, junctions and the MOSFET, to memory and brain-inspired devices.</p>
+<p class="box" style="text-align:left">Based on course materials by Prof. Wan Sik Hwang, Korea Aerospace University. The specific source of each lesson is credited at its end.</p>
+<p>Each lesson includes worked numerical examples and a <strong>Ga₂O₃ perspective</strong>. The lessons are best read in order: later ones reuse concepts from earlier ones.</p>
+<div class="quizcard"><div><p class="qt">Test your knowledge</p><p>10 random multiple-choice questions from a bank of 100, covering every lesson. Each retry brings different questions.</p></div><a class="qbtn" href="dev-quiz.html">Take the quiz →</a></div>
+<h2>Part 1. Foundations: electrons in solids</h2>
+<ol class="toc">
+  <li><a href="dev-conduction-metal.html">Electrical conduction in metals</a><span>Ohm's law, resistivity, the Drude model, mobility and Matthiessen's rule.</span></li>
+  <li><a href="dev-energy-bands.html">Energy band formation and effective mass</a><span>From atomic levels to energy bands, the condition for conduction and effective mass.</span></li>
+  <li><a href="dev-semiconductor-conduction.html">Electrical conduction in semiconductors</a><span>Intrinsic semiconductors, nᵢ versus temperature, n- and p-type doping, mass action and the three temperature regions.</span></li>
+  <li><a href="dev-energy-diagrams.html">Potential energy, kinetic energy and band diagrams</a><span>The eV, work function, electron affinity and the conventions for reading band diagrams.</span></li>
+</ol>
+<h2>Part 2. Measuring resistance and impedance</h2>
+<ol class="toc">
+  <li><a href="dev-sheet-resistance.html">Four-point probe and sheet resistance</a><span>Why four probes, sheet resistance in Ω/□ and the formulas for thick samples and thin films.</span></li>
+  <li><a href="dev-tlm.html">Contact resistance and the TLM method</a><span>Separating contact resistance, transfer length, specific contact resistivity, CTLM and the R² coefficient.</span></li>
+  <li><a href="dev-impedance.html">Impedance and capacitance measurement</a><span>Resistance and reactance, the LCR meter, parallel and series models, the role of frequency.</span></li>
+</ol>
+<h2>Part 3. pn, Schottky and heterojunctions</h2>
+<ol class="toc">
+  <li><a href="dev-pn-equilibrium.html">The pn junction in equilibrium</a><span>Space charge region, built-in potential, electric field, depletion width and one-sided junctions.</span></li>
+  <li><a href="dev-pn-bias.html">The biased pn junction</a><span>Band diagrams under bias, junction capacitance, 1/C² profiling and the ideal diode equation.</span></li>
+  <li><a href="dev-pn-nonideal.html">Real diodes: deviations from the simple theory</a><span>Graded junctions, depletion-region recombination, the ideality factor, high-level injection and ohmic losses.</span></li>
+  <li><a href="dev-schottky.html">Metal–semiconductor contacts</a><span>The electron affinity model, Schottky barrier height, thermionic emission, ohmic contacts and Fermi level pinning.</span></li>
+  <li><a href="dev-heterojunction.html">Heterojunctions</a><span>Three band alignments, band offsets from the EAM, the notch and the two-dimensional electron gas.</span></li>
+</ol>
+<h2>Part 4. The MOS capacitor and the MOSFET</h2>
+<ol class="toc">
+  <li><a href="dev-mos-capacitor.html">The transistor and the MOS capacitor</a><span>Amplification and switching, MOSFET structure, the three MOS regimes and surface potential.</span></li>
+  <li><a href="dev-mos-cv.html">C-V characteristics of the MOS capacitor</a><span>Two capacitors in series, low and high frequency, work-function difference, oxide charge, threshold voltage and Dᵢₜ.</span></li>
+  <li><a href="dev-mosfet-iv.html">MOSFET I-V characteristics</a><span>Pinch-off, the long-channel model, linear and saturation regions, channel conductance and transconductance.</span></li>
+  <li><a href="dev-mosfet-real.html">Real MOSFETs and short-channel effects</a><span>Mobility degradation, velocity saturation, subthreshold slope, threshold control, the body effect and DIBL.</span></li>
+</ol>
+<h2>Part 5. From devices to chips and memory</h2>
+<ol class="toc">
+  <li><a href="dev-fab.html">Inside a semiconductor fab</a><span>Chips in a phone, MOSFET scaling and new materials, the cleanroom and the tools of a research fab.</span></li>
+  <li><a href="dev-chip-layout.html">Chip layout, technology nodes and RC delay</a><span>Word and bit lines, 8F²/6F²/4F² DRAM cells, what a technology node means, and interconnect delay.</span></li>
+  <li><a href="dev-memory.html">Memory: DRAM and NAND flash</a><span>Memory types, DRAM operation, the floating-gate cell, FN tunneling, coupling ratio and ISPP.</span></li>
+  <li><a href="dev-nand-reliability.html">NAND reliability and charge trap flash</a><span>Endurance, retention, SILC, disturb and interference, floating-gate limits, CTF and 3D NAND.</span></li>
+</ol>
+<h2>Part 6. Brain-inspired devices</h2>
+<ol class="toc">
+  <li><a href="dev-brain.html">The brain, neurons and synapses</a><span>Types of memory, neuron anatomy, synapses, action potentials and long-term potentiation.</span></li>
+  <li><a href="dev-memristor.html">Memristors and artificial synapses</a><span>The fourth circuit element, the pinched hysteresis loop, Aplysia-style learning and the energy problem of AI.</span></li>
+</ol>
+
+</div>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

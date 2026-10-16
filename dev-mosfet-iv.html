@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Đặc tuyến I-V của MOSFET" data-title-en="MOSFET I-V characteristics">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOSFET I-V characteristics · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Pinch-off, the long-channel model, linear and saturation regions, channel conductance and transconductance.">
+<meta property="og:title" content="MOSFET I-V characteristics">
+<meta property="og:description" content="Pinch-off, the long-channel model, linear and saturation regions, channel conductance and transconductance.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 3</span><span class="l-en">Part 4 · Lesson 3</span></p>
+  <h1><span class="l-vi">Đặc tuyến I-V của MOSFET</span><span class="l-en">MOSFET I-V characteristics</span></h1>
+  <p class="sub"><span class="l-vi">Thắt kênh, mô hình kênh dài, vùng tuyến tính và bão hòa, độ dẫn kênh và hỗ dẫn.</span><span class="l-en">Pinch-off, the long-channel model, linear and saturation regions, channel conductance and transconductance.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Khi đã có kênh dưới cổng, điện áp máng kéo electron từ nguồn sang máng. Mô hình kênh dài cho một bộ phương trình đơn giản nhưng đủ để hiểu hai vùng làm việc cơ bản của MOSFET: tuyến tính và bão hòa.</p>
+
+<h2>1. Hình ảnh định tính</h2>
+<p>Xét MOSFET kênh n tăng cường, nguồn nối với đế. Khi \(V_{DS} = 0\), giản đồ năng lượng dọc kênh nằm ngang: không có điện trường dọc, không có dòng. Khi \(V_{DS} > 0\), electron chảy từ nguồn sang máng (dòng quy ước đi từ máng sang nguồn).</p>
+<ul>
+<li>\(V_{GS} < V_T\): không có dòng, bất kể \(V_{DS}\).</li>
+<li>\(V_{DS}\) nhỏ: dòng tăng tuyến tính. Kênh như một điện trở mà giá trị do \(V_{GS}\) quyết định, vì \(V_{GS}\) kiểm soát số hạt tải trong kênh.</li>
+<li>\(V_{DS}\) lớn: dòng bão hòa.</li>
+</ul>
+<p>Vì sao bão hòa? Dòng tại đầu nguồn phải bằng dòng tại đầu máng. Khi \(V_{DS}\) tăng, độ dốc của vùng năng lượng ở đầu máng tăng mạnh, nhưng ở đầu nguồn gần như không đổi. Số hạt tải đi vào kênh do rào thế ở đầu nguồn quyết định, tức do \(V_{GS}\), không phải \(V_{DS}\). Khi \(V_{GD} = V_T\), kênh ở đầu máng bị <strong>thắt</strong> (pinch-off); tăng \(V_{DS}\) thêm chỉ làm điện áp rơi trên vùng thắt ngắn gần máng, nơi electron chuyển động với vận tốc bão hòa.</p>
+
+<h2>2. Mô hình kênh dài</h2>
+<p>Giả thiết: kênh dài (\(L \gtrsim 5\)–10 µm), độ linh động \(\mu_n\) không đổi dọc kênh, dòng trôi chiếm ưu thế trên ngưỡng, và <strong>xấp xỉ kênh dần</strong>: trường dọc kênh \(E_L\) nhỏ hơn nhiều trường vuông góc \(E_T\). Gọi \(V_{ch}(y)\) là điện thế kênh tại vị trí \(y\), mật độ điện tích di động trong kênh là:</p>
+$$Q_{ch}(y) = -C_{ox}\big[V_{GS} - V_T - V_{ch}(y)\big]$$
+<p>Dòng \(I_D = -W\mu_n Q_{ch}\,dV_{ch}/dy\) không đổi dọc kênh; lấy tích phân từ \(y = 0\) (\(V_{ch} = 0\)) đến \(y = L\) (\(V_{ch} = V_{DS}\)):</p>
+$$I_D = \frac{\mu_n C_{ox} W}{L}\left[(V_{GS} - V_T)V_{DS} - \frac{V_{DS}^2}{2}\right], \qquad V_{DS} < V_{GS} - V_T$$
+<p>Biểu thức đạt cực đại tại \(V_{DS(sat)} = V_{GS} - V_T\). Trên giá trị này:</p>
+$$I_{D(sat)} = \frac{\mu_n C_{ox} W}{2L}(V_{GS} - V_T)^2$$
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="156.0" y1="255" x2="156.0" y2="260" class="ax"/><text x="156.0" y="275" class="tk" text-anchor="middle">1</text><line x1="252.0" y1="255" x2="252.0" y2="260" class="ax"/><text x="252.0" y="275" class="tk" text-anchor="middle">2</text><line x1="348.0" y1="255" x2="348.0" y2="260" class="ax"/><text x="348.0" y="275" class="tk" text-anchor="middle">3</text><line x1="444.0" y1="255" x2="444.0" y2="260" class="ax"/><text x="444.0" y="275" class="tk" text-anchor="middle">4</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">5</text><text x="300.0" y="294" class="lab" text-anchor="middle">V<tspan baseline-shift="sub" font-size="8">DS</tspan> (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">I<tspan baseline-shift="sub" font-size="8">D</tspan> (tương đối)</text><path d="M60.0,255.0 L64.8,253.9 L69.6,252.8 L74.4,251.7 L79.2,250.8 L84.0,249.9 L88.8,249.0 L93.6,248.2 L98.4,247.5 L103.2,246.8 L108.0,246.2 L112.8,245.6 L117.6,245.1 L122.4,244.7 L127.2,244.3 L132.0,244.0 L136.8,243.7 L141.6,243.5 L146.4,243.4 L151.2,243.3 L156.0,243.2 L160.8,243.2 L165.6,243.2 L170.4,243.2 L175.2,243.2 L180.0,243.2 L184.8,243.1 L189.6,243.1 L194.4,243.1 L199.2,243.1 L204.0,243.1 L208.8,243.1 L213.6,243.0 L218.4,243.0 L223.2,243.0 L228.0,243.0 L232.8,243.0 L237.6,243.0 L242.4,242.9 L247.2,242.9 L252.0,242.9 L256.8,242.9 L261.6,242.9 L266.4,242.8 L271.2,242.8 L276.0,242.8 L280.8,242.8 L285.6,242.8 L290.4,242.8 L295.2,242.7 L300.0,242.7 L304.8,242.7 L309.6,242.7 L314.4,242.7 L319.2,242.7 L324.0,242.6 L328.8,242.6 L333.6,242.6 L338.4,242.6 L343.2,242.6 L348.0,242.5 L352.8,242.5 L357.6,242.5 L362.4,242.5 L367.2,242.5 L372.0,242.5 L376.8,242.4 L381.6,242.4 L386.4,242.4 L391.2,242.4 L396.0,242.4 L400.8,242.4 L405.6,242.3 L410.4,242.3 L415.2,242.3 L420.0,242.3 L424.8,242.3 L429.6,242.2 L434.4,242.2 L439.2,242.2 L444.0,242.2 L448.8,242.2 L453.6,242.2 L458.4,242.1 L463.2,242.1 L468.0,242.1 L472.8,242.1 L477.6,242.1 L482.4,242.1 L487.2,242.0 L492.0,242.0 L496.8,242.0 L501.6,242.0 L506.4,242.0 L511.2,241.9 L516.0,241.9 L520.8,241.9 L525.6,241.9 L530.4,241.9 L535.2,241.9 L540.0,241.8" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,252.7 L69.6,250.4 L74.4,248.2 L79.2,246.1 L84.0,244.0 L88.8,242.0 L93.6,240.0 L98.4,238.1 L103.2,236.2 L108.0,234.4 L112.8,232.7 L117.6,231.0 L122.4,229.4 L127.2,227.9 L132.0,226.4 L136.8,224.9 L141.6,223.5 L146.4,222.2 L151.2,221.0 L156.0,219.8 L160.8,218.6 L165.6,217.5 L170.4,216.5 L175.2,215.5 L180.0,214.6 L184.8,213.8 L189.6,213.0 L194.4,212.2 L199.2,211.6 L204.0,210.9 L208.8,210.4 L213.6,209.9 L218.4,209.4 L223.2,209.1 L228.0,208.7 L232.8,208.5 L237.6,208.3 L242.4,208.1 L247.2,208.0 L252.0,208.0 L256.8,207.9 L261.6,207.9 L266.4,207.8 L271.2,207.7 L276.0,207.6 L280.8,207.6 L285.6,207.5 L290.4,207.4 L295.2,207.4 L300.0,207.3 L304.8,207.2 L309.6,207.2 L314.4,207.1 L319.2,207.0 L324.0,206.9 L328.8,206.9 L333.6,206.8 L338.4,206.7 L343.2,206.7 L348.0,206.6 L352.8,206.5 L357.6,206.4 L362.4,206.4 L367.2,206.3 L372.0,206.2 L376.8,206.2 L381.6,206.1 L386.4,206.0 L391.2,206.0 L396.0,205.9 L400.8,205.8 L405.6,205.7 L410.4,205.7 L415.2,205.6 L420.0,205.5 L424.8,205.5 L429.6,205.4 L434.4,205.3 L439.2,205.3 L444.0,205.2 L448.8,205.1 L453.6,205.0 L458.4,205.0 L463.2,204.9 L468.0,204.8 L472.8,204.8 L477.6,204.7 L482.4,204.6 L487.2,204.5 L492.0,204.5 L496.8,204.4 L501.6,204.3 L506.4,204.3 L511.2,204.2 L516.0,204.1 L520.8,204.1 L525.6,204.0 L530.4,203.9 L535.2,203.8 L540.0,203.8" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,251.5 L69.6,248.1 L74.4,244.7 L79.2,241.4 L84.0,238.1 L88.8,234.9 L93.6,231.8 L98.4,228.7 L103.2,225.7 L108.0,222.7 L112.8,219.8 L117.6,216.9 L122.4,214.1 L127.2,211.4 L132.0,208.7 L136.8,206.1 L141.6,203.6 L146.4,201.1 L151.2,198.6 L156.0,196.2 L160.8,193.9 L165.6,191.7 L170.4,189.5 L175.2,187.3 L180.0,185.2 L184.8,183.2 L189.6,181.2 L194.4,179.3 L199.2,177.5 L204.0,175.7 L208.8,174.0 L213.6,172.3 L218.4,170.7 L223.2,169.1 L228.0,167.6 L232.8,166.2 L237.6,164.8 L242.4,163.5 L247.2,162.2 L252.0,161.0 L256.8,159.9 L261.6,158.8 L266.4,157.7 L271.2,156.8 L276.0,155.9 L280.8,155.0 L285.6,154.2 L290.4,153.5 L295.2,152.8 L300.0,152.2 L304.8,151.6 L309.6,151.1 L314.4,150.7 L319.2,150.3 L324.0,150.0 L328.8,149.7 L333.6,149.5 L338.4,149.4 L343.2,149.3 L348.0,149.2 L352.8,149.1 L357.6,148.9 L362.4,148.8 L367.2,148.6 L372.0,148.5 L376.8,148.3 L381.6,148.1 L386.4,148.0 L391.2,147.8 L396.0,147.7 L400.8,147.5 L405.6,147.3 L410.4,147.2 L415.2,147.0 L420.0,146.9 L424.8,146.7 L429.6,146.6 L434.4,146.4 L439.2,146.2 L444.0,146.1 L448.8,145.9 L453.6,145.8 L458.4,145.6 L463.2,145.4 L468.0,145.3 L472.8,145.1 L477.6,145.0 L482.4,144.8 L487.2,144.6 L492.0,144.5 L496.8,144.3 L501.6,144.2 L506.4,144.0 L511.2,143.9 L516.0,143.7 L520.8,143.5 L525.6,143.4 L530.4,143.2 L535.2,143.1 L540.0,142.9" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,250.3 L69.6,245.7 L74.4,241.2 L79.2,236.7 L84.0,232.2 L88.8,227.9 L93.6,223.5 L98.4,219.3 L103.2,215.1 L108.0,210.9 L112.8,206.9 L117.6,202.8 L122.4,198.9 L127.2,195.0 L132.0,191.1 L136.8,187.3 L141.6,183.6 L146.4,179.9 L151.2,176.3 L156.0,172.8 L160.8,169.3 L165.6,165.8 L170.4,162.4 L175.2,159.1 L180.0,155.9 L184.8,152.7 L189.6,149.5 L194.4,146.4 L199.2,143.4 L204.0,140.4 L208.8,137.5 L213.6,134.7 L218.4,131.9 L223.2,129.2 L228.0,126.5 L232.8,123.9 L237.6,121.3 L242.4,118.8 L247.2,116.4 L252.0,114.0 L256.8,111.7 L261.6,109.4 L266.4,107.2 L271.2,105.1 L276.0,103.0 L280.8,101.0 L285.6,99.0 L290.4,97.1 L295.2,95.2 L300.0,93.4 L304.8,91.7 L309.6,90.0 L314.4,88.4 L319.2,86.9 L324.0,85.4 L328.8,83.9 L333.6,82.5 L338.4,81.2 L343.2,80.0 L348.0,78.8 L352.8,77.6 L357.6,76.5 L362.4,75.5 L367.2,74.5 L372.0,73.6 L376.8,72.8 L381.6,72.0 L386.4,71.2 L391.2,70.6 L396.0,69.9 L400.8,69.4 L405.6,68.9 L410.4,68.4 L415.2,68.1 L420.0,67.7 L424.8,67.5 L429.6,67.3 L434.4,67.1 L439.2,67.0 L444.0,67.0 L448.8,66.7 L453.6,66.4 L458.4,66.2 L463.2,65.9 L468.0,65.6 L472.8,65.3 L477.6,65.0 L482.4,64.7 L487.2,64.5 L492.0,64.2 L496.8,63.9 L501.6,63.6 L506.4,63.3 L511.2,63.1 L516.0,62.8 L520.8,62.5 L525.6,62.2 L530.4,61.9 L535.2,61.6 L540.0,61.4" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,255.0 L69.6,254.9 L74.4,254.7 L79.2,254.5 L84.0,254.3 L88.8,253.9 L93.6,253.6 L98.4,253.1 L103.2,252.6 L108.0,252.1 L112.8,251.4 L117.6,250.8 L122.4,250.0 L127.2,249.2 L132.0,248.4 L136.8,247.5 L141.6,246.5 L146.4,245.5 L151.2,244.4 L156.0,243.2 L160.8,242.0 L165.6,240.8 L170.4,239.5 L175.2,238.1 L180.0,236.6 L184.8,235.1 L189.6,233.6 L194.4,232.0 L199.2,230.3 L204.0,228.6 L208.8,226.8 L213.6,224.9 L218.4,223.0 L223.2,221.0 L228.0,219.0 L232.8,216.9 L237.6,214.8 L242.4,212.6 L247.2,210.3 L252.0,208.0 L256.8,205.6 L261.6,203.2 L266.4,200.7 L271.2,198.1 L276.0,195.5 L280.8,192.8 L285.6,190.1 L290.4,187.3 L295.2,184.5 L300.0,181.6 L304.8,178.6 L309.6,175.6 L314.4,172.5 L319.2,169.3 L324.0,166.1 L328.8,162.9 L333.6,159.6 L338.4,156.2 L343.2,152.7 L348.0,149.2 L352.8,145.7 L357.6,142.1 L362.4,138.4 L367.2,134.7 L372.0,130.9 L376.8,127.0 L381.6,123.1 L386.4,119.2 L391.2,115.1 L396.0,111.1 L400.8,106.9 L405.6,102.7 L410.4,98.5 L415.2,94.1 L420.0,89.8 L424.8,85.3 L429.6,80.8 L434.4,76.3 L439.2,71.7 L444.0,67.0" class="s3" fill="none"/><line x1="80" y1="28" x2="104" y2="28" class="s3"/><text x="110" y="32" class="tk">V<tspan baseline-shift="sub" font-size="8">DS</tspan> = V<tspan baseline-shift="sub" font-size="8">GS</tspan> − V<tspan baseline-shift="sub" font-size="8">T</tspan></text><text x="536.0" y="235.84" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 2 V</text><text x="536.0" y="197.76999999999998" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 3 V</text><text x="536.0" y="136.90499999999997" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 4 V</text><text x="536.0" y="55.359999999999985" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 5 V</text><text x="117.6" y="125.75" class="ns">Tuyến tính</text><text x="376.79999999999995" y="36.44999999999999" class="ns">Bão hòa</text></svg><figcaption>Hình 1. Họ đặc tuyến ra I<sub>D</sub>–V<sub>DS</sub> của MOSFET kênh n theo mô hình kênh dài; đường đứt nét là quỹ tích V<sub>DS</sub>(sat) = V<sub>GS</sub> − V<sub>T</sub>.</figcaption></figure>
+
+<h2>3. Độ dẫn kênh và hỗ dẫn</h2>
+<p>Hai thông số dùng để đánh giá MOSFET:</p>
+$$g_d = \frac{\partial I_D}{\partial V_{DS}} \approx \frac{\mu_n C_{ox}W}{L}(V_{GS} - V_T) \quad (V_{DS} \ll V_{GS}-V_T)$$
+$$g_m = \frac{\partial I_D}{\partial V_{GS}} \approx \frac{\mu_n C_{ox}W}{L}(V_{GS} - V_T) \quad \text{(vùng bão hòa)}$$
+<p>Muốn dòng lớn và hỗ dẫn cao: tăng độ linh động, tăng \(C_{ox}\) (oxit mỏng hơn hoặc hằng số điện môi cao hơn), tăng \(W/L\). Đây là động lực cho việc thu nhỏ \(L\) và dùng điện môi high-k.</p>
+
+<h2>4. Đặc tuyến truyền và trích xuất thông số</h2>
+<p>Đồ thị \(I_D\) theo \(V_{GS}\) ở \(V_{DS}\) nhỏ là đường thẳng trong vùng tuyến tính; ngoại suy về \(I_D = 0\) cho \(V_T\) (cộng \(V_{DS}/2\)). Trong vùng bão hòa, \(\sqrt{I_D}\) theo \(V_{GS}\) là đường thẳng. Ở \(V_{GS}\) cao, đường thực tế cong xuống do <strong>suy giảm độ linh động</strong> theo trường vuông góc và do điện trở nối tiếp nguồn/máng; đó là chủ đề của bài sau.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Độ linh động electron của β-Ga₂O₃ chỉ khoảng 150–200 cm²/V·s ở nhiệt độ phòng, bị giới hạn bởi tán xạ phonon quang cực, thấp hơn nhiều so với Si hay GaN. Nhưng điện trường đánh thủng tới hạn ~8 MV/cm bù lại, cho chỉ số Baliga \(\varepsilon\mu E_c^3\) rất cao. Vì vậy với Ga₂O₃, câu hỏi chính không phải là dòng lớn nhất mà là cân bằng giữa điện trở dẫn và điện áp đánh thủng.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 6.</li>
+<li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009), chương 3.</li>
+<li>N. Ma et al., "Intrinsic electron mobility limits in β-Ga₂O₃," <em>Applied Physics Letters</em> 109, 212101 (2016).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Once a channel exists under the gate, the drain voltage pulls electrons from source to drain. The long-channel model gives a simple set of equations, enough to understand the MOSFET's two basic operating regions: linear and saturation.</p>
+
+<h2>1. The qualitative picture</h2>
+<p>Consider an enhancement-mode n-channel MOSFET with the source tied to the body. At \(V_{DS} = 0\), the band diagram along the channel is flat: no longitudinal field, no current. With \(V_{DS} > 0\), electrons flow from source to drain (conventional current flows from drain to source).</p>
+<ul>
+<li>\(V_{GS} < V_T\): no current, whatever \(V_{DS}\).</li>
+<li>Small \(V_{DS}\): current rises linearly. The channel acts as a resistor whose value is set by \(V_{GS}\), since \(V_{GS}\) controls the number of carriers in the channel.</li>
+<li>Large \(V_{DS}\): current saturates.</li>
+</ul>
+<p>Why saturate? The current at the source end must equal that at the drain end. As \(V_{DS}\) rises, the band slope at the drain end rises steeply, but at the source end it hardly changes. The number of carriers entering the channel is set by the barrier at the source end, i.e. by \(V_{GS}\), not \(V_{DS}\). When \(V_{GD} = V_T\), the channel <strong>pinches off</strong> at the drain end; further increases in \(V_{DS}\) drop across the short pinched-off region near the drain, where electrons move at saturation velocity.</p>
+
+<h2>2. The long-channel model</h2>
+<p>Assumptions: a long channel (\(L \gtrsim 5\)–10 µm), constant mobility \(\mu_n\) along the channel, drift-dominated current above threshold, and the <strong>gradual channel approximation</strong>: the longitudinal field \(E_L\) is much smaller than the transverse field \(E_T\). With \(V_{ch}(y)\) the channel potential at position \(y\), the mobile channel charge density is:</p>
+$$Q_{ch}(y) = -C_{ox}\big[V_{GS} - V_T - V_{ch}(y)\big]$$
+<p>The current \(I_D = -W\mu_n Q_{ch}\,dV_{ch}/dy\) is constant along the channel; integrating from \(y = 0\) (\(V_{ch} = 0\)) to \(y = L\) (\(V_{ch} = V_{DS}\)):</p>
+$$I_D = \frac{\mu_n C_{ox} W}{L}\left[(V_{GS} - V_T)V_{DS} - \frac{V_{DS}^2}{2}\right], \qquad V_{DS} < V_{GS} - V_T$$
+<p>This peaks at \(V_{DS(sat)} = V_{GS} - V_T\). Beyond it:</p>
+$$I_{D(sat)} = \frac{\mu_n C_{ox} W}{2L}(V_{GS} - V_T)^2$$
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="156.0" y1="255" x2="156.0" y2="260" class="ax"/><text x="156.0" y="275" class="tk" text-anchor="middle">1</text><line x1="252.0" y1="255" x2="252.0" y2="260" class="ax"/><text x="252.0" y="275" class="tk" text-anchor="middle">2</text><line x1="348.0" y1="255" x2="348.0" y2="260" class="ax"/><text x="348.0" y="275" class="tk" text-anchor="middle">3</text><line x1="444.0" y1="255" x2="444.0" y2="260" class="ax"/><text x="444.0" y="275" class="tk" text-anchor="middle">4</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">5</text><text x="300.0" y="294" class="lab" text-anchor="middle">V<tspan baseline-shift="sub" font-size="8">DS</tspan> (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">I<tspan baseline-shift="sub" font-size="8">D</tspan> (relative)</text><path d="M60.0,255.0 L64.8,253.9 L69.6,252.8 L74.4,251.7 L79.2,250.8 L84.0,249.9 L88.8,249.0 L93.6,248.2 L98.4,247.5 L103.2,246.8 L108.0,246.2 L112.8,245.6 L117.6,245.1 L122.4,244.7 L127.2,244.3 L132.0,244.0 L136.8,243.7 L141.6,243.5 L146.4,243.4 L151.2,243.3 L156.0,243.2 L160.8,243.2 L165.6,243.2 L170.4,243.2 L175.2,243.2 L180.0,243.2 L184.8,243.1 L189.6,243.1 L194.4,243.1 L199.2,243.1 L204.0,243.1 L208.8,243.1 L213.6,243.0 L218.4,243.0 L223.2,243.0 L228.0,243.0 L232.8,243.0 L237.6,243.0 L242.4,242.9 L247.2,242.9 L252.0,242.9 L256.8,242.9 L261.6,242.9 L266.4,242.8 L271.2,242.8 L276.0,242.8 L280.8,242.8 L285.6,242.8 L290.4,242.8 L295.2,242.7 L300.0,242.7 L304.8,242.7 L309.6,242.7 L314.4,242.7 L319.2,242.7 L324.0,242.6 L328.8,242.6 L333.6,242.6 L338.4,242.6 L343.2,242.6 L348.0,242.5 L352.8,242.5 L357.6,242.5 L362.4,242.5 L367.2,242.5 L372.0,242.5 L376.8,242.4 L381.6,242.4 L386.4,242.4 L391.2,242.4 L396.0,242.4 L400.8,242.4 L405.6,242.3 L410.4,242.3 L415.2,242.3 L420.0,242.3 L424.8,242.3 L429.6,242.2 L434.4,242.2 L439.2,242.2 L444.0,242.2 L448.8,242.2 L453.6,242.2 L458.4,242.1 L463.2,242.1 L468.0,242.1 L472.8,242.1 L477.6,242.1 L482.4,242.1 L487.2,242.0 L492.0,242.0 L496.8,242.0 L501.6,242.0 L506.4,242.0 L511.2,241.9 L516.0,241.9 L520.8,241.9 L525.6,241.9 L530.4,241.9 L535.2,241.9 L540.0,241.8" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,252.7 L69.6,250.4 L74.4,248.2 L79.2,246.1 L84.0,244.0 L88.8,242.0 L93.6,240.0 L98.4,238.1 L103.2,236.2 L108.0,234.4 L112.8,232.7 L117.6,231.0 L122.4,229.4 L127.2,227.9 L132.0,226.4 L136.8,224.9 L141.6,223.5 L146.4,222.2 L151.2,221.0 L156.0,219.8 L160.8,218.6 L165.6,217.5 L170.4,216.5 L175.2,215.5 L180.0,214.6 L184.8,213.8 L189.6,213.0 L194.4,212.2 L199.2,211.6 L204.0,210.9 L208.8,210.4 L213.6,209.9 L218.4,209.4 L223.2,209.1 L228.0,208.7 L232.8,208.5 L237.6,208.3 L242.4,208.1 L247.2,208.0 L252.0,208.0 L256.8,207.9 L261.6,207.9 L266.4,207.8 L271.2,207.7 L276.0,207.6 L280.8,207.6 L285.6,207.5 L290.4,207.4 L295.2,207.4 L300.0,207.3 L304.8,207.2 L309.6,207.2 L314.4,207.1 L319.2,207.0 L324.0,206.9 L328.8,206.9 L333.6,206.8 L338.4,206.7 L343.2,206.7 L348.0,206.6 L352.8,206.5 L357.6,206.4 L362.4,206.4 L367.2,206.3 L372.0,206.2 L376.8,206.2 L381.6,206.1 L386.4,206.0 L391.2,206.0 L396.0,205.9 L400.8,205.8 L405.6,205.7 L410.4,205.7 L415.2,205.6 L420.0,205.5 L424.8,205.5 L429.6,205.4 L434.4,205.3 L439.2,205.3 L444.0,205.2 L448.8,205.1 L453.6,205.0 L458.4,205.0 L463.2,204.9 L468.0,204.8 L472.8,204.8 L477.6,204.7 L482.4,204.6 L487.2,204.5 L492.0,204.5 L496.8,204.4 L501.6,204.3 L506.4,204.3 L511.2,204.2 L516.0,204.1 L520.8,204.1 L525.6,204.0 L530.4,203.9 L535.2,203.8 L540.0,203.8" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,251.5 L69.6,248.1 L74.4,244.7 L79.2,241.4 L84.0,238.1 L88.8,234.9 L93.6,231.8 L98.4,228.7 L103.2,225.7 L108.0,222.7 L112.8,219.8 L117.6,216.9 L122.4,214.1 L127.2,211.4 L132.0,208.7 L136.8,206.1 L141.6,203.6 L146.4,201.1 L151.2,198.6 L156.0,196.2 L160.8,193.9 L165.6,191.7 L170.4,189.5 L175.2,187.3 L180.0,185.2 L184.8,183.2 L189.6,181.2 L194.4,179.3 L199.2,177.5 L204.0,175.7 L208.8,174.0 L213.6,172.3 L218.4,170.7 L223.2,169.1 L228.0,167.6 L232.8,166.2 L237.6,164.8 L242.4,163.5 L247.2,162.2 L252.0,161.0 L256.8,159.9 L261.6,158.8 L266.4,157.7 L271.2,156.8 L276.0,155.9 L280.8,155.0 L285.6,154.2 L290.4,153.5 L295.2,152.8 L300.0,152.2 L304.8,151.6 L309.6,151.1 L314.4,150.7 L319.2,150.3 L324.0,150.0 L328.8,149.7 L333.6,149.5 L338.4,149.4 L343.2,149.3 L348.0,149.2 L352.8,149.1 L357.6,148.9 L362.4,148.8 L367.2,148.6 L372.0,148.5 L376.8,148.3 L381.6,148.1 L386.4,148.0 L391.2,147.8 L396.0,147.7 L400.8,147.5 L405.6,147.3 L410.4,147.2 L415.2,147.0 L420.0,146.9 L424.8,146.7 L429.6,146.6 L434.4,146.4 L439.2,146.2 L444.0,146.1 L448.8,145.9 L453.6,145.8 L458.4,145.6 L463.2,145.4 L468.0,145.3 L472.8,145.1 L477.6,145.0 L482.4,144.8 L487.2,144.6 L492.0,144.5 L496.8,144.3 L501.6,144.2 L506.4,144.0 L511.2,143.9 L516.0,143.7 L520.8,143.5 L525.6,143.4 L530.4,143.2 L535.2,143.1 L540.0,142.9" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,250.3 L69.6,245.7 L74.4,241.2 L79.2,236.7 L84.0,232.2 L88.8,227.9 L93.6,223.5 L98.4,219.3 L103.2,215.1 L108.0,210.9 L112.8,206.9 L117.6,202.8 L122.4,198.9 L127.2,195.0 L132.0,191.1 L136.8,187.3 L141.6,183.6 L146.4,179.9 L151.2,176.3 L156.0,172.8 L160.8,169.3 L165.6,165.8 L170.4,162.4 L175.2,159.1 L180.0,155.9 L184.8,152.7 L189.6,149.5 L194.4,146.4 L199.2,143.4 L204.0,140.4 L208.8,137.5 L213.6,134.7 L218.4,131.9 L223.2,129.2 L228.0,126.5 L232.8,123.9 L237.6,121.3 L242.4,118.8 L247.2,116.4 L252.0,114.0 L256.8,111.7 L261.6,109.4 L266.4,107.2 L271.2,105.1 L276.0,103.0 L280.8,101.0 L285.6,99.0 L290.4,97.1 L295.2,95.2 L300.0,93.4 L304.8,91.7 L309.6,90.0 L314.4,88.4 L319.2,86.9 L324.0,85.4 L328.8,83.9 L333.6,82.5 L338.4,81.2 L343.2,80.0 L348.0,78.8 L352.8,77.6 L357.6,76.5 L362.4,75.5 L367.2,74.5 L372.0,73.6 L376.8,72.8 L381.6,72.0 L386.4,71.2 L391.2,70.6 L396.0,69.9 L400.8,69.4 L405.6,68.9 L410.4,68.4 L415.2,68.1 L420.0,67.7 L424.8,67.5 L429.6,67.3 L434.4,67.1 L439.2,67.0 L444.0,67.0 L448.8,66.7 L453.6,66.4 L458.4,66.2 L463.2,65.9 L468.0,65.6 L472.8,65.3 L477.6,65.0 L482.4,64.7 L487.2,64.5 L492.0,64.2 L496.8,63.9 L501.6,63.6 L506.4,63.3 L511.2,63.1 L516.0,62.8 L520.8,62.5 L525.6,62.2 L530.4,61.9 L535.2,61.6 L540.0,61.4" class="s1" fill="none"/><path d="M60.0,255.0 L64.8,255.0 L69.6,254.9 L74.4,254.7 L79.2,254.5 L84.0,254.3 L88.8,253.9 L93.6,253.6 L98.4,253.1 L103.2,252.6 L108.0,252.1 L112.8,251.4 L117.6,250.8 L122.4,250.0 L127.2,249.2 L132.0,248.4 L136.8,247.5 L141.6,246.5 L146.4,245.5 L151.2,244.4 L156.0,243.2 L160.8,242.0 L165.6,240.8 L170.4,239.5 L175.2,238.1 L180.0,236.6 L184.8,235.1 L189.6,233.6 L194.4,232.0 L199.2,230.3 L204.0,228.6 L208.8,226.8 L213.6,224.9 L218.4,223.0 L223.2,221.0 L228.0,219.0 L232.8,216.9 L237.6,214.8 L242.4,212.6 L247.2,210.3 L252.0,208.0 L256.8,205.6 L261.6,203.2 L266.4,200.7 L271.2,198.1 L276.0,195.5 L280.8,192.8 L285.6,190.1 L290.4,187.3 L295.2,184.5 L300.0,181.6 L304.8,178.6 L309.6,175.6 L314.4,172.5 L319.2,169.3 L324.0,166.1 L328.8,162.9 L333.6,159.6 L338.4,156.2 L343.2,152.7 L348.0,149.2 L352.8,145.7 L357.6,142.1 L362.4,138.4 L367.2,134.7 L372.0,130.9 L376.8,127.0 L381.6,123.1 L386.4,119.2 L391.2,115.1 L396.0,111.1 L400.8,106.9 L405.6,102.7 L410.4,98.5 L415.2,94.1 L420.0,89.8 L424.8,85.3 L429.6,80.8 L434.4,76.3 L439.2,71.7 L444.0,67.0" class="s3" fill="none"/><line x1="80" y1="28" x2="104" y2="28" class="s3"/><text x="110" y="32" class="tk">V<tspan baseline-shift="sub" font-size="8">DS</tspan> = V<tspan baseline-shift="sub" font-size="8">GS</tspan> − V<tspan baseline-shift="sub" font-size="8">T</tspan></text><text x="536.0" y="235.84" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 2 V</text><text x="536.0" y="197.76999999999998" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 3 V</text><text x="536.0" y="136.90499999999997" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 4 V</text><text x="536.0" y="55.359999999999985" class="tk" text-anchor="end">V<tspan baseline-shift="sub" font-size="7">GS</tspan> = 5 V</text><text x="117.6" y="125.75" class="ns">Linear</text><text x="376.79999999999995" y="36.44999999999999" class="ns">Saturation</text></svg><figcaption>Figure 1. Family of I<sub>D</sub>–V<sub>DS</sub> output curves for an n-channel MOSFET in the long-channel model; the dashed line is the locus V<sub>DS</sub>(sat) = V<sub>GS</sub> − V<sub>T</sub>.</figcaption></figure>
+
+<h2>3. Channel conductance and transconductance</h2>
+<p>Two parameters used to rate a MOSFET:</p>
+$$g_d = \frac{\partial I_D}{\partial V_{DS}} \approx \frac{\mu_n C_{ox}W}{L}(V_{GS} - V_T) \quad (V_{DS} \ll V_{GS}-V_T)$$
+$$g_m = \frac{\partial I_D}{\partial V_{GS}} \approx \frac{\mu_n C_{ox}W}{L}(V_{GS} - V_T) \quad \text{(saturation)}$$
+<p>For large current and high transconductance: raise mobility, raise \(C_{ox}\) (thinner oxide or higher permittivity), raise \(W/L\). This is the driving force behind shrinking \(L\) and adopting high-k dielectrics.</p>
+
+<h2>4. Transfer characteristics and parameter extraction</h2>
+<p>A plot of \(I_D\) versus \(V_{GS}\) at small \(V_{DS}\) is a straight line in the linear region; extrapolating to \(I_D = 0\) gives \(V_T\) (plus \(V_{DS}/2\)). In saturation, \(\sqrt{I_D}\) versus \(V_{GS}\) is a straight line. At high \(V_{GS}\), real curves bend down due to <strong>mobility degradation</strong> from the transverse field and to source/drain series resistance, the topic of the next lesson.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The electron mobility of β-Ga₂O₃ is only about 150–200 cm²/V·s at room temperature, limited by polar optical phonon scattering, far below Si or GaN. But its ~8 MV/cm critical field compensates, giving a very high Baliga figure of merit \(\varepsilon\mu E_c^3\). For Ga₂O₃, then, the main question is not maximum current but the trade-off between on-resistance and breakdown voltage.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 6.</li>
+<li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009), chapter 3.</li>
+<li>N. Ma et al., "Intrinsic electron mobility limits in β-Ga₂O₃," <em>Applied Physics Letters</em> 109, 212101 (2016).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-mos-cv.html">← <span class="l-vi">Đặc tuyến C-V của tụ MOS</span><span class="l-en">C-V characteristics of the MOS capacitor</span></a><a class="n" href="dev-mosfet-real.html"><span class="l-vi">MOSFET thực và hiệu ứng kênh ngắn</span><span class="l-en">Real MOSFETs and short-channel effects</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên tài liệu học phần của GS. Wan Sik Hwang, Korea Aerospace University, bao gồm bài giảng Linh kiện bán dẫn của Jinyoung Hwang. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on course materials by Prof. Wan Sik Hwang, Korea Aerospace University, including lecture notes on semiconductor devices by Jinyoung Hwang. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

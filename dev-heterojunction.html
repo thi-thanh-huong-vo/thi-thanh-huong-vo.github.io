@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Tiếp giáp dị chất" data-title-en="Heterojunctions">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heterojunctions · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Three band alignments, band offsets from the EAM, the notch and the two-dimensional electron gas.">
+<meta property="og:title" content="Heterojunctions">
+<meta property="og:description" content="Three band alignments, band offsets from the EAM, the notch and the two-dimensional electron gas.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 5</span><span class="l-en">Part 3 · Lesson 5</span></p>
+  <h1><span class="l-vi">Tiếp giáp dị chất</span><span class="l-en">Heterojunctions</span></h1>
+  <p class="sub"><span class="l-vi">Ba loại sắp xếp vùng, độ lệch vùng theo EAM, khấc thế và khí electron hai chiều.</span><span class="l-en">Three band alignments, band offsets from the EAM, the notch and the two-dimensional electron gas.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Tiếp giáp dị chất là tiếp giáp giữa hai vật liệu khác nhau. Nhờ chênh lệch vùng cấm, ta có thể "thiết kế" đường đi của electron và lỗ trống: giam chúng lại trong laser bán dẫn, tách chúng ra trong pin mặt trời, hoặc tạo khí electron hai chiều linh động cao trong transistor HEMT.</p>
+
+<h2>1. Ba loại tiếp giáp dị chất</h2>
+<p>Hai bán dẫn khác nhau có công thoát, ái lực điện tử và vùng cấm khác nhau. Tùy vị trí tương đối của các mép vùng, có ba kiểu sắp xếp:</p>
+<ul>
+<li><strong>Loại I (straddling)</strong>: vùng cấm hẹp nằm hoàn toàn trong vùng cấm rộng. Cả electron và lỗ trống bị giam trong vật liệu vùng cấm hẹp, như trong giếng lượng tử GaAs/AlGaAs của laser.</li>
+<li><strong>Loại II (staggered)</strong>: các vùng so le. Electron và lỗ trống bị tách sang hai vật liệu khác nhau, có lợi cho pin mặt trời và cảm biến quang.</li>
+<li><strong>Loại III (broken gap)</strong>: vùng dẫn của một bên nằm thấp hơn vùng hóa trị của bên kia, như InAs/GaSb.</li>
+</ul>
+<figure><svg viewBox="0 0 600 230" class="fig-svg" role="img"><text x="100" y="22" class="nt" text-anchor="middle">Loại I (lồng nhau)</text><rect x="20" y="60" width="75" height="110" fill="var(--s1)" opacity=".18"/><line x1="20" y1="60" x2="95" y2="60" class="s1"/><line x1="20" y1="170" x2="95" y2="170" class="s1"/><rect x="105" y="90" width="75" height="50" fill="var(--s3)" opacity=".18"/><line x1="105" y1="90" x2="180" y2="90" class="s3" style="stroke-dasharray:none"/><line x1="105" y1="140" x2="180" y2="140" class="s3" style="stroke-dasharray:none"/><text x="57" y="215" class="ns" text-anchor="middle">A</text><text x="142" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="22" class="nt" text-anchor="middle">Loại II (so le)</text><rect x="220" y="60" width="75" height="90" fill="var(--s1)" opacity=".18"/><line x1="220" y1="60" x2="295" y2="60" class="s1"/><line x1="220" y1="150" x2="295" y2="150" class="s1"/><rect x="305" y="95" width="75" height="90" fill="var(--s3)" opacity=".18"/><line x1="305" y1="95" x2="380" y2="95" class="s3" style="stroke-dasharray:none"/><line x1="305" y1="185" x2="380" y2="185" class="s3" style="stroke-dasharray:none"/><text x="257" y="215" class="ns" text-anchor="middle">A</text><text x="342" y="215" class="ns" text-anchor="middle">B</text><text x="500" y="22" class="nt" text-anchor="middle">Loại III (khe gãy)</text><rect x="420" y="60" width="75" height="60" fill="var(--s1)" opacity=".18"/><line x1="420" y1="60" x2="495" y2="60" class="s1"/><line x1="420" y1="120" x2="495" y2="120" class="s1"/><rect x="505" y="130" width="75" height="70" fill="var(--s3)" opacity=".18"/><line x1="505" y1="130" x2="580" y2="130" class="s3" style="stroke-dasharray:none"/><line x1="505" y1="200" x2="580" y2="200" class="s3" style="stroke-dasharray:none"/><text x="457" y="215" class="ns" text-anchor="middle">A</text><text x="542" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="44" class="tk" text-anchor="middle">E<tspan baseline-shift="sub" font-size="8">C</tspan> (trên), E<tspan baseline-shift="sub" font-size="8">V</tspan> (dưới)</text></svg><figcaption>Hình 1. Ba kiểu sắp xếp vùng năng lượng của tiếp giáp dị chất.</figcaption></figure>
+
+<h2>2. Dựng giản đồ bằng mô hình ái lực điện tử</h2>
+<p>Với tiếp giáp phù hợp mạng tinh thể (lattice-matched), EAM dùng các quy tắc sau:</p>
+<ul>
+<li>Ở cân bằng, mức Fermi nằm ngang; mức chân không \(E_{vac}\) liên tục nhưng các mép vùng thì gián đoạn tại mặt tiếp giáp.</li>
+<li>Độ gián đoạn được xác định từ các tham số vật liệu, không đổi theo điện áp hay pha tạp:</li>
+</ul>
+$$\Delta E_C = \chi_1 - \chi_2, \qquad \Delta E_V = (\chi_2 + E_{g2}) - (\chi_1 + E_{g1}), \qquad \Delta E_C + \Delta E_V = E_{g2} - E_{g1}\ \ (\text{loại I})$$
+<ul>
+<li>Mật độ thông lượng điện liên tục tại mặt tiếp giáp: \(\varepsilon_1 E_1 = \varepsilon_2 E_2\), nên điện trường "nhảy" khi đi qua mặt tiếp giáp.</li>
+<li>Uốn vùng tổng bằng hiệu công thoát và chia cho hai phía theo pha tạp và hằng số điện môi.</li>
+</ul>
+
+<h2>3. "Khấc" và khí electron hai chiều</h2>
+<p>Sự gián đoạn \(\Delta E_C\) cộng với uốn vùng thường tạo một <strong>khấc</strong> (notch), một giếng thế hẹp hình tam giác ở phía vật liệu vùng cấm hẹp, và một <strong>gai</strong> (spike) ở phía bên kia. Khấc có thể bẫy hạt tải; gai cản dòng. Trong tiếp giáp AlGaAs/GaAs pha tạp điều biến, electron từ lớp AlGaAs pha tạp rơi vào khấc trong GaAs không pha tạp, tạo <strong>khí electron hai chiều</strong> (2DEG) tách khỏi các ion tạp chất, nên tán xạ tạp chất giảm mạnh và độ linh động rất cao. Đây là nguyên lý của transistor HEMT.</p>
+
+<h2>4. Giới hạn của EAM</h2>
+<p>EAM giả định mặt phân cách lý tưởng. Trong thực tế, lưỡng cực mặt phân cách, trạng thái bề mặt và lệch mạng làm \(\Delta E_C\) thực khác giá trị dự đoán, nên độ lệch vùng thường được đo trực tiếp bằng XPS (phương pháp Kraut) thay vì chỉ tính từ \(\chi\).</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Ga₂O₃ có nhiều tiếp giáp dị chất quan trọng: β-(AlₓGa₁₋ₓ)₂O₃/Ga₂O₃ tạo 2DEG cho HEMT; NiO/Ga₂O₃ tạo diode p-n dị chất có điện áp đánh thủng vài kV; và các hệ loại II như Ga₂O₃ với bán dẫn vùng cấm hẹp hơn được dùng cho cảm biến quang tự cấp nguồn. Độ lệch vùng giữa các cặp này thường được xác định bằng XPS.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 5.</li>
+<li>H. Kroemer, "Nobel Lecture: Quasielectric fields and band offsets: teaching electrons new tricks," <em>Reviews of Modern Physics</em> 73, 783 (2001).</li>
+<li>E. A. Kraut et al., "Precise determination of the valence-band edge in X-ray photoemission spectra," <em>Physical Review Letters</em> 44, 1620 (1980).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A heterojunction is a junction between two different materials. Bandgap differences let us "design" the paths of electrons and holes: confining them in semiconductor lasers, separating them in solar cells, or forming a high-mobility two-dimensional electron gas in HEMTs.</p>
+
+<h2>1. Three types of heterojunction</h2>
+<p>Two different semiconductors have different work functions, electron affinities and bandgaps. Depending on the relative positions of the band edges, there are three alignments:</p>
+<ul>
+<li><strong>Type I (straddling)</strong>: the narrow gap lies entirely within the wide gap. Both electrons and holes are confined in the narrow-gap material, as in GaAs/AlGaAs laser quantum wells.</li>
+<li><strong>Type II (staggered)</strong>: the bands are staggered. Electrons and holes are separated into different materials, useful for solar cells and photodetectors.</li>
+<li><strong>Type III (broken gap)</strong>: one side's conduction band lies below the other's valence band, as in InAs/GaSb.</li>
+</ul>
+<figure><svg viewBox="0 0 600 230" class="fig-svg" role="img"><text x="100" y="22" class="nt" text-anchor="middle">Type I (straddling)</text><rect x="20" y="60" width="75" height="110" fill="var(--s1)" opacity=".18"/><line x1="20" y1="60" x2="95" y2="60" class="s1"/><line x1="20" y1="170" x2="95" y2="170" class="s1"/><rect x="105" y="90" width="75" height="50" fill="var(--s3)" opacity=".18"/><line x1="105" y1="90" x2="180" y2="90" class="s3" style="stroke-dasharray:none"/><line x1="105" y1="140" x2="180" y2="140" class="s3" style="stroke-dasharray:none"/><text x="57" y="215" class="ns" text-anchor="middle">A</text><text x="142" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="22" class="nt" text-anchor="middle">Type II (staggered)</text><rect x="220" y="60" width="75" height="90" fill="var(--s1)" opacity=".18"/><line x1="220" y1="60" x2="295" y2="60" class="s1"/><line x1="220" y1="150" x2="295" y2="150" class="s1"/><rect x="305" y="95" width="75" height="90" fill="var(--s3)" opacity=".18"/><line x1="305" y1="95" x2="380" y2="95" class="s3" style="stroke-dasharray:none"/><line x1="305" y1="185" x2="380" y2="185" class="s3" style="stroke-dasharray:none"/><text x="257" y="215" class="ns" text-anchor="middle">A</text><text x="342" y="215" class="ns" text-anchor="middle">B</text><text x="500" y="22" class="nt" text-anchor="middle">Type III (broken gap)</text><rect x="420" y="60" width="75" height="60" fill="var(--s1)" opacity=".18"/><line x1="420" y1="60" x2="495" y2="60" class="s1"/><line x1="420" y1="120" x2="495" y2="120" class="s1"/><rect x="505" y="130" width="75" height="70" fill="var(--s3)" opacity=".18"/><line x1="505" y1="130" x2="580" y2="130" class="s3" style="stroke-dasharray:none"/><line x1="505" y1="200" x2="580" y2="200" class="s3" style="stroke-dasharray:none"/><text x="457" y="215" class="ns" text-anchor="middle">A</text><text x="542" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="44" class="tk" text-anchor="middle">E<tspan baseline-shift="sub" font-size="8">C</tspan> (top), E<tspan baseline-shift="sub" font-size="8">V</tspan> (bottom)</text></svg><figcaption>Figure 1. The three band alignments of heterojunctions.</figcaption></figure>
+
+<h2>2. Building the diagram with the electron affinity model</h2>
+<p>For a lattice-matched junction, the EAM uses these rules:</p>
+<ul>
+<li>In equilibrium the Fermi level is flat; the vacuum level \(E_{vac}\) is continuous but the band edges are discontinuous at the interface.</li>
+<li>The discontinuities are set by material parameters and do not change with bias or doping:</li>
+</ul>
+$$\Delta E_C = \chi_1 - \chi_2, \qquad \Delta E_V = (\chi_2 + E_{g2}) - (\chi_1 + E_{g1}), \qquad \Delta E_C + \Delta E_V = E_{g2} - E_{g1}\ \ (\text{type I})$$
+<ul>
+<li>Electric flux density is continuous at the interface: \(\varepsilon_1 E_1 = \varepsilon_2 E_2\), so the field "jumps" across the interface.</li>
+<li>The total band bending equals the work-function difference and is shared between the two sides according to doping and permittivity.</li>
+</ul>
+
+<h2>3. The "notch" and the two-dimensional electron gas</h2>
+<p>The discontinuity \(\Delta E_C\) together with band bending often forms a <strong>notch</strong>, a narrow triangular potential well on the narrow-gap side, and a <strong>spike</strong> on the other side. The notch can trap carriers; the spike impedes current. In a modulation-doped AlGaAs/GaAs junction, electrons from the doped AlGaAs fall into the notch in undoped GaAs, forming a <strong>two-dimensional electron gas</strong> (2DEG) separated from the dopant ions, so impurity scattering drops sharply and mobility is very high. This is the principle of the HEMT.</p>
+
+<h2>4. Limits of the EAM</h2>
+<p>The EAM assumes an ideal interface. In reality, interface dipoles, interface states and lattice mismatch make the actual \(\Delta E_C\) differ from the prediction, so band offsets are usually measured directly by XPS (Kraut's method) rather than calculated only from \(\chi\).</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Ga₂O₃ has several important heterojunctions: β-(AlₓGa₁₋ₓ)₂O₃/Ga₂O₃ forms a 2DEG for HEMTs; NiO/Ga₂O₃ forms p-n heterojunction diodes with kV-class breakdown; and type-II systems pairing Ga₂O₃ with narrower-gap semiconductors are used for self-powered photodetectors. The band offsets of these pairs are usually determined by XPS.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 5.</li>
+<li>H. Kroemer, "Nobel Lecture: Quasielectric fields and band offsets: teaching electrons new tricks," <em>Reviews of Modern Physics</em> 73, 783 (2001).</li>
+<li>E. A. Kraut et al., "Precise determination of the valence-band edge in X-ray photoemission spectra," <em>Physical Review Letters</em> 44, 1620 (1980).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-schottky.html">← <span class="l-vi">Tiếp xúc kim loại–bán dẫn</span><span class="l-en">Metal–semiconductor contacts</span></a><a class="n" href="dev-mos-capacitor.html"><span class="l-vi">Transistor và tụ MOS</span><span class="l-en">The transistor and the MOS capacitor</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên tài liệu học phần của GS. Wan Sik Hwang, Korea Aerospace University, bao gồm bài giảng Linh kiện bán dẫn của Jinyoung Hwang. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on course materials by Prof. Wan Sik Hwang, Korea Aerospace University, including lecture notes on semiconductor devices by Jinyoung Hwang. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

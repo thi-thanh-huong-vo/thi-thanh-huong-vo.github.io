@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Tính chất vật liệu nano" data-title-en="Properties of Nanomaterials">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Properties of Nanomaterials · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="From the ideas of nanotechnology to fabrication, carbon and 2D materials and X-ray detectors: 13 lessons.">
+<meta property="og:title" content="Properties of Nanomaterials">
+<meta property="og:description" content="From the ideas of nanotechnology to fabrication, carbon and 2D materials and X-ray detectors: 13 lessons.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .quizcard{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:1rem 1.2rem;margin:1.75rem 0 .5rem}
+  .quizcard p{margin:0;text-align:left}.quizcard .qt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.15rem;color:var(--accent);margin-bottom:.25rem}
+  .qbtn{background:var(--accent);color:var(--paper)!important;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-weight:600;white-space:nowrap}
+</style>
+<style>
+  .topics{display:grid;grid-template-columns:1fr;gap:1rem;margin:1.5rem 0}
+  .topic{display:block;border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.3rem;text-decoration:none!important;color:inherit;text-align:left;transition:border-color .15s}
+  a.topic:hover{border-color:var(--accent)}
+  .topic .tn{font-family:"Source Serif 4",Georgia,serif;font-size:.95rem;color:var(--accent);margin:0}
+  .topic .tt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.3rem;margin:.15rem 0 .35rem;color:var(--ink)}
+  .topic .td{margin:0;text-align:left;color:var(--muted);font-size:.95rem}
+  .topic .tm{margin:.6rem 0 0;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .topic.soon{opacity:.6}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Chủ đề 3</span><span class="l-en">Topic 3</span></p>
+  <h1><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></h1>
+  <p class="sub"><span class="l-vi">Từ khái niệm công nghệ nano đến chế tạo, vật liệu carbon, vật liệu 2D và cảm biến tia X: 13 bài học.</span><span class="l-en">From the ideas of nanotechnology to fabrication, carbon and 2D materials and X-ray detectors: 13 lessons.</span></p>
+</header>
+<div class="l-vi">
+
+<p class="lead">Khi vật liệu nhỏ đến thang nanomet, kích thước trở thành một biến thiết kế ngang hàng với thành phần hóa học. Chủ đề này đi từ khái niệm và lịch sử của công nghệ nano, qua các phương pháp chế tạo từ trên xuống và từ dưới lên, đến vật liệu carbon, vật liệu 2D, và kết thúc bằng một nghiên cứu điển hình về cảm biến tia X Ga₂O₃.</p>
+<p class="box" style="text-align:left">Biên soạn dựa trên học phần Properties of Nanomaterials của GS. Wan Sik Hwang, Korea Aerospace University. Bài cuối dựa trên bài thuyết trình và công bố của chính tôi.</p>
+<div class="quizcard"><div><p class="qt">Kiểm tra kiến thức</p><p>10 câu hỏi trắc nghiệm ngẫu nhiên từ ngân hàng 65 câu, bao quát tất cả các bài. Mỗi lần làm lại sẽ gặp những câu khác.</p></div><a class="qbtn" href="nano-quiz.html">Làm bài quiz →</a></div>
+<h2>Phần 1. Nền tảng của công nghệ nano</h2>
+<ol class="toc">
+  <li><a href="nano-intro.html">Công nghệ nano là gì?</a><span>Định nghĩa vật liệu nano, kích thước tới hạn, hiệu ứng lượng tử và lịch sử từ Feynman đến fullerene.</span></li>
+  <li><a href="nano-size-effects.html">Kích thước quyết định: bề mặt và năng lượng</a><span>Nhiều vật thể hơn, nhiều bề mặt hơn, tỉ lệ nguyên tử bề mặt và các ứng dụng của diện tích lớn.</span></li>
+  <li><a href="nano-classification.html">Phân loại vật liệu nano: 0D đến 3D</a><span>Chấm lượng tử, dây và ống nano, vật liệu 2D, màng nano β-Ga₂O₃, Hall–Petch ngược và mật độ trạng thái.</span></li>
+  <li><a href="nano-history.html">Nano trong lịch sử, tự nhiên và sản phẩm</a><span>Chén Lycurgus, kính màu, kiếm Damascus, màu xanh Maya, bọt biển thủy tinh và danh mục sản phẩm nano.</span></li>
+</ol>
+<h2>Phần 2. Chế tạo vật liệu nano</h2>
+<ol class="toc">
+  <li><a href="nano-top-down.html">Chế tạo từ trên xuống</a><span>Nghiền cơ học, bóc tách laser, quang khắc và giới hạn nhiễu xạ, đa mẫu, FIB, quả cầu nano và in khuôn nano.</span></li>
+  <li><a href="nano-bottom-up-vapor.html">Từ dưới lên (1): tự lắp ráp và pha khí</a><span>Tự lắp ráp, quá bão hòa và tạo mầm, phóng điện hồ quang, ngưng tụ khí trơ, ngọn lửa và CVD/PVD.</span></li>
+  <li><a href="nano-bottom-up-solution.html">Từ dưới lên (2): phương pháp dung dịch</a><span>Keo, đồng kết tủa, thô hóa Ostwald, thủy nhiệt Ga₂O₃, sol-gel, điện kéo sợi và quang khắc bút nhúng.</span></li>
+  <li><a href="nano-nanowires.html">Dây nano bán dẫn</a><span>Đa mẫu spacer, EBL, transistor GAA, cơ chế hơi–lỏng–rắn với xúc tác Au và yêu cầu với chất xúc tác.</span></li>
+</ol>
+<h2>Phần 3. Vật liệu carbon và vật liệu 2D</h2>
+<ol class="toc">
+  <li><a href="nano-carbon.html">Thù hình carbon và lai hóa</a><span>Thù hình, liên kết σ và π, lai hóa sp³, sp², sp, kim cương và graphite, fullerene C₆₀.</span></li>
+  <li><a href="nano-graphene.html">Graphene</a><span>Phát hiện năm 2004, làm graphene nhìn thấy được, CVD cuộn–cuộn, tính chất, transistor, ruy băng nano và ký hiệu (n, m).</span></li>
+  <li><a href="nano-cnt.html">Ống nano carbon và thang máy vũ trụ</a><span>Véc-tơ chiral, quy tắc kim loại/bán dẫn, tách ống, transistor CNT và bài toán cáp thang máy vũ trụ.</span></li>
+  <li><a href="nano-tmd-mxene.html">TMD và MXene</a><span>MoS₂ và các pha 2H/1T, chuyển vùng cấm xiên sang thẳng, ưu điểm của điện tử 2D, dị chất van der Waals và MXene.</span></li>
+</ol>
+<h2>Phần 4. Nghiên cứu điển hình</h2>
+<ol class="toc">
+  <li><a href="nano-xray-ga2o3.html">Nghiên cứu điển hình: cảm biến tia X α-Ga₂O₃</a><span>Phát hiện gián tiếp và trực tiếp, chọn vật liệu, cảm biến MSM 700 nm và hiện tượng dịch điểm trung hòa điện tích.</span></li>
+</ol>
+
+</div>
+<div class="l-en">
+
+<p class="lead">When materials shrink to the nanometer scale, size becomes a design variable on a par with composition. This topic runs from the ideas and history of nanotechnology, through top-down and bottom-up fabrication, to carbon and 2D materials, ending with a case study on Ga₂O₃ X-ray detectors.</p>
+<p class="box" style="text-align:left">Based on the Properties of Nanomaterials course by Prof. Wan Sik Hwang, Korea Aerospace University. The last lesson is based on my own presentation and publication.</p>
+<div class="quizcard"><div><p class="qt">Test your knowledge</p><p>10 random multiple-choice questions from a bank of 65, covering every lesson. Each retry brings different questions.</p></div><a class="qbtn" href="nano-quiz.html">Take the quiz →</a></div>
+<h2>Part 1. Foundations of nanotechnology</h2>
+<ol class="toc">
+  <li><a href="nano-intro.html">What is nanotechnology?</a><span>Defining nanomaterials, critical sizes, quantum effects and the history from Feynman to fullerenes.</span></li>
+  <li><a href="nano-size-effects.html">Size matters: surface and energy</a><span>More objects, more surface, the fraction of surface atoms and applications of large surface area.</span></li>
+  <li><a href="nano-classification.html">Classifying nanomaterials: 0D to 3D</a><span>Quantum dots, nanowires and tubes, 2D materials, β-Ga₂O₃ nanomembranes, inverse Hall–Petch and density of states.</span></li>
+  <li><a href="nano-history.html">Nano in history, nature and products</a><span>The Lycurgus Cup, stained glass, Damascus swords, Maya blue, glass sponges and the nano products inventory.</span></li>
+</ol>
+<h2>Part 2. Fabricating nanomaterials</h2>
+<ol class="toc">
+  <li><a href="nano-top-down.html">Top-down fabrication</a><span>Milling, laser ablation, photolithography and the diffraction limit, multiple patterning, FIB, nanospheres and nanoimprint.</span></li>
+  <li><a href="nano-bottom-up-vapor.html">Bottom-up (1): self-assembly and vapor phase</a><span>Self-assembly, supersaturation and nucleation, arc discharge, inert-gas condensation, flames and CVD/PVD.</span></li>
+  <li><a href="nano-bottom-up-solution.html">Bottom-up (2): solution methods</a><span>Colloids, coprecipitation, Ostwald ripening, hydrothermal Ga₂O₃, sol-gel, electrospinning and dip-pen lithography.</span></li>
+  <li><a href="nano-nanowires.html">Semiconductor nanowires</a><span>Spacer patterning, EBL, GAA transistors, the vapor–liquid–solid mechanism with Au catalysts and catalyst requirements.</span></li>
+</ol>
+<h2>Part 3. Carbon and 2D materials</h2>
+<ol class="toc">
+  <li><a href="nano-carbon.html">Carbon allotropes and hybridization</a><span>Allotropes, σ and π bonds, sp³, sp² and sp hybridization, diamond versus graphite, C₆₀ fullerene.</span></li>
+  <li><a href="nano-graphene.html">Graphene</a><span>The 2004 discovery, making graphene visible, roll-to-roll CVD, properties, transistors, nanoribbons and (n, m) notation.</span></li>
+  <li><a href="nano-cnt.html">Carbon nanotubes and the space elevator</a><span>The chiral vector, the metallic/semiconducting rule, sorting tubes, CNT transistors and the space elevator cable.</span></li>
+  <li><a href="nano-tmd-mxene.html">TMDs and MXenes</a><span>MoS₂ and the 2H/1T phases, the indirect-to-direct gap transition, advantages of 2D electronics, vdW heterostructures and MXenes.</span></li>
+</ol>
+<h2>Part 4. Case study</h2>
+<ol class="toc">
+  <li><a href="nano-xray-ga2o3.html">Case study: α-Ga₂O₃ X-ray detectors</a><span>Indirect and direct detection, material choice, the 700 nm MSM detector and the charge-neutral-point shift.</span></li>
+</ol>
+
+</div>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

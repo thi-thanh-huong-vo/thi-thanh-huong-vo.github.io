@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Ống nano carbon và thang máy vũ trụ" data-title-en="Carbon nanotubes and the space elevator">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carbon nanotubes and the space elevator · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The chiral vector, the metallic/semiconducting rule, sorting tubes, CNT transistors and the space elevator cable.">
+<meta property="og:title" content="Carbon nanotubes and the space elevator">
+<meta property="og:description" content="The chiral vector, the metallic/semiconducting rule, sorting tubes, CNT transistors and the space elevator cable.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 3</span><span class="l-en">Part 3 · Lesson 3</span></p>
+  <h1><span class="l-vi">Ống nano carbon và thang máy vũ trụ</span><span class="l-en">Carbon nanotubes and the space elevator</span></h1>
+  <p class="sub"><span class="l-vi">Véc-tơ chiral, quy tắc kim loại/bán dẫn, tách ống, transistor CNT và bài toán cáp thang máy vũ trụ.</span><span class="l-en">The chiral vector, the metallic/semiconducting rule, sorting tubes, CNT transistors and the space elevator cable.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Cuộn một tấm graphene thành ống, và ta có ống nano carbon (CNT). Điều kỳ lạ là cách cuộn, tức một cặp số nguyên (n, m), quyết định ống là kim loại hay bán dẫn. Bài này đi từ hình học đến transistor CNT, và kết thúc bằng một giấc mơ: thang máy lên vũ trụ.</p>
+
+<h2>1. Ống đơn vách và đa vách</h2>
+<p>Ống nano carbon đơn vách (SWCNT) là một thù hình trung gian giữa lồng fullerene và tấm graphene phẳng. Ống đa vách (MWCNT) gồm nhiều ống đơn vách lồng vào nhau như vòng gỗ, liên kết yếu bằng lực van der Waals.</p>
+
+<h2>2. Véc-tơ chiral và đường kính</h2>
+<p>Ống (n, m) được tạo bằng cách cuộn graphene sao cho véc-tơ \(\vec C = n\vec a_1 + m\vec a_2\) trở thành chu vi ống. Với \(|\vec a_1| = |\vec a_2| = a = \sqrt{3}\,a_{C-C}\):</p>
+$$|\vec C| = a\sqrt{n^2 + nm + m^2} = \pi d, \qquad \tan\theta = \frac{\sqrt{3}\,m}{2n + m}$$
+<p>với \(d\) là đường kính và \(\theta\) góc chiral (0° cho zigzag, 30° cho armchair). Trong ống nano, \(a_{C-C} \approx 1{,}44\) Å, lớn hơn chút so với graphite (1,421 Å) do độ cong.</p>
+<div class="box"><p class="t">Ví dụ</p>
+<p>Armchair (5, 5): \(|\vec C| = \sqrt{3}\times1{,}44\times\sqrt{75} = 15 \times 1{,}44 = 21{,}6\) Å, nên \(d \approx 6{,}9\) Å. Zigzag (5, 0): \(|\vec C| = 5\sqrt{3}\times1{,}44 \approx 12{,}5\) Å, \(d \approx 4{,}0\) Å. Ống (10, 10) phổ biến có \(d \approx 1{,}4\) nm.</p></div>
+
+<h2>3. Kim loại hay bán dẫn</h2>
+<p>Khi cuộn tấm graphene, chỉ những trạng thái electron thỏa điều kiện tuần hoàn quanh chu vi mới được phép. Nếu các đường trạng thái được phép đi qua điểm Dirac, ống là kim loại; nếu không, ống có vùng cấm. Quy tắc đơn giản:</p>
+<ul>
+<li><strong>Kim loại</strong>: \((n - m)\) chia hết cho 3; mọi ống armchair (n, n) đều là kim loại.</li>
+<li><strong>Bán dẫn</strong>: \((n - m)\) không chia hết cho 3. Vùng cấm tỉ lệ nghịch với đường kính:</li>
+</ul>
+$$E_g \approx \frac{2\,a_{C-C}\,\gamma_0}{d} \approx \frac{0{,}8\ \text{eV}\cdot\text{nm}}{d}$$
+<p>với \(\gamma_0 \approx 2{,}9\) eV là năng lượng nhảy giữa các carbon lân cận. Ống zigzag (13, 0) có \(d \approx 1{,}0\) nm và \(E_g \approx 0{,}8\) eV. Theo quy tắc này, khoảng một phần ba số ống là kim loại.</p>
+<figure><svg viewBox="0 0 480 360" class="fig-svg" role="img"><circle cx="64.0" cy="48.0" r="16" class="node"/><text x="64.0" y="52.0" class="tk" text-anchor="middle">1,0</text><circle cx="37.0" cy="78.0" r="16" class="atom"/><text x="37.0" y="82.0" class="tk" text-anchor="middle">1,1</text><circle cx="118.0" cy="48.0" r="16" class="node"/><text x="118.0" y="52.0" class="tk" text-anchor="middle">2,0</text><circle cx="91.0" cy="78.0" r="16" class="node"/><text x="91.0" y="82.0" class="tk" text-anchor="middle">2,1</text><circle cx="64.0" cy="108.0" r="16" class="atom"/><text x="64.0" y="112.0" class="tk" text-anchor="middle">2,2</text><circle cx="172.0" cy="48.0" r="16" class="atom"/><text x="172.0" y="52.0" class="tk" text-anchor="middle">3,0</text><circle cx="145.0" cy="78.0" r="16" class="node"/><text x="145.0" y="82.0" class="tk" text-anchor="middle">3,1</text><circle cx="118.0" cy="108.0" r="16" class="node"/><text x="118.0" y="112.0" class="tk" text-anchor="middle">3,2</text><circle cx="91.0" cy="138.0" r="16" class="atom"/><text x="91.0" y="142.0" class="tk" text-anchor="middle">3,3</text><circle cx="226.0" cy="48.0" r="16" class="node"/><text x="226.0" y="52.0" class="tk" text-anchor="middle">4,0</text><circle cx="199.0" cy="78.0" r="16" class="atom"/><text x="199.0" y="82.0" class="tk" text-anchor="middle">4,1</text><circle cx="172.0" cy="108.0" r="16" class="node"/><text x="172.0" y="112.0" class="tk" text-anchor="middle">4,2</text><circle cx="145.0" cy="138.0" r="16" class="node"/><text x="145.0" y="142.0" class="tk" text-anchor="middle">4,3</text><circle cx="118.0" cy="168.0" r="16" class="atom"/><text x="118.0" y="172.0" class="tk" text-anchor="middle">4,4</text><circle cx="280.0" cy="48.0" r="16" class="node"/><text x="280.0" y="52.0" class="tk" text-anchor="middle">5,0</text><circle cx="253.0" cy="78.0" r="16" class="node"/><text x="253.0" y="82.0" class="tk" text-anchor="middle">5,1</text><circle cx="226.0" cy="108.0" r="16" class="atom"/><text x="226.0" y="112.0" class="tk" text-anchor="middle">5,2</text><circle cx="199.0" cy="138.0" r="16" class="node"/><text x="199.0" y="142.0" class="tk" text-anchor="middle">5,3</text><circle cx="172.0" cy="168.0" r="16" class="node"/><text x="172.0" y="172.0" class="tk" text-anchor="middle">5,4</text><circle cx="145.0" cy="198.0" r="16" class="atom"/><text x="145.0" y="202.0" class="tk" text-anchor="middle">5,5</text><circle cx="334.0" cy="48.0" r="16" class="atom"/><text x="334.0" y="52.0" class="tk" text-anchor="middle">6,0</text><circle cx="307.0" cy="78.0" r="16" class="node"/><text x="307.0" y="82.0" class="tk" text-anchor="middle">6,1</text><circle cx="280.0" cy="108.0" r="16" class="node"/><text x="280.0" y="112.0" class="tk" text-anchor="middle">6,2</text><circle cx="253.0" cy="138.0" r="16" class="atom"/><text x="253.0" y="142.0" class="tk" text-anchor="middle">6,3</text><circle cx="226.0" cy="168.0" r="16" class="node"/><text x="226.0" y="172.0" class="tk" text-anchor="middle">6,4</text><circle cx="199.0" cy="198.0" r="16" class="node"/><text x="199.0" y="202.0" class="tk" text-anchor="middle">6,5</text><circle cx="172.0" cy="228.0" r="16" class="atom"/><text x="172.0" y="232.0" class="tk" text-anchor="middle">6,6</text><circle cx="388.0" cy="48.0" r="16" class="node"/><text x="388.0" y="52.0" class="tk" text-anchor="middle">7,0</text><circle cx="361.0" cy="78.0" r="16" class="atom"/><text x="361.0" y="82.0" class="tk" text-anchor="middle">7,1</text><circle cx="334.0" cy="108.0" r="16" class="node"/><text x="334.0" y="112.0" class="tk" text-anchor="middle">7,2</text><circle cx="307.0" cy="138.0" r="16" class="node"/><text x="307.0" y="142.0" class="tk" text-anchor="middle">7,3</text><circle cx="280.0" cy="168.0" r="16" class="atom"/><text x="280.0" y="172.0" class="tk" text-anchor="middle">7,4</text><circle cx="253.0" cy="198.0" r="16" class="node"/><text x="253.0" y="202.0" class="tk" text-anchor="middle">7,5</text><circle cx="226.0" cy="228.0" r="16" class="node"/><text x="226.0" y="232.0" class="tk" text-anchor="middle">7,6</text><circle cx="199.0" cy="258.0" r="16" class="atom"/><text x="199.0" y="262.0" class="tk" text-anchor="middle">7,7</text><circle cx="442.0" cy="48.0" r="16" class="node"/><text x="442.0" y="52.0" class="tk" text-anchor="middle">8,0</text><circle cx="415.0" cy="78.0" r="16" class="node"/><text x="415.0" y="82.0" class="tk" text-anchor="middle">8,1</text><circle cx="388.0" cy="108.0" r="16" class="atom"/><text x="388.0" y="112.0" class="tk" text-anchor="middle">8,2</text><circle cx="361.0" cy="138.0" r="16" class="node"/><text x="361.0" y="142.0" class="tk" text-anchor="middle">8,3</text><circle cx="334.0" cy="168.0" r="16" class="node"/><text x="334.0" y="172.0" class="tk" text-anchor="middle">8,4</text><circle cx="307.0" cy="198.0" r="16" class="atom"/><text x="307.0" y="202.0" class="tk" text-anchor="middle">8,5</text><circle cx="280.0" cy="228.0" r="16" class="node"/><text x="280.0" y="232.0" class="tk" text-anchor="middle">8,6</text><circle cx="253.0" cy="258.0" r="16" class="node"/><text x="253.0" y="262.0" class="tk" text-anchor="middle">8,7</text><circle cx="226.0" cy="288.0" r="16" class="atom"/><text x="226.0" y="292.0" class="tk" text-anchor="middle">8,8</text><circle cx="30" cy="318" r="10" class="atom"/><text x="48" y="323" class="tk">Kim loại: (n − m) chia hết cho 3</text><circle cx="30" cy="344" r="10" class="node"/><text x="48" y="349" class="tk">Bán dẫn</text><text x="20" y="20" class="ns">Hàng trên: zigzag (n, 0); cạnh chéo: armchair (n, n)</text></svg><figcaption>Hình 1. Bản đồ chiral (n, m): ô tô đậm là ống kim loại, ô viền là ống bán dẫn.</figcaption></figure>
+
+<h2>4. Mọc CNT và bài toán tách</h2>
+<p>CNT được mọc bằng phóng điện hồ quang, bóc tách laser hoặc CVD: hydrocarbon phân hủy trên hạt xúc tác kim loại (Fe, Co, Ni), carbon khuếch tán vào hạt rồi kết tủa thành ống. Vấn đề lớn: mọc ra luôn là <strong>hỗn hợp</strong> ống kim loại và bán dẫn với nhiều đường kính khác nhau, thấy rõ qua các đỉnh hấp thụ quang riêng biệt của từng loại. Một transistor chỉ cần một ống kim loại lẫn vào là bị ngắn mạch.</p>
+<p>Giải pháp tách: (1) phản ứng hóa học chọn lọc với ống kim loại (ví dụ muối diazonium phản ứng mạnh hơn với ống kim loại, vì chúng có nhiều electron gần mức Fermi hơn), tạo "tay cầm" hóa học; (2) tách các ống đã phản ứng bằng ly tâm hoặc điện di. Ly tâm gradient mật độ cũng cho phép sắp xếp ống theo đường kính và tính điện tử.</p>
+
+<h2>5. Transistor CNT</h2>
+<ul>
+<li>Hình trụ rỗng hoàn hảo không có biên, nên không có tán xạ biên.</li>
+<li>Là vật liệu gần 1D, chỉ cho phép tán xạ tới và tán xạ ngược; quãng đường tự do trung bình dài cỡ micromet, nên quan sát được vận chuyển gần đạn đạo (quasi-ballistic) ở chiều dài tương đối lớn.</li>
+<li>Liên kết sp² mạnh làm ống trơ hóa học và chịu được dòng điện rất lớn; về lý thuyết dẫn nhiệt gần bằng kim cương.</li>
+<li>Vùng dẫn và vùng hóa trị đối xứng hoàn hảo: electron và lỗ trống có khối lượng hiệu dụng như nhau, thuận lợi cho CMOS bù.</li>
+<li>Độ linh động và vận tốc bão hòa cao: tốt cho cả linh kiện kênh dài (khuếch tán) lẫn kênh ngắn (vận tốc bão hòa). Transistor mảng CNT định hướng đã hoạt động trên 100 GHz cho ứng dụng RF.</li>
+</ul>
+
+<h2>6. Thang máy vũ trụ</h2>
+<p>Ý tưởng một sợi cáp nối mặt đất với một đối trọng trên quỹ đạo địa tĩnh có lịch sử dài: Tsiolkovsky hình dung năm 1895, Artsutanov đề xuất năm 1960, Pearson đưa vào khái niệm thay đổi tiết diện cáp năm 1975, và việc phát hiện CNT năm 1991 làm ý tưởng sống lại. Mọi thành phần (quỹ đạo địa tĩnh, trọng tâm, đối trọng, cabin) đều được xem là khả thi, trừ <strong>dây cáp</strong>.</p>
+<p>Để ứng suất đều trên toàn cáp, tiết diện phải lớn nhất ở quỹ đạo địa tĩnh và nhỏ dần về hai đầu. <strong>Tỉ lệ thuôn</strong> (taper ratio) giữa tiết diện lớn nhất và nhỏ nhất tăng theo hàm mũ của tỉ số khối lượng riêng/độ bền kéo:</p>
+<div class="tablewrap"><table>
+<tr><th>Vật liệu</th><th>Khối lượng riêng (kg/m³)</th><th>Độ bền kéo (GPa)</th><th>Tỉ lệ thuôn</th></tr>
+<tr><td>Thép</td><td>7900</td><td>5,0</td><td>1,6×10³³</td></tr>
+<tr><td>Kevlar</td><td>1440</td><td>3,6</td><td>2,5×10⁸</td></tr>
+<tr><td>CNT</td><td>1300</td><td>130</td><td>1,6</td></tr>
+</table></div>
+<p>Chỉ CNT cho tỉ lệ thuôn hợp lý. Nhưng còn những rào cản lớn: rất khó tạo cấu trúc dài liên tục, không kiểm soát được tính chất (kim loại hay bán dẫn, armchair hay zigzag), bề mặt không có liên kết nên khó làm composite, và chi phí, thời gian chế tạo cực lớn. Ngoài ra cáp phải chịu sét, thiên thạch, rác vũ trụ, gió, oxy nguyên tử và bức xạ.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Quy tắc "(n − m) chia hết cho 3" là ví dụ cực đoan về việc hình học quyết định cấu trúc vùng. Với Ga₂O₃, tính bất đẳng hướng của mạng đơn tà cũng làm hằng số điện môi, độ dẫn nhiệt và quang phổ hấp thụ phụ thuộc hướng tinh thể, nên định hướng đế (010), (001) hay (−201) là một lựa chọn thiết kế quan trọng.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. Iijima, "Helical microtubules of graphitic carbon," <em>Nature</em> 354, 56 (1991).</li>
+<li>R. Saito, G. Dresselhaus, M. S. Dresselhaus, <em>Physical Properties of Carbon Nanotubes</em>, Imperial College Press (1998).</li>
+<li>M. S. Strano et al., "Electronic structure control of single-walled carbon nanotube functionalization," <em>Science</em> 301, 1519 (2003).</li>
+<li>C. Rutherglen et al., "Wafer-scalable, aligned carbon nanotube transistors operating at frequencies of over 100 GHz," <em>Nature Electronics</em> 2, 530 (2019).</li>
+<li>B. C. Edwards, "Design and deployment of a space elevator," <em>Acta Astronautica</em> 47, 735 (2000).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Roll a graphene sheet into a tube and you get a carbon nanotube (CNT). Remarkably, the way it is rolled, a pair of integers (n, m), decides whether the tube is metallic or semiconducting. This lesson runs from geometry to CNT transistors, and ends with a dream: an elevator to space.</p>
+
+<h2>1. Single- and multi-walled tubes</h2>
+<p>A single-walled carbon nanotube (SWCNT) is an allotrope intermediate between fullerene cages and flat graphene. Multi-walled tubes (MWCNTs) consist of nested single-walled tubes, like tree rings, weakly bound by van der Waals forces.</p>
+
+<h2>2. The chiral vector and diameter</h2>
+<p>An (n, m) tube is made by rolling graphene so that \(\vec C = n\vec a_1 + m\vec a_2\) becomes the circumference. With \(|\vec a_1| = |\vec a_2| = a = \sqrt{3}\,a_{C-C}\):</p>
+$$|\vec C| = a\sqrt{n^2 + nm + m^2} = \pi d, \qquad \tan\theta = \frac{\sqrt{3}\,m}{2n + m}$$
+<p>where \(d\) is the diameter and \(\theta\) the chiral angle (0° for zigzag, 30° for armchair). In nanotubes \(a_{C-C} \approx 1.44\) Å, slightly larger than in graphite (1.421 Å) because of curvature.</p>
+<div class="box"><p class="t">Example</p>
+<p>Armchair (5, 5): \(|\vec C| = \sqrt{3}\times1.44\times\sqrt{75} = 15 \times 1.44 = 21.6\) Å, so \(d \approx 6.9\) Å. Zigzag (5, 0): \(|\vec C| = 5\sqrt{3}\times1.44 \approx 12.5\) Å, \(d \approx 4.0\) Å. The common (10, 10) tube has \(d \approx 1.4\) nm.</p></div>
+
+<h2>3. Metallic or semiconducting</h2>
+<p>When graphene is rolled, only electron states satisfying periodicity around the circumference are allowed. If the allowed lines of states pass through the Dirac point, the tube is metallic; otherwise it has a gap. A simple rule:</p>
+<ul>
+<li><strong>Metallic</strong>: \((n - m)\) divisible by 3; every armchair (n, n) tube is metallic.</li>
+<li><strong>Semiconducting</strong>: \((n - m)\) not divisible by 3. The gap is inversely proportional to diameter:</li>
+</ul>
+$$E_g \approx \frac{2\,a_{C-C}\,\gamma_0}{d} \approx \frac{0.8\ \text{eV}\cdot\text{nm}}{d}$$
+<p>where \(\gamma_0 \approx 2.9\) eV is the nearest-neighbor hopping energy. A zigzag (13, 0) tube has \(d \approx 1.0\) nm and \(E_g \approx 0.8\) eV. By this rule, about one third of tubes are metallic.</p>
+<figure><svg viewBox="0 0 480 360" class="fig-svg" role="img"><circle cx="64.0" cy="48.0" r="16" class="node"/><text x="64.0" y="52.0" class="tk" text-anchor="middle">1,0</text><circle cx="37.0" cy="78.0" r="16" class="atom"/><text x="37.0" y="82.0" class="tk" text-anchor="middle">1,1</text><circle cx="118.0" cy="48.0" r="16" class="node"/><text x="118.0" y="52.0" class="tk" text-anchor="middle">2,0</text><circle cx="91.0" cy="78.0" r="16" class="node"/><text x="91.0" y="82.0" class="tk" text-anchor="middle">2,1</text><circle cx="64.0" cy="108.0" r="16" class="atom"/><text x="64.0" y="112.0" class="tk" text-anchor="middle">2,2</text><circle cx="172.0" cy="48.0" r="16" class="atom"/><text x="172.0" y="52.0" class="tk" text-anchor="middle">3,0</text><circle cx="145.0" cy="78.0" r="16" class="node"/><text x="145.0" y="82.0" class="tk" text-anchor="middle">3,1</text><circle cx="118.0" cy="108.0" r="16" class="node"/><text x="118.0" y="112.0" class="tk" text-anchor="middle">3,2</text><circle cx="91.0" cy="138.0" r="16" class="atom"/><text x="91.0" y="142.0" class="tk" text-anchor="middle">3,3</text><circle cx="226.0" cy="48.0" r="16" class="node"/><text x="226.0" y="52.0" class="tk" text-anchor="middle">4,0</text><circle cx="199.0" cy="78.0" r="16" class="atom"/><text x="199.0" y="82.0" class="tk" text-anchor="middle">4,1</text><circle cx="172.0" cy="108.0" r="16" class="node"/><text x="172.0" y="112.0" class="tk" text-anchor="middle">4,2</text><circle cx="145.0" cy="138.0" r="16" class="node"/><text x="145.0" y="142.0" class="tk" text-anchor="middle">4,3</text><circle cx="118.0" cy="168.0" r="16" class="atom"/><text x="118.0" y="172.0" class="tk" text-anchor="middle">4,4</text><circle cx="280.0" cy="48.0" r="16" class="node"/><text x="280.0" y="52.0" class="tk" text-anchor="middle">5,0</text><circle cx="253.0" cy="78.0" r="16" class="node"/><text x="253.0" y="82.0" class="tk" text-anchor="middle">5,1</text><circle cx="226.0" cy="108.0" r="16" class="atom"/><text x="226.0" y="112.0" class="tk" text-anchor="middle">5,2</text><circle cx="199.0" cy="138.0" r="16" class="node"/><text x="199.0" y="142.0" class="tk" text-anchor="middle">5,3</text><circle cx="172.0" cy="168.0" r="16" class="node"/><text x="172.0" y="172.0" class="tk" text-anchor="middle">5,4</text><circle cx="145.0" cy="198.0" r="16" class="atom"/><text x="145.0" y="202.0" class="tk" text-anchor="middle">5,5</text><circle cx="334.0" cy="48.0" r="16" class="atom"/><text x="334.0" y="52.0" class="tk" text-anchor="middle">6,0</text><circle cx="307.0" cy="78.0" r="16" class="node"/><text x="307.0" y="82.0" class="tk" text-anchor="middle">6,1</text><circle cx="280.0" cy="108.0" r="16" class="node"/><text x="280.0" y="112.0" class="tk" text-anchor="middle">6,2</text><circle cx="253.0" cy="138.0" r="16" class="atom"/><text x="253.0" y="142.0" class="tk" text-anchor="middle">6,3</text><circle cx="226.0" cy="168.0" r="16" class="node"/><text x="226.0" y="172.0" class="tk" text-anchor="middle">6,4</text><circle cx="199.0" cy="198.0" r="16" class="node"/><text x="199.0" y="202.0" class="tk" text-anchor="middle">6,5</text><circle cx="172.0" cy="228.0" r="16" class="atom"/><text x="172.0" y="232.0" class="tk" text-anchor="middle">6,6</text><circle cx="388.0" cy="48.0" r="16" class="node"/><text x="388.0" y="52.0" class="tk" text-anchor="middle">7,0</text><circle cx="361.0" cy="78.0" r="16" class="atom"/><text x="361.0" y="82.0" class="tk" text-anchor="middle">7,1</text><circle cx="334.0" cy="108.0" r="16" class="node"/><text x="334.0" y="112.0" class="tk" text-anchor="middle">7,2</text><circle cx="307.0" cy="138.0" r="16" class="node"/><text x="307.0" y="142.0" class="tk" text-anchor="middle">7,3</text><circle cx="280.0" cy="168.0" r="16" class="atom"/><text x="280.0" y="172.0" class="tk" text-anchor="middle">7,4</text><circle cx="253.0" cy="198.0" r="16" class="node"/><text x="253.0" y="202.0" class="tk" text-anchor="middle">7,5</text><circle cx="226.0" cy="228.0" r="16" class="node"/><text x="226.0" y="232.0" class="tk" text-anchor="middle">7,6</text><circle cx="199.0" cy="258.0" r="16" class="atom"/><text x="199.0" y="262.0" class="tk" text-anchor="middle">7,7</text><circle cx="442.0" cy="48.0" r="16" class="node"/><text x="442.0" y="52.0" class="tk" text-anchor="middle">8,0</text><circle cx="415.0" cy="78.0" r="16" class="node"/><text x="415.0" y="82.0" class="tk" text-anchor="middle">8,1</text><circle cx="388.0" cy="108.0" r="16" class="atom"/><text x="388.0" y="112.0" class="tk" text-anchor="middle">8,2</text><circle cx="361.0" cy="138.0" r="16" class="node"/><text x="361.0" y="142.0" class="tk" text-anchor="middle">8,3</text><circle cx="334.0" cy="168.0" r="16" class="node"/><text x="334.0" y="172.0" class="tk" text-anchor="middle">8,4</text><circle cx="307.0" cy="198.0" r="16" class="atom"/><text x="307.0" y="202.0" class="tk" text-anchor="middle">8,5</text><circle cx="280.0" cy="228.0" r="16" class="node"/><text x="280.0" y="232.0" class="tk" text-anchor="middle">8,6</text><circle cx="253.0" cy="258.0" r="16" class="node"/><text x="253.0" y="262.0" class="tk" text-anchor="middle">8,7</text><circle cx="226.0" cy="288.0" r="16" class="atom"/><text x="226.0" y="292.0" class="tk" text-anchor="middle">8,8</text><circle cx="30" cy="318" r="10" class="atom"/><text x="48" y="323" class="tk">Metallic: (n − m) divisible by 3</text><circle cx="30" cy="344" r="10" class="node"/><text x="48" y="349" class="tk">Semiconducting</text><text x="20" y="20" class="ns">Top row: zigzag (n, 0); diagonal: armchair (n, n)</text></svg><figcaption>Figure 1. Chirality map (n, m): filled circles are metallic tubes, outlined circles semiconducting.</figcaption></figure>
+
+<h2>4. Growing CNTs and the separation problem</h2>
+<p>CNTs are grown by arc discharge, laser ablation or CVD: a hydrocarbon decomposes on metal catalyst particles (Fe, Co, Ni), carbon diffuses into the particle and precipitates as a tube. The big problem: growth always gives a <strong>mixture</strong> of metallic and semiconducting tubes of various diameters, clearly visible as distinct optical absorption peaks for each kind. A single metallic tube in a transistor shorts it.</p>
+<p>Separation: (1) a chemical reaction selective to metallic tubes (e.g. diazonium salts react more strongly with metallic tubes, which have more electrons near the Fermi level), creating a chemical "handle"; (2) separating the reacted tubes by centrifugation or electrophoresis. Density-gradient ultracentrifugation can also sort tubes by diameter and electronic type.</p>
+
+<h2>5. CNT transistors</h2>
+<ul>
+<li>The perfect hollow cylinder has no boundaries, so no boundary scattering.</li>
+<li>As quasi-1D materials, only forward and back scattering are allowed; mean free paths reach micrometers, so quasi-ballistic transport is seen at relatively long lengths.</li>
+<li>Strong sp² bonds make tubes chemically inert and able to carry very large currents; in theory they conduct heat nearly as well as diamond.</li>
+<li>Perfectly symmetric conduction and valence bands: electrons and holes have identical effective masses, convenient for complementary circuits.</li>
+<li>High mobility and saturation velocity: good for both long-channel (diffusive) and short-channel (velocity-saturated) devices. Aligned-CNT array transistors have operated above 100 GHz for RF applications.</li>
+</ul>
+
+<h2>6. The space elevator</h2>
+<p>The idea of a cable linking the ground to a counterweight beyond geostationary orbit has a long history: Tsiolkovsky imagined it in 1895, Artsutanov proposed it in 1960, Pearson introduced the tapered-cable concept in 1975, and the discovery of CNTs in 1991 revived it. Every component (geostationary orbit, center of mass, counterweight, climber) is considered feasible except the <strong>cable</strong>.</p>
+<p>For uniform stress along the cable, the cross-section must be largest at geostationary orbit and taper toward the ends. The <strong>taper ratio</strong> between largest and smallest cross-section grows exponentially with the density-to-strength ratio:</p>
+<div class="tablewrap"><table>
+<tr><th>Material</th><th>Density (kg/m³)</th><th>Tensile strength (GPa)</th><th>Taper ratio</th></tr>
+<tr><td>Steel</td><td>7900</td><td>5.0</td><td>1.6×10³³</td></tr>
+<tr><td>Kevlar</td><td>1440</td><td>3.6</td><td>2.5×10⁸</td></tr>
+<tr><td>CNT</td><td>1300</td><td>130</td><td>1.6</td></tr>
+</table></div>
+<p>Only CNTs give a reasonable taper ratio. But big hurdles remain: long continuous structures are very hard to make, properties cannot be controlled (metallic or semiconducting, armchair or zigzag), the bond-free surface makes composites difficult, and cost and fabrication time are enormous. The cable would also have to survive lightning, meteoroids, space debris, wind, atomic oxygen and radiation.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The "(n − m) divisible by 3" rule is an extreme example of geometry setting band structure. In Ga₂O₃, the anisotropy of the monoclinic lattice likewise makes permittivity, thermal conductivity and absorption depend on crystal direction, so choosing a (010), (001) or (−201) substrate is an important design decision.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>S. Iijima, "Helical microtubules of graphitic carbon," <em>Nature</em> 354, 56 (1991).</li>
+<li>R. Saito, G. Dresselhaus, M. S. Dresselhaus, <em>Physical Properties of Carbon Nanotubes</em>, Imperial College Press (1998).</li>
+<li>M. S. Strano et al., "Electronic structure control of single-walled carbon nanotube functionalization," <em>Science</em> 301, 1519 (2003).</li>
+<li>C. Rutherglen et al., "Wafer-scalable, aligned carbon nanotube transistors operating at frequencies of over 100 GHz," <em>Nature Electronics</em> 2, 530 (2019).</li>
+<li>B. C. Edwards, "Design and deployment of a space elevator," <em>Acta Astronautica</em> 47, 735 (2000).</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-graphene.html">← <span class="l-vi">Graphene</span><span class="l-en">Graphene</span></a><a class="n" href="nano-tmd-mxene.html"><span class="l-vi">TMD và MXene</span><span class="l-en">TMDs and MXenes</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

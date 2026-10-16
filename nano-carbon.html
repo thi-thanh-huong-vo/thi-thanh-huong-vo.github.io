@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thù hình carbon và lai hóa" data-title-en="Carbon allotropes and hybridization">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carbon allotropes and hybridization · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Allotropes, σ and π bonds, sp³, sp² and sp hybridization, diamond versus graphite, C₆₀ fullerene.">
+<meta property="og:title" content="Carbon allotropes and hybridization">
+<meta property="og:description" content="Allotropes, σ and π bonds, sp³, sp² and sp hybridization, diamond versus graphite, C₆₀ fullerene.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 1</span><span class="l-en">Part 3 · Lesson 1</span></p>
+  <h1><span class="l-vi">Thù hình carbon và lai hóa</span><span class="l-en">Carbon allotropes and hybridization</span></h1>
+  <p class="sub"><span class="l-vi">Thù hình, liên kết σ và π, lai hóa sp³, sp², sp, kim cương và graphite, fullerene C₆₀.</span><span class="l-en">Allotropes, σ and π bonds, sp³, sp² and sp hybridization, diamond versus graphite, C₆₀ fullerene.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Cùng một nguyên tố carbon có thể là kim cương cứng nhất, graphite mềm bôi trơn, graphene một lớp nguyên tử, hay quả bóng C₆₀. Chìa khóa nằm ở cách các orbital của carbon lai hóa trước khi liên kết.</p>
+
+<h2>1. Thù hình</h2>
+<p><strong>Thù hình</strong> là các dạng khác nhau của cùng một nguyên tố, khác với hợp chất (các nguyên tố khác nhau liên kết với nhau). Các nguyên tố nhóm 13–16 như C, P, B, Sn, As, O, S, Se có thể tạo thù hình. Carbon nguyên tử rất ngắn ngủi, nên carbon ổn định trong nhiều cấu trúc đa nguyên tử:</p>
+<ul>
+<li><strong>Thù hình tinh thể</strong> (trật tự cao): kim cương, graphite, graphene, fullerene, ống nano.</li>
+<li><strong>Thù hình vô định hình</strong> (không có mạng lặp lại rõ ràng): than đá, muội, than củi, không hoàn toàn vô định hình cũng không hoàn toàn là carbon.</li>
+</ul>
+<p>Graphite là dạng bền nhiệt động nhất ở điều kiện tiêu chuẩn. Theo số chiều: graphite (3D), graphene (2D), ống nano (1D), fullerene (0D).</p>
+
+<h2>2. Vì sao cần khái niệm lai hóa</h2>
+<p>Carbon có cấu hình 1s² 2s² 2p². Chỉ nhìn vào orbital nguyên tử, carbon chỉ có hai electron độc thân (2p), nên lẽ ra chỉ tạo hai liên kết; nhưng trong CH₄, carbon tạo bốn liên kết giống hệt nhau. Thuyết liên kết hóa trị đơn giản không giải thích được, nên người ta giả định các orbital hóa trị <strong>lai hóa</strong> trước khi liên kết.</p>
+
+<h2>3. Liên kết σ và π</h2>
+<ul>
+<li><strong>Liên kết σ</strong>: các orbital xen phủ đối đầu dọc trục liên kết; là loại liên kết cộng hóa trị mạnh nhất.</li>
+<li><strong>Liên kết π</strong>: các orbital p xen phủ bên sườn; yếu hơn và ngăn cản sự quay quanh trục liên kết.</li>
+</ul>
+<p>Độ dài, góc và năng lượng liên kết đều phụ thuộc cách xen phủ này.</p>
+
+<h2>4. Ba kiểu lai hóa của carbon</h2>
+<figure><svg viewBox="0 0 620 220" class="fig-svg" role="img"><line x1="100.0" y1="105.0" x2="100.0" y2="165.0" class="s1"/><line x1="100.0" y1="105.0" x2="48.0" y2="75.0" class="s1"/><line x1="100.0" y1="105.0" x2="152.0" y2="75.0" class="s1"/><line x1="100.0" y1="105.0" x2="100.0" y2="43.0" class="s2"/><circle cx="100.0" cy="165.0" r="8" class="node"/><circle cx="48.0" cy="75.0" r="8" class="node"/><circle cx="152.0" cy="75.0" r="8" class="node"/><circle cx="100.0" cy="43.0" r="8" class="node"/><circle cx="100.0" cy="105.0" r="11" class="atom"/><line x1="310.0" y1="105.0" x2="310.0" y2="167.0" class="s1"/><line x1="310.0" y1="105.0" x2="256.3" y2="74.0" class="s1"/><line x1="310.0" y1="105.0" x2="363.7" y2="74.0" class="s1"/><circle cx="310.0" cy="167.0" r="8" class="node"/><circle cx="256.3" cy="74.0" r="8" class="node"/><circle cx="363.7" cy="74.0" r="8" class="node"/><ellipse cx="310" cy="75" rx="9" ry="26" class="node" style="opacity:.6"/><circle cx="310.0" cy="105.0" r="11" class="atom"/><line x1="450.0" y1="105.0" x2="590.0" y2="105.0" class="s1"/><circle cx="450.0" cy="105.0" r="8" class="node"/><circle cx="590.0" cy="105.0" r="8" class="node"/><circle cx="520.0" cy="105.0" r="11" class="atom"/><text x="100" y="22" class="nt" text-anchor="middle">sp³</text><text x="100" y="195" class="ns" text-anchor="middle">tứ diện, 109,5° · kim cương</text><text x="100" y="212" class="ns" text-anchor="middle">4 liên kết σ</text><text x="310" y="22" class="nt" text-anchor="middle">sp²</text><text x="310" y="195" class="ns" text-anchor="middle">phẳng tam giác, 120° · graphene</text><text x="310" y="212" class="ns" text-anchor="middle">3 σ + 1 π</text><text x="520" y="22" class="nt" text-anchor="middle">sp</text><text x="520" y="195" class="ns" text-anchor="middle">thẳng, 180° · carbyne</text><text x="520" y="212" class="ns" text-anchor="middle">2 σ + 2 π</text></svg><figcaption>Hình 1. Ba kiểu lai hóa của carbon và hình học tương ứng (sơ đồ).</figcaption></figure>
+<ul>
+<li><strong>sp³</strong> (ví dụ CH₄, C₂H₆, kim cương): một orbital 2s và ba orbital 2p tạo bốn orbital sp³ giống nhau (25 % s, 75 % p), hướng về bốn đỉnh tứ diện, góc 109,5°. Bốn liên kết σ.</li>
+<li><strong>sp²</strong> (ví dụ C₂H₄, graphite, graphene): một 2s và hai 2p tạo ba orbital sp² (33 % s, 67 % p) trong một mặt phẳng, góc 120°. Ba liên kết σ trong mặt phẳng, orbital p còn lại tạo liên kết π vuông góc.</li>
+<li><strong>sp</strong> (ví dụ C₂H₂): một 2s và một 2p tạo hai orbital sp thẳng hàng, góc 180°. Một liên kết σ và hai liên kết π giữa hai carbon.</li>
+</ul>
+
+<h2>5. Kim cương và graphite: cùng nguyên tố, tính chất trái ngược</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>Kim cương (sp³)</th><th>Graphite (sp²)</th></tr>
+<tr><td>Hình học</td><td>Tứ diện, 4 liên kết σ</td><td>Phẳng tam giác, 3 σ + 1 π; các lớp liên kết van der Waals</td></tr>
+<tr><td>Cơ học</td><td>Một trong những vật liệu cứng nhất</td><td>Mềm, dùng làm chất bôi trơn</td></tr>
+<tr><td>Điện</td><td>Cách điện, vùng cấm ~5,5 eV</td><td>Bán kim loại, dẫn điện trong mặt phẳng</td></tr>
+<tr><td>Nhiệt</td><td>Dẫn nhiệt cực cao</td><td>Dẫn nhiệt tốt trong mặt phẳng</td></tr>
+<tr><td>Quang</td><td>Trong suốt với ánh sáng khả kiến</td><td>Phản xạ ánh sáng, màu đen xám</td></tr>
+</table></div>
+
+<h2>6. Cấu trúc nano carbon</h2>
+<p>Từ liên kết sp² (đôi khi pha sp³), carbon tạo một "vườn thú" cấu trúc: fullerene C₆₀, "hành tây" graphite, ống nano, nón và sừng nano, xuyến nano, ruy băng graphene, ống nano xoắn, chuỗi carbon ngắn, tinh thể Schwarzite 3D, bọt nano carbon và mạng ống nano 3D.</p>
+<ul>
+<li><strong>Buckminsterfullerene C₆₀</strong>: lồng hình quả bóng đá gồm 20 lục giác và 12 ngũ giác; mỗi carbon có ba liên kết. Lai hóa là sp²⁺ᵟ, với δ do độ cong. C₆₀ là chất rắn màu đen, tan trong dung môi hydrocarbon cho dung dịch màu tím. Curl, Kroto và Smalley nhận giải Nobel Hóa học 1996, dù đến nay C₆₀ có ít ứng dụng thực tế.</li>
+<li><strong>Hành tây carbon</strong>: nhiều vỏ giống fullerene đồng tâm, nhiều khuyết tật; diện tích ngoài lớn và dẫn điện tốt, hứa hẹn làm điện cực siêu tụ.</li>
+</ul>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Tính chất trái ngược của kim cương và graphite là ví dụ đẹp nhất cho thấy liên kết quyết định vùng cấm. Kim cương (~5,5 eV) cùng với Ga₂O₃ (~4,8 eV), AlN và c-BN là các ứng viên bán dẫn vùng cấm siêu rộng; mỗi loại có điểm mạnh riêng, với Ga₂O₃ nổi bật nhờ có đế đơn tinh thể mọc từ nóng chảy giá thành thấp.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>A. K. Geim, K. S. Novoselov, "The rise of graphene," <em>Nature Materials</em> 6, 183 (2007).</li>
+<li>H. W. Kroto et al., "C₆₀: Buckminsterfullerene," <em>Nature</em> 318, 162 (1985).</li>
+<li>L. Pauling, <em>The Nature of the Chemical Bond</em>, 3rd ed., Cornell University Press (1960).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The same element, carbon, can be the hardest diamond, soft lubricating graphite, one-atom-thick graphene or a C₆₀ ball. The key lies in how carbon's orbitals hybridize before bonding.</p>
+
+<h2>1. Allotropes</h2>
+<p>An <strong>allotrope</strong> is one of the different forms of the same element, unlike a compound (different elements bonded together). Group 13–16 elements such as C, P, B, Sn, As, O, S and Se can form allotropes. Atomic carbon is very short-lived, so carbon stabilizes in various multi-atom structures:</p>
+<ul>
+<li><strong>Crystalline allotropes</strong> (highly ordered): diamond, graphite, graphene, fullerenes, nanotubes.</li>
+<li><strong>Amorphous allotropes</strong> (no clear repeating lattice): coal, soot, charcoal, which are neither 100% amorphous nor 100% carbon.</li>
+</ul>
+<p>Graphite is the most thermodynamically stable form at standard conditions. By dimensionality: graphite (3D), graphene (2D), nanotubes (1D), fullerenes (0D).</p>
+
+<h2>2. Why hybridization is needed</h2>
+<p>Carbon's configuration is 1s² 2s² 2p². From the atomic orbitals alone, carbon has only two unpaired (2p) electrons and should form two bonds; yet in CH₄ it forms four identical bonds. Simple valence bond theory cannot explain this, so the valence orbitals are postulated to <strong>hybridize</strong> before bonding.</p>
+
+<h2>3. σ and π bonds</h2>
+<ul>
+<li><strong>σ bonds</strong>: head-on orbital overlap along the bond axis; the strongest type of covalent bond.</li>
+<li><strong>π bonds</strong>: sideways overlap of p orbitals; weaker, and they prevent rotation about the bond axis.</li>
+</ul>
+<p>Bond length, angle and energy all depend on how this overlap occurs.</p>
+
+<h2>4. Carbon's three hybridizations</h2>
+<figure><svg viewBox="0 0 620 220" class="fig-svg" role="img"><line x1="100.0" y1="105.0" x2="100.0" y2="165.0" class="s1"/><line x1="100.0" y1="105.0" x2="48.0" y2="75.0" class="s1"/><line x1="100.0" y1="105.0" x2="152.0" y2="75.0" class="s1"/><line x1="100.0" y1="105.0" x2="100.0" y2="43.0" class="s2"/><circle cx="100.0" cy="165.0" r="8" class="node"/><circle cx="48.0" cy="75.0" r="8" class="node"/><circle cx="152.0" cy="75.0" r="8" class="node"/><circle cx="100.0" cy="43.0" r="8" class="node"/><circle cx="100.0" cy="105.0" r="11" class="atom"/><line x1="310.0" y1="105.0" x2="310.0" y2="167.0" class="s1"/><line x1="310.0" y1="105.0" x2="256.3" y2="74.0" class="s1"/><line x1="310.0" y1="105.0" x2="363.7" y2="74.0" class="s1"/><circle cx="310.0" cy="167.0" r="8" class="node"/><circle cx="256.3" cy="74.0" r="8" class="node"/><circle cx="363.7" cy="74.0" r="8" class="node"/><ellipse cx="310" cy="75" rx="9" ry="26" class="node" style="opacity:.6"/><circle cx="310.0" cy="105.0" r="11" class="atom"/><line x1="450.0" y1="105.0" x2="590.0" y2="105.0" class="s1"/><circle cx="450.0" cy="105.0" r="8" class="node"/><circle cx="590.0" cy="105.0" r="8" class="node"/><circle cx="520.0" cy="105.0" r="11" class="atom"/><text x="100" y="22" class="nt" text-anchor="middle">sp³</text><text x="100" y="195" class="ns" text-anchor="middle">tetrahedral, 109.5° · diamond</text><text x="100" y="212" class="ns" text-anchor="middle">4 σ bonds</text><text x="310" y="22" class="nt" text-anchor="middle">sp²</text><text x="310" y="195" class="ns" text-anchor="middle">trigonal planar, 120° · graphene</text><text x="310" y="212" class="ns" text-anchor="middle">3 σ + 1 π</text><text x="520" y="22" class="nt" text-anchor="middle">sp</text><text x="520" y="195" class="ns" text-anchor="middle">linear, 180° · carbyne</text><text x="520" y="212" class="ns" text-anchor="middle">2 σ + 2 π</text></svg><figcaption>Figure 1. The three hybridizations of carbon and their geometries (schematic).</figcaption></figure>
+<ul>
+<li><strong>sp³</strong> (e.g. CH₄, C₂H₆, diamond): one 2s and three 2p orbitals form four identical sp³ orbitals (25% s, 75% p), pointing to the corners of a tetrahedron at 109.5°. Four σ bonds.</li>
+<li><strong>sp²</strong> (e.g. C₂H₄, graphite, graphene): one 2s and two 2p orbitals form three sp² orbitals (33% s, 67% p) in a plane at 120°. Three in-plane σ bonds; the remaining p orbital forms a perpendicular π bond.</li>
+<li><strong>sp</strong> (e.g. C₂H₂): one 2s and one 2p orbital form two collinear sp orbitals at 180°. One σ and two π bonds between the carbons.</li>
+</ul>
+
+<h2>5. Diamond and graphite: same element, opposite properties</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>Diamond (sp³)</th><th>Graphite (sp²)</th></tr>
+<tr><td>Geometry</td><td>Tetrahedral, 4 σ bonds</td><td>Trigonal planar, 3 σ + 1 π; layers held by van der Waals</td></tr>
+<tr><td>Mechanical</td><td>Among the hardest materials</td><td>Soft, used as a lubricant</td></tr>
+<tr><td>Electrical</td><td>Insulator, ~5.5 eV gap</td><td>Semimetal, conducts in-plane</td></tr>
+<tr><td>Thermal</td><td>Extremely high conductivity</td><td>Good in-plane conductivity</td></tr>
+<tr><td>Optical</td><td>Transparent to visible light</td><td>Reflective, black-gray</td></tr>
+</table></div>
+
+<h2>6. Carbon nanostructures</h2>
+<p>From sp² bonding (sometimes mixed with sp³), carbon forms a "zoo" of structures: C₆₀ fullerene, graphitic onions, nanotubes, nanocones and nanohorns, nanotoroids, graphene nanoribbons, helical nanotubes, short carbon chains, 3D Schwarzite crystals, carbon nanofoams and 3D nanotube networks.</p>
+<ul>
+<li><strong>Buckminsterfullerene C₆₀</strong>: a soccer-ball cage of 20 hexagons and 12 pentagons; each carbon has three bonds. Its hybridization is sp²⁺ᵟ, with δ from the curvature. C₆₀ is a black solid that dissolves in hydrocarbon solvents to give a violet solution. Curl, Kroto and Smalley won the 1996 Nobel Prize in Chemistry, though C₆₀ has found few real-world applications.</li>
+<li><strong>Carbon onions</strong>: multiple concentric fullerene-like shells, highly defective; large external surface and good conductivity make them promising supercapacitor electrodes.</li>
+</ul>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The opposite properties of diamond and graphite are the clearest example of bonding setting the bandgap. Diamond (~5.5 eV), together with Ga₂O₃ (~4.8 eV), AlN and c-BN, are the ultra-wide bandgap candidates; each has its strengths, with Ga₂O₃ standing out for its low-cost melt-grown single-crystal substrates.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>A. K. Geim, K. S. Novoselov, "The rise of graphene," <em>Nature Materials</em> 6, 183 (2007).</li>
+<li>H. W. Kroto et al., "C₆₀: Buckminsterfullerene," <em>Nature</em> 318, 162 (1985).</li>
+<li>L. Pauling, <em>The Nature of the Chemical Bond</em>, 3rd ed., Cornell University Press (1960).</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-nanowires.html">← <span class="l-vi">Dây nano bán dẫn</span><span class="l-en">Semiconductor nanowires</span></a><a class="n" href="nano-graphene.html"><span class="l-vi">Graphene</span><span class="l-en">Graphene</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

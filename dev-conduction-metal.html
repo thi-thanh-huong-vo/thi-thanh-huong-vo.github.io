@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Dẫn điện trong kim loại" data-title-en="Electrical conduction in metals">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electrical conduction in metals · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Ohm's law, resistivity, the Drude model, mobility and Matthiessen's rule.">
+<meta property="og:title" content="Electrical conduction in metals">
+<meta property="og:description" content="Ohm's law, resistivity, the Drude model, mobility and Matthiessen's rule.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 1</span><span class="l-en">Part 1 · Lesson 1</span></p>
+  <h1><span class="l-vi">Dẫn điện trong kim loại</span><span class="l-en">Electrical conduction in metals</span></h1>
+  <p class="sub"><span class="l-vi">Định luật Ohm, điện trở suất, mô hình Drude, độ linh động và quy tắc Matthiessen.</span><span class="l-en">Ohm's law, resistivity, the Drude model, mobility and Matthiessen's rule.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Điện trở suất là một trong những tính chất vật lý có dải giá trị rộng nhất trong tự nhiên: từ bạc đến Teflon chênh nhau hơn 30 bậc độ lớn. Hiểu vì sao kim loại dẫn điện tốt, và điều gì làm nó dẫn kém đi, là bước đầu tiên để hiểu bán dẫn.</p>
+
+<h2>1. Định luật Ohm và điện trở suất</h2>
+<p>Định luật Ohm \(V = IR\) liên hệ điện áp (V = J/C), dòng điện (A = C/s) và điện trở (Ω). Dòng điện qua điện trở sinh nhiệt Joule, công suất \(P = I^2R\). Nhưng điện trở \(R\) phụ thuộc hình dạng mẫu: giống nước chảy trong ống, dây càng dài càng cản trở, tiết diện càng lớn càng dễ chảy:</p>
+$$R = \rho\,\frac{L}{A}$$
+<p>Điện trở suất \(\rho\) (Ω·m) mới là tính chất của vật liệu, không phụ thuộc kích thước. Nghịch đảo của nó là độ dẫn điện \(\sigma = 1/\rho\) (S/m). Tương tự, nghịch đảo của điện trở là độ dẫn \(G = 1/R\) (siemens).</p>
+<p>Viết lại định luật Ohm dưới dạng "cục bộ", không phụ thuộc hình dạng: mật độ dòng \(J = I/A\) (giống một thông lượng điện tích) tỉ lệ với điện trường \(\mathcal{E} = V/L\):</p>
+$$J = \sigma\,\mathcal{E}$$
+
+<h2>2. Dải độ dẫn điện của vật liệu</h2>
+<div class="tablewrap"><table>
+<tr><th>Nhóm</th><th>Vật liệu</th><th>σ ở nhiệt độ phòng (S/m)</th></tr>
+<tr><td>Kim loại</td><td>Ag, Cu, Fe</td><td>6,8×10⁷; 6,0×10⁷; 1,0×10⁷</td></tr>
+<tr><td>Bán dẫn</td><td>Si, Ge, GaAs (tinh khiết)</td><td>4×10⁻⁴; 2; 10⁻⁶</td></tr>
+<tr><td>Gốm</td><td>Thủy tinh, Al₂O₃</td><td>10⁻¹¹; &lt;10⁻¹³</td></tr>
+<tr><td>Polymer</td><td>Polystyrene, polyethylene</td><td>&lt;10⁻¹⁴; 10⁻¹⁶</td></tr>
+</table></div>
+<p>Bán dẫn tinh khiết nằm giữa kim loại và chất cách điện, và điểm đặc biệt là độ dẫn của chúng có thể thay đổi nhiều bậc độ lớn nhờ pha tạp, nhiệt độ, ánh sáng hay điện trường.</p>
+<div class="box"><p class="t">Ví dụ: chọn đường kính dây đồng</p>
+<p>Dây Cu dài 100 m mang dòng 2,5 A, yêu cầu sụt áp dưới 1,5 V, với \(\sigma = 6{,}07\times10^7\) S/m. Điện trở tối đa \(R = V/I = 0{,}6\ \Omega\). Từ \(R = L/(\sigma A)\) và \(A = \pi D^2/4\):</p>
+$$D = \sqrt{\frac{4L}{\pi\sigma R}} = \sqrt{\frac{4\times100}{\pi\times6{,}07\times10^7\times0{,}6}} \approx 1{,}87\ \text{mm}$$</div>
+
+<h2>3. Độ linh động</h2>
+<p>Trong vật liệu, hạt tải không bay tự do mà liên tục va chạm. Dưới điện trường, chúng có vận tốc trôi trung bình \(v_d = \mu\,\mathcal{E}\), với \(\mu\) là <strong>độ linh động</strong>. Theo mô hình Drude:</p>
+$$\mu = \frac{q\,\bar{t}}{m^*}$$
+<p>với \(\bar{t}\) là thời gian trung bình giữa hai lần tán xạ và \(m^*\) là khối lượng hiệu dụng (bài sau). Độ dẫn điện là tổng đóng góp của electron và lỗ trống:</p>
+$$\sigma = n\,q\,\mu_e + p\,q\,\mu_h$$
+<p>Độ linh động thường được ghi theo đơn vị cm²/(V·s), khác với đơn vị SI m²/(V·s); 1 m²/(V·s) = 10⁴ cm²/(V·s).</p>
+
+<h2>4. Nhiệt độ và sai hỏng làm tăng điện trở suất</h2>
+<p>Trong kim loại, số electron tự do gần như không đổi, nên điện trở suất do tán xạ quyết định. Mọi thứ phá vỡ tính tuần hoàn của mạng đều làm electron tán xạ và đi đường vòng: dao động nhiệt của mạng (phonon), nguyên tử tạp chất, vacancy, lệch mạng và biên hạt. Theo quy tắc Matthiessen, các đóng góp cộng lại:</p>
+$$\rho_{\text{tổng}} = \rho_{\text{nhiệt}} + \rho_{\text{tạp chất}} + \rho_{\text{biến dạng}}$$
+<p>\(\rho_{\text{nhiệt}}\) tăng gần tuyến tính theo nhiệt độ; \(\rho_{\text{tạp chất}}\) tăng theo nồng độ tạp chất; \(\rho_{\text{biến dạng}}\) tăng theo mức biến dạng nguội.</p>
+<div class="box"><p class="t">Ví dụ: đánh đổi giữa độ bền và độ dẫn</p>
+<p>Thêm Ni vào Cu làm hợp kim bền hơn nhưng dẫn điện kém hơn. Muốn hợp kim Cu–Ni có giới hạn chảy 125 MPa cần khoảng 21% khối lượng Ni; ở thành phần này \(\rho \approx 30\times10^{-8}\ \Omega\)·m, nên \(\sigma = 1/\rho \approx 3{,}3\times10^6\) S/m, chỉ bằng khoảng 1/18 so với Cu tinh khiết.</p></div>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Cùng công thức \(\sigma = nq\mu\) là nền tảng để đọc kết quả đo Hall trên Ga₂O₃: phép đo cho \(n\) và \(\mu\) riêng rẽ. Độ linh động electron của β-Ga₂O₃ ở nhiệt độ phòng chỉ khoảng 150–200 cm²/(V·s), bị giới hạn chủ yếu bởi tán xạ phonon quang cực (polar optical phonon); vì vậy với Ga₂O₃, ưu thế nằm ở điện trường đánh thủng chứ không ở độ linh động.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. D. Callister, D. G. Rethwisch, <em>Materials Science and Engineering: An Introduction</em>, 8th ed., Wiley, chương 18.</li>
+<li>N. Ma, N. Tanen et al., "Intrinsic electron mobility limits in β-Ga₂O₃," <em>Applied Physics Letters</em> 109, 212101 (2016).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Electrical resistivity spans one of the widest ranges of any physical property: silver and Teflon differ by more than 30 orders of magnitude. Understanding why metals conduct well, and what makes them conduct worse, is the first step toward understanding semiconductors.</p>
+
+<h2>1. Ohm's law and resistivity</h2>
+<p>Ohm's law \(V = IR\) relates voltage (V = J/C), current (A = C/s) and resistance (Ω). Current through a resistor produces Joule heating, with power \(P = I^2R\). But resistance \(R\) depends on sample geometry: like water in a pipe, a longer wire resists more and a wider one lets more through:</p>
+$$R = \rho\,\frac{L}{A}$$
+<p>Resistivity \(\rho\) (Ω·m) is the material property, independent of size. Its inverse is the conductivity \(\sigma = 1/\rho\) (S/m). Likewise, the inverse of resistance is conductance \(G = 1/R\) (siemens).</p>
+<p>Ohm's law can be written in a "local", geometry-free form: current density \(J = I/A\) (a flux of charge) is proportional to the electric field \(\mathcal{E} = V/L\):</p>
+$$J = \sigma\,\mathcal{E}$$
+
+<h2>2. The range of conductivities</h2>
+<div class="tablewrap"><table>
+<tr><th>Class</th><th>Material</th><th>σ at room temperature (S/m)</th></tr>
+<tr><td>Metals</td><td>Ag, Cu, Fe</td><td>6.8×10⁷; 6.0×10⁷; 1.0×10⁷</td></tr>
+<tr><td>Semiconductors</td><td>Si, Ge, GaAs (pure)</td><td>4×10⁻⁴; 2; 10⁻⁶</td></tr>
+<tr><td>Ceramics</td><td>Glass, Al₂O₃</td><td>10⁻¹¹; &lt;10⁻¹³</td></tr>
+<tr><td>Polymers</td><td>Polystyrene, polyethylene</td><td>&lt;10⁻¹⁴; 10⁻¹⁶</td></tr>
+</table></div>
+<p>Pure semiconductors sit between metals and insulators, and what makes them special is that their conductivity can be changed by many orders of magnitude through doping, temperature, light or electric field.</p>
+<div class="box"><p class="t">Example: choosing a copper wire diameter</p>
+<p>A 100 m Cu wire carries 2.5 A and must drop less than 1.5 V, with \(\sigma = 6.07\times10^7\) S/m. The maximum resistance is \(R = V/I = 0.6\ \Omega\). From \(R = L/(\sigma A)\) and \(A = \pi D^2/4\):</p>
+$$D = \sqrt{\frac{4L}{\pi\sigma R}} = \sqrt{\frac{4\times100}{\pi\times6.07\times10^7\times0.6}} \approx 1.87\ \text{mm}$$</div>
+
+<h2>3. Mobility</h2>
+<p>Carriers in a material do not fly freely but collide constantly. Under a field they acquire an average drift velocity \(v_d = \mu\,\mathcal{E}\), where \(\mu\) is the <strong>mobility</strong>. In the Drude model:</p>
+$$\mu = \frac{q\,\bar{t}}{m^*}$$
+<p>where \(\bar{t}\) is the mean time between scattering events and \(m^*\) the effective mass (next lesson). Conductivity sums the electron and hole contributions:</p>
+$$\sigma = n\,q\,\mu_e + p\,q\,\mu_h$$
+<p>Mobility is usually quoted in cm²/(V·s) rather than the SI m²/(V·s); 1 m²/(V·s) = 10⁴ cm²/(V·s).</p>
+
+<h2>4. Temperature and defects raise resistivity</h2>
+<p>In a metal the number of free electrons is nearly fixed, so resistivity is governed by scattering. Anything that breaks lattice periodicity scatters electrons onto a less direct path: thermal lattice vibrations (phonons), impurity atoms, vacancies, dislocations and grain boundaries. By Matthiessen's rule the contributions add:</p>
+$$\rho_{\text{total}} = \rho_{\text{thermal}} + \rho_{\text{impurity}} + \rho_{\text{deformation}}$$
+<p>\(\rho_{\text{thermal}}\) rises almost linearly with temperature; \(\rho_{\text{impurity}}\) rises with impurity content; \(\rho_{\text{deformation}}\) rises with cold work.</p>
+<div class="box"><p class="t">Example: the strength–conductivity trade-off</p>
+<p>Adding Ni to Cu makes the alloy stronger but less conductive. A Cu–Ni alloy with a 125 MPa yield strength needs about 21 wt% Ni; at that composition \(\rho \approx 30\times10^{-8}\ \Omega\)·m, so \(\sigma = 1/\rho \approx 3.3\times10^6\) S/m, only about 1/18 of pure Cu.</p></div>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>The same relation \(\sigma = nq\mu\) underlies Hall measurements on Ga₂O₃, which give \(n\) and \(\mu\) separately. The room-temperature electron mobility of β-Ga₂O₃ is only about 150–200 cm²/(V·s), limited mainly by polar optical phonon scattering; Ga₂O₃'s advantage therefore lies in its breakdown field, not its mobility.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>W. D. Callister, D. G. Rethwisch, <em>Materials Science and Engineering: An Introduction</em>, 8th ed., Wiley, chapter 18.</li>
+<li>N. Ma, N. Tanen et al., "Intrinsic electron mobility limits in β-Ga₂O₃," <em>Applied Physics Letters</em> 109, 212101 (2016).</li>
+</ol>
+</div>
+<nav class="pager"><a href="devices.html">← <span class="l-vi">Mục lục</span><span class="l-en">Contents</span></a><a class="n" href="dev-energy-bands.html"><span class="l-vi">Sự hình thành vùng năng lượng và khối lượng hiệu dụng</span><span class="l-en">Energy band formation and effective mass</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

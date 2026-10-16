@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Điện trở tiếp xúc và phương pháp TLM" data-title-en="Contact resistance and the TLM method">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact resistance and the TLM method · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Separating contact resistance, transfer length, specific contact resistivity, CTLM and the R² coefficient.">
+<meta property="og:title" content="Contact resistance and the TLM method">
+<meta property="og:description" content="Separating contact resistance, transfer length, specific contact resistivity, CTLM and the R² coefficient.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 2</span><span class="l-en">Part 2 · Lesson 2</span></p>
+  <h1><span class="l-vi">Điện trở tiếp xúc và phương pháp TLM</span><span class="l-en">Contact resistance and the TLM method</span></h1>
+  <p class="sub"><span class="l-vi">Tách điện trở tiếp xúc, độ dài truyền, điện trở suất tiếp xúc, CTLM và hệ số R².</span><span class="l-en">Separating contact resistance, transfer length, specific contact resistivity, CTLM and the R² coefficient.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Một transistor tốt có thể bị "bóp nghẹt" bởi tiếp xúc kém: dòng điện phải đi qua mặt phân cách kim loại/bán dẫn ở cả hai đầu. Phương pháp đường truyền (TLM) cho phép tách điện trở tiếp xúc khỏi điện trở của lớp bán dẫn bằng một phép đo đơn giản và một đường thẳng.</p>
+
+<h2>1. Các thành phần điện trở</h2>
+<p>Điện trở đo được giữa hai điện cực trên một lớp bán dẫn gồm:</p>
+$$R_T = 2R_m + 2R_c + R_{semi}$$
+<p>với \(R_m\) là điện trở của kim loại, \(R_c\) điện trở của mặt phân cách kim loại/bán dẫn, và \(R_{semi}\) điện trở của lớp bán dẫn giữa hai điện cực. Thường \(R_c \gg R_m\), nên bỏ qua \(R_m\). Lớp bán dẫn có điện trở tấm \(R_{sh}\), điện cực rộng \(W\), cách nhau \(L\):</p>
+$$R_T = 2R_c + \frac{R_{sh}}{W}\,L$$
+
+<h2>2. Phương pháp TLM</h2>
+<p>Chế tạo một dãy điện cực giống nhau với khoảng cách \(L\) tăng dần, đo \(R_T\) giữa từng cặp rồi vẽ \(R_T\) theo \(L\). Theo phương trình trên, dữ liệu nằm trên một đường thẳng (Berger, 1972):</p>
+<ul>
+<li><strong>Độ dốc</strong> = \(R_{sh}/W\), cho điện trở tấm của lớp bán dẫn.</li>
+<li><strong>Giao điểm với trục tung</strong> (\(L = 0\)) = \(2R_c\).</li>
+<li><strong>Giao điểm với trục hoành</strong> = \(-2L_T\), với \(L_T\) là độ dài truyền (xem dưới).</li>
+</ul>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255.0" x2="540" y2="255.0" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="20" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="260.0" class="ax"/><text x="156.0" y="275.0" class="tk" text-anchor="middle">0</text><line x1="232.79999999999998" y1="255.0" x2="232.79999999999998" y2="260.0" class="ax"/><text x="232.79999999999998" y="275.0" class="tk" text-anchor="middle">20</text><line x1="309.6" y1="255.0" x2="309.6" y2="260.0" class="ax"/><text x="309.6" y="275.0" class="tk" text-anchor="middle">40</text><line x1="386.40000000000003" y1="255.0" x2="386.40000000000003" y2="260.0" class="ax"/><text x="386.40000000000003" y="275.0" class="tk" text-anchor="middle">60</text><line x1="463.2" y1="255.0" x2="463.2" y2="260.0" class="ax"/><text x="463.2" y="275.0" class="tk" text-anchor="middle">80</text><line x1="540.0" y1="255.0" x2="540.0" y2="260.0" class="ax"/><text x="540.0" y="275.0" class="tk" text-anchor="middle">100</text><line x1="151.0" y1="255.0" x2="156.0" y2="255.0" class="ax"/><text x="147.0" y="259.0" class="tk" text-anchor="end">0</text><line x1="151.0" y1="176.66666666666669" x2="156.0" y2="176.66666666666669" class="ax"/><text x="147.0" y="180.66666666666669" class="tk" text-anchor="end">20</text><line x1="151.0" y1="98.33333333333334" x2="156.0" y2="98.33333333333334" class="ax"/><text x="147.0" y="102.33333333333334" class="tk" text-anchor="end">40</text><line x1="151.0" y1="20.0" x2="156.0" y2="20.0" class="ax"/><text x="147.0" y="24.0" class="tk" text-anchor="end">60</text><path d="M87.73333333333332,255.0 L540.0,47.416666666666686" class="s2" fill="none"/><circle cx="194.4" cy="208.5" r="4.5" fill="var(--s1)"/><circle cx="232.8" cy="188.0" r="4.5" fill="var(--s1)"/><circle cx="309.6" cy="154.4" r="4.5" fill="var(--s1)"/><circle cx="386.4" cy="116.9" r="4.5" fill="var(--s1)"/><circle cx="463.2" cy="81.5" r="4.5" fill="var(--s1)"/><circle cx="540.0" cy="51.5" r="4.5" fill="var(--s1)"/><circle cx="156.0" cy="223.66666666666666" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="166.0" y="215.66666666666666" class="ns">2R<tspan baseline-shift="sub" font-size="8">c</tspan></text><circle cx="87.73333333333332" cy="255.0" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="87.73333333333332" y="243.0" class="ns" text-anchor="middle">−2L<tspan baseline-shift="sub" font-size="8">T</tspan></text><text x="309.6" y="82.66666666666669" class="ns">độ dốc = R<tspan baseline-shift="sub" font-size="8">sh</tspan> / W</text><text x="300.0" y="294" class="lab" text-anchor="middle">Khoảng cách giữa hai điện cực L (µm)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Điện trở tổng R<tspan baseline-shift="sub" font-size="8">T</tspan> (Ω)</text></svg><figcaption>Hình 1. Đồ thị TLM điển hình: điện trở tổng theo khoảng cách điện cực (dữ liệu minh họa).</figcaption></figure>
+
+<h2>3. Điện trở suất tiếp xúc và độ dài truyền</h2>
+<p>\(R_c\) phụ thuộc kích thước điện cực nên không dùng để so sánh các quy trình. Đại lượng nội tại là <strong>điện trở suất tiếp xúc</strong> \(\rho_c\) (Ω·cm²), tức điện trở của một đơn vị diện tích mặt phân cách. Giá trị điển hình trải từ 10⁻³ đến 10⁻⁸ Ω·cm².</p>
+<p>Nhưng dòng điện không đi vào điện cực đều trên toàn bộ diện tích. Dòng chảy đều trong bán dẫn, rồi tập trung đi lên ở mép điện cực gần phía bên kia (hiện tượng <strong>dồn dòng</strong>, current crowding), giảm dần theo hàm mũ khi đi sâu dưới điện cực, đến mép xa thì gần như bằng 0. Độ dài đặc trưng của sự suy giảm này là <strong>độ dài truyền</strong>:</p>
+$$L_T = \sqrt{\frac{\rho_c}{R_{sh}}}$$
+<p>\(L_T\) là quãng đường trung bình hạt tải đi dưới điện cực trước khi đi lên kim loại, tức chiều dài hiệu dụng của tiếp xúc. Diện tích hiệu dụng là \(L_T W\), nên khi điện cực dài hơn vài \(L_T\):</p>
+$$R_c \approx \frac{\rho_c}{L_T W} \quad\Longrightarrow\quad \rho_c = R_c\,L_T\,W$$
+<div class="box"><p class="t">Ví dụ từ đồ thị</p>
+<p>Với \(W = 100\ \mu\)m, độ dốc 0,45 Ω/µm và giao điểm trục tung \(2R_c = 8\ \Omega\): \(R_{sh} = 0{,}45\times100 = 45\ \Omega\)/□; \(L_T = R_c/(R_{sh}/W) = 4/0{,}45 \approx 8{,}9\ \mu\)m; \(\rho_c = R_c L_T W = 4\times(8{,}9\times10^{-4})\times0{,}01 \approx 3{,}6\times10^{-5}\ \Omega\)·cm².</p></div>
+
+<h2>4. Các biến thể cấu trúc</h2>
+<ul>
+<li><strong>TLM mesa</strong>: lớp bán dẫn quanh vùng đo được khắc thành một "bàn" (mesa) cô lập, để dòng chỉ chảy trong dải có độ rộng \(W\) xác định.</li>
+<li><strong>TLM tròn (CTLM)</strong>: điện cực trong hình tròn và điện cực ngoài bao quanh, cách nhau một khe hình vành khuyên. Dòng tự giới hạn trong vành khuyên nên không cần khắc mesa, rất tiện cho vật liệu mới.</li>
+</ul>
+
+<h2>5. Đánh giá độ khớp của đường thẳng: hệ số R²</h2>
+<p>Đường TLM được xác định bằng hồi quy tuyến tính bình phương tối thiểu. Để đánh giá dữ liệu khớp tốt đến đâu, ta so sánh tổng bình phương sai số so với đường hồi quy, \(SE_{line} = \sum (y_i - \hat{y}_i)^2\), với tổng bình phương sai số so với giá trị trung bình, \(SE_{mean} = \sum (y_i - \bar{y})^2\):</p>
+$$R^2 = 1 - \frac{SE_{line}}{SE_{mean}}$$
+<p>\(R^2 \approx 1\): đường thẳng giải thích gần hết biến thiên của dữ liệu. \(R^2 \approx 0\): đường thẳng không tốt hơn việc lấy giá trị trung bình. Với TLM, \(R^2\) thấp thường báo hiệu điện cực không đồng đều, tiếp xúc không ohmic hoặc dòng rò qua đế, nên cần kiểm tra trước khi tin vào giá trị \(\rho_c\).</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>TLM là phép đo tiêu chuẩn để đánh giá tiếp xúc ohmic Ti/Au trên Ga₂O₃. Các tiếp xúc tốt trên lớp n⁺ (cấy Si hoặc pha tạp mạnh) đạt \(\rho_c\) cỡ 10⁻⁵–10⁻⁶ Ω·cm² sau ủ nhiệt, nhờ lớp phản ứng TiOₓ và vùng nghèo oxy ở mặt phân cách giúp electron xuyên hầm dễ dàng.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>H. H. Berger, "Models for contacts to planar devices," <em>Solid-State Electronics</em> 15, 145 (1972).</li>
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chương 3.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A good transistor can be "choked" by poor contacts: current must cross a metal/semiconductor interface at both ends. The transmission line method (TLM) separates contact resistance from the semiconductor layer's resistance with a simple measurement and a straight line.</p>
+
+<h2>1. The resistance components</h2>
+<p>The resistance measured between two electrodes on a semiconductor layer consists of:</p>
+$$R_T = 2R_m + 2R_c + R_{semi}$$
+<p>where \(R_m\) is the metal resistance, \(R_c\) the metal/semiconductor interface resistance, and \(R_{semi}\) the semiconductor resistance between the electrodes. Usually \(R_c \gg R_m\), so \(R_m\) is neglected. With layer sheet resistance \(R_{sh}\), electrode width \(W\) and spacing \(L\):</p>
+$$R_T = 2R_c + \frac{R_{sh}}{W}\,L$$
+
+<h2>2. The TLM method</h2>
+<p>Fabricate a row of identical electrodes with increasing spacing \(L\), measure \(R_T\) for each pair and plot \(R_T\) against \(L\). By the equation above, the data fall on a straight line (Berger, 1972):</p>
+<ul>
+<li><strong>Slope</strong> = \(R_{sh}/W\), giving the layer's sheet resistance.</li>
+<li><strong>y-intercept</strong> (\(L = 0\)) = \(2R_c\).</li>
+<li><strong>x-intercept</strong> = \(-2L_T\), where \(L_T\) is the transfer length (below).</li>
+</ul>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255.0" x2="540" y2="255.0" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="20" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="260.0" class="ax"/><text x="156.0" y="275.0" class="tk" text-anchor="middle">0</text><line x1="232.79999999999998" y1="255.0" x2="232.79999999999998" y2="260.0" class="ax"/><text x="232.79999999999998" y="275.0" class="tk" text-anchor="middle">20</text><line x1="309.6" y1="255.0" x2="309.6" y2="260.0" class="ax"/><text x="309.6" y="275.0" class="tk" text-anchor="middle">40</text><line x1="386.40000000000003" y1="255.0" x2="386.40000000000003" y2="260.0" class="ax"/><text x="386.40000000000003" y="275.0" class="tk" text-anchor="middle">60</text><line x1="463.2" y1="255.0" x2="463.2" y2="260.0" class="ax"/><text x="463.2" y="275.0" class="tk" text-anchor="middle">80</text><line x1="540.0" y1="255.0" x2="540.0" y2="260.0" class="ax"/><text x="540.0" y="275.0" class="tk" text-anchor="middle">100</text><line x1="151.0" y1="255.0" x2="156.0" y2="255.0" class="ax"/><text x="147.0" y="259.0" class="tk" text-anchor="end">0</text><line x1="151.0" y1="176.66666666666669" x2="156.0" y2="176.66666666666669" class="ax"/><text x="147.0" y="180.66666666666669" class="tk" text-anchor="end">20</text><line x1="151.0" y1="98.33333333333334" x2="156.0" y2="98.33333333333334" class="ax"/><text x="147.0" y="102.33333333333334" class="tk" text-anchor="end">40</text><line x1="151.0" y1="20.0" x2="156.0" y2="20.0" class="ax"/><text x="147.0" y="24.0" class="tk" text-anchor="end">60</text><path d="M87.73333333333332,255.0 L540.0,47.416666666666686" class="s2" fill="none"/><circle cx="194.4" cy="208.5" r="4.5" fill="var(--s1)"/><circle cx="232.8" cy="188.0" r="4.5" fill="var(--s1)"/><circle cx="309.6" cy="154.4" r="4.5" fill="var(--s1)"/><circle cx="386.4" cy="116.9" r="4.5" fill="var(--s1)"/><circle cx="463.2" cy="81.5" r="4.5" fill="var(--s1)"/><circle cx="540.0" cy="51.5" r="4.5" fill="var(--s1)"/><circle cx="156.0" cy="223.66666666666666" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="166.0" y="215.66666666666666" class="ns">2R<tspan baseline-shift="sub" font-size="8">c</tspan></text><circle cx="87.73333333333332" cy="255.0" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="87.73333333333332" y="243.0" class="ns" text-anchor="middle">−2L<tspan baseline-shift="sub" font-size="8">T</tspan></text><text x="309.6" y="82.66666666666669" class="ns">slope = R<tspan baseline-shift="sub" font-size="8">sh</tspan> / W</text><text x="300.0" y="294" class="lab" text-anchor="middle">Contact spacing L (µm)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Total resistance R<tspan baseline-shift="sub" font-size="8">T</tspan> (Ω)</text></svg><figcaption>Figure 1. A typical TLM plot: total resistance versus electrode spacing (illustrative data).</figcaption></figure>
+
+<h2>3. Contact resistivity and transfer length</h2>
+<p>\(R_c\) depends on electrode size, so it is not suitable for comparing processes. The intrinsic quantity is the <strong>specific contact resistivity</strong> \(\rho_c\) (Ω·cm²), the resistance of a unit area of interface. Typical values range from 10⁻³ to 10⁻⁸ Ω·cm².</p>
+<p>But current does not enter the electrode uniformly over its area. It flows uniformly in the semiconductor, then crowds up into the electrode at the edge facing the other contact (<strong>current crowding</strong>), decaying exponentially under the electrode until it is nearly zero at the far edge. The characteristic length of this decay is the <strong>transfer length</strong>:</p>
+$$L_T = \sqrt{\frac{\rho_c}{R_{sh}}}$$
+<p>\(L_T\) is the average distance a carrier travels under the electrode before flowing up into the metal, the effective length of the contact. The effective area is \(L_T W\), so for electrodes longer than a few \(L_T\):</p>
+$$R_c \approx \frac{\rho_c}{L_T W} \quad\Longrightarrow\quad \rho_c = R_c\,L_T\,W$$
+<div class="box"><p class="t">Example from the plot</p>
+<p>With \(W = 100\ \mu\)m, a slope of 0.45 Ω/µm and a y-intercept \(2R_c = 8\ \Omega\): \(R_{sh} = 0.45\times100 = 45\ \Omega\)/□; \(L_T = R_c/(R_{sh}/W) = 4/0.45 \approx 8.9\ \mu\)m; \(\rho_c = R_c L_T W = 4\times(8.9\times10^{-4})\times0.01 \approx 3.6\times10^{-5}\ \Omega\)·cm².</p></div>
+
+<h2>4. Structural variants</h2>
+<ul>
+<li><strong>Mesa TLM</strong>: the semiconductor around the test area is etched into an isolated "mesa" so current flows only in a strip of well-defined width \(W\).</li>
+<li><strong>Circular TLM (CTLM)</strong>: a circular inner electrode surrounded by an outer electrode, separated by an annular gap. Current is confined to the ring without mesa etching, very convenient for new materials.</li>
+</ul>
+
+<h2>5. Judging the fit: the R² coefficient</h2>
+<p>The TLM line is found by least-squares linear regression. To judge how well the data fit, compare the sum of squared errors about the regression line, \(SE_{line} = \sum (y_i - \hat{y}_i)^2\), with that about the mean, \(SE_{mean} = \sum (y_i - \bar{y})^2\):</p>
+$$R^2 = 1 - \frac{SE_{line}}{SE_{mean}}$$
+<p>\(R^2 \approx 1\): the line explains nearly all variation in the data. \(R^2 \approx 0\): the line does no better than the mean. For TLM, a low \(R^2\) usually signals nonuniform electrodes, non-ohmic contacts or substrate leakage, so it should be checked before trusting \(\rho_c\).</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>TLM is the standard measurement for Ti/Au ohmic contacts on Ga₂O₃. Good contacts on n⁺ layers (Si-implanted or heavily doped) reach \(\rho_c\) of about 10⁻⁵–10⁻⁶ Ω·cm² after annealing, thanks to an interfacial TiOₓ reaction layer and an oxygen-deficient region that make electron tunneling easy.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>H. H. Berger, "Models for contacts to planar devices," <em>Solid-State Electronics</em> 15, 145 (1972).</li>
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chapter 3.</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-sheet-resistance.html">← <span class="l-vi">Phép đo bốn đầu dò và điện trở tấm</span><span class="l-en">Four-point probe and sheet resistance</span></a><a class="n" href="dev-impedance.html"><span class="l-vi">Trở kháng và phép đo điện dung</span><span class="l-en">Impedance and capacitance measurement</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

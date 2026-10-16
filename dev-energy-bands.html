@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Sự hình thành vùng năng lượng và khối lượng hiệu dụng" data-title-en="Energy band formation and effective mass">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Energy band formation and effective mass · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="From atomic levels to energy bands, the condition for conduction and effective mass.">
+<meta property="og:title" content="Energy band formation and effective mass">
+<meta property="og:description" content="From atomic levels to energy bands, the condition for conduction and effective mass.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 2</span><span class="l-en">Part 1 · Lesson 2</span></p>
+  <h1><span class="l-vi">Sự hình thành vùng năng lượng và khối lượng hiệu dụng</span><span class="l-en">Energy band formation and effective mass</span></h1>
+  <p class="sub"><span class="l-vi">Từ mức năng lượng nguyên tử đến vùng năng lượng, điều kiện dẫn điện và khối lượng hiệu dụng.</span><span class="l-en">From atomic levels to energy bands, the condition for conduction and effective mass.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Vì sao kim loại dẫn điện còn kim cương thì không, dù cả hai đều chứa vô số electron? Câu trả lời nằm ở cách các mức năng lượng của từng nguyên tử hợp lại thành vùng năng lượng khi chúng liên kết thành chất rắn.</p>
+
+<h2>1. Từ nguyên tử: các mức năng lượng rời rạc</h2>
+<p>Trong mô hình Bohr của nguyên tử hydro, electron chỉ tồn tại trên những quỹ đạo có bán kính và năng lượng xác định:</p>
+$$E_n = -\frac{13{,}6\ \text{eV}}{n^2}, \qquad r_n = 0{,}053\,n^2\ \text{nm}$$
+<p>Ở trạng thái cơ bản (\(n = 1\)), năng lượng là −13,6 eV. Khi \(n\) tăng, bán kính tăng theo \(n^2\) còn năng lượng tiến dần về 0 eV, tức mức chân không, nơi electron không còn bị hạt nhân giữ lại.</p>
+
+<h2>2. Từ nhiều nguyên tử: vùng năng lượng</h2>
+<p>Khi hai nguyên tử tiến lại gần nhau, hàm sóng của chúng chồng lấn và mỗi mức năng lượng tách thành hai. Với \(N\) nguyên tử, mỗi mức tách thành \(N\) mức. Một cm³ Si chứa khoảng 5×10²² nguyên tử, nên mỗi mức nguyên tử tách thành ngần ấy mức, sát nhau đến mức gần như liên tục, tạo thành một <strong>vùng cho phép</strong> rộng cỡ vài eV. Giữa các vùng cho phép có thể là <strong>vùng cấm</strong>, nơi không có trạng thái nào cho electron.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="52" y1="90.0" x2="108" y2="90.0" class="s1" style="stroke-width:2"/><line x1="142" y1="67.0" x2="198" y2="67.0" class="s1" style="stroke-width:2"/><line x1="142" y1="113.0" x2="198" y2="113.0" class="s1" style="stroke-width:2"/><line x1="232" y1="67.0" x2="288" y2="67.0" class="s1" style="stroke-width:2"/><line x1="232" y1="82.3" x2="288" y2="82.3" class="s1" style="stroke-width:2"/><line x1="232" y1="97.7" x2="288" y2="97.7" class="s1" style="stroke-width:2"/><line x1="232" y1="113.0" x2="288" y2="113.0" class="s1" style="stroke-width:2"/><rect x="335" y="67.0" width="90" height="46" fill="var(--s1)" opacity=".25"/><line x1="335" y1="67.0" x2="425" y2="67.0" class="s1" style="stroke-width:.8"/><line x1="335" y1="69.7" x2="425" y2="69.7" class="s1" style="stroke-width:.8"/><line x1="335" y1="72.4" x2="425" y2="72.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="75.1" x2="425" y2="75.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="77.8" x2="425" y2="77.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="80.5" x2="425" y2="80.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="83.2" x2="425" y2="83.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="85.9" x2="425" y2="85.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="88.6" x2="425" y2="88.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="91.4" x2="425" y2="91.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="94.1" x2="425" y2="94.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="96.8" x2="425" y2="96.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="99.5" x2="425" y2="99.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="102.2" x2="425" y2="102.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="104.9" x2="425" y2="104.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="107.6" x2="425" y2="107.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="110.3" x2="425" y2="110.3" class="s1" style="stroke-width:.8"/><line x1="335" y1="113.0" x2="425" y2="113.0" class="s1" style="stroke-width:.8"/><line x1="52" y1="200.0" x2="108" y2="200.0" class="s1" style="stroke-width:2"/><line x1="142" y1="187.0" x2="198" y2="187.0" class="s1" style="stroke-width:2"/><line x1="142" y1="213.0" x2="198" y2="213.0" class="s1" style="stroke-width:2"/><line x1="232" y1="187.0" x2="288" y2="187.0" class="s1" style="stroke-width:2"/><line x1="232" y1="195.7" x2="288" y2="195.7" class="s1" style="stroke-width:2"/><line x1="232" y1="204.3" x2="288" y2="204.3" class="s1" style="stroke-width:2"/><line x1="232" y1="213.0" x2="288" y2="213.0" class="s1" style="stroke-width:2"/><rect x="335" y="187.0" width="90" height="26" fill="var(--s1)" opacity=".25"/><line x1="335" y1="187.0" x2="425" y2="187.0" class="s1" style="stroke-width:.8"/><line x1="335" y1="188.5" x2="425" y2="188.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="190.1" x2="425" y2="190.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="191.6" x2="425" y2="191.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="193.1" x2="425" y2="193.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="194.6" x2="425" y2="194.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="196.2" x2="425" y2="196.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="197.7" x2="425" y2="197.7" class="s1" style="stroke-width:.8"/><line x1="335" y1="199.2" x2="425" y2="199.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="200.8" x2="425" y2="200.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="202.3" x2="425" y2="202.3" class="s1" style="stroke-width:.8"/><line x1="335" y1="203.8" x2="425" y2="203.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="205.4" x2="425" y2="205.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="206.9" x2="425" y2="206.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="208.4" x2="425" y2="208.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="209.9" x2="425" y2="209.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="211.5" x2="425" y2="211.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="213.0" x2="425" y2="213.0" class="s1" style="stroke-width:.8"/><text x="470" y="94" class="ns">Vùng cho phép</text><text x="470" y="150" class="ns">Vùng cấm</text><text x="470" y="204" class="ns">Vùng cho phép</text><text x="80" y="262" class="tk" text-anchor="middle">1</text><text x="170" y="262" class="tk" text-anchor="middle">2</text><text x="260" y="262" class="tk" text-anchor="middle">4</text><text x="380" y="262" class="tk" text-anchor="middle">N</text><text x="230" y="290" class="lab" text-anchor="middle">Số nguyên tử liên kết</text><text x="14" y="150" class="lab" text-anchor="middle" transform="rotate(-90 14 150)">Năng lượng electron</text><line x1="30" y1="250" x2="30" y2="30" class="ax"/></svg><figcaption>Hình 1. Mỗi mức năng lượng nguyên tử tách dần thành một vùng khi số nguyên tử liên kết tăng.</figcaption></figure>
+<p>Tùy cách các lớp vỏ tương tác, các vùng có thể chồng lên nhau tạo thành một dải liên tục. Electron lấp đầy các trạng thái từ thấp lên cao, mỗi trạng thái tối đa một electron (tính cả spin là hai).</p>
+
+<h2>3. Điều kiện để dẫn điện</h2>
+<ul>
+<li>Một vùng <strong>trống</strong> không dẫn điện vì không có electron mang dòng.</li>
+<li>Một vùng <strong>đầy</strong> cũng không dẫn điện: có nhiều electron nhưng không có trạng thái trống để chúng chuyển tới.</li>
+<li>Chỉ vùng <strong>đầy một phần</strong>, có cả electron lẫn trạng thái trống, mới dẫn điện.</li>
+</ul>
+<p>Kim loại có vùng đầy một phần ngay ở 0 K. Chất cách điện và bán dẫn có vùng hóa trị đầy và vùng dẫn trống ở 0 K, ngăn cách bởi vùng cấm \(E_g\). Khác biệt giữa hai loại chỉ là độ lớn: bán dẫn có \(E_g\) đủ nhỏ (Si 1,12 eV) để nhiệt hoặc ánh sáng kích thích một phần electron lên vùng dẫn, để lại lỗ trống trong vùng hóa trị.</p>
+
+<h2>4. Khối lượng hiệu dụng</h2>
+<p>Electron trong vùng dẫn không hoàn toàn "tự do": nó di chuyển trong thế tuần hoàn của các hạt nhân và lớp vỏ electron. Khi có lực ngoài \(F_{ext}\) (ví dụ điện trường), electron còn chịu lực nội \(F_{int}\) từ mạng:</p>
+$$F_{ext} + F_{int} = m_0\,a \quad\Longrightarrow\quad F_{ext} = m_n^*\,a$$
+<p>Thay vì tính lực nội phức tạp, ta gói toàn bộ ảnh hưởng của mạng vào một <strong>khối lượng hiệu dụng</strong> \(m_n^*\). Electron gần đáy vùng dẫn khi đó chuyển động như hạt tự do với khối lượng \(m_n^*\).</p>
+<div class="box"><p class="t">Hình dung: đẩy một chiếc xe</p>
+<p>Bạn đẩy xe với một lực nhất định. Nếu người trong xe đạp phanh (lực nội ngược chiều), xe "có vẻ" nặng hơn và tăng tốc chậm: khối lượng hiệu dụng lớn. Nếu người trong xe nhấn ga (lực nội cùng chiều), xe "có vẻ" nhẹ hơn: khối lượng hiệu dụng nhỏ. Bạn không cần biết chi tiết bên trong xe, chỉ cần biết nó phản ứng thế nào với lực của bạn.</p></div>
+<p>Lỗ trống ở đỉnh vùng hóa trị là hiệu ứng tập thể của các electron trong một vùng gần đầy, và cũng có khối lượng hiệu dụng riêng \(m_p^*\):</p>
+<div class="tablewrap"><table>
+<tr><th>Vật liệu</th><th>\(m_n^*/m_0\)</th><th>\(m_p^*/m_0\)</th></tr>
+<tr><td>Si</td><td>0,26</td><td>0,49</td></tr>
+<tr><td>Ge</td><td>0,12</td><td>0,28</td></tr>
+<tr><td>GaAs</td><td>0,067</td><td>0,5</td></tr>
+</table></div>
+<p>Vì \(\mu = q\bar{t}/m^*\), khối lượng hiệu dụng nhỏ cho độ linh động cao. Đó là lý do GaAs được dùng cho linh kiện tần số cao, và electron thường linh động hơn lỗ trống.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>β-Ga₂O₃ có khối lượng hiệu dụng electron khoảng 0,28 m₀, gần như đẳng hướng, nhưng vùng hóa trị rất phẳng, tức lỗ trống có khối lượng hiệu dụng rất lớn. Kết hợp với xu hướng tự bẫy của lỗ trống, điều này giải thích vì sao β-Ga₂O₃ gần như không thể pha tạp loại p hữu ích.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>D. A. Neamen, <em>Semiconductor Physics and Devices</em>, 4th ed., McGraw-Hill, chương 3.</li>
+<li>S. O. Kasap, <em>Principles of Electronic Materials and Devices</em>, McGraw-Hill.</li>
+<li>J. B. Varley et al., "Role of self-trapping in luminescence and p-type conductivity of wide-band-gap oxides," <em>Physical Review B</em> 85, 081109 (2012).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Why does a metal conduct while diamond does not, even though both contain countless electrons? The answer lies in how the energy levels of individual atoms merge into energy bands when the atoms bond into a solid.</p>
+
+<h2>1. From an atom: discrete energy levels</h2>
+<p>In the Bohr model of hydrogen, the electron exists only in orbits of fixed radius and energy:</p>
+$$E_n = -\frac{13.6\ \text{eV}}{n^2}, \qquad r_n = 0.053\,n^2\ \text{nm}$$
+<p>In the ground state (\(n = 1\)) the energy is −13.6 eV. As \(n\) grows, the radius increases as \(n^2\) while the energy approaches 0 eV, the vacuum level, where the electron is no longer bound to the nucleus.</p>
+
+<h2>2. From many atoms: energy bands</h2>
+<p>When two atoms approach, their wavefunctions overlap and each energy level splits in two. With \(N\) atoms, each level splits into \(N\) levels. One cm³ of Si contains about 5×10²² atoms, so each atomic level splits into that many levels, so closely spaced that they are nearly continuous, forming an <strong>allowed band</strong> a few eV wide. Between allowed bands there may be <strong>forbidden gaps</strong> with no states for electrons.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="52" y1="90.0" x2="108" y2="90.0" class="s1" style="stroke-width:2"/><line x1="142" y1="67.0" x2="198" y2="67.0" class="s1" style="stroke-width:2"/><line x1="142" y1="113.0" x2="198" y2="113.0" class="s1" style="stroke-width:2"/><line x1="232" y1="67.0" x2="288" y2="67.0" class="s1" style="stroke-width:2"/><line x1="232" y1="82.3" x2="288" y2="82.3" class="s1" style="stroke-width:2"/><line x1="232" y1="97.7" x2="288" y2="97.7" class="s1" style="stroke-width:2"/><line x1="232" y1="113.0" x2="288" y2="113.0" class="s1" style="stroke-width:2"/><rect x="335" y="67.0" width="90" height="46" fill="var(--s1)" opacity=".25"/><line x1="335" y1="67.0" x2="425" y2="67.0" class="s1" style="stroke-width:.8"/><line x1="335" y1="69.7" x2="425" y2="69.7" class="s1" style="stroke-width:.8"/><line x1="335" y1="72.4" x2="425" y2="72.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="75.1" x2="425" y2="75.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="77.8" x2="425" y2="77.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="80.5" x2="425" y2="80.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="83.2" x2="425" y2="83.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="85.9" x2="425" y2="85.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="88.6" x2="425" y2="88.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="91.4" x2="425" y2="91.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="94.1" x2="425" y2="94.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="96.8" x2="425" y2="96.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="99.5" x2="425" y2="99.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="102.2" x2="425" y2="102.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="104.9" x2="425" y2="104.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="107.6" x2="425" y2="107.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="110.3" x2="425" y2="110.3" class="s1" style="stroke-width:.8"/><line x1="335" y1="113.0" x2="425" y2="113.0" class="s1" style="stroke-width:.8"/><line x1="52" y1="200.0" x2="108" y2="200.0" class="s1" style="stroke-width:2"/><line x1="142" y1="187.0" x2="198" y2="187.0" class="s1" style="stroke-width:2"/><line x1="142" y1="213.0" x2="198" y2="213.0" class="s1" style="stroke-width:2"/><line x1="232" y1="187.0" x2="288" y2="187.0" class="s1" style="stroke-width:2"/><line x1="232" y1="195.7" x2="288" y2="195.7" class="s1" style="stroke-width:2"/><line x1="232" y1="204.3" x2="288" y2="204.3" class="s1" style="stroke-width:2"/><line x1="232" y1="213.0" x2="288" y2="213.0" class="s1" style="stroke-width:2"/><rect x="335" y="187.0" width="90" height="26" fill="var(--s1)" opacity=".25"/><line x1="335" y1="187.0" x2="425" y2="187.0" class="s1" style="stroke-width:.8"/><line x1="335" y1="188.5" x2="425" y2="188.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="190.1" x2="425" y2="190.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="191.6" x2="425" y2="191.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="193.1" x2="425" y2="193.1" class="s1" style="stroke-width:.8"/><line x1="335" y1="194.6" x2="425" y2="194.6" class="s1" style="stroke-width:.8"/><line x1="335" y1="196.2" x2="425" y2="196.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="197.7" x2="425" y2="197.7" class="s1" style="stroke-width:.8"/><line x1="335" y1="199.2" x2="425" y2="199.2" class="s1" style="stroke-width:.8"/><line x1="335" y1="200.8" x2="425" y2="200.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="202.3" x2="425" y2="202.3" class="s1" style="stroke-width:.8"/><line x1="335" y1="203.8" x2="425" y2="203.8" class="s1" style="stroke-width:.8"/><line x1="335" y1="205.4" x2="425" y2="205.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="206.9" x2="425" y2="206.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="208.4" x2="425" y2="208.4" class="s1" style="stroke-width:.8"/><line x1="335" y1="209.9" x2="425" y2="209.9" class="s1" style="stroke-width:.8"/><line x1="335" y1="211.5" x2="425" y2="211.5" class="s1" style="stroke-width:.8"/><line x1="335" y1="213.0" x2="425" y2="213.0" class="s1" style="stroke-width:.8"/><text x="470" y="94" class="ns">Allowed band</text><text x="470" y="150" class="ns">Forbidden gap</text><text x="470" y="204" class="ns">Allowed band</text><text x="80" y="262" class="tk" text-anchor="middle">1</text><text x="170" y="262" class="tk" text-anchor="middle">2</text><text x="260" y="262" class="tk" text-anchor="middle">4</text><text x="380" y="262" class="tk" text-anchor="middle">N</text><text x="230" y="290" class="lab" text-anchor="middle">Number of bonded atoms</text><text x="14" y="150" class="lab" text-anchor="middle" transform="rotate(-90 14 150)">Electron energy</text><line x1="30" y1="250" x2="30" y2="30" class="ax"/></svg><figcaption>Figure 1. Each atomic energy level gradually splits into a band as the number of bonded atoms grows.</figcaption></figure>
+<p>Depending on how the shells interact, bands may overlap into one continuous range. Electrons fill states from the bottom up, one electron per state (two counting spin).</p>
+
+<h2>3. The condition for conduction</h2>
+<ul>
+<li>An <strong>empty</strong> band cannot conduct: there are no electrons to carry current.</li>
+<li>A <strong>full</strong> band cannot conduct either: there are plenty of electrons but no empty states to move into.</li>
+<li>Only a <strong>partially filled</strong> band, with both electrons and empty states, conducts.</li>
+</ul>
+<p>A metal has a partially filled band even at 0 K. Insulators and semiconductors have a full valence band and an empty conduction band at 0 K, separated by a gap \(E_g\). The difference between them is only one of size: a semiconductor's \(E_g\) is small enough (1.12 eV for Si) for heat or light to excite some electrons into the conduction band, leaving holes in the valence band.</p>
+
+<h2>4. Effective mass</h2>
+<p>An electron in the conduction band is not entirely "free": it moves in the periodic potential of the nuclei and core electrons. Under an external force \(F_{ext}\) (for example an electric field), it also feels internal forces \(F_{int}\) from the lattice:</p>
+$$F_{ext} + F_{int} = m_0\,a \quad\Longrightarrow\quad F_{ext} = m_n^*\,a$$
+<p>Instead of computing the complicated internal forces, we fold all the lattice effects into an <strong>effective mass</strong> \(m_n^*\). An electron near the bottom of the conduction band then moves like a free particle of mass \(m_n^*\).</p>
+<div class="box"><p class="t">Picture it: pushing a car</p>
+<p>You push a car with a given force. If the driver is braking (an opposing internal force), the car "feels" heavier and accelerates slowly: a large effective mass. If the driver presses the accelerator (an assisting internal force), the car "feels" lighter: a small effective mass. You need not know what happens inside the car, only how it responds to your push.</p></div>
+<p>A hole at the top of the valence band is the collective effect of electrons in a nearly full band, and it has its own effective mass \(m_p^*\):</p>
+<div class="tablewrap"><table>
+<tr><th>Material</th><th>\(m_n^*/m_0\)</th><th>\(m_p^*/m_0\)</th></tr>
+<tr><td>Si</td><td>0.26</td><td>0.49</td></tr>
+<tr><td>Ge</td><td>0.12</td><td>0.28</td></tr>
+<tr><td>GaAs</td><td>0.067</td><td>0.5</td></tr>
+</table></div>
+<p>Since \(\mu = q\bar{t}/m^*\), a small effective mass gives high mobility. That is why GaAs is used for high-frequency devices, and why electrons are usually more mobile than holes.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>β-Ga₂O₃ has an electron effective mass of about 0.28 m₀, nearly isotropic, but a very flat valence band, meaning holes have a very large effective mass. Combined with the tendency of holes to self-trap, this explains why useful p-type doping of β-Ga₂O₃ is nearly impossible.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>D. A. Neamen, <em>Semiconductor Physics and Devices</em>, 4th ed., McGraw-Hill, chapter 3.</li>
+<li>S. O. Kasap, <em>Principles of Electronic Materials and Devices</em>, McGraw-Hill.</li>
+<li>J. B. Varley et al., "Role of self-trapping in luminescence and p-type conductivity of wide-band-gap oxides," <em>Physical Review B</em> 85, 081109 (2012).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-conduction-metal.html">← <span class="l-vi">Dẫn điện trong kim loại</span><span class="l-en">Electrical conduction in metals</span></a><a class="n" href="dev-semiconductor-conduction.html"><span class="l-vi">Dẫn điện trong bán dẫn</span><span class="l-en">Electrical conduction in semiconductors</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

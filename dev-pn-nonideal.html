@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Diode thực: sai lệch khỏi lý thuyết đơn giản" data-title-en="Real diodes: deviations from the simple theory">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real diodes: deviations from the simple theory · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Graded junctions, depletion-region recombination, the ideality factor, high-level injection and ohmic losses.">
+<meta property="og:title" content="Real diodes: deviations from the simple theory">
+<meta property="og:description" content="Graded junctions, depletion-region recombination, the ideality factor, high-level injection and ohmic losses.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 3</span><span class="l-en">Part 3 · Lesson 3</span></p>
+  <h1><span class="l-vi">Diode thực: sai lệch khỏi lý thuyết đơn giản</span><span class="l-en">Real diodes: deviations from the simple theory</span></h1>
+  <p class="sub"><span class="l-vi">Tiếp giáp biến đổi tuyến tính, tái hợp trong vùng nghèo, hệ số lý tưởng, tiêm mức cao và tổn hao ohmic.</span><span class="l-en">Graded junctions, depletion-region recombination, the ideality factor, high-level injection and ohmic losses.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Đặc tuyến I-V đo được của một diode thật hiếm khi trùng với phương trình Shockley. Những sai lệch đó không phải là "nhiễu" mà là thông tin: mỗi vùng điện áp kể một câu chuyện riêng về tái hợp, mức tiêm hay điện trở của linh kiện.</p>
+
+<h2>1. Tiếp giáp biến đổi tuyến tính</h2>
+<p>Tiếp giáp tạo bằng khuếch tán hoặc cấy ion không đột ngột: nồng độ tạp chất ròng thay đổi dần qua mặt tiếp giáp, và có thể xấp xỉ \(N_d - N_a = Gx\), với \(G\) là hằng số gradient. Phương trình Poisson khi đó cho điện trường dạng parabol, và độ rộng vùng nghèo tăng theo căn bậc ba của điện áp:</p>
+$$W = \left[\frac{12\varepsilon_s (V_{bi} - V)}{qG}\right]^{1/3}, \qquad C_j = \left[\frac{qG\varepsilon_s^2 A^3}{12(V_{bi}-V)}\right]^{1/3}$$
+<p>So với \(C_j \propto (V_{bi}-V)^{-1/2}\) của tiếp giáp đột ngột một phía, số mũ −1/3 là dấu hiệu nhận biết tiếp giáp biến đổi tuyến tính trên đồ thị C-V.</p>
+
+<h2>2. Tái hợp và phát sinh trong vùng nghèo</h2>
+<p>Mô hình lý tưởng giả định tái hợp và phát sinh chỉ xảy ra ở vùng trung hòa. Trong thực tế:</p>
+<ul>
+<li><strong>Phân cực thuận:</strong> một phần đáng kể hạt tải tái hợp ngay trong vùng nghèo, qua các tâm tái hợp. Dòng tái hợp này tỉ lệ \(n_i\,e^{qV/2kT}\) thay vì \(n_i^2\,e^{qV/kT}\).</li>
+<li><strong>Phân cực ngược:</strong> các tâm phát xạ trong vùng nghèo sinh cặp điện tử–lỗ trống, tạo dòng phát sinh tỉ lệ với \(n_i W\). Vì \(W\) tăng theo điện áp ngược, dòng ngược không còn bão hòa. Tâm hiệu quả nhất nằm gần giữa vùng cấm.</li>
+</ul>
+<p>Hai cơ chế được gộp vào <strong>hệ số lý tưởng</strong> \(n\) (ideality factor), có giá trị từ 1 đến 2:</p>
+$$I = I_0\left(e^{qV/nkT} - 1\right)$$
+<p>\(n \approx 2\) khi tái hợp trong vùng nghèo chiếm ưu thế (dòng nhỏ, vật liệu vùng cấm rộng), \(n \approx 1\) khi dòng khuếch tán chiếm ưu thế (điện áp cao hơn, vùng cấm hẹp).</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="540" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="70.0" y1="255" x2="70.0" y2="260" class="ax"/><text x="70.0" y="275" class="tk" text-anchor="middle">0</text><line x1="187.5" y1="255" x2="187.5" y2="260" class="ax"/><text x="187.5" y="275" class="tk" text-anchor="middle">0.2</text><line x1="305.0" y1="255" x2="305.0" y2="260" class="ax"/><text x="305.0" y="275" class="tk" text-anchor="middle">0.4</text><line x1="422.49999999999994" y1="255" x2="422.49999999999994" y2="260" class="ax"/><text x="422.49999999999994" y="275" class="tk" text-anchor="middle">0.6</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">0.8</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-14</tspan></text><line x1="65" y1="215.83333333333334" x2="70" y2="215.83333333333334" class="ax"/><line x1="70" y1="215.83333333333334" x2="540" y2="215.83333333333334" class="grid"/><text x="61" y="219.83333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-12</tspan></text><line x1="65" y1="176.66666666666669" x2="70" y2="176.66666666666669" class="ax"/><line x1="70" y1="176.66666666666669" x2="540" y2="176.66666666666669" class="grid"/><text x="61" y="180.66666666666669" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-10</tspan></text><line x1="65" y1="137.5" x2="70" y2="137.5" class="ax"/><line x1="70" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="61" y="141.5" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-8</tspan></text><line x1="65" y1="98.33333333333334" x2="70" y2="98.33333333333334" class="ax"/><line x1="70" y1="98.33333333333334" x2="540" y2="98.33333333333334" class="grid"/><text x="61" y="102.33333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-6</tspan></text><line x1="65" y1="59.16666666666666" x2="70" y2="59.16666666666666" class="ax"/><line x1="70" y1="59.16666666666666" x2="540" y2="59.16666666666666" class="grid"/><text x="61" y="63.16666666666666" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-4</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-2</tspan></text><text x="305.0" y="294" class="lab" text-anchor="middle">Điện áp thuận V (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Dòng I (A)</text><path d="M75.9,261.4 L81.8,253.7 L87.6,248.3 L93.5,243.9 L99.4,239.9 L105.2,236.1 L111.1,232.6 L117.0,229.1 L122.9,225.7 L128.8,222.3 L134.6,218.9 L140.5,215.6 L146.4,212.3 L152.2,209.0 L158.1,205.7 L164.0,202.4 L169.9,199.1 L175.8,195.8 L181.6,192.5 L187.5,189.2 L193.4,185.9 L199.2,182.6 L205.1,179.3 L211.0,176.0 L216.9,172.7 L222.8,169.5 L228.6,166.2 L234.5,162.9 L240.4,159.6 L246.2,156.3 L252.1,153.0 L258.0,149.7 L263.9,146.4 L269.8,143.1 L275.6,139.8 L281.5,136.6 L287.4,133.3 L293.2,130.0 L299.1,126.7 L305.0,123.4 L310.9,120.1 L316.8,116.8 L322.6,113.5 L328.5,110.2 L334.4,106.9 L340.2,103.7 L346.1,100.4 L352.0,97.1 L357.9,93.8 L363.8,90.5 L369.6,87.2 L375.5,83.9 L381.4,80.6 L387.2,77.3 L393.1,74.0 L399.0,70.8 L404.9,67.5 L410.7,64.2 L416.6,60.9 L422.5,57.6 L428.4,54.3 L434.2,51.0 L440.1,47.7 L446.0,44.4 L451.9,41.1 L457.8,37.9 L463.6,34.6 L469.5,31.3 L475.4,28.0 L481.2,24.7 L487.1,21.4" class="s2" fill="none"/><path d="M75.9,200.0 L81.8,193.3 L87.6,188.9 L93.5,185.6 L99.4,182.7 L105.2,180.2 L111.1,177.9 L117.0,175.8 L122.9,173.7 L128.8,171.8 L134.6,169.9 L140.5,168.0 L146.4,166.2 L152.2,164.4 L158.1,162.7 L164.0,160.9 L169.9,159.2 L175.8,157.5 L181.6,155.8 L187.5,154.0 L193.4,152.3 L199.2,150.6 L205.1,148.9 L211.0,147.2 L216.9,145.5 L222.8,143.8 L228.6,142.0 L234.5,140.3 L240.4,138.5 L246.2,136.7 L252.1,134.9 L258.0,133.0 L263.9,131.1 L269.8,129.2 L275.6,127.2 L281.5,125.1 L287.4,123.0 L293.2,120.8 L299.1,118.6 L305.0,116.3 L310.9,113.9 L316.8,111.4 L322.6,108.9 L328.5,106.2 L334.4,103.5 L340.2,100.7 L346.1,97.9 L352.0,95.0 L357.9,92.1 L363.8,89.1 L369.6,86.0 L375.5,83.0 L381.4,79.9 L387.2,76.8 L393.1,73.7 L399.0,70.7 L404.9,67.7 L410.7,64.7 L416.6,61.8 L422.5,59.0 L428.4,56.4 L434.2,53.9 L440.1,51.6 L446.0,49.4 L451.9,47.5 L457.8,45.7 L463.6,44.1 L469.5,42.6 L475.4,41.3 L481.2,40.1 L487.1,39.0 L493.0,38.0 L498.9,37.0 L504.7,36.1 L510.6,35.3 L516.5,34.6 L522.4,33.9 L528.2,33.2 L534.1,32.6 L540.0,32.0" class="s1" fill="none"/><line x1="90" y1="30" x2="114" y2="30" class="s2"/><text x="120" y="34" class="tk">Lý tưởng (n = 1)</text><line x1="90" y1="48" x2="114" y2="48" class="s1"/><text x="120" y="52" class="tk">Thực tế</text><text x="164.0" y="164.91666666666669" class="ns">tái hợp vùng nghèo, n ≈ 2</text><text x="534.125" y="70.91666666666666" class="ns" text-anchor="end">điện trở nối tiếp</text></svg><figcaption>Hình 1. Đặc tuyến thuận của diode thực (thang log): vùng tái hợp n ≈ 2 ở điện áp thấp, vùng lý tưởng n = 1, và sự uốn cong do điện trở nối tiếp ở điện áp cao (minh họa).</figcaption></figure>
+
+<h2>3. Tiêm mức cao</h2>
+<p>Khi dòng thuận lớn, nồng độ hạt tải thiểu số được tiêm có thể sánh với nồng độ hạt tải đa số. Khi đó giả thiết "tiêm mức thấp" không còn đúng: cả hai loại hạt tải đều tăng, \(p \approx n\), và tích \(pn = n_i^2 e^{qV/kT}\) cho \(p \approx n_i e^{qV/2kT}\). Dòng điện lại tỉ lệ với \(e^{qV/2kT}\), tức đặc tuyến log lại thoải đi ở dòng cao.</p>
+
+<h2>4. Tổn hao ohmic</h2>
+<p>Trong mô hình lý tưởng, toàn bộ điện áp đặt vào rơi trên tiếp giáp. Thực tế các vùng trung hòa và tiếp xúc có điện trở, nên điện áp trên tiếp giáp nhỏ hơn điện áp đặt vào:</p>
+$$V_j = V - I\,(R_p + R_n)$$
+<p>Ở dòng cao, sụt áp \(IR\) chiếm phần lớn, và đặc tuyến log I-V bị uốn ngang. Từ độ lệch này có thể trích xuất điện trở nối tiếp \(R_s\).</p>
+
+<div class="box"><p class="t">Đọc một đặc tuyến I-V thực</p>
+<p>Đi từ điện áp thấp đến cao trên đồ thị log I theo V: (1) dòng rò hoặc dòng shunt ở điện áp rất thấp; (2) vùng tái hợp với \(n \approx 2\); (3) vùng khuếch tán \(n \approx 1\); (4) vùng tiêm mức cao và điện trở nối tiếp làm đường cong bẻ ngang. Không phải diode nào cũng thể hiện đủ bốn vùng.</p></div>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Với diode Schottky Ga₂O₃, hệ số lý tưởng gần 1 (thường 1,02–1,1) ở nhiệt độ phòng là dấu hiệu của phát xạ nhiệt điện tử chiếm ưu thế. Khi \(n\) tăng và chiều cao rào giảm ở nhiệt độ thấp, đó thường là dấu hiệu rào không đồng nhất, được mô tả bằng mô hình phân bố Gauss của chiều cao rào (Werner–Güttler).</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 5.</li>
+<li>C.-T. Sah, R. N. Noyce, W. Shockley, "Carrier generation and recombination in p-n junctions and p-n junction characteristics," <em>Proceedings of the IRE</em> 45, 1228 (1957).</li>
+<li>J. H. Werner, H. H. Güttler, "Barrier inhomogeneities at Schottky contacts," <em>Journal of Applied Physics</em> 69, 1522 (1991).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The measured I-V curve of a real diode rarely matches the Shockley equation. The deviations are not "noise" but information: each voltage range tells its own story about recombination, injection level or device resistance.</p>
+
+<h2>1. Linearly graded junctions</h2>
+<p>Junctions made by diffusion or implantation are not abrupt: the net doping changes gradually across the junction and can be approximated as \(N_d - N_a = Gx\), with grade constant \(G\). Poisson's equation then gives a parabolic field, and the depletion width grows with the cube root of voltage:</p>
+$$W = \left[\frac{12\varepsilon_s (V_{bi} - V)}{qG}\right]^{1/3}, \qquad C_j = \left[\frac{qG\varepsilon_s^2 A^3}{12(V_{bi}-V)}\right]^{1/3}$$
+<p>Compared with \(C_j \propto (V_{bi}-V)^{-1/2}\) for a one-sided abrupt junction, the exponent −1/3 is the signature of a linearly graded junction on a C-V plot.</p>
+
+<h2>2. Recombination and generation in the depletion region</h2>
+<p>The ideal model assumes recombination and generation occur only in the neutral regions. In practice:</p>
+<ul>
+<li><strong>Forward bias:</strong> a significant fraction of carriers recombine inside the depletion region via recombination centers. This recombination current scales as \(n_i\,e^{qV/2kT}\) instead of \(n_i^2\,e^{qV/kT}\).</li>
+<li><strong>Reverse bias:</strong> emission centers in the depletion region generate electron–hole pairs, producing a generation current proportional to \(n_i W\). Because \(W\) grows with reverse voltage, the reverse current no longer saturates. The most effective centers lie near midgap.</li>
+</ul>
+<p>Both mechanisms are lumped into the <strong>ideality factor</strong> \(n\), between 1 and 2:</p>
+$$I = I_0\left(e^{qV/nkT} - 1\right)$$
+<p>\(n \approx 2\) when depletion-region recombination dominates (low current, wide-bandgap material), \(n \approx 1\) when diffusion current dominates (higher voltage, narrow bandgap).</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="540" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="70.0" y1="255" x2="70.0" y2="260" class="ax"/><text x="70.0" y="275" class="tk" text-anchor="middle">0</text><line x1="187.5" y1="255" x2="187.5" y2="260" class="ax"/><text x="187.5" y="275" class="tk" text-anchor="middle">0.2</text><line x1="305.0" y1="255" x2="305.0" y2="260" class="ax"/><text x="305.0" y="275" class="tk" text-anchor="middle">0.4</text><line x1="422.49999999999994" y1="255" x2="422.49999999999994" y2="260" class="ax"/><text x="422.49999999999994" y="275" class="tk" text-anchor="middle">0.6</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">0.8</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-14</tspan></text><line x1="65" y1="215.83333333333334" x2="70" y2="215.83333333333334" class="ax"/><line x1="70" y1="215.83333333333334" x2="540" y2="215.83333333333334" class="grid"/><text x="61" y="219.83333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-12</tspan></text><line x1="65" y1="176.66666666666669" x2="70" y2="176.66666666666669" class="ax"/><line x1="70" y1="176.66666666666669" x2="540" y2="176.66666666666669" class="grid"/><text x="61" y="180.66666666666669" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-10</tspan></text><line x1="65" y1="137.5" x2="70" y2="137.5" class="ax"/><line x1="70" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="61" y="141.5" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-8</tspan></text><line x1="65" y1="98.33333333333334" x2="70" y2="98.33333333333334" class="ax"/><line x1="70" y1="98.33333333333334" x2="540" y2="98.33333333333334" class="grid"/><text x="61" y="102.33333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-6</tspan></text><line x1="65" y1="59.16666666666666" x2="70" y2="59.16666666666666" class="ax"/><line x1="70" y1="59.16666666666666" x2="540" y2="59.16666666666666" class="grid"/><text x="61" y="63.16666666666666" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-4</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-2</tspan></text><text x="305.0" y="294" class="lab" text-anchor="middle">Forward voltage V (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Current I (A)</text><path d="M75.9,261.4 L81.8,253.7 L87.6,248.3 L93.5,243.9 L99.4,239.9 L105.2,236.1 L111.1,232.6 L117.0,229.1 L122.9,225.7 L128.8,222.3 L134.6,218.9 L140.5,215.6 L146.4,212.3 L152.2,209.0 L158.1,205.7 L164.0,202.4 L169.9,199.1 L175.8,195.8 L181.6,192.5 L187.5,189.2 L193.4,185.9 L199.2,182.6 L205.1,179.3 L211.0,176.0 L216.9,172.7 L222.8,169.5 L228.6,166.2 L234.5,162.9 L240.4,159.6 L246.2,156.3 L252.1,153.0 L258.0,149.7 L263.9,146.4 L269.8,143.1 L275.6,139.8 L281.5,136.6 L287.4,133.3 L293.2,130.0 L299.1,126.7 L305.0,123.4 L310.9,120.1 L316.8,116.8 L322.6,113.5 L328.5,110.2 L334.4,106.9 L340.2,103.7 L346.1,100.4 L352.0,97.1 L357.9,93.8 L363.8,90.5 L369.6,87.2 L375.5,83.9 L381.4,80.6 L387.2,77.3 L393.1,74.0 L399.0,70.8 L404.9,67.5 L410.7,64.2 L416.6,60.9 L422.5,57.6 L428.4,54.3 L434.2,51.0 L440.1,47.7 L446.0,44.4 L451.9,41.1 L457.8,37.9 L463.6,34.6 L469.5,31.3 L475.4,28.0 L481.2,24.7 L487.1,21.4" class="s2" fill="none"/><path d="M75.9,200.0 L81.8,193.3 L87.6,188.9 L93.5,185.6 L99.4,182.7 L105.2,180.2 L111.1,177.9 L117.0,175.8 L122.9,173.7 L128.8,171.8 L134.6,169.9 L140.5,168.0 L146.4,166.2 L152.2,164.4 L158.1,162.7 L164.0,160.9 L169.9,159.2 L175.8,157.5 L181.6,155.8 L187.5,154.0 L193.4,152.3 L199.2,150.6 L205.1,148.9 L211.0,147.2 L216.9,145.5 L222.8,143.8 L228.6,142.0 L234.5,140.3 L240.4,138.5 L246.2,136.7 L252.1,134.9 L258.0,133.0 L263.9,131.1 L269.8,129.2 L275.6,127.2 L281.5,125.1 L287.4,123.0 L293.2,120.8 L299.1,118.6 L305.0,116.3 L310.9,113.9 L316.8,111.4 L322.6,108.9 L328.5,106.2 L334.4,103.5 L340.2,100.7 L346.1,97.9 L352.0,95.0 L357.9,92.1 L363.8,89.1 L369.6,86.0 L375.5,83.0 L381.4,79.9 L387.2,76.8 L393.1,73.7 L399.0,70.7 L404.9,67.7 L410.7,64.7 L416.6,61.8 L422.5,59.0 L428.4,56.4 L434.2,53.9 L440.1,51.6 L446.0,49.4 L451.9,47.5 L457.8,45.7 L463.6,44.1 L469.5,42.6 L475.4,41.3 L481.2,40.1 L487.1,39.0 L493.0,38.0 L498.9,37.0 L504.7,36.1 L510.6,35.3 L516.5,34.6 L522.4,33.9 L528.2,33.2 L534.1,32.6 L540.0,32.0" class="s1" fill="none"/><line x1="90" y1="30" x2="114" y2="30" class="s2"/><text x="120" y="34" class="tk">Ideal (n = 1)</text><line x1="90" y1="48" x2="114" y2="48" class="s1"/><text x="120" y="52" class="tk">Real diode</text><text x="164.0" y="164.91666666666669" class="ns">depletion recombination, n ≈ 2</text><text x="534.125" y="70.91666666666666" class="ns" text-anchor="end">series resistance</text></svg><figcaption>Figure 1. Forward characteristic of a real diode (log scale): recombination region with n ≈ 2 at low voltage, ideal n = 1 region, and bending from series resistance at high voltage (illustrative).</figcaption></figure>
+
+<h2>3. High-level injection</h2>
+<p>At large forward current, the injected minority concentration can become comparable to the majority concentration. The "low-level injection" assumption then fails: both carrier types rise, \(p \approx n\), and \(pn = n_i^2 e^{qV/kT}\) gives \(p \approx n_i e^{qV/2kT}\). The current again scales as \(e^{qV/2kT}\), so the log characteristic flattens at high current.</p>
+
+<h2>4. Ohmic losses</h2>
+<p>In the ideal model, all applied voltage drops across the junction. In reality the neutral regions and contacts have resistance, so the junction voltage is smaller than the applied voltage:</p>
+$$V_j = V - I\,(R_p + R_n)$$
+<p>At high current, the \(IR\) drop dominates and the log I-V curve bends over. The series resistance \(R_s\) can be extracted from this deviation.</p>
+
+<div class="box"><p class="t">Reading a real I-V curve</p>
+<p>Going from low to high voltage on a log I vs V plot: (1) leakage or shunt current at very low voltage; (2) recombination region with \(n \approx 2\); (3) diffusion region with \(n \approx 1\); (4) high-level injection and series resistance bending the curve over. Not every diode shows all four regions.</p></div>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>For Ga₂O₃ Schottky diodes, an ideality factor near 1 (typically 1.02–1.1) at room temperature signals dominant thermionic emission. When \(n\) rises and the apparent barrier height falls at low temperature, that usually indicates an inhomogeneous barrier, described by a Gaussian distribution of barrier heights (Werner–Güttler).</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 5.</li>
+<li>C.-T. Sah, R. N. Noyce, W. Shockley, "Carrier generation and recombination in p-n junctions and p-n junction characteristics," <em>Proceedings of the IRE</em> 45, 1228 (1957).</li>
+<li>J. H. Werner, H. H. Güttler, "Barrier inhomogeneities at Schottky contacts," <em>Journal of Applied Physics</em> 69, 1522 (1991).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-pn-bias.html">← <span class="l-vi">Tiếp giáp pn khi phân cực</span><span class="l-en">The biased pn junction</span></a><a class="n" href="dev-schottky.html"><span class="l-vi">Tiếp xúc kim loại–bán dẫn</span><span class="l-en">Metal–semiconductor contacts</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên tài liệu học phần của GS. Wan Sik Hwang, Korea Aerospace University, bao gồm bài giảng Linh kiện bán dẫn của Jinyoung Hwang. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on course materials by Prof. Wan Sik Hwang, Korea Aerospace University, including lecture notes on semiconductor devices by Jinyoung Hwang. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

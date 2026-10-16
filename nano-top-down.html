@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Chế tạo từ trên xuống" data-title-en="Top-down fabrication">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Top-down fabrication · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Milling, laser ablation, photolithography and the diffraction limit, multiple patterning, FIB, nanospheres and nanoimprint.">
+<meta property="og:title" content="Top-down fabrication">
+<meta property="og:description" content="Milling, laser ablation, photolithography and the diffraction limit, multiple patterning, FIB, nanospheres and nanoimprint.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 1</span><span class="l-en">Part 2 · Lesson 1</span></p>
+  <h1><span class="l-vi">Chế tạo từ trên xuống</span><span class="l-en">Top-down fabrication</span></h1>
+  <p class="sub"><span class="l-vi">Nghiền cơ học, bóc tách laser, quang khắc và giới hạn nhiễu xạ, đa mẫu, FIB, quả cầu nano và in khuôn nano.</span><span class="l-en">Milling, laser ablation, photolithography and the diffraction limit, multiple patterning, FIB, nanospheres and nanoimprint.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Có hai chiến lược lớn để tạo cấu trúc nano. Từ trên xuống: bắt đầu từ vật liệu khối rồi "đẽo" bớt, như nhà điêu khắc. Từ dưới lên: lắp ráp từ nguyên tử và phân tử, như xếp gạch Lego. Bài này xét cách tiếp cận từ trên xuống, nền tảng của toàn bộ ngành vi điện tử.</p>
+
+<h2>1. Nghiền cơ học</h2>
+<p>Bột vật liệu được nghiền trong cối với các viên bi năng lượng cao. Kích thước giảm dần qua <strong>va đập và mài mòn</strong> khi các viên bi rơi từ đỉnh cối xuống; va chạm cục bộ còn sinh nhiệt và có thể kích hoạt phản ứng hóa học (nghiền cơ hóa).</p>
+<ul>
+<li>Ưu điểm: đơn giản, rẻ, là phương pháp được chấp nhận rộng rãi nhất trong công nghiệp.</li>
+<li>Nhược điểm: tốn nhiều năng lượng và thời gian (hàng giờ đến hàng ngày); nhiễm bẩn từ bi và cối; khuyết tật bề mặt và tinh thể đáng kể; vật liệu dẫn nhiệt kém có thể bị biến đổi thể tích lớn hoặc chuyển pha.</li>
+</ul>
+
+<h2>2. Bóc tách bằng laser</h2>
+<p>Laser xung năng lượng cao (thường nano giây) bốc hơi vật liệu từ bia rắn. Hơi vật liệu ngưng tụ thành hạt nano, có thể trong pha khí, chân không, hoặc ngay trong chất lỏng (bóc tách laser trong dung dịch), cho hạt nano sạch không cần chất hóa học tiền chất.</p>
+
+<h2>3. Quang khắc và giới hạn của nó</h2>
+<p>Quang khắc chuyển hình mẫu từ mặt nạ lên lớp cảm quang bằng ánh sáng, rồi khắc xuống vật liệu bên dưới. Kích thước nhỏ nhất bị giới hạn bởi nhiễu xạ, theo tiêu chí Rayleigh:</p>
+$$CD = k_1\,\frac{\lambda}{NA}$$
+<p>với \(\lambda\) là bước sóng, \(NA\) khẩu độ số của thấu kính, \(k_1\) hệ số quy trình. Vì vậy ngành đã liên tục giảm bước sóng: g-line 436 nm, i-line 365 nm, KrF 248 nm, ArF 193 nm, rồi tăng \(NA\) bằng quang khắc nhúng nước (193i), và cuối cùng là EUV 13,5 nm.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">1980</text><line x1="166.66666666666666" y1="255" x2="166.66666666666666" y2="260" class="ax"/><text x="166.66666666666666" y="275" class="tk" text-anchor="middle">1990</text><line x1="273.3333333333333" y1="255" x2="273.3333333333333" y2="260" class="ax"/><text x="273.3333333333333" y="275" class="tk" text-anchor="middle">2000</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">2010</text><line x1="486.66666666666663" y1="255" x2="486.66666666666663" y2="260" class="ax"/><text x="486.66666666666663" y="275" class="tk" text-anchor="middle">2020</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">10</text><line x1="55" y1="191.94378088763284" x2="60" y2="191.94378088763284" class="ax"/><line x1="60" y1="191.94378088763284" x2="540" y2="191.94378088763284" class="grid"/><text x="51" y="195.94378088763284" class="tk" text-anchor="end">30</text><line x1="55" y1="122.84026389808079" x2="60" y2="122.84026389808079" class="ax"/><line x1="60" y1="122.84026389808079" x2="540" y2="122.84026389808079" class="grid"/><text x="51" y="126.84026389808079" class="tk" text-anchor="end">100</text><line x1="55" y1="59.784044785713576" x2="60" y2="59.784044785713576" class="ax"/><line x1="60" y1="59.784044785713576" x2="540" y2="59.784044785713576" class="grid"/><text x="51" y="63.784044785713576" class="tk" text-anchor="end">300</text><text x="300.0" y="294" class="lab" text-anchor="middle">Năm</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Bước sóng quang khắc (nm)</text><path d="M81.3,38.3 L166.7,38.3 L166.7,48.5 L230.7,48.5 L230.7,70.7 L284.0,70.7 L284.0,85.1 L476.0,85.1 L476.0,237.8 L540.0,237.8" class="s1" fill="none"/><text x="85.3" y="31.3" class="tk">g-line 436 nm</text><text x="170.7" y="41.5" class="tk">i-line 365 nm</text><text x="234.7" y="63.7" class="tk">KrF 248 nm</text><text x="288.0" y="78.1" class="tk">ArF 193 nm</text><text x="480.0" y="230.8" class="tk">EUV 13,5 nm</text><text x="337.3" y="103.1" class="ns">+ nhúng nước, đa mẫu</text></svg><figcaption>Hình 1. Bước sóng nguồn sáng quang khắc theo năm (thang log, các mốc gần đúng).</figcaption></figure>
+<p>Dù ý tưởng đơn giản, triển khai quang khắc thực tế rất phức tạp và đắt:</p>
+<ul>
+<li>Cấu trúc nhỏ hơn đáng kể so với bước sóng khó tạo vì nhiễu xạ.</li>
+<li>Mặt nạ phải căn chỉnh hoàn hảo với hình mẫu đã có trên wafer.</li>
+<li>Mật độ khuyết tật phải được kiểm soát chặt.</li>
+<li>Máy quang khắc có giá từ hàng chục đến hàng trăm triệu đô la.</li>
+</ul>
+
+<h2>4. Đa mẫu (multiple patterning)</h2>
+<p>Khi kích thước cần tạo nhỏ hơn khả năng của ArF 193 nm (khoảng 65 nm nửa bước với ArF khô), ngành dùng <strong>đa mẫu</strong>. Trong kỹ thuật đa mẫu tự căn chỉnh bằng spacer: tạo một đường "lõi" bằng quang khắc, phủ một lớp điện môi đồng đều lên, khắc dị hướng để chỉ còn spacer hai bên thành lõi, rồi bỏ lõi. Mỗi đường ban đầu sinh ra hai đường, nên bước giảm một nửa. Độ rộng spacer do <strong>độ dày lớp lắng đọng</strong> quyết định, không phải quang khắc, nên rất nhỏ và đồng đều. Ảnh TEM của bộ nhớ flash 25 nm cho thấy các cổng xếp sát nhau tạo bằng cách này.</p>
+
+<h2>5. Các kỹ thuật tạo mẫu nano khác</h2>
+<ul>
+<li><strong>Chùm ion hội tụ</strong> (FIB): chùm ion Ga⁺ khắc trực tiếp vật liệu, hoặc phân hủy khí tiền chất để lắng đọng cục bộ. Có thể "viết" cấu trúc 3D cỡ vài µm, như mô hình máy bay thu nhỏ; cũng là công cụ chuẩn để chuẩn bị mẫu TEM.</li>
+<li><strong>Quang khắc quả cầu nano</strong>: (1) làm sạch đế; (2) nhỏ dung dịch quả cầu polystyrene; (3) để khô, các quả cầu tự xếp thành mạng lục giác; (4) lắng đọng kim loại (ví dụ Ag) qua khe hở giữa các quả cầu; (5) tẩy bỏ quả cầu; (6) còn lại mạng hạt kim loại tam giác đều đặn, quan sát bằng AFM.</li>
+<li><strong>In khuôn nano</strong> (nanoimprint): ép khuôn cứng có hình nano vào lớp polymer, tách khuôn, rồi khắc RIE để chuyển hình mẫu. Độ phân giải dưới 10 nm, chi phí thấp, không bị giới hạn nhiễu xạ.</li>
+<li><strong>Quang khắc chùm electron</strong> (EBL): xem bài dây nano.</li>
+</ul>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Linh kiện Ga₂O₃ nghiên cứu hầu hết dùng quang khắc i-line hoặc ghi laser không mặt nạ, với kích thước vài µm, vì linh kiện công suất cần khoảng cách điện cực lớn. EBL và FIB chỉ dùng cho cấu trúc đặc biệt như cổng ngắn của transistor RF hay cắt mẫu TEM để phân tích khuyết tật mặt phân cách.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. Y. Chou, P. R. Krauss, P. J. Renstrom, "Imprint lithography with 25-nanometer resolution," <em>Science</em> 272, 85 (1996).</li>
+<li>J. C. Hulteen, R. P. Van Duyne, "Nanosphere lithography: a materials general fabrication process for periodic particle array surfaces," <em>Journal of Vacuum Science &amp; Technology A</em> 13, 1553 (1995).</li>
+<li>C. Suryanarayana, "Mechanical alloying and milling," <em>Progress in Materials Science</em> 46, 1 (2001).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">There are two broad strategies for making nanostructures. Top-down: start from bulk and "carve" it away, like a sculptor. Bottom-up: assemble from atoms and molecules, like building with Lego. This lesson covers the top-down approach, the foundation of all of microelectronics.</p>
+
+<h2>1. Mechanical milling</h2>
+<p>Powder is ground in a mill with high-energy balls. Size is reduced by <strong>impact and attrition</strong> as the balls drop from the top of the shell; local collisions also generate heat and can trigger chemical reactions (mechanochemical milling).</p>
+<ul>
+<li>Pros: simple, low cost, the most widely accepted process in industry.</li>
+<li>Cons: energy- and time-intensive (hours to days); contamination from balls and vial; significant surface and crystal imperfections; materials with poor thermal conductivity may undergo large volume changes or phase transitions.</li>
+</ul>
+
+<h2>2. Laser ablation</h2>
+<p>High-energy laser pulses (often nanoseconds) vaporize material from a solid target. The vapor condenses into nanoparticles, in a gas, in vacuum, or even in a liquid (laser ablation in liquid), giving clean nanoparticles without chemical precursors.</p>
+
+<h2>3. Photolithography and its limits</h2>
+<p>Photolithography transfers a pattern from a mask to a photoresist with light, then etches it into the underlying material. The smallest feature is limited by diffraction, per the Rayleigh criterion:</p>
+$$CD = k_1\,\frac{\lambda}{NA}$$
+<p>where \(\lambda\) is the wavelength, \(NA\) the lens numerical aperture and \(k_1\) a process factor. The industry therefore kept shortening the wavelength: g-line 436 nm, i-line 365 nm, KrF 248 nm, ArF 193 nm, then raised \(NA\) with water immersion (193i), and finally moved to EUV at 13.5 nm.</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">1980</text><line x1="166.66666666666666" y1="255" x2="166.66666666666666" y2="260" class="ax"/><text x="166.66666666666666" y="275" class="tk" text-anchor="middle">1990</text><line x1="273.3333333333333" y1="255" x2="273.3333333333333" y2="260" class="ax"/><text x="273.3333333333333" y="275" class="tk" text-anchor="middle">2000</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">2010</text><line x1="486.66666666666663" y1="255" x2="486.66666666666663" y2="260" class="ax"/><text x="486.66666666666663" y="275" class="tk" text-anchor="middle">2020</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">10</text><line x1="55" y1="191.94378088763284" x2="60" y2="191.94378088763284" class="ax"/><line x1="60" y1="191.94378088763284" x2="540" y2="191.94378088763284" class="grid"/><text x="51" y="195.94378088763284" class="tk" text-anchor="end">30</text><line x1="55" y1="122.84026389808079" x2="60" y2="122.84026389808079" class="ax"/><line x1="60" y1="122.84026389808079" x2="540" y2="122.84026389808079" class="grid"/><text x="51" y="126.84026389808079" class="tk" text-anchor="end">100</text><line x1="55" y1="59.784044785713576" x2="60" y2="59.784044785713576" class="ax"/><line x1="60" y1="59.784044785713576" x2="540" y2="59.784044785713576" class="grid"/><text x="51" y="63.784044785713576" class="tk" text-anchor="end">300</text><text x="300.0" y="294" class="lab" text-anchor="middle">Year</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Lithography wavelength (nm)</text><path d="M81.3,38.3 L166.7,38.3 L166.7,48.5 L230.7,48.5 L230.7,70.7 L284.0,70.7 L284.0,85.1 L476.0,85.1 L476.0,237.8 L540.0,237.8" class="s1" fill="none"/><text x="85.3" y="31.3" class="tk">g-line 436 nm</text><text x="170.7" y="41.5" class="tk">i-line 365 nm</text><text x="234.7" y="63.7" class="tk">KrF 248 nm</text><text x="288.0" y="78.1" class="tk">ArF 193 nm</text><text x="480.0" y="230.8" class="tk">EUV 13.5 nm</text><text x="337.3" y="103.1" class="ns">+ immersion, multiple patterning</text></svg><figcaption>Figure 1. Lithography source wavelength over time (log scale, approximate milestones).</figcaption></figure>
+<p>Simple as the idea is, real photolithography is complex and expensive:</p>
+<ul>
+<li>Features much smaller than the wavelength are hard to make because of diffraction.</li>
+<li>The mask must be perfectly aligned to the pattern already on the wafer.</li>
+<li>Defect density must be tightly controlled.</li>
+<li>Lithography tools cost tens to hundreds of millions of dollars.</li>
+</ul>
+
+<h2>4. Multiple patterning</h2>
+<p>When features must be smaller than ArF 193 nm can print (about 65 nm half-pitch with dry ArF), the industry uses <strong>multiple patterning</strong>. In spacer-based self-aligned patterning: print a "core" line, coat a conformal dielectric, etch anisotropically to leave spacers on both sidewalls, then remove the core. Each original line yields two, halving the pitch. Spacer width is set by the <strong>deposited film thickness</strong>, not by lithography, so it is very small and uniform. TEM images of 25 nm flash memory show closely packed gates made this way.</p>
+
+<h2>5. Other nanopatterning techniques</h2>
+<ul>
+<li><strong>Focused ion beam</strong> (FIB): a Ga⁺ beam mills material directly, or decomposes a precursor gas for local deposition. It can "write" 3D structures a few µm in size, such as a miniature airplane; it is also the standard tool for TEM sample preparation.</li>
+<li><strong>Nanosphere lithography</strong>: (1) clean the substrate; (2) drop-coat polystyrene spheres; (3) let it dry so the spheres self-assemble into a hexagonal array; (4) deposit metal (e.g. Ag) through the gaps; (5) lift off the spheres; (6) a regular array of triangular metal particles remains, imaged by AFM.</li>
+<li><strong>Nanoimprint lithography</strong>: press a hard mold with nano features into a polymer layer, release the mold, then RIE to transfer the pattern. Resolution below 10 nm, low cost, and no diffraction limit.</li>
+<li><strong>Electron beam lithography</strong> (EBL): see the nanowire lesson.</li>
+</ul>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Research Ga₂O₃ devices mostly use i-line lithography or maskless laser writing at feature sizes of a few µm, since power devices need large electrode spacing. EBL and FIB are reserved for special structures such as short gates in RF transistors, or cutting TEM lamellae to analyze interface defects.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>S. Y. Chou, P. R. Krauss, P. J. Renstrom, "Imprint lithography with 25-nanometer resolution," <em>Science</em> 272, 85 (1996).</li>
+<li>J. C. Hulteen, R. P. Van Duyne, "Nanosphere lithography: a materials general fabrication process for periodic particle array surfaces," <em>Journal of Vacuum Science &amp; Technology A</em> 13, 1553 (1995).</li>
+<li>C. Suryanarayana, "Mechanical alloying and milling," <em>Progress in Materials Science</em> 46, 1 (2001).</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-history.html">← <span class="l-vi">Nano trong lịch sử, tự nhiên và sản phẩm</span><span class="l-en">Nano in history, nature and products</span></a><a class="n" href="nano-bottom-up-vapor.html"><span class="l-vi">Từ dưới lên (1): tự lắp ráp và pha khí</span><span class="l-en">Bottom-up (1): self-assembly and vapor phase</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

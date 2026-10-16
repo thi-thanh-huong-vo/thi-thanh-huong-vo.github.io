@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Tiếp giáp pn ở cân bằng" data-title-en="The pn junction in equilibrium">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The pn junction in equilibrium · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Space charge region, built-in potential, electric field, depletion width and one-sided junctions.">
+<meta property="og:title" content="The pn junction in equilibrium">
+<meta property="og:description" content="Space charge region, built-in potential, electric field, depletion width and one-sided junctions.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 1</span><span class="l-en">Part 3 · Lesson 1</span></p>
+  <h1><span class="l-vi">Tiếp giáp pn ở cân bằng</span><span class="l-en">The pn junction in equilibrium</span></h1>
+  <p class="sub"><span class="l-vi">Vùng điện tích không gian, điện thế tiếp xúc, điện trường, độ rộng vùng nghèo và tiếp giáp một phía.</span><span class="l-en">Space charge region, built-in potential, electric field, depletion width and one-sided junctions.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Tiếp giáp pn là "nguyên tử" của điện tử học bán dẫn: diode, pin mặt trời, LED, transistor lưỡng cực và cả vùng nguồn/máng của MOSFET đều được xây từ nó. Bài này xét tiếp giáp ở trạng thái cân bằng nhiệt, khi chưa có điện áp ngoài.</p>
+
+<h2>1. Hình thành vùng điện tích không gian</h2>
+<p>Khi một vùng p (nhiều lỗ trống) và một vùng n (nhiều electron) được ghép trong cùng một tinh thể, chênh lệch nồng độ khiến electron khuếch tán từ n sang p và lỗ trống từ p sang n. Hạt tải rời đi để lại các ion tạp chất cố định: ion donor dương \(N_d^+\) phía n, ion acceptor âm \(N_a^-\) phía p. Vùng chỉ còn ion cố định này gọi là <strong>vùng điện tích không gian</strong> (space charge region, SCR) hay vùng nghèo (depletion region).</p>
+<p>Điện tích ion tạo ra một điện trường hướng từ n sang p, chống lại sự khuếch tán. Cân bằng đạt được khi dòng trôi (drift) do điện trường bằng đúng dòng khuếch tán, cho từng loại hạt tải. Khi đó mức Fermi \(E_F\) <strong>nằm ngang</strong> trên toàn bộ linh kiện, và các vùng năng lượng bị uốn cong trong SCR.</p>
+
+<h2>2. Điện thế tiếp xúc</h2>
+<p>Độ uốn của vùng năng lượng tương ứng với <strong>điện thế tiếp xúc</strong> (built-in potential) \(V_{bi}\), bằng tổng khoảng cách từ mức Fermi nội tại tới \(E_F\) ở hai phía:</p>
+$$V_{bi} = \frac{kT}{q}\ln\frac{N_a N_d}{n_i^2}$$
+<div class="box"><p class="t">Ví dụ</p>
+<p>Diode Si ở 300 K, \(N_a = 10^{17}\) cm⁻³, \(N_d = 10^{16}\) cm⁻³, dùng \(n_i = 6{,}95\times10^{9}\) cm⁻³: \(V_{bi} = 0{,}0259\,\ln\!\big(10^{33}/(6{,}95\times10^{9})^2\big) \approx 0{,}794\) V. Nếu pha tạp giảm 10 lần ở cả hai phía, \(V_{bi}\) chỉ giảm còn khoảng 0,675 V: \(V_{bi}\) phụ thuộc logarit nên thay đổi chậm theo nồng độ.</p></div>
+<p>Lưu ý: \(V_{bi}\) không đo được bằng vôn kế nối hai đầu diode. Các tiếp xúc kim loại cũng có điện thế tiếp xúc riêng, và tổng các điện thế quanh mạch kín bằng 0 ở cân bằng.</p>
+
+<h2>3. Điện trường, điện thế và độ rộng vùng nghèo</h2>
+<p>Trong <strong>xấp xỉ vùng nghèo</strong> (depletion approximation), SCR hoàn toàn không có hạt tải tự do và biên của nó sắc nét. Phương trình Poisson \(dE/dx = \rho/\varepsilon_s\) với mật độ điện tích hình chữ nhật cho điện trường hình tam giác, cực đại tại mặt tiếp giáp, và điện thế dạng parabol.</p>
+<figure><svg viewBox="0 0 560 360" class="fig-svg" role="img"><line x1="280" y1="20" x2="280" y2="340" class="grid" style="stroke-dasharray:4 4"/><text x="110" y="22" class="nt" text-anchor="middle">p</text><text x="430" y="22" class="nt" text-anchor="middle">n</text><line x1="40" y1="70" x2="520" y2="70" class="ax"/><text x="34" y="74" class="ns" text-anchor="end">ρ</text><rect x="180" y="70" width="100" height="26" fill="var(--s2)" opacity=".5"/><rect x="280" y="18" width="50" height="52" fill="var(--s3)" opacity=".5"/><text x="230.0" y="112" class="tk" text-anchor="middle">−eN<tspan baseline-shift="sub" font-size="8">a</tspan></text><text x="336" y="40" class="tk">+eN<tspan baseline-shift="sub" font-size="8">d</tspan></text><line x1="40" y1="150" x2="520" y2="150" class="ax"/><text x="34" y="154" class="ns" text-anchor="end">E</text><path d="M180,150 L280,215 L330,150" class="s1" fill="none"/><text x="288" y="220" class="tk">E<tspan baseline-shift="sub" font-size="8">max</tspan></text><line x1="40" y1="320" x2="520" y2="320" class="ax"/><text x="34" y="324" class="ns" text-anchor="end">φ</text><path d="M40,320 L180.0,320.0 L181.5,320.0 L183.0,320.0 L184.5,319.9 L186.0,319.8 L187.5,319.8 L189.0,319.6 L190.5,319.5 L192.0,319.4 L193.5,319.2 L195.0,319.0 L196.5,318.8 L198.0,318.6 L199.5,318.3 L201.0,318.1 L202.5,317.8 L204.0,317.5 L205.5,317.2 L207.0,316.8 L208.5,316.5 L210.0,316.1 L211.5,315.7 L213.0,315.3 L214.5,314.8 L216.0,314.4 L217.5,313.9 L219.0,313.4 L220.5,312.9 L222.0,312.3 L223.5,311.8 L225.0,311.2 L226.5,310.6 L228.0,310.0 L229.5,309.4 L231.0,308.7 L232.5,308.0 L234.0,307.3 L235.5,306.6 L237.0,305.9 L238.5,305.1 L240.0,304.4 L241.5,303.6 L243.0,302.8 L244.5,301.9 L246.0,301.1 L247.5,300.2 L249.0,299.3 L250.5,298.4 L252.0,297.5 L253.5,296.6 L255.0,295.6 L256.5,294.6 L258.0,293.6 L259.5,292.6 L261.0,291.5 L262.5,290.5 L264.0,289.4 L265.5,288.3 L267.0,287.2 L268.5,286.0 L270.0,284.8 L271.5,283.7 L273.0,282.5 L274.5,281.2 L276.0,280.0 L277.5,278.7 L279.0,277.5 L280.5,276.1 L282.0,274.5 L283.5,273.0 L285.0,271.5 L286.5,270.1 L288.0,268.8 L289.5,267.5 L291.0,266.2 L292.5,265.0 L294.0,263.8 L295.5,262.7 L297.0,261.6 L298.5,260.6 L300.0,259.6 L301.5,258.6 L303.0,257.8 L304.5,256.9 L306.0,256.1 L307.5,255.4 L309.0,254.7 L310.5,254.0 L312.0,253.4 L313.5,252.9 L315.0,252.4 L316.5,251.9 L318.0,251.5 L319.5,251.2 L321.0,250.9 L322.5,250.6 L324.0,250.4 L325.5,250.2 L327.0,250.1 L328.5,250.0 L330.0,250.0 L520,250" class="s1" fill="none"/><text x="530" y="254" class="tk">V<tspan baseline-shift="sub" font-size="8">bi</tspan></text><text x="180" y="345" class="tk" text-anchor="middle">−x<tspan baseline-shift="sub" font-size="8">p</tspan></text><text x="330" y="345" class="tk" text-anchor="middle">x<tspan baseline-shift="sub" font-size="8">n</tspan></text></svg><figcaption>Hình 1. Tiếp giáp pn đột ngột trong xấp xỉ vùng nghèo: mật độ điện tích, điện trường và điện thế.</figcaption></figure>
+<p>Trung hòa điện tích yêu cầu \(N_a x_p = N_d x_n\): vùng nghèo lan sâu hơn về phía pha tạp nhẹ. Độ rộng tổng:</p>
+$$W = x_n + x_p = \sqrt{\frac{2\varepsilon_s V_{bi}}{q}\left(\frac{1}{N_a}+\frac{1}{N_d}\right)}, \qquad E_{max} = \frac{qN_d x_n}{\varepsilon_s} = \frac{qN_a x_p}{\varepsilon_s}$$
+<div class="box"><p class="t">Ví dụ (tiếp)</p>
+<p>Với diode trên: \(W \approx 0{,}336\ \mu\)m và \(E_{max} \approx 4{,}7\times10^{4}\) V/cm. Do \(N_a = 10N_d\), khoảng 91 % vùng nghèo nằm ở phía n.</p></div>
+
+<h2>4. Tiếp giáp một phía</h2>
+<p>Khi một phía pha tạp rất mạnh, ví dụ p⁺n với \(N_a \gg N_d\), gần như toàn bộ vùng nghèo nằm ở phía n và \(W \approx \sqrt{2\varepsilon_s V_{bi}/(qN_d)}\). Các tính chất của tiếp giáp khi đó do phía pha tạp nhẹ quyết định. Ví dụ p⁺n với \(N_a = 10^{18}\), \(N_d = 10^{15}\) cm⁻³, \(n_i = 1{,}5\times10^{10}\) cm⁻³: \(V_{bi} \approx 0{,}754\) V, \(W \approx 0{,}99\ \mu\)m, \(E_{max} \approx 1{,}5\times10^{4}\) V/cm. Đây cũng là cơ sở để hiểu tiếp xúc Schottky, vốn hoạt động như một tiếp giáp "một phía" lý tưởng.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Ga₂O₃ gần như không thể pha tạp loại p hiệu quả: các acceptor như Mg hay N có mức năng lượng rất sâu, và lỗ trống tự bẫy (self-trapped holes) do vùng hóa trị rất phẳng. Vì vậy tiếp giáp pn đồng chất Ga₂O₃ chưa hiện thực, và các nhóm thay thế bằng tiếp giáp dị chất với oxit loại p như NiO hoặc Cu₂O, hoặc dùng tiếp xúc Schottky.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 5.</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chương 2.</li>
+<li>J. B. Varley et al., "Role of self-trapping in luminescence and p-type conductivity of wide-band-gap oxides," <em>Physical Review B</em> 85, 081109 (2012).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The pn junction is the "atom" of semiconductor electronics: diodes, solar cells, LEDs, bipolar transistors and even MOSFET source/drain regions are built from it. This lesson treats the junction in thermal equilibrium, with no external voltage.</p>
+
+<h2>1. Forming the space charge region</h2>
+<p>When a p region (many holes) and an n region (many electrons) are joined in one crystal, the concentration difference makes electrons diffuse from n to p and holes from p to n. The departing carriers leave behind fixed dopant ions: positive donors \(N_d^+\) on the n side, negative acceptors \(N_a^-\) on the p side. This region containing only fixed ions is the <strong>space charge region</strong> (SCR), or depletion region.</p>
+<p>The ionic charge creates an electric field pointing from n to p, opposing diffusion. Equilibrium is reached when the field-driven drift current exactly balances the diffusion current, for each carrier type. The Fermi level \(E_F\) is then <strong>flat</strong> across the whole device, and the bands bend inside the SCR.</p>
+
+<h2>2. The built-in potential</h2>
+<p>The band bending corresponds to the <strong>built-in potential</strong> \(V_{bi}\), the sum of the distances from the intrinsic level to \(E_F\) on the two sides:</p>
+$$V_{bi} = \frac{kT}{q}\ln\frac{N_a N_d}{n_i^2}$$
+<div class="box"><p class="t">Example</p>
+<p>A Si diode at 300 K with \(N_a = 10^{17}\) cm⁻³, \(N_d = 10^{16}\) cm⁻³ and \(n_i = 6.95\times10^{9}\) cm⁻³: \(V_{bi} = 0.0259\,\ln\!\big(10^{33}/(6.95\times10^{9})^2\big) \approx 0.794\) V. With doping 10× lower on both sides, \(V_{bi}\) only drops to about 0.675 V: the logarithm makes \(V_{bi}\) change slowly with doping.</p></div>
+<p>Note: \(V_{bi}\) cannot be measured with a voltmeter across the diode. The metal contacts have their own contact potentials, and the potentials around a closed loop sum to zero in equilibrium.</p>
+
+<h2>3. Field, potential and depletion width</h2>
+<p>In the <strong>depletion approximation</strong>, the SCR is completely free of mobile carriers and has sharp edges. Poisson's equation \(dE/dx = \rho/\varepsilon_s\) with a rectangular charge density gives a triangular field, peaking at the junction, and a parabolic potential.</p>
+<figure><svg viewBox="0 0 560 360" class="fig-svg" role="img"><line x1="280" y1="20" x2="280" y2="340" class="grid" style="stroke-dasharray:4 4"/><text x="110" y="22" class="nt" text-anchor="middle">p</text><text x="430" y="22" class="nt" text-anchor="middle">n</text><line x1="40" y1="70" x2="520" y2="70" class="ax"/><text x="34" y="74" class="ns" text-anchor="end">ρ</text><rect x="180" y="70" width="100" height="26" fill="var(--s2)" opacity=".5"/><rect x="280" y="18" width="50" height="52" fill="var(--s3)" opacity=".5"/><text x="230.0" y="112" class="tk" text-anchor="middle">−eN<tspan baseline-shift="sub" font-size="8">a</tspan></text><text x="336" y="40" class="tk">+eN<tspan baseline-shift="sub" font-size="8">d</tspan></text><line x1="40" y1="150" x2="520" y2="150" class="ax"/><text x="34" y="154" class="ns" text-anchor="end">E</text><path d="M180,150 L280,215 L330,150" class="s1" fill="none"/><text x="288" y="220" class="tk">E<tspan baseline-shift="sub" font-size="8">max</tspan></text><line x1="40" y1="320" x2="520" y2="320" class="ax"/><text x="34" y="324" class="ns" text-anchor="end">φ</text><path d="M40,320 L180.0,320.0 L181.5,320.0 L183.0,320.0 L184.5,319.9 L186.0,319.8 L187.5,319.8 L189.0,319.6 L190.5,319.5 L192.0,319.4 L193.5,319.2 L195.0,319.0 L196.5,318.8 L198.0,318.6 L199.5,318.3 L201.0,318.1 L202.5,317.8 L204.0,317.5 L205.5,317.2 L207.0,316.8 L208.5,316.5 L210.0,316.1 L211.5,315.7 L213.0,315.3 L214.5,314.8 L216.0,314.4 L217.5,313.9 L219.0,313.4 L220.5,312.9 L222.0,312.3 L223.5,311.8 L225.0,311.2 L226.5,310.6 L228.0,310.0 L229.5,309.4 L231.0,308.7 L232.5,308.0 L234.0,307.3 L235.5,306.6 L237.0,305.9 L238.5,305.1 L240.0,304.4 L241.5,303.6 L243.0,302.8 L244.5,301.9 L246.0,301.1 L247.5,300.2 L249.0,299.3 L250.5,298.4 L252.0,297.5 L253.5,296.6 L255.0,295.6 L256.5,294.6 L258.0,293.6 L259.5,292.6 L261.0,291.5 L262.5,290.5 L264.0,289.4 L265.5,288.3 L267.0,287.2 L268.5,286.0 L270.0,284.8 L271.5,283.7 L273.0,282.5 L274.5,281.2 L276.0,280.0 L277.5,278.7 L279.0,277.5 L280.5,276.1 L282.0,274.5 L283.5,273.0 L285.0,271.5 L286.5,270.1 L288.0,268.8 L289.5,267.5 L291.0,266.2 L292.5,265.0 L294.0,263.8 L295.5,262.7 L297.0,261.6 L298.5,260.6 L300.0,259.6 L301.5,258.6 L303.0,257.8 L304.5,256.9 L306.0,256.1 L307.5,255.4 L309.0,254.7 L310.5,254.0 L312.0,253.4 L313.5,252.9 L315.0,252.4 L316.5,251.9 L318.0,251.5 L319.5,251.2 L321.0,250.9 L322.5,250.6 L324.0,250.4 L325.5,250.2 L327.0,250.1 L328.5,250.0 L330.0,250.0 L520,250" class="s1" fill="none"/><text x="530" y="254" class="tk">V<tspan baseline-shift="sub" font-size="8">bi</tspan></text><text x="180" y="345" class="tk" text-anchor="middle">−x<tspan baseline-shift="sub" font-size="8">p</tspan></text><text x="330" y="345" class="tk" text-anchor="middle">x<tspan baseline-shift="sub" font-size="8">n</tspan></text></svg><figcaption>Figure 1. An abrupt pn junction in the depletion approximation: charge density, electric field and potential.</figcaption></figure>
+<p>Charge neutrality requires \(N_a x_p = N_d x_n\): the depletion region extends further into the lightly doped side. The total width is:</p>
+$$W = x_n + x_p = \sqrt{\frac{2\varepsilon_s V_{bi}}{q}\left(\frac{1}{N_a}+\frac{1}{N_d}\right)}, \qquad E_{max} = \frac{qN_d x_n}{\varepsilon_s} = \frac{qN_a x_p}{\varepsilon_s}$$
+<div class="box"><p class="t">Example (continued)</p>
+<p>For the diode above: \(W \approx 0.336\ \mu\)m and \(E_{max} \approx 4.7\times10^{4}\) V/cm. Because \(N_a = 10N_d\), about 91% of the depletion region lies on the n side.</p></div>
+
+<h2>4. One-sided junctions</h2>
+<p>When one side is very heavily doped, for example p⁺n with \(N_a \gg N_d\), nearly all of the depletion region is on the n side and \(W \approx \sqrt{2\varepsilon_s V_{bi}/(qN_d)}\). The junction's properties are then set by the lightly doped side. Example: p⁺n with \(N_a = 10^{18}\), \(N_d = 10^{15}\) cm⁻³, \(n_i = 1.5\times10^{10}\) cm⁻³: \(V_{bi} \approx 0.754\) V, \(W \approx 0.99\ \mu\)m, \(E_{max} \approx 1.5\times10^{4}\) V/cm. This is also the basis for understanding the Schottky contact, which behaves like an ideal "one-sided" junction.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Ga₂O₃ can hardly be doped p-type effectively: acceptors such as Mg or N have very deep levels, and holes self-trap because the valence band is very flat. Homojunction Ga₂O₃ pn diodes are therefore not yet realized, and groups instead use heterojunctions with p-type oxides such as NiO or Cu₂O, or Schottky contacts.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 5.</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chapter 2.</li>
+<li>J. B. Varley et al., "Role of self-trapping in luminescence and p-type conductivity of wide-band-gap oxides," <em>Physical Review B</em> 85, 081109 (2012).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-impedance.html">← <span class="l-vi">Trở kháng và phép đo điện dung</span><span class="l-en">Impedance and capacitance measurement</span></a><a class="n" href="dev-pn-bias.html"><span class="l-vi">Tiếp giáp pn khi phân cực</span><span class="l-en">The biased pn junction</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

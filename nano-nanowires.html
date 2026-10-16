@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Dây nano bán dẫn" data-title-en="Semiconductor nanowires">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semiconductor nanowires · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Spacer patterning, EBL, GAA transistors, the vapor–liquid–solid mechanism with Au catalysts and catalyst requirements.">
+<meta property="og:title" content="Semiconductor nanowires">
+<meta property="og:description" content="Spacer patterning, EBL, GAA transistors, the vapor–liquid–solid mechanism with Au catalysts and catalyst requirements.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 4</span><span class="l-en">Part 2 · Lesson 4</span></p>
+  <h1><span class="l-vi">Dây nano bán dẫn</span><span class="l-en">Semiconductor nanowires</span></h1>
+  <p class="sub"><span class="l-vi">Đa mẫu spacer, EBL, transistor GAA, cơ chế hơi–lỏng–rắn với xúc tác Au và yêu cầu với chất xúc tác.</span><span class="l-en">Spacer patterning, EBL, GAA transistors, the vapor–liquid–solid mechanism with Au catalysts and catalyst requirements.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Dây nano bán dẫn là cầu nối giữa vật liệu nano và linh kiện: transistor cổng bao quanh (GAA) trong chip hiện đại chính là dây hoặc tấm nano. Có hai con đường để tạo chúng: khắc từ trên xuống, hoặc "trồng" từ dưới lên bằng cơ chế hơi–lỏng–rắn.</p>
+
+<h2>1. Từ trên xuống: đa mẫu spacer và EBL</h2>
+<p>Chiều ngang của dây thường được xác định bằng quang khắc. Với kỹ thuật spacer (xem bài từ trên xuống), độ rộng mặt nạ cứng được quyết định bởi độ dày lớp điện môi lắng đọng chứ không phải quang khắc, nên rất hẹp và đồng đều.</p>
+<p><strong>Quang khắc chùm electron</strong> (EBL) quét một chùm electron hội tụ trên lớp cảm điện tử để "viết" trực tiếp hình mẫu. Vì bước sóng của electron cực ngắn, EBL tạo được cấu trúc mà quang khắc thường không làm được. Nó chậm (viết tuần tự từng điểm) nên không dùng cho sản xuất hàng loạt, nhưng là kỹ thuật tạo mẫu nano phổ biến nhất trong nghiên cứu và chế tạo mẫu thử.</p>
+
+<h2>2. Transistor dây nano cổng bao quanh</h2>
+<p>Quy trình <strong>silicon-on-nothing</strong> (SON): mọc xen kẽ các lớp epitaxy Si/SiGe/Si/SiGe/Si trên đế Si. Lớp SiGe truyền tính liên tục của mạng tinh thể từ đế lên lớp Si phía trên, nên Si giữ được đơn tinh thể. Sau đó khắc chọn lọc bỏ SiGe, để lại các dây Si treo lơ lửng, rồi bọc oxit và cổng xung quanh. Xếp chồng nhiều lớp cho nhiều dây trong một transistor.</p>
+
+<h2>3. Từ dưới lên: các cơ chế tạo cấu trúc 1D</h2>
+<p>Có nhiều cách để buộc tinh thể phát triển một chiều: (a) cấu trúc tinh thể bất đẳng hướng tự nhiên; (b) giam bằng giọt lỏng như trong cơ chế hơi–lỏng–rắn (VLS); (c) dùng khuôn; (d) điều khiển động học bằng chất bao; (e) tự lắp ráp các cấu trúc 0D; (f) thu nhỏ cấu trúc vi mô 1D.</p>
+
+<h2>4. Cơ chế hơi–lỏng–rắn (VLS)</h2>
+<p>Cơ sở là <strong>hệ cùng tinh</strong> (eutectic): một hỗn hợp nóng chảy ở nhiệt độ thấp hơn nhiệt độ nóng chảy của từng thành phần. Hệ Au–Si có điểm cùng tinh ở khoảng <strong>363 °C</strong>, với khoảng 19 % nguyên tử Si, thấp hơn rất nhiều so với nhiệt độ nóng chảy của Au (1064 °C) hay Si (1414 °C).</p>
+<figure><svg viewBox="0 0 620 250" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="15" y="190" width="170" height="22" class="node"/><text x="100" y="240" class="ns" text-anchor="middle">1. Hạt Au trên đế</text><rect x="225" y="190" width="170" height="22" class="node"/><text x="310" y="240" class="ns" text-anchor="middle">2. Giọt lỏng Au–Si, hấp thụ Si</text><rect x="435" y="190" width="170" height="22" class="node"/><text x="520" y="240" class="ns" text-anchor="middle">3. Si kết tủa: dây nano lớn lên</text><path d="M85,190 a15,10 0 0,1 30,0z" style="fill:#d4a017"/><ellipse cx="310" cy="178" rx="20" ry="14" style="fill:#e8c35a;stroke:#b8901a"/><rect x="506" y="95" width="28" height="95" class="node" style="fill:var(--accent-soft)"/><ellipse cx="520" cy="84" rx="20" ry="14" style="fill:#e8c35a;stroke:#b8901a"/><path d="M290,120 L295.0,155" class="arr" marker-end="url(#mv)"/><path d="M330,120 L325.0,155" class="arr" marker-end="url(#mv)"/><path d="M500,30 L505.0,65" class="arr" marker-end="url(#mv)"/><path d="M540,30 L535.0,65" class="arr" marker-end="url(#mv)"/><text x="310" y="108" class="ns" text-anchor="middle">SiH₄ → Si + 2H₂</text><text x="520" y="20" class="ns" text-anchor="middle">hơi SiH₄</text><text x="568" y="88" class="ns">lỏng</text><text x="545" y="150" class="ns">rắn</text><text x="338" y="200" class="ns">&gt; 363 °C</text><path d="M190,165H225" class="arr" marker-end="url(#mv)"/><path d="M400,165H435" class="arr" marker-end="url(#mv)"/></svg><figcaption>Hình 1. Cơ chế VLS mọc dây nano Si với xúc tác Au (sơ đồ).</figcaption></figure>
+<ol>
+<li>Hạt Au được nung trên nhiệt độ cùng tinh, tạo giọt hợp kim Au–Si lỏng.</li>
+<li>Au xúc tác phân hủy tiền chất (SiH₄, SiCl₄, SiH₂Cl₂ → Si + H₂) ngay tại giọt; Si hòa vào giọt qua mặt phân cách hơi/lỏng cho tới khi quá bão hòa.</li>
+<li>Si kết tủa tại mặt phân cách lỏng/rắn (mặt phát triển). Si liên tục đi vào ở mặt trên và kết tủa ở mặt dưới, đẩy giọt lên cao: dây nano lớn lên, và luôn thấy một "quả cầu" lỏng ở đầu dây.</li>
+</ol>
+<p>Giọt xúc tác quyết định <strong>đường kính</strong> dây và <strong>vị trí</strong> mọc. Hướng mọc cũng phụ thuộc đường kính: dây Si 3–10 nm ưu tiên hướng ⟨110⟩, 10–20 nm thường ⟨112⟩ (mặt bậc giữa (111) và (110)), còn dây lớn hơn 20 nm mọc theo ⟨111⟩.</p>
+<p>Hệ VLS có ba pha và hai mặt phân cách, với bốn bước: (1) vận chuyển khối trong pha khí (nhanh); (2) phản ứng hóa học ở mặt hơi/lỏng (phụ thuộc áp suất riêng phần); (3) khuếch tán trong pha lỏng (rất nhanh); (4) gắn nguyên tử vào mạng tinh thể ở mặt lỏng/rắn. Bước chậm nhất quyết định tốc độ mọc.</p>
+
+<h2>5. Yêu cầu với chất xúc tác</h2>
+<ul>
+<li>Tạo được dung dịch lỏng với thành phần của pha rắn.</li>
+<li>Áp suất hơi của xúc tác trên hợp kim lỏng phải nhỏ, nếu không xúc tác bay hơi hết trong quá trình mọc.</li>
+<li>Trơ về hóa học, không có pha rắn trung gian.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th>Loại</th><th>Ví dụ</th><th>Đặc điểm</th></tr>
+<tr><td>A</td><td>Au, Ag, Al</td><td>Một điểm cùng tinh với Si, không tạo silicide</td></tr>
+<tr><td>B</td><td>In, Ga, Zn</td><td>Một điểm cùng tinh, không tạo silicide, độ hòa tan Si thấp (&lt;1 % nguyên tử)</td></tr>
+<tr><td>C</td><td>Cu, Pt, Ti</td><td>Có một hoặc nhiều pha silicide</td></tr>
+</table></div>
+<p>Au đáp ứng tốt nhất nên được dùng phổ biến, nhưng <strong>không tương thích với CMOS</strong>: Au khuếch tán nhanh, tạo mức bẫy sâu trong Si và di chuyển trên bề mặt dây. Al có giản đồ pha tương tự Au–Si nhưng bị oxy hóa nhanh. Từ VLS, có thể tạo dây dị chất (dọc trục hoặc lõi–vỏ), dây phân nhánh hay dây gấp khúc.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Dây nano β-Ga₂O₃ cũng được mọc bằng VLS với xúc tác Au, hoặc bằng oxy hóa trực tiếp Ga kim loại. Với vùng cấm rộng và tỉ lệ bề mặt/thể tích lớn, chúng được dùng cho cảm biến UV-C mù ánh sáng mặt trời và cảm biến khí. Ga cũng là xúc tác loại B cho dây Si, tức chính nguyên tố trong vật liệu của tôi có mặt trong bảng trên.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>R. S. Wagner, W. C. Ellis, "Vapor-liquid-solid mechanism of single crystal growth," <em>Applied Physics Letters</em> 4, 89 (1964).</li>
+<li>Y. Wu et al., "Controlled growth and structures of molecular-scale silicon nanowires," <em>Nano Letters</em> 4, 433 (2004).</li>
+<li>V. Schmidt, J. V. Wittemann, S. Senz, U. Gösele, "Silicon nanowires: a review on aspects of their growth and their electrical properties," <em>Advanced Materials</em> 21, 2681 (2009).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Semiconductor nanowires bridge nanomaterials and devices: the gate-all-around (GAA) transistors in modern chips are nanowires or nanosheets. There are two routes to them: etch them top-down, or "grow" them bottom-up via the vapor–liquid–solid mechanism.</p>
+
+<h2>1. Top-down: spacer patterning and EBL</h2>
+<p>The lateral dimension of a wire is usually defined by lithography. With the spacer technique (see the top-down lesson), the hard-mask width is set by the deposited dielectric thickness rather than lithography, so it is very narrow and uniform.</p>
+<p><strong>Electron beam lithography</strong> (EBL) scans a focused electron beam over an electron-sensitive resist to write patterns directly. Because the electron wavelength is extremely short, EBL makes features ordinary photolithography cannot. It is slow (writing point by point) and unsuited to mass production, but it is the most popular nanopatterning technique for research and prototyping.</p>
+
+<h2>2. Gate-all-around nanowire transistors</h2>
+<p>The <strong>silicon-on-nothing</strong> (SON) process: grow alternating epitaxial Si/SiGe/Si/SiGe/Si layers on a Si substrate. The SiGe layers carry the lattice continuity from the substrate to the Si layers above, keeping them single-crystalline. SiGe is then selectively etched away, leaving suspended Si wires, which are wrapped in oxide and gate. Stacking several layers gives multiple wires per transistor.</p>
+
+<h2>3. Bottom-up: ways to make 1D structures</h2>
+<p>Several mechanisms force one-dimensional growth: (a) an intrinsically anisotropic crystal structure; (b) confinement by a liquid droplet, as in the vapor–liquid–solid (VLS) process; (c) templates; (d) kinetic control by capping agents; (e) self-assembly of 0D structures; (f) size reduction of 1D microstructures.</p>
+
+<h2>4. The vapor–liquid–solid (VLS) mechanism</h2>
+<p>The basis is a <strong>eutectic system</strong>: a mixture that melts at a lower temperature than any of its components. The Au–Si system has a eutectic at about <strong>363 °C</strong>, at roughly 19 at.% Si, far below the melting points of Au (1064 °C) and Si (1414 °C).</p>
+<figure><svg viewBox="0 0 620 250" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="15" y="190" width="170" height="22" class="node"/><text x="100" y="240" class="ns" text-anchor="middle">1. Au particle on substrate</text><rect x="225" y="190" width="170" height="22" class="node"/><text x="310" y="240" class="ns" text-anchor="middle">2. Liquid Au–Si droplet absorbs Si</text><rect x="435" y="190" width="170" height="22" class="node"/><text x="520" y="240" class="ns" text-anchor="middle">3. Si precipitates: nanowire grows</text><path d="M85,190 a15,10 0 0,1 30,0z" style="fill:#d4a017"/><ellipse cx="310" cy="178" rx="20" ry="14" style="fill:#e8c35a;stroke:#b8901a"/><rect x="506" y="95" width="28" height="95" class="node" style="fill:var(--accent-soft)"/><ellipse cx="520" cy="84" rx="20" ry="14" style="fill:#e8c35a;stroke:#b8901a"/><path d="M290,120 L295.0,155" class="arr" marker-end="url(#me)"/><path d="M330,120 L325.0,155" class="arr" marker-end="url(#me)"/><path d="M500,30 L505.0,65" class="arr" marker-end="url(#me)"/><path d="M540,30 L535.0,65" class="arr" marker-end="url(#me)"/><text x="310" y="108" class="ns" text-anchor="middle">SiH₄ → Si + 2H₂</text><text x="520" y="20" class="ns" text-anchor="middle">vapor SiH₄</text><text x="568" y="88" class="ns">liquid</text><text x="545" y="150" class="ns">solid</text><text x="338" y="200" class="ns">&gt; 363 °C</text><path d="M190,165H225" class="arr" marker-end="url(#me)"/><path d="M400,165H435" class="arr" marker-end="url(#me)"/></svg><figcaption>Figure 1. VLS growth of a Si nanowire with an Au catalyst (schematic).</figcaption></figure>
+<ol>
+<li>Au particles are heated above the eutectic temperature, forming liquid Au–Si alloy droplets.</li>
+<li>Au catalyzes precursor decomposition (SiH₄, SiCl₄, SiH₂Cl₂ → Si + H₂) right at the droplet; Si dissolves into the droplet through the vapor/liquid interface until it is supersaturated.</li>
+<li>Si precipitates at the liquid/solid interface (the growth interface). Si keeps entering at the top and precipitating at the bottom, lifting the droplet: the nanowire grows, and a liquid "ball" is always found at its tip.</li>
+</ol>
+<p>The catalyst droplet sets the wire <strong>diameter</strong> and growth <strong>location</strong>. Growth direction also depends on diameter: 3–10 nm Si wires prefer ⟨110⟩, 10–20 nm often ⟨112⟩ (a stepped plane between (111) and (110)), and wires above 20 nm grow along ⟨111⟩.</p>
+<p>The VLS system has three phases and two interfaces, with four steps: (1) mass transport in the gas (fast); (2) chemical reaction at the vapor/liquid interface (partial-pressure dependent); (3) diffusion through the liquid (very fast); (4) incorporation into the crystal lattice at the liquid/solid interface. The slowest step sets the growth rate.</p>
+
+<h2>5. Catalyst requirements</h2>
+<ul>
+<li>Form a liquid solution with the component of the solid phase.</li>
+<li>Have a low vapor pressure over the liquid alloy, or the catalyst will evaporate during growth.</li>
+<li>Be chemically inert, with no intermediate solid phase.</li>
+</ul>
+<div class="tablewrap"><table>
+<tr><th>Type</th><th>Examples</th><th>Characteristics</th></tr>
+<tr><td>A</td><td>Au, Ag, Al</td><td>Single eutectic with Si, no silicide formation</td></tr>
+<tr><td>B</td><td>In, Ga, Zn</td><td>Single eutectic, no silicide, low Si solubility (&lt;1 at.%)</td></tr>
+<tr><td>C</td><td>Cu, Pt, Ti</td><td>One or more silicide phases</td></tr>
+</table></div>
+<p>Au meets the requirements best and is used most, but it is <strong>not CMOS-compatible</strong>: Au diffuses fast, forms deep traps in Si and migrates along the wire surface. Al has a phase diagram similar to Au–Si but oxidizes quickly. VLS can also produce heterostructured wires (axial or core–shell), branched wires and kinked wires.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>β-Ga₂O₃ nanowires are also grown by VLS with Au catalysts, or by direct oxidation of Ga metal. With a wide bandgap and large surface-to-volume ratio, they are used for solar-blind UV-C detectors and gas sensors. Ga is also a type-B catalyst for Si wires, so the very element in my material appears in the table above.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>R. S. Wagner, W. C. Ellis, "Vapor-liquid-solid mechanism of single crystal growth," <em>Applied Physics Letters</em> 4, 89 (1964).</li>
+<li>Y. Wu et al., "Controlled growth and structures of molecular-scale silicon nanowires," <em>Nano Letters</em> 4, 433 (2004).</li>
+<li>V. Schmidt, J. V. Wittemann, S. Senz, U. Gösele, "Silicon nanowires: a review on aspects of their growth and their electrical properties," <em>Advanced Materials</em> 21, 2681 (2009).</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-bottom-up-solution.html">← <span class="l-vi">Từ dưới lên (2): phương pháp dung dịch</span><span class="l-en">Bottom-up (2): solution methods</span></a><a class="n" href="nano-carbon.html"><span class="l-vi">Thù hình carbon và lai hóa</span><span class="l-en">Carbon allotropes and hybridization</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

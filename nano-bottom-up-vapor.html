@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Từ dưới lên (1): tự lắp ráp và pha khí" data-title-en="Bottom-up (1): self-assembly and vapor phase">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bottom-up (1): self-assembly and vapor phase · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Self-assembly, supersaturation and nucleation, arc discharge, inert-gas condensation, flames and CVD/PVD.">
+<meta property="og:title" content="Bottom-up (1): self-assembly and vapor phase">
+<meta property="og:description" content="Self-assembly, supersaturation and nucleation, arc discharge, inert-gas condensation, flames and CVD/PVD.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 2</span><span class="l-en">Part 2 · Lesson 2</span></p>
+  <h1><span class="l-vi">Từ dưới lên (1): tự lắp ráp và pha khí</span><span class="l-en">Bottom-up (1): self-assembly and vapor phase</span></h1>
+  <p class="sub"><span class="l-vi">Tự lắp ráp, quá bão hòa và tạo mầm, phóng điện hồ quang, ngưng tụ khí trơ, ngọn lửa và CVD/PVD.</span><span class="l-en">Self-assembly, supersaturation and nucleation, arc discharge, inert-gas condensation, flames and CVD/PVD.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Cách tiếp cận từ dưới lên xây vật liệu nano từng nguyên tử, từng phân tử. Bài này giới thiệu nguyên lý chung và các phương pháp pha khí; bài sau là các phương pháp pha lỏng.</p>
+
+<h2>1. Ba nhóm phương pháp</h2>
+<ul>
+<li><strong>Tổng hợp hóa học</strong>: phản ứng tạo nguyên tử hoặc phân tử rồi kết tụ thành hạt.</li>
+<li><strong>Phương pháp vật lý</strong>: bốc hơi rồi ngưng tụ, phóng điện hồ quang.</li>
+<li><strong>Tổng hợp sinh học</strong>: dùng vi khuẩn, tảo, nấm, nấm men hay cả DNA để tạo hạt nano, thường thân thiện môi trường.</li>
+</ul>
+
+<h2>2. Tự lắp ráp phân tử</h2>
+<p>Tự lắp ráp là sự <strong>tự phát</strong> sắp xếp các phân tử thành tập hợp bền, có cấu trúc xác định. Các phân tử có thể được vận chuyển tới bề mặt qua chất lỏng để tạo đơn lớp tự lắp ráp (SAM). Động lực chủ yếu là năng lượng tự do bề mặt; kích thước và hình dạng của các thành phần quyết định độ mạnh và hướng tương tác, và một lớp phủ có thể thay đổi năng lượng bề mặt. Tự nhiên làm điều này khắp nơi: màng tế bào lipid, chuỗi xoắn kép DNA, vỏ virus.</p>
+
+<h2>3. Hai cách tiếp cận về cơ chế</h2>
+<ul>
+<li><strong>Cân bằng nhiệt động</strong>: tạo trạng thái <strong>quá bão hòa</strong> → tạo mầm → phát triển mầm. Kích thước hạt điều khiển bằng cách tách pha tạo mầm và pha phát triển.</li>
+<li><strong>Động học</strong>: giới hạn lượng tiền chất cho phát triển (như epitaxy chùm phân tử, MBE), hoặc giam quá trình trong không gian nhỏ (tổng hợp aerosol, mixen).</li>
+</ul>
+
+<h2>4. Phóng điện hồ quang</h2>
+<p>Đánh thủng điện chất khí tạo plasma giữa hai điện cực graphite. Dòng hồ quang tạo plasma nhiệt độ rất cao, khoảng 4000–6000 K, làm thăng hoa carbon ở anode. Hơi carbon kết tụ trong pha khí và trôi về phía cathode, nơi nó nguội đi do gradient nhiệt và lắng đọng. Ống nano carbon đầu tiên được Iijima quan sát năm 1991 trong muội từ phóng điện hồ quang.</p>
+
+<h2>5. Ngưng tụ trong khí trơ</h2>
+<p>Kim loại được bốc hơi vào dòng khí trơ ở nhiệt độ cao. Làm lạnh khí tạo hơi quá bão hòa, và hạt <strong>tạo mầm đồng thể</strong> ngay trong dòng khí. Phương pháp này tạo được muội carbon, SiO₂ và TiO₂.</p>
+
+<h2>6. Tổng hợp bằng ngọn lửa</h2>
+<p>Đây là phương pháp phổ biến nhất để sản xuất vật liệu nano ở quy mô thương mại: oxit hỗn hợp, phi oxit, fullerene, ống nano. Hạt hình thành ngay trong ngọn lửa, và đặc tính hạt được điều khiển bằng cấu hình và thành phần ngọn lửa. Tiền chất cũng có thể hòa tan trong dung môi hữu cơ dễ cháy rồi phun vào lửa (nhiệt phân phun lửa). Ngay cả muội nến cũng chứa nhiều cấu trúc nano carbon, gồm ống nano và fullerene.</p>
+
+<h2>7. Lắng đọng pha hơi</h2>
+<p>Lắng đọng hóa học pha hơi (CVD) và lắng đọng vật lý pha hơi (PVD) đưa vật liệu từ pha hơi lên đế, nơi nó kết tụ thành vật liệu nano mong muốn: màng mỏng, dây nano, graphene, ống nano.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Hầu hết màng Ga₂O₃ chất lượng cao được tạo bằng phương pháp pha hơi: MOCVD, HVPE, MBE và mist-CVD. Màng α-Ga₂O₃ dày 700 nm trong nghiên cứu tia X của tôi được mọc bằng HVPE trên đế sapphire ở 470 °C; nhiệt độ thấp này giữ được pha α giả bền thay vì pha β bền vững.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. Iijima, "Helical microtubules of graphitic carbon," <em>Nature</em> 354, 56 (1991).</li>
+<li>G. M. Whitesides, B. Grzybowski, "Self-assembly at all scales," <em>Science</em> 295, 2418 (2002).</li>
+<li>G. Cao, Y. Wang, <em>Nanostructures and Nanomaterials: Synthesis, Properties, and Applications</em>, 2nd ed., World Scientific (2011), chương 3.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The bottom-up approach builds nanomaterials atom by atom, molecule by molecule. This lesson introduces the general principles and the vapor-phase methods; the next covers the liquid-phase methods.</p>
+
+<h2>1. Three families of methods</h2>
+<ul>
+<li><strong>Chemical synthesis</strong>: reactions produce atoms or molecules that aggregate into particles.</li>
+<li><strong>Physical methods</strong>: evaporation and condensation, arc discharge.</li>
+<li><strong>Biological synthesis</strong>: bacteria, algae, fungi, yeast or even DNA make nanoparticles, often in an environmentally friendly way.</li>
+</ul>
+
+<h2>2. Molecular self-assembly</h2>
+<p>Self-assembly is the <strong>spontaneous</strong> organization of molecules into stable, well-defined aggregates. Molecules can be carried to a surface through a liquid to form self-assembled monolayers (SAMs). The main driver is surface free energy; the size and shape of the components set the strength and direction of interactions, and a coating can change the surface energy. Nature does this everywhere: lipid cell membranes, the DNA double helix, virus capsids.</p>
+
+<h2>3. Two mechanistic approaches</h2>
+<ul>
+<li><strong>Thermodynamic equilibrium</strong>: create <strong>supersaturation</strong> → nucleation → growth. Particle size is controlled by separating the nucleation and growth stages.</li>
+<li><strong>Kinetic</strong>: limit the precursor available for growth (as in molecular beam epitaxy, MBE), or confine the process to a small space (aerosol or micelle synthesis).</li>
+</ul>
+
+<h2>4. Arc discharge</h2>
+<p>Electrical breakdown of a gas creates a plasma between two graphite electrodes. The arc current produces a very hot plasma, about 4000–6000 K, which sublimes carbon at the anode. The carbon vapor aggregates in the gas phase and drifts toward the cathode, where it cools in the temperature gradient and deposits. Iijima first observed carbon nanotubes in 1991 in arc-discharge soot.</p>
+
+<h2>5. Inert-gas condensation</h2>
+<p>A metal is evaporated into a hot inert carrier gas. Cooling the gas creates a supersaturated vapor, and particles <strong>nucleate homogeneously</strong> in the gas stream. This method makes carbon black, SiO₂ and TiO₂.</p>
+
+<h2>6. Flame synthesis</h2>
+<p>This is the most widely used method for producing nanomaterials in commercial quantities: mixed oxides, non-oxides, fullerenes and nanotubes. Particles form within the flame, and their characteristics are controlled by the flame's configuration and composition. Precursors can also be dissolved in flammable organic solvents and sprayed into the flame (flame spray pyrolysis). Even candle soot contains many carbon nanostructures, including nanotubes and fullerenes.</p>
+
+<h2>7. Vapor-phase deposition</h2>
+<p>Chemical vapor deposition (CVD) and physical vapor deposition (PVD) bring material from the vapor onto a substrate, where it coalesces into the desired nanomaterial: thin films, nanowires, graphene, nanotubes.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Most high-quality Ga₂O₃ films are grown from the vapor: MOCVD, HVPE, MBE and mist-CVD. The 700 nm α-Ga₂O₃ film in my X-ray work was grown by HVPE on sapphire at 470 °C; this low temperature preserves the metastable α phase instead of the stable β phase.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>S. Iijima, "Helical microtubules of graphitic carbon," <em>Nature</em> 354, 56 (1991).</li>
+<li>G. M. Whitesides, B. Grzybowski, "Self-assembly at all scales," <em>Science</em> 295, 2418 (2002).</li>
+<li>G. Cao, Y. Wang, <em>Nanostructures and Nanomaterials: Synthesis, Properties, and Applications</em>, 2nd ed., World Scientific (2011), chapter 3.</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-top-down.html">← <span class="l-vi">Chế tạo từ trên xuống</span><span class="l-en">Top-down fabrication</span></a><a class="n" href="nano-bottom-up-solution.html"><span class="l-vi">Từ dưới lên (2): phương pháp dung dịch</span><span class="l-en">Bottom-up (2): solution methods</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

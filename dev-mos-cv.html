@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Đặc tuyến C-V của tụ MOS" data-title-en="C-V characteristics of the MOS capacitor">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C-V characteristics of the MOS capacitor · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Two capacitors in series, low and high frequency, work-function difference, oxide charge, threshold voltage and Dᵢₜ.">
+<meta property="og:title" content="C-V characteristics of the MOS capacitor">
+<meta property="og:description" content="Two capacitors in series, low and high frequency, work-function difference, oxide charge, threshold voltage and Dᵢₜ.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="devices.html"><span class="l-vi">Linh kiện bán dẫn</span><span class="l-en">Semiconductor Devices</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 2</span><span class="l-en">Part 4 · Lesson 2</span></p>
+  <h1><span class="l-vi">Đặc tuyến C-V của tụ MOS</span><span class="l-en">C-V characteristics of the MOS capacitor</span></h1>
+  <p class="sub"><span class="l-vi">Hai tụ nối tiếp, tần số thấp và cao, hiệu công thoát, điện tích oxit, điện áp ngưỡng và Dᵢₜ.</span><span class="l-en">Two capacitors in series, low and high frequency, work-function difference, oxide charge, threshold voltage and Dᵢₜ.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Đường C-V của tụ MOS là một trong những phép đo giàu thông tin nhất của công nghệ bán dẫn. Từ một đường cong, ta có thể đọc ra độ dày oxit, loại và nồng độ pha tạp, điện áp vùng phẳng, điện áp ngưỡng, điện tích trong oxit và mật độ bẫy mặt phân cách.</p>
+
+<h2>1. Hai tụ nối tiếp</h2>
+<p>Điện dung vi phân của tụ MOS là \(C = dQ/dV\). Điện áp cổng chia cho oxit và bán dẫn, nên tụ MOS tương đương hai tụ nối tiếp:</p>
+$$\frac{1}{C} = \frac{1}{C_i} + \frac{1}{C_d}, \qquad C_i = \frac{\varepsilon_i}{d}, \qquad C_d = \frac{\varepsilon_s}{W}$$
+<p>với \(d\) là độ dày oxit. Tại vùng phẳng, điện dung bán dẫn được thay bằng điện dung Debye \(C_{debye} = \varepsilon_s/L_D\).</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">-3</text><line x1="140.0" y1="255" x2="140.0" y2="260" class="ax"/><text x="140.0" y="275" class="tk" text-anchor="middle">-2</text><line x1="220.0" y1="255" x2="220.0" y2="260" class="ax"/><text x="220.0" y="275" class="tk" text-anchor="middle">-1</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">0</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">1</text><line x1="460.0" y1="255" x2="460.0" y2="260" class="ax"/><text x="460.0" y="275" class="tk" text-anchor="middle">2</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">3</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0</text><line x1="55" y1="148.1818181818182" x2="60" y2="148.1818181818182" class="ax"/><line x1="60" y1="148.1818181818182" x2="540" y2="148.1818181818182" class="grid"/><text x="51" y="152.1818181818182" class="tk" text-anchor="end">0.5</text><line x1="55" y1="41.363636363636374" x2="60" y2="41.363636363636374" class="ax"/><line x1="60" y1="41.363636363636374" x2="540" y2="41.363636363636374" class="grid"/><text x="51" y="45.363636363636374" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Điện áp cổng V<tspan baseline-shift="sub" font-size="8">G</tspan> (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">C / C<tspan baseline-shift="sub" font-size="8">ox</tspan></text><path d="M60.0,41.4 L64.0,41.4 L68.0,41.4 L72.0,41.4 L76.0,41.4 L80.0,41.4 L84.0,41.4 L88.0,41.4 L92.0,41.4 L96.0,41.4 L100.0,41.4 L104.0,41.4 L108.0,41.4 L112.0,41.4 L116.0,41.4 L120.0,41.4 L124.0,41.4 L128.0,41.4 L132.0,41.4 L136.0,41.4 L140.0,41.4 L144.0,41.4 L148.0,41.4 L152.0,41.4 L156.0,41.4 L160.0,41.4 L164.0,41.4 L168.0,41.4 L172.0,41.4 L176.0,41.4 L180.0,41.4 L184.0,41.4 L188.0,41.4 L192.0,41.4 L196.0,41.4 L200.0,41.4 L204.0,41.4 L208.0,41.4 L212.0,41.4 L216.0,41.4 L220.0,41.4 L224.0,41.4 L228.0,41.4 L232.0,41.4 L236.0,41.4 L240.0,41.4 L244.0,41.4 L248.0,50.4 L252.0,60.1 L256.0,70.2 L260.0,80.3 L264.0,90.2 L268.0,99.6 L272.0,108.4 L276.0,116.5 L280.0,123.9 L284.0,130.6 L288.0,136.7 L292.0,142.2 L296.0,147.1 L300.0,151.5 L304.0,155.5 L308.0,159.1 L312.0,162.3 L316.0,165.1 L320.0,167.6 L324.0,169.7 L328.0,171.4 L332.0,172.6 L336.0,173.3 L340.0,173.4 L344.0,172.9 L348.0,171.4 L352.0,168.4 L356.0,163.5 L360.0,157.6 L364.0,150.6 L368.0,142.6 L372.0,133.7 L376.0,124.0 L380.0,114.0 L384.0,104.0 L388.0,94.3 L392.0,85.4 L396.0,77.3 L400.0,70.4 L404.0,64.4 L408.0,59.5 L412.0,55.6 L416.0,52.4 L420.0,49.9 L424.0,47.9 L428.0,46.4 L432.0,45.2 L436.0,44.3 L440.0,43.6 L444.0,43.0 L448.0,42.6 L452.0,42.3 L456.0,42.1 L460.0,41.9 L464.0,41.8 L468.0,41.7 L472.0,41.6 L476.0,41.5 L480.0,41.5 L484.0,41.5 L488.0,41.4 L492.0,41.4 L496.0,41.4 L500.0,41.4 L504.0,41.4 L508.0,41.4 L512.0,41.4 L516.0,41.4 L520.0,41.4 L524.0,41.4 L528.0,41.4 L532.0,41.4 L536.0,41.4 L540.0,41.4" class="s3" fill="none"/><path d="M60.0,41.4 L64.0,41.4 L68.0,41.4 L72.0,41.4 L76.0,41.4 L80.0,41.4 L84.0,41.4 L88.0,41.4 L92.0,41.4 L96.0,41.4 L100.0,41.4 L104.0,41.4 L108.0,41.4 L112.0,41.4 L116.0,41.4 L120.0,41.4 L124.0,41.4 L128.0,41.4 L132.0,41.4 L136.0,41.4 L140.0,41.4 L144.0,41.4 L148.0,41.4 L152.0,41.4 L156.0,41.4 L160.0,41.4 L164.0,41.4 L168.0,41.4 L172.0,41.4 L176.0,41.4 L180.0,41.4 L184.0,41.4 L188.0,41.4 L192.0,41.4 L196.0,41.4 L200.0,41.4 L204.0,41.4 L208.0,41.4 L212.0,41.4 L216.0,41.4 L220.0,41.4 L224.0,41.4 L228.0,41.4 L232.0,41.4 L236.0,41.4 L240.0,41.4 L244.0,41.4 L248.0,50.4 L252.0,60.1 L256.0,70.2 L260.0,80.3 L264.0,90.2 L268.0,99.6 L272.0,108.5 L276.0,116.6 L280.0,124.0 L284.0,130.8 L288.0,136.9 L292.0,142.4 L296.0,147.4 L300.0,152.0 L304.0,156.1 L308.0,159.9 L312.0,163.4 L316.0,166.6 L320.0,169.6 L324.0,172.3 L328.0,174.9 L332.0,177.3 L336.0,179.5 L340.0,181.7 L344.0,183.7 L348.0,185.5 L352.0,186.6 L356.0,186.6 L360.0,186.6 L364.0,186.6 L368.0,186.6 L372.0,186.6 L376.0,186.6 L380.0,186.6 L384.0,186.6 L388.0,186.6 L392.0,186.6 L396.0,186.6 L400.0,186.6 L404.0,186.6 L408.0,186.6 L412.0,186.6 L416.0,186.6 L420.0,186.6 L424.0,186.6 L428.0,186.6 L432.0,186.6 L436.0,186.6 L440.0,186.6 L444.0,186.6 L448.0,186.6 L452.0,186.6 L456.0,186.6 L460.0,186.6 L464.0,186.6 L468.0,186.6 L472.0,186.6 L476.0,186.6 L480.0,186.6 L484.0,186.6 L488.0,186.6 L492.0,186.6 L496.0,186.6 L500.0,186.6 L504.0,186.6 L508.0,186.6 L512.0,186.6 L516.0,186.6 L520.0,186.6 L524.0,186.6 L528.0,186.6 L532.0,186.6 L536.0,186.6 L540.0,186.6" class="s1" fill="none"/><line x1="75" y1="170" x2="99" y2="170" class="s3"/><text x="105" y="174" class="tk">Tần số thấp</text><line x1="75" y1="188" x2="99" y2="188" class="s1"/><text x="105" y="192" class="tk">Tần số cao</text><text x="108.0" y="30.681818181818187" class="ns">Tích lũy</text><text x="316.0" y="101.18181818181822" class="ns">Nghèo</text><text x="476.0" y="208.0" class="ns" text-anchor="middle">Đảo</text></svg><figcaption>Hình 1. Đường C-V của tụ MOS lý tưởng trên đế p, ở tần số thấp và tần số cao.</figcaption></figure>
+<ul>
+<li><strong>Tích lũy</strong>: lỗ trống ở ngay bề mặt, \(C_d\) rất lớn, \(C \approx C_i\).</li>
+<li><strong>Nghèo</strong>: \(W\) tăng theo điện áp, \(C\) giảm.</li>
+<li><strong>Đảo, tần số thấp</strong>: electron lớp đảo đáp ứng kịp tín hiệu, điện tích thay đổi ngay dưới oxit, \(C\) trở về \(C_i\).</li>
+<li><strong>Đảo, tần số cao</strong> (~1 MHz): electron chỉ sinh ra ở mép vùng nghèo và không kịp vào lớp đảo; thay đổi điện tích xuất hiện ở mép \(W_m\), \(C\) giữ ở giá trị cực tiểu \(C_{min}\).</li>
+</ul>
+
+<h2>2. Tụ MOS không lý tưởng</h2>
+<p><strong>Hiệu công thoát.</strong> Thực tế \(\Phi_{ms} = \Phi_m - \Phi_s \ne 0\). Để làm phẳng vùng cần đặt một điện áp bằng \(\Phi_{ms}\). Với cổng polysilicon n⁺ trên đế p, \(\Phi_{ms}\) luôn âm.</p>
+<p><strong>Điện tích trong oxit.</strong> Điện tích dương cố định \(Q_i\) ở mặt phân cách Si/SiO₂ cảm ứng điện tích âm trong bán dẫn, nên cần thêm điện áp âm để bù:</p>
+$$V_{FB} = \Phi_{ms} - \frac{Q_i}{C_i}$$
+<p>Cả hai hiệu ứng làm đường C-V dịch dọc trục điện áp mà không đổi hình dạng.</p>
+
+<h2>3. Điện áp ngưỡng</h2>
+<p>Điện áp ngưỡng gồm ba phần: làm phẳng vùng, giữ điện tích vùng nghèo cực đại và tạo uốn vùng \(2\phi_F\):</p>
+$$V_T = \Phi_{ms} - \frac{Q_i}{C_i} - \frac{Q_d}{C_i} + 2\phi_F$$
+<div class="box"><p class="t">Ví dụ</p>
+<p>Cổng poly n⁺, oxit 40 nm (\(C_i \approx 8{,}6\times10^{-8}\) F/cm²), đế p \(N_a = 10^{16}\) cm⁻³: \(\phi_F \approx 0{,}347\) V, \(\Phi_{ms} \approx -0{,}91\) V, \(-Q_d/C_i \approx 0{,}56\) V. Nếu \(Q_i = 0\), \(V_T \approx -0{,}91 + 0{,}56 + 0{,}69 \approx +0{,}34\) V. Một điện tích dương cố định \(Q_i/q = 5\times10^{11}\) cm⁻² dịch \(V_T\) thêm \(-0{,}93\) V, biến linh kiện thành chế độ nghèo. Đây là lý do việc giảm \(Q_i\) là mục tiêu then chốt của quy trình oxi hóa.</p></div>
+
+<h2>4. Đọc thông số từ đường C-V</h2>
+<ul>
+<li><strong>Loại đế</strong>: tích lũy ở điện áp âm là đế p, ở điện áp dương là đế n.</li>
+<li><strong>Độ dày oxit</strong> từ \(C_i\) trong tích lũy mạnh.</li>
+<li><strong>Nồng độ pha tạp</strong> từ \(C_{min}\) ở tần số cao (qua \(W_m\)).</li>
+<li><strong>\(V_{FB}\)</strong> từ điện dung vùng phẳng \(C_{FB}\), rồi suy ra \(Q_i\).</li>
+<li><strong>Mật độ bẫy mặt phân cách</strong> \(D_{it}\): bẫy theo kịp tín hiệu ở tần số thấp nhưng không theo kịp ở tần số cao, nên so sánh hai đường cho</li>
+</ul>
+$$D_{it} = \frac{1}{q}\left(\frac{C_iC_{LF}}{C_i - C_{LF}} - \frac{C_iC_{HF}}{C_i - C_{HF}}\right)\ \ \text{(cm}^{-2}\,\text{eV}^{-1}\text{)}$$
+<ul>
+<li><strong>Điện tích di động</strong> \(Q_m\) (ví dụ ion Na⁺) bằng thử nghiệm ứng suất nhiệt–điện áp (bias-temperature stress): nung mẫu ở ~200 °C với điện áp cổng dương rồi âm, ion di chuyển qua oxit và \(V_{FB}\) dịch: \(Q_m = C_i\,(V_{FB}^{-} - V_{FB}^{+})\).</li>
+</ul>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Với tụ MOS trên Ga₂O₃, việc tạo lớp đảo gần như không thể vì tốc độ sinh hạt tải thiểu số cực thấp, nên đường C-V không bao giờ phục hồi về \(C_i\) như tần số thấp trên Si. Mật độ \(D_{it}\) của các điện môi Al₂O₃, SiO₂ hay HfO₂ trên Ga₂O₃ thường được đánh giá bằng phương pháp conductance hoặc C-V dưới chiếu sáng UV, một chủ đề tôi quan tâm khi mô phỏng bẫy bằng TCAD.</p></div>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 6.</li>
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chương 6.</li>
+<li>R. Castagné, A. Vapaille, "Description of the SiO₂–Si interface properties by means of very low frequency MOS capacitance measurements," <em>Surface Science</em> 28, 157 (1971).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The C-V curve of a MOS capacitor is one of the most information-rich measurements in semiconductor technology. From one curve you can read oxide thickness, doping type and concentration, flat-band and threshold voltages, oxide charge and interface trap density.</p>
+
+<h2>1. Two capacitors in series</h2>
+<p>The differential capacitance of a MOS capacitor is \(C = dQ/dV\). The gate voltage is shared between oxide and semiconductor, so the MOS capacitor is equivalent to two capacitors in series:</p>
+$$\frac{1}{C} = \frac{1}{C_i} + \frac{1}{C_d}, \qquad C_i = \frac{\varepsilon_i}{d}, \qquad C_d = \frac{\varepsilon_s}{W}$$
+<p>where \(d\) is the oxide thickness. At flat band, the semiconductor capacitance is replaced by the Debye capacitance \(C_{debye} = \varepsilon_s/L_D\).</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">-3</text><line x1="140.0" y1="255" x2="140.0" y2="260" class="ax"/><text x="140.0" y="275" class="tk" text-anchor="middle">-2</text><line x1="220.0" y1="255" x2="220.0" y2="260" class="ax"/><text x="220.0" y="275" class="tk" text-anchor="middle">-1</text><line x1="300.0" y1="255" x2="300.0" y2="260" class="ax"/><text x="300.0" y="275" class="tk" text-anchor="middle">0</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">1</text><line x1="460.0" y1="255" x2="460.0" y2="260" class="ax"/><text x="460.0" y="275" class="tk" text-anchor="middle">2</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">3</text><line x1="55" y1="255.0" x2="60" y2="255.0" class="ax"/><line x1="60" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="51" y="259.0" class="tk" text-anchor="end">0</text><line x1="55" y1="148.1818181818182" x2="60" y2="148.1818181818182" class="ax"/><line x1="60" y1="148.1818181818182" x2="540" y2="148.1818181818182" class="grid"/><text x="51" y="152.1818181818182" class="tk" text-anchor="end">0.5</text><line x1="55" y1="41.363636363636374" x2="60" y2="41.363636363636374" class="ax"/><line x1="60" y1="41.363636363636374" x2="540" y2="41.363636363636374" class="grid"/><text x="51" y="45.363636363636374" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Gate voltage V<tspan baseline-shift="sub" font-size="8">G</tspan> (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">C / C<tspan baseline-shift="sub" font-size="8">ox</tspan></text><path d="M60.0,41.4 L64.0,41.4 L68.0,41.4 L72.0,41.4 L76.0,41.4 L80.0,41.4 L84.0,41.4 L88.0,41.4 L92.0,41.4 L96.0,41.4 L100.0,41.4 L104.0,41.4 L108.0,41.4 L112.0,41.4 L116.0,41.4 L120.0,41.4 L124.0,41.4 L128.0,41.4 L132.0,41.4 L136.0,41.4 L140.0,41.4 L144.0,41.4 L148.0,41.4 L152.0,41.4 L156.0,41.4 L160.0,41.4 L164.0,41.4 L168.0,41.4 L172.0,41.4 L176.0,41.4 L180.0,41.4 L184.0,41.4 L188.0,41.4 L192.0,41.4 L196.0,41.4 L200.0,41.4 L204.0,41.4 L208.0,41.4 L212.0,41.4 L216.0,41.4 L220.0,41.4 L224.0,41.4 L228.0,41.4 L232.0,41.4 L236.0,41.4 L240.0,41.4 L244.0,41.4 L248.0,50.4 L252.0,60.1 L256.0,70.2 L260.0,80.3 L264.0,90.2 L268.0,99.6 L272.0,108.4 L276.0,116.5 L280.0,123.9 L284.0,130.6 L288.0,136.7 L292.0,142.2 L296.0,147.1 L300.0,151.5 L304.0,155.5 L308.0,159.1 L312.0,162.3 L316.0,165.1 L320.0,167.6 L324.0,169.7 L328.0,171.4 L332.0,172.6 L336.0,173.3 L340.0,173.4 L344.0,172.9 L348.0,171.4 L352.0,168.4 L356.0,163.5 L360.0,157.6 L364.0,150.6 L368.0,142.6 L372.0,133.7 L376.0,124.0 L380.0,114.0 L384.0,104.0 L388.0,94.3 L392.0,85.4 L396.0,77.3 L400.0,70.4 L404.0,64.4 L408.0,59.5 L412.0,55.6 L416.0,52.4 L420.0,49.9 L424.0,47.9 L428.0,46.4 L432.0,45.2 L436.0,44.3 L440.0,43.6 L444.0,43.0 L448.0,42.6 L452.0,42.3 L456.0,42.1 L460.0,41.9 L464.0,41.8 L468.0,41.7 L472.0,41.6 L476.0,41.5 L480.0,41.5 L484.0,41.5 L488.0,41.4 L492.0,41.4 L496.0,41.4 L500.0,41.4 L504.0,41.4 L508.0,41.4 L512.0,41.4 L516.0,41.4 L520.0,41.4 L524.0,41.4 L528.0,41.4 L532.0,41.4 L536.0,41.4 L540.0,41.4" class="s3" fill="none"/><path d="M60.0,41.4 L64.0,41.4 L68.0,41.4 L72.0,41.4 L76.0,41.4 L80.0,41.4 L84.0,41.4 L88.0,41.4 L92.0,41.4 L96.0,41.4 L100.0,41.4 L104.0,41.4 L108.0,41.4 L112.0,41.4 L116.0,41.4 L120.0,41.4 L124.0,41.4 L128.0,41.4 L132.0,41.4 L136.0,41.4 L140.0,41.4 L144.0,41.4 L148.0,41.4 L152.0,41.4 L156.0,41.4 L160.0,41.4 L164.0,41.4 L168.0,41.4 L172.0,41.4 L176.0,41.4 L180.0,41.4 L184.0,41.4 L188.0,41.4 L192.0,41.4 L196.0,41.4 L200.0,41.4 L204.0,41.4 L208.0,41.4 L212.0,41.4 L216.0,41.4 L220.0,41.4 L224.0,41.4 L228.0,41.4 L232.0,41.4 L236.0,41.4 L240.0,41.4 L244.0,41.4 L248.0,50.4 L252.0,60.1 L256.0,70.2 L260.0,80.3 L264.0,90.2 L268.0,99.6 L272.0,108.5 L276.0,116.6 L280.0,124.0 L284.0,130.8 L288.0,136.9 L292.0,142.4 L296.0,147.4 L300.0,152.0 L304.0,156.1 L308.0,159.9 L312.0,163.4 L316.0,166.6 L320.0,169.6 L324.0,172.3 L328.0,174.9 L332.0,177.3 L336.0,179.5 L340.0,181.7 L344.0,183.7 L348.0,185.5 L352.0,186.6 L356.0,186.6 L360.0,186.6 L364.0,186.6 L368.0,186.6 L372.0,186.6 L376.0,186.6 L380.0,186.6 L384.0,186.6 L388.0,186.6 L392.0,186.6 L396.0,186.6 L400.0,186.6 L404.0,186.6 L408.0,186.6 L412.0,186.6 L416.0,186.6 L420.0,186.6 L424.0,186.6 L428.0,186.6 L432.0,186.6 L436.0,186.6 L440.0,186.6 L444.0,186.6 L448.0,186.6 L452.0,186.6 L456.0,186.6 L460.0,186.6 L464.0,186.6 L468.0,186.6 L472.0,186.6 L476.0,186.6 L480.0,186.6 L484.0,186.6 L488.0,186.6 L492.0,186.6 L496.0,186.6 L500.0,186.6 L504.0,186.6 L508.0,186.6 L512.0,186.6 L516.0,186.6 L520.0,186.6 L524.0,186.6 L528.0,186.6 L532.0,186.6 L536.0,186.6 L540.0,186.6" class="s1" fill="none"/><line x1="75" y1="170" x2="99" y2="170" class="s3"/><text x="105" y="174" class="tk">Low frequency</text><line x1="75" y1="188" x2="99" y2="188" class="s1"/><text x="105" y="192" class="tk">High frequency</text><text x="108.0" y="30.681818181818187" class="ns">Accumulation</text><text x="316.0" y="101.18181818181822" class="ns">Depletion</text><text x="476.0" y="208.0" class="ns" text-anchor="middle">Inversion</text></svg><figcaption>Figure 1. C-V curves of an ideal MOS capacitor on p substrate at low and high frequency.</figcaption></figure>
+<ul>
+<li><strong>Accumulation</strong>: holes sit right at the surface, \(C_d\) is very large, \(C \approx C_i\).</li>
+<li><strong>Depletion</strong>: \(W\) grows with voltage, so \(C\) falls.</li>
+<li><strong>Inversion, low frequency</strong>: inversion electrons follow the signal, charge changes right under the oxide, \(C\) returns to \(C_i\).</li>
+<li><strong>Inversion, high frequency</strong> (~1 MHz): electrons are generated only at the depletion edge and cannot reach the inversion layer in time; charge changes appear at the edge of \(W_m\), and \(C\) stays at its minimum \(C_{min}\).</li>
+</ul>
+
+<h2>2. The nonideal MOS capacitor</h2>
+<p><strong>Work-function difference.</strong> In practice \(\Phi_{ms} = \Phi_m - \Phi_s \ne 0\). A voltage equal to \(\Phi_{ms}\) is needed to flatten the bands. For an n⁺ polysilicon gate on p substrate, \(\Phi_{ms}\) is always negative.</p>
+<p><strong>Oxide charge.</strong> Fixed positive charge \(Q_i\) at the Si/SiO₂ interface induces negative charge in the semiconductor, so an extra negative voltage is needed to compensate:</p>
+$$V_{FB} = \Phi_{ms} - \frac{Q_i}{C_i}$$
+<p>Both effects shift the C-V curve along the voltage axis without changing its shape.</p>
+
+<h2>3. Threshold voltage</h2>
+<p>The threshold voltage has three parts: flattening the bands, supporting the maximum depletion charge, and producing band bending of \(2\phi_F\):</p>
+$$V_T = \Phi_{ms} - \frac{Q_i}{C_i} - \frac{Q_d}{C_i} + 2\phi_F$$
+<div class="box"><p class="t">Example</p>
+<p>n⁺ poly gate, 40 nm oxide (\(C_i \approx 8.6\times10^{-8}\) F/cm²), p substrate with \(N_a = 10^{16}\) cm⁻³: \(\phi_F \approx 0.347\) V, \(\Phi_{ms} \approx -0.91\) V, \(-Q_d/C_i \approx 0.56\) V. With \(Q_i = 0\), \(V_T \approx -0.91 + 0.56 + 0.69 \approx +0.34\) V. A fixed positive charge \(Q_i/q = 5\times10^{11}\) cm⁻² shifts \(V_T\) by a further \(-0.93\) V, turning the device into depletion mode. This is why reducing \(Q_i\) is a key goal of the oxidation process.</p></div>
+
+<h2>4. Reading parameters from a C-V curve</h2>
+<ul>
+<li><strong>Substrate type</strong>: accumulation at negative voltage means p substrate; at positive voltage, n substrate.</li>
+<li><strong>Oxide thickness</strong> from \(C_i\) in strong accumulation.</li>
+<li><strong>Doping concentration</strong> from the high-frequency \(C_{min}\) (via \(W_m\)).</li>
+<li><strong>\(V_{FB}\)</strong> from the flat-band capacitance \(C_{FB}\), and hence \(Q_i\).</li>
+<li><strong>Interface trap density</strong> \(D_{it}\): traps follow the signal at low frequency but not at high frequency, so comparing the two curves gives</li>
+</ul>
+$$D_{it} = \frac{1}{q}\left(\frac{C_iC_{LF}}{C_i - C_{LF}} - \frac{C_iC_{HF}}{C_i - C_{HF}}\right)\ \ \text{(cm}^{-2}\,\text{eV}^{-1}\text{)}$$
+<ul>
+<li><strong>Mobile charge</strong> \(Q_m\) (e.g. Na⁺ ions) by bias-temperature stress: heat the sample to ~200 °C under positive and then negative gate bias; the ions drift through the oxide and \(V_{FB}\) shifts: \(Q_m = C_i\,(V_{FB}^{-} - V_{FB}^{+})\).</li>
+</ul>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>For MOS capacitors on Ga₂O₃, forming an inversion layer is practically impossible because minority-carrier generation is extremely slow, so the C-V curve never recovers to \(C_i\) as in low-frequency Si. \(D_{it}\) of Al₂O₃, SiO₂ or HfO₂ dielectrics on Ga₂O₃ is usually evaluated with the conductance method or C-V under UV illumination, a topic I care about when modeling traps in TCAD.</p></div>
+
+<h2>References</h2>
+<ol class="refs">
+<li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 6.</li>
+<li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chapter 6.</li>
+<li>R. Castagné, A. Vapaille, "Description of the SiO₂–Si interface properties by means of very low frequency MOS capacitance measurements," <em>Surface Science</em> 28, 157 (1971).</li>
+</ol>
+</div>
+<nav class="pager"><a href="dev-mos-capacitor.html">← <span class="l-vi">Transistor và tụ MOS</span><span class="l-en">The transistor and the MOS capacitor</span></a><a class="n" href="dev-mosfet-iv.html"><span class="l-vi">Đặc tuyến I-V của MOSFET</span><span class="l-en">MOSFET I-V characteristics</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên tài liệu học phần của GS. Wan Sik Hwang, Korea Aerospace University, bao gồm bài giảng Linh kiện bán dẫn của Jinyoung Hwang. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on course materials by Prof. Wan Sik Hwang, Korea Aerospace University, including lecture notes on semiconductor devices by Jinyoung Hwang. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

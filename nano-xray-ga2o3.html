@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Nghiên cứu điển hình: cảm biến tia X α-Ga₂O₃" data-title-en="Case study: α-Ga₂O₃ X-ray detectors">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case study: α-Ga₂O₃ X-ray detectors · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Indirect and direct detection, material choice, the 700 nm MSM detector and the charge-neutral-point shift.">
+<meta property="og:title" content="Case study: α-Ga₂O₃ X-ray detectors">
+<meta property="og:description" content="Indirect and direct detection, material choice, the 700 nm MSM detector and the charge-neutral-point shift.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="nanomaterials.html"><span class="l-vi">Tính chất vật liệu nano</span><span class="l-en">Properties of Nanomaterials</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 1</span><span class="l-en">Part 4 · Lesson 1</span></p>
+  <h1><span class="l-vi">Nghiên cứu điển hình: cảm biến tia X α-Ga₂O₃</span><span class="l-en">Case study: α-Ga₂O₃ X-ray detectors</span></h1>
+  <p class="sub"><span class="l-vi">Phát hiện gián tiếp và trực tiếp, chọn vật liệu, cảm biến MSM 700 nm và hiện tượng dịch điểm trung hòa điện tích.</span><span class="l-en">Indirect and direct detection, material choice, the 700 nm MSM detector and the charge-neutral-point shift.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Bài cuối của chủ đề là một nghiên cứu điển hình từ chính công việc của tôi: dùng màng α-Ga₂O₃ dày 700 nm làm cảm biến tia X. Ở đây, các ý tưởng của thang nano (độ dày so với độ sâu xuyên thấu, điện tích bề mặt và mặt phân cách) quyết định trực tiếp tín hiệu đo được.</p>
+
+<h2>1. Vì sao cần cảm biến tia X tốt hơn</h2>
+<p>Cảm biến tia X có mặt trong y tế (chụp X quang, CT, chụp nhũ ảnh), an ninh sân bay, kiểm tra linh kiện điện tử và cả kiểm định nông sản: ví dụ, CT kết hợp AI đã được dùng để kiểm tra độ chín và sâu bệnh bên trong trái sầu riêng xuất khẩu, mỗi quả chỉ vài giây. Thị trường này lớn và hoạt động sáng chế rất sôi động.</p>
+
+<h2>2. Phát hiện gián tiếp và trực tiếp</h2>
+<figure><svg viewBox="0 0 620 230" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><text x="155" y="20" class="nt" text-anchor="middle">Gián tiếp</text><text x="465" y="20" class="nt" text-anchor="middle">Trực tiếp</text><line x1="310" y1="10" x2="310" y2="220" class="grid"/><rect x="70" y="70" width="170" height="45" class="node"/><text x="155" y="97" class="ns" text-anchor="middle">Chất nhấp nháy (CsI, GOS)</text><rect x="70" y="135" width="170" height="35" class="node" style="fill:var(--accent-soft)"/><text x="155" y="157" class="ns" text-anchor="middle">Photodiode (a-Si)</text><path d="M155,32V66" class="arr" marker-end="url(#mv)"/><text x="162" y="52" class="ns">X</text><path d="M120,112V132M155,112V132M190,112V132" class="s2" style="stroke-dasharray:3 3"/><text x="250" y="126" class="ns">ánh sáng</text><text x="155" y="195" class="ns" text-anchor="middle">X → ánh sáng → tín hiệu điện</text><rect x="380" y="70" width="170" height="100" class="node" style="fill:var(--accent-soft)"/><text x="465" y="120" class="ns" text-anchor="middle">Bán dẫn</text><text x="465" y="136" class="ns" text-anchor="middle">a-Se, CZT, Ga₂O₃</text><line x1="375" y1="66" x2="555" y2="66" class="s1"/><line x1="375" y1="174" x2="555" y2="174" class="s1"/><text x="560" y="70" class="ns">+V</text><path d="M465,32V62" class="arr" marker-end="url(#mv)"/><text x="472" y="52" class="ns">X</text><text x="420" y="95" class="tk">e⁻ ↓</text><text x="490" y="150" class="tk">h⁺ ↑</text><text x="465" y="195" class="ns" text-anchor="middle">X → cặp e–h → tín hiệu điện</text></svg><figcaption>Hình 1. Hai nguyên lý phát hiện tia X: gián tiếp qua chất nhấp nháy và trực tiếp trong bán dẫn.</figcaption></figure>
+<ul>
+<li><strong>Gián tiếp</strong>: chất nhấp nháy chuyển tia X thành ánh sáng khả kiến, rồi photodiode chuyển ánh sáng thành tín hiệu điện. Ví dụ: tấm phẳng trong máy chụp X quang ngực và xương thông thường.</li>
+<li><strong>Trực tiếp</strong>: bán dẫn hấp thụ tia X và tạo trực tiếp cặp điện tử–lỗ trống, được điện trường thu về điện cực. Không có bước chuyển đổi trung gian nên nhanh hơn, ít nhòe ảnh hơn và cho chi tiết tốt hơn. Ví dụ: a-Se trong máy chụp nhũ ảnh.</li>
+</ul>
+
+<h2>3. Lựa chọn vật liệu</h2>
+<p>Các vật liệu truyền thống như Ge, kim cương và CZT (CdZnTe) ổn định, nhạy và bền bức xạ, nhưng đắt và khó làm diện tích lớn. Perovskite halide rẻ và hoạt động ở điện áp thấp, nhưng kém bền hóa học, nhiễu cao và giới hạn kích thước. Ga₂O₃ là ứng viên mới với hai lợi thế:</p>
+<ul>
+<li><strong>Hấp thụ tốt</strong>: Ga (Z = 31) cho hệ số suy giảm tuyến tính cao hơn Si và kim cương. Theo định luật Beer–Lambert, cường độ còn lại sau độ dày \(x\) là \(I = I_0\,e^{-\mu x}\), nên \(\mu\) lớn nghĩa là màng mỏng hơn đã chặn được phần lớn tia X.</li>
+<li><strong>Dòng tối thấp</strong>: vùng cấm ~4,8–5,3 eV (tùy pha) cho dòng tối rất nhỏ, tức tỉ số tín hiệu/nhiễu cao, kể cả ở nhiệt độ cao.</li>
+</ul>
+<p>Ga₂O₃ có năm pha tinh thể (α, β, γ, δ, ε); β đơn tà là bền nhiệt nhất, các pha còn lại giả bền và chuyển về β ở nhiệt độ cao, nên hầu hết nghiên cứu tập trung vào β. Pha α (corundum) có vùng cấm lớn nhất, khoảng 5,3 eV, hứa hẹn dòng tối thấp hơn nữa.</p>
+
+<h2>4. Cảm biến MSM α-Ga₂O₃ và điểm trung hòa điện tích</h2>
+<p>Linh kiện: màng α-Ga₂O₃ dày 700 nm mọc bằng HVPE trên đế sapphire mặt c 2 inch ở 470 °C, với hai điện cực Ti/Au tạo cấu trúc kim loại–bán dẫn–kim loại (MSM). Dưới chiếu xạ tia X mềm 5 keV, dòng tăng mạnh. Năng lượng 5 keV cao hơn nhiều năng lượng liên kết của các lớp vỏ ngoài của Ga, nên electron bị bật ra khỏi nguyên tử, để lại các ion Gaⁿ⁺ dương (ion hóa), cùng với các cặp điện tử–lỗ trống đóng góp vào dòng.</p>
+<p><strong>Điểm trung hòa điện tích</strong> (CNP) là điện áp tại đó dòng cực tiểu, tương ứng với điện tích ròng bằng 0. Dưới UV-C, CNP nằm gần 0 V; dưới tia X, CNP dịch về khoảng −2 V, phản ánh lượng điện tích dương dư.</p>
+<p>Vì sao các nghiên cứu khác không thấy dịch CNP? Hai yếu tố then chốt là <strong>độ dày lớp</strong> và <strong>năng lượng tia X</strong>. Tia X 5 keV xuyên qua toàn bộ màng 700 nm, nên Ga trong <em>toàn bộ</em> lớp bị ion hóa và không còn vùng nào cung cấp electron để trung hòa: CNP dịch. Ngược lại, khi tổng độ dày lớp hấp thụ lớn hơn nhiều so với độ dày bị tia X tác động, các ion Gaⁿ⁺ được trung hòa ngay bởi electron từ vùng chưa bị chiếu.</p>
+<div class="box"><p class="t">Bài học thang nano</p>
+<p>Đây chính là thông điệp của cả chủ đề: khi một kích thước của vật liệu (ở đây là độ dày 700 nm) trở nên tương đương với một độ dài vật lý đặc trưng (độ sâu xuyên thấu của tia X), hành vi của linh kiện thay đổi về chất.</p></div>
+
+<h2>5. Hướng ứng dụng</h2>
+<ul>
+<li>Thiết bị soi tia X cầm tay: kiểm tra thư và bưu kiện nhỏ, hành lý tại điểm kiểm soát xa nơi không đặt được máy lớn, kiểm tra túi tại sự kiện.</li>
+<li>Công cụ giáo dục minh họa nguyên lý hấp thụ và phát hiện tia X, ví dụ dùng giấy làm vật hấp thụ đơn giản.</li>
+<li>Phân biệt vật liệu nhẹ như giấy, gỗ ở liều thấp: các nghiên cứu tiếp theo của chúng tôi dùng diode Schottky Ga₂O₃ để đánh giá khả năng che chắn tia X mềm của màng gỗ tự nhiên và của các chồng giấy A4.</li>
+</ul>
+
+<h2>Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>T. H. Vo et al., "Charge neutral point shift of a 700 nm-thick α-Ga₂O₃ thin-film detector under soft X-ray irradiation," <em>ACS Applied Electronic Materials</em> 6, 5973 (2024).</li>
+<li>T. H. Vo et al., "Soft X-ray shielding characteristics of natural wood films with varying densities evaluated using a Ga₂O₃ Schottky diode detector," <em>Applied Physics Letters</em> (2026).</li>
+<li>National Institute of Standards and Technology, <em>XCOM: Photon Cross Sections Database</em>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The topic's last lesson is a case study from my own work: using a 700 nm α-Ga₂O₃ film as an X-ray detector. Here, nanoscale ideas (thickness relative to penetration depth, surface and interface charge) directly decide the measured signal.</p>
+
+<h2>1. Why better X-ray detectors are needed</h2>
+<p>X-ray detectors appear in medicine (radiography, CT, mammography), airport security, electronics inspection and even agricultural quality control: for example, CT combined with AI has been used to check the ripeness and hidden pests inside export durians, in a few seconds per fruit. The market is large and patent activity is intense.</p>
+
+<h2>2. Indirect and direct detection</h2>
+<figure><svg viewBox="0 0 620 230" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><text x="155" y="20" class="nt" text-anchor="middle">Indirect</text><text x="465" y="20" class="nt" text-anchor="middle">Direct</text><line x1="310" y1="10" x2="310" y2="220" class="grid"/><rect x="70" y="70" width="170" height="45" class="node"/><text x="155" y="97" class="ns" text-anchor="middle">Scintillator (CsI, GOS)</text><rect x="70" y="135" width="170" height="35" class="node" style="fill:var(--accent-soft)"/><text x="155" y="157" class="ns" text-anchor="middle">Photodiode (a-Si)</text><path d="M155,32V66" class="arr" marker-end="url(#me)"/><text x="162" y="52" class="ns">X</text><path d="M120,112V132M155,112V132M190,112V132" class="s2" style="stroke-dasharray:3 3"/><text x="250" y="126" class="ns">light</text><text x="155" y="195" class="ns" text-anchor="middle">X → light → electrical signal</text><rect x="380" y="70" width="170" height="100" class="node" style="fill:var(--accent-soft)"/><text x="465" y="120" class="ns" text-anchor="middle">Semiconductor</text><text x="465" y="136" class="ns" text-anchor="middle">a-Se, CZT, Ga₂O₃</text><line x1="375" y1="66" x2="555" y2="66" class="s1"/><line x1="375" y1="174" x2="555" y2="174" class="s1"/><text x="560" y="70" class="ns">+V</text><path d="M465,32V62" class="arr" marker-end="url(#me)"/><text x="472" y="52" class="ns">X</text><text x="420" y="95" class="tk">e⁻ ↓</text><text x="490" y="150" class="tk">h⁺ ↑</text><text x="465" y="195" class="ns" text-anchor="middle">X → e–h pairs → electrical signal</text></svg><figcaption>Figure 1. Two principles of X-ray detection: indirect via a scintillator, and direct in a semiconductor.</figcaption></figure>
+<ul>
+<li><strong>Indirect</strong>: a scintillator converts X-rays into visible light, and a photodiode converts the light into an electrical signal. Example: the flat panels in ordinary chest and bone X-ray machines.</li>
+<li><strong>Direct</strong>: a semiconductor absorbs X-rays and directly creates electron–hole pairs, collected by an electric field. With no intermediate conversion it is faster, blurs less and captures finer detail. Example: a-Se in mammography.</li>
+</ul>
+
+<h2>3. Choosing a material</h2>
+<p>Traditional materials such as Ge, diamond and CZT (CdZnTe) are stable, sensitive and radiation-hard, but expensive and hard to make over large areas. Halide perovskites are cheap and work at low bias, but suffer chemical instability, high noise and size limits. Ga₂O₃ is a new candidate with two advantages:</p>
+<ul>
+<li><strong>Good absorption</strong>: Ga (Z = 31) gives a higher linear attenuation coefficient than Si and diamond. By the Beer–Lambert law, the intensity remaining after thickness \(x\) is \(I = I_0\,e^{-\mu x}\), so a large \(\mu\) means a thinner film already stops most X-rays.</li>
+<li><strong>Low dark current</strong>: a bandgap of ~4.8–5.3 eV (depending on phase) gives very small dark current, hence a high signal-to-noise ratio, even at high temperature.</li>
+</ul>
+<p>Ga₂O₃ has five crystal phases (α, β, γ, δ, ε); monoclinic β is the most thermally stable, while the others are metastable and turn into β at high temperature, so most work focuses on β. The corundum α phase has the largest gap, about 5.3 eV, promising even lower dark current.</p>
+
+<h2>4. The MSM α-Ga₂O₃ detector and the charge neutral point</h2>
+<p>The device: a 700 nm α-Ga₂O₃ film grown by HVPE on a 2-inch c-plane sapphire substrate at 470 °C, with two Ti/Au electrodes forming a metal–semiconductor–metal (MSM) structure. Under 5 keV soft X-rays, the current rises sharply. 5 keV is well above the binding energies of the outer shells of Ga, so electrons are knocked out of atoms, leaving positive Gaⁿ⁺ ions (ionization), along with electron–hole pairs that contribute to the current.</p>
+<p>The <strong>charge neutral point</strong> (CNP) is the voltage of minimum current, corresponding to zero net charge. Under UV-C the CNP sits near 0 V; under X-rays it shifts to about −2 V, reflecting the excess positive charge.</p>
+<p>Why did other studies not see a CNP shift? Two key factors: <strong>layer thickness</strong> and <strong>X-ray energy</strong>. 5 keV X-rays penetrate the whole 700 nm film, so Ga in the <em>entire</em> layer is ionized and no region is left to supply neutralizing electrons: the CNP shifts. By contrast, when the absorber is much thicker than the X-ray-affected depth, the Gaⁿ⁺ ions are neutralized at once by electrons from the unexposed regions.</p>
+<div class="box"><p class="t">The nanoscale lesson</p>
+<p>This is the message of the whole topic: when a material dimension (here the 700 nm thickness) becomes comparable to a characteristic physical length (the X-ray penetration depth), device behavior changes qualitatively.</p></div>
+
+<h2>5. Applications in view</h2>
+<ul>
+<li>Portable X-ray screening: checking letters and small parcels, luggage at remote checkpoints where large machines are impractical, bags at events.</li>
+<li>Educational tools demonstrating X-ray absorption and detection, e.g. with paper as a simple absorber.</li>
+<li>Low-dose discrimination of light materials such as paper and wood: our follow-up studies used Ga₂O₃ Schottky diodes to evaluate the soft X-ray shielding of natural wood films and of stacked A4 sheets.</li>
+</ul>
+
+<h2>References</h2>
+<ol class="refs">
+<li>T. H. Vo et al., "Charge neutral point shift of a 700 nm-thick α-Ga₂O₃ thin-film detector under soft X-ray irradiation," <em>ACS Applied Electronic Materials</em> 6, 5973 (2024).</li>
+<li>T. H. Vo et al., "Soft X-ray shielding characteristics of natural wood films with varying densities evaluated using a Ga₂O₃ Schottky diode detector," <em>Applied Physics Letters</em> (2026).</li>
+<li>National Institute of Standards and Technology, <em>XCOM: Photon Cross Sections Database</em>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="nano-tmd-mxene.html">← <span class="l-vi">TMD và MXene</span><span class="l-en">TMDs and MXenes</span></a><a class="n" href="nano-quiz.html"><span class="l-vi">Kiểm tra kiến thức</span><span class="l-en">Test your knowledge</span> →</a></nav>
+<footer><p><span class="l-vi">Dựa trên bài thuyết trình của Thi-Thanh-Huong Vo trong học phần Properties of Nanomaterials của GS. Wan Sik Hwang, Korea Aerospace University, và công bố Vo et al., ACS Applied Electronic Materials (2024). Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on Thi-Thanh-Huong Vo's presentation in the Properties of Nanomaterials course of Prof. Wan Sik Hwang, Korea Aerospace University, and on Vo et al., ACS Applied Electronic Materials (2024). Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

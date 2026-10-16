@@ -103,13 +103,13 @@
 <body>
 <main>
 <header>
-  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="semiconductors.html"><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
-  <p class="kicker"><span class="l-vi">Thế giới bán dẫn · Quiz</span><span class="l-en">Welcome to Semiconductors · Quiz</span></p>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="processing.html"><span class="l-vi">Công nghệ chế tạo bán dẫn tiên tiến</span><span class="l-en">Advanced Semiconductor Processing Technology</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Công nghệ chế tạo · Quiz</span><span class="l-en">Processing Technology · Quiz</span></p>
   <h1><span class="l-vi">Kiểm tra kiến thức</span><span class="l-en">Test your knowledge</span></h1>
   <p class="sub"><span class="l-vi">10 câu hỏi ngẫu nhiên từ ngân hàng 120 câu, bao quát tất cả các bài.</span><span class="l-en">10 random questions from a bank of 120, covering every lesson.</span></p>
 </header>
-<div class="l-vi"><p class="lead">Ngân hàng gồm 120 câu hỏi trắc nghiệm bao quát tất cả các bài trong <a href="semiconductors.html">Thế giới bán dẫn</a>. Mỗi lượt làm gồm 10 câu được chọn ngẫu nhiên; khi làm lại, bạn sẽ gặp những câu chưa xuất hiện trước đó.</p></div>
-<div class="l-en"><p class="lead">The bank holds 120 multiple-choice questions covering every lesson in <a href="semiconductors.html">Welcome to Semiconductors</a>. Each round draws 10 questions at random; when you retry, you get questions you have not seen yet.</p></div>
+<div class="l-vi"><p class="lead">Ngân hàng gồm 120 câu hỏi trắc nghiệm bao quát tất cả các bài trong <a href="processing.html">Công nghệ chế tạo bán dẫn tiên tiến</a>. Mỗi lượt làm gồm 10 câu được chọn ngẫu nhiên; khi làm lại, bạn sẽ gặp những câu chưa xuất hiện trước đó.</p></div>
+<div class="l-en"><p class="lead">The bank holds 120 multiple-choice questions covering every lesson in <a href="processing.html">Advanced Semiconductor Processing Technology</a>. Each round draws 10 questions at random; when you retry, you get questions you have not seen yet.</p></div>
 <div class="qz" id="quiz" aria-live="polite"></div>
 <script>
 (function(){
@@ -175,7 +175,7 @@ function renderResult(){
   else if(s>=5)m=bi('Khá ổn. Hãy xem lại các câu sai bên dưới.','Not bad. Review the questions you missed below.');
   else m=bi('Đừng nản! Đọc lại các bài liên quan rồi thử lại nhé.','Don\'t give up! Revisit the related lessons and try again.');
   var h='<div class="card"><p class="score">'+s+'/'+N+'</p><p class="msg">'+m+'</p>'+
-   '<div class="actions"><button class="btnq" id="again">'+bi('Làm lại với 10 câu mới','Retry with 10 new questions')+'</button><a class="btnq sec" href="semiconductors.html">'+bi('Về mục lục','Back to contents')+'</a></div>'+
+   '<div class="actions"><button class="btnq" id="again">'+bi('Làm lại với 10 câu mới','Retry with 10 new questions')+'</button><a class="btnq sec" href="processing.html">'+bi('Về mục lục','Back to contents')+'</a></div>'+
    '<ol class="review">';
   state.items.forEach(function(it){var q=it.q, ok=it.pick===q.c;
     h+='<li><span class="rq">'+b2(q.q)+'</span>';
@@ -195,7 +195,7 @@ renderStart();
 })();
 </script>
 
-<nav class="pager"><a href="oxide-calculator.html">← <span class="l-vi">Tính độ dày oxide: bài tập và công cụ</span><span class="l-en">Calculating oxide thickness: worked example and calculator</span></a><a class="n" href="semiconductors.html"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>
+<nav class="pager"><a href="oxide-calculator.html">← <span class="l-vi">Tính độ dày oxide: bài tập và công cụ</span><span class="l-en">Calculating oxide thickness: worked example and calculator</span></a><a class="n" href="processing.html"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>
 <footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
 </main>
 
