@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Quy tắc vẽ để mask in đúng" data-title-en="Drawing rules for a correct mask">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drawing rules for a correct mask · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Closed zero-width polylines, no self-intersection, holes, circles, text, grids and a checklist.">
+<meta property="og:title" content="Drawing rules for a correct mask">
+<meta property="og:description" content="Closed zero-width polylines, no self-intersection, holes, circles, text, grids and a checklist.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="autocad.html"><span class="l-vi">AutoCAD cho thiết kế mask</span><span class="l-en">AutoCAD for Mask Design</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 2</span><span class="l-en">Part 2 · Lesson 2</span></p>
+  <h1><span class="l-vi">Quy tắc vẽ để mask in đúng</span><span class="l-en">Drawing rules for a correct mask</span></h1>
+  <p class="sub"><span class="l-vi">Polyline kín độ rộng 0, không tự cắt, tạo lỗ, hình tròn, chữ, lưới và danh sách kiểm tra.</span><span class="l-en">Closed zero-width polylines, no self-intersection, holes, circles, text, grids and a checklist.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Một bản vẽ trông hoàn hảo trên màn hình vẫn có thể cho ra tấm mask sai. Lý do là máy ghi mask chỉ hiểu đa giác kín. Bài này tổng hợp các quy tắc từ hướng dẫn của nhiều phòng sạch, kèm danh sách kiểm tra trước khi gửi file.</p>
+
+<h2 id="v-s1">1. Chỉ dùng polyline kín, độ rộng bằng 0</h2>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><text x="85" y="200" class="ns" text-anchor="middle">Đúng: polyline kín</text><text x="85" y="222" class="nt" text-anchor="middle" style="fill:#15803d">✓</text><text x="242" y="200" class="ns" text-anchor="middle">Sai: polyline hở</text><text x="242" y="222" class="nt" text-anchor="middle" style="fill:#b91c1c">✗</text><text x="399" y="200" class="ns" text-anchor="middle">Sai: tự cắt</text><text x="399" y="222" class="nt" text-anchor="middle" style="fill:#b91c1c">✗</text><text x="556" y="200" class="ns" text-anchor="middle">Đúng: lỗ bằng biên tự chạm</text><text x="556" y="222" class="nt" text-anchor="middle" style="fill:#15803d">✓</text><path d="M25,40H135V170H25Z" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/><path d="M182,40H292V170H182V60" style="fill:none;stroke:var(--accent);stroke-width:2"/><circle cx="182" cy="60" r="4" style="fill:#b91c1c"/><path d="M339,40L449,170H339L449,40Z" style="fill:var(--accent-soft);stroke:#b91c1c;stroke-width:2"/><path d="M496,40H606V170H496V40 M496,40V40 M526,75V135H576V75H526Z" style="fill:var(--accent-soft);fill-rule:evenodd;stroke:var(--accent);stroke-width:2"/></svg><figcaption>Hình 1. Đúng và sai khi vẽ hình cho mask.</figcaption></figure>
+<ul>
+<li>Mọi vùng cần in phải là <strong>polyline kín, độ rộng 0</strong>, bao một diện tích khác 0. Đây là lỗi phổ biến nhất với file AutoCAD: polyline hở.</li>
+<li>Khi vẽ bằng PLINE, kết thúc bằng <code>C</code> (Close), không phải nhấp lại vào điểm đầu.</li>
+<li>Không dùng <strong>LINE</strong> rời cho hình in; nếu đã lỡ vẽ, dùng <code>BOUNDARY</code> hoặc <code>PEDIT</code> → Join để biến thành polyline kín.</li>
+<li>Không dùng polyline có độ rộng (width) để vẽ đường dẫn hay kênh: hãy vẽ đường bao của nó.</li>
+<li>Không dùng <strong>HATCH</strong>: máy in mask không nhận vùng tô; chỉ vẽ đường bao.</li>
+</ul>
+
+<h2 id="v-s2">2. Không tự cắt, không trùng đỉnh</h2>
+<ul>
+<li>Polyline <strong>không được tự cắt</strong> (hình số 8): kết quả không đoán trước được.</li>
+<li>Không có đỉnh trùng lặp hay đoạn dài 0.</li>
+<li>Giữ số đỉnh mỗi polyline dưới khoảng 200; hình phức tạp hơn thì chia thành nhiều đa giác.</li>
+</ul>
+
+<h2 id="v-s3">3. Tạo lỗ và hình lồng nhau</h2>
+<p>Có ba cách tạo một vùng có lỗ (ví dụ vành khuyên của TLM tròn):</p>
+<ol>
+<li><strong>Hình lồng nhau</strong>: vẽ hình ngoài và hình trong là hai polyline kín. Hầu hết bộ chuyển đổi hiểu theo quy tắc chẵn–lẻ: hình lồng bên trong đổi màu. Kiểm tra kỹ với bộ chuyển đổi của bạn.</li>
+<li><strong>Biên tự chạm</strong>: một polyline đi vòng ngoài, rẽ vào trong theo một "khe" có độ rộng 0, đi vòng trong rồi ra lại. Đây là đa giác hợp lệ trong GDSII.</li>
+<li><strong>Hai layer</strong>: vẽ phần chính và phần lỗ trên hai layer khác nhau, ghi rõ "lớp chính trừ lớp lỗ" khi gửi file.</li>
+</ol>
+<p>Có thể dùng <code>REGION</code> rồi <code>SUBTRACT</code> để trừ hình, nhưng region không được hầu hết bộ chuyển đổi DXF hỗ trợ. Sau khi trừ, phải <code>EXPLODE</code> region thành các đoạn rồi <code>PEDIT</code> → Join lại thành polyline kín.</p>
+
+<h2 id="v-s4">4. Hình tròn và đường cong</h2>
+<p>GDSII không có hình tròn: mọi đường cong là đa giác nhiều cạnh. Có hai lựa chọn:</p>
+<ul>
+<li>Vẽ bằng <code>POLYGON</code> với 32–64 cạnh: bạn kiểm soát chính xác hình dạng.</li>
+<li>Vẽ <code>CIRCLE</code> rồi để bộ chuyển đổi xấp xỉ (tham số "arc precision" trong LinkCAD hay KLayout). Tiện nhưng phải kiểm tra lại số cạnh.</li>
+</ul>
+<p>Lưu ý: POLYGON "inscribed" nằm bên trong đường tròn, nên diện tích nhỏ hơn một chút. Với anode đường kính 100 µm và 64 cạnh, sai lệch diện tích khoảng 0,16 %, thường không đáng kể, nhưng nên ghi lại khi chuẩn hóa mật độ dòng.</p>
+
+<h2 id="v-s5">5. Chữ</h2>
+<p>TEXT và MTEXT không được in. Cách chuyển chữ thành polyline:</p>
+<ul>
+<li><code>TXTEXP</code> (Express Tools, chỉ có ở AutoCAD đầy đủ) tách chữ thành các đoạn; sau đó phải kiểm tra và đóng kín.</li>
+<li>Tự vẽ chữ đơn giản bằng RECTANG và PLINE (đơn giản và chắc chắn nhất cho nhãn ngắn).</li>
+<li>Hoặc thêm chữ sau trong KLayout bằng PCell <code>BASIC.TEXT</code> rồi chuyển thành đa giác.</li>
+</ul>
+
+<h2 id="v-s6">6. Lưới, đơn vị và gốc tọa độ</h2>
+<ul>
+<li>Mọi đỉnh nên nằm trên lưới (ví dụ 0,1 hoặc 1 µm); đỉnh lệch lưới sẽ bị làm tròn khi ghi mask.</li>
+<li>Vẽ bằng đơn vị mét hệ (µm hoặc mm) và ghi rõ đơn vị.</li>
+<li>Đặt tâm thiết kế tại (0,0) nếu máy ghi yêu cầu (ví dụ Heidelberg µPG).</li>
+<li>Các hình chồng lên nhau trên cùng layer sẽ được gộp (phép OR). Điều này thường vô hại, nhưng không dựa vào nó để tạo lỗ.</li>
+</ul>
+
+<h2 id="v-s7">7. Danh sách kiểm tra trước khi xuất file</h2>
+<ol>
+<li><code>ZOOM</code> → <code>E</code>: không có đối tượng lạc ở xa.</li>
+<li><code>QSELECT</code>: chọn Polyline với Closed = No; kết quả phải là 0 đối tượng.</li>
+<li><code>QSELECT</code>: không còn LINE, ARC, HATCH, TEXT, REGION trên các layer mask.</li>
+<li><code>OVERKILL</code> để xóa đối tượng trùng; <code>PURGE</code> và <code>AUDIT</code>.</li>
+<li>Kiểm tra mỗi layer mask: tắt các layer khác và xem riêng.</li>
+<li>Kiểm tra dấu căn chỉnh của các lớp chồng khít nhau.</li>
+<li>Đo lại vài kích thước quan trọng bằng <code>DIST</code>.</li>
+</ol>
+
+<h2 id="v-s8">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Unity Health Toronto, <a href="https://oldresearch.unityhealth.to/wp-content/uploads/2019/05/Photomask_Design_Rules.pdf" target="_blank" rel="noopener">Photomask design rules</a> (polyline kín, không hatch, ≤ 200 đỉnh, không tự cắt).</li>
+<li>University of Utah Nanofab, <a href="https://www.nanofab.utah.edu/wp-content/uploads/2022/12/Heidelberg-uPG-SOP-2018.pdf" target="_blank" rel="noopener">Heidelberg µPG 101 SOP</a> (quy tắc DXF, gốc tọa độ, đơn vị).</li>
+<li>University of Florida NRF, <a href="https://nrf.aux.eng.ufl.edu/_files/documents/4218.pdf" target="_blank" rel="noopener">Mask design guidelines</a>.</li>
+<li>University of Washington, <a href="https://ebeam.wnf.uw.edu/ebeamweb/training/cad_tut_main/cad_tut_det/cad_tutorial_details.html" target="_blank" rel="noopener">CAD tutorial: layout details</a>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A drawing that looks perfect on screen can still yield a wrong mask. The reason: mask writers only understand closed polygons. This lesson collects the rules from several cleanroom guides, plus a checklist before sending the file.</p>
+
+<h2 id="e-s1">1. Only closed, zero-width polylines</h2>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><text x="85" y="200" class="ns" text-anchor="middle">OK: closed polyline</text><text x="85" y="222" class="nt" text-anchor="middle" style="fill:#15803d">✓</text><text x="242" y="200" class="ns" text-anchor="middle">Wrong: open polyline</text><text x="242" y="222" class="nt" text-anchor="middle" style="fill:#b91c1c">✗</text><text x="399" y="200" class="ns" text-anchor="middle">Wrong: self-intersecting</text><text x="399" y="222" class="nt" text-anchor="middle" style="fill:#b91c1c">✗</text><text x="556" y="200" class="ns" text-anchor="middle">OK: hole via self-touching edge</text><text x="556" y="222" class="nt" text-anchor="middle" style="fill:#15803d">✓</text><path d="M25,40H135V170H25Z" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2"/><path d="M182,40H292V170H182V60" style="fill:none;stroke:var(--accent);stroke-width:2"/><circle cx="182" cy="60" r="4" style="fill:#b91c1c"/><path d="M339,40L449,170H339L449,40Z" style="fill:var(--accent-soft);stroke:#b91c1c;stroke-width:2"/><path d="M496,40H606V170H496V40 M496,40V40 M526,75V135H576V75H526Z" style="fill:var(--accent-soft);fill-rule:evenodd;stroke:var(--accent);stroke-width:2"/></svg><figcaption>Figure 1. Right and wrong ways to draw mask shapes.</figcaption></figure>
+<ul>
+<li>Every area to print must be a <strong>closed, zero-width polyline</strong> enclosing a non-zero area. Open polylines are the most common error in AutoCAD files.</li>
+<li>When drawing with PLINE, finish with <code>C</code> (Close), not by clicking back on the start point.</li>
+<li>Do not use separate <strong>LINE</strong>s for printed shapes; if you already did, use <code>BOUNDARY</code> or <code>PEDIT</code> → Join to make a closed polyline.</li>
+<li>Do not use wide polylines for traces or channels: draw their outline instead.</li>
+<li>Do not use <strong>HATCH</strong>: mask printers ignore fills; draw outlines only.</li>
+</ul>
+
+<h2 id="e-s2">2. No self-intersection, no duplicate vertices</h2>
+<ul>
+<li>A polyline <strong>must not cross itself</strong> (a figure eight): the result is unpredictable.</li>
+<li>No duplicate vertices or zero-length segments.</li>
+<li>Keep each polyline below about 200 vertices; split more complex shapes into several polygons.</li>
+</ul>
+
+<h2 id="e-s3">3. Holes and nested shapes</h2>
+<p>Three ways to make an area with a hole (e.g. the ring of a circular TLM):</p>
+<ol>
+<li><strong>Nested shapes</strong>: draw the outer and inner shapes as two closed polylines. Most converters apply an even–odd rule: the nested shape flips. Check carefully with your converter.</li>
+<li><strong>Self-touching boundary</strong>: one polyline runs around the outside, cuts in along a zero-width "slit", runs around the inside and back out. This is a valid GDSII polygon.</li>
+<li><strong>Two layers</strong>: draw the main part and the hole on different layers and state "main layer minus hole layer" when submitting.</li>
+</ol>
+<p>You can use <code>REGION</code> then <code>SUBTRACT</code>, but most DXF converters do not support regions. After subtracting, <code>EXPLODE</code> the region into segments and <code>PEDIT</code> → Join them back into a closed polyline.</p>
+
+<h2 id="e-s4">4. Circles and curves</h2>
+<p>GDSII has no circles: every curve is a many-sided polygon. Two choices:</p>
+<ul>
+<li>Draw with <code>POLYGON</code> using 32–64 sides: you control the exact shape.</li>
+<li>Draw a <code>CIRCLE</code> and let the converter approximate it ("arc precision" in LinkCAD or KLayout). Convenient, but check the side count.</li>
+</ul>
+<p>Note: an "inscribed" POLYGON lies inside the circle, so its area is slightly smaller. For a 100 µm anode with 64 sides, the area error is about 0.16%, usually negligible, but worth recording when normalizing current density.</p>
+
+<h2 id="e-s5">5. Text</h2>
+<p>TEXT and MTEXT are not printed. Ways to turn text into polylines:</p>
+<ul>
+<li><code>TXTEXP</code> (Express Tools, full AutoCAD only) breaks text into segments; you must then check and close them.</li>
+<li>Draw simple letters yourself with RECTANG and PLINE (the simplest and safest for short labels).</li>
+<li>Or add text later in KLayout with the <code>BASIC.TEXT</code> PCell and convert it to polygons.</li>
+</ul>
+
+<h2 id="e-s6">6. Grid, units and origin</h2>
+<ul>
+<li>Every vertex should sit on a grid (e.g. 0.1 or 1 µm); off-grid vertices are rounded when the mask is written.</li>
+<li>Draw in metric units (µm or mm) and state the unit.</li>
+<li>Center the design at (0,0) if the writer requires it (e.g. Heidelberg µPG).</li>
+<li>Overlapping shapes on the same layer are merged (an OR operation). This is usually harmless, but do not rely on it to make holes.</li>
+</ul>
+
+<h2 id="e-s7">7. Checklist before export</h2>
+<ol>
+<li><code>ZOOM</code> → <code>E</code>: no stray objects far away.</li>
+<li><code>QSELECT</code>: select Polylines with Closed = No; the result must be 0 objects.</li>
+<li><code>QSELECT</code>: no LINE, ARC, HATCH, TEXT or REGION left on mask layers.</li>
+<li><code>OVERKILL</code> to remove duplicates; <code>PURGE</code> and <code>AUDIT</code>.</li>
+<li>Inspect each mask layer alone, with the others turned off.</li>
+<li>Check that alignment marks of all layers overlay correctly.</li>
+<li>Re-measure a few critical dimensions with <code>DIST</code>.</li>
+</ol>
+
+<h2 id="e-s8">References</h2>
+<ol class="refs">
+<li>Unity Health Toronto, <a href="https://oldresearch.unityhealth.to/wp-content/uploads/2019/05/Photomask_Design_Rules.pdf" target="_blank" rel="noopener">Photomask design rules</a> (closed polylines, no hatch, ≤ 200 vertices, no self-intersection).</li>
+<li>University of Utah Nanofab, <a href="https://www.nanofab.utah.edu/wp-content/uploads/2022/12/Heidelberg-uPG-SOP-2018.pdf" target="_blank" rel="noopener">Heidelberg µPG 101 SOP</a> (DXF rules, origin, units).</li>
+<li>University of Florida NRF, <a href="https://nrf.aux.eng.ufl.edu/_files/documents/4218.pdf" target="_blank" rel="noopener">Mask design guidelines</a>.</li>
+<li>University of Washington, <a href="https://ebeam.wnf.uw.edu/ebeamweb/training/cad_tut_main/cad_tut_det/cad_tutorial_details.html" target="_blank" rel="noopener">CAD tutorial: layout details</a>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="cad-mask-elements.html">← <span class="l-vi">Các đối tượng cần có trên một bộ mask</span><span class="l-en">What goes on a mask set</span></a><a class="n" href="cad-tutorial.html"><span class="l-vi">Thực hành: mask diode Schottky và TLM</span><span class="l-en">Hands-on: a Schottky diode and TLM mask</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

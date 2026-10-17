@@ -79,25 +79,25 @@
 
 <p class="lead">Nhỏ một giọt mực vào cốc nước, mực sẽ lan dần cho đến khi cả cốc có màu đồng đều. Trong chất rắn, nguyên tử cũng "lan" như vậy, chỉ chậm hơn rất nhiều. Khuếch tán là cơ chế nền tảng để pha tạp bán dẫn, và cũng là nguyên nhân khiến linh kiện xuống cấp ở nhiệt độ cao.</p>
 
-<h2>1. Khuếch tán là gì?</h2>
+<h2 id="v-s1">1. Khuếch tán là gì?</h2>
 <p>Khuếch tán (diffusion, từ tiếng Latin <em>diffundere</em>, "lan ra") là sự <strong>di chuyển tổng thể</strong> của vật chất từ vùng nồng độ cao đến vùng nồng độ thấp, tức là đi xuôi theo gradient nồng độ. Ở cấp độ nguyên tử, mỗi nguyên tử chuyển động ngẫu nhiên; chính sự chênh lệch số lượng giữa hai vùng tạo ra dòng tổng thể.</p>
 <p>Để một nguyên tử trong mạng tinh thể nhảy được sang vị trí khác cần hai điều kiện: <strong>có vị trí trống bên cạnh</strong>, và <strong>đủ năng lượng để phá vỡ liên kết</strong> và vượt qua rào thế.</p>
 <p>Một ví dụ quen thuộc ngoài ngành bán dẫn là <strong>tôi bề mặt thép</strong> (case hardening): nung nóng chi tiết thép trong môi trường giàu carbon để carbon khuếch tán xen kẽ vào lớp bề mặt. Bánh răng khi đó cứng ở ngoài để chống mài mòn, nhưng vẫn dẻo ở trong để chịu va đập.</p>
 
-<h2>2. Các dạng khuếch tán trong chất rắn</h2>
+<h2 id="v-s2">2. Các dạng khuếch tán trong chất rắn</h2>
 <ul>
 <li><strong>Khuếch tán tương hỗ</strong> (inter-diffusion): trong hợp kim, nguyên tử của hai loại cùng di chuyển ngược chiều nhau, ranh giới sắc nét ban đầu dần trở thành vùng chuyển tiếp trơn.</li>
 <li><strong>Tự khuếch tán</strong> (self-diffusion): ngay cả trong chất rắn đơn nguyên tố, các nguyên tử cùng loại vẫn liên tục đổi chỗ cho nhau, có thể theo dõi bằng đồng vị đánh dấu.</li>
 </ul>
 
-<h2>3. Động lực học nguyên tử: vì sao khuếch tán phụ thuộc mạnh vào nhiệt độ?</h2>
+<h2 id="v-s3">3. Động lực học nguyên tử: vì sao khuếch tán phụ thuộc mạnh vào nhiệt độ?</h2>
 <p>Trong tinh thể, mỗi nút mạng có thể xem như đáy một giếng thế. Chỉ ở 0 K nguyên tử mới đứng yên; ở nhiệt độ hữu hạn, nó dao động quanh vị trí cân bằng với tần số cỡ \(\nu_0 \sim 10^{13}\ \text{s}^{-1}\). Muốn nhảy sang giếng bên cạnh, nguyên tử phải vượt rào thế \(E_a\). Xác suất có đủ năng lượng tuân theo phân bố Boltzmann, nên tần suất nhảy:</p>
 $$\Gamma = \nu_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
 <p>Hệ quả là hệ số khuếch tán có dạng Arrhenius:</p>
 $$D = D_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
 <p>Với tạp chất pha tạp trong Si, \(E_a\) điển hình khoảng 3,5–4 eV. Ở nhiệt độ phòng (\(kT \approx 0{,}026\) eV), \(D\) gần như bằng 0; ở 1000–1100 °C, \(D\) đủ lớn để tạp chất di chuyển được vài trăm nanomet trong vài chục phút. Đây là lý do pha tạp bằng khuếch tán phải thực hiện ở nhiệt độ rất cao, và cũng là lý do các bước nhiệt sau đó phải được kiểm soát (gọi là "thermal budget") để tạp chất không lan quá xa.</p>
 
-<h2>4. Cơ chế khuếch tán</h2>
+<h2 id="v-s4">4. Cơ chế khuếch tán</h2>
 <figure><svg viewBox="0 0 600 260" class="fig-svg" role="img">
 <defs><marker id="ah3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
 <text x="150" y="22" class="nt" text-anchor="middle">(a) Cơ chế vacancy</text>
@@ -118,7 +118,7 @@ $$D = D_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
 <h3>Cơ chế interstitial</h3>
 <p>Các nguyên tử nhỏ (H, C, N, O) và nhiều kim loại chuyển tiếp (Cu, Fe, Au...) di chuyển qua các khe giữa nút mạng, không cần vacancy. Rào thế thấp hơn nên chúng khuếch tán <strong>nhanh hơn nhiều</strong> so với tạp chất thay thế. Tuy nhiên ở vị trí xen kẽ, chúng thường không đóng góp trực tiếp vào việc pha tạp, mà ngược lại, kim loại xen kẽ có thể tạo mức năng lượng sâu (deep level) làm giảm thời gian sống hạt tải. Trên thực tế, nhiều tạp chất trong Si khuếch tán theo cơ chế kết hợp, có sự tham gia của cả vacancy và nguyên tử Si tự xen kẽ (self-interstitial).</p>
 
-<h2>5. Định luật Fick</h2>
+<h2 id="v-s5">5. Định luật Fick</h2>
 <p><strong>Định luật Fick thứ nhất</strong>: thông lượng nguyên tử tỉ lệ với gradient nồng độ, chiều ngược với gradient:</p>
 $$J = -D\,\frac{\partial C}{\partial x}$$
 <p>Kết hợp với định luật bảo toàn vật chất ta có <strong>định luật Fick thứ hai</strong>, mô tả nồng độ thay đổi theo thời gian (với \(D\) không đổi):</p>
@@ -132,7 +132,7 @@ $$C(x,t) = \frac{Q}{\sqrt{\pi D t}}\exp\!\left(-\frac{x^2}{4Dt}\right)$$
 <figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="220.0" y1="255" x2="220.0" y2="260" class="ax"/><text x="220.0" y="275" class="tk" text-anchor="middle">1</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">2</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">3</text><line x1="55" y1="255" x2="60" y2="255" class="ax"/><line x1="60" y1="255" x2="540" y2="255" class="grid"/><text x="51" y="259" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">0.25</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">0.5</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">0.75</text><line x1="55" y1="20" x2="60" y2="20" class="ax"/><line x1="60" y1="20" x2="540" y2="20" class="grid"/><text x="51" y="24" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Độ sâu x / √(Dt)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">C(x) chuẩn hóa</text><path d="M60.0,20.0 L68.0,26.6 L76.0,33.2 L84.0,39.9 L92.0,46.4 L100.0,53.0 L108.0,59.5 L116.0,65.9 L124.0,72.3 L132.0,78.7 L140.0,84.9 L148.0,91.1 L156.0,97.2 L164.0,103.2 L172.0,109.2 L180.0,115.0 L188.0,120.7 L196.0,126.3 L204.0,131.7 L212.0,137.1 L220.0,142.3 L228.0,147.4 L236.0,152.4 L244.0,157.2 L252.0,161.9 L260.0,166.5 L268.0,170.9 L276.0,175.2 L284.0,179.3 L292.0,183.3 L300.0,187.1 L308.0,190.8 L316.0,194.4 L324.0,197.8 L332.0,201.1 L340.0,204.3 L348.0,207.3 L356.0,210.2 L364.0,212.9 L372.0,215.5 L380.0,218.0 L388.0,220.4 L396.0,222.7 L404.0,224.8 L412.0,226.8 L420.0,228.8 L428.0,230.6 L436.0,232.3 L444.0,233.9 L452.0,235.4 L460.0,236.9 L468.0,238.2 L476.0,239.5 L484.0,240.7 L492.0,241.8 L500.0,242.8 L508.0,243.8 L516.0,244.7 L524.0,245.5 L532.0,246.3 L540.0,247.0" class="s1" fill="none"/><path d="M60.0,20.0 L68.0,20.1 L76.0,20.6 L84.0,21.3 L92.0,22.3 L100.0,23.6 L108.0,25.2 L116.0,27.1 L124.0,29.2 L132.0,31.6 L140.0,34.2 L148.0,37.1 L156.0,40.2 L164.0,43.6 L172.0,47.1 L180.0,50.8 L188.0,54.7 L196.0,58.8 L204.0,63.1 L212.0,67.5 L220.0,72.0 L228.0,76.6 L236.0,81.3 L244.0,86.2 L252.0,91.0 L260.0,96.0 L268.0,101.0 L276.0,106.0 L284.0,111.0 L292.0,116.1 L300.0,121.1 L308.0,126.1 L316.0,131.1 L324.0,136.0 L332.0,140.9 L340.0,145.7 L348.0,150.5 L356.0,155.1 L364.0,159.7 L372.0,164.2 L380.0,168.5 L388.0,172.8 L396.0,177.0 L404.0,181.0 L412.0,184.9 L420.0,188.7 L428.0,192.4 L436.0,195.9 L444.0,199.3 L452.0,202.6 L460.0,205.7 L468.0,208.8 L476.0,211.6 L484.0,214.4 L492.0,217.0 L500.0,219.5 L508.0,221.9 L516.0,224.2 L524.0,226.3 L532.0,228.3 L540.0,230.2" class="s2" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">nguồn không đổi (erfc)</text><line x1="390" y1="46" x2="414" y2="46" class="s2"/><text x="420" y="50" class="tk">nguồn giới hạn (Gauss)</text></svg><figcaption>Hình 2. Hai profile khuếch tán theo độ sâu chuẩn hóa x/√(Dt), cả hai được chuẩn hóa về 1 tại bề mặt.</figcaption></figure>
 <p>Trong quy trình truyền thống, hai bước được kết hợp: pre-deposition để đưa một lượng tạp chất xác định vào lớp mỏng sát bề mặt, rồi drive-in để đạt độ sâu tiếp giáp mong muốn. Độ sâu tiếp giáp \(x_j\) là nơi nồng độ tạp chất khuếch tán bằng nồng độ nền của đế.</p>
 
-<h2>6. Đưa tạp chất vào bán dẫn</h2>
+<h2 id="v-s6">6. Đưa tạp chất vào bán dẫn</h2>
 <h3>Khuếch tán từ nguồn</h3>
 <ul>
 <li><strong>Nguồn rắn:</strong> các tấm BN hoặc B₂O₃ đặt xen kẽ với wafer trong lò; ở nhiệt độ cao, tạp chất bay hơi và lắng lên wafer.</li>
@@ -147,7 +147,7 @@ $$C(x,t) = \frac{Q}{\sqrt{\pi D t}}\exp\!\left(-\frac{x^2}{4Dt}\right)$$
 <p>Với β-Ga₂O₃, pha tạp loại n thường dùng Si hoặc Sn thay thế Ga. Khuếch tán nhiệt truyền thống ít được dùng; thay vào đó, pha tạp được đưa vào trong quá trình mọc màng (MOCVD, HVPE, MBE) hoặc bằng cấy ion Si, sau đó ủ kích hoạt ở khoảng 900–1100 °C trong khí N₂ (Sasaki và cộng sự, 2013). Thách thức lớn là β-Ga₂O₃ <strong>gần như chưa có pha tạp loại p hiệu quả</strong>, vì lỗ trống có xu hướng tự bẫy và các acceptor như Mg, N tạo mức năng lượng rất sâu. Vì vậy Mg và N được dùng chủ yếu để tạo lớp bán cách điện hoặc lớp chặn dòng.</p>
 <p>Khuếch tán cũng liên quan trực tiếp đến độ tin cậy: ở nhiệt độ cao, sai hỏng điểm như oxygen vacancy và tạp chất có thể di chuyển, làm thay đổi phân bố bẫy gần tiếp giáp Schottky. Hiểu khuếch tán giúp giải thích vì sao đặc tính C-V và dòng rò của linh kiện Ga₂O₃ thay đổi theo nhiệt độ và thời gian hoạt động.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s7">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>W. D. Callister, D. G. Rethwisch, <em>Materials Science and Engineering: An Introduction</em>, Wiley.</li>
@@ -159,25 +159,25 @@ $$C(x,t) = \frac{Q}{\sqrt{\pi D t}}\exp\!\left(-\frac{x^2}{4Dt}\right)$$
 <div class="l-en">
 <p class="lead">Drop ink into a glass of water and it slowly spreads until the whole glass is evenly colored. Atoms in a solid spread in the same way, only far more slowly. Diffusion is the basis of semiconductor doping, and also a reason devices degrade at high temperature.</p>
 
-<h2>1. What is diffusion?</h2>
+<h2 id="e-s1">1. What is diffusion?</h2>
 <p>Diffusion (from the Latin <em>diffundere</em>, "to spread out") is the <strong>net movement</strong> of matter from a region of high concentration to one of low concentration, that is, down a concentration gradient. At the atomic scale each atom moves randomly; the imbalance in numbers between two regions produces the net flux.</p>
 <p>For an atom in a crystal lattice to jump to another site, two conditions must be met: <strong>an empty adjacent site</strong>, and <strong>enough energy to break bonds</strong> and overcome the barrier.</p>
 <p>A familiar example outside semiconductors is <strong>case hardening of steel</strong>: heating a steel part in a carbon-rich environment so that carbon diffuses interstitially into the surface. A gear treated this way is hard on the outside to resist wear, yet tough on the inside to absorb shocks.</p>
 
-<h2>2. Types of diffusion in solids</h2>
+<h2 id="e-s2">2. Types of diffusion in solids</h2>
 <ul>
 <li><strong>Inter-diffusion:</strong> in an alloy, two kinds of atoms move in opposite directions, and an initially sharp boundary becomes a smooth transition region.</li>
 <li><strong>Self-diffusion:</strong> even in a pure element, atoms of the same kind constantly exchange places, which can be traced with labeled isotopes.</li>
 </ul>
 
-<h2>3. Atomic dynamics: why diffusion depends so strongly on temperature</h2>
+<h2 id="e-s3">3. Atomic dynamics: why diffusion depends so strongly on temperature</h2>
 <p>In a crystal, each lattice site can be pictured as the bottom of a potential well. Only at 0 K is an atom at rest; at finite temperature it vibrates around its equilibrium position at a frequency of order \(\nu_0 \sim 10^{13}\ \text{s}^{-1}\). To jump into the neighboring well it must overcome a barrier \(E_a\). The probability of having enough energy follows the Boltzmann distribution, so the jump rate is:</p>
 $$\Gamma = \nu_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
 <p>Consequently the diffusion coefficient takes an Arrhenius form:</p>
 $$D = D_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
 <p>For common dopants in Si, \(E_a\) is typically about 3.5–4 eV. At room temperature (\(kT \approx 0.026\) eV), \(D\) is essentially zero; at 1000–1100 °C, it is large enough for dopants to move a few hundred nanometers in tens of minutes. This is why diffusion doping is done at very high temperature, and why later thermal steps must be controlled (the "thermal budget") so dopants do not spread too far.</p>
 
-<h2>4. Diffusion mechanisms</h2>
+<h2 id="e-s4">4. Diffusion mechanisms</h2>
 <figure><svg viewBox="0 0 600 260" class="fig-svg" role="img">
 <defs><marker id="ah3e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
 <text x="150" y="22" class="nt" text-anchor="middle">(a) Vacancy mechanism</text>
@@ -198,7 +198,7 @@ $$D = D_0 \exp\!\left(-\frac{E_a}{kT}\right)$$
 <h3>Interstitial mechanism</h3>
 <p>Small atoms (H, C, N, O) and many transition metals (Cu, Fe, Au...) move through the spaces between lattice sites without needing vacancies. Their barrier is lower, so they diffuse <strong>much faster</strong> than substitutional impurities. On interstitial sites, however, they usually do not contribute directly to doping; interstitial metals can instead create deep levels that shorten carrier lifetime. In practice, many dopants in Si diffuse by combined mechanisms involving both vacancies and Si self-interstitials.</p>
 
-<h2>5. Fick's laws</h2>
+<h2 id="e-s5">5. Fick's laws</h2>
 <p><strong>Fick's first law</strong>: the atomic flux is proportional to the concentration gradient and points down the gradient:</p>
 $$J = -D\,\frac{\partial C}{\partial x}$$
 <p>Combining it with conservation of matter gives <strong>Fick's second law</strong>, which describes how concentration changes over time (for constant \(D\)):</p>
@@ -212,7 +212,7 @@ $$C(x,t) = \frac{Q}{\sqrt{\pi D t}}\exp\!\left(-\frac{x^2}{4Dt}\right)$$
 <figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255" x2="540" y2="255" class="ax"/><line x1="60" y1="255" x2="60" y2="20" class="ax"/><line x1="60.0" y1="255" x2="60.0" y2="260" class="ax"/><text x="60.0" y="275" class="tk" text-anchor="middle">0</text><line x1="220.0" y1="255" x2="220.0" y2="260" class="ax"/><text x="220.0" y="275" class="tk" text-anchor="middle">1</text><line x1="380.0" y1="255" x2="380.0" y2="260" class="ax"/><text x="380.0" y="275" class="tk" text-anchor="middle">2</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">3</text><line x1="55" y1="255" x2="60" y2="255" class="ax"/><line x1="60" y1="255" x2="540" y2="255" class="grid"/><text x="51" y="259" class="tk" text-anchor="end">0</text><line x1="55" y1="196.25" x2="60" y2="196.25" class="ax"/><line x1="60" y1="196.25" x2="540" y2="196.25" class="grid"/><text x="51" y="200.25" class="tk" text-anchor="end">0.25</text><line x1="55" y1="137.5" x2="60" y2="137.5" class="ax"/><line x1="60" y1="137.5" x2="540" y2="137.5" class="grid"/><text x="51" y="141.5" class="tk" text-anchor="end">0.5</text><line x1="55" y1="78.75" x2="60" y2="78.75" class="ax"/><line x1="60" y1="78.75" x2="540" y2="78.75" class="grid"/><text x="51" y="82.75" class="tk" text-anchor="end">0.75</text><line x1="55" y1="20" x2="60" y2="20" class="ax"/><line x1="60" y1="20" x2="540" y2="20" class="grid"/><text x="51" y="24" class="tk" text-anchor="end">1</text><text x="300.0" y="294" class="lab" text-anchor="middle">Depth x / √(Dt)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">normalized C(x)</text><path d="M60.0,20.0 L68.0,26.6 L76.0,33.2 L84.0,39.9 L92.0,46.4 L100.0,53.0 L108.0,59.5 L116.0,65.9 L124.0,72.3 L132.0,78.7 L140.0,84.9 L148.0,91.1 L156.0,97.2 L164.0,103.2 L172.0,109.2 L180.0,115.0 L188.0,120.7 L196.0,126.3 L204.0,131.7 L212.0,137.1 L220.0,142.3 L228.0,147.4 L236.0,152.4 L244.0,157.2 L252.0,161.9 L260.0,166.5 L268.0,170.9 L276.0,175.2 L284.0,179.3 L292.0,183.3 L300.0,187.1 L308.0,190.8 L316.0,194.4 L324.0,197.8 L332.0,201.1 L340.0,204.3 L348.0,207.3 L356.0,210.2 L364.0,212.9 L372.0,215.5 L380.0,218.0 L388.0,220.4 L396.0,222.7 L404.0,224.8 L412.0,226.8 L420.0,228.8 L428.0,230.6 L436.0,232.3 L444.0,233.9 L452.0,235.4 L460.0,236.9 L468.0,238.2 L476.0,239.5 L484.0,240.7 L492.0,241.8 L500.0,242.8 L508.0,243.8 L516.0,244.7 L524.0,245.5 L532.0,246.3 L540.0,247.0" class="s1" fill="none"/><path d="M60.0,20.0 L68.0,20.1 L76.0,20.6 L84.0,21.3 L92.0,22.3 L100.0,23.6 L108.0,25.2 L116.0,27.1 L124.0,29.2 L132.0,31.6 L140.0,34.2 L148.0,37.1 L156.0,40.2 L164.0,43.6 L172.0,47.1 L180.0,50.8 L188.0,54.7 L196.0,58.8 L204.0,63.1 L212.0,67.5 L220.0,72.0 L228.0,76.6 L236.0,81.3 L244.0,86.2 L252.0,91.0 L260.0,96.0 L268.0,101.0 L276.0,106.0 L284.0,111.0 L292.0,116.1 L300.0,121.1 L308.0,126.1 L316.0,131.1 L324.0,136.0 L332.0,140.9 L340.0,145.7 L348.0,150.5 L356.0,155.1 L364.0,159.7 L372.0,164.2 L380.0,168.5 L388.0,172.8 L396.0,177.0 L404.0,181.0 L412.0,184.9 L420.0,188.7 L428.0,192.4 L436.0,195.9 L444.0,199.3 L452.0,202.6 L460.0,205.7 L468.0,208.8 L476.0,211.6 L484.0,214.4 L492.0,217.0 L500.0,219.5 L508.0,221.9 L516.0,224.2 L524.0,226.3 L532.0,228.3 L540.0,230.2" class="s2" fill="none"/><line x1="390" y1="28" x2="414" y2="28" class="s1"/><text x="420" y="32" class="tk">constant source (erfc)</text><line x1="390" y1="46" x2="414" y2="46" class="s2"/><text x="420" y="50" class="tk">limited source (Gaussian)</text></svg><figcaption>Figure 2. The two diffusion profiles versus normalized depth x/√(Dt), both normalized to 1 at the surface.</figcaption></figure>
 <p>In traditional processing, the two steps are combined: pre-deposition introduces a defined dose into a thin surface layer, then drive-in reaches the target junction depth. The junction depth \(x_j\) is where the diffused dopant concentration equals the background doping of the substrate.</p>
 
-<h2>6. Introducing dopants into semiconductors</h2>
+<h2 id="e-s6">6. Introducing dopants into semiconductors</h2>
 <h3>Diffusion from a source</h3>
 <ul>
 <li><strong>Solid sources:</strong> BN or B₂O₃ plates placed between wafers in the furnace; at high temperature the dopant evaporates and deposits on the wafers.</li>
@@ -227,7 +227,7 @@ $$C(x,t) = \frac{Q}{\sqrt{\pi D t}}\exp\!\left(-\frac{x^2}{4Dt}\right)$$
 <p>In β-Ga₂O₃, n-type doping usually uses Si or Sn substituting for Ga. Conventional thermal diffusion is rarely used; instead, dopants are introduced during film growth (MOCVD, HVPE, MBE) or by Si ion implantation followed by activation annealing at about 900–1100 °C in N₂ (Sasaki et al., 2013). A major challenge is that β-Ga₂O₃ has <strong>no effective p-type doping yet</strong>, because holes tend to self-trap and acceptors such as Mg and N form very deep levels. Mg and N are therefore used mainly to create semi-insulating or current-blocking layers.</p>
 <p>Diffusion also bears directly on reliability: at high temperature, point defects such as oxygen vacancies and impurities can migrate, changing the trap distribution near the Schottky junction. Understanding diffusion helps explain why the C-V characteristics and leakage current of Ga₂O₃ devices change with temperature and operating time.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s7">References</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>W. D. Callister, D. G. Rethwisch, <em>Materials Science and Engineering: An Introduction</em>, Wiley.</li>

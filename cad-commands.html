@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Các lệnh AutoCAD cần thiết cho mask" data-title-en="Essential AutoCAD commands for masks">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Essential AutoCAD commands for masks · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="A table of about 30 commands by task: draw, copy, edit, measure, organize and export.">
+<meta property="og:title" content="Essential AutoCAD commands for masks">
+<meta property="og:description" content="A table of about 30 commands by task: draw, copy, edit, measure, organize and export.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="autocad.html"><span class="l-vi">AutoCAD cho thiết kế mask</span><span class="l-en">AutoCAD for Mask Design</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 3</span><span class="l-en">Part 1 · Lesson 3</span></p>
+  <h1><span class="l-vi">Các lệnh AutoCAD cần thiết cho mask</span><span class="l-en">Essential AutoCAD commands for masks</span></h1>
+  <p class="sub"><span class="l-vi">Bảng khoảng 30 lệnh theo nhóm: vẽ, sao chép, chỉnh sửa, đo kiểm, tổ chức và xuất file.</span><span class="l-en">A table of about 30 commands by task: draw, copy, edit, measure, organize and export.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">AutoCAD có hàng trăm lệnh, nhưng để vẽ mask bạn chỉ cần khoảng 30 lệnh dưới đây. Bảng được nhóm theo công việc; tên tắt (alias) giúp gõ nhanh hơn trên dòng lệnh.</p>
+<h2 id="v-s1">1. Bảng lệnh cần thiết</h2>
+<h3>Vẽ</h3><div class="tablewrap"><table><tr><th>Lệnh</th><th>Tắt</th><th>Dùng cho mask</th></tr>
+<tr><td><code>RECTANG</code></td><td><code>REC</code></td><td>Hình chữ nhật, tạo sẵn polyline kín. Lệnh dùng nhiều nhất cho mask.</td></tr>
+<tr><td><code>PLINE</code></td><td><code>PL</code></td><td>Polyline nhiều đoạn; kết thúc bằng tùy chọn <code>C</code> (Close) để đóng kín.</td></tr>
+<tr><td><code>POLYGON</code></td><td><code>POL</code></td><td>Đa giác đều; dùng 32–64 cạnh để xấp xỉ hình tròn có kiểm soát.</td></tr>
+<tr><td><code>CIRCLE</code></td><td><code>C</code></td><td>Hình tròn thật; nhiều bộ chuyển đổi xấp xỉ được, nhưng nên kiểm tra.</td></tr>
+<tr><td><code>LINE</code></td><td><code>L</code></td><td>Đoạn thẳng rời: <em>không</em> dùng cho hình in trên mask, chỉ dùng cho đường dựng.</td></tr>
+</table></div>
+<h3>Sao chép và sắp xếp</h3><div class="tablewrap"><table><tr><th>Lệnh</th><th>Tắt</th><th>Dùng cho mask</th></tr>
+<tr><td><code>COPY</code></td><td><code>CO</code></td><td>Sao chép theo vector dịch chuyển chính xác.</td></tr>
+<tr><td><code>MOVE</code></td><td><code>M</code></td><td>Di chuyển; gõ khoảng dịch dạng <code>@dx,dy</code>.</td></tr>
+<tr><td><code>ARRAYRECT</code></td><td><code>AR</code></td><td>Mảng chữ nhật: số hàng, số cột, bước. Dùng cho die lặp, mảng TLM, mảng diode.</td></tr>
+<tr><td><code>ARRAYPOLAR</code></td><td><code>—</code></td><td>Mảng tròn quanh một tâm.</td></tr>
+<tr><td><code>MIRROR</code></td><td><code>MI</code></td><td>Đối xứng qua một trục; giữ nguyên bản gốc nếu chọn No.</td></tr>
+<tr><td><code>ROTATE</code></td><td><code>RO</code></td><td>Xoay quanh điểm gốc chọn.</td></tr>
+</table></div>
+<h3>Chỉnh sửa hình học</h3><div class="tablewrap"><table><tr><th>Lệnh</th><th>Tắt</th><th>Dùng cho mask</th></tr>
+<tr><td><code>OFFSET</code></td><td><code>O</code></td><td>Tạo đường song song cách đều, ví dụ vành bảo vệ quanh anode.</td></tr>
+<tr><td><code>TRIM / EXTEND</code></td><td><code>TR / EX</code></td><td>Cắt bớt hoặc kéo dài tới đường biên.</td></tr>
+<tr><td><code>FILLET</code></td><td><code>F</code></td><td>Bo góc; bán kính 0 để nối hai đoạn thành góc nhọn sạch.</td></tr>
+<tr><td><code>PEDIT / JOIN</code></td><td><code>PE / J</code></td><td>Đóng polyline hở, nối các đoạn rời thành một polyline kín.</td></tr>
+<tr><td><code>BOUNDARY</code></td><td><code>BO</code></td><td>Nhấp vào bên trong một vùng kín để tạo polyline biên. Cách nhanh để "cứu" hình vẽ bằng LINE.</td></tr>
+<tr><td><code>EXPLODE</code></td><td><code>X</code></td><td>Tách polyline hoặc block thành đối tượng con. Cẩn thận: polyline sẽ thành các LINE rời.</td></tr>
+</table></div>
+<h3>Đo và kiểm tra</h3><div class="tablewrap"><table><tr><th>Lệnh</th><th>Tắt</th><th>Dùng cho mask</th></tr>
+<tr><td><code>DIST / MEASUREGEOM</code></td><td><code>DI / MEA</code></td><td>Đo khoảng cách và góc.</td></tr>
+<tr><td><code>ID</code></td><td><code>—</code></td><td>Hiện tọa độ của một điểm.</td></tr>
+<tr><td><code>LIST</code></td><td><code>LI</code></td><td>Liệt kê thuộc tính, cho biết polyline Closed hay Open.</td></tr>
+<tr><td><code>AREA</code></td><td><code>AA</code></td><td>Diện tích và chu vi vùng kín.</td></tr>
+<tr><td><code>QSELECT</code></td><td><code>—</code></td><td>Chọn nhanh theo điều kiện, ví dụ mọi polyline có Closed = No.</td></tr>
+</table></div>
+<h3>Tổ chức</h3><div class="tablewrap"><table><tr><th>Lệnh</th><th>Tắt</th><th>Dùng cho mask</th></tr>
+<tr><td><code>LAYER</code></td><td><code>LA</code></td><td>Tạo và quản lý layer: mỗi lớp mask là một layer.</td></tr>
+<tr><td><code>BLOCK / INSERT</code></td><td><code>B / I</code></td><td>Gom die thành block để lặp lại; sửa một lần cập nhật mọi bản sao.</td></tr>
+<tr><td><code>PROPERTIES</code></td><td><code>Ctrl+1</code></td><td>Xem và sửa layer, tọa độ, độ rộng.</td></tr>
+</table></div>
+<h3>Dọn dẹp và xuất file</h3><div class="tablewrap"><table><tr><th>Lệnh</th><th>Tắt</th><th>Dùng cho mask</th></tr>
+<tr><td><code>OVERKILL</code></td><td><code>—</code></td><td>Xóa đối tượng trùng lặp và chồng chéo.</td></tr>
+<tr><td><code>PURGE</code></td><td><code>PU</code></td><td>Xóa layer, block không dùng.</td></tr>
+<tr><td><code>AUDIT</code></td><td><code>—</code></td><td>Kiểm tra và sửa lỗi cơ sở dữ liệu bản vẽ.</td></tr>
+<tr><td><code>SAVEAS → DXF</code></td><td><code>—</code></td><td>Lưu DXF (ví dụ AutoCAD 2000/LT2000 DXF hoặc R12 nếu bộ chuyển đổi yêu cầu).</td></tr>
+</table></div>
+<h2 id="v-s2">2. Ba lệnh đáng luyện nhất</h2>
+<p><strong>RECTANG với tọa độ tương đối.</strong> Pad 100 × 200 µm có góc dưới trái tại (200, 1500):</p>
+<pre><code>Command: REC
+Specify first corner point: 200,1500
+Specify other corner point: @100,200</code></pre>
+<p><strong>ARRAYRECT cho mảng đều.</strong> Mảng 5 × 5 die bước 2000 µm:</p>
+<pre><code>Command: ARRAYRECT
+Select objects: (chọn die)  Enter
+  → chọn tùy chọn COUnt: 5 cột, 5 hàng
+  → chọn Spacing: 2000 (giữa các cột), 2000 (giữa các hàng)
+  → ASsociative: No  (mảng thành các đối tượng rời, dễ xuất file hơn)</code></pre>
+<p><strong>PEDIT để đóng và nối.</strong> Đóng một polyline hở, hoặc nối các LINE rời thành polyline kín:</p>
+<pre><code>Command: PEDIT
+Select polyline or [Multiple]: M     (chọn nhiều đối tượng)
+Convert Lines and Arcs to polylines? Y
+Enter an option [Close/Open/Join/...]: J
+Enter fuzz distance: 0.01            (dung sai nối, đơn vị µm)</code></pre>
+<p>Các đoạn phải gặp nhau đúng tại đầu mút; nếu có khe hở hoặc chồng lấn, polyline sẽ không đóng được.</p>
+
+<h2 id="v-s3">3. Mẹo nhỏ</h2>
+<ul>
+<li>Gõ một phần tên lệnh, AutoCAD gợi ý danh sách; dùng phím mũi tên để chọn.</li>
+<li>Nhấn F2 để xem lịch sử dòng lệnh, rất hữu ích khi muốn biết vừa nhập sai ở đâu.</li>
+<li>Chọn đối tượng bằng cửa sổ từ trái sang phải (chỉ chọn đối tượng nằm trọn trong cửa sổ) hoặc từ phải sang trái (chọn cả đối tượng bị cắt qua).</li>
+<li>Đặt dimension (kích thước) trên một layer riêng như <code>DIM</code>, để có thể tắt hoặc xóa trước khi xuất file.</li>
+</ul>
+
+<h2 id="v-s4">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Autodesk, <a href="https://help.autodesk.com/view/ACD/2024/ENU/" target="_blank" rel="noopener">AutoCAD Help: Commands reference</a>.</li>
+<li>Autodesk, <a href="https://help.autodesk.com/cloudhelp/2024/ENU/AutoCAD-MAC-Core/files/GUID-9F9536F0-FBC3-4FA5-89FB-16D6BAFCA5FB.htm" target="_blank" rel="noopener">To modify polylines with PEDIT</a>.</li>
+<li>W. Baumback, <a href="https://opentextbc.ca/autocad2d/chapter/polylines/" target="_blank" rel="noopener"><em>Introduction to Drafting and AutoCAD 2D</em>, Module 29: Polylines</a>, BCcampus (2021).</li>
+<li>G. Omura, B. C. Benton, <em>Mastering AutoCAD 2021 and AutoCAD LT 2021</em>, Sybex/Wiley (2020).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">AutoCAD has hundreds of commands, but for masks you need about 30 of them, listed below. The table is grouped by task; aliases make typing faster at the command line.</p>
+<h2 id="e-s1">1. The essential command table</h2>
+<h3>Draw</h3><div class="tablewrap"><table><tr><th>Command</th><th>Alias</th><th>Mask use</th></tr>
+<tr><td><code>RECTANG</code></td><td><code>REC</code></td><td>Rectangle, already a closed polyline. The most used command for masks.</td></tr>
+<tr><td><code>PLINE</code></td><td><code>PL</code></td><td>Multi-segment polyline; finish with the <code>C</code> (Close) option to close it.</td></tr>
+<tr><td><code>POLYGON</code></td><td><code>POL</code></td><td>Regular polygon; use 32–64 sides for a controlled circle approximation.</td></tr>
+<tr><td><code>CIRCLE</code></td><td><code>C</code></td><td>A true circle; many converters approximate it, but check the result.</td></tr>
+<tr><td><code>LINE</code></td><td><code>L</code></td><td>Separate line segments: <em>not</em> for printed mask shapes, only construction lines.</td></tr>
+</table></div>
+<h3>Copy and arrange</h3><div class="tablewrap"><table><tr><th>Command</th><th>Alias</th><th>Mask use</th></tr>
+<tr><td><code>COPY</code></td><td><code>CO</code></td><td>Copy by an exact displacement vector.</td></tr>
+<tr><td><code>MOVE</code></td><td><code>M</code></td><td>Move; type the displacement as <code>@dx,dy</code>.</td></tr>
+<tr><td><code>ARRAYRECT</code></td><td><code>AR</code></td><td>Rectangular array: rows, columns, spacing. For repeated dies, TLM arrays, diode arrays.</td></tr>
+<tr><td><code>ARRAYPOLAR</code></td><td><code>—</code></td><td>Circular array around a center.</td></tr>
+<tr><td><code>MIRROR</code></td><td><code>MI</code></td><td>Mirror about an axis; keep the original by answering No.</td></tr>
+<tr><td><code>ROTATE</code></td><td><code>RO</code></td><td>Rotate about a base point.</td></tr>
+</table></div>
+<h3>Edit geometry</h3><div class="tablewrap"><table><tr><th>Command</th><th>Alias</th><th>Mask use</th></tr>
+<tr><td><code>OFFSET</code></td><td><code>O</code></td><td>Create an equidistant parallel outline, e.g. a guard ring around an anode.</td></tr>
+<tr><td><code>TRIM / EXTEND</code></td><td><code>TR / EX</code></td><td>Trim to or extend to a boundary.</td></tr>
+<tr><td><code>FILLET</code></td><td><code>F</code></td><td>Round a corner; radius 0 joins two segments into a clean sharp corner.</td></tr>
+<tr><td><code>PEDIT / JOIN</code></td><td><code>PE / J</code></td><td>Close an open polyline, join separate segments into one closed polyline.</td></tr>
+<tr><td><code>BOUNDARY</code></td><td><code>BO</code></td><td>Click inside an enclosed area to create a boundary polyline. A quick way to "rescue" shapes drawn with LINE.</td></tr>
+<tr><td><code>EXPLODE</code></td><td><code>X</code></td><td>Break a polyline or block into sub-objects. Careful: polylines become separate LINEs.</td></tr>
+</table></div>
+<h3>Measure and check</h3><div class="tablewrap"><table><tr><th>Command</th><th>Alias</th><th>Mask use</th></tr>
+<tr><td><code>DIST / MEASUREGEOM</code></td><td><code>DI / MEA</code></td><td>Measure distances and angles.</td></tr>
+<tr><td><code>ID</code></td><td><code>—</code></td><td>Show the coordinates of a point.</td></tr>
+<tr><td><code>LIST</code></td><td><code>LI</code></td><td>List properties, including whether a polyline is Closed or Open.</td></tr>
+<tr><td><code>AREA</code></td><td><code>AA</code></td><td>Area and perimeter of a closed region.</td></tr>
+<tr><td><code>QSELECT</code></td><td><code>—</code></td><td>Quick select by criteria, e.g. all polylines with Closed = No.</td></tr>
+</table></div>
+<h3>Organize</h3><div class="tablewrap"><table><tr><th>Command</th><th>Alias</th><th>Mask use</th></tr>
+<tr><td><code>LAYER</code></td><td><code>LA</code></td><td>Create and manage layers: one layer per mask level.</td></tr>
+<tr><td><code>BLOCK / INSERT</code></td><td><code>B / I</code></td><td>Group a die into a block for repetition; edit once to update every copy.</td></tr>
+<tr><td><code>PROPERTIES</code></td><td><code>Ctrl+1</code></td><td>View and edit layer, coordinates, width.</td></tr>
+</table></div>
+<h3>Clean up and export</h3><div class="tablewrap"><table><tr><th>Command</th><th>Alias</th><th>Mask use</th></tr>
+<tr><td><code>OVERKILL</code></td><td><code>—</code></td><td>Delete duplicate and overlapping objects.</td></tr>
+<tr><td><code>PURGE</code></td><td><code>PU</code></td><td>Remove unused layers and blocks.</td></tr>
+<tr><td><code>AUDIT</code></td><td><code>—</code></td><td>Check and repair the drawing database.</td></tr>
+<tr><td><code>SAVEAS → DXF</code></td><td><code>—</code></td><td>Save as DXF (e.g. AutoCAD 2000/LT2000 DXF, or R12 if the converter requires it).</td></tr>
+</table></div>
+<h2 id="e-s2">2. Three commands worth practicing</h2>
+<p><strong>RECTANG with relative coordinates.</strong> A 100 × 200 µm pad with its lower-left corner at (200, 1500):</p>
+<pre><code>Command: REC
+Specify first corner point: 200,1500
+Specify other corner point: @100,200</code></pre>
+<p><strong>ARRAYRECT for regular arrays.</strong> A 5 × 5 array of dies at 2000 µm pitch:</p>
+<pre><code>Command: ARRAYRECT
+Select objects: (pick the die)  Enter
+  → COUnt option: 5 columns, 5 rows
+  → Spacing option: 2000 (between columns), 2000 (between rows)
+  → ASsociative: No  (separate objects, easier to export)</code></pre>
+<p><strong>PEDIT to close and join.</strong> Close an open polyline, or join separate LINEs into a closed polyline:</p>
+<pre><code>Command: PEDIT
+Select polyline or [Multiple]: M     (pick several objects)
+Convert Lines and Arcs to polylines? Y
+Enter an option [Close/Open/Join/...]: J
+Enter fuzz distance: 0.01            (joining tolerance, in µm)</code></pre>
+<p>The segments must meet exactly at their endpoints; with gaps or overlaps the polyline will not close.</p>
+
+<h2 id="e-s3">3. Small tips</h2>
+<ul>
+<li>Type part of a command name and AutoCAD suggests a list; use the arrow keys to choose.</li>
+<li>Press F2 to see the command history, very useful for finding where you mistyped.</li>
+<li>Window selection left-to-right picks only objects fully inside; right-to-left also picks objects crossing the window.</li>
+<li>Put dimensions on their own layer, such as <code>DIM</code>, so you can turn them off or delete them before export.</li>
+</ul>
+
+<h2 id="e-s4">References</h2>
+<ol class="refs">
+<li>Autodesk, <a href="https://help.autodesk.com/view/ACD/2024/ENU/" target="_blank" rel="noopener">AutoCAD Help: Commands reference</a>.</li>
+<li>Autodesk, <a href="https://help.autodesk.com/cloudhelp/2024/ENU/AutoCAD-MAC-Core/files/GUID-9F9536F0-FBC3-4FA5-89FB-16D6BAFCA5FB.htm" target="_blank" rel="noopener">To modify polylines with PEDIT</a>.</li>
+<li>W. Baumback, <a href="https://opentextbc.ca/autocad2d/chapter/polylines/" target="_blank" rel="noopener"><em>Introduction to Drafting and AutoCAD 2D</em>, Module 29: Polylines</a>, BCcampus (2021).</li>
+<li>G. Omura, B. C. Benton, <em>Mastering AutoCAD 2021 and AutoCAD LT 2021</em>, Sybex/Wiley (2020).</li>
+</ol>
+</div>
+<nav class="pager"><a href="cad-setup.html">← <span class="l-vi">Làm quen AutoCAD: giao diện, đơn vị, tọa độ</span><span class="l-en">Getting started: interface, units, coordinates</span></a><a class="n" href="cad-mask-elements.html"><span class="l-vi">Các đối tượng cần có trên một bộ mask</span><span class="l-en">What goes on a mask set</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

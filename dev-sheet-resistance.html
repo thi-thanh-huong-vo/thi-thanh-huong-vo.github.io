@@ -78,12 +78,12 @@
 <div class="l-vi">
 <p class="lead">Đo điện trở nghe có vẻ là phép đo đơn giản nhất trong phòng thí nghiệm. Nhưng với màng mỏng và linh kiện bán dẫn, chính dây đo và điểm tiếp xúc có thể đóng góp nhiều hơn cả mẫu. Phép đo bốn đầu dò ra đời để giải quyết vấn đề này.</p>
 
-<h2>1. Hạn chế của phép đo hai đầu dò</h2>
+<h2 id="v-s1">1. Hạn chế của phép đo hai đầu dò</h2>
 <p>Với hai đầu dò, dòng điện và điện áp đi qua cùng một cặp tiếp xúc, nên điện trở đo được là tổng:</p>
 $$R_T = \frac{V}{I} = 2R_P + 2R_C + 2R_{SP} + R_{DUT}$$
 <p>với \(R_P\) là điện trở đầu dò, \(R_C\) điện trở tiếp xúc giữa đầu dò và mẫu, \(R_{SP}\) điện trở lan tỏa (spreading) ngay dưới đầu dò, và \(R_{DUT}\) điện trở thực của mẫu. Kết quả luôn lớn hơn giá trị thật, và không thể tách riêng \(R_{DUT}\).</p>
 
-<h2>2. Phép đo bốn đầu dò (kỹ thuật Kelvin)</h2>
+<h2 id="v-s2">2. Phép đo bốn đầu dò (kỹ thuật Kelvin)</h2>
 <p>Ý tưởng: tách đường dòng và đường đo áp. Dòng \(I\) được cấp qua hai đầu dò ngoài; điện áp \(V\) được đo giữa hai đầu dò trong bằng vôn kế trở kháng rất cao, nên gần như không có dòng chảy qua các tiếp xúc đo áp, và \(R_P\), \(R_C\), \(R_{SP}\) không còn ảnh hưởng.</p>
 <figure><svg viewBox="0 0 560 220" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
 <rect x="40" y="130" width="480" height="40" class="atom"/><text x="280" y="192" class="ns" text-anchor="middle">Màng mỏng, độ dày t</text>
@@ -94,12 +94,12 @@ $$R_T = \frac{V}{I} = 2R_P + 2R_C + 2R_{SP} + R_{DUT}$$
 <text x="200" y="122" class="ns" text-anchor="middle">s</text><text x="280" y="122" class="ns" text-anchor="middle">s</text><text x="360" y="122" class="ns" text-anchor="middle">s</text>
 </svg><figcaption>Hình 1. Đầu dò bốn điểm thẳng hàng với khoảng cách đều s.</figcaption></figure>
 
-<h2>3. Điện trở tấm</h2>
+<h2 id="v-s3">3. Điện trở tấm</h2>
 <p>Với màng chữ nhật dài \(L\), rộng \(W\), dày \(t\): \(R = \rho L/(tW)\). Với một hình vuông (\(L = W\)), \(L/W\) biến mất:</p>
 $$R_s = \frac{\rho}{t} \qquad \text{(đơn vị: Ω/□, "ohm trên vuông")}$$
 <p>Điện trở tấm bằng điện trở đo được của một mảnh vuông vật liệu, <strong>không phụ thuộc kích thước hình vuông</strong>, và không cần biết độ dày màng để đo nó. Vì vậy \(R_s\) rất tiện để so sánh các màng mỏng, lớp khuếch tán, lớp cấy ion, lớp epitaxy hay lớp kim loại. Một dải dẫn dài \(L\), rộng \(W\) có điện trở \(R = R_s\,(L/W)\), tức \(R_s\) nhân với "số hình vuông". Nếu biết độ dày, ta suy ra điện trở suất \(\rho = R_s\,t\), và \(R_s = 1/(\sigma t)\) tỉ lệ nghịch với tích độ dẫn–độ dày.</p>
 
-<h2>4. Công thức bốn đầu dò</h2>
+<h2 id="v-s4">4. Công thức bốn đầu dò</h2>
 <p>Với khối bán vô hạn, dòng \(I\) từ một đầu dò lan ra theo nửa mặt cầu; điện thế tại khoảng cách \(r\) là \(V = \rho I/(2\pi r)\). Chồng chập cho bốn đầu dò cách đều \(s\) ta được:</p>
 $$\rho = 2\pi s\,\frac{V}{I} \qquad \text{(mẫu dày, } t \gg s\text{)}$$
 <p>Khi \(s = 0{,}1588\) cm, \(2\pi s = 1\) cm, nên \(\rho\) (Ω·cm) bằng đúng \(V/I\); đầu dò thương mại thường được chế tạo với khoảng cách này. Với màng mỏng (\(t \ll s\)), dòng lan theo hình trụ thay vì hình cầu:</p>
@@ -109,7 +109,7 @@ $$R_s = \frac{\pi}{\ln 2}\,\frac{V}{I} \approx 4{,}532\,\frac{V}{I}$$
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Đầu dò bốn điểm khó dùng trực tiếp trên Ga₂O₃ pha tạp nhẹ: đầu kim tạo tiếp xúc Schottky chứ không ohmic, và lớp epitaxy thường nằm trên đế cũng dẫn điện. Vì vậy điện trở tấm của các lớp Ga₂O₃ thường được đo bằng cấu trúc van der Pauw hoặc TLM có điện cực ohmic, kết hợp với lớp đệm hoặc đế bán cách điện pha Fe để dòng không rò xuống đế.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s5">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chương 1.</li>
 <li>F. M. Smits, "Measurement of sheet resistivities with the four-point probe," <em>Bell System Technical Journal</em> 37, 711 (1958).</li>
@@ -118,12 +118,12 @@ $$R_s = \frac{\pi}{\ln 2}\,\frac{V}{I} \approx 4{,}532\,\frac{V}{I}$$
 <div class="l-en">
 <p class="lead">Measuring resistance sounds like the simplest measurement in the lab. But for thin films and semiconductor devices, the leads and contacts can contribute more than the sample itself. The four-point probe was invented to solve exactly this problem.</p>
 
-<h2>1. Limits of two-point measurement</h2>
+<h2 id="e-s1">1. Limits of two-point measurement</h2>
 <p>With two probes, current and voltage share the same pair of contacts, so the measured resistance is the sum:</p>
 $$R_T = \frac{V}{I} = 2R_P + 2R_C + 2R_{SP} + R_{DUT}$$
 <p>where \(R_P\) is the probe resistance, \(R_C\) the probe–sample contact resistance, \(R_{SP}\) the spreading resistance just under the probe, and \(R_{DUT}\) the true sample resistance. The result is always higher than the true value, and \(R_{DUT}\) cannot be separated out.</p>
 
-<h2>2. Four-point (Kelvin) measurement</h2>
+<h2 id="e-s2">2. Four-point (Kelvin) measurement</h2>
 <p>The idea: separate the current path from the voltage path. Current \(I\) is supplied through the two outer probes; voltage \(V\) is measured between the two inner probes with a very high-impedance voltmeter, so almost no current flows through the voltage contacts, and \(R_P\), \(R_C\), \(R_{SP}\) drop out.</p>
 <figure><svg viewBox="0 0 560 220" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
 <rect x="40" y="130" width="480" height="40" class="atom"/><text x="280" y="192" class="ns" text-anchor="middle">Thin film, thickness t</text>
@@ -134,12 +134,12 @@ $$R_T = \frac{V}{I} = 2R_P + 2R_C + 2R_{SP} + R_{DUT}$$
 <text x="200" y="122" class="ns" text-anchor="middle">s</text><text x="280" y="122" class="ns" text-anchor="middle">s</text><text x="360" y="122" class="ns" text-anchor="middle">s</text>
 </svg><figcaption>Figure 1. Collinear four-point probe with equal spacing s.</figcaption></figure>
 
-<h2>3. Sheet resistance</h2>
+<h2 id="e-s3">3. Sheet resistance</h2>
 <p>For a rectangular film of length \(L\), width \(W\) and thickness \(t\): \(R = \rho L/(tW)\). For a square (\(L = W\)), \(L/W\) cancels:</p>
 $$R_s = \frac{\rho}{t} \qquad \text{(units: Ω/□, "ohms per square")}$$
 <p>Sheet resistance equals the measured resistance of a square piece of material, <strong>independent of the size of the square</strong>, and the film thickness need not be known to measure it. This makes \(R_s\) very convenient for comparing thin films, diffused, implanted, epitaxial or metal layers. A strip of length \(L\) and width \(W\) has \(R = R_s\,(L/W)\), that is, \(R_s\) times the "number of squares". If the thickness is known, the resistivity follows as \(\rho = R_s\,t\), and \(R_s = 1/(\sigma t)\) is inversely proportional to the conductivity–thickness product.</p>
 
-<h2>4. The four-point formulas</h2>
+<h2 id="e-s4">4. The four-point formulas</h2>
 <p>In a semi-infinite bulk, current \(I\) from one probe spreads out hemispherically; the potential at distance \(r\) is \(V = \rho I/(2\pi r)\). Superposing the four equally spaced probes gives:</p>
 $$\rho = 2\pi s\,\frac{V}{I} \qquad \text{(thick sample, } t \gg s\text{)}$$
 <p>With \(s = 0.1588\) cm, \(2\pi s = 1\) cm, so \(\rho\) (Ω·cm) equals \(V/I\); commercial heads are often made with this spacing. For thin films (\(t \ll s\)), current spreads cylindrically rather than spherically:</p>
@@ -149,7 +149,7 @@ $$R_s = \frac{\pi}{\ln 2}\,\frac{V}{I} \approx 4.532\,\frac{V}{I}$$
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>The four-point probe is hard to use directly on lightly doped Ga₂O₃: the tips form Schottky rather than ohmic contacts, and the epitaxial layer often sits on a conductive substrate. Sheet resistance of Ga₂O₃ layers is therefore usually measured with van der Pauw or TLM structures with ohmic electrodes, combined with semi-insulating Fe-doped substrates or buffers so current does not leak into the substrate.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s5">References</h2>
 <ol class="refs">
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chapter 1.</li>
 <li>F. M. Smits, "Measurement of sheet resistivities with the four-point probe," <em>Bell System Technical Journal</em> 37, 711 (1958).</li>

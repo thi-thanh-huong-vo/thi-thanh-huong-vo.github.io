@@ -78,11 +78,11 @@
 <div class="l-vi">
 <p class="lead">Một MOSFET hiện đại chứa nhiều vùng pha tạp khác nhau: giếng, vùng điều chỉnh điện áp ngưỡng, vùng halo, vùng mở rộng nguồn/máng và vùng nguồn/máng sâu. Mỗi vùng cần đúng một lượng tạp chất ở đúng một độ sâu. Cấy ion (ion implantation) là công cụ cho phép làm điều đó một cách chính xác và lặp lại được.</p>
 
-<h2>1. Bán dẫn loại n và loại p</h2>
+<h2 id="v-s1">1. Bán dẫn loại n và loại p</h2>
 <p>Trong mạng Si, mỗi nguyên tử liên kết cộng hóa trị với bốn nguyên tử lân cận. Thay một nguyên tử Si bằng nguyên tử nhóm V (P, As, Sb), electron thứ năm liên kết yếu và dễ bị ion hóa thành electron tự do: đó là <strong>donor</strong>, tạo bán dẫn loại n. Thay bằng nguyên tử nhóm III (B), thiếu một electron để hoàn thành liên kết, tạo ra lỗ trống: đó là <strong>acceptor</strong>, tạo bán dẫn loại p.</p>
 <p>Lượng tạp chất có thể hòa tan vào Si bị giới hạn bởi <strong>độ hòa tan rắn</strong> (solid solubility), phụ thuộc nhiệt độ. Với As và P, giới hạn này cỡ 10²¹ cm⁻³ ở nhiệt độ xử lý điển hình; với B thấp hơn một chút. Vượt quá giới hạn này, tạp chất có xu hướng kết tụ và không còn hoạt động điện.</p>
 
-<h2>2. Hai cách pha tạp: khuếch tán và cấy ion</h2>
+<h2 id="v-s2">2. Hai cách pha tạp: khuếch tán và cấy ion</h2>
 <div class="tablewrap"><table>
 <tr><th></th><th>Khuếch tán nhiệt</th><th>Cấy ion</th></tr>
 <tr><td>Nguyên lý</td><td>Tạp chất đi vào từ bề mặt nhờ nhiệt</td><td>Ion được gia tốc và bắn vào wafer</td></tr>
@@ -94,10 +94,10 @@
 </table></div>
 <p>Khuếch tán là phương pháp pha tạp đầu tiên của công nghiệp bán dẫn, thực hiện trong lò nhiệt độ cao với mặt nạ SiO₂. Cấy ion ra đời từ nghiên cứu vật lý hạt nhân những năm 1950 và được đưa vào sản xuất từ giữa thập niên 1970, nhanh chóng thay thế khuếch tán ở hầu hết các bước pha tạp. Khuếch tán ngày nay chủ yếu còn được dùng cho bước "drive-in" sau cấy ion.</p>
 
-<h2>3. Cổng tự căn chỉnh (self-aligned gate)</h2>
+<h2 id="v-s3">3. Cổng tự căn chỉnh (self-aligned gate)</h2>
 <p>Một lợi thế lớn của cấy ion là khả năng <strong>tự căn chỉnh</strong>. Nếu cổng kim loại được chế tạo sau vùng nguồn/máng, chỉ cần một sai lệch nhỏ khi căn mặt nạ là cổng sẽ không phủ đúng kênh, gây vùng kênh không được cổng điều khiển hoặc điện dung chồng lấn lớn. Với cổng poly-Si làm trước, chính cổng đóng vai trò mặt nạ khi cấy nguồn/máng: ion chỉ đi vào hai bên cổng, nên mép nguồn/máng luôn trùng mép cổng mà không cần mặt nạ quang riêng. Poly-Si chịu được nhiệt độ ủ cao, điều mà cổng nhôm thời kỳ đầu không làm được.</p>
 
-<h2>4. Các bước cấy ion trong CMOS</h2>
+<h2 id="v-s4">4. Các bước cấy ion trong CMOS</h2>
 <div class="tablewrap"><table>
 <tr><th>Bước cấy</th><th>Mục đích</th><th>Đặc điểm</th></tr>
 <tr><td>Giếng (well)</td><td>Tạo giếng n và giếng p, cách ly và pha tạp nền</td><td>Sâu, năng lượng cao</td></tr>
@@ -107,16 +107,16 @@
 <tr><td>Nguồn/máng sâu</td><td>Vùng tiếp xúc pha tạp mạnh n⁺/p⁺</td><td>Liều cao, tự căn theo spacer</td></tr>
 </table></div>
 
-<h2>5. An toàn hóa chất</h2>
+<h2 id="v-s5">5. An toàn hóa chất</h2>
 <p>Hầu hết nguồn tạp chất đều nguy hiểm: AsH₃, PH₃, B₂H₆ vừa cực độc vừa dễ cháy nổ; BF₃ ăn mòn; bản thân P, B, As, Sb cũng độc. Nguyên tắc khi có sự cố: rời khỏi khu vực trước, để người được đào tạo xử lý.</p>
 
-<h2>6. Xu hướng: tiếp giáp siêu nông</h2>
+<h2 id="v-s6">6. Xu hướng: tiếp giáp siêu nông</h2>
 <p>Khi kênh ngắn lại, độ sâu tiếp giáp nguồn/máng phải giảm theo để hạn chế hiệu ứng kênh ngắn, xuống cỡ vài chục nanomet (ultra-shallow junction, USJ). Yêu cầu đặt ra cùng lúc: nông, điện trở tấm thấp, điện trở tiếp xúc thấp và không ảnh hưởng tới profile kênh. Với tiếp giáp p⁺, ion B phải được cấy ở năng lượng cực thấp, tới dưới 1 keV. Ở năng lượng này dòng ion rất khó duy trì, nên người ta dùng ion phân tử nặng hơn như BF₂⁺: cùng năng lượng, nguyên tử B trong phân tử chỉ mang một phần nhỏ năng lượng nên đi nông hơn.</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Cấy ion là kỹ thuật then chốt cho linh kiện β-Ga₂O₃. Cấy Si được dùng để tạo vùng tiếp xúc ohmic n⁺ có điện trở thấp (Sasaki và cộng sự, 2013). Ngược lại, cấy N hoặc Mg tạo ra các vùng điện trở cao, dùng làm lớp chặn dòng hoặc cách ly linh kiện, bù lại việc β-Ga₂O₃ chưa có pha tạp loại p hiệu quả để tạo tiếp giáp p-n như Si (Wong và cộng sự, 2018).</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s7">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>
@@ -127,11 +127,11 @@
 <div class="l-en">
 <p class="lead">A modern MOSFET contains many doped regions: wells, threshold-adjust layers, halos, source/drain extensions and deep source/drain regions. Each needs exactly the right amount of dopant at exactly the right depth. Ion implantation is the tool that does this precisely and repeatably.</p>
 
-<h2>1. n-type and p-type Si</h2>
+<h2 id="e-s1">1. n-type and p-type Si</h2>
 <p>In the Si lattice, each atom forms covalent bonds with four neighbors. Replacing a Si atom with a group-V atom (P, As, Sb) leaves a fifth electron that is weakly bound and easily ionized into a free electron: a <strong>donor</strong>, giving n-type material. Replacing it with a group-III atom (B) leaves one bond incomplete, creating a hole: an <strong>acceptor</strong>, giving p-type material.</p>
 <p>The amount of dopant that can dissolve in Si is limited by its temperature-dependent <strong>solid solubility</strong>. For As and P it is of order 10²¹ cm⁻³ at typical process temperatures; for B it is somewhat lower. Beyond this limit, dopants tend to cluster and become electrically inactive.</p>
 
-<h2>2. Two ways to dope: diffusion and implantation</h2>
+<h2 id="e-s2">2. Two ways to dope: diffusion and implantation</h2>
 <div class="tablewrap"><table>
 <tr><th></th><th>Thermal diffusion</th><th>Ion implantation</th></tr>
 <tr><td>Principle</td><td>Dopants enter from the surface by heat</td><td>Accelerated ions are shot into the wafer</td></tr>
@@ -143,10 +143,10 @@
 </table></div>
 <p>Diffusion was the industry's first doping method, carried out in high-temperature furnaces with SiO₂ masks. Ion implantation grew out of nuclear physics research in the 1950s and entered manufacturing in the mid-1970s, quickly replacing diffusion for most doping steps. Diffusion survives mainly as the drive-in step after implantation.</p>
 
-<h2>3. The self-aligned gate</h2>
+<h2 id="e-s3">3. The self-aligned gate</h2>
 <p>A major advantage of implantation is <strong>self-alignment</strong>. If a metal gate is formed after the source and drain, even a small mask misalignment leaves part of the channel uncovered by the gate or creates a large overlap capacitance. With a poly-Si gate formed first, the gate itself masks the source/drain implant: ions enter only on either side, so the source/drain edges always line up with the gate without an extra photomask. Poly-Si also survives the high-temperature anneal, which early aluminum gates could not.</p>
 
-<h2>4. Implant steps in CMOS</h2>
+<h2 id="e-s4">4. Implant steps in CMOS</h2>
 <div class="tablewrap"><table>
 <tr><th>Implant</th><th>Purpose</th><th>Character</th></tr>
 <tr><td>Well</td><td>Forms n- and p-wells for isolation and baseline doping</td><td>Deep, high energy</td></tr>
@@ -156,16 +156,16 @@
 <tr><td>Deep source/drain</td><td>Heavily doped n⁺/p⁺ contact regions</td><td>High dose, self-aligned to the spacer</td></tr>
 </table></div>
 
-<h2>5. Chemical safety</h2>
+<h2 id="e-s5">5. Chemical safety</h2>
 <p>Most dopant sources are hazardous: AsH₃, PH₃ and B₂H₆ are extremely toxic and flammable; BF₃ is corrosive; P, B, As and Sb themselves are toxic. The rule in an emergency: get out first and let trained people handle it.</p>
 
-<h2>6. Trend: ultra-shallow junctions</h2>
+<h2 id="e-s6">6. Trend: ultra-shallow junctions</h2>
 <p>As channels shrink, source/drain junction depth must shrink too, to tens of nanometers (ultra-shallow junctions, USJ), to limit short-channel effects. The requirements come together: shallow, low sheet resistance, low contact resistance and no disturbance of the channel profile. For p⁺ junctions, B must be implanted at extremely low energy, below 1 keV. Beam current is hard to sustain at such energies, so heavier molecular ions such as BF₂⁺ are used: at the same energy, the B atom carries only a fraction of the energy and stops shallower.</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>Ion implantation is a key technique for β-Ga₂O₃ devices. Si implantation forms low-resistance n⁺ ohmic contact regions (Sasaki et al., 2013). Conversely, N or Mg implantation creates highly resistive regions used as current-blocking or isolation layers, compensating for the lack of effective p-type doping that would allow p-n junctions as in Si (Wong et al., 2018).</p></div>
 
-<h2>References</h2>
+<h2 id="e-s7">References</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>S. M. Sze, M. K. Lee, <em>Semiconductor Devices: Physics and Technology</em>, 3rd ed., Wiley (2012).</li>

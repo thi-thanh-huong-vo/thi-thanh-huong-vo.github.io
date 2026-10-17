@@ -78,13 +78,13 @@
 <div class="l-vi">
 <p class="lead">Một transistor tốt có thể bị "bóp nghẹt" bởi tiếp xúc kém: dòng điện phải đi qua mặt phân cách kim loại/bán dẫn ở cả hai đầu. Phương pháp đường truyền (TLM) cho phép tách điện trở tiếp xúc khỏi điện trở của lớp bán dẫn bằng một phép đo đơn giản và một đường thẳng.</p>
 
-<h2>1. Các thành phần điện trở</h2>
+<h2 id="v-s1">1. Các thành phần điện trở</h2>
 <p>Điện trở đo được giữa hai điện cực trên một lớp bán dẫn gồm:</p>
 $$R_T = 2R_m + 2R_c + R_{semi}$$
 <p>với \(R_m\) là điện trở của kim loại, \(R_c\) điện trở của mặt phân cách kim loại/bán dẫn, và \(R_{semi}\) điện trở của lớp bán dẫn giữa hai điện cực. Thường \(R_c \gg R_m\), nên bỏ qua \(R_m\). Lớp bán dẫn có điện trở tấm \(R_{sh}\), điện cực rộng \(W\), cách nhau \(L\):</p>
 $$R_T = 2R_c + \frac{R_{sh}}{W}\,L$$
 
-<h2>2. Phương pháp TLM</h2>
+<h2 id="v-s2">2. Phương pháp TLM</h2>
 <p>Chế tạo một dãy điện cực giống nhau với khoảng cách \(L\) tăng dần, đo \(R_T\) giữa từng cặp rồi vẽ \(R_T\) theo \(L\). Theo phương trình trên, dữ liệu nằm trên một đường thẳng (Berger, 1972):</p>
 <ul>
 <li><strong>Độ dốc</strong> = \(R_{sh}/W\), cho điện trở tấm của lớp bán dẫn.</li>
@@ -93,7 +93,7 @@ $$R_T = 2R_c + \frac{R_{sh}}{W}\,L$$
 </ul>
 <figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255.0" x2="540" y2="255.0" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="20" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="260.0" class="ax"/><text x="156.0" y="275.0" class="tk" text-anchor="middle">0</text><line x1="232.79999999999998" y1="255.0" x2="232.79999999999998" y2="260.0" class="ax"/><text x="232.79999999999998" y="275.0" class="tk" text-anchor="middle">20</text><line x1="309.6" y1="255.0" x2="309.6" y2="260.0" class="ax"/><text x="309.6" y="275.0" class="tk" text-anchor="middle">40</text><line x1="386.40000000000003" y1="255.0" x2="386.40000000000003" y2="260.0" class="ax"/><text x="386.40000000000003" y="275.0" class="tk" text-anchor="middle">60</text><line x1="463.2" y1="255.0" x2="463.2" y2="260.0" class="ax"/><text x="463.2" y="275.0" class="tk" text-anchor="middle">80</text><line x1="540.0" y1="255.0" x2="540.0" y2="260.0" class="ax"/><text x="540.0" y="275.0" class="tk" text-anchor="middle">100</text><line x1="151.0" y1="255.0" x2="156.0" y2="255.0" class="ax"/><text x="147.0" y="259.0" class="tk" text-anchor="end">0</text><line x1="151.0" y1="176.66666666666669" x2="156.0" y2="176.66666666666669" class="ax"/><text x="147.0" y="180.66666666666669" class="tk" text-anchor="end">20</text><line x1="151.0" y1="98.33333333333334" x2="156.0" y2="98.33333333333334" class="ax"/><text x="147.0" y="102.33333333333334" class="tk" text-anchor="end">40</text><line x1="151.0" y1="20.0" x2="156.0" y2="20.0" class="ax"/><text x="147.0" y="24.0" class="tk" text-anchor="end">60</text><path d="M87.73333333333332,255.0 L540.0,47.416666666666686" class="s2" fill="none"/><circle cx="194.4" cy="208.5" r="4.5" fill="var(--s1)"/><circle cx="232.8" cy="188.0" r="4.5" fill="var(--s1)"/><circle cx="309.6" cy="154.4" r="4.5" fill="var(--s1)"/><circle cx="386.4" cy="116.9" r="4.5" fill="var(--s1)"/><circle cx="463.2" cy="81.5" r="4.5" fill="var(--s1)"/><circle cx="540.0" cy="51.5" r="4.5" fill="var(--s1)"/><circle cx="156.0" cy="223.66666666666666" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="166.0" y="215.66666666666666" class="ns">2R<tspan baseline-shift="sub" font-size="8">c</tspan></text><circle cx="87.73333333333332" cy="255.0" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="87.73333333333332" y="243.0" class="ns" text-anchor="middle">−2L<tspan baseline-shift="sub" font-size="8">T</tspan></text><text x="309.6" y="82.66666666666669" class="ns">độ dốc = R<tspan baseline-shift="sub" font-size="8">sh</tspan> / W</text><text x="300.0" y="294" class="lab" text-anchor="middle">Khoảng cách giữa hai điện cực L (µm)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Điện trở tổng R<tspan baseline-shift="sub" font-size="8">T</tspan> (Ω)</text></svg><figcaption>Hình 1. Đồ thị TLM điển hình: điện trở tổng theo khoảng cách điện cực (dữ liệu minh họa).</figcaption></figure>
 
-<h2>3. Điện trở suất tiếp xúc và độ dài truyền</h2>
+<h2 id="v-s3">3. Điện trở suất tiếp xúc và độ dài truyền</h2>
 <p>\(R_c\) phụ thuộc kích thước điện cực nên không dùng để so sánh các quy trình. Đại lượng nội tại là <strong>điện trở suất tiếp xúc</strong> \(\rho_c\) (Ω·cm²), tức điện trở của một đơn vị diện tích mặt phân cách. Giá trị điển hình trải từ 10⁻³ đến 10⁻⁸ Ω·cm².</p>
 <p>Nhưng dòng điện không đi vào điện cực đều trên toàn bộ diện tích. Dòng chảy đều trong bán dẫn, rồi tập trung đi lên ở mép điện cực gần phía bên kia (hiện tượng <strong>dồn dòng</strong>, current crowding), giảm dần theo hàm mũ khi đi sâu dưới điện cực, đến mép xa thì gần như bằng 0. Độ dài đặc trưng của sự suy giảm này là <strong>độ dài truyền</strong>:</p>
 $$L_T = \sqrt{\frac{\rho_c}{R_{sh}}}$$
@@ -102,13 +102,13 @@ $$R_c \approx \frac{\rho_c}{L_T W} \quad\Longrightarrow\quad \rho_c = R_c\,L_T\,
 <div class="box"><p class="t">Ví dụ từ đồ thị</p>
 <p>Với \(W = 100\ \mu\)m, độ dốc 0,45 Ω/µm và giao điểm trục tung \(2R_c = 8\ \Omega\): \(R_{sh} = 0{,}45\times100 = 45\ \Omega\)/□; \(L_T = R_c/(R_{sh}/W) = 4/0{,}45 \approx 8{,}9\ \mu\)m; \(\rho_c = R_c L_T W = 4\times(8{,}9\times10^{-4})\times0{,}01 \approx 3{,}6\times10^{-5}\ \Omega\)·cm².</p></div>
 
-<h2>4. Các biến thể cấu trúc</h2>
+<h2 id="v-s4">4. Các biến thể cấu trúc</h2>
 <ul>
 <li><strong>TLM mesa</strong>: lớp bán dẫn quanh vùng đo được khắc thành một "bàn" (mesa) cô lập, để dòng chỉ chảy trong dải có độ rộng \(W\) xác định.</li>
 <li><strong>TLM tròn (CTLM)</strong>: điện cực trong hình tròn và điện cực ngoài bao quanh, cách nhau một khe hình vành khuyên. Dòng tự giới hạn trong vành khuyên nên không cần khắc mesa, rất tiện cho vật liệu mới.</li>
 </ul>
 
-<h2>5. Đánh giá độ khớp của đường thẳng: hệ số R²</h2>
+<h2 id="v-s5">5. Đánh giá độ khớp của đường thẳng: hệ số R²</h2>
 <p>Đường TLM được xác định bằng hồi quy tuyến tính bình phương tối thiểu. Để đánh giá dữ liệu khớp tốt đến đâu, ta so sánh tổng bình phương sai số so với đường hồi quy, \(SE_{line} = \sum (y_i - \hat{y}_i)^2\), với tổng bình phương sai số so với giá trị trung bình, \(SE_{mean} = \sum (y_i - \bar{y})^2\):</p>
 $$R^2 = 1 - \frac{SE_{line}}{SE_{mean}}$$
 <p>\(R^2 \approx 1\): đường thẳng giải thích gần hết biến thiên của dữ liệu. \(R^2 \approx 0\): đường thẳng không tốt hơn việc lấy giá trị trung bình. Với TLM, \(R^2\) thấp thường báo hiệu điện cực không đồng đều, tiếp xúc không ohmic hoặc dòng rò qua đế, nên cần kiểm tra trước khi tin vào giá trị \(\rho_c\).</p>
@@ -116,7 +116,7 @@ $$R^2 = 1 - \frac{SE_{line}}{SE_{mean}}$$
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>TLM là phép đo tiêu chuẩn để đánh giá tiếp xúc ohmic Ti/Au trên Ga₂O₃. Các tiếp xúc tốt trên lớp n⁺ (cấy Si hoặc pha tạp mạnh) đạt \(\rho_c\) cỡ 10⁻⁵–10⁻⁶ Ω·cm² sau ủ nhiệt, nhờ lớp phản ứng TiOₓ và vùng nghèo oxy ở mặt phân cách giúp electron xuyên hầm dễ dàng.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s6">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>H. H. Berger, "Models for contacts to planar devices," <em>Solid-State Electronics</em> 15, 145 (1972).</li>
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chương 3.</li>
@@ -125,13 +125,13 @@ $$R^2 = 1 - \frac{SE_{line}}{SE_{mean}}$$
 <div class="l-en">
 <p class="lead">A good transistor can be "choked" by poor contacts: current must cross a metal/semiconductor interface at both ends. The transmission line method (TLM) separates contact resistance from the semiconductor layer's resistance with a simple measurement and a straight line.</p>
 
-<h2>1. The resistance components</h2>
+<h2 id="e-s1">1. The resistance components</h2>
 <p>The resistance measured between two electrodes on a semiconductor layer consists of:</p>
 $$R_T = 2R_m + 2R_c + R_{semi}$$
 <p>where \(R_m\) is the metal resistance, \(R_c\) the metal/semiconductor interface resistance, and \(R_{semi}\) the semiconductor resistance between the electrodes. Usually \(R_c \gg R_m\), so \(R_m\) is neglected. With layer sheet resistance \(R_{sh}\), electrode width \(W\) and spacing \(L\):</p>
 $$R_T = 2R_c + \frac{R_{sh}}{W}\,L$$
 
-<h2>2. The TLM method</h2>
+<h2 id="e-s2">2. The TLM method</h2>
 <p>Fabricate a row of identical electrodes with increasing spacing \(L\), measure \(R_T\) for each pair and plot \(R_T\) against \(L\). By the equation above, the data fall on a straight line (Berger, 1972):</p>
 <ul>
 <li><strong>Slope</strong> = \(R_{sh}/W\), giving the layer's sheet resistance.</li>
@@ -140,7 +140,7 @@ $$R_T = 2R_c + \frac{R_{sh}}{W}\,L$$
 </ul>
 <figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="60" y1="255.0" x2="540" y2="255.0" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="20" class="ax"/><line x1="156.0" y1="255.0" x2="156.0" y2="260.0" class="ax"/><text x="156.0" y="275.0" class="tk" text-anchor="middle">0</text><line x1="232.79999999999998" y1="255.0" x2="232.79999999999998" y2="260.0" class="ax"/><text x="232.79999999999998" y="275.0" class="tk" text-anchor="middle">20</text><line x1="309.6" y1="255.0" x2="309.6" y2="260.0" class="ax"/><text x="309.6" y="275.0" class="tk" text-anchor="middle">40</text><line x1="386.40000000000003" y1="255.0" x2="386.40000000000003" y2="260.0" class="ax"/><text x="386.40000000000003" y="275.0" class="tk" text-anchor="middle">60</text><line x1="463.2" y1="255.0" x2="463.2" y2="260.0" class="ax"/><text x="463.2" y="275.0" class="tk" text-anchor="middle">80</text><line x1="540.0" y1="255.0" x2="540.0" y2="260.0" class="ax"/><text x="540.0" y="275.0" class="tk" text-anchor="middle">100</text><line x1="151.0" y1="255.0" x2="156.0" y2="255.0" class="ax"/><text x="147.0" y="259.0" class="tk" text-anchor="end">0</text><line x1="151.0" y1="176.66666666666669" x2="156.0" y2="176.66666666666669" class="ax"/><text x="147.0" y="180.66666666666669" class="tk" text-anchor="end">20</text><line x1="151.0" y1="98.33333333333334" x2="156.0" y2="98.33333333333334" class="ax"/><text x="147.0" y="102.33333333333334" class="tk" text-anchor="end">40</text><line x1="151.0" y1="20.0" x2="156.0" y2="20.0" class="ax"/><text x="147.0" y="24.0" class="tk" text-anchor="end">60</text><path d="M87.73333333333332,255.0 L540.0,47.416666666666686" class="s2" fill="none"/><circle cx="194.4" cy="208.5" r="4.5" fill="var(--s1)"/><circle cx="232.8" cy="188.0" r="4.5" fill="var(--s1)"/><circle cx="309.6" cy="154.4" r="4.5" fill="var(--s1)"/><circle cx="386.4" cy="116.9" r="4.5" fill="var(--s1)"/><circle cx="463.2" cy="81.5" r="4.5" fill="var(--s1)"/><circle cx="540.0" cy="51.5" r="4.5" fill="var(--s1)"/><circle cx="156.0" cy="223.66666666666666" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="166.0" y="215.66666666666666" class="ns">2R<tspan baseline-shift="sub" font-size="8">c</tspan></text><circle cx="87.73333333333332" cy="255.0" r="4" fill="none" stroke="var(--s3)" stroke-width="2"/><text x="87.73333333333332" y="243.0" class="ns" text-anchor="middle">−2L<tspan baseline-shift="sub" font-size="8">T</tspan></text><text x="309.6" y="82.66666666666669" class="ns">slope = R<tspan baseline-shift="sub" font-size="8">sh</tspan> / W</text><text x="300.0" y="294" class="lab" text-anchor="middle">Contact spacing L (µm)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Total resistance R<tspan baseline-shift="sub" font-size="8">T</tspan> (Ω)</text></svg><figcaption>Figure 1. A typical TLM plot: total resistance versus electrode spacing (illustrative data).</figcaption></figure>
 
-<h2>3. Contact resistivity and transfer length</h2>
+<h2 id="e-s3">3. Contact resistivity and transfer length</h2>
 <p>\(R_c\) depends on electrode size, so it is not suitable for comparing processes. The intrinsic quantity is the <strong>specific contact resistivity</strong> \(\rho_c\) (Ω·cm²), the resistance of a unit area of interface. Typical values range from 10⁻³ to 10⁻⁸ Ω·cm².</p>
 <p>But current does not enter the electrode uniformly over its area. It flows uniformly in the semiconductor, then crowds up into the electrode at the edge facing the other contact (<strong>current crowding</strong>), decaying exponentially under the electrode until it is nearly zero at the far edge. The characteristic length of this decay is the <strong>transfer length</strong>:</p>
 $$L_T = \sqrt{\frac{\rho_c}{R_{sh}}}$$
@@ -149,13 +149,13 @@ $$R_c \approx \frac{\rho_c}{L_T W} \quad\Longrightarrow\quad \rho_c = R_c\,L_T\,
 <div class="box"><p class="t">Example from the plot</p>
 <p>With \(W = 100\ \mu\)m, a slope of 0.45 Ω/µm and a y-intercept \(2R_c = 8\ \Omega\): \(R_{sh} = 0.45\times100 = 45\ \Omega\)/□; \(L_T = R_c/(R_{sh}/W) = 4/0.45 \approx 8.9\ \mu\)m; \(\rho_c = R_c L_T W = 4\times(8.9\times10^{-4})\times0.01 \approx 3.6\times10^{-5}\ \Omega\)·cm².</p></div>
 
-<h2>4. Structural variants</h2>
+<h2 id="e-s4">4. Structural variants</h2>
 <ul>
 <li><strong>Mesa TLM</strong>: the semiconductor around the test area is etched into an isolated "mesa" so current flows only in a strip of well-defined width \(W\).</li>
 <li><strong>Circular TLM (CTLM)</strong>: a circular inner electrode surrounded by an outer electrode, separated by an annular gap. Current is confined to the ring without mesa etching, very convenient for new materials.</li>
 </ul>
 
-<h2>5. Judging the fit: the R² coefficient</h2>
+<h2 id="e-s5">5. Judging the fit: the R² coefficient</h2>
 <p>The TLM line is found by least-squares linear regression. To judge how well the data fit, compare the sum of squared errors about the regression line, \(SE_{line} = \sum (y_i - \hat{y}_i)^2\), with that about the mean, \(SE_{mean} = \sum (y_i - \bar{y})^2\):</p>
 $$R^2 = 1 - \frac{SE_{line}}{SE_{mean}}$$
 <p>\(R^2 \approx 1\): the line explains nearly all variation in the data. \(R^2 \approx 0\): the line does no better than the mean. For TLM, a low \(R^2\) usually signals nonuniform electrodes, non-ohmic contacts or substrate leakage, so it should be checked before trusting \(\rho_c\).</p>
@@ -163,7 +163,7 @@ $$R^2 = 1 - \frac{SE_{line}}{SE_{mean}}$$
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>TLM is the standard measurement for Ti/Au ohmic contacts on Ga₂O₃. Good contacts on n⁺ layers (Si-implanted or heavily doped) reach \(\rho_c\) of about 10⁻⁵–10⁻⁶ Ω·cm² after annealing, thanks to an interfacial TiOₓ reaction layer and an oxygen-deficient region that make electron tunneling easy.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s6">References</h2>
 <ol class="refs">
 <li>H. H. Berger, "Models for contacts to planar devices," <em>Solid-State Electronics</em> 15, 145 (1972).</li>
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chapter 3.</li>

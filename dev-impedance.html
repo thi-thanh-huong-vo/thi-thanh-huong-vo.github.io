@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Khi đo điện dung của một linh kiện, máy LCR không đo trực tiếp "điện dung": nó đo trở kháng ở một tần số rồi suy ra điện dung theo một mô hình mạch. Hiểu trở kháng và vai trò của tần số giúp tránh những kết luận sai từ đường C-V.</p>
 
-<h2>1. Trở kháng</h2>
+<h2 id="v-s1">1. Trở kháng</h2>
 <p>Trở kháng \(Z\) là tổng mức cản trở mà một mạch đặt lên dòng xoay chiều, gồm hai phần:</p>
 <ul>
 <li><strong>Điện trở</strong> \(R\): cản trở gây tỏa nhiệt.</li>
@@ -92,7 +92,7 @@ $$Z = R + jX = |Z|\,e^{j\theta}, \qquad |Z| = \sqrt{R^2 + X^2}, \qquad \theta = 
 <tr><td>Nghịch đảo</td><td>Độ dẫn G = 1/R (S)</td><td>Dẫn nạp Y = 1/Z = G + jB (S); B là điện nạp</td></tr>
 </table></div>
 
-<h2>2. Máy LCR và mô hình mạch</h2>
+<h2 id="v-s2">2. Máy LCR và mô hình mạch</h2>
 <p>Máy LCR đặt một tín hiệu xoay chiều nhỏ (thường vài chục mV) chồng lên điện áp phân cực một chiều, đo biên độ và pha của dòng, rồi tính \(Z\). Để ra con số "điện dung", máy phải giả định một mô hình:</p>
 <ul>
 <li><strong>Mô hình song song</strong> (\(C_p\)–\(R_p\)): phù hợp khi trở kháng của tụ lớn (điện dung nhỏ), dòng rò qua điện môi đáng kể. Thường dùng cho tụ MOS và diode phân cực ngược.</li>
@@ -100,14 +100,14 @@ $$Z = R + jX = |Z|\,e^{j\theta}, \qquad |Z| = \sqrt{R^2 + X^2}, \qquad \theta = 
 </ul>
 <p>Chọn sai mô hình có thể làm điện dung đo được sai lệch lớn, nhất là khi linh kiện có dòng rò cao hoặc điện trở nối tiếp lớn. Kiểm tra hệ số tổn hao \(D = 1/(\omega R_p C_p)\) là một cách đánh giá độ tin cậy của phép đo.</p>
 
-<h2>3. Tần số là điều kiện đo quan trọng nhất</h2>
+<h2 id="v-s3">3. Tần số là điều kiện đo quan trọng nhất</h2>
 <p>Điện dung đo được chỉ phản ánh những điện tích <strong>kịp đáp ứng</strong> với tín hiệu xoay chiều. Ở tần số thấp, cả hạt tải thiểu số, bẫy mặt phân cách và bẫy sâu đều kịp nạp xả, góp phần vào điện dung; ở tần số cao, chỉ những điện tích đáp ứng nhanh (hạt tải đa số ở mép vùng nghèo) mới theo kịp. Ví dụ rõ nhất là tụ MOS trên Si: ở tần số thấp, điện dung trong vùng đảo trở về bằng \(C_{ox}\); ở tần số cao (khoảng 1 MHz), điện dung giữ ở giá trị cực tiểu vì hạt tải thiểu số không kịp sinh ra theo tín hiệu.</p>
 <p>Các yếu tố ảnh hưởng tới điện dung đo được gồm: diện tích và độ dày điện môi, hằng số điện môi (bản thân nó có thể phụ thuộc tần số), nhiệt độ, điện áp phân cực, và điện trở nối tiếp. Với vật liệu mới, nên luôn đo C-V ở nhiều tần số: nếu đường cong dịch hoặc biến dạng theo tần số, đó là dấu hiệu của bẫy hoặc dòng rò, và điện dung không thể diễn giải đơn giản như một tụ điện lý tưởng.</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Đo C-V theo nhiệt độ và tần số là công cụ chính trong luận văn của tôi về diode Schottky Ga₂O₃. Từ đồ thị \(1/C^2\) theo điện áp ngược có thể suy ra nồng độ pha tạp và điện thế tiếp xúc; còn sự phụ thuộc tần số của điện dung ở nhiệt độ cao tiết lộ các bẫy sâu có hằng số thời gian thay đổi theo nhiệt độ, điều mà mô phỏng TCAD có thể tái hiện khi đưa thêm bẫy vào mô hình.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s4">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>Keysight Technologies, <em>Impedance Measurement Handbook</em>, 6th ed. (2016).</li>
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chương 6.</li>
@@ -117,7 +117,7 @@ $$Z = R + jX = |Z|\,e^{j\theta}, \qquad |Z| = \sqrt{R^2 + X^2}, \qquad \theta = 
 <div class="l-en">
 <p class="lead">When measuring a device's capacitance, an LCR meter does not measure "capacitance" directly: it measures impedance at one frequency and infers capacitance from a circuit model. Understanding impedance and the role of frequency helps avoid wrong conclusions from C-V curves.</p>
 
-<h2>1. Impedance</h2>
+<h2 id="e-s1">1. Impedance</h2>
 <p>Impedance \(Z\) is the total opposition a circuit presents to alternating current, with two parts:</p>
 <ul>
 <li><strong>Resistance</strong> \(R\): opposition that produces heat.</li>
@@ -131,7 +131,7 @@ $$Z = R + jX = |Z|\,e^{j\theta}, \qquad |Z| = \sqrt{R^2 + X^2}, \qquad \theta = 
 <tr><td>Inverse</td><td>Conductance G = 1/R (S)</td><td>Admittance Y = 1/Z = G + jB (S); B is susceptance</td></tr>
 </table></div>
 
-<h2>2. The LCR meter and circuit models</h2>
+<h2 id="e-s2">2. The LCR meter and circuit models</h2>
 <p>An LCR meter applies a small AC signal (typically tens of mV) on top of a DC bias, measures the current's amplitude and phase, and computes \(Z\). To report a "capacitance", it must assume a model:</p>
 <ul>
 <li><strong>Parallel model</strong> (\(C_p\)–\(R_p\)): suited to high capacitor impedance (small capacitance) with significant leakage through the dielectric. Commonly used for MOS capacitors and reverse-biased diodes.</li>
@@ -139,14 +139,14 @@ $$Z = R + jX = |Z|\,e^{j\theta}, \qquad |Z| = \sqrt{R^2 + X^2}, \qquad \theta = 
 </ul>
 <p>Choosing the wrong model can distort the measured capacitance badly, especially for leaky devices or large series resistance. Checking the dissipation factor \(D = 1/(\omega R_p C_p)\) is one way to judge the measurement's reliability.</p>
 
-<h2>3. Frequency is the most fundamental measurement condition</h2>
+<h2 id="e-s3">3. Frequency is the most fundamental measurement condition</h2>
 <p>The measured capacitance reflects only charges that <strong>can follow</strong> the AC signal. At low frequency, minority carriers, interface traps and deep traps all have time to charge and discharge, contributing to the capacitance; at high frequency, only fast-responding charges (majority carriers at the depletion edge) keep up. The clearest example is a Si MOS capacitor: at low frequency the inversion capacitance returns to \(C_{ox}\); at high frequency (about 1 MHz) it stays at its minimum because minority carriers cannot be generated fast enough.</p>
 <p>Factors affecting measured capacitance include area and dielectric thickness, the dielectric constant (itself possibly frequency-dependent), temperature, bias voltage and series resistance. For new materials, always measure C-V at several frequencies: if the curve shifts or distorts with frequency, that signals traps or leakage, and the capacitance cannot be interpreted simply as an ideal capacitor.</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>Temperature- and frequency-dependent C-V measurements were a main tool of my thesis on Ga₂O₃ Schottky diodes. A plot of \(1/C^2\) versus reverse voltage gives the doping concentration and built-in potential; the frequency dependence of capacitance at high temperature reveals deep traps whose time constants change with temperature, something TCAD simulation can reproduce once traps are added to the model.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s4">References</h2>
 <ol class="refs">
 <li>Keysight Technologies, <em>Impedance Measurement Handbook</em>, 6th ed. (2016).</li>
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006), chapter 6.</li>

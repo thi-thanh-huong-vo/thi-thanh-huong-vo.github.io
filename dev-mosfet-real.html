@@ -78,26 +78,26 @@
 <div class="l-vi">
 <p class="lead">Mô hình kênh dài là điểm khởi đầu, nhưng MOSFET thật, đặc biệt là MOSFET kênh ngắn, lệch khỏi nó theo nhiều cách. Bài này điểm qua các hiệu ứng thực tế quan trọng nhất: suy giảm độ linh động, bão hòa vận tốc, điều biến chiều dài kênh, dẫn dưới ngưỡng, điều chỉnh \(V_T\), hiệu ứng thân và các hiệu ứng kênh ngắn.</p>
 
-<h2>1. Suy giảm độ linh động do trường vuông góc</h2>
+<h2 id="v-s1">1. Suy giảm độ linh động do trường vuông góc</h2>
 <p>Trường vuông góc kéo electron sát vào mặt phân cách oxit, nơi chúng tán xạ với độ nhám bề mặt và các điện tích ở mặt phân cách. Thời gian tự do trung bình giảm và độ linh động giảm theo \(V_{GS}\):</p>
 $$\mu_{lf} = \frac{\mu_0}{1 + \theta\,(V_{GS} - V_T)}$$
 <p>với \(\theta\) là tham số suy giảm độ linh động. Dòng máng giảm theo cùng hệ số, làm đặc tuyến truyền cong xuống ở \(V_{GS}\) cao. Từ đặc tuyến truyền đo ở \(V_{DS}\) nhỏ (ví dụ 50 mV), ta trích được \(V_T\) từ giao điểm, \(\mu_0\) từ độ dốc tại ngưỡng và \(\theta\) từ sự giảm độ dốc ở \(V_{GS}\) cao.</p>
 
-<h2>2. Bão hòa vận tốc</h2>
+<h2 id="v-s2">2. Bão hòa vận tốc</h2>
 <p>Kênh càng ngắn, trường dọc gần máng càng lớn ở cùng \(V_{DS}\). Vận tốc hạt tải tăng theo trường nhưng cuối cùng bão hòa ở \(v_{sat}\) (cỡ 10⁷ cm/s với electron trong Si), chủ yếu do tán xạ phonon. Khi vận tốc bão hòa trên một phần lớn kênh, dòng thấp hơn và \(V_{DS(sat)}\) nhỏ hơn mô hình kênh dài dự đoán; trong giới hạn kênh rất ngắn, \(I_{D(sat)} \approx WC_{ox}v_{sat}(V_{GS} - V_T)\), tuyến tính chứ không phải bậc hai theo \(V_{GS}\).</p>
 
-<h2>3. Điều biến chiều dài kênh</h2>
+<h2 id="v-s3">3. Điều biến chiều dài kênh</h2>
 <p>Thực tế \(I_D\) vẫn tăng nhẹ trên vùng bão hòa. Khi \(V_{DS}\) tăng, điểm thắt dịch về phía nguồn một đoạn \(\Delta L\), nên chiều dài hiệu dụng \(L_{eff} = L - \Delta L\) giảm:</p>
 $$I_D' = I_{D(sat)}\frac{L}{L - \Delta L} \approx I_{D(sat)}(1 + \lambda V_{DS})$$
 <p>Hiệu ứng này càng mạnh khi kênh càng ngắn. Nguyên nhân thứ hai làm \(I_D\) tăng là DIBL (mục 7).</p>
 
-<h2>4. Dẫn dưới ngưỡng</h2>
+<h2 id="v-s4">4. Dẫn dưới ngưỡng</h2>
 <p>Dưới \(V_T\), dòng không bằng 0 mà giảm theo hàm mũ, vì đây là dòng khuếch tán của số ít electron vượt rào nguồn–kênh. <strong>Độ dốc dưới ngưỡng</strong> \(S\) là điện áp cổng cần để dòng thay đổi 10 lần:</p>
 $$S = \frac{dV_G}{d(\log I_D)} = 2{,}3\,\frac{kT}{q}\left(1 + \frac{C_d + C_{it}}{C_i}\right)$$
 <p>Giới hạn lý tưởng ở 300 K là 60 mV/decade; giá trị điển hình khoảng 70 mV/decade. \(S\) càng nhỏ, transistor càng là công tắc tốt: dòng tắt thấp hơn ở cùng \(V_T\), nên công suất tiêu tán ở chế độ chờ thấp hơn. Bẫy mặt phân cách (\(C_{it}\)) và vùng nghèo dày (\(C_d\) lớn so với \(C_i\)) làm \(S\) xấu đi.</p>
 <figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="540" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="70.0" y1="255" x2="70.0" y2="260" class="ax"/><text x="70.0" y="275" class="tk" text-anchor="middle">0</text><line x1="226.66666666666666" y1="255" x2="226.66666666666666" y2="260" class="ax"/><text x="226.66666666666666" y="275" class="tk" text-anchor="middle">0.5</text><line x1="383.3333333333333" y1="255" x2="383.3333333333333" y2="260" class="ax"/><text x="383.3333333333333" y="275" class="tk" text-anchor="middle">1</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">1.5</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-12</tspan></text><line x1="65" y1="176.66666666666669" x2="70" y2="176.66666666666669" class="ax"/><line x1="70" y1="176.66666666666669" x2="540" y2="176.66666666666669" class="grid"/><text x="61" y="180.66666666666669" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-9</tspan></text><line x1="65" y1="98.33333333333334" x2="70" y2="98.33333333333334" class="ax"/><line x1="70" y1="98.33333333333334" x2="540" y2="98.33333333333334" class="grid"/><text x="61" y="102.33333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-6</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-3</tspan></text><text x="305.0" y="294" class="lab" text-anchor="middle">V<tspan baseline-shift="sub" font-size="8">GS</tspan> (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">I<tspan baseline-shift="sub" font-size="8">D</tspan> (A)</text><path d="M70.0,255.0 L74.7,255.0 L79.4,255.0 L84.1,255.0 L88.8,254.8 L93.5,249.2 L98.2,243.6 L102.9,238.0 L107.6,232.4 L112.3,226.8 L117.0,221.2 L121.7,215.6 L126.4,210.1 L131.1,204.5 L135.8,198.9 L140.5,193.3 L145.2,187.7 L149.9,182.2 L154.6,176.6 L159.3,171.1 L164.0,165.6 L168.7,160.1 L173.4,154.6 L178.1,149.2 L182.8,143.9 L187.5,138.5 L192.2,133.3 L196.9,128.1 L201.6,123.1 L206.3,118.2 L211.0,113.4 L215.7,108.8 L220.4,104.4 L225.1,100.1 L229.8,96.1 L234.5,92.4 L239.2,88.8 L243.9,85.5 L248.6,82.4 L253.3,79.5 L258.0,76.9 L262.7,74.4 L267.4,72.1 L272.1,69.9 L276.8,67.9 L281.5,66.0 L286.2,64.3 L290.9,62.7 L295.6,61.1 L300.3,59.7 L305.0,58.3 L309.7,57.0 L314.4,55.8 L319.1,54.6 L323.8,53.5 L328.5,52.4 L333.2,51.4 L337.9,50.4 L342.6,49.5 L347.3,48.6 L352.0,47.7 L356.7,46.9 L361.4,46.1 L366.1,45.3 L370.8,44.5 L375.5,43.8 L380.2,43.1 L384.9,42.4 L389.6,41.8 L394.3,41.1 L399.0,40.5 L403.7,39.9 L408.4,39.3 L413.1,38.7 L417.8,38.1 L422.5,37.6 L427.2,37.1 L431.9,36.5 L436.6,36.0 L441.3,35.5 L446.0,35.0 L450.7,34.5 L455.4,34.1 L460.1,33.6 L464.8,33.2 L469.5,32.7 L474.2,32.3 L478.9,31.9 L483.6,31.4 L488.3,31.0 L493.0,30.6 L497.7,30.2 L502.4,29.8 L507.1,29.5 L511.8,29.1 L516.5,28.7 L521.2,28.3 L525.9,28.0 L530.6,27.6 L535.3,27.3 L540.0,26.9" class="s1" fill="none"/><path d="M70.0,199.5 L74.7,196.3 L79.4,193.0 L84.1,189.8 L88.8,186.5 L93.5,183.3 L98.2,180.0 L102.9,176.8 L107.6,173.6 L112.3,170.3 L117.0,167.1 L121.7,163.9 L126.4,160.7 L131.1,157.5 L135.8,154.3 L140.5,151.2 L145.2,148.0 L149.9,144.9 L154.6,141.8 L159.3,138.7 L164.0,135.6 L168.7,132.6 L173.4,129.6 L178.1,126.6 L182.8,123.7 L187.5,120.8 L192.2,117.9 L196.9,115.1 L201.6,112.4 L206.3,109.7 L211.0,107.0 L215.7,104.5 L220.4,102.0 L225.1,99.6 L229.8,97.2 L234.5,95.0 L239.2,92.8 L243.9,90.7 L248.6,88.6 L253.3,86.7 L258.0,84.8 L262.7,83.0 L267.4,81.3 L272.1,79.6 L276.8,78.0 L281.5,76.5 L286.2,75.0 L290.9,73.6 L295.6,72.3 L300.3,71.0 L305.0,69.8 L309.7,68.6 L314.4,67.5 L319.1,66.4 L323.8,65.3 L328.5,64.3 L333.2,63.4 L337.9,62.4 L342.6,61.5 L347.3,60.7 L352.0,59.8 L356.7,59.0 L361.4,58.2 L366.1,57.5 L370.8,56.7 L375.5,56.0 L380.2,55.3 L384.9,54.6 L389.6,54.0 L394.3,53.3 L399.0,52.7 L403.7,52.1 L408.4,51.5 L413.1,50.9 L417.8,50.4 L422.5,49.8 L427.2,49.3 L431.9,48.8 L436.6,48.2 L441.3,47.7 L446.0,47.2 L450.7,46.8 L455.4,46.3 L460.1,45.8 L464.8,45.4 L469.5,44.9 L474.2,44.5 L478.9,44.1 L483.6,43.7 L488.3,43.2 L493.0,42.8 L497.7,42.4 L502.4,42.1 L507.1,41.7 L511.8,41.3 L516.5,40.9 L521.2,40.6 L525.9,40.2 L530.6,39.9 L535.3,39.5 L540.0,39.2" class="s3" fill="none"/><line x1="360" y1="195" x2="384" y2="195" class="s1"/><text x="390" y="199" class="tk">S = 70 mV/dec</text><line x1="360" y1="213" x2="384" y2="213" class="s3"/><text x="390" y="217" class="tk">S = 120 mV/dec</text></svg><figcaption>Hình 1. Đặc tuyến truyền thang log: độ dốc dưới ngưỡng tốt (70 mV/dec) và kém (120 mV/dec) (minh họa).</figcaption></figure>
 
-<h2>5. Điều chỉnh điện áp ngưỡng</h2>
+<h2 id="v-s5">5. Điều chỉnh điện áp ngưỡng</h2>
 <p>Từ \(V_T = \Phi_{ms} - Q_i/C_{ox} - Q_d/C_{ox} + 2\phi_F\), có ba "núm vặn":</p>
 <ul>
 <li><strong>Vật liệu cổng</strong>: thay đổi \(\Phi_{ms}\), ví dụ cặp kim loại công thoát khác nhau cho NMOS và PMOS trong công nghệ HKMG.</li>
@@ -105,11 +105,11 @@ $$S = \frac{dV_G}{d(\log I_D)} = 2{,}3\,\frac{kT}{q}\left(1 + \frac{C_d + C_{it}
 <li><strong>Cấy ion điều chỉnh \(V_T\)</strong>: cấy một lớp boron nông có liều \(N_{ii}\) (cm⁻²). Ion acceptor mang điện tích âm, nên \(\Delta V_T = qN_{ii}/C_{ox}\) dương. Nhờ vậy có thể chế tạo cả transistor chế độ tăng cường và chế độ nghèo trên cùng một chip.</li>
 </ul>
 
-<h2>6. Hiệu ứng thân</h2>
+<h2 id="v-s6">6. Hiệu ứng thân</h2>
 <p>Phân cực ngược đế so với nguồn (\(V_B < 0\) với kênh n) làm rộng vùng nghèo, tăng điện tích \(Q_d' = -\sqrt{2\varepsilon_s qN_a(2\phi_F - V_B)}\), và do đó tăng \(V_T\):</p>
 $$\Delta V_T \approx \frac{\sqrt{2\varepsilon_s qN_a}}{C_{ox}}\left(\sqrt{2\phi_F - V_B} - \sqrt{2\phi_F}\right)$$
 
-<h2>7. Thu nhỏ và hiệu ứng kênh ngắn</h2>
+<h2 id="v-s7">7. Thu nhỏ và hiệu ứng kênh ngắn</h2>
 <p>Thu nhỏ MOSFET cho nhiều linh kiện hơn trên mỗi wafer (giá thành chip giảm) và chuyển mạch nhanh hơn. Có hai cách: <strong>thu nhỏ trường không đổi</strong> (mọi kích thước, điện áp giảm cùng hệ số, pha tạp tăng, nên trường giữ nguyên) và <strong>thu nhỏ điện áp không đổi</strong> (giữ điện áp nguồn cho tương thích mạch cũ, áp dụng vài thế hệ rồi mới giảm điện áp). Khi kênh ngắn, xuất hiện:</p>
 <ul>
 <li><strong>Hạ rào do máng</strong> (DIBL): vùng nghèo của máng lan tới gần nguồn và hạ rào nguồn–kênh, làm \(V_T\) giảm khi \(V_{DS}\) tăng. Đây là nguyên nhân chính của độ dốc hữu hạn trong vùng bão hòa. Trường hợp cực đoan là xuyên thủng (punch-through): vùng nghèo nguồn và máng chạm nhau, cổng mất khả năng tắt dòng. Phân cực ngược đế giúp giảm DIBL.</li>
@@ -121,7 +121,7 @@ $$\Delta V_T \approx \frac{\sqrt{2\varepsilon_s qN_a}}{C_{ox}}\left(\sqrt{2\phi_
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Trong mô phỏng TCAD linh kiện Ga₂O₃, các mô hình tương ứng được bật riêng: suy giảm độ linh động theo trường vuông góc, bão hòa vận tốc (\(v_{sat}\) của Ga₂O₃ khoảng 1–2×10⁷ cm/s), và bẫy mặt phân cách ảnh hưởng tới \(S\). Việc hiệu chỉnh các tham số này theo dữ liệu đo là bước bắt buộc trước khi dùng mô phỏng để dự đoán điện áp đánh thủng hay dòng rò.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s8">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 6.</li>
 <li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009), chương 3–4.</li>
@@ -131,26 +131,26 @@ $$\Delta V_T \approx \frac{\sqrt{2\varepsilon_s qN_a}}{C_{ox}}\left(\sqrt{2\phi_
 <div class="l-en">
 <p class="lead">The long-channel model is a starting point, but real MOSFETs, especially short-channel ones, deviate from it in many ways. This lesson surveys the most important real-world effects: mobility degradation, velocity saturation, channel-length modulation, subthreshold conduction, \(V_T\) adjustment, the body effect and short-channel effects.</p>
 
-<h2>1. Mobility degradation from the transverse field</h2>
+<h2 id="e-s1">1. Mobility degradation from the transverse field</h2>
 <p>The transverse field pulls electrons tight against the oxide interface, where they scatter from surface roughness and interface charges. The mean free time shortens and mobility falls with \(V_{GS}\):</p>
 $$\mu_{lf} = \frac{\mu_0}{1 + \theta\,(V_{GS} - V_T)}$$
 <p>where \(\theta\) is the mobility degradation parameter. The drain current falls by the same factor, bending the transfer curve down at high \(V_{GS}\). From a transfer curve measured at small \(V_{DS}\) (e.g. 50 mV), we extract \(V_T\) from the intercept, \(\mu_0\) from the slope at threshold, and \(\theta\) from the slope reduction at high \(V_{GS}\).</p>
 
-<h2>2. Velocity saturation</h2>
+<h2 id="e-s2">2. Velocity saturation</h2>
 <p>The shorter the channel, the larger the longitudinal field near the drain at a given \(V_{DS}\). Carrier velocity rises with field but eventually saturates at \(v_{sat}\) (about 10⁷ cm/s for electrons in Si), mainly due to phonon scattering. When velocity saturates over a large part of the channel, the current is lower and \(V_{DS(sat)}\) smaller than the long-channel model predicts; in the very short channel limit, \(I_{D(sat)} \approx WC_{ox}v_{sat}(V_{GS} - V_T)\), linear rather than quadratic in \(V_{GS}\).</p>
 
-<h2>3. Channel-length modulation</h2>
+<h2 id="e-s3">3. Channel-length modulation</h2>
 <p>In practice \(I_D\) still rises slightly above saturation. As \(V_{DS}\) increases, the pinch-off point moves toward the source by \(\Delta L\), so the effective length \(L_{eff} = L - \Delta L\) shrinks:</p>
 $$I_D' = I_{D(sat)}\frac{L}{L - \Delta L} \approx I_{D(sat)}(1 + \lambda V_{DS})$$
 <p>The effect is stronger for shorter channels. The second cause of rising \(I_D\) is DIBL (section 7).</p>
 
-<h2>4. Subthreshold conduction</h2>
+<h2 id="e-s4">4. Subthreshold conduction</h2>
 <p>Below \(V_T\) the current is not zero but falls exponentially, as it is the diffusion current of the few electrons crossing the source–channel barrier. The <strong>subthreshold slope</strong> \(S\) is the gate voltage needed to change the current tenfold:</p>
 $$S = \frac{dV_G}{d(\log I_D)} = 2.3\,\frac{kT}{q}\left(1 + \frac{C_d + C_{it}}{C_i}\right)$$
 <p>The ideal limit at 300 K is 60 mV/decade; typical values are about 70 mV/decade. The smaller \(S\), the better the switch: lower off-current at the same \(V_T\), and so lower standby power. Interface traps (\(C_{it}\)) and a thick depletion region (\(C_d\) large relative to \(C_i\)) degrade \(S\).</p>
 <figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="70" y1="255" x2="540" y2="255" class="ax"/><line x1="70" y1="255" x2="70" y2="20" class="ax"/><line x1="70.0" y1="255" x2="70.0" y2="260" class="ax"/><text x="70.0" y="275" class="tk" text-anchor="middle">0</text><line x1="226.66666666666666" y1="255" x2="226.66666666666666" y2="260" class="ax"/><text x="226.66666666666666" y="275" class="tk" text-anchor="middle">0.5</text><line x1="383.3333333333333" y1="255" x2="383.3333333333333" y2="260" class="ax"/><text x="383.3333333333333" y="275" class="tk" text-anchor="middle">1</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">1.5</text><line x1="65" y1="255.0" x2="70" y2="255.0" class="ax"/><line x1="70" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="61" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-12</tspan></text><line x1="65" y1="176.66666666666669" x2="70" y2="176.66666666666669" class="ax"/><line x1="70" y1="176.66666666666669" x2="540" y2="176.66666666666669" class="grid"/><text x="61" y="180.66666666666669" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-9</tspan></text><line x1="65" y1="98.33333333333334" x2="70" y2="98.33333333333334" class="ax"/><line x1="70" y1="98.33333333333334" x2="540" y2="98.33333333333334" class="grid"/><text x="61" y="102.33333333333334" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-6</tspan></text><line x1="65" y1="20.0" x2="70" y2="20.0" class="ax"/><line x1="70" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="61" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" font-size="9">-3</tspan></text><text x="305.0" y="294" class="lab" text-anchor="middle">V<tspan baseline-shift="sub" font-size="8">GS</tspan> (V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">I<tspan baseline-shift="sub" font-size="8">D</tspan> (A)</text><path d="M70.0,255.0 L74.7,255.0 L79.4,255.0 L84.1,255.0 L88.8,254.8 L93.5,249.2 L98.2,243.6 L102.9,238.0 L107.6,232.4 L112.3,226.8 L117.0,221.2 L121.7,215.6 L126.4,210.1 L131.1,204.5 L135.8,198.9 L140.5,193.3 L145.2,187.7 L149.9,182.2 L154.6,176.6 L159.3,171.1 L164.0,165.6 L168.7,160.1 L173.4,154.6 L178.1,149.2 L182.8,143.9 L187.5,138.5 L192.2,133.3 L196.9,128.1 L201.6,123.1 L206.3,118.2 L211.0,113.4 L215.7,108.8 L220.4,104.4 L225.1,100.1 L229.8,96.1 L234.5,92.4 L239.2,88.8 L243.9,85.5 L248.6,82.4 L253.3,79.5 L258.0,76.9 L262.7,74.4 L267.4,72.1 L272.1,69.9 L276.8,67.9 L281.5,66.0 L286.2,64.3 L290.9,62.7 L295.6,61.1 L300.3,59.7 L305.0,58.3 L309.7,57.0 L314.4,55.8 L319.1,54.6 L323.8,53.5 L328.5,52.4 L333.2,51.4 L337.9,50.4 L342.6,49.5 L347.3,48.6 L352.0,47.7 L356.7,46.9 L361.4,46.1 L366.1,45.3 L370.8,44.5 L375.5,43.8 L380.2,43.1 L384.9,42.4 L389.6,41.8 L394.3,41.1 L399.0,40.5 L403.7,39.9 L408.4,39.3 L413.1,38.7 L417.8,38.1 L422.5,37.6 L427.2,37.1 L431.9,36.5 L436.6,36.0 L441.3,35.5 L446.0,35.0 L450.7,34.5 L455.4,34.1 L460.1,33.6 L464.8,33.2 L469.5,32.7 L474.2,32.3 L478.9,31.9 L483.6,31.4 L488.3,31.0 L493.0,30.6 L497.7,30.2 L502.4,29.8 L507.1,29.5 L511.8,29.1 L516.5,28.7 L521.2,28.3 L525.9,28.0 L530.6,27.6 L535.3,27.3 L540.0,26.9" class="s1" fill="none"/><path d="M70.0,199.5 L74.7,196.3 L79.4,193.0 L84.1,189.8 L88.8,186.5 L93.5,183.3 L98.2,180.0 L102.9,176.8 L107.6,173.6 L112.3,170.3 L117.0,167.1 L121.7,163.9 L126.4,160.7 L131.1,157.5 L135.8,154.3 L140.5,151.2 L145.2,148.0 L149.9,144.9 L154.6,141.8 L159.3,138.7 L164.0,135.6 L168.7,132.6 L173.4,129.6 L178.1,126.6 L182.8,123.7 L187.5,120.8 L192.2,117.9 L196.9,115.1 L201.6,112.4 L206.3,109.7 L211.0,107.0 L215.7,104.5 L220.4,102.0 L225.1,99.6 L229.8,97.2 L234.5,95.0 L239.2,92.8 L243.9,90.7 L248.6,88.6 L253.3,86.7 L258.0,84.8 L262.7,83.0 L267.4,81.3 L272.1,79.6 L276.8,78.0 L281.5,76.5 L286.2,75.0 L290.9,73.6 L295.6,72.3 L300.3,71.0 L305.0,69.8 L309.7,68.6 L314.4,67.5 L319.1,66.4 L323.8,65.3 L328.5,64.3 L333.2,63.4 L337.9,62.4 L342.6,61.5 L347.3,60.7 L352.0,59.8 L356.7,59.0 L361.4,58.2 L366.1,57.5 L370.8,56.7 L375.5,56.0 L380.2,55.3 L384.9,54.6 L389.6,54.0 L394.3,53.3 L399.0,52.7 L403.7,52.1 L408.4,51.5 L413.1,50.9 L417.8,50.4 L422.5,49.8 L427.2,49.3 L431.9,48.8 L436.6,48.2 L441.3,47.7 L446.0,47.2 L450.7,46.8 L455.4,46.3 L460.1,45.8 L464.8,45.4 L469.5,44.9 L474.2,44.5 L478.9,44.1 L483.6,43.7 L488.3,43.2 L493.0,42.8 L497.7,42.4 L502.4,42.1 L507.1,41.7 L511.8,41.3 L516.5,40.9 L521.2,40.6 L525.9,40.2 L530.6,39.9 L535.3,39.5 L540.0,39.2" class="s3" fill="none"/><line x1="360" y1="195" x2="384" y2="195" class="s1"/><text x="390" y="199" class="tk">S = 70 mV/dec</text><line x1="360" y1="213" x2="384" y2="213" class="s3"/><text x="390" y="217" class="tk">S = 120 mV/dec</text></svg><figcaption>Figure 1. Transfer characteristics on a log scale: good (70 mV/dec) and poor (120 mV/dec) subthreshold slope (illustrative).</figcaption></figure>
 
-<h2>5. Threshold voltage control</h2>
+<h2 id="e-s5">5. Threshold voltage control</h2>
 <p>From \(V_T = \Phi_{ms} - Q_i/C_{ox} - Q_d/C_{ox} + 2\phi_F\), there are three "knobs":</p>
 <ul>
 <li><strong>Gate material</strong>: changes \(\Phi_{ms}\), e.g. different work-function metals for NMOS and PMOS in HKMG technology.</li>
@@ -158,11 +158,11 @@ $$S = \frac{dV_G}{d(\log I_D)} = 2.3\,\frac{kT}{q}\left(1 + \frac{C_d + C_{it}}{
 <li><strong>\(V_T\)-adjust implant</strong>: a shallow boron implant of dose \(N_{ii}\) (cm⁻²). The acceptor ions are negatively charged, so \(\Delta V_T = qN_{ii}/C_{ox}\) is positive. This lets enhancement- and depletion-mode transistors be built on the same chip.</li>
 </ul>
 
-<h2>6. The body effect</h2>
+<h2 id="e-s6">6. The body effect</h2>
 <p>Reverse-biasing the body relative to the source (\(V_B < 0\) for an n-channel) widens the depletion region, increasing \(Q_d' = -\sqrt{2\varepsilon_s qN_a(2\phi_F - V_B)}\) and thus raising \(V_T\):</p>
 $$\Delta V_T \approx \frac{\sqrt{2\varepsilon_s qN_a}}{C_{ox}}\left(\sqrt{2\phi_F - V_B} - \sqrt{2\phi_F}\right)$$
 
-<h2>7. Scaling and short-channel effects</h2>
+<h2 id="e-s7">7. Scaling and short-channel effects</h2>
 <p>Shrinking MOSFETs puts more devices on each wafer (lower chip cost) and speeds up switching. There are two approaches: <strong>constant-field scaling</strong> (all dimensions and voltages shrink by the same factor and doping rises, so fields stay the same) and <strong>constant-voltage scaling</strong> (supply voltage kept for compatibility with older circuits, used for a few generations before voltage is reduced). As channels shorten, these appear:</p>
 <ul>
 <li><strong>Drain-induced barrier lowering</strong> (DIBL): the drain depletion region reaches toward the source and lowers the source–channel barrier, reducing \(V_T\) as \(V_{DS}\) rises. It is the main cause of the finite slope in saturation. In the extreme, punch-through occurs: source and drain depletion regions merge and the gate can no longer turn the current off. Substrate reverse bias helps mitigate DIBL.</li>
@@ -174,7 +174,7 @@ $$\Delta V_T \approx \frac{\sqrt{2\varepsilon_s qN_a}}{C_{ox}}\left(\sqrt{2\phi_
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>In TCAD simulation of Ga₂O₃ devices, the corresponding models are switched on individually: transverse-field mobility degradation, velocity saturation (\(v_{sat}\) of Ga₂O₃ is about 1–2×10⁷ cm/s), and interface traps affecting \(S\). Calibrating these parameters against measured data is a mandatory step before using simulation to predict breakdown voltage or leakage current.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s8">References</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 6.</li>
 <li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009), chapters 3–4.</li>

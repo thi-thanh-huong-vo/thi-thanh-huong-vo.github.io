@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Sentaurus Workbench: dự án, tham số, thí nghiệm" data-title-en="Sentaurus Workbench: projects, parameters, experiments">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentaurus Workbench: projects, parameters, experiments · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Starting on Linux, tool flows, @...@ parameters, nodes, running and key files.">
+<meta property="og:title" content="Sentaurus Workbench: projects, parameters, experiments">
+<meta property="og:description" content="Starting on Linux, tool flows, @...@ parameters, nodes, running and key files.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 1</span><span class="l-en">Part 2 · Lesson 1</span></p>
+  <h1><span class="l-vi">Sentaurus Workbench: dự án, tham số, thí nghiệm</span><span class="l-en">Sentaurus Workbench: projects, parameters, experiments</span></h1>
+  <p class="sub"><span class="l-vi">Khởi động trên Linux, chuỗi công cụ, tham số @...@, nút, chạy và các file quan trọng.</span><span class="l-en">Starting on Linux, tool flows, @...@ parameters, nodes, running and key files.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Sentaurus Workbench (SWB) là "bàn làm việc" quản lý toàn bộ dự án mô phỏng: chuỗi công cụ, tham số, các thí nghiệm và kết quả. Hiểu SWB giúp bạn chạy hàng chục biến thể thiết kế mà không phải sửa file lệnh bằng tay.</p>
+
+<h2 id="v-s1">1. Khởi động</h2>
+<pre><code>ssh -X username@tcad-server      # đăng nhập từ xa, bật chuyển tiếp đồ họa
+source /path/to/sentaurus/setup  # nạp môi trường (đường dẫn do quản trị viên cung cấp)
+mkdir -p ~/STDB                   # thư mục chứa các dự án
+cd ~/STDB
+swb &amp;                             # mở Sentaurus Workbench</code></pre>
+<p>Đường dẫn cài đặt và cách nạp giấy phép khác nhau giữa các máy chủ; hãy hỏi quản trị viên hệ thống. Nếu kết nối chậm, dùng VNC hoặc một môi trường desktop từ xa thay cho X11.</p>
+
+<h2 id="v-s2">2. Cấu trúc một dự án</h2>
+<ul>
+<li><strong>Chuỗi công cụ</strong> (tool flow): ví dụ SDE → SDevice → SVisual, thêm qua menu <em>Project → Add Tool</em>.</li>
+<li><strong>Tham số</strong>: thêm cột tham số dưới mỗi công cụ, ví dụ <code>Ra</code> (bán kính anode), <code>Nd</code> (pha tạp lớp trôi), <code>T</code> (nhiệt độ).</li>
+<li><strong>Thí nghiệm</strong> (experiment): mỗi hàng là một tổ hợp giá trị tham số. SWB tự tạo các <strong>nút</strong> (node), mỗi nút là một lần chạy của một công cụ, đánh số duy nhất.</li>
+</ul>
+
+<h2 id="v-s3">3. Tham số trong file lệnh</h2>
+<p>Trong file lệnh, viết tham số dưới dạng <code>@Ra@</code>; SWB thay bằng giá trị của từng thí nghiệm trước khi chạy (bước <em>preprocessing</em>). Một số biến đặc biệt:</p>
+<div class="tablewrap"><table>
+<tr><th>Cú pháp</th><th>Ý nghĩa</th></tr>
+<tr><td><code>@Ra@</code></td><td>Giá trị tham số Ra của thí nghiệm hiện tại</td></tr>
+<tr><td><code>@node@</code></td><td>Số nút hiện tại, dùng để đặt tên file đầu ra</td></tr>
+<tr><td><code>@node|sde@</code></td><td>Số nút của công cụ <code>sde</code> phía trên trong cùng thí nghiệm</td></tr>
+<tr><td><code>@tdr@</code>, <code>@plot@</code></td><td>Tên file mặc định do SWB quản lý</td></tr>
+<tr><td><code>#if</code> … <code>#endif</code></td><td>Khối lệnh có điều kiện theo tham số</td></tr>
+</table></div>
+<pre><code>#if @T@ &gt; 400
+  * ở nhiệt độ cao, bật thêm mô hình bẫy
+#endif</code></pre>
+
+<h2 id="v-s4">4. Chạy và theo dõi</h2>
+<ol>
+<li>Chọn các nút cần chạy, nhấn <em>Run</em>. Màu của nút cho biết trạng thái: đang chờ, đang chạy, xong, hoặc lỗi.</li>
+<li>Khi một nút lỗi, mở file log (<code>*_des.log</code> hoặc <code>*.out</code>) để xem dòng lỗi đầu tiên; đừng chỉ đọc dòng cuối.</li>
+<li>Tham số trích xuất (ví dụ điện áp đánh thủng) có thể được ghi ngược vào bảng SWB nếu file Tcl của SVisual in ra dòng có dạng <code>DOE: Vbr 1234</code>.</li>
+</ol>
+
+<h2 id="v-s5">5. Các file quan trọng</h2>
+<div class="tablewrap"><table>
+<tr><th>File</th><th>Nội dung</th></tr>
+<tr><td><code>sde_dvs.cmd</code></td><td>Lệnh SDE (Scheme)</td></tr>
+<tr><td><code>sdevice_des.cmd</code></td><td>Lệnh SDevice</td></tr>
+<tr><td><code>*.par</code></td><td>Tham số vật liệu</td></tr>
+<tr><td><code>n*_msh.tdr</code></td><td>Cấu trúc và lưới</td></tr>
+<tr><td><code>n*_des.plt</code></td><td>Dữ liệu điện (dòng, áp theo bước)</td></tr>
+<tr><td><code>n*_des.tdr</code></td><td>Phân bố đại lượng trong linh kiện</td></tr>
+<tr><td><code>n*_des.log</code></td><td>Nhật ký chạy, chứa thông báo lỗi</td></tr>
+</table></div>
+
+<h2 id="v-s6">6. Thói quen tốt</h2>
+<ul>
+<li>Bắt đầu từ một dự án mẫu trong Sentaurus Training gần với linh kiện của bạn, rồi sửa dần.</li>
+<li>Thay đổi một thứ mỗi lần, chạy lại, so sánh.</li>
+<li>Ghi chú phiên bản Sentaurus và các mô hình đã bật cho mỗi kết quả quan trọng; điều này cần thiết khi viết bài báo.</li>
+<li>Sao lưu dự án (SWB có chức năng xuất dự án thành file nén).</li>
+</ul>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Workbench User Guide</em> và module <em>Sentaurus Training</em> (đi kèm phần mềm).</li>
+<li>UC Berkeley EECS, <a href="https://inst.eecs.berkeley.edu/~ee232/sp15/Tutorials/Sentaurus_Instructional_Connection.pdf" target="_blank" rel="noopener">Sentaurus instructional connection</a> (hướng dẫn kết nối và khởi động).</li>
+<li>D. W. Parent, <a href="https://ee.kpi.ua/~yv/edu/ok/book/sentaurus_2_eng.pdf" target="_blank" rel="noopener">Sentaurus TCAD student guide</a> (dự án điện trở Si mẫu).</li>
+<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Synopsys TCAD Sentaurus training modules</a>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Sentaurus Workbench (SWB) is the "workbench" that manages the whole simulation project: tool chain, parameters, experiments and results. Understanding SWB lets you run dozens of design variants without editing command files by hand.</p>
+
+<h2 id="e-s1">1. Starting up</h2>
+<pre><code>ssh -X username@tcad-server      # remote login with graphics forwarding
+source /path/to/sentaurus/setup  # load the environment (path from your admin)
+mkdir -p ~/STDB                   # folder for projects
+cd ~/STDB
+swb &amp;                             # open Sentaurus Workbench</code></pre>
+<p>Installation paths and license setup differ between servers; ask your system administrator. If the connection is slow, use VNC or a remote desktop instead of X11.</p>
+
+<h2 id="e-s2">2. Anatomy of a project</h2>
+<ul>
+<li><strong>Tool flow</strong>: e.g. SDE → SDevice → SVisual, added via <em>Project → Add Tool</em>.</li>
+<li><strong>Parameters</strong>: add parameter columns under each tool, e.g. <code>Ra</code> (anode radius), <code>Nd</code> (drift doping), <code>T</code> (temperature).</li>
+<li><strong>Experiments</strong>: each row is one combination of parameter values. SWB creates <strong>nodes</strong>, each one run of one tool, with a unique number.</li>
+</ul>
+
+<h2 id="e-s3">3. Parameters in command files</h2>
+<p>In a command file, write a parameter as <code>@Ra@</code>; SWB replaces it with each experiment's value before running (the <em>preprocessing</em> step). Some special variables:</p>
+<div class="tablewrap"><table>
+<tr><th>Syntax</th><th>Meaning</th></tr>
+<tr><td><code>@Ra@</code></td><td>The value of parameter Ra in the current experiment</td></tr>
+<tr><td><code>@node@</code></td><td>The current node number, used to name output files</td></tr>
+<tr><td><code>@node|sde@</code></td><td>The node number of the upstream <code>sde</code> tool in the same experiment</td></tr>
+<tr><td><code>@tdr@</code>, <code>@plot@</code></td><td>Default file names managed by SWB</td></tr>
+<tr><td><code>#if</code> … <code>#endif</code></td><td>Conditional blocks depending on parameters</td></tr>
+</table></div>
+<pre><code>#if @T@ &gt; 400
+  * at high temperature, switch on the trap model as well
+#endif</code></pre>
+
+<h2 id="e-s4">4. Running and monitoring</h2>
+<ol>
+<li>Select the nodes to run and press <em>Run</em>. Node colors show status: queued, running, done or failed.</li>
+<li>When a node fails, open its log (<code>*_des.log</code> or <code>*.out</code>) and look for the first error line; do not read only the last line.</li>
+<li>Extracted values (e.g. breakdown voltage) can be written back into the SWB table if the SVisual Tcl file prints a line of the form <code>DOE: Vbr 1234</code>.</li>
+</ol>
+
+<h2 id="e-s5">5. Key files</h2>
+<div class="tablewrap"><table>
+<tr><th>File</th><th>Contents</th></tr>
+<tr><td><code>sde_dvs.cmd</code></td><td>SDE commands (Scheme)</td></tr>
+<tr><td><code>sdevice_des.cmd</code></td><td>SDevice commands</td></tr>
+<tr><td><code>*.par</code></td><td>Material parameters</td></tr>
+<tr><td><code>n*_msh.tdr</code></td><td>Structure and mesh</td></tr>
+<tr><td><code>n*_des.plt</code></td><td>Electrical data (currents, voltages per step)</td></tr>
+<tr><td><code>n*_des.tdr</code></td><td>Internal distributions of quantities</td></tr>
+<tr><td><code>n*_des.log</code></td><td>Run log, including error messages</td></tr>
+</table></div>
+
+<h2 id="e-s6">6. Good habits</h2>
+<ul>
+<li>Start from a Sentaurus Training example close to your device and modify it gradually.</li>
+<li>Change one thing at a time, rerun, compare.</li>
+<li>Record the Sentaurus version and enabled models for every important result; you will need them when writing papers.</li>
+<li>Back up projects (SWB can export a project as an archive).</li>
+</ul>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Workbench User Guide</em> and the <em>Sentaurus Training</em> modules (shipped with the software).</li>
+<li>UC Berkeley EECS, <a href="https://inst.eecs.berkeley.edu/~ee232/sp15/Tutorials/Sentaurus_Instructional_Connection.pdf" target="_blank" rel="noopener">Sentaurus instructional connection</a> (connecting and starting up).</li>
+<li>D. W. Parent, <a href="https://ee.kpi.ua/~yv/edu/ok/book/sentaurus_2_eng.pdf" target="_blank" rel="noopener">Sentaurus TCAD student guide</a> (example Si resistor project).</li>
+<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Synopsys TCAD Sentaurus training modules</a>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-physics.html">← <span class="l-vi">TCAD giải gì: phương trình, lưới và Newton</span><span class="l-en">What TCAD solves: equations, mesh and Newton</span></a><a class="n" href="tcad-sde.html"><span class="l-vi">Dựng cấu trúc với Structure Editor</span><span class="l-en">Building structures with Structure Editor</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

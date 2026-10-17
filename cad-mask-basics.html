@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Mask quang khắc và quy trình thiết kế" data-title-en="Photomasks and the design workflow">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photomasks and the design workflow · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="What a mask is, mask types, the workflow, clear/dark-field polarity and file formats.">
+<meta property="og:title" content="Photomasks and the design workflow">
+<meta property="og:description" content="What a mask is, mask types, the workflow, clear/dark-field polarity and file formats.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="autocad.html"><span class="l-vi">AutoCAD cho thiết kế mask</span><span class="l-en">AutoCAD for Mask Design</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 1</span><span class="l-en">Part 1 · Lesson 1</span></p>
+  <h1><span class="l-vi">Mask quang khắc và quy trình thiết kế</span><span class="l-en">Photomasks and the design workflow</span></h1>
+  <p class="sub"><span class="l-vi">Mask là gì, các loại mask, luồng công việc, cực tính clear/dark field và định dạng file.</span><span class="l-en">What a mask is, mask types, the workflow, clear/dark-field polarity and file formats.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Mỗi linh kiện trong phòng sạch bắt đầu từ một tấm mask: một tấm kính phủ lớp crom mang hình mẫu cần in lên mẫu. Trước khi mở AutoCAD, cần hiểu mask được dùng thế nào, vì chính quy trình chế tạo quyết định ta phải vẽ gì và vẽ ra sao.</p>
+
+<h2 id="v-s1">1. Mask là gì</h2>
+<p><strong>Photomask</strong> (mask quang khắc) là tấm vật liệu trong suốt (kính soda-lime hoặc thạch anh) phủ một lớp chắn sáng, thường là crom (Cr) dày khoảng 100 nm. Trong máy căn chỉnh tiếp xúc (contact aligner) như SUSS MA6, mask được ép sát lên mẫu đã phủ chất cảm quang, rồi chiếu tia UV: vùng trong suốt cho ánh sáng đi qua, vùng crom chặn lại. Hình mẫu được chuyển 1:1 lên lớp cảm quang.</p>
+<div class="tablewrap"><table>
+<tr><th>Loại mask</th><th>Kích thước tối thiểu điển hình</th><th>Ghi chú</th></tr>
+<tr><td>Phim in (transparency film)</td><td>~10–50 µm</td><td>Rẻ, nhanh; độ phân giải phụ thuộc máy in (5000–25 000 dpi)</td></tr>
+<tr><td>Crom trên kính (chrome-on-glass)</td><td>~1 µm (ghi laser), nhỏ hơn với ghi e-beam</td><td>Chuẩn cho linh kiện bán dẫn; đắt hơn nhiều</td></tr>
+<tr><td>Ghi trực tiếp không mặt nạ (maskless)</td><td>~1 µm</td><td>Máy ghi laser (Heidelberg MLA, µPG) đọc thẳng file thiết kế</td></tr>
+</table></div>
+<p>Một linh kiện thường cần nhiều lớp mask, mỗi lớp cho một bước quang khắc: ví dụ diode Schottky Ga₂O₃ có lớp tiếp xúc ohmic, lớp anode Schottky, có thể thêm lớp cách ly (mesa) hay lớp thụ động. Các lớp phải chồng khít lên nhau, nên mask cần <strong>dấu căn chỉnh</strong>.</p>
+
+<h2 id="v-s2">2. Từ ý tưởng đến tấm mask</h2>
+<figure><svg viewBox="0 0 640 150" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="10.0" y="40" width="88.3" height="64" rx="8" class="node"/><text x="54.2" y="66" class="nt" text-anchor="middle">Ý tưởng</text><text x="54.2" y="86" class="ns" text-anchor="middle">phác thảo</text><path d="M100.3,72H113.3" class="arr" marker-end="url(#mv)"/><rect x="116.3" y="40" width="88.3" height="64" rx="8" class="node"/><text x="160.5" y="66" class="nt" text-anchor="middle">AutoCAD</text><text x="160.5" y="86" class="ns" text-anchor="middle">.dwg</text><path d="M206.7,72H219.7" class="arr" marker-end="url(#mv)"/><rect x="222.7" y="40" width="88.3" height="64" rx="8" class="node"/><text x="266.8" y="66" class="nt" text-anchor="middle">Xuất DXF</text><text x="266.8" y="86" class="ns" text-anchor="middle">đơn vị µm</text><path d="M313.0,72H326.0" class="arr" marker-end="url(#mv)"/><rect x="329.0" y="40" width="88.3" height="64" rx="8" class="node"/><text x="373.2" y="66" class="nt" text-anchor="middle">KLayout</text><text x="373.2" y="86" class="ns" text-anchor="middle">DXF → GDS</text><path d="M419.3,72H432.3" class="arr" marker-end="url(#mv)"/><rect x="435.3" y="40" width="88.3" height="64" rx="8" class="node"/><text x="479.5" y="66" class="nt" text-anchor="middle">Đặt mask</text><text x="479.5" y="86" class="ns" text-anchor="middle">bản thử PDF</text><path d="M525.7,72H538.7" class="arr" marker-end="url(#mv)"/><rect x="541.7" y="40" width="88.3" height="64" rx="8" class="node"/><text x="585.8" y="66" class="nt" text-anchor="middle">Mask</text><text x="585.8" y="86" class="ns" text-anchor="middle">Cr trên kính</text></svg><figcaption>Hình 1. Luồng công việc thiết kế mask điển hình với AutoCAD.</figcaption></figure>
+<ol>
+<li><strong>Phác thảo</strong>: kích thước linh kiện, số lớp, thứ tự quy trình, loại chất cảm quang.</li>
+<li><strong>Vẽ trong AutoCAD</strong>: mỗi lớp mask là một layer, mọi hình là polyline kín.</li>
+<li><strong>Xuất DXF</strong> với đơn vị rõ ràng (khuyến nghị 1 đơn vị = 1 µm).</li>
+<li><strong>Chuyển sang GDSII</strong> bằng KLayout hoặc LinkCAD và kiểm tra lại. Nhiều phòng sạch ưu tiên GDSII; DXF chỉ được chấp nhận kèm nhiều hạn chế.</li>
+<li><strong>Đặt mask</strong>: ghi rõ cực tính, loại mask, kích thước tấm; luôn yêu cầu bản thử (proof) PDF.</li>
+</ol>
+
+<h2 id="v-s3">3. Cực tính: clear field và dark field</h2>
+<p>Cùng một file có thể cho hai tấm mask ngược nhau, tùy cách chỉ định:</p>
+<figure><svg viewBox="0 0 620 250" class="fig-svg" role="img"><rect x="10" y="30" width="170" height="170" style="fill:none;stroke:var(--muted);stroke-dasharray:4 3"/><rect x="30" y="50" width="16" height="70" class="node" style="fill:none"/><rect x="66" y="50" width="16" height="70" class="node" style="fill:none"/><rect x="102" y="50" width="16" height="70" class="node" style="fill:none"/><rect x="138" y="50" width="16" height="70" class="node" style="fill:none"/><circle cx="65" cy="160" r="22" class="node" style="fill:none"/><rect x="115" y="140" width="45" height="40" class="node" style="fill:none"/><rect x="128" y="152" width="19" height="16" class="node" style="fill:none"/><rect x="225" y="30" width="170" height="170" style="fill:#ffffff;stroke:var(--muted)"/><rect x="245" y="50" width="16" height="70" style="fill:#2b2b33"/><rect x="281" y="50" width="16" height="70" style="fill:#2b2b33"/><rect x="317" y="50" width="16" height="70" style="fill:#2b2b33"/><rect x="353" y="50" width="16" height="70" style="fill:#2b2b33"/><circle cx="280" cy="160" r="22" style="fill:#2b2b33"/><rect x="330" y="140" width="45" height="40" style="fill:#2b2b33"/><rect x="343" y="152" width="19" height="16" style="fill:#ffffff"/><rect x="440" y="30" width="170" height="170" style="fill:#2b2b33;stroke:var(--muted)"/><rect x="460" y="50" width="16" height="70" style="fill:#ffffff"/><rect x="496" y="50" width="16" height="70" style="fill:#ffffff"/><rect x="532" y="50" width="16" height="70" style="fill:#ffffff"/><rect x="568" y="50" width="16" height="70" style="fill:#ffffff"/><circle cx="495" cy="160" r="22" style="fill:#ffffff"/><rect x="545" y="140" width="45" height="40" style="fill:#ffffff"/><rect x="558" y="152" width="19" height="16" style="fill:#2b2b33"/><text x="95" y="20" class="nt" text-anchor="middle">Bản vẽ (đường bao)</text><text x="310" y="20" class="nt" text-anchor="middle">Clear field</text><text x="525" y="20" class="nt" text-anchor="middle">Dark field</text><text x="310" y="222" class="ns" text-anchor="middle">hình vẽ = Cr (tối), nền trong</text><text x="525" y="222" class="ns" text-anchor="middle">hình vẽ = trong, nền Cr</text><text x="95" y="222" class="ns" text-anchor="middle">lỗ bên trong đổi màu lần nữa</text></svg><figcaption>Hình 2. Cùng một bản vẽ cho mask clear field (hình vẽ là crom) hoặc dark field (hình vẽ là vùng trong suốt).</figcaption></figure>
+<ul>
+<li><strong>Clear field</strong> (nền trong): hình vẽ thành crom tối, phần còn lại trong suốt.</li>
+<li><strong>Dark field</strong> (nền tối): hình vẽ thành vùng trong suốt trên nền crom.</li>
+<li>Hình lồng bên trong một hình kín sẽ đổi màu lần nữa (tạo lỗ).</li>
+</ul>
+<p>Chọn cực tính theo chất cảm quang và mục đích:</p>
+<div class="tablewrap"><table>
+<tr><th>Bước quy trình</th><th>Chất cảm quang dương</th><th>Chất cảm quang âm / đảo ảnh</th></tr>
+<tr><td>Khắc (giữ lại vùng vẽ)</td><td>Clear field (vùng vẽ là crom)</td><td>Dark field</td></tr>
+<tr><td>Lift-off kim loại (kim loại ở vùng vẽ)</td><td>Dark field (vùng vẽ trong suốt)</td><td>Clear field</td></tr>
+</table></div>
+<p>Với chất cảm quang dương, vùng được chiếu sáng sẽ tan khi tráng. Muốn kim loại nằm ở vùng vẽ bằng lift-off, cảm quang phải bị mở tại đó, tức vùng vẽ phải trong suốt. Luôn kiểm tra lại với quy trình cụ thể của phòng sạch, vì chất cảm quang đảo ảnh (như AZ 5214E) làm đảo ngược quy tắc trên.</p>
+
+<h2 id="v-s4">4. Định dạng file</h2>
+<ul>
+<li><strong>DWG</strong>: định dạng gốc của AutoCAD, nhà làm mask thường không nhận trực tiếp.</li>
+<li><strong>DXF</strong>: định dạng trao đổi của AutoCAD; được nhiều nơi nhận nhưng hay gặp lỗi đơn vị, polyline hở, đối tượng không hỗ trợ.</li>
+<li><strong>GDSII</strong> (và OASIS): chuẩn công nghiệp, chỉ chứa đa giác, layer số và cell phân cấp. Đây là định dạng ưu tiên của hầu hết phòng sạch.</li>
+</ul>
+<p>Vì vậy, AutoCAD phù hợp cho mask có kích thước micromet trở lên và người đã quen vẽ kỹ thuật; với thiết kế phức tạp, nhiều phòng sạch khuyên dùng trực tiếp các công cụ layout như KLayout. Phần còn lại của chủ đề này giúp bạn dùng AutoCAD đúng cách để file chuyển sang GDSII không lỗi.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Mẫu Ga₂O₃ trong nghiên cứu thường là mảnh nhỏ (ví dụ 5 × 5 mm hoặc 10 × 15 mm) chứ không phải wafer nguyên. Khi thiết kế mask, nên đặt nhiều bản sao của die trong vùng tương ứng kích thước mảnh mẫu, và để dấu căn chỉnh gần nhau để vẫn nằm trong mẫu nhỏ.</p></div>
+
+<h2 id="v-s5">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. Franssila, <em>Introduction to Microfabrication</em>, 2nd ed., Wiley (2010), chương về quang khắc.</li>
+<li>M. J. Madou, <em>Fundamentals of Microfabrication: The Science of Miniaturization</em>, 2nd ed., CRC Press (2002), chương 1.</li>
+<li>EPFL Center of MicroNanoTechnology (CMi), <a href="https://www.epfl.ch/research/facilities/cmi/process/photolithography/layout-design" target="_blank" rel="noopener">Layout design guidelines</a>.</li>
+<li>Unity Health Toronto, <a href="https://oldresearch.unityhealth.to/wp-content/uploads/2019/05/Photomask_Design_Rules.pdf" target="_blank" rel="noopener">Photomask design rules</a>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Every device in the cleanroom starts with a mask: a glass plate coated with chromium carrying the pattern to print. Before opening AutoCAD, it helps to understand how the mask will be used, because the fabrication process decides what you must draw and how.</p>
+
+<h2 id="e-s1">1. What a mask is</h2>
+<p>A <strong>photomask</strong> is a transparent plate (soda-lime glass or quartz) coated with a light-blocking film, usually chromium (Cr) about 100 nm thick. In a contact aligner such as the SUSS MA6, the mask is pressed against a resist-coated sample and exposed to UV: clear areas pass light, chromium blocks it. The pattern transfers 1:1 into the resist.</p>
+<div class="tablewrap"><table>
+<tr><th>Mask type</th><th>Typical minimum feature</th><th>Notes</th></tr>
+<tr><td>Transparency film</td><td>~10–50 µm</td><td>Cheap and fast; resolution set by the printer (5,000–25,000 dpi)</td></tr>
+<tr><td>Chrome-on-glass</td><td>~1 µm (laser-written), smaller with e-beam</td><td>Standard for semiconductor devices; much more expensive</td></tr>
+<tr><td>Maskless direct writing</td><td>~1 µm</td><td>Laser writers (Heidelberg MLA, µPG) read the design file directly</td></tr>
+</table></div>
+<p>A device usually needs several mask layers, one per lithography step: a Ga₂O₃ Schottky diode, for example, has an ohmic contact layer and a Schottky anode layer, perhaps plus isolation (mesa) or passivation layers. The layers must overlay precisely, so the masks need <strong>alignment marks</strong>.</p>
+
+<h2 id="e-s2">2. From idea to mask</h2>
+<figure><svg viewBox="0 0 640 150" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="10.0" y="40" width="88.3" height="64" rx="8" class="node"/><text x="54.2" y="66" class="nt" text-anchor="middle">Idea</text><text x="54.2" y="86" class="ns" text-anchor="middle">sketch</text><path d="M100.3,72H113.3" class="arr" marker-end="url(#me)"/><rect x="116.3" y="40" width="88.3" height="64" rx="8" class="node"/><text x="160.5" y="66" class="nt" text-anchor="middle">AutoCAD</text><text x="160.5" y="86" class="ns" text-anchor="middle">.dwg</text><path d="M206.7,72H219.7" class="arr" marker-end="url(#me)"/><rect x="222.7" y="40" width="88.3" height="64" rx="8" class="node"/><text x="266.8" y="66" class="nt" text-anchor="middle">Export DXF</text><text x="266.8" y="86" class="ns" text-anchor="middle">µm units</text><path d="M313.0,72H326.0" class="arr" marker-end="url(#me)"/><rect x="329.0" y="40" width="88.3" height="64" rx="8" class="node"/><text x="373.2" y="66" class="nt" text-anchor="middle">KLayout</text><text x="373.2" y="86" class="ns" text-anchor="middle">DXF → GDS</text><path d="M419.3,72H432.3" class="arr" marker-end="url(#me)"/><rect x="435.3" y="40" width="88.3" height="64" rx="8" class="node"/><text x="479.5" y="66" class="nt" text-anchor="middle">Order</text><text x="479.5" y="86" class="ns" text-anchor="middle">PDF proof</text><path d="M525.7,72H538.7" class="arr" marker-end="url(#me)"/><rect x="541.7" y="40" width="88.3" height="64" rx="8" class="node"/><text x="585.8" y="66" class="nt" text-anchor="middle">Mask</text><text x="585.8" y="86" class="ns" text-anchor="middle">Cr on glass</text></svg><figcaption>Figure 1. A typical mask design workflow with AutoCAD.</figcaption></figure>
+<ol>
+<li><strong>Sketch</strong>: device dimensions, number of layers, process order, resist type.</li>
+<li><strong>Draw in AutoCAD</strong>: each mask level on its own layer, every shape a closed polyline.</li>
+<li><strong>Export DXF</strong> with clear units (recommended: 1 unit = 1 µm).</li>
+<li><strong>Convert to GDSII</strong> with KLayout or LinkCAD and check again. Many cleanrooms prefer GDSII; DXF is accepted only with many limitations.</li>
+<li><strong>Order the mask</strong>: state polarity, mask type and plate size; always request a PDF proof.</li>
+</ol>
+
+<h2 id="e-s3">3. Polarity: clear field and dark field</h2>
+<p>The same file can yield two opposite masks, depending on what you specify:</p>
+<figure><svg viewBox="0 0 620 250" class="fig-svg" role="img"><rect x="10" y="30" width="170" height="170" style="fill:none;stroke:var(--muted);stroke-dasharray:4 3"/><rect x="30" y="50" width="16" height="70" class="node" style="fill:none"/><rect x="66" y="50" width="16" height="70" class="node" style="fill:none"/><rect x="102" y="50" width="16" height="70" class="node" style="fill:none"/><rect x="138" y="50" width="16" height="70" class="node" style="fill:none"/><circle cx="65" cy="160" r="22" class="node" style="fill:none"/><rect x="115" y="140" width="45" height="40" class="node" style="fill:none"/><rect x="128" y="152" width="19" height="16" class="node" style="fill:none"/><rect x="225" y="30" width="170" height="170" style="fill:#ffffff;stroke:var(--muted)"/><rect x="245" y="50" width="16" height="70" style="fill:#2b2b33"/><rect x="281" y="50" width="16" height="70" style="fill:#2b2b33"/><rect x="317" y="50" width="16" height="70" style="fill:#2b2b33"/><rect x="353" y="50" width="16" height="70" style="fill:#2b2b33"/><circle cx="280" cy="160" r="22" style="fill:#2b2b33"/><rect x="330" y="140" width="45" height="40" style="fill:#2b2b33"/><rect x="343" y="152" width="19" height="16" style="fill:#ffffff"/><rect x="440" y="30" width="170" height="170" style="fill:#2b2b33;stroke:var(--muted)"/><rect x="460" y="50" width="16" height="70" style="fill:#ffffff"/><rect x="496" y="50" width="16" height="70" style="fill:#ffffff"/><rect x="532" y="50" width="16" height="70" style="fill:#ffffff"/><rect x="568" y="50" width="16" height="70" style="fill:#ffffff"/><circle cx="495" cy="160" r="22" style="fill:#ffffff"/><rect x="545" y="140" width="45" height="40" style="fill:#ffffff"/><rect x="558" y="152" width="19" height="16" style="fill:#2b2b33"/><text x="95" y="20" class="nt" text-anchor="middle">Drawing (outlines)</text><text x="310" y="20" class="nt" text-anchor="middle">Clear field</text><text x="525" y="20" class="nt" text-anchor="middle">Dark field</text><text x="310" y="222" class="ns" text-anchor="middle">features = Cr (dark), clear background</text><text x="525" y="222" class="ns" text-anchor="middle">features = clear, Cr background</text><text x="95" y="222" class="ns" text-anchor="middle">nested hole flips again</text></svg><figcaption>Figure 2. The same drawing as a clear-field mask (features are chrome) or a dark-field mask (features are clear).</figcaption></figure>
+<ul>
+<li><strong>Clear field</strong>: drawn features become dark chrome; the rest is clear.</li>
+<li><strong>Dark field</strong>: drawn features become clear windows in a chrome background.</li>
+<li>A shape nested inside a closed shape flips again (it becomes a hole).</li>
+</ul>
+<p>Choose polarity by resist and purpose:</p>
+<div class="tablewrap"><table>
+<tr><th>Process step</th><th>Positive resist</th><th>Negative / image-reversal resist</th></tr>
+<tr><td>Etching (keep the drawn areas)</td><td>Clear field (drawn areas are chrome)</td><td>Dark field</td></tr>
+<tr><td>Metal lift-off (metal where drawn)</td><td>Dark field (drawn areas clear)</td><td>Clear field</td></tr>
+</table></div>
+<p>With positive resist, exposed areas dissolve on development. For lift-off metal to sit in the drawn areas, the resist must open there, so the drawn areas must be clear. Always confirm with your cleanroom's actual process, since image-reversal resists (such as AZ 5214E) invert this rule.</p>
+
+<h2 id="e-s4">4. File formats</h2>
+<ul>
+<li><strong>DWG</strong>: AutoCAD's native format; mask shops usually do not accept it directly.</li>
+<li><strong>DXF</strong>: AutoCAD's exchange format; widely accepted but prone to unit errors, open polylines and unsupported entities.</li>
+<li><strong>GDSII</strong> (and OASIS): the industry standard, containing only polygons, numbered layers and hierarchical cells. The preferred format of most cleanrooms.</li>
+</ul>
+<p>AutoCAD is therefore well suited to micrometer-scale masks and to people already comfortable with technical drawing; for complex designs, many cleanrooms recommend layout tools such as KLayout directly. The rest of this topic helps you use AutoCAD correctly so the file converts to GDSII without errors.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Research Ga₂O₃ samples are often small pieces (e.g. 5 × 5 mm or 10 × 15 mm) rather than full wafers. When designing the mask, place several copies of the die within an area matching the sample size, and keep alignment marks close together so they still fall on a small sample.</p></div>
+
+<h2 id="e-s5">References</h2>
+<ol class="refs">
+<li>S. Franssila, <em>Introduction to Microfabrication</em>, 2nd ed., Wiley (2010), lithography chapter.</li>
+<li>M. J. Madou, <em>Fundamentals of Microfabrication: The Science of Miniaturization</em>, 2nd ed., CRC Press (2002), chapter 1.</li>
+<li>EPFL Center of MicroNanoTechnology (CMi), <a href="https://www.epfl.ch/research/facilities/cmi/process/photolithography/layout-design" target="_blank" rel="noopener">Layout design guidelines</a>.</li>
+<li>Unity Health Toronto, <a href="https://oldresearch.unityhealth.to/wp-content/uploads/2019/05/Photomask_Design_Rules.pdf" target="_blank" rel="noopener">Photomask design rules</a>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="autocad.html">← <span class="l-vi">Mục lục</span><span class="l-en">Contents</span></a><a class="n" href="cad-setup.html"><span class="l-vi">Làm quen AutoCAD: giao diện, đơn vị, tọa độ</span><span class="l-en">Getting started: interface, units, coordinates</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

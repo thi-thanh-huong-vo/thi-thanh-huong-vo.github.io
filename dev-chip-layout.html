@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Từ một transistor đơn lẻ đến một con chip là bài toán sắp xếp: đặt hàng tỉ ô nhớ và transistor sát nhau nhất có thể mà vẫn nối dây được. Bài này xét ba khía cạnh: bố trí ô DRAM, ý nghĩa của "nút công nghệ", và trễ RC của dây dẫn.</p>
 
-<h2>1. Ô nhớ DRAM: word line và bit line</h2>
+<h2 id="v-s1">1. Ô nhớ DRAM: word line và bit line</h2>
 <p>Một ô DRAM gồm <strong>1 transistor + 1 tụ điện</strong> (1T1C). Ô được nối với hai đường:</p>
 <ul>
 <li><strong>Word line</strong> (WL) nối với cổng transistor, chọn ô nào được truy cập.</li>
@@ -86,7 +86,7 @@
 </ul>
 <p>Các word line và bit line chạy vuông góc nhau thành lưới, mỗi giao điểm là một ô.</p>
 
-<h2>2. Diện tích ô: 8F², 6F², 4F²</h2>
+<h2 id="v-s2">2. Diện tích ô: 8F², 6F², 4F²</h2>
 <p>Diện tích ô nhớ được biểu diễn theo \(F\), kích thước đặc trưng nhỏ nhất (feature size) của công nghệ:</p>
 <ul>
 <li><strong>8F²</strong> (kiến trúc bit line gập): ô chiếm 4F × 2F. Bit line đi qua cả các ô không được chọn, nên nhiễu giữa các bit line được triệt tiêu tốt.</li>
@@ -95,7 +95,7 @@
 </ul>
 <p>Với cùng \(F\), chuyển từ 8F² sang 6F² giảm diện tích ô 25 %, tương đương gần một thế hệ thu nhỏ mà không cần quang khắc mới.</p>
 
-<h2>3. Nút công nghệ</h2>
+<h2 id="v-s3">3. Nút công nghệ</h2>
 <p>Nút công nghệ (technology node) chỉ một quy trình sản xuất bán dẫn cụ thể cùng bộ quy tắc thiết kế của nó. Nhìn chung, nút nhỏ hơn nghĩa là kích thước nhỏ hơn, transistor nhanh hơn và tiết kiệm năng lượng hơn.</p>
 <ul>
 <li><strong>Trước đây</strong>, tên nút gắn với kích thước vật lý thật như chiều dài cổng hoặc nửa bước của lớp kim loại 1 (M1 half-pitch).</li>
@@ -103,7 +103,7 @@
 </ul>
 <p>Thước đo khách quan hơn là mật độ transistor (triệu transistor/mm²) hoặc các bước cổng (contacted gate pitch) và bước kim loại tối thiểu.</p>
 
-<h2>4. Trễ RC của dây dẫn</h2>
+<h2 id="v-s4">4. Trễ RC của dây dẫn</h2>
 <p>Mỗi dây dẫn có điện trở \(R = R_s\,(L/W)\) và điện dung \(C\) với các dây bên cạnh và với đế. Khi đặt một bước điện áp \(V_i\) vào mạch RC:</p>
 $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 <p>\(\tau = RC\) là hằng số thời gian: sau \(\tau\), tín hiệu đạt 63 % giá trị cuối. Các lớp kim loại dưới cùng mỏng để xếp sát nhau, nhưng điện trở tấm cao; các lớp trên dày hơn, dùng cho dây dài và cấp nguồn. Khi thu nhỏ, transistor nhanh hơn nhưng dây hẹp và sát hơn nên cả R và C tăng; từ khoảng thế hệ 250–180 nm, trễ của dây dẫn bắt đầu vượt trễ của cổng. Đây là lý do ngành chuyển từ nhôm sang đồng (điện trở suất thấp hơn) và từ SiO₂ sang điện môi low-k giữa các dây.</p>
@@ -111,7 +111,7 @@ $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Với linh kiện công suất Ga₂O₃, bài toán bố trí khác hẳn chip logic: thay vì nén chặt, ta cần đủ khoảng cách giữa các điện cực để chịu điện áp hàng trăm đến hàng nghìn volt, thêm vành bảo vệ (guard ring) hoặc tấm trường (field plate) ở mép điện cực để giảm tập trung điện trường. Khi thiết kế mặt nạ, khoảng cách và bán kính bo góc là thông số quan trọng nhất.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s5">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. Keeth, R. J. Baker, B. Johnson, F. Lin, <em>DRAM Circuit Design: Fundamental and High-Speed Topics</em>, 2nd ed., Wiley-IEEE Press (2008).</li>
 <li>International Roadmap for Devices and Systems (IRDS), <em>More Moore</em>, IEEE (2022).</li>
@@ -121,7 +121,7 @@ $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 <div class="l-en">
 <p class="lead">Going from a single transistor to a chip is an arrangement problem: packing billions of memory cells and transistors as closely as possible while still being able to wire them. This lesson covers three aspects: DRAM cell layout, the meaning of the "technology node", and interconnect RC delay.</p>
 
-<h2>1. The DRAM cell: word line and bit line</h2>
+<h2 id="e-s1">1. The DRAM cell: word line and bit line</h2>
 <p>A DRAM cell is <strong>1 transistor + 1 capacitor</strong> (1T1C). The cell connects to two lines:</p>
 <ul>
 <li>The <strong>word line</strong> (WL) connects to the transistor gate and selects which cell is accessed.</li>
@@ -129,7 +129,7 @@ $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 </ul>
 <p>Word lines and bit lines run perpendicular to each other in a grid, with one cell at each crossing.</p>
 
-<h2>2. Cell area: 8F², 6F², 4F²</h2>
+<h2 id="e-s2">2. Cell area: 8F², 6F², 4F²</h2>
 <p>Cell area is expressed in terms of \(F\), the minimum feature size of the technology:</p>
 <ul>
 <li><strong>8F²</strong> (folded bit line): the cell occupies 4F × 2F. Bit lines pass over unselected cells too, so bit-line noise cancels well.</li>
@@ -138,7 +138,7 @@ $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 </ul>
 <p>At the same \(F\), moving from 8F² to 6F² cuts cell area by 25%, close to a full scaling generation without new lithography.</p>
 
-<h2>3. The technology node</h2>
+<h2 id="e-s3">3. The technology node</h2>
 <p>A technology node names a specific semiconductor manufacturing process and its design rules. In general, a smaller node means smaller features and transistors that are faster and more power-efficient.</p>
 <ul>
 <li><strong>Historically</strong>, the node name referred to real physical dimensions such as gate length or the metal-1 half-pitch.</li>
@@ -146,7 +146,7 @@ $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 </ul>
 <p>More objective measures are transistor density (million transistors/mm²) or the contacted gate pitch and minimum metal pitch.</p>
 
-<h2>4. Interconnect RC delay</h2>
+<h2 id="e-s4">4. Interconnect RC delay</h2>
 <p>Every wire has resistance \(R = R_s\,(L/W)\) and capacitance \(C\) to neighboring wires and the substrate. When a voltage step \(V_i\) is applied to an RC circuit:</p>
 $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 <p>\(\tau = RC\) is the time constant: after \(\tau\), the signal reaches 63% of its final value. The lowest metal layers are thin to allow tight spacing, but have high sheet resistance; upper layers are thicker, for long wires and power distribution. With scaling, transistors get faster but wires get narrower and closer, so both R and C rise; from around the 250–180 nm generations, interconnect delay began to exceed gate delay. This is why the industry moved from aluminum to copper (lower resistivity) and from SiO₂ to low-k dielectrics between wires.</p>
@@ -154,7 +154,7 @@ $$V_o(t) = V_i\left(1 - e^{-t/RC}\right)$$
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>For Ga₂O₃ power devices, the layout problem is quite different from logic chips: instead of packing tightly, we need enough spacing between electrodes to hold hundreds to thousands of volts, plus guard rings or field plates at the electrode edges to reduce field crowding. When designing masks, spacing and corner radii are the most important parameters.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s5">References</h2>
 <ol class="refs">
 <li>B. Keeth, R. J. Baker, B. Johnson, F. Lin, <em>DRAM Circuit Design: Fundamental and High-Speed Topics</em>, 2nd ed., Wiley-IEEE Press (2008).</li>
 <li>International Roadmap for Devices and Systems (IRDS), <em>More Moore</em>, IEEE (2022).</li>

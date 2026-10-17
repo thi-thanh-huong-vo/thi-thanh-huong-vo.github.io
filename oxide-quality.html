@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Một lớp oxide tốt không chỉ cần đúng độ dày, mà còn phải "sạch" về điện: ít điện tích, ít bẫy, và chịu được điện trường cao trong suốt tuổi thọ linh kiện. Bài này trình bày cách phân loại điện tích trong oxide, cách đánh giá độ bền điện môi và các phương pháp đo độ dày.</p>
 
-<h2>1. Bốn loại điện tích trong oxide</h2>
+<h2 id="v-s1">1. Bốn loại điện tích trong oxide</h2>
 <div class="tablewrap"><table>
 <tr><th>Loại</th><th>Vị trí và nguồn gốc</th><th>Giảm thiểu bằng</th></tr>
 <tr><td><strong>Bẫy mặt phân cách</strong> \(Q_{it}\)</td><td>Ngay tại mặt Si/SiO₂, từ liên kết treo của Si; có thể trao đổi điện tích với Si tùy điện áp</td><td>Ủ trong khí chứa H₂ (forming gas)</td></tr>
@@ -88,7 +88,7 @@
 </table></div>
 <p>Liên kết treo ở mặt phân cách có thể được "bịt" bằng nguyên tử H. Tuy nhiên liên kết Si–H tương đối yếu, có thể bị phá dưới ứng suất điện hoặc bức xạ ion hóa, để lại bẫy hoặc trạng thái tích điện mới. Đây là một cơ chế suy giảm độ tin cậy quan trọng.</p>
 
-<h2>2. Đánh giá độ bền điện môi</h2>
+<h2 id="v-s2">2. Đánh giá độ bền điện môi</h2>
 <p>Phương pháp điện là cách hữu ích nhất để đánh giá chất lượng oxide. Phép đo đơn giản nhất là <strong>điện áp (điện trường) đánh thủng</strong>. Đo trên nhiều tụ điện rồi vẽ biểu đồ tần suất (histogram) cho cái nhìn bậc nhất về chất lượng và mật độ sai hỏng:</p>
 <ul>
 <li><strong>Đánh thủng ngoại lai</strong> (extrinsic) ở điện trường thấp: do lỗ kim (pinhole), hạt bụi, nhiễm bẩn, vùng mỏng cục bộ.</li>
@@ -101,7 +101,7 @@ $$Q_{BD} = \int_0^{t_{BD}} J(t)\,dt$$
 <h3>Mô hình thấm (percolation)</h3>
 <p>Ở điện áp cao, electron trong oxide thu đủ năng lượng để gây ion hóa va chạm, tạo lỗ trống và sinh dần các bẫy. Khi các bẫy phân bố ngẫu nhiên đủ dày để tạo thành một "đường thấm" nối hai điện cực, dòng điện tăng vọt và oxide bị đánh thủng. Oxide gồm các vùng chắc chắn và vùng yếu; vùng yếu có thể mỏng hơn hoặc chứa sai hỏng dễ bẫy điện tích. Mô hình này giải thích vì sao oxide càng mỏng thì càng dễ đánh thủng và vì sao thời gian đánh thủng có tính thống kê (phân bố Weibull).</p>
 
-<h2>3. Đo độ dày oxide</h2>
+<h2 id="v-s3">3. Đo độ dày oxide</h2>
 <div class="tablewrap"><table>
 <tr><th>Loại độ dày</th><th>Phương pháp</th><th>Đặc điểm</th></tr>
 <tr><td>Vật lý</td><td>Máy đo biên dạng dùng mũi dò (profiler), AFM</td><td>Cần tạo bậc oxide bằng mặt nạ và khắc; phá hủy, thường cần wafer thử riêng</td></tr>
@@ -123,7 +123,7 @@ $$\mathrm{EOT} = t_{\text{high-}k}\,\frac{\varepsilon_{SiO_2}}{\varepsilon_{\tex
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Cách phân loại điện tích oxide của Si được áp dụng gần như nguyên vẹn cho các cấu trúc MOS trên Ga₂O₃, nhưng mật độ bẫy mặt phân cách thường cao hơn nhiều, và vùng cấm rộng của Ga₂O₃ khiến nhiều bẫy sâu có hằng số thời gian rất dài. Hệ quả là đường C-V bị trễ (hysteresis) và phụ thuộc tần số, đòi hỏi các kỹ thuật như đo xung hay đo C-V dưới chiếu sáng UV để đánh giá đầy đủ.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s4">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. E. Deal, "Standardized terminology for oxide charges associated with thermally oxidized silicon," <em>IEEE Transactions on Electron Devices</em> 27, 606 (1980).</li>
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006).</li>
@@ -133,7 +133,7 @@ $$\mathrm{EOT} = t_{\text{high-}k}\,\frac{\varepsilon_{SiO_2}}{\varepsilon_{\tex
 <div class="l-en">
 <p class="lead">A good oxide needs more than the right thickness: it must be electrically "clean", with little charge, few traps, and the ability to withstand high fields over the device lifetime. This lesson covers how oxide charges are classified, how dielectric strength is evaluated, and how thickness is measured.</p>
 
-<h2>1. Four types of oxide charge</h2>
+<h2 id="e-s1">1. Four types of oxide charge</h2>
 <div class="tablewrap"><table>
 <tr><th>Type</th><th>Location and origin</th><th>Reduced by</th></tr>
 <tr><td><strong>Interface traps</strong> \(Q_{it}\)</td><td>Right at the Si/SiO₂ interface, from Si dangling bonds; can exchange charge with Si depending on bias</td><td>Annealing in H₂-containing forming gas</td></tr>
@@ -143,7 +143,7 @@ $$\mathrm{EOT} = t_{\text{high-}k}\,\frac{\varepsilon_{SiO_2}}{\varepsilon_{\tex
 </table></div>
 <p>Interface dangling bonds can be capped by hydrogen atoms. The Si–H bond is relatively weak, however, and can be broken by electrical stress or ionizing radiation, leaving a new trap or charged state. This is an important reliability degradation mechanism.</p>
 
-<h2>2. Evaluating dielectric strength</h2>
+<h2 id="e-s2">2. Evaluating dielectric strength</h2>
 <p>Electrical techniques are the most useful way to characterize oxide quality. The simplest measurement is the <strong>breakdown voltage (field)</strong>. Measuring many capacitors and plotting a histogram gives a first-order picture of quality and defect density:</p>
 <ul>
 <li><strong>Extrinsic breakdown</strong> at low fields: from pinholes, particles, contamination and locally thin spots.</li>
@@ -156,7 +156,7 @@ $$Q_{BD} = \int_0^{t_{BD}} J(t)\,dt$$
 <h3>Percolation model</h3>
 <p>At high voltage, electrons in the oxide gain enough energy for impact ionization, creating holes and gradually generating traps. When randomly placed traps become dense enough to form a "percolation path" between the electrodes, the current jumps and the oxide breaks down. The oxide consists of robust and weak regions; weak regions may be physically thinner or contain defects that easily trap charge. This model explains why thinner oxides break down more easily and why breakdown times are statistical (Weibull distribution).</p>
 
-<h2>3. Measuring oxide thickness</h2>
+<h2 id="e-s3">3. Measuring oxide thickness</h2>
 <div class="tablewrap"><table>
 <tr><th>Thickness type</th><th>Method</th><th>Notes</th></tr>
 <tr><td>Physical</td><td>Stylus profiler, AFM</td><td>Requires an oxide step made by masking and etching; destructive, usually a dedicated test wafer</td></tr>
@@ -178,7 +178,7 @@ $$\mathrm{EOT} = t_{\text{high-}k}\,\frac{\varepsilon_{SiO_2}}{\varepsilon_{\tex
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>The Si oxide-charge classification carries over almost directly to MOS structures on Ga₂O₃, but interface trap densities are usually much higher, and Ga₂O₃'s wide bandgap gives many deep traps very long time constants. The result is C-V hysteresis and frequency dispersion, which call for techniques such as pulsed measurements or C-V under UV illumination for a complete evaluation.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s4">References</h2>
 <ol class="refs">
 <li>B. E. Deal, "Standardized terminology for oxide charges associated with thermally oxidized silicon," <em>IEEE Transactions on Electron Devices</em> 27, 606 (1980).</li>
 <li>D. K. Schroder, <em>Semiconductor Material and Device Characterization</em>, 3rd ed., Wiley (2006).</li>

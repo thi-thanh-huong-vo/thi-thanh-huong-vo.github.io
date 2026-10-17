@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Mô phỏng điện với Sentaurus Device" data-title-en="Electrical simulation with Sentaurus Device">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electrical simulation with Sentaurus Device · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The File, Electrode, Physics, Plot, Math and Solve sections; Quasistationary and reading results.">
+<meta property="og:title" content="Electrical simulation with Sentaurus Device">
+<meta property="og:description" content="The File, Electrode, Physics, Plot, Math and Solve sections; Quasistationary and reading results.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 3</span><span class="l-en">Part 2 · Lesson 3</span></p>
+  <h1><span class="l-vi">Mô phỏng điện với Sentaurus Device</span><span class="l-en">Electrical simulation with Sentaurus Device</span></h1>
+  <p class="sub"><span class="l-vi">Các khối File, Electrode, Physics, Plot, Math, Solve; Quasistationary và đọc kết quả.</span><span class="l-en">The File, Electrode, Physics, Plot, Math and Solve sections; Quasistationary and reading results.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Sentaurus Device (SDevice) đọc cấu trúc và lưới từ SDE, giải các phương trình bán dẫn và ghi ra dòng, áp và phân bố bên trong linh kiện. File lệnh gồm vài khối cố định; hiểu từng khối là đủ để chạy hầu hết mô phỏng điện.</p>
+
+<h2 id="v-s1">1. File lệnh cho đặc tuyến thuận</h2>
+<pre><code>File {
+  Grid      = &quot;n@node|sde@_msh.tdr&quot;   * structure and mesh from SDE
+  Parameter = &quot;Ga2O3.par&quot;             * material parameters
+  Current   = &quot;n@node@_des.plt&quot;       * electrical results
+  Plot      = &quot;n@node@_des.tdr&quot;       * internal distributions
+  Output    = &quot;n@node@_des.log&quot;       * run log
+}
+
+Electrode {
+  { Name = &quot;anode&quot;   Voltage = 0.0  Schottky  Barrier = @PhiB@ }
+  { Name = &quot;cathode&quot; Voltage = 0.0 }
+}
+
+Physics {
+  Temperature = @T@
+  Fermi
+  Mobility ( DopingDependence  HighFieldSaturation )
+  Recombination ( SRH )
+}
+
+Plot {
+  eDensity  ElectricField/Vector  Potential  SpaceCharge
+  eCurrent/Vector  ConductionBandEnergy  eQuasiFermiEnergy
+  DopingConcentration
+}
+
+Math {
+  Extrapolate
+  Derivatives
+  RelErrControl
+  Digits = 5
+  Iterations = 20
+  NotDamped = 50
+  ExtendedPrecision      * helps with the tiny n_i of ultra-wide bandgap materials
+  ExitOnFailure
+}
+
+Solve {
+  * 1. Equilibrium: Poisson only, then add electrons
+  Coupled ( Iterations = 100 ) { Poisson }
+  Coupled { Poisson Electron }
+
+  * 2. Forward sweep of the anode from 0 to 2 V
+  Quasistationary (
+    InitialStep = 1e-3  MinStep = 1e-6  MaxStep = 0.05
+    Goal { Name = &quot;anode&quot; Voltage = 2.0 }
+  ) { Coupled { Poisson Electron } }
+}</code></pre>
+
+<h2 id="v-s2">2. Ý nghĩa từng khối</h2>
+<div class="tablewrap"><table>
+<tr><th>Khối</th><th>Nhiệm vụ</th></tr>
+<tr><td><code>File</code></td><td>Tên các file vào/ra. <code>@node|sde@</code> lấy đúng cấu trúc của thí nghiệm hiện tại.</td></tr>
+<tr><td><code>Electrode</code></td><td>Tên điện cực (khớp với SDE), điện áp ban đầu, loại tiếp xúc. <code>Schottky Barrier = 1.2</code> đặt chiều cao rào 1,2 eV; không ghi gì là tiếp xúc ohmic.</td></tr>
+<tr><td><code>Physics</code></td><td>Các mô hình vật lý: nhiệt độ, thống kê Fermi–Dirac, độ linh động phụ thuộc pha tạp và bão hòa vận tốc, tái hợp SRH. Có thể viết riêng cho từng vùng, vật liệu, mặt phân cách hay điện cực.</td></tr>
+<tr><td><code>Plot</code></td><td>Các đại lượng được lưu vào file <code>.tdr</code> để xem phân bố.</td></tr>
+<tr><td><code>Math</code></td><td>Tùy chọn số: số lần lặp Newton, độ chính xác, ngoại suy giữa các bước, dừng khi lỗi.</td></tr>
+<tr><td><code>Solve</code></td><td>Trình tự giải: điểm cân bằng trước, rồi quét điện áp.</td></tr>
+</table></div>
+
+<h2 id="v-s3">3. Quét điện áp: Quasistationary</h2>
+<figure><svg viewBox="0 0 560 260" class="fig-svg" role="img"><line x1="60" y1="215" x2="540" y2="215" class="ax"/><line x1="60" y1="215" x2="60" y2="20" class="ax"/><line x1="60" y1="215" x2="60" y2="220" class="ax"/><text x="60" y="235" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="215" x2="180.0" y2="220" class="ax"/><text x="180.0" y="235" class="tk" text-anchor="middle">0.25</text><line x1="300.0" y1="215" x2="300.0" y2="220" class="ax"/><text x="300.0" y="235" class="tk" text-anchor="middle">0.5</text><line x1="420.0" y1="215" x2="420.0" y2="220" class="ax"/><text x="420.0" y="235" class="tk" text-anchor="middle">0.75</text><line x1="540" y1="215" x2="540" y2="220" class="ax"/><text x="540" y="235" class="tk" text-anchor="middle">1</text><line x1="55" y1="215.0" x2="60" y2="215.0" class="ax"/><line x1="60" y1="215.0" x2="540" y2="215.0" class="grid"/><text x="51" y="219.0" class="tk" text-anchor="end">0</text><line x1="55" y1="166.25" x2="60" y2="166.25" class="ax"/><line x1="60" y1="166.25" x2="540" y2="166.25" class="grid"/><text x="51" y="170.25" class="tk" text-anchor="end">0.5</text><line x1="55" y1="117.5" x2="60" y2="117.5" class="ax"/><line x1="60" y1="117.5" x2="540" y2="117.5" class="grid"/><text x="51" y="121.5" class="tk" text-anchor="end">1</text><line x1="55" y1="68.75" x2="60" y2="68.75" class="ax"/><line x1="60" y1="68.75" x2="540" y2="68.75" class="grid"/><text x="51" y="72.75" class="tk" text-anchor="end">1.5</text><line x1="55" y1="20.0" x2="60" y2="20.0" class="ax"/><line x1="60" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="51" y="24.0" class="tk" text-anchor="end">2</text><text x="300.0" y="254" class="lab" text-anchor="middle">Biến thời gian t của Quasistationary</text><text x="14" y="117.5" class="lab" text-anchor="middle" transform="rotate(-90 14 117.5)">Điện áp anode (V)</text><path d="M60.0,215.0 L540.0,20.0" class="s1" fill="none"/><circle cx="60.0" cy="215.0" r="4" class="atom"/><circle cx="64.8" cy="213.1" r="4" class="atom"/><circle cx="74.4" cy="209.2" r="4" class="atom"/><circle cx="93.6" cy="201.3" r="4" class="atom"/><circle cx="132.0" cy="185.8" r="4" class="atom"/><circle cx="208.8" cy="154.5" r="4" class="atom"/><circle cx="304.8" cy="115.5" r="4" class="atom"/><circle cx="328.8" cy="105.8" r="4" class="atom"/><circle cx="352.8" cy="96.0" r="4" class="atom"/><circle cx="376.8" cy="86.3" r="4" class="atom"/><circle cx="400.8" cy="76.5" r="4" class="atom"/><circle cx="424.8" cy="66.8" r="4" class="atom"/><circle cx="448.8" cy="57.0" r="4" class="atom"/><circle cx="472.8" cy="47.3" r="4" class="atom"/><circle cx="496.8" cy="37.5" r="4" class="atom"/><circle cx="520.8" cy="27.8" r="4" class="atom"/><circle cx="540.0" cy="20.0" r="4" class="atom"/><text x="84.0" y="39.5" class="ns">V(t) = V₀ + t·(Goal − V₀); bước tự điều chỉnh</text></svg><figcaption>Hình 1. Quasistationary đưa điện áp từ giá trị đầu đến Goal theo biến t từ 0 đến 1, với bước tự điều chỉnh.</figcaption></figure>
+<p>Quasistationary tăng một biến "thời gian" ảo \(t\) từ 0 đến 1, và điện áp điện cực đi tuyến tính từ giá trị ban đầu tới <code>Goal</code>. Bước bắt đầu bằng <code>InitialStep</code>; nếu hội tụ tốt, bước được nhân lên (tới <code>MaxStep</code>); nếu không hội tụ, bước bị chia nhỏ (tới <code>MinStep</code>, quá nữa thì mô phỏng dừng). Với <code>MaxStep = 0.05</code> và quét 0–2 V, khoảng cách điểm lớn nhất là 0,1 V.</p>
+
+<h2 id="v-s4">4. Phương trình nào cần giải</h2>
+<p>Ga₂O₃ chỉ có electron dẫn điện; nồng độ lỗ trống nhỏ đến mức gần như bằng 0. Giải thêm phương trình lỗ trống (<code>Hole</code>) không thêm thông tin cho đặc tuyến thuận nhưng làm mô phỏng dễ mất ổn định. Chỉ thêm <code>Hole</code> khi cần ion hóa va chạm, chiếu sáng UV hay tiếp giáp với vật liệu loại p như NiO.</p>
+
+<h2 id="v-s5">5. Đọc kết quả</h2>
+<ul>
+<li><code>n*_des.plt</code>: các cột như <code>anode OuterVoltage</code>, <code>anode TotalCurrent</code>. Dòng tính theo A/µm (2D, trên một µm chiều sâu); chia cho chiều rộng anode để có mật độ dòng, hoặc dùng hệ số diện tích trong khối <code>Physics</code> hay đối xứng trụ.</li>
+<li><code>n*_des.tdr</code>: phân bố điện trường, nồng độ electron, giản đồ vùng tại điểm cuối của mỗi lần giải (có thể yêu cầu lưu ở nhiều điểm bằng lệnh <code>Plot</code> trong <code>Solve</code>).</li>
+</ul>
+<figure><svg viewBox="0 0 560 320" class="fig-svg" role="img"><line x1="66" y1="275" x2="540" y2="275" class="ax"/><line x1="66" y1="275" x2="66" y2="20" class="ax"/><line x1="66.0" y1="275" x2="66.0" y2="280" class="ax"/><text x="66.0" y="295" class="tk" text-anchor="middle">0</text><line x1="184.5" y1="275" x2="184.5" y2="280" class="ax"/><text x="184.5" y="295" class="tk" text-anchor="middle">0.5</text><line x1="303.0" y1="275" x2="303.0" y2="280" class="ax"/><text x="303.0" y="295" class="tk" text-anchor="middle">1</text><line x1="421.5" y1="275" x2="421.5" y2="280" class="ax"/><text x="421.5" y="295" class="tk" text-anchor="middle">1.5</text><line x1="540.0" y1="275" x2="540.0" y2="280" class="ax"/><text x="540.0" y="295" class="tk" text-anchor="middle">2</text><line x1="61" y1="255.3846153846154" x2="66" y2="255.3846153846154" class="ax"/><line x1="66" y1="255.3846153846154" x2="540" y2="255.3846153846154" class="grid"/><text x="57" y="259.38461538461536" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-9</tspan></text><line x1="61" y1="196.53846153846155" x2="66" y2="196.53846153846155" class="ax"/><line x1="66" y1="196.53846153846155" x2="540" y2="196.53846153846155" class="grid"/><text x="57" y="200.53846153846155" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-6</tspan></text><line x1="61" y1="137.6923076923077" x2="66" y2="137.6923076923077" class="ax"/><line x1="66" y1="137.6923076923077" x2="540" y2="137.6923076923077" class="grid"/><text x="57" y="141.6923076923077" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-3</tspan></text><line x1="61" y1="78.84615384615384" x2="66" y2="78.84615384615384" class="ax"/><line x1="66" y1="78.84615384615384" x2="540" y2="78.84615384615384" class="grid"/><text x="57" y="82.84615384615384" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">0</tspan></text><line x1="61" y1="20.0" x2="66" y2="20.0" class="ax"/><line x1="66" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="57" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">3</tspan></text><text x="303.0" y="314" class="lab" text-anchor="middle">Điện áp thuận (V)</text><text x="14" y="147.5" class="lab" text-anchor="middle" transform="rotate(-90 14 147.5)">Mật độ dòng (A/cm²)</text><path d="M127.6,274.7 L132.4,268.4 L137.1,262.1 L141.8,255.9 L146.6,249.6 L151.3,243.3 L156.1,237.0 L160.8,230.8 L165.5,224.5 L170.3,218.2 L175.0,211.9 L179.8,205.7 L184.5,199.4 L189.2,193.1 L194.0,186.8 L198.7,180.5 L203.5,174.3 L208.2,168.0 L212.9,161.7 L217.7,155.4 L222.4,149.2 L227.2,142.9 L231.9,136.6 L236.6,130.3 L241.4,124.1 L246.1,117.8 L250.9,111.5 L255.6,105.3 L260.3,99.1 L265.1,93.0 L269.8,87.0 L274.6,81.3 L279.3,76.0 L284.0,71.3 L288.8,67.3 L293.5,64.0 L298.3,61.2 L303.0,58.9 L307.7,56.9 L312.5,55.2 L317.2,53.7 L322.0,52.4 L326.7,51.2 L331.4,50.2 L336.2,49.2 L340.9,48.4 L345.7,47.6 L350.4,46.8 L355.1,46.2 L359.9,45.5 L364.6,44.9 L369.4,44.4 L374.1,43.8 L378.8,43.3 L383.6,42.9 L388.3,42.4 L393.1,42.0 L397.8,41.6 L402.5,41.2 L407.3,40.8 L412.0,40.4 L416.8,40.1 L421.5,39.8 L426.2,39.4 L431.0,39.1 L435.7,38.8 L440.5,38.5 L445.2,38.3 L449.9,38.0 L454.7,37.7 L459.4,37.5 L464.2,37.2 L468.9,37.0 L473.6,36.7 L478.4,36.5 L483.1,36.3 L487.9,36.1 L492.6,35.8 L497.3,35.6 L502.1,35.4 L506.8,35.2 L511.6,35.0 L516.3,34.8 L521.0,34.7 L525.8,34.5 L530.5,34.3 L535.3,34.1 L540.0,33.9" class="s1" fill="none"/><text x="303.0" y="206.3" class="ns">Φ<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 1,2 eV, n = 1,05, R<tspan dy="3" style="font-size:9px">on</tspan><tspan dy="-3"> </tspan>= 5 mΩ·cm²</text><text x="303.0" y="235.8" class="ns">phát xạ nhiệt điện tử + điện trở nối tiếp</text></svg><figcaption>Hình 2. Đặc tuyến thuận điển hình của diode Schottky Ga₂O₃ theo phát xạ nhiệt điện tử với điện trở nối tiếp (tính giải tích để minh họa).</figcaption></figure>
+
+<h2 id="v-s6">6. Bổ sung cho tiếp xúc Schottky</h2>
+<ul>
+<li><strong>Hạ rào do lực ảnh</strong>: bật mô hình hạ rào cho điện cực anode trong một khối <code>Physics (Electrode = "anode") { ... }</code>; quan trọng khi mô phỏng dòng rò ngược.</li>
+<li><strong>Xuyên hầm qua rào</strong>: dùng mô hình xuyên hầm phi cục bộ (khai báo lưới phi cục bộ trong <code>Math</code> và bật xuyên hầm cho anode). Cần khi pha tạp cao hoặc điện trường lớn, nơi phát xạ nhiệt điện tử–trường chiếm ưu thế.</li>
+</ul>
+<p>Tên chính xác của các từ khóa này phụ thuộc phiên bản; tra mục "Schottky contacts" và "Tunneling" trong <em>Sentaurus Device User Guide</em>.</p>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Device User Guide</em> (đi kèm phần mềm): các chương về cấu trúc file lệnh, Schottky contacts, Quasistationary.</li>
+<li>E. H. Rhoderick, R. H. Williams, <em>Metal–Semiconductor Contacts</em>, 2nd ed., Clarendon Press (1988).</li>
+<li>S. Roy, A. Bhattacharyya, S. Krishnamoorthy, <a href="https://arxiv.org/abs/2006.15645" target="_blank" rel="noopener">arXiv:2006.15645</a> (2020) (thiết lập Sentaurus cho SBD Ga₂O₃).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Sentaurus Device (SDevice) reads the structure and mesh from SDE, solves the semiconductor equations, and writes out currents, voltages and internal distributions. The command file has a few fixed sections; understanding each is enough for most electrical simulations.</p>
+
+<h2 id="e-s1">1. A command file for the forward characteristic</h2>
+<pre><code>File {
+  Grid      = &quot;n@node|sde@_msh.tdr&quot;   * structure and mesh from SDE
+  Parameter = &quot;Ga2O3.par&quot;             * material parameters
+  Current   = &quot;n@node@_des.plt&quot;       * electrical results
+  Plot      = &quot;n@node@_des.tdr&quot;       * internal distributions
+  Output    = &quot;n@node@_des.log&quot;       * run log
+}
+
+Electrode {
+  { Name = &quot;anode&quot;   Voltage = 0.0  Schottky  Barrier = @PhiB@ }
+  { Name = &quot;cathode&quot; Voltage = 0.0 }
+}
+
+Physics {
+  Temperature = @T@
+  Fermi
+  Mobility ( DopingDependence  HighFieldSaturation )
+  Recombination ( SRH )
+}
+
+Plot {
+  eDensity  ElectricField/Vector  Potential  SpaceCharge
+  eCurrent/Vector  ConductionBandEnergy  eQuasiFermiEnergy
+  DopingConcentration
+}
+
+Math {
+  Extrapolate
+  Derivatives
+  RelErrControl
+  Digits = 5
+  Iterations = 20
+  NotDamped = 50
+  ExtendedPrecision      * helps with the tiny n_i of ultra-wide bandgap materials
+  ExitOnFailure
+}
+
+Solve {
+  * 1. Equilibrium: Poisson only, then add electrons
+  Coupled ( Iterations = 100 ) { Poisson }
+  Coupled { Poisson Electron }
+
+  * 2. Forward sweep of the anode from 0 to 2 V
+  Quasistationary (
+    InitialStep = 1e-3  MinStep = 1e-6  MaxStep = 0.05
+    Goal { Name = &quot;anode&quot; Voltage = 2.0 }
+  ) { Coupled { Poisson Electron } }
+}</code></pre>
+
+<h2 id="e-s2">2. What each section does</h2>
+<div class="tablewrap"><table>
+<tr><th>Section</th><th>Purpose</th></tr>
+<tr><td><code>File</code></td><td>Input/output file names. <code>@node|sde@</code> picks the structure of the current experiment.</td></tr>
+<tr><td><code>Electrode</code></td><td>Electrode names (matching SDE), initial voltages, contact type. <code>Schottky Barrier = 1.2</code> sets a 1.2 eV barrier; no keyword means ohmic.</td></tr>
+<tr><td><code>Physics</code></td><td>Physical models: temperature, Fermi–Dirac statistics, doping-dependent mobility with velocity saturation, SRH recombination. Can be written per region, material, interface or electrode.</td></tr>
+<tr><td><code>Plot</code></td><td>Quantities saved to the <code>.tdr</code> file to view distributions.</td></tr>
+<tr><td><code>Math</code></td><td>Numerical options: Newton iterations, precision, extrapolation between steps, stop on failure.</td></tr>
+<tr><td><code>Solve</code></td><td>The solution sequence: equilibrium first, then the voltage sweep.</td></tr>
+</table></div>
+
+<h2 id="e-s3">3. Sweeping voltage: Quasistationary</h2>
+<figure><svg viewBox="0 0 560 260" class="fig-svg" role="img"><line x1="60" y1="215" x2="540" y2="215" class="ax"/><line x1="60" y1="215" x2="60" y2="20" class="ax"/><line x1="60" y1="215" x2="60" y2="220" class="ax"/><text x="60" y="235" class="tk" text-anchor="middle">0</text><line x1="180.0" y1="215" x2="180.0" y2="220" class="ax"/><text x="180.0" y="235" class="tk" text-anchor="middle">0.25</text><line x1="300.0" y1="215" x2="300.0" y2="220" class="ax"/><text x="300.0" y="235" class="tk" text-anchor="middle">0.5</text><line x1="420.0" y1="215" x2="420.0" y2="220" class="ax"/><text x="420.0" y="235" class="tk" text-anchor="middle">0.75</text><line x1="540" y1="215" x2="540" y2="220" class="ax"/><text x="540" y="235" class="tk" text-anchor="middle">1</text><line x1="55" y1="215.0" x2="60" y2="215.0" class="ax"/><line x1="60" y1="215.0" x2="540" y2="215.0" class="grid"/><text x="51" y="219.0" class="tk" text-anchor="end">0</text><line x1="55" y1="166.25" x2="60" y2="166.25" class="ax"/><line x1="60" y1="166.25" x2="540" y2="166.25" class="grid"/><text x="51" y="170.25" class="tk" text-anchor="end">0.5</text><line x1="55" y1="117.5" x2="60" y2="117.5" class="ax"/><line x1="60" y1="117.5" x2="540" y2="117.5" class="grid"/><text x="51" y="121.5" class="tk" text-anchor="end">1</text><line x1="55" y1="68.75" x2="60" y2="68.75" class="ax"/><line x1="60" y1="68.75" x2="540" y2="68.75" class="grid"/><text x="51" y="72.75" class="tk" text-anchor="end">1.5</text><line x1="55" y1="20.0" x2="60" y2="20.0" class="ax"/><line x1="60" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="51" y="24.0" class="tk" text-anchor="end">2</text><text x="300.0" y="254" class="lab" text-anchor="middle">Quasistationary time variable t</text><text x="14" y="117.5" class="lab" text-anchor="middle" transform="rotate(-90 14 117.5)">Anode voltage (V)</text><path d="M60.0,215.0 L540.0,20.0" class="s1" fill="none"/><circle cx="60.0" cy="215.0" r="4" class="atom"/><circle cx="64.8" cy="213.1" r="4" class="atom"/><circle cx="74.4" cy="209.2" r="4" class="atom"/><circle cx="93.6" cy="201.3" r="4" class="atom"/><circle cx="132.0" cy="185.8" r="4" class="atom"/><circle cx="208.8" cy="154.5" r="4" class="atom"/><circle cx="304.8" cy="115.5" r="4" class="atom"/><circle cx="328.8" cy="105.8" r="4" class="atom"/><circle cx="352.8" cy="96.0" r="4" class="atom"/><circle cx="376.8" cy="86.3" r="4" class="atom"/><circle cx="400.8" cy="76.5" r="4" class="atom"/><circle cx="424.8" cy="66.8" r="4" class="atom"/><circle cx="448.8" cy="57.0" r="4" class="atom"/><circle cx="472.8" cy="47.3" r="4" class="atom"/><circle cx="496.8" cy="37.5" r="4" class="atom"/><circle cx="520.8" cy="27.8" r="4" class="atom"/><circle cx="540.0" cy="20.0" r="4" class="atom"/><text x="84.0" y="39.5" class="ns">V(t) = V₀ + t·(Goal − V₀); adaptive steps</text></svg><figcaption>Figure 1. Quasistationary takes the voltage from its initial value to the Goal as a variable t goes from 0 to 1, with adaptive steps.</figcaption></figure>
+<p>Quasistationary ramps a virtual "time" \(t\) from 0 to 1, and the electrode voltage moves linearly from its initial value to the <code>Goal</code>. The step starts at <code>InitialStep</code>; if convergence is good the step grows (up to <code>MaxStep</code>); if not, it shrinks (down to <code>MinStep</code>, beyond which the simulation stops). With <code>MaxStep = 0.05</code> over a 0–2 V sweep, the largest point spacing is 0.1 V.</p>
+
+<h2 id="e-s4">4. Which equations to solve</h2>
+<p>In Ga₂O₃ only electrons conduct; the hole density is practically zero. Adding the hole equation (<code>Hole</code>) adds nothing to the forward characteristic but makes the simulation less stable. Add <code>Hole</code> only for impact ionization, UV illumination, or junctions with p-type materials such as NiO.</p>
+
+<h2 id="e-s5">5. Reading the results</h2>
+<ul>
+<li><code>n*_des.plt</code>: columns such as <code>anode OuterVoltage</code> and <code>anode TotalCurrent</code>. Current is in A/µm (2D, per µm of depth); divide by the anode width for current density, or use an area factor in <code>Physics</code> or cylindrical symmetry.</li>
+<li><code>n*_des.tdr</code>: field, electron density and band diagrams at the end of each solve (more snapshots can be requested with <code>Plot</code> commands inside <code>Solve</code>).</li>
+</ul>
+<figure><svg viewBox="0 0 560 320" class="fig-svg" role="img"><line x1="66" y1="275" x2="540" y2="275" class="ax"/><line x1="66" y1="275" x2="66" y2="20" class="ax"/><line x1="66.0" y1="275" x2="66.0" y2="280" class="ax"/><text x="66.0" y="295" class="tk" text-anchor="middle">0</text><line x1="184.5" y1="275" x2="184.5" y2="280" class="ax"/><text x="184.5" y="295" class="tk" text-anchor="middle">0.5</text><line x1="303.0" y1="275" x2="303.0" y2="280" class="ax"/><text x="303.0" y="295" class="tk" text-anchor="middle">1</text><line x1="421.5" y1="275" x2="421.5" y2="280" class="ax"/><text x="421.5" y="295" class="tk" text-anchor="middle">1.5</text><line x1="540.0" y1="275" x2="540.0" y2="280" class="ax"/><text x="540.0" y="295" class="tk" text-anchor="middle">2</text><line x1="61" y1="255.3846153846154" x2="66" y2="255.3846153846154" class="ax"/><line x1="66" y1="255.3846153846154" x2="540" y2="255.3846153846154" class="grid"/><text x="57" y="259.38461538461536" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-9</tspan></text><line x1="61" y1="196.53846153846155" x2="66" y2="196.53846153846155" class="ax"/><line x1="66" y1="196.53846153846155" x2="540" y2="196.53846153846155" class="grid"/><text x="57" y="200.53846153846155" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-6</tspan></text><line x1="61" y1="137.6923076923077" x2="66" y2="137.6923076923077" class="ax"/><line x1="66" y1="137.6923076923077" x2="540" y2="137.6923076923077" class="grid"/><text x="57" y="141.6923076923077" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-3</tspan></text><line x1="61" y1="78.84615384615384" x2="66" y2="78.84615384615384" class="ax"/><line x1="66" y1="78.84615384615384" x2="540" y2="78.84615384615384" class="grid"/><text x="57" y="82.84615384615384" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">0</tspan></text><line x1="61" y1="20.0" x2="66" y2="20.0" class="ax"/><line x1="66" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="57" y="24.0" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">3</tspan></text><text x="303.0" y="314" class="lab" text-anchor="middle">Forward voltage (V)</text><text x="14" y="147.5" class="lab" text-anchor="middle" transform="rotate(-90 14 147.5)">Current density (A/cm²)</text><path d="M127.6,274.7 L132.4,268.4 L137.1,262.1 L141.8,255.9 L146.6,249.6 L151.3,243.3 L156.1,237.0 L160.8,230.8 L165.5,224.5 L170.3,218.2 L175.0,211.9 L179.8,205.7 L184.5,199.4 L189.2,193.1 L194.0,186.8 L198.7,180.5 L203.5,174.3 L208.2,168.0 L212.9,161.7 L217.7,155.4 L222.4,149.2 L227.2,142.9 L231.9,136.6 L236.6,130.3 L241.4,124.1 L246.1,117.8 L250.9,111.5 L255.6,105.3 L260.3,99.1 L265.1,93.0 L269.8,87.0 L274.6,81.3 L279.3,76.0 L284.0,71.3 L288.8,67.3 L293.5,64.0 L298.3,61.2 L303.0,58.9 L307.7,56.9 L312.5,55.2 L317.2,53.7 L322.0,52.4 L326.7,51.2 L331.4,50.2 L336.2,49.2 L340.9,48.4 L345.7,47.6 L350.4,46.8 L355.1,46.2 L359.9,45.5 L364.6,44.9 L369.4,44.4 L374.1,43.8 L378.8,43.3 L383.6,42.9 L388.3,42.4 L393.1,42.0 L397.8,41.6 L402.5,41.2 L407.3,40.8 L412.0,40.4 L416.8,40.1 L421.5,39.8 L426.2,39.4 L431.0,39.1 L435.7,38.8 L440.5,38.5 L445.2,38.3 L449.9,38.0 L454.7,37.7 L459.4,37.5 L464.2,37.2 L468.9,37.0 L473.6,36.7 L478.4,36.5 L483.1,36.3 L487.9,36.1 L492.6,35.8 L497.3,35.6 L502.1,35.4 L506.8,35.2 L511.6,35.0 L516.3,34.8 L521.0,34.7 L525.8,34.5 L530.5,34.3 L535.3,34.1 L540.0,33.9" class="s1" fill="none"/><text x="303.0" y="206.3" class="ns">Φ<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 1.2 eV, n = 1.05, R<tspan dy="3" style="font-size:9px">on</tspan><tspan dy="-3"> </tspan>= 5 mΩ·cm²</text><text x="303.0" y="235.8" class="ns">thermionic emission + series resistance</text></svg><figcaption>Figure 2. A typical forward characteristic of a Ga₂O₃ Schottky diode from thermionic emission with series resistance (computed analytically for illustration).</figcaption></figure>
+
+<h2 id="e-s6">6. Additions for Schottky contacts</h2>
+<ul>
+<li><strong>Image-force barrier lowering</strong>: enable barrier lowering for the anode in a <code>Physics (Electrode = "anode") { ... }</code> block; important when simulating reverse leakage.</li>
+<li><strong>Tunneling through the barrier</strong>: use the nonlocal tunneling model (declare a nonlocal mesh in <code>Math</code> and enable tunneling at the anode). Needed at high doping or high fields, where thermionic-field emission dominates.</li>
+</ul>
+<p>The exact keywords depend on the version; look up "Schottky contacts" and "Tunneling" in the <em>Sentaurus Device User Guide</em>.</p>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Device User Guide</em> (shipped with the software): chapters on command file structure, Schottky contacts and Quasistationary.</li>
+<li>E. H. Rhoderick, R. H. Williams, <em>Metal–Semiconductor Contacts</em>, 2nd ed., Clarendon Press (1988).</li>
+<li>S. Roy, A. Bhattacharyya, S. Krishnamoorthy, <a href="https://arxiv.org/abs/2006.15645" target="_blank" rel="noopener">arXiv:2006.15645</a> (2020) (Sentaurus setup for a Ga₂O₃ SBD).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-sde.html">← <span class="l-vi">Dựng cấu trúc với Structure Editor</span><span class="l-en">Building structures with Structure Editor</span></a><a class="n" href="tcad-ga2o3-material.html"><span class="l-vi">Tham số vật liệu Ga₂O₃ và hiệu chỉnh</span><span class="l-en">Ga₂O₃ material parameters and calibration</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

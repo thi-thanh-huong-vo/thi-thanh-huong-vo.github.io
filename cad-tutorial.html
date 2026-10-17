@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thực hành: mask diode Schottky và TLM" data-title-en="Hands-on: a Schottky diode and TLM mask">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hands-on: a Schottky diode and TLM mask · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Step by step: a two-layer 2 × 2 mm die with exact coordinates, alignment marks and a die array.">
+<meta property="og:title" content="Hands-on: a Schottky diode and TLM mask">
+<meta property="og:description" content="Step by step: a two-layer 2 × 2 mm die with exact coordinates, alignment marks and a die array.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="autocad.html"><span class="l-vi">AutoCAD cho thiết kế mask</span><span class="l-en">AutoCAD for Mask Design</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 1</span><span class="l-en">Part 3 · Lesson 1</span></p>
+  <h1><span class="l-vi">Thực hành: mask diode Schottky và TLM</span><span class="l-en">Hands-on: a Schottky diode and TLM mask</span></h1>
+  <p class="sub"><span class="l-vi">Từng bước vẽ die 2 × 2 mm hai lớp với tọa độ chính xác, dấu căn chỉnh và mảng die.</span><span class="l-en">Step by step: a two-layer 2 × 2 mm die with exact coordinates, alignment marks and a die array.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Bài thực hành này đi từng bước để vẽ một die 2 × 2 mm gồm hai lớp mask cho diode Schottky và cấu trúc TLM trên Ga₂O₃. Mọi kích thước là µm, mọi tọa độ được gõ trực tiếp, nên bạn có thể làm theo chính xác và so với hình kết quả.</p>
+
+<figure><svg viewBox="0 0 620 380" class="fig-svg" role="img"><rect x="20.0" y="40.0" width="300.0" height="300.0" style="fill:none;stroke:var(--ink);stroke-dasharray:5 4"/><rect x="50.0" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="66.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="84.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="105.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="132.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="171.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><circle cx="80.0" cy="220.0" r="7.5" style="fill:var(--accent);opacity:.8"/><circle cx="140.0" cy="220.0" r="15.0" style="fill:var(--accent);opacity:.8"/><circle cx="222.5" cy="220.0" r="22.5" style="fill:var(--accent);opacity:.8"/><rect x="50.0" y="280.0" width="240.0" height="22.5" style="fill:#d0812f;opacity:.75"/><path d="M33.5,58.0H51.5M42.5,67.0V49.0" style="stroke:#d0812f;stroke-width:3"/><rect x="35.3" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="35.3" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="43.7" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="43.7" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><path d="M288.5,58.0H306.5M297.5,67.0V49.0" style="stroke:#d0812f;stroke-width:3"/><rect x="290.3" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="290.3" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="298.7" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="298.7" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><text x="170.0" y="26.0" class="ns" text-anchor="middle">Die 2 × 2 mm, gốc (0,0) ở góc dưới trái</text><text x="104.0" y="127.0" class="ns" text-anchor="middle">TLM: khe 10–160 µm (lớp 1)</text><text x="147.5" y="262.0" class="ns" text-anchor="middle">Anode Schottky Ø100/200/300 µm (lớp 2)</text><text x="170.0" y="295.0" class="ns" text-anchor="middle">Pad ohmic lớn (lớp 1)</text><rect x="355" y="60" width="18" height="18" style="fill:#d0812f;opacity:.75"/><text x="381" y="74" class="tk">Lớp 1 OHMIC (Ti/Au)</text><rect x="355" y="92" width="18" height="18" style="fill:var(--accent);opacity:.8"/><text x="381" y="106" class="tk">Lớp 2 SCHOTTKY (Ni/Au)</text><path d="M358,140H370M364,134V146" style="stroke:#d0812f;stroke-width:3"/><text x="381" y="144" class="tk">Dấu căn chỉnh hai góc</text><text x="355" y="190" class="ns">Kích thước không theo tỉ lệ cho chữ;</text><text x="355" y="206" class="ns">hình học đúng tỉ lệ 1 px = 6,7 µm</text></svg><figcaption>Hình 1. Kết quả của bài thực hành: die 2 × 2 mm với lớp OHMIC (cam) và lớp SCHOTTKY (tím).</figcaption></figure>
+
+<div class="box"><p class="t">Trước khi bắt đầu</p>
+<p>Tắt Dynamic Input (F12) để mọi tọa độ gõ vào là tuyệt đối, trừ khi có dấu <code>@</code>. Nếu muốn giữ Dynamic Input, thêm <code>#</code> trước tọa độ tuyệt đối. Sau mỗi lệnh, dùng <code>Z</code> → <code>E</code> để xem toàn bộ.</p></div>
+
+<h2 id="v-s1">Bước 1. Đơn vị và layer</h2>
+<pre><code>UNITS   → Decimal, Precision 0.000, Insertion scale: Microns
+LA      → tạo các layer:
+          0_FRAME     (màu xám)
+          1_OHMIC     (màu cam)
+          2_SCHOTTKY  (màu xanh)
+          DIM         (màu trắng, cho kích thước)</code></pre>
+
+<h2 id="v-s2">Bước 2. Khung die (layer 0_FRAME)</h2>
+<p>Đặt <code>0_FRAME</code> làm layer hiện hành (chọn trong danh sách layer trên Ribbon), rồi:</p>
+<pre><code>REC
+  first corner: 0,0
+  other corner: @2000,2000</code></pre>
+<p>Khung chỉ để tham chiếu; gốc (0,0) ở góc dưới trái die.</p>
+
+<h2 id="v-s3">Bước 3. Cấu trúc TLM (layer 1_OHMIC)</h2>
+<p>Pad 100 × 200 µm, khoảng cách giữa các pad 10, 20, 40, 80, 160 µm. Vẽ pad đầu tiên:</p>
+<pre><code>REC
+  first corner: 200,1500
+  other corner: @100,200</code></pre>
+<p>Tọa độ x góc trái của các pad tiếp theo: 310, 430, 570, 750, 1010 (mỗi pad cách pad trước một khoảng bằng khe cộng 100 µm chiều rộng pad). Sao chép:</p>
+<pre><code>COPY
+  select objects: (chọn pad vừa vẽ)  Enter
+  base point: 200,1500
+  second point: 310,1500
+  second point: 430,1500
+  second point: 570,1500
+  second point: 750,1500
+  second point: 1010,1500   Enter</code></pre>
+<p>Kiểm tra bằng <code>DIST</code> giữa cạnh phải pad thứ nhất (300,1600) và cạnh trái pad thứ hai (310,1600): phải đúng 10 µm.</p>
+
+<h2 id="v-s4">Bước 4. Pad ohmic lớn (layer 1_OHMIC)</h2>
+<pre><code>REC
+  first corner: 200,250
+  other corner: @1600,150</code></pre>
+
+<h2 id="v-s5">Bước 5. Anode Schottky (layer 2_SCHOTTKY)</h2>
+<p>Đổi layer hiện hành sang <code>2_SCHOTTKY</code>. Vẽ ba anode tròn bằng đa giác 64 cạnh để kiểm soát hình dạng:</p>
+<pre><code>POLYGON
+  number of sides: 64
+  center: 400,800
+  Inscribed in circle
+  radius: 50            (đường kính 100 µm)
+POLYGON → 64, center 800,800,  I, radius 100   (Ø200 µm)
+POLYGON → 64, center 1350,800, I, radius 150   (Ø300 µm)</code></pre>
+
+<h2 id="v-s6">Bước 6. Dấu căn chỉnh</h2>
+<p>Đổi layer hiện hành về <code>1_OHMIC</code>. <strong>Lớp 1: chữ thập</strong> tâm (150, 1880), tay dài 120 µm, rộng 10 µm, vẽ bằng một polyline kín 12 đỉnh:</p>
+<pre><code>PLINE
+  start point: 145,1820
+  @10,0   @0,55   @55,0   @0,10   @-55,0  @0,55
+  @-10,0  @0,-55  @-55,0  @0,-10  @55,0
+  C        (Close)</code></pre>
+<p>Đổi layer hiện hành sang <code>2_SCHOTTKY</code>. <strong>Lớp 2: bốn ô vuông</strong> 40 × 40 µm, cách cạnh tay chữ thập 3 µm:</p>
+<pre><code>REC 158,1883  @40,40
+REC 102,1883  @40,40
+REC 102,1837  @40,40
+REC 158,1837  @40,40</code></pre>
+<p>Sao chép cả chữ thập và bốn ô sang góc phải của die:</p>
+<pre><code>COPY → chọn chữ thập + 4 ô → base point 0,0 → second point 1700,0</code></pre>
+
+<h2 id="v-s7">Bước 7. Kiểm tra</h2>
+<ol>
+<li><code>LIST</code> một vài đối tượng: phải thấy <em>Closed</em>.</li>
+<li><code>QSELECT</code> → Object type: Polyline, Property: Closed, Operator: = Equals, Value: No → không có đối tượng nào được chọn.</li>
+<li>Tắt lần lượt từng layer để xem riêng lớp 1 và lớp 2.</li>
+</ol>
+
+<h2 id="v-s8">Bước 8. Lặp die thành mảng</h2>
+<p>Gom die thành block rồi lặp cho vừa mẫu 6 × 6 mm:</p>
+<pre><code>BLOCK
+  name: DIE_A
+  base point: 0,0
+  select objects: (chọn mọi đối tượng của die)
+INSERT → DIE_A tại 0,0
+ARRAYRECT
+  select: DIE_A
+  COUnt: 3 cột, 3 hàng
+  Spacing: 2000, 2000
+  ASsociative: No</code></pre>
+<p>Cuối cùng lưu file <code>.dwg</code> gốc, rồi xuất DXF theo bài tiếp theo.</p>
+
+<h2 id="v-s9">Gợi ý mở rộng</h2>
+<ul>
+<li>Thêm vành bảo vệ (guard ring) quanh anode bằng <code>OFFSET</code> trên một layer mới.</li>
+<li>Thêm mẫu độ phân giải và thước vernier ở khoảng trống của die.</li>
+<li>Với TLM tròn (CTLM), vẽ đĩa trong bằng POLYGON và vành ngoài bằng hai đa giác lồng nhau (xem bài quy tắc vẽ).</li>
+</ul>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Đây là bộ mask điển hình cho nghiên cứu diode Schottky Ga₂O₃: lớp ohmic (Ti/Au, ủ nhiệt) đi trước, lớp Schottky (Ni/Au hoặc Pt/Au) đi sau để tránh làm hỏng mặt phân cách Schottky khi ủ. Ba kích thước anode cho phép tách dòng rò theo diện tích và theo chu vi.</p></div>
+
+<h2 id="v-s10">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Autodesk, <a href="https://help.autodesk.com/view/ACD/2024/ENU/" target="_blank" rel="noopener">AutoCAD Help</a> (RECTANG, COPY, POLYGON, PLINE, ARRAYRECT, BLOCK, QSELECT).</li>
+<li>EPFL CMi, <a href="https://www.epfl.ch/research/facilities/cmi/process/photolithography/layout-design" target="_blank" rel="noopener">Layout design guidelines</a>.</li>
+<li>H. H. Berger, "Models for contacts to planar devices," <em>Solid-State Electronics</em> 15, 145 (1972) (thiết kế TLM).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">This hands-on lesson walks step by step through drawing a 2 × 2 mm die with two mask layers for Schottky diodes and TLM structures on Ga₂O₃. All dimensions are in µm and every coordinate is typed, so you can follow exactly and compare with the result figure.</p>
+
+<figure><svg viewBox="0 0 620 380" class="fig-svg" role="img"><rect x="20.0" y="40.0" width="300.0" height="300.0" style="fill:none;stroke:var(--ink);stroke-dasharray:5 4"/><rect x="50.0" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="66.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="84.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="105.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="132.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><rect x="171.5" y="85.0" width="15.0" height="30.0" style="fill:#d0812f;opacity:.75"/><circle cx="80.0" cy="220.0" r="7.5" style="fill:var(--accent);opacity:.8"/><circle cx="140.0" cy="220.0" r="15.0" style="fill:var(--accent);opacity:.8"/><circle cx="222.5" cy="220.0" r="22.5" style="fill:var(--accent);opacity:.8"/><rect x="50.0" y="280.0" width="240.0" height="22.5" style="fill:#d0812f;opacity:.75"/><path d="M33.5,58.0H51.5M42.5,67.0V49.0" style="stroke:#d0812f;stroke-width:3"/><rect x="35.3" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="35.3" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="43.7" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="43.7" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><path d="M288.5,58.0H306.5M297.5,67.0V49.0" style="stroke:#d0812f;stroke-width:3"/><rect x="290.3" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="290.3" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="298.7" y="59.2" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><rect x="298.7" y="50.8" width="6.0" height="6.0" style="fill:var(--accent);opacity:.8"/><text x="170.0" y="26.0" class="ns" text-anchor="middle">2 × 2 mm die, origin (0,0) at lower left</text><text x="104.0" y="127.0" class="ns" text-anchor="middle">TLM: gaps 10–160 µm (layer 1)</text><text x="147.5" y="262.0" class="ns" text-anchor="middle">Schottky anodes Ø100/200/300 µm (layer 2)</text><text x="170.0" y="295.0" class="ns" text-anchor="middle">Large ohmic pad (layer 1)</text><rect x="355" y="60" width="18" height="18" style="fill:#d0812f;opacity:.75"/><text x="381" y="74" class="tk">Layer 1 OHMIC (Ti/Au)</text><rect x="355" y="92" width="18" height="18" style="fill:var(--accent);opacity:.8"/><text x="381" y="106" class="tk">Layer 2 SCHOTTKY (Ni/Au)</text><path d="M358,140H370M364,134V146" style="stroke:#d0812f;stroke-width:3"/><text x="381" y="144" class="tk">Alignment marks at two corners</text><text x="355" y="190" class="ns">Not to scale for text;</text><text x="355" y="206" class="ns">geometry at 1 px = 6.7 µm</text></svg><figcaption>Figure 1. The result of this exercise: a 2 × 2 mm die with an OHMIC layer (orange) and a SCHOTTKY layer (purple).</figcaption></figure>
+
+<div class="box"><p class="t">Before you start</p>
+<p>Turn off Dynamic Input (F12) so every typed coordinate is absolute unless prefixed with <code>@</code>. If you keep Dynamic Input on, prefix absolute coordinates with <code>#</code>. After each command, use <code>Z</code> → <code>E</code> to see everything.</p></div>
+
+<h2 id="e-s1">Step 1. Units and layers</h2>
+<pre><code>UNITS   → Decimal, Precision 0.000, Insertion scale: Microns
+LA      → create layers:
+          0_FRAME     (gray)
+          1_OHMIC     (orange)
+          2_SCHOTTKY  (blue)
+          DIM         (white, for dimensions)</code></pre>
+
+<h2 id="e-s2">Step 2. Die frame (layer 0_FRAME)</h2>
+<p>Make <code>0_FRAME</code> current (pick it in the Ribbon's layer list), then:</p>
+<pre><code>REC
+  first corner: 0,0
+  other corner: @2000,2000</code></pre>
+<p>The frame is for reference only; the origin (0,0) is the die's lower-left corner.</p>
+
+<h2 id="e-s3">Step 3. TLM structure (layer 1_OHMIC)</h2>
+<p>100 × 200 µm pads with spacings of 10, 20, 40, 80 and 160 µm. Draw the first pad:</p>
+<pre><code>REC
+  first corner: 200,1500
+  other corner: @100,200</code></pre>
+<p>Left-edge x coordinates of the following pads: 310, 430, 570, 750, 1010 (each pad sits one gap plus the 100 µm pad width after the previous one). Copy:</p>
+<pre><code>COPY
+  select objects: (pick the pad)  Enter
+  base point: 200,1500
+  second point: 310,1500
+  second point: 430,1500
+  second point: 570,1500
+  second point: 750,1500
+  second point: 1010,1500   Enter</code></pre>
+<p>Check with <code>DIST</code> between the right edge of pad 1 (300,1600) and the left edge of pad 2 (310,1600): it must be exactly 10 µm.</p>
+
+<h2 id="e-s4">Step 4. Large ohmic pad (layer 1_OHMIC)</h2>
+<pre><code>REC
+  first corner: 200,250
+  other corner: @1600,150</code></pre>
+
+<h2 id="e-s5">Step 5. Schottky anodes (layer 2_SCHOTTKY)</h2>
+<p>Make <code>2_SCHOTTKY</code> current. Draw three round anodes as 64-sided polygons for controlled shape:</p>
+<pre><code>POLYGON
+  number of sides: 64
+  center: 400,800
+  Inscribed in circle
+  radius: 50            (100 µm diameter)
+POLYGON → 64, center 800,800,  I, radius 100   (Ø200 µm)
+POLYGON → 64, center 1350,800, I, radius 150   (Ø300 µm)</code></pre>
+
+<h2 id="e-s6">Step 6. Alignment marks</h2>
+<p>Make <code>1_OHMIC</code> current again. <strong>Layer 1: a cross</strong> centered at (150, 1880), arms 120 µm long and 10 µm wide, drawn as one closed 12-vertex polyline:</p>
+<pre><code>PLINE
+  start point: 145,1820
+  @10,0   @0,55   @55,0   @0,10   @-55,0  @0,55
+  @-10,0  @0,-55  @-55,0  @0,-10  @55,0
+  C        (Close)</code></pre>
+<p>Make <code>2_SCHOTTKY</code> current. <strong>Layer 2: four squares</strong> 40 × 40 µm, 3 µm from the cross arms:</p>
+<pre><code>REC 158,1883  @40,40
+REC 102,1883  @40,40
+REC 102,1837  @40,40
+REC 158,1837  @40,40</code></pre>
+<p>Copy the cross and the four squares to the die's right corner:</p>
+<pre><code>COPY → pick the cross + 4 squares → base point 0,0 → second point 1700,0</code></pre>
+
+<h2 id="e-s7">Step 7. Check</h2>
+<ol>
+<li><code>LIST</code> a few objects: you should see <em>Closed</em>.</li>
+<li><code>QSELECT</code> → Object type: Polyline, Property: Closed, Operator: = Equals, Value: No → nothing should be selected.</li>
+<li>Turn layers off one at a time to view layer 1 and layer 2 alone.</li>
+</ol>
+
+<h2 id="e-s8">Step 8. Array the die</h2>
+<p>Turn the die into a block and repeat it to fill a 6 × 6 mm sample:</p>
+<pre><code>BLOCK
+  name: DIE_A
+  base point: 0,0
+  select objects: (all objects of the die)
+INSERT → DIE_A at 0,0
+ARRAYRECT
+  select: DIE_A
+  COUnt: 3 columns, 3 rows
+  Spacing: 2000, 2000
+  ASsociative: No</code></pre>
+<p>Finally save the original <code>.dwg</code>, then export DXF as in the next lesson.</p>
+
+<h2 id="e-s9">Ideas to extend</h2>
+<ul>
+<li>Add a guard ring around each anode with <code>OFFSET</code> on a new layer.</li>
+<li>Add resolution patterns and verniers in the empty die area.</li>
+<li>For a circular TLM (CTLM), draw the inner disk with POLYGON and the outer ring with two nested polygons (see the drawing rules lesson).</li>
+</ul>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>This is a typical mask set for Ga₂O₃ Schottky diode research: the ohmic layer (Ti/Au, annealed) comes first and the Schottky layer (Ni/Au or Pt/Au) second, so annealing does not damage the Schottky interface. Three anode sizes let you separate area-related and perimeter-related leakage.</p></div>
+
+<h2 id="e-s10">References</h2>
+<ol class="refs">
+<li>Autodesk, <a href="https://help.autodesk.com/view/ACD/2024/ENU/" target="_blank" rel="noopener">AutoCAD Help</a> (RECTANG, COPY, POLYGON, PLINE, ARRAYRECT, BLOCK, QSELECT).</li>
+<li>EPFL CMi, <a href="https://www.epfl.ch/research/facilities/cmi/process/photolithography/layout-design" target="_blank" rel="noopener">Layout design guidelines</a>.</li>
+<li>H. H. Berger, "Models for contacts to planar devices," <em>Solid-State Electronics</em> 15, 145 (1972) (TLM design).</li>
+</ol>
+</div>
+<nav class="pager"><a href="cad-drawing-rules.html">← <span class="l-vi">Quy tắc vẽ để mask in đúng</span><span class="l-en">Drawing rules for a correct mask</span></a><a class="n" href="cad-export.html"><span class="l-vi">Xuất DXF, chuyển GDSII và đặt mask</span><span class="l-en">Export DXF, convert to GDSII and order</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

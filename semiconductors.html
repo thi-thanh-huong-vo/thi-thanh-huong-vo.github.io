@@ -78,12 +78,27 @@
   .topic .td{margin:0;text-align:left;color:var(--muted);font-size:.95rem}
   .topic .tm{margin:.6rem 0 0;font-size:.85rem;font-weight:600;color:var(--accent)}
   .topic.soon{opacity:.6}
+</style><style>
+  .ls-search{margin:1.25rem 0 1.75rem}
+  .ls-search input{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;padding:.8rem 1rem;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink)}
+  .ls-search input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .ls-results{display:grid;gap:.5rem;margin-top:.6rem}
+  .ls-hit{display:block;border:1px solid var(--rule);border-radius:8px;padding:.7rem .9rem;text-decoration:none!important;color:var(--ink);text-align:left}
+  .ls-hit:hover{border-color:var(--accent)}
+  .ls-tag{display:inline-block;font-size:.72rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:.05rem .4rem;margin-right:.45rem;vertical-align:1px}
+  .ls-t{font-weight:600}.ls-h{display:block;font-size:.9rem;color:var(--accent);margin-top:.15rem}
+  .ls-x{display:block;font-size:.88rem;color:var(--muted);margin-top:.25rem;overflow-wrap:anywhere}
+  .ls-x mark{background:var(--accent-soft);color:var(--ink);font-weight:600;padding:0 .1rem;border-radius:2px}
+  .ls-none{color:var(--muted);text-align:left}
+  .res h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.2rem 0 .4rem}
+  .res ul{padding-left:1.2rem}.res li{margin-bottom:.4rem;text-align:left}
+  .topic .lock{font-size:.85rem}
 </style></head>
 <body>
 <main>
 <header>
-  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><span></span><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
-  <p class="kicker"><span class="l-vi">Từ hạt cát đến linh kiện</span><span class="l-en">From sand to devices</span></p>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="learning.html"><span class="l-vi">Learning Space</span><span class="l-en">Learning Space</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Learning Space · Thư mục 1</span><span class="l-en">Learning Space · Folder 1</span></p>
   <h1><span class="l-vi">Chào mừng đến với thế giới bán dẫn</span><span class="l-en">Welcome to Semiconductors</span></h1>
   <p class="sub"><span class="l-vi">Những kiến thức nền tảng về vật liệu, công nghệ và linh kiện bán dẫn, viết cho học viên cao học và nghiên cứu sinh.</span><span class="l-en">Foundations of semiconductor materials, processing and devices, written for graduate students and PhD researchers.</span></p>
 </header>
@@ -91,17 +106,19 @@
 
 <p class="lead">Mỗi con chip trong điện thoại của bạn bắt đầu từ một khối đá thạch anh. Hành trình từ hạt cát đến linh kiện đi qua vật lý chất rắn, hóa học, kỹ thuật vật liệu và cả kinh tế học. Trang này là nơi tôi ghi lại hành trình ấy theo cách mình hiểu, với công thức đủ chặt để dùng trong nghiên cứu và ví dụ đủ gần để dễ hình dung.</p>
 <p>Mỗi bài có phần <strong>Góc nhìn Ga₂O₃</strong>, liên hệ kiến thức nền tảng với bán dẫn vùng cấm siêu rộng (ultra-wide bandgap) mà tôi đang nghiên cứu. Thuật ngữ chuyên ngành được giữ nguyên tiếng Anh để thuận tiện tra cứu tài liệu.</p>
+<div class="ls-search" data-scope="proc,dev,nano"><input type="search" data-vi="Tìm kiếm… (vd: Deal–Grove, TLM)" data-en="Search… (e.g. Deal–Grove, TLM)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
 <div class="topics">
 <a class="topic" href="processing.html"><p class="tn">Chủ đề 1</p><p class="tt">Công nghệ chế tạo bán dẫn tiên tiến</p><p class="td">Advanced Semiconductor Processing Technology. Wafer Si, khuếch tán, cấy ion, ủ nhiệt, RTP, oxy hóa nhiệt và mô hình Deal–Grove.</p><p class="tm">17 bài · quiz 120 câu · công cụ tính oxide →</p></a>
 <a class="topic" href="devices.html"><p class="tn">Chủ đề 2</p><p class="tt">Linh kiện bán dẫn</p><p class="td">Semiconductor Devices. Electron trong chất rắn, phép đo điện, tiếp giáp pn và Schottky, MOSFET, bộ nhớ và memristor.</p><p class="tm">22 bài · quiz 100 câu →</p></a>
 <a class="topic" href="nanomaterials.html"><p class="tn">Chủ đề 3</p><p class="tt">Tính chất vật liệu nano</p><p class="td">Properties of Nanomaterials. Công nghệ nano, chế tạo từ trên xuống và từ dưới lên, dây nano, vật liệu carbon, graphene, CNT, TMD và MXene.</p><p class="tm">13 bài · quiz 65 câu →</p></a>
 </div>
-
+<script defer src="search.js?v=1"></script>
 </div>
 <div class="l-en">
 
 <p class="lead">Every chip in your phone begins as a lump of quartzite. The journey from sand to device runs through solid-state physics, chemistry, materials engineering and even economics. This is where I write that journey down as I understand it, with equations rigorous enough to use in research and examples close enough to picture.</p>
 <p>Each lesson ends with a <strong>Ga₂O₃ perspective</strong> that connects the fundamentals to the ultra-wide bandgap semiconductor I work on.</p>
+<div class="ls-search" data-scope="proc,dev,nano"><input type="search" data-vi="Tìm kiếm… (vd: Deal–Grove, TLM)" data-en="Search… (e.g. Deal–Grove, TLM)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
 <div class="topics">
 <a class="topic" href="processing.html"><p class="tn">Topic 1</p><p class="tt">Advanced Semiconductor Processing Technology</p><p class="td">Si wafers, diffusion, ion implantation, annealing, RTP, thermal oxidation and the Deal–Grove model.</p><p class="tm">17 lessons · 120-question quiz · oxide calculator →</p></a>
 <a class="topic" href="devices.html"><p class="tn">Topic 2</p><p class="tt">Semiconductor Devices</p><p class="td">Electrons in solids, electrical measurements, pn and Schottky junctions, MOSFETs, memory and memristors.</p><p class="tm">22 lessons · 100-question quiz →</p></a>

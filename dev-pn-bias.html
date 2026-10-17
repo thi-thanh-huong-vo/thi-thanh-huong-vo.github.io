@@ -78,20 +78,20 @@
 <div class="l-vi">
 <p class="lead">Khi đặt điện áp lên tiếp giáp pn, hệ không còn ở cân bằng: mức Fermi tách đôi, rào thế thay đổi, và dòng điện chạy theo một chiều dễ hơn chiều kia. Đây là tính chỉnh lưu, chức năng cơ bản của diode.</p>
 
-<h2>1. Quy ước phân cực</h2>
+<h2 id="v-s1">1. Quy ước phân cực</h2>
 <ul>
 <li><strong>Phân cực thuận</strong> (\(V = V_a > 0\), p dương hơn n): rào thế giảm còn \(V_{bi} - V_a\). Dòng lớn chạy qua, và có thể gây sụt áp đáng kể trên các vùng trung hòa do điện trở của chúng.</li>
 <li><strong>Phân cực ngược</strong> (\(V = -V_R\)): rào thế tăng lên \(V_{bi} + V_R\). Gần như toàn bộ điện áp rơi trên vùng nghèo, và chỉ có dòng ngược rất nhỏ.</li>
 </ul>
 
-<h2>2. Vẽ giản đồ năng lượng khi có phân cực</h2>
+<h2 id="v-s2">2. Vẽ giản đồ năng lượng khi có phân cực</h2>
 <ol>
 <li>Vẽ mức Fermi của hai vùng trung hòa, lệch nhau một khoảng \(qV\) (phía được đặt điện thế dương hơn có \(E_F\) thấp hơn).</li>
 <li>Đặt \(E_C\) và \(E_V\) so với \(E_F\) trong từng vùng trung hòa, giống hệt như ở cân bằng, vì nồng độ pha tạp không đổi.</li>
 <li>Nối các mép vùng của hai phía bằng đường cong trơn qua vùng nghèo; thêm mức chân không nếu cần.</li>
 </ol>
 
-<h2>3. Vùng nghèo thay đổi theo điện áp</h2>
+<h2 id="v-s3">3. Vùng nghèo thay đổi theo điện áp</h2>
 <p>Điện áp ngoài thêm vào hoặc bớt đi điện trường sẵn có. Với phân cực ngược, trường ngoài cùng chiều trường nội, nên cần thêm điện tích không gian; vì nồng độ tạp chất cố định, điện tích chỉ tăng được bằng cách mở rộng vùng nghèo, và \(E_{max}\) tăng:</p>
 $$W = \sqrt{\frac{2\varepsilon_s (V_{bi} - V)}{q}\left(\frac{1}{N_a}+\frac{1}{N_d}\right)}$$
 <p>Với ví dụ \(N_a = 10^{17}\), \(N_d = 10^{16}\) cm⁻³ ở bài trước, \(W\) tăng từ 0,336 µm lên khoảng 0,91 µm khi đặt \(V_R = 5\) V, và \(E_{max}\) tăng lên khoảng \(1{,}3\times10^{5}\) V/cm.</p>
@@ -99,7 +99,7 @@ $$W = \sqrt{\frac{2\varepsilon_s (V_{bi} - V)}{q}\left(\frac{1}{N_a}+\frac{1}{N_
 $$\frac{1}{C_j^2} = \frac{2(V_{bi} - V)}{q\varepsilon_s N_d A^2}$$
 <p>Đồ thị \(1/C^2\) theo \(V\) là đường thẳng: độ dốc cho \(N_d\), giao điểm với trục điện áp cho \(V_{bi}\). Đây là cơ sở của phép đo profile pha tạp bằng C-V.</p>
 
-<h2>4. Phương trình diode lý tưởng</h2>
+<h2 id="v-s4">4. Phương trình diode lý tưởng</h2>
 <p>Phân cực thuận làm rào thế thấp đi, hạt tải được <strong>tiêm</strong> sang phía bên kia và trở thành hạt tải thiểu số dư. Tại biên vùng nghèo, nồng độ thiểu số tăng theo hàm mũ của điện áp, ví dụ \(p_n(x_n) = p_{n0}\,e^{qV/kT}\), rồi giảm dần do tái hợp với độ dài khuếch tán \(L_p = \sqrt{D_p\tau_p}\). Dòng khuếch tán của hạt tải thiểu số cho phương trình Shockley:</p>
 $$J = J_s\left(e^{qV/kT} - 1\right), \qquad J_s = q n_i^2\left(\frac{D_n}{L_n N_a} + \frac{D_p}{L_p N_d}\right)$$
 <div class="box"><p class="t">Ví dụ</p>
@@ -109,7 +109,7 @@ $$J = J_s\left(e^{qV/kT} - 1\right), \qquad J_s = q n_i^2\left(\frac{D_n}{L_n N_
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Với \(E_g \approx 4{,}8\) eV, \(n_i\) của Ga₂O₃ ở 300 K nhỏ đến mức gần như không có ý nghĩa vật lý, nên dòng khuếch tán lý tưởng gần bằng 0. Dòng ngược thực tế của linh kiện Ga₂O₃ do các cơ chế khác chi phối: phát xạ qua bẫy, xuyên hầm hỗ trợ bởi bẫy, phát xạ nhiệt điện tử–trường. Đây chính là lý do việc phân tích cơ chế dòng rò là một chủ đề nghiên cứu riêng.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s5">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 5.</li>
 <li>W. Shockley, "The theory of p-n junctions in semiconductors and p-n junction transistors," <em>Bell System Technical Journal</em> 28, 435 (1949).</li>
@@ -118,20 +118,20 @@ $$J = J_s\left(e^{qV/kT} - 1\right), \qquad J_s = q n_i^2\left(\frac{D_n}{L_n N_
 <div class="l-en">
 <p class="lead">When a voltage is applied to a pn junction, the system leaves equilibrium: the Fermi level splits, the barrier changes, and current flows more easily in one direction than the other. This is rectification, the basic function of a diode.</p>
 
-<h2>1. Bias conventions</h2>
+<h2 id="e-s1">1. Bias conventions</h2>
 <ul>
 <li><strong>Forward bias</strong> (\(V = V_a > 0\), p more positive than n): the barrier drops to \(V_{bi} - V_a\). A large current flows and can cause significant voltage drops across the resistive neutral regions.</li>
 <li><strong>Reverse bias</strong> (\(V = -V_R\)): the barrier rises to \(V_{bi} + V_R\). Almost all the voltage drops across the depletion region, and only a very small reverse current flows.</li>
 </ul>
 
-<h2>2. Sketching the band diagram under bias</h2>
+<h2 id="e-s2">2. Sketching the band diagram under bias</h2>
 <ol>
 <li>Draw the Fermi levels of the two neutral regions, offset by \(qV\) (the side at higher potential has the lower \(E_F\)).</li>
 <li>Place \(E_C\) and \(E_V\) relative to \(E_F\) in each neutral region exactly as in equilibrium, since the doping is unchanged.</li>
 <li>Join the band edges of the two sides with smooth curves through the depletion region; add the vacuum level if needed.</li>
 </ol>
 
-<h2>3. The depletion region changes with voltage</h2>
+<h2 id="e-s3">3. The depletion region changes with voltage</h2>
 <p>The applied voltage adds to or subtracts from the built-in field. In reverse bias the external field adds to the built-in field, so more space charge is needed; since dopant concentration is fixed, charge can only increase by widening the depletion region, and \(E_{max}\) rises:</p>
 $$W = \sqrt{\frac{2\varepsilon_s (V_{bi} - V)}{q}\left(\frac{1}{N_a}+\frac{1}{N_d}\right)}$$
 <p>For the previous lesson's example (\(N_a = 10^{17}\), \(N_d = 10^{16}\) cm⁻³), \(W\) grows from 0.336 µm to about 0.91 µm at \(V_R = 5\) V, and \(E_{max}\) rises to about \(1.3\times10^{5}\) V/cm.</p>
@@ -139,7 +139,7 @@ $$W = \sqrt{\frac{2\varepsilon_s (V_{bi} - V)}{q}\left(\frac{1}{N_a}+\frac{1}{N_
 $$\frac{1}{C_j^2} = \frac{2(V_{bi} - V)}{q\varepsilon_s N_d A^2}$$
 <p>A plot of \(1/C^2\) against \(V\) is a straight line: its slope gives \(N_d\) and its voltage intercept gives \(V_{bi}\). This is the basis of C-V doping profiling.</p>
 
-<h2>4. The ideal diode equation</h2>
+<h2 id="e-s4">4. The ideal diode equation</h2>
 <p>Forward bias lowers the barrier, carriers are <strong>injected</strong> across and become excess minority carriers. At the depletion edge, the minority concentration rises exponentially with voltage, e.g. \(p_n(x_n) = p_{n0}\,e^{qV/kT}\), then decays by recombination over the diffusion length \(L_p = \sqrt{D_p\tau_p}\). The minority-carrier diffusion current gives the Shockley equation:</p>
 $$J = J_s\left(e^{qV/kT} - 1\right), \qquad J_s = q n_i^2\left(\frac{D_n}{L_n N_a} + \frac{D_p}{L_p N_d}\right)$$
 <div class="box"><p class="t">Example</p>
@@ -149,7 +149,7 @@ $$J = J_s\left(e^{qV/kT} - 1\right), \qquad J_s = q n_i^2\left(\frac{D_n}{L_n N_
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>With \(E_g \approx 4.8\) eV, the 300 K \(n_i\) of Ga₂O₃ is so small it has almost no physical meaning, so the ideal diffusion current is essentially zero. The real reverse current of Ga₂O₃ devices is governed by other mechanisms: trap emission, trap-assisted tunneling, thermionic-field emission. This is exactly why analyzing leakage mechanisms is a research topic in its own right.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s5">References</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 5.</li>
 <li>W. Shockley, "The theory of p-n junctions in semiconductors and p-n junction transistors," <em>Bell System Technical Journal</em> 28, 435 (1949).</li>

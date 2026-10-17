@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="TCAD là gì và bắt đầu với Sentaurus" data-title-en="What TCAD is and starting with Sentaurus">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What TCAD is and starting with Sentaurus · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Process and device simulation, when to trust results, the Sentaurus suite and what you need.">
+<meta property="og:title" content="What TCAD is and starting with Sentaurus">
+<meta property="og:description" content="Process and device simulation, when to trust results, the Sentaurus suite and what you need.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 1</span><span class="l-en">Part 1 · Lesson 1</span></p>
+  <h1><span class="l-vi">TCAD là gì và bắt đầu với Sentaurus</span><span class="l-en">What TCAD is and starting with Sentaurus</span></h1>
+  <p class="sub"><span class="l-vi">Mô phỏng quy trình và linh kiện, khi nào tin kết quả, bộ công cụ Sentaurus và những gì cần chuẩn bị.</span><span class="l-en">Process and device simulation, when to trust results, the Sentaurus suite and what you need.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">TCAD (Technology Computer-Aided Design) giải các phương trình vật lý bán dẫn trên một cấu trúc linh kiện ảo để dự đoán dòng, điện trường, điện dung hay điện áp đánh thủng trước khi, hoặc thay vì, chế tạo. Chủ đề này hướng dẫn người mới bắt đầu dùng Synopsys Sentaurus, công cụ TCAD phổ biến nhất trong công nghiệp và học thuật.</p>
+
+<h2 id="v-s1">1. TCAD làm được gì</h2>
+<ul>
+<li><strong>Mô phỏng quy trình</strong> (process simulation): cấy ion, khuếch tán, oxy hóa, khắc, lắng đọng, để biết cấu trúc và profile pha tạp thu được.</li>
+<li><strong>Mô phỏng linh kiện</strong> (device simulation): cho cấu trúc và pha tạp, giải phương trình Poisson và phương trình liên tục để có đặc tuyến I-V, C-V, đáp ứng quá độ, phân bố điện trường và nồng độ hạt tải bên trong.</li>
+</ul>
+<p>Giá trị lớn nhất của TCAD là <strong>nhìn vào bên trong linh kiện</strong>: thực nghiệm chỉ cho dòng và áp ở các điện cực, còn mô phỏng cho biết điện trường đạt cực đại ở đâu, bẫy nào đang nạp điện, dòng đi theo đường nào. Dùng đúng cách, TCAD giúp giải thích dữ liệu đo và thiết kế cấu trúc mới (field plate, vành bảo vệ, độ dày lớp trôi) nhanh và rẻ hơn nhiều so với chế tạo thử.</p>
+
+<h2 id="v-s2">2. Khi nào nên tin kết quả TCAD</h2>
+<p>TCAD chỉ chính xác bằng các mô hình và tham số vật liệu đưa vào. Với Si, tham số đã được hiệu chỉnh qua hàng chục năm; với vật liệu mới như Ga₂O₃, nhiều tham số (hệ số ion hóa va chạm, mô hình độ linh động, mật độ bẫy) vẫn đang được nghiên cứu. Vì vậy quy trình đúng là:</p>
+<ol>
+<li>Bắt đầu từ mô hình đơn giản nhất giải thích được hiện tượng.</li>
+<li><strong>Hiệu chỉnh</strong> (calibrate) với dữ liệu đo của chính linh kiện của bạn: ví dụ khớp I-V thuận để có chiều cao rào và điện trở nối tiếp, khớp C-V để có nồng độ pha tạp.</li>
+<li>Chỉ sau đó mới dùng mô phỏng để dự đoán hay so sánh các thiết kế.</li>
+</ol>
+
+<h2 id="v-s3">3. Bộ công cụ Sentaurus</h2>
+<figure><svg viewBox="0 0 640 200" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="20" y="50" width="170" height="80" rx="9" class="node"/><text x="105" y="80" class="nt" text-anchor="middle">SDE</text><text x="105" y="100" class="ns" text-anchor="middle">Cấu trúc + lưới</text><text x="105" y="40" class="tk" text-anchor="middle">vào: sde_dvs.cmd</text><text x="105" y="150" class="tk" text-anchor="middle">ra: n1_msh.tdr</text><path d="M192,90H232" class="arr" marker-end="url(#mv)"/><rect x="235" y="50" width="170" height="80" rx="9" class="node"/><text x="320" y="80" class="nt" text-anchor="middle">SDevice</text><text x="320" y="100" class="ns" text-anchor="middle">Giải phương trình</text><text x="320" y="40" class="tk" text-anchor="middle">vào: sdevice_des.cmd</text><text x="320" y="150" class="tk" text-anchor="middle">ra: *.plt, *.tdr</text><path d="M407,90H447" class="arr" marker-end="url(#mv)"/><rect x="450" y="50" width="170" height="80" rx="9" class="node"/><text x="535" y="80" class="nt" text-anchor="middle">SVisual</text><text x="535" y="100" class="ns" text-anchor="middle">Vẽ và trích xuất</text><text x="535" y="40" class="tk" text-anchor="middle">vào: svisual_vis.tcl</text><text x="535" y="150" class="tk" text-anchor="middle">ra: đồ thị, số liệu</text><rect x="10" y="8" width="620" height="180" rx="10" style="fill:none;stroke:var(--muted);stroke-dasharray:5 4"/><text x="320" y="180" class="ns" text-anchor="middle">Sentaurus Workbench (SWB): quản lý dự án, tham số &#64;...&#64; và các nút (node)</text></svg><figcaption>Hình 1. Luồng công việc cơ bản trong Sentaurus: SDE tạo cấu trúc và lưới, SDevice giải phương trình, SVisual vẽ và trích xuất kết quả.</figcaption></figure>
+<div class="tablewrap"><table>
+<tr><th>Công cụ</th><th>Vai trò</th><th>File lệnh</th></tr>
+<tr><td>Sentaurus Workbench (SWB)</td><td>Quản lý dự án, chuỗi công cụ, tham số và thí nghiệm</td><td>(giao diện đồ họa)</td></tr>
+<tr><td>Sentaurus Structure Editor (SDE)</td><td>Vẽ cấu trúc 2D/3D, gán vật liệu, pha tạp, tiếp xúc và lưới</td><td>Scheme, <code>*_dvs.cmd</code></td></tr>
+<tr><td>Sentaurus Process (SProcess)</td><td>Mô phỏng quy trình chế tạo</td><td>Tcl, <code>*_fps.cmd</code></td></tr>
+<tr><td>Sentaurus Device (SDevice)</td><td>Mô phỏng điện, nhiệt, quang của linh kiện</td><td><code>*_des.cmd</code></td></tr>
+<tr><td>Sentaurus Visual (SVisual)</td><td>Hiển thị cấu trúc, đồ thị, trích xuất thông số</td><td>Tcl, <code>*_vis.tcl</code></td></tr>
+</table></div>
+<p>Với linh kiện Ga₂O₃ trong nghiên cứu, thường bỏ qua SProcess (vì quy trình Ga₂O₃ chưa có mô hình chuẩn) và dựng cấu trúc trực tiếp bằng SDE.</p>
+
+<h2 id="v-s4">4. Bạn cần gì để bắt đầu</h2>
+<ul>
+<li><strong>Giấy phép</strong>: Sentaurus là phần mềm thương mại. Các trường đại học thường có giấy phép qua chương trình đại học của Synopsys; hỏi phòng thí nghiệm hoặc trung tâm máy tính của trường.</li>
+<li><strong>Máy Linux</strong>: Sentaurus chạy trên Linux, thường truy cập từ xa bằng SSH và giao diện đồ họa qua X11 hoặc VNC. Biết vài lệnh cơ bản (<code>cd</code>, <code>ls</code>, <code>cp</code>, trình soạn thảo như gedit hoặc vi) là đủ để bắt đầu.</li>
+<li><strong>Tài liệu</strong>: bộ hướng dẫn sử dụng đi kèm phần mềm và module <em>Sentaurus Training</em> có sẵn trong thư mục cài đặt. Đây là nguồn chính xác nhất cho cú pháp của phiên bản bạn đang dùng.</li>
+<li><strong>Kiến thức vật lý linh kiện</strong>: tiếp giáp pn, Schottky, MOSFET (xem chủ đề Linh kiện bán dẫn).</li>
+</ul>
+
+<div class="box"><p class="t">Về các đoạn mã trong chủ đề này</p>
+<p>Các ví dụ được viết lại để minh họa cấu trúc và ý tưởng, không sao chép từ tài liệu của Synopsys. Từ khóa và tham số có thể khác giữa các phiên bản; hãy luôn đối chiếu với hướng dẫn sử dụng đi kèm phiên bản Sentaurus của bạn.</p></div>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Trong luận văn của tôi, mô phỏng Sentaurus được dùng để tái hiện đặc tuyến C-V của diode Schottky Ga₂O₃ từ 300 đến 673 K. Kinh nghiệm quan trọng nhất: khớp được dữ liệu ở một nhiệt độ thì dễ, nhưng chỉ khi đưa bẫy sâu vào mô hình thì mới khớp được xu hướng theo nhiệt độ.</p></div>
+
+<h2 id="v-s5">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Device User Guide</em> và <em>Sentaurus Structure Editor User Guide</em> (đi kèm phần mềm, theo phiên bản).</li>
+<li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
+<li>D. Vasileska, S. M. Goodnick, G. Klimeck, <em>Computational Electronics: Semiclassical and Quantum Device Modeling and Simulation</em>, CRC Press (2010).</li>
+<li>C. K. Sarkar (ed.), <em>Technology Computer Aided Design: Simulation for VLSI MOSFET</em>, CRC Press (2013).</li>
+<li>T. H. Vo et al., "Correlation between experimental and modeled capacitance–voltage characteristics of Ga₂O₃ Schottky barrier diode in temperature range of 300–673 K," <em>Physica B</em> (2025).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">TCAD (Technology Computer-Aided Design) solves the physical equations of semiconductors on a virtual device structure to predict current, electric field, capacitance or breakdown voltage before, or instead of, fabricating. This topic guides beginners through Synopsys Sentaurus, the most widely used TCAD tool in industry and academia.</p>
+
+<h2 id="e-s1">1. What TCAD does</h2>
+<ul>
+<li><strong>Process simulation</strong>: implantation, diffusion, oxidation, etching, deposition, to obtain the resulting structure and doping profiles.</li>
+<li><strong>Device simulation</strong>: given the structure and doping, solve Poisson's equation and the continuity equations to obtain I-V, C-V, transient response, and the internal field and carrier distributions.</li>
+</ul>
+<p>TCAD's greatest value is <strong>seeing inside the device</strong>: experiments give only currents and voltages at the electrodes, while simulation shows where the field peaks, which traps are charging, which path the current takes. Used properly, TCAD helps explain measured data and design new structures (field plates, guard rings, drift-layer thickness) much faster and cheaper than trial fabrication.</p>
+
+<h2 id="e-s2">2. When to trust TCAD results</h2>
+<p>TCAD is only as accurate as its models and material parameters. For Si, parameters have been calibrated over decades; for new materials like Ga₂O₃, many parameters (impact ionization coefficients, mobility models, trap densities) are still under research. The right procedure is therefore:</p>
+<ol>
+<li>Start with the simplest model that explains the phenomenon.</li>
+<li><strong>Calibrate</strong> against measurements of your own devices: e.g. fit the forward I-V for barrier height and series resistance, fit C-V for doping.</li>
+<li>Only then use simulation to predict or compare designs.</li>
+</ol>
+
+<h2 id="e-s3">3. The Sentaurus tool suite</h2>
+<figure><svg viewBox="0 0 640 200" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="20" y="50" width="170" height="80" rx="9" class="node"/><text x="105" y="80" class="nt" text-anchor="middle">SDE</text><text x="105" y="100" class="ns" text-anchor="middle">Structure + mesh</text><text x="105" y="40" class="tk" text-anchor="middle">in: sde_dvs.cmd</text><text x="105" y="150" class="tk" text-anchor="middle">out: n1_msh.tdr</text><path d="M192,90H232" class="arr" marker-end="url(#me)"/><rect x="235" y="50" width="170" height="80" rx="9" class="node"/><text x="320" y="80" class="nt" text-anchor="middle">SDevice</text><text x="320" y="100" class="ns" text-anchor="middle">Solve equations</text><text x="320" y="40" class="tk" text-anchor="middle">in: sdevice_des.cmd</text><text x="320" y="150" class="tk" text-anchor="middle">out: *.plt, *.tdr</text><path d="M407,90H447" class="arr" marker-end="url(#me)"/><rect x="450" y="50" width="170" height="80" rx="9" class="node"/><text x="535" y="80" class="nt" text-anchor="middle">SVisual</text><text x="535" y="100" class="ns" text-anchor="middle">Plot and extract</text><text x="535" y="40" class="tk" text-anchor="middle">in: svisual_vis.tcl</text><text x="535" y="150" class="tk" text-anchor="middle">out: plots, values</text><rect x="10" y="8" width="620" height="180" rx="10" style="fill:none;stroke:var(--muted);stroke-dasharray:5 4"/><text x="320" y="180" class="ns" text-anchor="middle">Sentaurus Workbench (SWB): manages the project, &#64;...&#64; parameters and nodes</text></svg><figcaption>Figure 1. The basic Sentaurus workflow: SDE builds structure and mesh, SDevice solves the equations, SVisual plots and extracts results.</figcaption></figure>
+<div class="tablewrap"><table>
+<tr><th>Tool</th><th>Role</th><th>Command file</th></tr>
+<tr><td>Sentaurus Workbench (SWB)</td><td>Manages the project, tool chain, parameters and experiments</td><td>(graphical interface)</td></tr>
+<tr><td>Sentaurus Structure Editor (SDE)</td><td>Draws 2D/3D structures, assigns materials, doping, contacts and mesh</td><td>Scheme, <code>*_dvs.cmd</code></td></tr>
+<tr><td>Sentaurus Process (SProcess)</td><td>Simulates fabrication processes</td><td>Tcl, <code>*_fps.cmd</code></td></tr>
+<tr><td>Sentaurus Device (SDevice)</td><td>Electrical, thermal and optical device simulation</td><td><code>*_des.cmd</code></td></tr>
+<tr><td>Sentaurus Visual (SVisual)</td><td>Displays structures, plots, extracts parameters</td><td>Tcl, <code>*_vis.tcl</code></td></tr>
+</table></div>
+<p>For research Ga₂O₃ devices, SProcess is usually skipped (Ga₂O₃ processes have no standard models yet) and the structure is built directly in SDE.</p>
+
+<h2 id="e-s4">4. What you need to start</h2>
+<ul>
+<li><strong>A license</strong>: Sentaurus is commercial software. Universities usually hold licenses through Synopsys's university program; ask your lab or computing center.</li>
+<li><strong>A Linux machine</strong>: Sentaurus runs on Linux, usually accessed remotely via SSH with graphics over X11 or VNC. A few basic commands (<code>cd</code>, <code>ls</code>, <code>cp</code>, an editor such as gedit or vi) are enough to start.</li>
+<li><strong>Documentation</strong>: the user guides shipped with the software and the <em>Sentaurus Training</em> modules in the installation directory. These are the most accurate source for the syntax of your version.</li>
+<li><strong>Device physics</strong>: pn junctions, Schottky contacts, MOSFETs (see the Semiconductor Devices topic).</li>
+</ul>
+
+<div class="box"><p class="t">About the code in this topic</p>
+<p>The examples are written from scratch to illustrate structure and ideas, not copied from Synopsys documentation. Keywords and parameters can differ between versions; always check against the user guide shipped with your Sentaurus version.</p></div>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>In my thesis, Sentaurus simulation was used to reproduce the C-V characteristics of Ga₂O₃ Schottky diodes from 300 to 673 K. The most important lesson: fitting data at one temperature is easy, but only after adding deep traps to the model could the temperature trend be matched.</p></div>
+
+<h2 id="e-s5">References</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Device User Guide</em> and <em>Sentaurus Structure Editor User Guide</em> (shipped with the software, version-specific).</li>
+<li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
+<li>D. Vasileska, S. M. Goodnick, G. Klimeck, <em>Computational Electronics: Semiclassical and Quantum Device Modeling and Simulation</em>, CRC Press (2010).</li>
+<li>C. K. Sarkar (ed.), <em>Technology Computer Aided Design: Simulation for VLSI MOSFET</em>, CRC Press (2013).</li>
+<li>T. H. Vo et al., "Correlation between experimental and modeled capacitance–voltage characteristics of Ga₂O₃ Schottky barrier diode in temperature range of 300–673 K," <em>Physica B</em> (2025).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad.html">← <span class="l-vi">Mục lục</span><span class="l-en">Contents</span></a><a class="n" href="tcad-physics.html"><span class="l-vi">TCAD giải gì: phương trình, lưới và Newton</span><span class="l-en">What TCAD solves: equations, mesh and Newton</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

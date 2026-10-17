@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Tham số vật liệu Ga₂O₃ và hiệu chỉnh" data-title-en="Ga₂O₃ material parameters and calibration">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ga₂O₃ material parameters and calibration · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Parameter files, sourced starting values, a calibration sequence and declaring deep traps.">
+<meta property="og:title" content="Ga₂O₃ material parameters and calibration">
+<meta property="og:description" content="Parameter files, sourced starting values, a calibration sequence and declaring deep traps.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 1</span><span class="l-en">Part 3 · Lesson 1</span></p>
+  <h1><span class="l-vi">Tham số vật liệu Ga₂O₃ và hiệu chỉnh</span><span class="l-en">Ga₂O₃ material parameters and calibration</span></h1>
+  <p class="sub"><span class="l-vi">Tệp tham số, giá trị khởi đầu có nguồn, quy trình hiệu chỉnh và khai báo bẫy sâu.</span><span class="l-en">Parameter files, sourced starting values, a calibration sequence and declaring deep traps.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Với Si, Sentaurus có sẵn bộ tham số đã hiệu chỉnh kỹ. Với Ga₂O₃, bạn thường phải tự xây dựng tệp tham số từ tài liệu đã công bố, rồi hiệu chỉnh theo dữ liệu đo. Bài này giới thiệu cách làm và các giá trị khởi đầu hợp lý.</p>
+
+<h2 id="v-s1">1. Tệp tham số hoạt động thế nào</h2>
+<p>Mỗi vật liệu có một tệp <code>.par</code> gồm nhiều khối, mỗi khối ứng với một mô hình (hằng số điện môi, vùng cấm, mật độ trạng thái, độ linh động, ion hóa va chạm...). SDevice đọc tệp này qua dòng <code>Parameter = "..."</code> trong khối <code>File</code>, hoặc theo từng vật liệu trong các khối <code>Material = "..."</code> của tệp tham số tổng.</p>
+<p>Cách an toàn nhất để có đúng cú pháp: in ra tệp tham số mặc định của một vật liệu có sẵn rồi sửa giá trị:</p>
+<pre><code>sdevice -P:GaN  &gt;  Ga2O3.par      # in tham số mặc định của GaN
+# sửa các giá trị trong Ga2O3.par cho Ga₂O₃</code></pre>
+
+<h2 id="v-s2">2. Đoạn tệp tham số minh họa</h2>
+<pre><code>* Ga2O3.par -- ILLUSTRATIVE excerpt, check every keyword against
+* the default file printed by:  sdevice -P:GaN  (or another material)
+
+Epsilon {
+  epsilon = 10.0                 * relative permittivity
+}
+Bandgap {
+  Chi0 = 4.0                     * electron affinity (eV)
+  Eg0  = 4.8                     * bandgap at 0 K reference (eV)
+  alpha = 0.0   beta = 0.0       * no temperature dependence at first
+}
+eDOSMass {
+  Formula = 2
+  Nc300 = 3.7e18                 * effective density of states (cm^-3)
+}
+ConstantMobility {
+  mumax = 200 , 50               * electrons , holes (cm^2/Vs)
+}
+HighFieldDependence {
+  vsat0 = 2.0e7 , 1.0e7          * saturation velocity (cm/s)
+}</code></pre>
+<p>Đây chỉ là đoạn minh họa cấu trúc: tên khối và tên tham số phải khớp với tệp mặc định của phiên bản bạn dùng.</p>
+
+<h2 id="v-s3">3. Giá trị khởi đầu cho β-Ga₂O₃</h2>
+<div class="tablewrap"><table>
+<tr><th>Tham số</th><th>Giá trị thường dùng</th><th>Ghi chú và nguồn</th></tr>
+<tr><td>Vùng cấm \(E_g\)</td><td>4,8–4,85 eV</td><td>Các tài liệu báo cáo 4,6–4,9 eV tùy phép đo và hướng tinh thể</td></tr>
+<tr><td>Ái lực điện tử \(\chi\)</td><td>3,9–4,0 eV</td><td>Roy et al. (2020); Zhou et al. (2024)</td></tr>
+<tr><td>Hằng số điện môi \(\varepsilon_r\)</td><td>~10</td><td>Bất đẳng hướng, khoảng 10–12 tùy hướng</td></tr>
+<tr><td>Khối lượng hiệu dụng electron</td><td>0,28 \(m_0\)</td><td>Gần đẳng hướng</td></tr>
+<tr><td>\(N_C\) (300 K)</td><td>3,7 × 10¹⁸ cm⁻³</td><td>Zhou et al. (2024)</td></tr>
+<tr><td>Độ linh động electron</td><td>150–200 cm²/V·s (pha tạp thấp)</td><td>Giới hạn bởi tán xạ phonon quang cực; Ma et al. (2016)</td></tr>
+<tr><td>Vận tốc bão hòa</td><td>1–2 × 10⁷ cm/s</td><td>Zhou et al. (2024)</td></tr>
+<tr><td>Trường tới hạn</td><td>~8 MV/cm (lý thuyết)</td><td>Dùng làm tiêu chí đánh thủng khi chưa có hệ số ion hóa tin cậy</td></tr>
+<tr><td>Ion hóa va chạm</td><td>Mô hình Okuto–Crowell hoặc van Overstraeten–de Man</td><td>Hệ số từ tính toán của Ghosh và Singisetti (2018); vẫn đang được kiểm chứng thực nghiệm</td></tr>
+</table></div>
+
+<h2 id="v-s4">4. Quy trình hiệu chỉnh</h2>
+<ol>
+<li><strong>C-V trước</strong>: khớp đường \(1/C^2\) theo điện áp để xác định nồng độ pha tạp lớp trôi và điện thế tiếp xúc.</li>
+<li><strong>I-V thuận ở dòng thấp</strong>: khớp chiều cao rào \(\Phi_B\) và hệ số lý tưởng.</li>
+<li><strong>I-V thuận ở dòng cao</strong>: khớp độ linh động và điện trở nối tiếp (gồm đế và tiếp xúc ohmic).</li>
+<li><strong>Theo nhiệt độ</strong>: bật sự phụ thuộc nhiệt độ của độ linh động và vùng cấm; nếu xu hướng không khớp, xét đến bẫy.</li>
+<li><strong>Dòng rò ngược và đánh thủng</strong> sau cùng, vì cần nhiều mô hình phức tạp nhất.</li>
+</ol>
+
+<h2 id="v-s5">5. Thêm bẫy sâu</h2>
+<p>Ga₂O₃ có các mức bẫy sâu điển hình được ký hiệu E1–E4 trong các phép đo DLTS; E2 (khoảng 0,75–0,8 eV dưới vùng dẫn) thường gắn với Fe, E3 (khoảng 1,0 eV) gắn với các khuyết tật nội tại. Khai báo bẫy theo vật liệu:</p>
+<pre><code>Physics ( Material = &quot;Ga2O3&quot; ) {
+  Traps (
+    ( Acceptor Level fromCondBand EnergyMid = 0.75
+      Conc = 1e15  eXsection = 1e-15  hXsection = 1e-15 )   * E2-like level
+    ( Acceptor Level fromCondBand EnergyMid = 1.0
+      Conc = 5e14  eXsection = 1e-15  hXsection = 1e-15 )   * E3-like level
+  )
+}</code></pre>
+<p>Nồng độ và tiết diện bắt ở đây chỉ là giá trị minh họa; hãy dùng giá trị từ DLTS hoặc từ chính phép đo của bạn.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Khi khớp C-V theo nhiệt độ của diode Schottky Ga₂O₃, điện dung ở nhiệt độ cao thay đổi theo tần số mà mô hình không bẫy không giải thích được. Đưa vào một mức bẫy acceptor sâu với hằng số thời gian phát xạ phụ thuộc nhiệt độ là bước giúp mô phỏng khớp với thực nghiệm.</p></div>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. Roy, A. Bhattacharyya, S. Krishnamoorthy, <a href="https://arxiv.org/abs/2006.15645" target="_blank" rel="noopener">arXiv:2006.15645</a> (2020).</li>
+<li>X. Zhou et al., <a href="https://www.mdpi.com/2079-4991/14/11/978" target="_blank" rel="noopener"><em>Nanomaterials</em> 14, 978 (2024)</a>.</li>
+<li>N. Ma et al., "Intrinsic electron mobility limits in β-Ga₂O₃," <em>Applied Physics Letters</em> 109, 212101 (2016).</li>
+<li>K. Ghosh, U. Singisetti, "Impact ionization in β-Ga₂O₃," <em>Journal of Applied Physics</em> 124, 085707 (2018).</li>
+<li>Z. Zhang et al., "Deep level defects throughout the bandgap of (010) β-Ga₂O₃ detected by optically and thermally stimulated defect spectroscopies," <em>Applied Physics Letters</em> 108, 052105 (2016).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">For Si, Sentaurus ships with carefully calibrated parameters. For Ga₂O₃ you usually build the parameter file yourself from published data and then calibrate it against measurements. This lesson shows how, with reasonable starting values.</p>
+
+<h2 id="e-s1">1. How parameter files work</h2>
+<p>Each material has a <code>.par</code> file made of blocks, one per model (permittivity, bandgap, density of states, mobility, impact ionization...). SDevice reads it via the <code>Parameter = "..."</code> line in the <code>File</code> section, or per material via <code>Material = "..."</code> blocks in a global parameter file.</p>
+<p>The safest way to get the syntax right: print the default parameter file of an existing material and edit the values:</p>
+<pre><code>sdevice -P:GaN  &gt;  Ga2O3.par      # print GaN default parameters
+# edit the values in Ga2O3.par for Ga₂O₃</code></pre>
+
+<h2 id="e-s2">2. An illustrative parameter excerpt</h2>
+<pre><code>* Ga2O3.par -- ILLUSTRATIVE excerpt, check every keyword against
+* the default file printed by:  sdevice -P:GaN  (or another material)
+
+Epsilon {
+  epsilon = 10.0                 * relative permittivity
+}
+Bandgap {
+  Chi0 = 4.0                     * electron affinity (eV)
+  Eg0  = 4.8                     * bandgap at 0 K reference (eV)
+  alpha = 0.0   beta = 0.0       * no temperature dependence at first
+}
+eDOSMass {
+  Formula = 2
+  Nc300 = 3.7e18                 * effective density of states (cm^-3)
+}
+ConstantMobility {
+  mumax = 200 , 50               * electrons , holes (cm^2/Vs)
+}
+HighFieldDependence {
+  vsat0 = 2.0e7 , 1.0e7          * saturation velocity (cm/s)
+}</code></pre>
+<p>This only illustrates the structure: block and parameter names must match the default file of your version.</p>
+
+<h2 id="e-s3">3. Starting values for β-Ga₂O₃</h2>
+<div class="tablewrap"><table>
+<tr><th>Parameter</th><th>Common value</th><th>Notes and source</th></tr>
+<tr><td>Bandgap \(E_g\)</td><td>4.8–4.85 eV</td><td>Reports range from 4.6 to 4.9 eV depending on method and orientation</td></tr>
+<tr><td>Electron affinity \(\chi\)</td><td>3.9–4.0 eV</td><td>Roy et al. (2020); Zhou et al. (2024)</td></tr>
+<tr><td>Permittivity \(\varepsilon_r\)</td><td>~10</td><td>Anisotropic, about 10–12 depending on direction</td></tr>
+<tr><td>Electron effective mass</td><td>0.28 \(m_0\)</td><td>Nearly isotropic</td></tr>
+<tr><td>\(N_C\) (300 K)</td><td>3.7 × 10¹⁸ cm⁻³</td><td>Zhou et al. (2024)</td></tr>
+<tr><td>Electron mobility</td><td>150–200 cm²/V·s (low doping)</td><td>Limited by polar optical phonons; Ma et al. (2016)</td></tr>
+<tr><td>Saturation velocity</td><td>1–2 × 10⁷ cm/s</td><td>Zhou et al. (2024)</td></tr>
+<tr><td>Critical field</td><td>~8 MV/cm (theoretical)</td><td>Used as a breakdown criterion when reliable ionization coefficients are lacking</td></tr>
+<tr><td>Impact ionization</td><td>Okuto–Crowell or van Overstraeten–de Man model</td><td>Coefficients from Ghosh and Singisetti's calculations (2018); still being verified experimentally</td></tr>
+</table></div>
+
+<h2 id="e-s4">4. A calibration sequence</h2>
+<ol>
+<li><strong>C-V first</strong>: fit \(1/C^2\) versus voltage for the drift-layer doping and built-in potential.</li>
+<li><strong>Low-current forward I-V</strong>: fit barrier height \(\Phi_B\) and ideality factor.</li>
+<li><strong>High-current forward I-V</strong>: fit mobility and series resistance (substrate and ohmic contact).</li>
+<li><strong>Versus temperature</strong>: switch on temperature-dependent mobility and bandgap; if the trend does not match, consider traps.</li>
+<li><strong>Reverse leakage and breakdown</strong> last, since they need the most complex models.</li>
+</ol>
+
+<h2 id="e-s5">5. Adding deep traps</h2>
+<p>Ga₂O₃ has typical deep levels labeled E1–E4 in DLTS; E2 (about 0.75–0.8 eV below the conduction band) is usually linked to Fe, E3 (about 1.0 eV) to native defects. Declare traps per material:</p>
+<pre><code>Physics ( Material = &quot;Ga2O3&quot; ) {
+  Traps (
+    ( Acceptor Level fromCondBand EnergyMid = 0.75
+      Conc = 1e15  eXsection = 1e-15  hXsection = 1e-15 )   * E2-like level
+    ( Acceptor Level fromCondBand EnergyMid = 1.0
+      Conc = 5e14  eXsection = 1e-15  hXsection = 1e-15 )   * E3-like level
+  )
+}</code></pre>
+<p>The concentrations and cross sections here are illustrative only; use values from DLTS or from your own measurements.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>When fitting the temperature-dependent C-V of Ga₂O₃ Schottky diodes, the high-temperature capacitance varies with frequency in a way a trap-free model cannot explain. Adding a deep acceptor level with a temperature-dependent emission time constant is the step that brings simulation and experiment together.</p></div>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>S. Roy, A. Bhattacharyya, S. Krishnamoorthy, <a href="https://arxiv.org/abs/2006.15645" target="_blank" rel="noopener">arXiv:2006.15645</a> (2020).</li>
+<li>X. Zhou et al., <a href="https://www.mdpi.com/2079-4991/14/11/978" target="_blank" rel="noopener"><em>Nanomaterials</em> 14, 978 (2024)</a>.</li>
+<li>N. Ma et al., "Intrinsic electron mobility limits in β-Ga₂O₃," <em>Applied Physics Letters</em> 109, 212101 (2016).</li>
+<li>K. Ghosh, U. Singisetti, "Impact ionization in β-Ga₂O₃," <em>Journal of Applied Physics</em> 124, 085707 (2018).</li>
+<li>Z. Zhang et al., "Deep level defects throughout the bandgap of (010) β-Ga₂O₃ detected by optically and thermally stimulated defect spectroscopies," <em>Applied Physics Letters</em> 108, 052105 (2016).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-sdevice.html">← <span class="l-vi">Mô phỏng điện với Sentaurus Device</span><span class="l-en">Electrical simulation with Sentaurus Device</span></a><a class="n" href="tcad-breakdown-cv.html"><span class="l-vi">Đánh thủng, dòng rò, C-V và nhiệt độ</span><span class="l-en">Breakdown, leakage, C-V and temperature</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

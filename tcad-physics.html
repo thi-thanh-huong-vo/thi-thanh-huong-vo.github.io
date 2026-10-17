@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="TCAD giải gì: phương trình, lưới và Newton" data-title-en="What TCAD solves: equations, mesh and Newton">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What TCAD solves: equations, mesh and Newton · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Poisson, continuity, drift-diffusion, boundary conditions, meshing and Newton's method.">
+<meta property="og:title" content="What TCAD solves: equations, mesh and Newton">
+<meta property="og:description" content="Poisson, continuity, drift-diffusion, boundary conditions, meshing and Newton's method.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 2</span><span class="l-en">Part 1 · Lesson 2</span></p>
+  <h1><span class="l-vi">TCAD giải gì: phương trình, lưới và Newton</span><span class="l-en">What TCAD solves: equations, mesh and Newton</span></h1>
+  <p class="sub"><span class="l-vi">Poisson, phương trình liên tục, trôi–khuếch tán, điều kiện biên, lưới và phương pháp Newton.</span><span class="l-en">Poisson, continuity, drift-diffusion, boundary conditions, meshing and Newton's method.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Trước khi gõ lệnh, nên hiểu TCAD thực sự giải cái gì. Biết các phương trình và cách chúng được giải giúp bạn chọn đúng mô hình, dựng lưới hợp lý và hiểu vì sao mô phỏng đôi khi không hội tụ.</p>
+
+<h2 id="v-s1">1. Ba phương trình cơ bản</h2>
+<p><strong>Phương trình Poisson</strong> liên hệ điện thế \(\psi\) với điện tích:</p>
+$$\nabla\cdot(\varepsilon\nabla\psi) = -q\left(p - n + N_D^+ - N_A^-\right) - \rho_{trap}$$
+<p><strong>Phương trình liên tục</strong> cho electron và lỗ trống:</p>
+$$\nabla\cdot\vec J_n = q\left(R - G\right) + q\frac{\partial n}{\partial t}, \qquad -\nabla\cdot\vec J_p = q\left(R - G\right) + q\frac{\partial p}{\partial t}$$
+<p><strong>Mô hình trôi–khuếch tán</strong> (drift-diffusion) cho mật độ dòng:</p>
+$$\vec J_n = q\mu_n n\vec E + qD_n\nabla n, \qquad \vec J_p = q\mu_p p\vec E - qD_p\nabla p$$
+<p>Ba ẩn chính là \(\psi\), \(n\), \(p\) (hoặc các tựa mức Fermi). Mọi "mô hình vật lý" bạn bật trong TCAD thực chất là cách tính các đại lượng trong các phương trình này: độ linh động \(\mu\) phụ thuộc pha tạp và điện trường, tốc độ tái hợp \(R\) (SRH, Auger, bức xạ), tốc độ phát sinh \(G\) (ion hóa va chạm, quang), điện tích bẫy \(\rho_{trap}\).</p>
+
+<h2 id="v-s2">2. Tái hợp SRH và bẫy</h2>
+$$R_{SRH} = \frac{np - n_i^2}{\tau_p\,(n + n_1) + \tau_n\,(p + p_1)}$$
+<p>với \(n_1\), \(p_1\) phụ thuộc vị trí mức bẫy trong vùng cấm. Mô hình bẫy đầy đủ còn tính điện tích bẫy và động học nạp xả, cần thiết khi mô phỏng hiện tượng phụ thuộc tần số hay thời gian.</p>
+
+<h2 id="v-s3">3. Điều kiện biên</h2>
+<ul>
+<li><strong>Tiếp xúc ohmic</strong>: trung hòa điện tích và cân bằng nhiệt tại điện cực; điện thế bằng điện áp đặt vào cộng điện thế tiếp xúc.</li>
+<li><strong>Tiếp xúc Schottky</strong>: chiều cao rào \(\Phi_B\) cố định; dòng qua mặt phân cách theo phát xạ nhiệt điện tử, có thể bổ sung hạ rào do lực ảnh và xuyên hầm.</li>
+<li><strong>Biên tự do</strong> (không phải điện cực): điều kiện Neumann, không có dòng và thông lượng điện đi ra; vì vậy biên trái của cấu trúc một nửa tự nhiên là trục đối xứng.</li>
+</ul>
+
+<h2 id="v-s4">4. Rời rạc hóa và lưới</h2>
+<p>Các phương trình vi phân được rời rạc hóa trên một <strong>lưới</strong> (mesh) gồm các tam giác hoặc tứ giác (2D). Dòng giữa hai nút lân cận dùng sơ đồ Scharfetter–Gummel, ổn định ngay cả khi mật độ hạt tải thay đổi hàng chục bậc độ lớn giữa hai nút.</p>
+<figure><svg viewBox="0 0 620 220" class="fig-svg" role="img"><rect x="20" y="30" width="270" height="150" style="fill:none;stroke:var(--ink)"/><line x1="20.0" y1="30" x2="20.0" y2="180" class="grid"/><line x1="50.0" y1="30" x2="50.0" y2="180" class="grid"/><line x1="80.0" y1="30" x2="80.0" y2="180" class="grid"/><line x1="110.0" y1="30" x2="110.0" y2="180" class="grid"/><line x1="140.0" y1="30" x2="140.0" y2="180" class="grid"/><line x1="170.0" y1="30" x2="170.0" y2="180" class="grid"/><line x1="200.0" y1="30" x2="200.0" y2="180" class="grid"/><line x1="230.0" y1="30" x2="230.0" y2="180" class="grid"/><line x1="260.0" y1="30" x2="260.0" y2="180" class="grid"/><line x1="290.0" y1="30" x2="290.0" y2="180" class="grid"/><line x1="20" y1="30.0" x2="290" y2="30.0" class="grid"/><line x1="20" y1="55.0" x2="290" y2="55.0" class="grid"/><line x1="20" y1="80.0" x2="290" y2="80.0" class="grid"/><line x1="20" y1="105.0" x2="290" y2="105.0" class="grid"/><line x1="20" y1="130.0" x2="290" y2="130.0" class="grid"/><line x1="20" y1="155.0" x2="290" y2="155.0" class="grid"/><line x1="20" y1="180.0" x2="290" y2="180.0" class="grid"/><rect x="20" y="24" width="150" height="6" style="fill:#666"/><text x="155" y="205" class="ns" text-anchor="middle">Lưới đều: thô ở nơi cần mịn</text><rect x="330" y="30" width="270" height="150" style="fill:none;stroke:var(--ink)"/><line x1="330.0" y1="30" x2="330.0" y2="180" class="grid"/><line x1="360.0" y1="30" x2="360.0" y2="180" class="grid"/><line x1="390.0" y1="30" x2="390.0" y2="180" class="grid"/><line x1="420.0" y1="30" x2="420.0" y2="180" class="grid"/><line x1="444.0" y1="30" x2="444.0" y2="180" class="grid"/><line x1="450.0" y1="30" x2="450.0" y2="180" class="grid"/><line x1="456.0" y1="30" x2="456.0" y2="180" class="grid"/><line x1="462.0" y1="30" x2="462.0" y2="180" class="grid"/><line x1="468.0" y1="30" x2="468.0" y2="180" class="grid"/><line x1="474.0" y1="30" x2="474.0" y2="180" class="grid"/><line x1="480.0" y1="30" x2="480.0" y2="180" class="grid"/><line x1="486.0" y1="30" x2="486.0" y2="180" class="grid"/><line x1="492.0" y1="30" x2="492.0" y2="180" class="grid"/><line x1="498.0" y1="30" x2="498.0" y2="180" class="grid"/><line x1="504.0" y1="30" x2="504.0" y2="180" class="grid"/><line x1="510.0" y1="30" x2="510.0" y2="180" class="grid"/><line x1="516.0" y1="30" x2="516.0" y2="180" class="grid"/><line x1="540.0" y1="30" x2="540.0" y2="180" class="grid"/><line x1="570.0" y1="30" x2="570.0" y2="180" class="grid"/><line x1="600.0" y1="30" x2="600.0" y2="180" class="grid"/><line x1="330" y1="30.0" x2="600" y2="30.0" class="grid"/><line x1="330" y1="34.0" x2="600" y2="34.0" class="grid"/><line x1="330" y1="38.0" x2="600" y2="38.0" class="grid"/><line x1="330" y1="42.0" x2="600" y2="42.0" class="grid"/><line x1="330" y1="46.0" x2="600" y2="46.0" class="grid"/><line x1="330" y1="50.0" x2="600" y2="50.0" class="grid"/><line x1="330" y1="54.0" x2="600" y2="54.0" class="grid"/><line x1="330" y1="55.0" x2="600" y2="55.0" class="grid"/><line x1="330" y1="58.0" x2="600" y2="58.0" class="grid"/><line x1="330" y1="62.0" x2="600" y2="62.0" class="grid"/><line x1="330" y1="66.0" x2="600" y2="66.0" class="grid"/><line x1="330" y1="80.0" x2="600" y2="80.0" class="grid"/><line x1="330" y1="105.0" x2="600" y2="105.0" class="grid"/><line x1="330" y1="130.0" x2="600" y2="130.0" class="grid"/><line x1="330" y1="155.0" x2="600" y2="155.0" class="grid"/><line x1="330" y1="180.0" x2="600" y2="180.0" class="grid"/><rect x="330" y="24" width="150" height="6" style="fill:#666"/><text x="465" y="205" class="ns" text-anchor="middle">Lưới tinh chỉnh tại mép anode và bề mặt</text></svg><figcaption>Hình 1. Lưới đều (trái) so với lưới được tinh chỉnh tại mép anode và bề mặt (phải).</figcaption></figure>
+<p>Nguyên tắc dựng lưới:</p>
+<ul>
+<li><strong>Mịn</strong> ở nơi đại lượng thay đổi nhanh: mặt tiếp giáp, mép điện cực, mặt phân cách, kênh dẫn.</li>
+<li><strong>Thô</strong> ở vùng khối đồng nhất để giảm số nút và thời gian chạy.</li>
+<li>Luôn làm <strong>thử nghiệm hội tụ lưới</strong>: làm mịn lưới thêm và kiểm tra kết quả không đổi đáng kể.</li>
+</ul>
+
+<h2 id="v-s5">5. Giải phương trình phi tuyến</h2>
+<p>Hệ phương trình rời rạc là phi tuyến, được giải bằng <strong>phương pháp Newton</strong>: bắt đầu từ một nghiệm đoán, tuyến tính hóa, giải, cập nhật, lặp đến khi sai số đủ nhỏ. Newton hội tụ rất nhanh khi nghiệm đoán gần nghiệm thật, nhưng có thể phân kỳ nếu đoán xa. Vì thế mô phỏng luôn:</p>
+<ol>
+<li>Giải trạng thái cân bằng (điện áp bằng 0) trước, thường chỉ với phương trình Poisson.</li>
+<li>Thêm dần các phương trình liên tục.</li>
+<li>Tăng điện áp <strong>từng bước nhỏ</strong> (quasistationary), dùng nghiệm bước trước làm nghiệm đoán cho bước sau; nếu một bước không hội tụ, bước được chia nhỏ tự động.</li>
+</ol>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Với vùng cấm ~4,8 eV, nồng độ nội tại \(n_i\) của Ga₂O₃ ở 300 K vào khoảng 10⁻²² cm⁻³ trở xuống, nhỏ hơn nồng độ pha tạp hơn 35 bậc. Độ chính xác số thông thường không biểu diễn nổi các mật độ lỗ trống cực nhỏ này, nên mô phỏng vật liệu vùng cấm siêu rộng thường cần bật độ chính xác mở rộng, và chỉ giải phương trình electron khi lỗ trống không đóng vai trò.</p></div>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
+<li>D. L. Scharfetter, H. K. Gummel, "Large-signal analysis of a silicon Read diode oscillator," <em>IEEE Transactions on Electron Devices</em> 16, 64 (1969).</li>
+<li>D. Vasileska, S. M. Goodnick, G. Klimeck, <em>Computational Electronics</em>, CRC Press (2010).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Before typing commands, it is worth knowing what TCAD actually solves. Knowing the equations and how they are solved helps you choose the right models, build a sensible mesh, and understand why simulations sometimes fail to converge.</p>
+
+<h2 id="e-s1">1. The three basic equations</h2>
+<p><strong>Poisson's equation</strong> links the potential \(\psi\) to charge:</p>
+$$\nabla\cdot(\varepsilon\nabla\psi) = -q\left(p - n + N_D^+ - N_A^-\right) - \rho_{trap}$$
+<p>The <strong>continuity equations</strong> for electrons and holes:</p>
+$$\nabla\cdot\vec J_n = q\left(R - G\right) + q\frac{\partial n}{\partial t}, \qquad -\nabla\cdot\vec J_p = q\left(R - G\right) + q\frac{\partial p}{\partial t}$$
+<p>The <strong>drift-diffusion model</strong> for current density:</p>
+$$\vec J_n = q\mu_n n\vec E + qD_n\nabla n, \qquad \vec J_p = q\mu_p p\vec E - qD_p\nabla p$$
+<p>The main unknowns are \(\psi\), \(n\), \(p\) (or the quasi-Fermi levels). Every "physical model" you switch on in TCAD is really a way to compute quantities in these equations: mobility \(\mu\) as a function of doping and field, recombination rate \(R\) (SRH, Auger, radiative), generation rate \(G\) (impact ionization, optical), trap charge \(\rho_{trap}\).</p>
+
+<h2 id="e-s2">2. SRH recombination and traps</h2>
+$$R_{SRH} = \frac{np - n_i^2}{\tau_p\,(n + n_1) + \tau_n\,(p + p_1)}$$
+<p>where \(n_1\), \(p_1\) depend on the trap level in the gap. A full trap model also accounts for trap charge and capture/emission dynamics, needed for frequency- or time-dependent phenomena.</p>
+
+<h2 id="e-s3">3. Boundary conditions</h2>
+<ul>
+<li><strong>Ohmic contacts</strong>: charge neutrality and thermal equilibrium at the electrode; the potential equals the applied voltage plus the built-in potential.</li>
+<li><strong>Schottky contacts</strong>: a fixed barrier height \(\Phi_B\); current across the interface by thermionic emission, optionally with image-force lowering and tunneling.</li>
+<li><strong>Free boundaries</strong> (not electrodes): Neumann conditions, no current or electric flux leaves; this is why the left edge of a half structure naturally acts as a symmetry axis.</li>
+</ul>
+
+<h2 id="e-s4">4. Discretization and the mesh</h2>
+<p>The differential equations are discretized on a <strong>mesh</strong> of triangles or quadrilaterals (in 2D). Current between neighboring nodes uses the Scharfetter–Gummel scheme, which stays stable even when carrier densities change by tens of orders of magnitude between nodes.</p>
+<figure><svg viewBox="0 0 620 220" class="fig-svg" role="img"><rect x="20" y="30" width="270" height="150" style="fill:none;stroke:var(--ink)"/><line x1="20.0" y1="30" x2="20.0" y2="180" class="grid"/><line x1="50.0" y1="30" x2="50.0" y2="180" class="grid"/><line x1="80.0" y1="30" x2="80.0" y2="180" class="grid"/><line x1="110.0" y1="30" x2="110.0" y2="180" class="grid"/><line x1="140.0" y1="30" x2="140.0" y2="180" class="grid"/><line x1="170.0" y1="30" x2="170.0" y2="180" class="grid"/><line x1="200.0" y1="30" x2="200.0" y2="180" class="grid"/><line x1="230.0" y1="30" x2="230.0" y2="180" class="grid"/><line x1="260.0" y1="30" x2="260.0" y2="180" class="grid"/><line x1="290.0" y1="30" x2="290.0" y2="180" class="grid"/><line x1="20" y1="30.0" x2="290" y2="30.0" class="grid"/><line x1="20" y1="55.0" x2="290" y2="55.0" class="grid"/><line x1="20" y1="80.0" x2="290" y2="80.0" class="grid"/><line x1="20" y1="105.0" x2="290" y2="105.0" class="grid"/><line x1="20" y1="130.0" x2="290" y2="130.0" class="grid"/><line x1="20" y1="155.0" x2="290" y2="155.0" class="grid"/><line x1="20" y1="180.0" x2="290" y2="180.0" class="grid"/><rect x="20" y="24" width="150" height="6" style="fill:#666"/><text x="155" y="205" class="ns" text-anchor="middle">Uniform: too coarse where it matters</text><rect x="330" y="30" width="270" height="150" style="fill:none;stroke:var(--ink)"/><line x1="330.0" y1="30" x2="330.0" y2="180" class="grid"/><line x1="360.0" y1="30" x2="360.0" y2="180" class="grid"/><line x1="390.0" y1="30" x2="390.0" y2="180" class="grid"/><line x1="420.0" y1="30" x2="420.0" y2="180" class="grid"/><line x1="444.0" y1="30" x2="444.0" y2="180" class="grid"/><line x1="450.0" y1="30" x2="450.0" y2="180" class="grid"/><line x1="456.0" y1="30" x2="456.0" y2="180" class="grid"/><line x1="462.0" y1="30" x2="462.0" y2="180" class="grid"/><line x1="468.0" y1="30" x2="468.0" y2="180" class="grid"/><line x1="474.0" y1="30" x2="474.0" y2="180" class="grid"/><line x1="480.0" y1="30" x2="480.0" y2="180" class="grid"/><line x1="486.0" y1="30" x2="486.0" y2="180" class="grid"/><line x1="492.0" y1="30" x2="492.0" y2="180" class="grid"/><line x1="498.0" y1="30" x2="498.0" y2="180" class="grid"/><line x1="504.0" y1="30" x2="504.0" y2="180" class="grid"/><line x1="510.0" y1="30" x2="510.0" y2="180" class="grid"/><line x1="516.0" y1="30" x2="516.0" y2="180" class="grid"/><line x1="540.0" y1="30" x2="540.0" y2="180" class="grid"/><line x1="570.0" y1="30" x2="570.0" y2="180" class="grid"/><line x1="600.0" y1="30" x2="600.0" y2="180" class="grid"/><line x1="330" y1="30.0" x2="600" y2="30.0" class="grid"/><line x1="330" y1="34.0" x2="600" y2="34.0" class="grid"/><line x1="330" y1="38.0" x2="600" y2="38.0" class="grid"/><line x1="330" y1="42.0" x2="600" y2="42.0" class="grid"/><line x1="330" y1="46.0" x2="600" y2="46.0" class="grid"/><line x1="330" y1="50.0" x2="600" y2="50.0" class="grid"/><line x1="330" y1="54.0" x2="600" y2="54.0" class="grid"/><line x1="330" y1="55.0" x2="600" y2="55.0" class="grid"/><line x1="330" y1="58.0" x2="600" y2="58.0" class="grid"/><line x1="330" y1="62.0" x2="600" y2="62.0" class="grid"/><line x1="330" y1="66.0" x2="600" y2="66.0" class="grid"/><line x1="330" y1="80.0" x2="600" y2="80.0" class="grid"/><line x1="330" y1="105.0" x2="600" y2="105.0" class="grid"/><line x1="330" y1="130.0" x2="600" y2="130.0" class="grid"/><line x1="330" y1="155.0" x2="600" y2="155.0" class="grid"/><line x1="330" y1="180.0" x2="600" y2="180.0" class="grid"/><rect x="330" y="24" width="150" height="6" style="fill:#666"/><text x="465" y="205" class="ns" text-anchor="middle">Refined at the anode edge and surface</text></svg><figcaption>Figure 1. A uniform mesh (left) versus a mesh refined at the anode edge and surface (right).</figcaption></figure>
+<p>Meshing principles:</p>
+<ul>
+<li><strong>Fine</strong> where quantities change rapidly: junctions, electrode edges, interfaces, channels.</li>
+<li><strong>Coarse</strong> in uniform bulk regions to reduce node count and run time.</li>
+<li>Always run a <strong>mesh convergence test</strong>: refine further and check that results do not change significantly.</li>
+</ul>
+
+<h2 id="e-s5">5. Solving the nonlinear system</h2>
+<p>The discretized system is nonlinear and solved with <strong>Newton's method</strong>: start from a guess, linearize, solve, update, iterate until the error is small. Newton converges very fast when the guess is close but can diverge when it is far. So a simulation always:</p>
+<ol>
+<li>Solves equilibrium (zero bias) first, often with Poisson's equation alone.</li>
+<li>Adds the continuity equations step by step.</li>
+<li>Ramps voltage in <strong>small steps</strong> (quasistationary), using each step's solution as the next guess; if a step fails, it is automatically subdivided.</li>
+</ol>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>With a ~4.8 eV bandgap, the intrinsic density \(n_i\) of Ga₂O₃ at 300 K is around 10⁻²² cm⁻³ or less, more than 35 orders of magnitude below the doping. Ordinary numerical precision cannot represent such tiny hole densities, so simulating ultra-wide bandgap materials often requires extended precision, and solving only the electron equation when holes play no role.</p></div>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
+<li>D. L. Scharfetter, H. K. Gummel, "Large-signal analysis of a silicon Read diode oscillator," <em>IEEE Transactions on Electron Devices</em> 16, 64 (1969).</li>
+<li>D. Vasileska, S. M. Goodnick, G. Klimeck, <em>Computational Electronics</em>, CRC Press (2010).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-intro.html">← <span class="l-vi">TCAD là gì và bắt đầu với Sentaurus</span><span class="l-en">What TCAD is and starting with Sentaurus</span></a><a class="n" href="tcad-workbench.html"><span class="l-vi">Sentaurus Workbench: dự án, tham số, thí nghiệm</span><span class="l-en">Sentaurus Workbench: projects, parameters, experiments</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

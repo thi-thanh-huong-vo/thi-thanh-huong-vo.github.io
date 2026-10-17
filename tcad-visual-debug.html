@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Sentaurus Visual và xử lý lỗi hội tụ" data-title-en="Sentaurus Visual and fixing convergence">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentaurus Visual and fixing convergence · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Plotting and extraction with Tcl, a convergence checklist and good working habits.">
+<meta property="og:title" content="Sentaurus Visual and fixing convergence">
+<meta property="og:description" content="Plotting and extraction with Tcl, a convergence checklist and good working habits.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 3</span><span class="l-en">Part 3 · Lesson 3</span></p>
+  <h1><span class="l-vi">Sentaurus Visual và xử lý lỗi hội tụ</span><span class="l-en">Sentaurus Visual and fixing convergence</span></h1>
+  <p class="sub"><span class="l-vi">Vẽ và trích xuất bằng Tcl, danh sách xử lý khi không hội tụ và thói quen làm việc tốt.</span><span class="l-en">Plotting and extraction with Tcl, a convergence checklist and good working habits.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Bài cuối gồm hai kỹ năng mà người mới cần nhất: biến kết quả thành đồ thị và con số bằng Sentaurus Visual, và xử lý khi mô phỏng không hội tụ.</p>
+
+<h2 id="v-s1">1. Sentaurus Visual</h2>
+<p>SVisual mở được cả file cấu trúc <code>.tdr</code> (xem phân bố 2D, cắt 1D) và file <code>.plt</code> (đồ thị I-V, C-V). Mọi thao tác chuột đều tương ứng với một lệnh Tcl, nên có thể tự động hóa bằng một tệp lệnh chạy trong SWB:</p>
+<pre><code># svisual_vis.tcl -- plot the forward I-V and extract the current at 2 V
+load_file n@node|sdevice@_des.plt -name IV
+create_plot -1d -name Plot_IV
+select_plots Plot_IV
+create_curve -name Ianode -dataset IV \
+    -axisX &quot;anode OuterVoltage&quot; -axisY &quot;anode TotalCurrent&quot;
+set_axis_prop -plot Plot_IV -axis y -type log
+
+# extraction: read the two columns and report the last current value
+set V [get_variable_data &quot;anode OuterVoltage&quot; -dataset IV]
+set I [get_variable_data &quot;anode TotalCurrent&quot; -dataset IV]
+set Imax [lindex $I end]
+puts &quot;DOE: Imax $Imax&quot;      ;# SWB shows this value in the project table</code></pre>
+<p>Dòng có dạng <code>DOE: tên giá-trị</code> được SWB đọc và hiển thị trong bảng dự án, giúp so sánh hàng loạt thí nghiệm mà không phải mở từng đồ thị.</p>
+<p>Các thao tác hay dùng với file <code>.tdr</code>:</p>
+<ul>
+<li>Hiển thị điện trường, mật độ electron, giản đồ vùng trên toàn cấu trúc.</li>
+<li><strong>Cắt 1D</strong> (cutline) dọc bề mặt hoặc theo chiều sâu dưới mép anode để vẽ điện trường hay giản đồ vùng.</li>
+<li>Xuất dữ liệu ra file CSV để vẽ lại bằng Origin hay Python cho bài báo.</li>
+</ul>
+
+<h2 id="v-s2">2. Khi mô phỏng không hội tụ</h2>
+<p>Thông báo thường gặp là bước Quasistationary bị chia nhỏ tới <code>MinStep</code> rồi dừng. Đi theo danh sách sau, từ dễ đến khó:</p>
+<ol>
+<li><strong>Đọc file log</strong> từ lỗi đầu tiên: phương trình nào không hội tụ, ở bước nào, nút lưới nào có sai số lớn nhất.</li>
+<li><strong>Kiểm tra cấu trúc</strong>: tên điện cực khớp giữa SDE và SDevice chưa; tiếp xúc có gán đúng cạnh không; vật liệu có tham số chưa (cảnh báo "undefined model" hay "parameter not found").</li>
+<li><strong>Nghiệm ban đầu</strong>: giải <code>Poisson</code> riêng trước với nhiều vòng lặp; sau đó mới thêm phương trình hạt tải.</li>
+<li><strong>Giảm bước</strong>: <code>InitialStep</code> và <code>MaxStep</code> nhỏ hơn, đặc biệt gần đánh thủng hay khi bẫy bắt đầu nạp.</li>
+<li><strong>Bớt phương trình</strong>: với Ga₂O₃, bỏ <code>Hole</code> khi không cần.</li>
+<li><strong>Độ chính xác số</strong>: bật độ chính xác mở rộng cho vật liệu vùng cấm siêu rộng; tăng <code>Iterations</code>.</li>
+<li><strong>Lưới</strong>: lưới quá thô ở mép điện cực, hoặc thay đổi kích thước ô quá đột ngột, đều gây khó hội tụ; làm mịn và làm mượt chuyển tiếp.</li>
+<li><strong>Bật mô hình từng cái một</strong>: nếu bật đồng thời ion hóa, bẫy, xuyên hầm và nhiệt mà không hội tụ, hãy tắt hết rồi bật lại từng mô hình để tìm thủ phạm.</li>
+</ol>
+
+<h2 id="v-s3">3. Thói quen làm việc tốt</h2>
+<ul>
+<li>Bắt đầu đơn giản: cấu trúc 1D hoặc 2D thô, mô hình tối thiểu; chỉ thêm khi cần giải thích dữ liệu.</li>
+<li>Luôn so sánh với một kết quả biết trước (ví dụ phương trình phát xạ nhiệt điện tử giải tích) trước khi tin mô phỏng phức tạp hơn.</li>
+<li>Thử nghiệm hội tụ lưới cho mọi kết quả sẽ công bố.</li>
+<li>Lưu bảng các mô hình, tham số và nguồn trích dẫn; phần "Simulation details" của bài báo sẽ cần đúng những thông tin này.</li>
+</ul>
+
+<h2 id="v-s4">4. Nguồn học tiếp</h2>
+<ul>
+<li><strong>Sentaurus Training</strong> đi kèm phần mềm: có ví dụ hoàn chỉnh cho diode, MOSFET, linh kiện công suất và C-V.</li>
+<li><strong>Hướng dẫn của trường đại học</strong>: tài liệu của UC Berkeley, các khóa của CMC Microsystems, hướng dẫn sinh viên của D. W. Parent.</li>
+<li><strong>Sách</strong>: Selberherr (nền tảng số), Vasileska–Goodnick–Klimeck (mô hình hóa), Sarkar (TCAD cho MOSFET).</li>
+<li><strong>Bài báo Ga₂O₃</strong> có mục mô phỏng chi tiết: đọc kỹ phần thiết lập mô hình để học cách người khác chọn tham số.</li>
+</ul>
+
+<h2 id="v-s5">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Visual User Guide</em> và <em>Sentaurus Device User Guide</em> (đi kèm phần mềm).</li>
+<li>CERN BILPA, <a href="https://bilpa.docs.cern.ch/simulation/tcad/guide" target="_blank" rel="noopener">TCAD guide</a> (luồng công việc và SVisual).</li>
+<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Sentaurus training modules</a>.</li>
+<li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The last lesson covers the two skills beginners need most: turning results into plots and numbers with Sentaurus Visual, and dealing with simulations that do not converge.</p>
+
+<h2 id="e-s1">1. Sentaurus Visual</h2>
+<p>SVisual opens both structure files (<code>.tdr</code>, for 2D distributions and 1D cuts) and current files (<code>.plt</code>, for I-V and C-V plots). Every mouse action corresponds to a Tcl command, so you can automate it with a command file run inside SWB:</p>
+<pre><code># svisual_vis.tcl -- plot the forward I-V and extract the current at 2 V
+load_file n@node|sdevice@_des.plt -name IV
+create_plot -1d -name Plot_IV
+select_plots Plot_IV
+create_curve -name Ianode -dataset IV \
+    -axisX &quot;anode OuterVoltage&quot; -axisY &quot;anode TotalCurrent&quot;
+set_axis_prop -plot Plot_IV -axis y -type log
+
+# extraction: read the two columns and report the last current value
+set V [get_variable_data &quot;anode OuterVoltage&quot; -dataset IV]
+set I [get_variable_data &quot;anode TotalCurrent&quot; -dataset IV]
+set Imax [lindex $I end]
+puts &quot;DOE: Imax $Imax&quot;      ;# SWB shows this value in the project table</code></pre>
+<p>A line of the form <code>DOE: name value</code> is read by SWB and shown in the project table, so you can compare many experiments without opening each plot.</p>
+<p>Common operations on <code>.tdr</code> files:</p>
+<ul>
+<li>Show the field, electron density or band diagram over the whole structure.</li>
+<li><strong>1D cutlines</strong> along the surface or vertically under the anode edge to plot field or band diagrams.</li>
+<li>Export data as CSV to replot in Origin or Python for papers.</li>
+</ul>
+
+<h2 id="e-s2">2. When the simulation does not converge</h2>
+<p>The usual message is that the Quasistationary step was reduced to <code>MinStep</code> and the run stopped. Work through this list, from easy to hard:</p>
+<ol>
+<li><strong>Read the log</strong> from the first error: which equation failed, at which step, which mesh node had the largest error.</li>
+<li><strong>Check the structure</strong>: electrode names match between SDE and SDevice; contacts are on the right edges; materials have parameters (warnings such as "undefined model" or "parameter not found").</li>
+<li><strong>Initial solution</strong>: solve <code>Poisson</code> alone first with many iterations; only then add carrier equations.</li>
+<li><strong>Smaller steps</strong>: reduce <code>InitialStep</code> and <code>MaxStep</code>, especially near breakdown or when traps start to charge.</li>
+<li><strong>Fewer equations</strong>: for Ga₂O₃, drop <code>Hole</code> when not needed.</li>
+<li><strong>Numerical precision</strong>: enable extended precision for ultra-wide bandgap materials; raise <code>Iterations</code>.</li>
+<li><strong>Mesh</strong>: a mesh too coarse at electrode edges, or cell sizes changing too abruptly, both hurt convergence; refine and smooth the transitions.</li>
+<li><strong>Enable models one at a time</strong>: if impact ionization, traps, tunneling and thermal models are all on and nothing converges, turn them all off and re-enable one by one to find the culprit.</li>
+</ol>
+
+<h2 id="e-s3">3. Good working habits</h2>
+<ul>
+<li>Start simple: a 1D or coarse 2D structure, minimal models; add only what is needed to explain data.</li>
+<li>Always compare with a known result (e.g. the analytical thermionic emission equation) before trusting a more complex simulation.</li>
+<li>Run a mesh convergence test for every result you will publish.</li>
+<li>Keep a table of models, parameters and their sources; the "Simulation details" section of a paper needs exactly this.</li>
+</ul>
+
+<h2 id="e-s4">4. Where to learn more</h2>
+<ul>
+<li><strong>Sentaurus Training</strong>, shipped with the software: complete examples for diodes, MOSFETs, power devices and C-V.</li>
+<li><strong>University guides</strong>: UC Berkeley's materials, CMC Microsystems courses, D. W. Parent's student guide.</li>
+<li><strong>Books</strong>: Selberherr (numerical foundations), Vasileska–Goodnick–Klimeck (modeling), Sarkar (TCAD for MOSFETs).</li>
+<li><strong>Ga₂O₃ papers</strong> with detailed simulation sections: read the model setup carefully to learn how others choose parameters.</li>
+</ul>
+
+<h2 id="e-s5">References</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Visual User Guide</em> and <em>Sentaurus Device User Guide</em> (shipped with the software).</li>
+<li>CERN BILPA, <a href="https://bilpa.docs.cern.ch/simulation/tcad/guide" target="_blank" rel="noopener">TCAD guide</a> (workflow and SVisual).</li>
+<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Sentaurus training modules</a>.</li>
+<li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-breakdown-cv.html">← <span class="l-vi">Đánh thủng, dòng rò, C-V và nhiệt độ</span><span class="l-en">Breakdown, leakage, C-V and temperature</span></a><a class="n" href="tcad.html"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

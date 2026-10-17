@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Năm 1965, Bruce Deal và Andrew Grove tại Fairchild Semiconductor công bố một mô hình chỉ dùng ba định luật quen thuộc: định luật Henry, định luật Fick và động học phản ứng bậc một. Bài này đi qua từng bước dẫn xuất, để thấy mỗi hằng số trong phương trình cuối cùng mang ý nghĩa vật lý gì.</p>
 
-<h2>1. Ba công cụ cơ bản</h2>
+<h2 id="v-s1">1. Ba công cụ cơ bản</h2>
 <h3>Thông lượng (flux)</h3>
 <p>Trong các hiện tượng vận chuyển (truyền nhiệt, truyền khối, cơ học chất lưu), thông lượng là lượng của một đại lượng đi qua một đơn vị diện tích trong một đơn vị thời gian, có thứ nguyên [lượng]·[thời gian]⁻¹·[diện tích]⁻¹. Với oxy hóa, đó là số phân tử chất oxy hóa đi qua 1 cm² mỗi giây (cm⁻²s⁻¹). Lưu lượng nước chảy qua mặt cắt một dòng sông mỗi giây, hay lượng ánh sáng mặt trời chiếu xuống một mảnh đất mỗi giây, cũng là những dạng thông lượng.</p>
 <h3>Định luật Henry</h3>
@@ -88,7 +88,7 @@ $$C = H\,p$$
 <h3>Định luật Fick thứ nhất</h3>
 <p>Khuếch tán xảy ra để đáp ứng gradient nồng độ: \(F = -D\,\partial C/\partial x\). Trong oxide mỏng ở trạng thái dừng, profile nồng độ gần như tuyến tính, nên \(F = D(C_0 - C_i)/x_{ox}\).</p>
 
-<h2>2. Bức tranh vật lý</h2>
+<h2 id="v-s2">2. Bức tranh vật lý</h2>
 <p>Chất oxy hóa đi từ khí tới Si qua ba bước nối tiếp:</p>
 <ol>
 <li>Từ khối khí khuếch tán qua <strong>lớp biên</strong> tới bề mặt oxide. Khí mang (N₂, Ar) chảy dọc ống lò theo dòng chảy tầng (laminar flow): các lớp khí trượt song song, không xáo trộn. Sát bề mặt wafer, vận tốc giảm về 0 và hình thành một lớp khí gần như đứng yên dày \(\delta\); chất oxy hóa phải khuếch tán qua lớp này.</li>
@@ -114,7 +114,7 @@ $$C = H\,p$$
 <text x="525" y="120" class="ns" text-anchor="middle">phản ứng tại</text><text x="525" y="136" class="ns" text-anchor="middle">mặt phân cách</text>
 </svg><figcaption>Hình 1. Profile nồng độ chất oxy hóa và ba thông lượng nối tiếp trong mô hình Deal–Grove.</figcaption></figure>
 
-<h2>3. Viết ba thông lượng</h2>
+<h2 id="v-s3">3. Viết ba thông lượng</h2>
 <p><strong>Bước 1, vận chuyển pha khí.</strong> Với hệ số truyền khối \(h_g = D_g/\delta\):</p>
 $$F_1 = h_g\,(C_g - C_s)$$
 <p>Nồng độ trong khí liên hệ với áp suất qua phương trình khí lý tưởng \(pV = nkT\), tức \(C = p/kT\). Theo định luật Henry, nồng độ ngay trong oxide tại bề mặt là \(C_0 = H p_s = H kT\,C_s\), và nồng độ cân bằng ứng với áp suất khí khối là \(C^* = H p_g = HkT\,C_g\). Thay vào:</p>
@@ -125,14 +125,14 @@ $$F_2 = D\,\frac{C_0 - C_i}{x_{ox}}$$
 <p><strong>Bước 3, phản ứng bậc một tại mặt phân cách</strong>, với hằng số tốc độ \(k_s\):</p>
 $$F_3 = k_s\,C_i$$
 
-<h2>4. Trạng thái dừng</h2>
+<h2 id="v-s4">4. Trạng thái dừng</h2>
 <p>Ở trạng thái dừng không có chất oxy hóa tích tụ ở đâu cả, nên \(F_1 = F_2 = F_3 \equiv F\). Đây là hai phương trình cho hai ẩn \(C_0\) và \(C_i\). Giải ra:</p>
 $$C_i = \frac{C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}, \qquad C_0 = \frac{\left(1 + \dfrac{k_s x_{ox}}{D}\right)C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
 <p>và thông lượng:</p>
 $$F = \frac{k_s C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
 <p>Mẫu số là tổng ba "trở kháng" nối tiếp, giống ba điện trở mắc nối tiếp: \(1/h\) của pha khí, \(x_{ox}/D\) của oxide và \(1/k_s\) của phản ứng. Trở kháng nào lớn nhất sẽ quyết định tốc độ.</p>
 
-<h2>5. Từ thông lượng tới tốc độ mọc oxide</h2>
+<h2 id="v-s5">5. Từ thông lượng tới tốc độ mọc oxide</h2>
 <p>Gọi \(N_1\) là số phân tử chất oxy hóa cần để tạo một đơn vị thể tích oxide: khoảng 2,2×10²² cm⁻³ với O₂ (một phân tử O₂ cho một phân tử SiO₂) và gấp đôi, khoảng 4,4×10²² cm⁻³, với H₂O. Tốc độ mọc:</p>
 $$\frac{dx_{ox}}{dt} = \frac{F}{N_1} = \frac{k_s C^*/N_1}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
 <p>Tách biến và tích phân từ \(x_{ox} = x_i\) tại \(t = 0\):</p>
@@ -151,7 +151,7 @@ $$A = 2D\left(\frac{1}{k_s} + \frac{1}{h}\right), \qquad B = \frac{2DC^*}{N_1}, 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Cách lập luận "các trở kháng nối tiếp" này rất hữu ích trong nghiên cứu Ga₂O₃. Ví dụ, khi ủ một tiếp xúc Ti/Ga₂O₃, oxy từ Ga₂O₃ khuếch tán vào Ti để tạo lớp TiOₓ ở mặt phân cách; tùy nhiệt độ và độ dày lớp, quá trình có thể bị giới hạn bởi phản ứng hoặc bởi khuếch tán, và lớp này lại để lại oxygen vacancy trong Ga₂O₃ gần mặt phân cách, ảnh hưởng tới tính chất tiếp xúc.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s6">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. E. Deal, A. S. Grove, "General relationship for the thermal oxidation of silicon," <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chương 6.</li>
@@ -160,7 +160,7 @@ $$A = 2D\left(\frac{1}{k_s} + \frac{1}{h}\right), \qquad B = \frac{2DC^*}{N_1}, 
 <div class="l-en">
 <p class="lead">In 1965, Bruce Deal and Andrew Grove at Fairchild Semiconductor published a model built from three familiar laws: Henry's law, Fick's law and first-order reaction kinetics. This lesson walks through the derivation step by step, so that every constant in the final equation has a clear physical meaning.</p>
 
-<h2>1. Three basic tools</h2>
+<h2 id="e-s1">1. Three basic tools</h2>
 <h3>Flux</h3>
 <p>In transport phenomena (heat transfer, mass transfer, fluid dynamics), flux is the amount of a quantity passing through unit area per unit time, with dimensions [quantity]·[time]⁻¹·[area]⁻¹. For oxidation, it is the number of oxidant molecules crossing 1 cm² per second (cm⁻²s⁻¹). The water flowing through a river's cross-section each second, or the sunlight falling on a patch of ground each second, are also fluxes.</p>
 <h3>Henry's law</h3>
@@ -170,7 +170,7 @@ $$C = H\,p$$
 <h3>Fick's first law</h3>
 <p>Diffusion responds to a concentration gradient: \(F = -D\,\partial C/\partial x\). In a thin oxide at steady state the profile is nearly linear, so \(F = D(C_0 - C_i)/x_{ox}\).</p>
 
-<h2>2. The physical picture</h2>
+<h2 id="e-s2">2. The physical picture</h2>
 <p>The oxidant travels from the gas to the Si in three series steps:</p>
 <ol>
 <li>It diffuses from the bulk gas across a <strong>boundary layer</strong> to the oxide surface. The carrier gas (N₂, Ar) flows along the furnace tube in laminar flow: layers slide parallel without mixing. Next to the wafer the velocity falls to zero, forming a nearly stagnant gas layer of thickness \(\delta\) that the oxidant must diffuse across.</li>
@@ -196,7 +196,7 @@ $$C = H\,p$$
 <text x="525" y="120" class="ns" text-anchor="middle">reaction at the</text><text x="525" y="136" class="ns" text-anchor="middle">interface</text>
 </svg><figcaption>Figure 1. Oxidant concentration profile and the three series fluxes in the Deal–Grove model.</figcaption></figure>
 
-<h2>3. Writing the three fluxes</h2>
+<h2 id="e-s3">3. Writing the three fluxes</h2>
 <p><strong>Step 1, gas-phase transport.</strong> With mass-transfer coefficient \(h_g = D_g/\delta\):</p>
 $$F_1 = h_g\,(C_g - C_s)$$
 <p>Gas concentration relates to pressure through the ideal gas law \(pV = nkT\), so \(C = p/kT\). By Henry's law, the concentration just inside the oxide surface is \(C_0 = H p_s = H kT\,C_s\), and the equilibrium concentration for the bulk gas pressure is \(C^* = H p_g = HkT\,C_g\). Substituting:</p>
@@ -207,14 +207,14 @@ $$F_2 = D\,\frac{C_0 - C_i}{x_{ox}}$$
 <p><strong>Step 3, first-order reaction at the interface</strong>, with rate constant \(k_s\):</p>
 $$F_3 = k_s\,C_i$$
 
-<h2>4. Steady state</h2>
+<h2 id="e-s4">4. Steady state</h2>
 <p>At steady state no oxidant accumulates anywhere, so \(F_1 = F_2 = F_3 \equiv F\). These are two equations for the two unknowns \(C_0\) and \(C_i\). Solving:</p>
 $$C_i = \frac{C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}, \qquad C_0 = \frac{\left(1 + \dfrac{k_s x_{ox}}{D}\right)C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
 <p>and the flux:</p>
 $$F = \frac{k_s C^*}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
 <p>The denominator is a sum of three series "resistances", like three resistors in series: \(1/h\) for the gas phase, \(x_{ox}/D\) for the oxide and \(1/k_s\) for the reaction. The largest resistance controls the rate.</p>
 
-<h2>5. From flux to growth rate</h2>
+<h2 id="e-s5">5. From flux to growth rate</h2>
 <p>Let \(N_1\) be the number of oxidant molecules needed per unit volume of oxide: about 2.2×10²² cm⁻³ for O₂ (one O₂ per SiO₂ molecule) and twice that, about 4.4×10²² cm⁻³, for H₂O. The growth rate is:</p>
 $$\frac{dx_{ox}}{dt} = \frac{F}{N_1} = \frac{k_s C^*/N_1}{1 + \dfrac{k_s}{h} + \dfrac{k_s x_{ox}}{D}}$$
 <p>Separating variables and integrating from \(x_{ox} = x_i\) at \(t = 0\):</p>
@@ -233,7 +233,7 @@ $$A = 2D\left(\frac{1}{k_s} + \frac{1}{h}\right), \qquad B = \frac{2DC^*}{N_1}, 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>This "series resistances" reasoning is very useful in Ga₂O₃ research. When a Ti/Ga₂O₃ contact is annealed, for example, oxygen from Ga₂O₃ diffuses into Ti to form an interfacial TiOₓ layer; depending on temperature and layer thickness the process may be reaction-limited or diffusion-limited, and it leaves oxygen vacancies in the Ga₂O₃ near the interface that affect contact behavior.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s6">References</h2>
 <ol class="refs">
 <li>B. E. Deal, A. S. Grove, "General relationship for the thermal oxidation of silicon," <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chapter 6.</li>

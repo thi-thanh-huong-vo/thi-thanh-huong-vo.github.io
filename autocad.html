@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="AutoCAD cho thiết kế mask" data-title-en="AutoCAD for Mask Design">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutoCAD for Mask Design · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="An AutoCAD introduction for first-time photomask designers: commands, objects, drawing rules and practice.">
+<meta property="og:title" content="AutoCAD for Mask Design">
+<meta property="og:description" content="An AutoCAD introduction for first-time photomask designers: commands, objects, drawing rules and practice.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .quizcard{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:1rem 1.2rem;margin:1.75rem 0 .5rem}
+  .quizcard p{margin:0;text-align:left}.quizcard .qt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.15rem;color:var(--accent);margin-bottom:.25rem}
+  .qbtn{background:var(--accent);color:var(--paper)!important;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-weight:600;white-space:nowrap}
+</style>
+<style>
+  .topics{display:grid;grid-template-columns:1fr;gap:1rem;margin:1.5rem 0}
+  .topic{display:block;border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.3rem;text-decoration:none!important;color:inherit;text-align:left;transition:border-color .15s}
+  a.topic:hover{border-color:var(--accent)}
+  .topic .tn{font-family:"Source Serif 4",Georgia,serif;font-size:.95rem;color:var(--accent);margin:0}
+  .topic .tt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.3rem;margin:.15rem 0 .35rem;color:var(--ink)}
+  .topic .td{margin:0;text-align:left;color:var(--muted);font-size:.95rem}
+  .topic .tm{margin:.6rem 0 0;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .topic.soon{opacity:.6}
+</style><style>
+  .ls-search{margin:1.25rem 0 1.75rem}
+  .ls-search input{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;padding:.8rem 1rem;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink)}
+  .ls-search input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .ls-results{display:grid;gap:.5rem;margin-top:.6rem}
+  .ls-hit{display:block;border:1px solid var(--rule);border-radius:8px;padding:.7rem .9rem;text-decoration:none!important;color:var(--ink);text-align:left}
+  .ls-hit:hover{border-color:var(--accent)}
+  .ls-tag{display:inline-block;font-size:.72rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:.05rem .4rem;margin-right:.45rem;vertical-align:1px}
+  .ls-t{font-weight:600}.ls-h{display:block;font-size:.9rem;color:var(--accent);margin-top:.15rem}
+  .ls-x{display:block;font-size:.88rem;color:var(--muted);margin-top:.25rem;overflow-wrap:anywhere}
+  .ls-x mark{background:var(--accent-soft);color:var(--ink);font-weight:600;padding:0 .1rem;border-radius:2px}
+  .ls-none{color:var(--muted);text-align:left}
+  .res h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.2rem 0 .4rem}
+  .res ul{padding-left:1.2rem}.res li{margin-bottom:.4rem;text-align:left}
+  .topic .lock{font-size:.85rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="learning.html"><span class="l-vi">Learning Space</span><span class="l-en">Learning Space</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Learning Space · Thư mục 2</span><span class="l-en">Learning Space · Folder 2</span></p>
+  <h1><span class="l-vi">AutoCAD cho thiết kế mask</span><span class="l-en">AutoCAD for Mask Design</span></h1>
+  <p class="sub"><span class="l-vi">Nhập môn AutoCAD cho người lần đầu vẽ mask quang khắc: lệnh, đối tượng, quy tắc vẽ và bài thực hành.</span><span class="l-en">An AutoCAD introduction for first-time photomask designers: commands, objects, drawing rules and practice.</span></p>
+</header>
+<div class="l-vi">
+
+<p class="lead">Lần đầu thiết kế mask quang khắc? Chủ đề này dành cho bạn. Bảy bài đi từ mask là gì, cách dùng AutoCAD, các lệnh và đối tượng cần thiết, quy tắc vẽ để mask in đúng, đến một bài thực hành hoàn chỉnh và cách xuất file gửi đi làm mask.</p>
+<div class="ls-search" data-scope="cad"><input type="search" data-vi="Tìm kiếm… (vd: polyline, dark field)" data-en="Search… (e.g. polyline, dark field)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
+<p class="box" style="text-align:left">Biên soạn từ sách, tài liệu chính thức của Autodesk và hướng dẫn thiết kế mask của nhiều phòng sạch đại học. Nếu đã quen AutoCAD, bạn có thể bắt đầu từ Phần 2.</p>
+<h2>Phần 1. Nền tảng</h2>
+<ol class="toc">
+  <li><a href="cad-mask-basics.html">Mask quang khắc và quy trình thiết kế</a><span>Mask là gì, các loại mask, luồng công việc, cực tính clear/dark field và định dạng file.</span></li>
+  <li><a href="cad-setup.html">Làm quen AutoCAD: giao diện, đơn vị, tọa độ</a><span>Dòng lệnh, quy ước 1 đơn vị = 1 µm, tọa độ tuyệt đối và tương đối, OSNAP, ORTHO và file mẫu.</span></li>
+  <li><a href="cad-commands.html">Các lệnh AutoCAD cần thiết cho mask</a><span>Bảng khoảng 30 lệnh theo nhóm: vẽ, sao chép, chỉnh sửa, đo kiểm, tổ chức và xuất file.</span></li>
+</ol>
+<h2>Phần 2. Thiết kế mask</h2>
+<ol class="toc">
+  <li><a href="cad-mask-elements.html">Các đối tượng cần có trên một bộ mask</a><span>Layer theo lớp mask, wafer và die, dấu căn chỉnh, thước vernier, mẫu kiểm tra và nhãn.</span></li>
+  <li><a href="cad-drawing-rules.html">Quy tắc vẽ để mask in đúng</a><span>Polyline kín độ rộng 0, không tự cắt, tạo lỗ, hình tròn, chữ, lưới và danh sách kiểm tra.</span></li>
+</ol>
+<h2>Phần 3. Thực hành và xuất file</h2>
+<ol class="toc">
+  <li><a href="cad-tutorial.html">Thực hành: mask diode Schottky và TLM</a><span>Từng bước vẽ die 2 × 2 mm hai lớp với tọa độ chính xác, dấu căn chỉnh và mảng die.</span></li>
+  <li><a href="cad-export.html">Xuất DXF, chuyển GDSII và đặt mask</a><span>Chuẩn bị bản xuất, KLayout, thông tin đặt mask và bảng lỗi thường gặp.</span></li>
+</ol>
+<div class="res"><h2>Sách và tài liệu tham khảo</h2>
+<h3>Sách về AutoCAD</h3><ul>
+<li>G. Omura, B. C. Benton, <em>Mastering AutoCAD 2021 and AutoCAD LT 2021</em>, Sybex/Wiley (2020). Sách tham khảo toàn diện, được cập nhật theo từng phiên bản AutoCAD.</li>
+<li>W. Baumback, <a href="https://opentextbc.ca/autocad2d/" target="_blank" rel="noopener"><em>Introduction to Drafting and AutoCAD 2D</em></a>, BCcampus (2021). Sách mở miễn phí (CC BY 4.0), rất phù hợp cho người mới.</li>
+<li>Autodesk, <a href="https://help.autodesk.com/view/ACD/2024/ENU/" target="_blank" rel="noopener">AutoCAD Help</a>: tra cứu chính thức mọi lệnh.</li></ul>
+<h3>Sách về vi chế tạo và mask</h3><ul>
+<li>S. Franssila, <em>Introduction to Microfabrication</em>, 2nd ed., Wiley (2010).</li>
+<li>M. J. Madou, <em>Fundamentals of Microfabrication: The Science of Miniaturization</em>, 2nd ed., CRC Press (2002).</li></ul>
+<h3>Hướng dẫn của các phòng sạch</h3><ul>
+<li>EPFL CMi, <a href="https://www.epfl.ch/research/facilities/cmi/process/photolithography/layout-design" target="_blank" rel="noopener">Layout design guidelines</a>.</li>
+<li>Unity Health Toronto, <a href="https://oldresearch.unityhealth.to/wp-content/uploads/2019/05/Photomask_Design_Rules.pdf" target="_blank" rel="noopener">Photomask design rules</a>.</li>
+<li>University of Utah Nanofab, <a href="https://www.nanofab.utah.edu/wp-content/uploads/2022/12/Heidelberg-uPG-SOP-2018.pdf" target="_blank" rel="noopener">Heidelberg µPG 101 SOP</a>.</li>
+<li>University of Florida NRF, <a href="https://nrf.aux.eng.ufl.edu/_files/documents/4218.pdf" target="_blank" rel="noopener">Mask design guidelines</a>.</li>
+<li>UCSB Nanofab, <a href="https://wiki.nanofab.ucsb.edu/wiki/KLayout_Design_Tips" target="_blank" rel="noopener">KLayout design tips</a>.</li>
+<li>University of Washington, <a href="https://ebeam.wnf.uw.edu/ebeamweb/training/cad_tut_main/cad_tut_det/cad_tutorial_details.html" target="_blank" rel="noopener">CAD tutorial: layout details</a>.</li>
+<li><a href="https://www.klayout.de/" target="_blank" rel="noopener">KLayout</a>: phần mềm layout miễn phí để chuyển và kiểm tra GDSII.</li></ul></div>
+<script defer src="search.js?v=1"></script>
+</div>
+<div class="l-en">
+
+<p class="lead">Designing a photomask for the first time? This topic is for you. Seven lessons run from what a mask is, through using AutoCAD and the commands and objects you need, to drawing rules that make masks print correctly, a complete hands-on exercise, and exporting the file for mask making.</p>
+<div class="ls-search" data-scope="cad"><input type="search" data-vi="Tìm kiếm… (vd: polyline, dark field)" data-en="Search… (e.g. polyline, dark field)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
+<p class="box" style="text-align:left">Compiled from books, Autodesk's official documentation and the mask design guides of several university cleanrooms. If you already know AutoCAD, you can start at Part 2.</p>
+<h2>Part 1. Foundations</h2>
+<ol class="toc">
+  <li><a href="cad-mask-basics.html">Photomasks and the design workflow</a><span>What a mask is, mask types, the workflow, clear/dark-field polarity and file formats.</span></li>
+  <li><a href="cad-setup.html">Getting started: interface, units, coordinates</a><span>The command line, the 1 unit = 1 µm convention, absolute and relative coordinates, OSNAP, ORTHO and templates.</span></li>
+  <li><a href="cad-commands.html">Essential AutoCAD commands for masks</a><span>A table of about 30 commands by task: draw, copy, edit, measure, organize and export.</span></li>
+</ol>
+<h2>Part 2. Designing the mask</h2>
+<ol class="toc">
+  <li><a href="cad-mask-elements.html">What goes on a mask set</a><span>Layers per mask level, wafer and dies, alignment marks, verniers, test patterns and labels.</span></li>
+  <li><a href="cad-drawing-rules.html">Drawing rules for a correct mask</a><span>Closed zero-width polylines, no self-intersection, holes, circles, text, grids and a checklist.</span></li>
+</ol>
+<h2>Part 3. Practice and export</h2>
+<ol class="toc">
+  <li><a href="cad-tutorial.html">Hands-on: a Schottky diode and TLM mask</a><span>Step by step: a two-layer 2 × 2 mm die with exact coordinates, alignment marks and a die array.</span></li>
+  <li><a href="cad-export.html">Export DXF, convert to GDSII and order</a><span>Preparing the export, KLayout conversion, ordering information and a table of common errors.</span></li>
+</ol>
+<div class="res"><h2>Books and references</h2>
+<h3>Books on AutoCAD</h3><ul>
+<li>G. Omura, B. C. Benton, <em>Mastering AutoCAD 2021 and AutoCAD LT 2021</em>, Sybex/Wiley (2020). A comprehensive reference, updated for each AutoCAD release.</li>
+<li>W. Baumback, <a href="https://opentextbc.ca/autocad2d/" target="_blank" rel="noopener"><em>Introduction to Drafting and AutoCAD 2D</em></a>, BCcampus (2021). A free open textbook (CC BY 4.0), well suited to beginners.</li>
+<li>Autodesk, <a href="https://help.autodesk.com/view/ACD/2024/ENU/" target="_blank" rel="noopener">AutoCAD Help</a>: the official reference for every command.</li></ul>
+<h3>Books on microfabrication and masks</h3><ul>
+<li>S. Franssila, <em>Introduction to Microfabrication</em>, 2nd ed., Wiley (2010).</li>
+<li>M. J. Madou, <em>Fundamentals of Microfabrication: The Science of Miniaturization</em>, 2nd ed., CRC Press (2002).</li></ul>
+<h3>Cleanroom guides</h3><ul>
+<li>EPFL CMi, <a href="https://www.epfl.ch/research/facilities/cmi/process/photolithography/layout-design" target="_blank" rel="noopener">Layout design guidelines</a>.</li>
+<li>Unity Health Toronto, <a href="https://oldresearch.unityhealth.to/wp-content/uploads/2019/05/Photomask_Design_Rules.pdf" target="_blank" rel="noopener">Photomask design rules</a>.</li>
+<li>University of Utah Nanofab, <a href="https://www.nanofab.utah.edu/wp-content/uploads/2022/12/Heidelberg-uPG-SOP-2018.pdf" target="_blank" rel="noopener">Heidelberg µPG 101 SOP</a>.</li>
+<li>University of Florida NRF, <a href="https://nrf.aux.eng.ufl.edu/_files/documents/4218.pdf" target="_blank" rel="noopener">Mask design guidelines</a>.</li>
+<li>UCSB Nanofab, <a href="https://wiki.nanofab.ucsb.edu/wiki/KLayout_Design_Tips" target="_blank" rel="noopener">KLayout design tips</a>.</li>
+<li>University of Washington, <a href="https://ebeam.wnf.uw.edu/ebeamweb/training/cad_tut_main/cad_tut_det/cad_tutorial_details.html" target="_blank" rel="noopener">CAD tutorial: layout details</a>.</li>
+<li><a href="https://www.klayout.de/" target="_blank" rel="noopener">KLayout</a>: free layout software to convert and check GDSII.</li></ul></div>
+
+</div>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn. Nguồn tham khảo được ghi ở trang chủ đề và cuối mỗi bài.</span><span class="l-en">Written by Thi-Thanh-Huong Vo. Sources are credited on each topic page and at the end of every lesson.</span></p></footer>
+</main>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

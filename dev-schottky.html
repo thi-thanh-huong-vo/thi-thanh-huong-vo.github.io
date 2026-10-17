@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Tiếp xúc kim loại–bán dẫn có thể cho dòng đi một chiều như diode (tiếp xúc Schottky) hoặc cho dòng đi cả hai chiều như điện trở (tiếp xúc ohmic). Linh kiện nào cũng cần ít nhất hai tiếp xúc, nên hiểu chúng là kỹ năng nền tảng.</p>
 
-<h2>1. Mô hình ái lực điện tử</h2>
+<h2 id="v-s1">1. Mô hình ái lực điện tử</h2>
 <p>Để vẽ giản đồ năng lượng của tiếp xúc, ta dùng <strong>mô hình ái lực điện tử</strong> (electron affinity model, EAM): đặt hai vật liệu chung mức chân không, sau đó để mức Fermi cân bằng. Với kim loại có công thoát \(\Phi_m\) và bán dẫn loại n có ái lực điện tử \(\chi\), công thoát \(\Phi_s\):</p>
 <ul>
 <li>Nếu \(\Phi_m > \Phi_s\): electron chảy từ bán dẫn sang kim loại, để lại vùng nghèo ion donor dương. Vùng năng lượng uốn lên, tạo <strong>rào Schottky</strong> cho electron.</li>
@@ -97,7 +97,7 @@
 <text x="430" y="40" class="nt" text-anchor="middle">Bán dẫn loại n</text>
 </svg><figcaption>Hình 1. Giản đồ năng lượng của tiếp xúc Schottky trên bán dẫn loại n ở cân bằng.</figcaption></figure>
 
-<h2>2. Chiều cao rào và điện thế tiếp xúc</h2>
+<h2 id="v-s2">2. Chiều cao rào và điện thế tiếp xúc</h2>
 <p>Có hai rào khác nhau cần phân biệt:</p>
 $$q\Phi_B = q(\Phi_m - \chi) \quad\text{(rào nhìn từ kim loại)}, \qquad qV_0 = q(\Phi_m - \Phi_s) \quad\text{(rào nhìn từ bán dẫn)}$$
 <p>Vùng nghèo nằm hoàn toàn trong bán dẫn, giống một tiếp giáp p⁺n một phía:</p>
@@ -105,7 +105,7 @@ $$W = \sqrt{\frac{2\varepsilon_s (V_0 - V)}{qN_d}}, \qquad \frac{1}{C'^2} = \fra
 <div class="box"><p class="t">Ví dụ</p>
 <p>W (\(\Phi_m = 4{,}55\) eV) trên Si loại n (\(\chi = 4{,}01\) eV, \(N_d = 10^{16}\) cm⁻³, \(E_C - E_F \approx 0{,}21\) eV): \(\Phi_B \approx 0{,}54\) eV, \(V_0 \approx 0{,}34\) V, \(W \approx 0{,}21\ \mu\)m. Đo \(1/C^2\) theo điện áp ngược cho \(V_0\) và \(N_d\), từ đó suy ra \(\Phi_B = V_0 + (E_C - E_F)/q\).</p></div>
 
-<h2>3. Đặc tuyến I-V: phát xạ nhiệt điện tử</h2>
+<h2 id="v-s3">3. Đặc tuyến I-V: phát xạ nhiệt điện tử</h2>
 <p>Ở cân bằng, số electron vượt rào từ kim loại sang bán dẫn bằng số đi theo chiều ngược lại. Phân cực thuận (kim loại dương) hạ rào phía bán dẫn, và số electron vượt rào tăng theo hàm mũ. Phân cực ngược nâng rào phía bán dẫn; dòng còn lại do electron từ kim loại vượt \(\Phi_B\), mà \(\Phi_B\) gần như không đổi theo điện áp, nên dòng ngược gần như bão hòa:</p>
 $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <p>với \(A^{*}\) là hằng số Richardson hiệu dụng. Điểm khác biệt quan trọng so với diode pn:</p>
@@ -115,10 +115,10 @@ $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <li>Ở điện áp ngược lớn hoặc pha tạp cao, xuyên hầm qua rào mỏng trở nên quan trọng.</li>
 </ul>
 
-<h2>4. Tiếp xúc ohmic</h2>
+<h2 id="v-s4">4. Tiếp xúc ohmic</h2>
 <p>Tiếp xúc ohmic lý tưởng có I-V tuyến tính theo cả hai chiều và điện trở tối thiểu. Vì khó tìm được kim loại có công thoát phù hợp, cách phổ biến là pha tạp rất mạnh (n⁺ hoặc p⁺) ngay dưới kim loại: vùng nghèo trở nên mỏng đến mức hạt tải xuyên hầm qua dễ dàng theo cả hai chiều.</p>
 
-<h2>5. Các hiệu ứng không lý tưởng</h2>
+<h2 id="v-s5">5. Các hiệu ứng không lý tưởng</h2>
 <ul>
 <li><strong>Trạng thái bề mặt và ghim mức Fermi</strong> (Fermi level pinning): mật độ trạng thái bề mặt cao ghim \(E_F\) tại một vị trí cố định trong vùng cấm, làm \(\Phi_B\) gần như không phụ thuộc \(\Phi_m\). Với Si và GaAs, hiệu ứng này rất mạnh.</li>
 <li><strong>Lưỡng cực do xuyên hầm</strong>: hàm sóng electron của kim loại "rò" vào vùng cấm bán dẫn, tạo lưỡng cực ở mặt phân cách và làm gián đoạn mức chân không.</li>
@@ -128,7 +128,7 @@ $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Diode Schottky là linh kiện Ga₂O₃ trưởng thành nhất, với các kim loại như Ni, Pt, Au hoặc Pd cho \(\Phi_B\) cỡ 1,0–1,6 eV. Ghim mức Fermi trên Ga₂O₃ yếu hơn Si, nên \(\Phi_B\) thay đổi rõ theo kim loại. Rào cao kết hợp vùng cấm rộng cho phép diode hoạt động ở nhiệt độ hàng trăm °C, và cũng là nền tảng cho cảm biến UV và tia X mà tôi đang nghiên cứu.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s6">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 5.</li>
 <li>E. H. Rhoderick, R. H. Williams, <em>Metal–Semiconductor Contacts</em>, 2nd ed., Clarendon Press (1988).</li>
@@ -138,7 +138,7 @@ $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <div class="l-en">
 <p class="lead">A metal–semiconductor contact can pass current one way like a diode (Schottky contact) or both ways like a resistor (ohmic contact). Every device needs at least two contacts, so understanding them is a foundational skill.</p>
 
-<h2>1. The electron affinity model</h2>
+<h2 id="e-s1">1. The electron affinity model</h2>
 <p>To draw a contact's band diagram we use the <strong>electron affinity model</strong> (EAM): align both materials to a common vacuum level, then let the Fermi levels equalize. For a metal with work function \(\Phi_m\) and an n-type semiconductor with electron affinity \(\chi\) and work function \(\Phi_s\):</p>
 <ul>
 <li>If \(\Phi_m > \Phi_s\): electrons flow from the semiconductor to the metal, leaving a depletion region of positive donors. The bands bend up, forming a <strong>Schottky barrier</strong> for electrons.</li>
@@ -157,7 +157,7 @@ $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <text x="430" y="40" class="nt" text-anchor="middle">n-type semiconductor</text>
 </svg><figcaption>Figure 1. Band diagram of a Schottky contact on an n-type semiconductor in equilibrium.</figcaption></figure>
 
-<h2>2. Barrier height and contact potential</h2>
+<h2 id="e-s2">2. Barrier height and contact potential</h2>
 <p>Two different barriers must be distinguished:</p>
 $$q\Phi_B = q(\Phi_m - \chi) \quad\text{(seen from the metal)}, \qquad qV_0 = q(\Phi_m - \Phi_s) \quad\text{(seen from the semiconductor)}$$
 <p>The depletion region lies entirely in the semiconductor, like a one-sided p⁺n junction:</p>
@@ -165,7 +165,7 @@ $$W = \sqrt{\frac{2\varepsilon_s (V_0 - V)}{qN_d}}, \qquad \frac{1}{C'^2} = \fra
 <div class="box"><p class="t">Example</p>
 <p>W (\(\Phi_m = 4.55\) eV) on n-type Si (\(\chi = 4.01\) eV, \(N_d = 10^{16}\) cm⁻³, \(E_C - E_F \approx 0.21\) eV): \(\Phi_B \approx 0.54\) eV, \(V_0 \approx 0.34\) V, \(W \approx 0.21\ \mu\)m. Measuring \(1/C^2\) against reverse voltage gives \(V_0\) and \(N_d\), and hence \(\Phi_B = V_0 + (E_C - E_F)/q\).</p></div>
 
-<h2>3. I-V characteristics: thermionic emission</h2>
+<h2 id="e-s3">3. I-V characteristics: thermionic emission</h2>
 <p>In equilibrium, the number of electrons crossing from metal to semiconductor equals the number crossing back. Forward bias (metal positive) lowers the semiconductor-side barrier, and the number of electrons crossing rises exponentially. Reverse bias raises the semiconductor-side barrier; the remaining current comes from electrons crossing \(\Phi_B\) from the metal, and since \(\Phi_B\) hardly changes with bias, the reverse current nearly saturates:</p>
 $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <p>where \(A^{*}\) is the effective Richardson constant. Key differences from a pn diode:</p>
@@ -175,10 +175,10 @@ $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <li>At large reverse bias or high doping, tunneling through the thin barrier becomes important.</li>
 </ul>
 
-<h2>4. Ohmic contacts</h2>
+<h2 id="e-s4">4. Ohmic contacts</h2>
 <p>An ideal ohmic contact has linear I-V in both directions and minimal resistance. Since a metal with a suitable work function is hard to find, the common approach is to dope very heavily (n⁺ or p⁺) right under the metal: the depletion region becomes so thin that carriers tunnel through easily in both directions.</p>
 
-<h2>5. Nonideal effects</h2>
+<h2 id="e-s5">5. Nonideal effects</h2>
 <ul>
 <li><strong>Surface states and Fermi level pinning</strong>: a high surface-state density pins \(E_F\) at a fixed position in the gap, making \(\Phi_B\) nearly independent of \(\Phi_m\). The effect is very strong for Si and GaAs.</li>
 <li><strong>Tunneling-induced dipoles</strong>: metal electron wavefunctions "leak" into the semiconductor gap, creating an interface dipole and a discontinuity in the vacuum level.</li>
@@ -188,7 +188,7 @@ $$J = A^{*}T^2\,e^{-q\Phi_B/kT}\left(e^{qV/nkT} - 1\right)$$
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>The Schottky diode is the most mature Ga₂O₃ device, with metals such as Ni, Pt, Au or Pd giving \(\Phi_B\) of about 1.0–1.6 eV. Fermi level pinning on Ga₂O₃ is weaker than on Si, so \(\Phi_B\) varies noticeably with the metal. A high barrier combined with a wide bandgap lets the diodes operate at hundreds of °C, and is also the basis for the UV and X-ray detectors I work on.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s6">References</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 5.</li>
 <li>E. H. Rhoderick, R. H. Williams, <em>Metal–Semiconductor Contacts</em>, 2nd ed., Clarendon Press (1988).</li>

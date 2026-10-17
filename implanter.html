@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Máy cấy ion là một máy gia tốc hạt thu nhỏ: tạo ion, chọn đúng loại ion, gia tốc đến năng lượng mong muốn rồi quét đều lên wafer. Mỗi bộ phận đều ảnh hưởng trực tiếp tới độ chính xác của liều và profile.</p>
 
-<h2>1. Cấu trúc tổng quát</h2>
+<h2 id="v-s1">1. Cấu trúc tổng quát</h2>
 <figure><svg viewBox="0 0 620 200" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
 <rect x="5" y="70" width="95" height="56" rx="8" class="node"/><text x="52" y="94" class="nt" text-anchor="middle">Nguồn ion</text><text x="52" y="111" class="ns" text-anchor="middle">BF₃, PH₃, AsH₃</text>
 <rect x="125" y="70" width="95" height="56" rx="8" class="node"/><text x="172" y="94" class="nt" text-anchor="middle">Trích xuất</text><text x="172" y="111" class="ns" text-anchor="middle">15–40 kV</text>
@@ -104,7 +104,7 @@ $$r = \frac{mv}{qB} = \frac{1}{B}\sqrt{\frac{2mV}{q}}$$
 <h3>Buồng wafer và quét chùm</h3>
 <p>Đường kính chùm chỉ cỡ 25 mm, trong khi wafer từ 200 mm trở lên, nên phải quét chùm, di chuyển wafer, hoặc cả hai: đĩa quay mang nhiều wafer (spin disk), bánh xe quay (spin wheel), hoặc quét từng wafer (single-wafer scan). Liều được đo bằng cốc Faraday, đếm điện tích của ion tới.</p>
 
-<h2>2. Các vấn đề thường gặp</h2>
+<h2 id="v-s2">2. Các vấn đề thường gặp</h2>
 <ul>
 <li><strong>Hiệu ứng che khuất</strong> (shadowing): khi cấy nghiêng, các cấu trúc cao như cổng che một phía, làm hai bên nguồn và máng không đối xứng. Đặc tính I-V của transistor có thể khác nhau khi đổi vai trò nguồn và máng.</li>
 <li><strong>Tích điện</strong> (charging): ion tới mang điện dương. Wafer nối đất kém, hoặc có các lớp cách điện như SiO₂, photoresist, sẽ tích điện dương, làm lệch chùm và có thể gây đánh thủng điện môi. Giải pháp: phun electron (electron shower) hoặc plasma flood để trung hòa.</li>
@@ -114,13 +114,13 @@ $$r = \frac{mv}{qB} = \frac{1}{B}\sqrt{\frac{2mV}{q}}$$
 <li><strong>Nhiễm chéo</strong>: sau nhiều lần cấy, bề mặt trong máy bão hòa tạp chất; khi đổi khí nguồn, nguyên tử cũ có thể bị phún xạ và cấy vào wafer.</li>
 </ul>
 
-<h2>3. Độ đồng đều</h2>
+<h2 id="v-s3">3. Độ đồng đều</h2>
 <p>Độ đồng đều của liều được kiểm tra bằng bản đồ điện trở tấm \(R_s\) trên toàn wafer. Một quan sát thú vị: liều càng cao thì độ đồng đều càng tốt, vì hư hỏng mạng tích lũy làm mất kênh và giảm channeling. Tích điện mạnh trên toàn wafer làm vùng trung tâm nhận liều thấp hơn dự kiến; tích điện cục bộ gây bất đồng đều cục bộ. Góc nghiêng và xoay cần được tối ưu cho từng điều kiện cấy.</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>β-Ga₂O₃ là vật liệu cách điện tốt khi không pha tạp hoặc khi đế được pha Fe để bán cách điện, nên vấn đề <strong>tích điện</strong> khi cấy ion càng cần chú ý. Ngoài ra, khi so sánh liều cấy với nồng độ hạt tải đo được bằng C-V hay Hall, cần nhớ rằng chỉ một phần tạp chất được kích hoạt sau ủ.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s4">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>H. Xiao, <em>Introduction to Semiconductor Manufacturing Technology</em>, 2nd ed., SPIE Press (2012).</li>
@@ -129,7 +129,7 @@ $$r = \frac{mv}{qB} = \frac{1}{B}\sqrt{\frac{2mV}{q}}$$
 <div class="l-en">
 <p class="lead">An ion implanter is a miniature particle accelerator: it creates ions, selects the right species, accelerates them to the desired energy and scans them uniformly over the wafer. Every component directly affects the accuracy of dose and profile.</p>
 
-<h2>1. Overall layout</h2>
+<h2 id="e-s1">1. Overall layout</h2>
 <figure><svg viewBox="0 0 620 200" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs>
 <rect x="5" y="70" width="95" height="56" rx="8" class="node"/><text x="52" y="94" class="nt" text-anchor="middle">Ion source</text><text x="52" y="111" class="ns" text-anchor="middle">BF₃, PH₃, AsH₃</text>
 <rect x="125" y="70" width="95" height="56" rx="8" class="node"/><text x="172" y="94" class="nt" text-anchor="middle">Extraction</text><text x="172" y="111" class="ns" text-anchor="middle">15–40 kV</text>
@@ -155,7 +155,7 @@ $$r = \frac{mv}{qB} = \frac{1}{B}\sqrt{\frac{2mV}{q}}$$
 <h3>End station and beam scanning</h3>
 <p>The beam is only about 25 mm across while wafers are 200 mm or larger, so the beam, the wafer or both must be scanned: spin disks carrying many wafers, spin wheels, or single-wafer scanning. Dose is measured with a Faraday cup that counts the charge of incoming ions.</p>
 
-<h2>2. Common issues</h2>
+<h2 id="e-s2">2. Common issues</h2>
 <ul>
 <li><strong>Shadowing</strong>: with tilted implants, tall features such as gates shade one side, making source and drain asymmetric. A transistor's I-V characteristics can differ when source and drain are swapped.</li>
 <li><strong>Charging</strong>: incoming ions are positive. A poorly grounded wafer, or one with insulating layers such as SiO₂ or photoresist, charges up positively, deflecting the beam and possibly causing dielectric breakdown. Solution: an electron shower or plasma flood to neutralize the charge.</li>
@@ -165,13 +165,13 @@ $$r = \frac{mv}{qB} = \frac{1}{B}\sqrt{\frac{2mV}{q}}$$
 <li><strong>Cross-contamination</strong>: after many implants, internal surfaces saturate with dopant; after a source-gas change, old atoms can be sputtered and implanted.</li>
 </ul>
 
-<h2>3. Uniformity</h2>
+<h2 id="e-s3">3. Uniformity</h2>
 <p>Dose uniformity is checked by mapping sheet resistance \(R_s\) across the wafer. An interesting observation: higher doses give better uniformity, because accumulated lattice damage destroys channels and reduces channeling. Severe wafer-wide charging makes the center receive a lower dose than intended; local charging causes local nonuniformity. Tilt and twist must be optimized for each implant condition.</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>β-Ga₂O₃ is a good insulator when undoped or when the substrate is Fe-doped to be semi-insulating, so <strong>charging</strong> during implantation deserves extra attention. Also, when comparing the implanted dose with carrier concentrations measured by C-V or Hall, remember that only part of the dopants are activated after annealing.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s4">References</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>H. Xiao, <em>Introduction to Semiconductor Manufacturing Technology</em>, 2nd ed., SPIE Press (2012).</li>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Đánh thủng, dòng rò, C-V và nhiệt độ" data-title-en="Breakdown, leakage, C-V and temperature">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breakdown, leakage, C-V and temperature · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Ionization integral and critical-field criterion, leakage mechanisms, AC analysis and temperature sweeps.">
+<meta property="og:title" content="Breakdown, leakage, C-V and temperature">
+<meta property="og:description" content="Ionization integral and critical-field criterion, leakage mechanisms, AC analysis and temperature sweeps.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 2</span><span class="l-en">Part 3 · Lesson 2</span></p>
+  <h1><span class="l-vi">Đánh thủng, dòng rò, C-V và nhiệt độ</span><span class="l-en">Breakdown, leakage, C-V and temperature</span></h1>
+  <p class="sub"><span class="l-vi">Tích phân ion hóa và tiêu chí trường tới hạn, cơ chế dòng rò, phân tích AC và quét nhiệt độ.</span><span class="l-en">Ionization integral and critical-field criterion, leakage mechanisms, AC analysis and temperature sweeps.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Sau đặc tuyến thuận, ba bài toán hay gặp nhất với linh kiện công suất là: điện áp đánh thủng, dòng rò ngược và đặc tuyến C-V. Bài này đưa ra khung thiết lập cho từng bài toán và các lưu ý riêng với Ga₂O₃.</p>
+
+<h2 id="v-s1">1. Điện áp đánh thủng</h2>
+<p>Có hai cách xác định đánh thủng trong TCAD:</p>
+<ul>
+<li><strong>Tích phân ion hóa</strong>: bật mô hình ion hóa va chạm; đánh thủng thác lũ xảy ra khi tích phân ion hóa dọc một đường điện trường đạt 1. Cần phương trình cho cả electron và lỗ trống.</li>
+<li><strong>Tiêu chí trường tới hạn</strong>: tăng điện áp ngược và ghi lại điện áp khi điện trường cực đại đạt giá trị tới hạn (ví dụ 8 MV/cm cho Ga₂O₃). Cách này được dùng trong nhiều bài báo về Ga₂O₃ vì hệ số ion hóa chưa được xác nhận chắc chắn.</li>
+</ul>
+<pre><code>Physics {
+  Temperature = 300
+  Fermi
+  Mobility ( DopingDependence HighFieldSaturation )
+  Recombination ( SRH  Avalanche )     * impact ionization model
+}
+Math {
+  BreakAtIonIntegral                    * stop when the ionization integral reaches 1
+  ExtendedPrecision
+}
+Solve {
+  Coupled ( Iterations = 100 ) { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary (
+    InitialStep = 1e-4  MinStep = 1e-8  MaxStep = 0.02
+    Goal { Name = &quot;anode&quot; Voltage = -2000 }
+  ) { Coupled { Poisson Electron Hole } }
+}</code></pre>
+<p>Ghi chú: cách chọn mô hình ion hóa và tham số đi kèm nằm trong tệp tham số; xem bài trước.</p>
+
+<h2 id="v-s2">2. Đọc kết quả đánh thủng</h2>
+<ul>
+<li>Vẽ điện trường dọc bề mặt và dọc trục thẳng đứng dưới mép anode: đỉnh trường gần như luôn nằm ở mép anode. Đây là nơi field plate hay vùng cấy N phát huy tác dụng.</li>
+<li>So sánh nhiều thiết kế (độ dài field plate, độ dày điện môi) bằng cách quét tham số trong SWB.</li>
+<li>Kiểm tra lưới: điện trường đỉnh rất nhạy với kích thước ô ở mép điện cực; làm mịn thêm cho đến khi kết quả không đổi.</li>
+</ul>
+
+<h2 id="v-s3">3. Dòng rò ngược</h2>
+<p>Với diode Schottky Ga₂O₃, dòng rò ngược thường do các cơ chế sau chi phối, theo thứ tự cần thêm vào mô hình:</p>
+<ol>
+<li>Phát xạ nhiệt điện tử với hạ rào do lực ảnh.</li>
+<li>Phát xạ nhiệt điện tử–trường và xuyên hầm qua rào (mô hình xuyên hầm phi cục bộ).</li>
+<li>Xuyên hầm hỗ trợ bởi bẫy và các đường rò ở mép hoặc bề mặt.</li>
+</ol>
+<p>Dòng rò mô phỏng thường nhỏ hơn thực nghiệm nhiều bậc nếu chỉ dùng phát xạ nhiệt điện tử; đó là tín hiệu cần thêm các cơ chế khác, không phải là lỗi mô phỏng.</p>
+
+<h2 id="v-s4">4. Đặc tuyến C-V</h2>
+<p>Điện dung được tính bằng <strong>phân tích tín hiệu nhỏ AC</strong>: tại mỗi điểm phân cực DC, SDevice tuyến tính hóa hệ phương trình và tính đáp ứng với tín hiệu xoay chiều ở tần số cho trước. Trong Sentaurus, việc này thường được làm trong chế độ mạch hỗn hợp (mixed-mode): linh kiện được đặt trong một khối <code>System</code> với nguồn áp, và lệnh <code>ACCoupled</code> chạy bên trong <code>Quasistationary</code>. Kết quả gồm ma trận điện dung và độ dẫn giữa các nút mạch.</p>
+<ul>
+<li>Tần số là tham số quan trọng: bẫy chỉ đóng góp vào điện dung khi kịp nạp xả theo tín hiệu, nên mô phỏng ở nhiều tần số (ví dụ 1 kHz, 100 kHz, 1 MHz) để so với phép đo.</li>
+<li>Vẽ \(1/C^2\) theo điện áp và so với thực nghiệm để kiểm tra pha tạp đã đúng chưa.</li>
+</ul>
+<p>Cú pháp đầy đủ của mixed-mode và <code>ACCoupled</code> khá dài; hãy bắt đầu từ ví dụ C-V trong Sentaurus Training rồi thay cấu trúc của bạn vào.</p>
+
+<h2 id="v-s5">5. Nhiệt độ</h2>
+<ul>
+<li>Quét nhiệt độ bằng tham số SWB, ví dụ <code>Temperature = @T@</code> với T từ 300 đến 673 K.</li>
+<li>Bật sự phụ thuộc nhiệt độ của vùng cấm, độ linh động và chiều cao rào nếu cần.</li>
+<li>Khi dòng lớn, tự gia nhiệt quan trọng (Ga₂O₃ dẫn nhiệt kém, khoảng 10–30 W/m·K): dùng mô hình nhiệt động (<code>Thermodynamic</code>) và thêm phương trình nhiệt độ mạng.</li>
+</ul>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Device User Guide</em>: các chương về avalanche generation, small-signal AC analysis, mixed-mode và thermodynamic model.</li>
+<li>X. Zhou et al., <a href="https://www.mdpi.com/2079-4991/14/11/978" target="_blank" rel="noopener"><em>Nanomaterials</em> 14, 978 (2024)</a> (mô phỏng field plate và cấy N).</li>
+<li>S. Roy, A. Bhattacharyya, S. Krishnamoorthy, <a href="https://arxiv.org/abs/2006.15645" target="_blank" rel="noopener">arXiv:2006.15645</a> (2020) (tiêu chí điện trường đỉnh).</li>
+<li>T. H. Vo et al., "Investigating reverse low-bias conduction mechanisms in Ga₂O₃ Schottky barrier diodes using pulsed current methods," <em>ACS Applied Electronic Materials</em> (2025).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">After the forward characteristic, the three most common problems for power devices are breakdown voltage, reverse leakage and C-V. This lesson gives a setup framework for each, with notes specific to Ga₂O₃.</p>
+
+<h2 id="e-s1">1. Breakdown voltage</h2>
+<p>There are two ways to determine breakdown in TCAD:</p>
+<ul>
+<li><strong>Ionization integral</strong>: enable impact ionization; avalanche breakdown occurs when the ionization integral along a field line reaches 1. Requires both electron and hole equations.</li>
+<li><strong>Critical-field criterion</strong>: ramp the reverse bias and record the voltage at which the peak field reaches a critical value (e.g. 8 MV/cm for Ga₂O₃). Many Ga₂O₃ papers use this approach because ionization coefficients are not yet firmly established.</li>
+</ul>
+<pre><code>Physics {
+  Temperature = 300
+  Fermi
+  Mobility ( DopingDependence HighFieldSaturation )
+  Recombination ( SRH  Avalanche )     * impact ionization model
+}
+Math {
+  BreakAtIonIntegral                    * stop when the ionization integral reaches 1
+  ExtendedPrecision
+}
+Solve {
+  Coupled ( Iterations = 100 ) { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary (
+    InitialStep = 1e-4  MinStep = 1e-8  MaxStep = 0.02
+    Goal { Name = &quot;anode&quot; Voltage = -2000 }
+  ) { Coupled { Poisson Electron Hole } }
+}</code></pre>
+<p>Note: the choice of ionization model and its parameters lives in the parameter file; see the previous lesson.</p>
+
+<h2 id="e-s2">2. Reading breakdown results</h2>
+<ul>
+<li>Plot the field along the surface and along a vertical cut under the anode edge: the peak is almost always at the anode edge. This is where field plates or N-implanted regions do their work.</li>
+<li>Compare designs (field-plate length, dielectric thickness) by sweeping parameters in SWB.</li>
+<li>Check the mesh: the peak field is very sensitive to cell size at the electrode edge; refine until results stop changing.</li>
+</ul>
+
+<h2 id="e-s3">3. Reverse leakage</h2>
+<p>For Ga₂O₃ Schottky diodes, reverse leakage is usually governed by the following mechanisms, in the order they should be added to the model:</p>
+<ol>
+<li>Thermionic emission with image-force barrier lowering.</li>
+<li>Thermionic-field emission and tunneling through the barrier (nonlocal tunneling model).</li>
+<li>Trap-assisted tunneling and leakage paths at edges or surfaces.</li>
+</ol>
+<p>Simulated leakage is often orders of magnitude below experiment if only thermionic emission is used; that signals missing mechanisms, not a simulation error.</p>
+
+<h2 id="e-s4">4. C-V characteristics</h2>
+<p>Capacitance is computed by <strong>small-signal AC analysis</strong>: at each DC bias point SDevice linearizes the system and computes the response to an AC signal at a given frequency. In Sentaurus this is usually done in mixed mode: the device is placed in a <code>System</code> block with a voltage source, and an <code>ACCoupled</code> command runs inside <code>Quasistationary</code>. The results are capacitance and conductance matrices between circuit nodes.</p>
+<ul>
+<li>Frequency matters: traps contribute only if they can charge and discharge with the signal, so simulate at several frequencies (e.g. 1 kHz, 100 kHz, 1 MHz) to compare with measurements.</li>
+<li>Plot \(1/C^2\) versus voltage and compare with experiment to check the doping.</li>
+</ul>
+<p>The full mixed-mode and <code>ACCoupled</code> syntax is lengthy; start from the C-V example in Sentaurus Training and substitute your structure.</p>
+
+<h2 id="e-s5">5. Temperature</h2>
+<ul>
+<li>Sweep temperature with an SWB parameter, e.g. <code>Temperature = @T@</code> for T from 300 to 673 K.</li>
+<li>Enable temperature dependence of bandgap, mobility and barrier height where needed.</li>
+<li>At high current, self-heating matters (Ga₂O₃ conducts heat poorly, about 10–30 W/m·K): use the thermodynamic model (<code>Thermodynamic</code>) and add the lattice temperature equation.</li>
+</ul>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>Synopsys, <em>Sentaurus Device User Guide</em>: chapters on avalanche generation, small-signal AC analysis, mixed mode and the thermodynamic model.</li>
+<li>X. Zhou et al., <a href="https://www.mdpi.com/2079-4991/14/11/978" target="_blank" rel="noopener"><em>Nanomaterials</em> 14, 978 (2024)</a> (field plate and N implantation simulation).</li>
+<li>S. Roy, A. Bhattacharyya, S. Krishnamoorthy, <a href="https://arxiv.org/abs/2006.15645" target="_blank" rel="noopener">arXiv:2006.15645</a> (2020) (peak-field criterion).</li>
+<li>T. H. Vo et al., "Investigating reverse low-bias conduction mechanisms in Ga₂O₃ Schottky barrier diodes using pulsed current methods," <em>ACS Applied Electronic Materials</em> (2025).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-ga2o3-material.html">← <span class="l-vi">Tham số vật liệu Ga₂O₃ và hiệu chỉnh</span><span class="l-en">Ga₂O₃ material parameters and calibration</span></a><a class="n" href="tcad-visual-debug.html"><span class="l-vi">Sentaurus Visual và xử lý lỗi hội tụ</span><span class="l-en">Sentaurus Visual and fixing convergence</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

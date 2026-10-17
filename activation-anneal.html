@@ -78,10 +78,10 @@
 <div class="l-vi">
 <p class="lead">Ngay sau khi cấy, tạp chất đã nằm đúng độ sâu nhưng gần như chưa "làm việc": mạng tinh thể bị phá hỏng và phần lớn nguyên tử tạp chất đang ở sai vị trí. Ủ nhiệt là bước biến các nguyên tử đó thành donor và acceptor thực sự.</p>
 
-<h2>1. Hư hỏng do cấy ion</h2>
+<h2 id="v-s1">1. Hư hỏng do cấy ion</h2>
 <p>Mỗi ion tới va chạm với nguyên tử mạng và đánh bật chúng khỏi nút mạng, tạo ra cặp vacancy và nguyên tử xen kẽ (cặp Frenkel). Các nguyên tử bị đánh bật lại tiếp tục va chạm, tạo một "dòng thác" hư hỏng. Với liều đủ cao, đặc biệt với ion nặng, vùng bị cấy trở thành <strong>vô định hình</strong>.</p>
 
-<h2>2. Ủ kích hoạt</h2>
+<h2 id="v-s2">2. Ủ kích hoạt</h2>
 <p>Một nguyên tử tạp chất chỉ hoạt động như donor hoặc acceptor khi nằm ở vị trí thay thế trong mạng đơn tinh thể và liên kết với bốn nguyên tử Si. Ủ nhiệt cung cấp năng lượng để:</p>
 <ul>
 <li><strong>Phục hồi mạng tinh thể.</strong> Với lớp vô định hình, quá trình kết tinh lại xảy ra theo cơ chế epitaxy pha rắn (solid-phase epitaxy): mặt phân cách vô định hình/tinh thể tiến dần lên bề mặt, dùng phần tinh thể bên dưới làm mầm.</li>
@@ -89,7 +89,7 @@
 </ul>
 <p>Mâu thuẫn cơ bản: nhiệt độ cao giúp kích hoạt tốt và giảm sai hỏng, nhưng cũng làm tạp chất <strong>khuếch tán</strong>, làm tiếp giáp sâu thêm. Ở nhiệt độ đủ cao, quá trình kích hoạt và phục hồi diễn ra nhanh hơn khuếch tán, vì chúng có năng lượng kích hoạt khác nhau. Đây là cơ sở của xử lý nhiệt nhanh (RTP): lên nhiệt độ rất cao trong thời gian rất ngắn.</p>
 
-<h2>3. Lò nung và RTA</h2>
+<h2 id="v-s3">3. Lò nung và RTA</h2>
 <div class="tablewrap"><table>
 <tr><th></th><th>Lò nung (furnace)</th><th>RTA</th></tr>
 <tr><td>Xử lý</td><td>Theo mẻ, hàng trăm wafer</td><td>Từng wafer</td></tr>
@@ -101,7 +101,7 @@
 <div class="box"><p class="t">Hỏi đáp: vì sao lò nung không thể gia nhiệt nhanh như RTP?</p>
 <p>Lò nung có nhiệt dung rất lớn (ống thạch anh, giá đỡ, hàng trăm wafer). Muốn tăng nhiệt nhanh cần công suất rất lớn, và rất khó tăng nhanh mà không bị dao động nhiệt độ do quá đà (overshoot) rồi hụt (undershoot). Ngoài ra, wafer trong lò nóng dần từ mép vào tâm, gia nhiệt nhanh sẽ gây ứng suất nhiệt và cong vênh.</p></div>
 
-<h2>4. Ba cơ chế truyền nhiệt</h2>
+<h2 id="v-s4">4. Ba cơ chế truyền nhiệt</h2>
 <p><strong>Dẫn nhiệt</strong> (conduction): năng lượng truyền qua dao động mạng (phonon) và va chạm phân tử. Theo định luật Fourier, thông lượng nhiệt tỉ lệ với gradient nhiệt độ:</p>
 $$q = -k\,\frac{dT}{dx}$$
 <p>với \(k\) là độ dẫn nhiệt (W/m·K).</p>
@@ -112,7 +112,7 @@ $$q = h\,(T_s - T_\infty)$$
 $$q = \varepsilon\,\sigma\,T^4, \qquad \sigma = 5{,}67\times10^{-8}\ \mathrm{W/m^2K^4}$$
 <p>với \(\varepsilon\) là độ phát xạ (emissivity) của bề mặt. Vì phụ thuộc \(T^4\), <strong>bức xạ chiếm ưu thế ở nhiệt độ cao</strong>, còn dẫn nhiệt quan trọng hơn ở nhiệt độ thấp. Trong RTP, wafer được nung chủ yếu bằng bức xạ từ đèn.</p>
 
-<h2>5. Wafer hấp thụ bức xạ như thế nào?</h2>
+<h2 id="v-s5">5. Wafer hấp thụ bức xạ như thế nào?</h2>
 <p>Bức xạ tới bề mặt wafer có thể bị phản xạ (\(\rho\)), hấp thụ (\(\alpha\)) hoặc truyền qua (\(\tau\)), với \(\alpha + \rho + \tau = 1\); với vật liệu không trong suốt, \(\tau = 0\). Ở trạng thái cân bằng nhiệt, theo định luật Kirchhoff, độ hấp thụ bằng độ phát xạ. Si hấp thụ qua hai cơ chế:</p>
 <ul>
 <li><strong>Hấp thụ vùng cấm</strong>: photon có bước sóng ngắn hơn khoảng 1,1 µm (năng lượng lớn hơn E<sub>g</sub> ≈ 1,12 eV) kích thích electron từ vùng hóa trị lên vùng dẫn. Chiếm ưu thế khi dùng đèn hồ quang (arc lamp) có phổ ngắn.</li>
@@ -120,7 +120,7 @@ $$q = \varepsilon\,\sigma\,T^4, \qquad \sigma = 5{,}67\times10^{-8}\ \mathrm{W/m
 </ul>
 <p>Hệ quả: wafer Si nguội, pha tạp nhẹ gần như trong suốt với hồng ngoại xa, nhưng khi nóng lên nó hấp thụ ngày càng mạnh. Độ hấp thụ còn phụ thuộc các lớp màng và hoa văn trên bề mặt, là nguồn gốc của "hiệu ứng hoa văn" (pattern effect) trong RTP.</p>
 
-<h2>6. Thermal budget</h2>
+<h2 id="v-s6">6. Thermal budget</h2>
 <p>Với khuếch tán, đại lượng quyết định là \(Dt\). Vì \(D\) phụ thuộc hàm mũ vào nhiệt độ, tổng "ngân sách nhiệt" của một chu trình nhiệt độ \(T(t)\) là:</p>
 $$(Dt)_{\text{hiệu dụng}} = \int D\big(T(t)\big)\,dt$$
 <p>Giảm thiểu thermal budget giúp hạn chế các quá trình không mong muốn như khuếch tán tạp chất, trong khi vẫn đạt được quá trình mong muốn như kích hoạt. Phân tích này giải thích vì sao RTP vượt trội lò nung: thời gian ở nhiệt độ cao rất ngắn, và các đoạn tăng giảm nhiệt chậm của lò nung đóng góp đáng kể vào \(Dt\).</p>
@@ -128,7 +128,7 @@ $$(Dt)_{\text{hiệu dụng}} = \int D\big(T(t)\big)\,dt$$
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Với β-Ga₂O₃ cấy Si, ủ kích hoạt thường ở khoảng 900–1100 °C trong N₂ (Sasaki và cộng sự, 2013). Hai điểm khác biệt so với Si: thứ nhất, Ga₂O₃ có vùng cấm khoảng 4,8 eV nên <strong>trong suốt</strong> với phần lớn phổ đèn halogen; wafer pha tạp nhẹ hấp thụ kém, nên cách nung và đo nhiệt độ cần được hiệu chỉnh riêng. Thứ hai, độ dẫn nhiệt của β-Ga₂O₃ chỉ khoảng 10–27 W/m·K tùy hướng tinh thể, thấp hơn Si (khoảng 150 W/m·K) cỡ một bậc (Guo và cộng sự, 2015), điều ảnh hưởng tới cả quá trình xử lý nhiệt lẫn hiện tượng tự gia nhiệt khi linh kiện hoạt động.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s7">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>F. P. Incropera, D. P. DeWitt, <em>Fundamentals of Heat and Mass Transfer</em>, Wiley.</li>
@@ -138,10 +138,10 @@ $$(Dt)_{\text{hiệu dụng}} = \int D\big(T(t)\big)\,dt$$
 <div class="l-en">
 <p class="lead">Right after implantation, the dopants sit at the right depth but hardly "work" yet: the lattice is damaged and most dopant atoms are on the wrong sites. Annealing is the step that turns them into real donors and acceptors.</p>
 
-<h2>1. Implantation damage</h2>
+<h2 id="e-s1">1. Implantation damage</h2>
 <p>Each incoming ion collides with lattice atoms and knocks them off their sites, creating vacancy–interstitial pairs (Frenkel pairs). Displaced atoms collide further, producing a damage cascade. At high enough dose, especially for heavy ions, the implanted region becomes <strong>amorphous</strong>.</p>
 
-<h2>2. Activation annealing</h2>
+<h2 id="e-s2">2. Activation annealing</h2>
 <p>A dopant atom acts as a donor or acceptor only on a substitutional site in a single-crystal lattice, bonded to four Si atoms. Annealing provides the energy to:</p>
 <ul>
 <li><strong>Repair the lattice.</strong> An amorphous layer recrystallizes by solid-phase epitaxy: the amorphous/crystalline interface moves toward the surface, using the crystal below as a template.</li>
@@ -149,7 +149,7 @@ $$(Dt)_{\text{hiệu dụng}} = \int D\big(T(t)\big)\,dt$$
 </ul>
 <p>The basic conflict: high temperature improves activation and removes defects, but also makes dopants <strong>diffuse</strong>, deepening the junction. At sufficiently high temperature, activation and repair outpace diffusion because they have different activation energies. This is the basis of rapid thermal processing (RTP): very high temperature for a very short time.</p>
 
-<h2>3. Furnace versus RTA</h2>
+<h2 id="e-s3">3. Furnace versus RTA</h2>
 <div class="tablewrap"><table>
 <tr><th></th><th>Furnace</th><th>RTA</th></tr>
 <tr><td>Processing</td><td>Batch, hundreds of wafers</td><td>Single wafer</td></tr>
@@ -161,7 +161,7 @@ $$(Dt)_{\text{hiệu dụng}} = \int D\big(T(t)\big)\,dt$$
 <div class="box"><p class="t">Q&amp;A: why can't a furnace ramp as fast as RTP?</p>
 <p>A furnace has a huge thermal mass (quartz tube, boats, hundreds of wafers). Ramping quickly would need enormous power, and it is very hard to ramp fast without temperature overshoot and undershoot. In addition, wafers in a furnace heat from the edge inward, so fast ramps cause thermal stress and warpage.</p></div>
 
-<h2>4. Three heat-transfer mechanisms</h2>
+<h2 id="e-s4">4. Three heat-transfer mechanisms</h2>
 <p><strong>Conduction</strong>: energy transported by lattice vibrations (phonons) and molecular collisions. By Fourier's law, heat flux is proportional to the temperature gradient:</p>
 $$q = -k\,\frac{dT}{dx}$$
 <p>where \(k\) is the thermal conductivity (W/m·K).</p>
@@ -172,7 +172,7 @@ $$q = h\,(T_s - T_\infty)$$
 $$q = \varepsilon\,\sigma\,T^4, \qquad \sigma = 5.67\times10^{-8}\ \mathrm{W/m^2K^4}$$
 <p>where \(\varepsilon\) is the surface emissivity. Because of the \(T^4\) dependence, <strong>radiation dominates at high temperature</strong>, while conduction matters more at low temperature. In RTP, wafers are heated mainly by lamp radiation.</p>
 
-<h2>5. How does a wafer absorb radiation?</h2>
+<h2 id="e-s5">5. How does a wafer absorb radiation?</h2>
 <p>Radiation reaching the wafer is reflected (\(\rho\)), absorbed (\(\alpha\)) or transmitted (\(\tau\)), with \(\alpha + \rho + \tau = 1\); for an opaque material \(\tau = 0\). In thermal equilibrium, by Kirchhoff's law, absorptivity equals emissivity. Si absorbs through two mechanisms:</p>
 <ul>
 <li><strong>Band-gap absorption</strong>: photons with wavelength shorter than about 1.1 µm (energy above E<sub>g</sub> ≈ 1.12 eV) excite electrons from the valence to the conduction band. Dominant with short-wavelength arc lamps.</li>
@@ -180,7 +180,7 @@ $$q = \varepsilon\,\sigma\,T^4, \qquad \sigma = 5.67\times10^{-8}\ \mathrm{W/m^2
 </ul>
 <p>As a result, a cold, lightly doped Si wafer is nearly transparent to far infrared, but absorbs more and more as it heats up. Absorption also depends on surface films and patterns, which is the origin of the pattern effect in RTP.</p>
 
-<h2>6. Thermal budget</h2>
+<h2 id="e-s6">6. Thermal budget</h2>
 <p>For diffusion, the controlling quantity is \(Dt\). Since \(D\) depends exponentially on temperature, the total "thermal budget" of a temperature cycle \(T(t)\) is:</p>
 $$(Dt)_{\text{eff}} = \int D\big(T(t)\big)\,dt$$
 <p>Minimizing the thermal budget limits unwanted processes such as dopant diffusion while still achieving wanted ones such as activation. This analysis explains why RTP outperforms furnaces: the time at peak temperature is very short, while a furnace's slow ramps contribute substantially to \(Dt\).</p>
@@ -188,7 +188,7 @@ $$(Dt)_{\text{eff}} = \int D\big(T(t)\big)\,dt$$
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>For Si-implanted β-Ga₂O₃, activation anneals are typically around 900–1100 °C in N₂ (Sasaki et al., 2013). Two differences from Si stand out. First, Ga₂O₃ has a bandgap of about 4.8 eV, so it is <strong>transparent</strong> to most of the halogen-lamp spectrum; lightly doped wafers absorb poorly, so heating and temperature measurement need dedicated calibration. Second, β-Ga₂O₃ has a thermal conductivity of only about 10–27 W/m·K depending on crystal direction, roughly an order of magnitude below Si (about 150 W/m·K) (Guo et al., 2015), which affects both thermal processing and device self-heating.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s7">References</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>F. P. Incropera, D. P. DeWitt, <em>Fundamentals of Heat and Mass Transfer</em>, Wiley.</li>

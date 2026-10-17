@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Xuất DXF, chuyển GDSII và đặt mask" data-title-en="Export DXF, convert to GDSII and order">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Export DXF, convert to GDSII and order · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Preparing the export, KLayout conversion, ordering information and a table of common errors.">
+<meta property="og:title" content="Export DXF, convert to GDSII and order">
+<meta property="og:description" content="Preparing the export, KLayout conversion, ordering information and a table of common errors.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="autocad.html"><span class="l-vi">AutoCAD cho thiết kế mask</span><span class="l-en">AutoCAD for Mask Design</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 2</span><span class="l-en">Part 3 · Lesson 2</span></p>
+  <h1><span class="l-vi">Xuất DXF, chuyển GDSII và đặt mask</span><span class="l-en">Export DXF, convert to GDSII and order</span></h1>
+  <p class="sub"><span class="l-vi">Chuẩn bị bản xuất, KLayout, thông tin đặt mask và bảng lỗi thường gặp.</span><span class="l-en">Preparing the export, KLayout conversion, ordering information and a table of common errors.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Bản vẽ chỉ có ích khi đến được máy ghi mask nguyên vẹn. Bài cuối hướng dẫn xuất DXF, chuyển sang GDSII bằng KLayout, kiểm tra, đặt mask và sửa các lỗi thường gặp.</p>
+
+<h2 id="v-s1">1. Chuẩn bị bản để xuất</h2>
+<ol>
+<li>Lưu bản gốc <code>.dwg</code>; làm việc trên một bản sao để xuất.</li>
+<li>Xóa hoặc tắt các layer không in (<code>DIM</code>, <code>NOTE</code>, và <code>FRAME</code> nếu nhà làm mask không cần).</li>
+<li>Nếu bộ chuyển đổi không hỗ trợ block: <code>EXPLODE</code> các block <em>một lần</em> (chỉ tách block, không tách tiếp polyline).</li>
+<li>Chạy lại danh sách kiểm tra: QSELECT polyline hở, OVERKILL, PURGE, AUDIT.</li>
+</ol>
+
+<h2 id="v-s2">2. Xuất DXF</h2>
+<pre><code>SAVEAS
+  Files of type: AutoCAD 2000/LT2000 DXF (*.dxf)
+  (hoặc AutoCAD R12/LT2 DXF nếu bộ chuyển đổi cũ yêu cầu)</code></pre>
+<p>Đặt tên file chứa đơn vị và phiên bản, ví dụ <code>Ga2O3_SBD_v3_um.dxf</code>.</p>
+
+<h2 id="v-s3">3. Chuyển sang GDSII bằng KLayout</h2>
+<p>KLayout là phần mềm layout miễn phí, mã nguồn mở, được hầu hết phòng sạch khuyên dùng.</p>
+<ol>
+<li><strong>File → Reader Options → DXF</strong> trước khi mở file:
+<ul>
+<li><em>Unit</em>: đặt bằng kích thước một đơn vị bản vẽ tính theo µm (1 nếu bạn vẽ bằng µm, 1000 nếu bằng mm).</li>
+<li>Chế độ polyline: chọn tạo đa giác từ polyline kín.</li>
+<li>Số điểm trên mỗi đường tròn: đủ lớn (ví dụ 64) nếu bản vẽ có CIRCLE.</li>
+</ul></li>
+<li><strong>File → Open</strong> file DXF. Kiểm tra ngay kích thước bằng thước đo (phím K): die phải đúng 2000 µm, không phải 2 µm hay 2 m.</li>
+<li>Các layer DXF xuất hiện theo tên. Gán số layer GDS cho từng layer (ví dụ OHMIC → 1/0, SCHOTTKY → 2/0) trong phần chỉnh sửa thuộc tính layer.</li>
+<li><strong>File → Save As</strong> → định dạng GDS2.</li>
+<li>Mở lại file GDS vừa lưu và kiểm tra từng layer.</li>
+</ol>
+<p>Tên menu có thể khác đôi chút giữa các phiên bản KLayout; hãy xem tài liệu của phiên bản bạn dùng. Một công cụ thương mại phổ biến khác là <strong>LinkCAD</strong>, thường do kỹ thuật viên phòng sạch vận hành; bạn chỉ cần báo đơn vị và layer.</p>
+
+<h2 id="v-s4">4. Đặt mask</h2>
+<p>Thông tin cần ghi rõ cho nhà làm mask hoặc kỹ thuật viên phòng sạch:</p>
+<div class="tablewrap"><table>
+<tr><th>Mục</th><th>Ví dụ</th></tr>
+<tr><td>Định dạng và đơn vị file</td><td>GDSII, đơn vị cơ sở 1 nm, thiết kế bằng µm</td></tr>
+<tr><td>Kích thước tấm và vật liệu</td><td>5 inch, soda-lime, Cr</td></tr>
+<tr><td>Layer nào in trên tấm nào</td><td>GDS 1/0 → mask 1; GDS 2/0 → mask 2</td></tr>
+<tr><td>Cực tính cho từng tấm</td><td>Mask 1: dark field (lift-off, cảm quang dương); mask 2: dark field</td></tr>
+<tr><td>Chiều đọc</td><td>Đọc đúng chiều khi nhìn từ mặt crom, hoặc lật gương</td></tr>
+<tr><td>Kích thước tới hạn và dung sai</td><td>CD 5 µm ± 0,5 µm</td></tr>
+</table></div>
+<p>Luôn yêu cầu và kiểm tra kỹ <strong>bản thử PDF</strong>: vùng nào tối, vùng nào trong, các lỗ có đúng không, nhãn có đọc được không.</p>
+
+<h2 id="v-s5">5. Lỗi thường gặp và cách sửa</h2>
+<div class="tablewrap"><table>
+<tr><th>Triệu chứng</th><th>Nguyên nhân</th><th>Cách sửa</th></tr>
+<tr><td>Thiết kế to hoặc nhỏ gấp 1000 lần</td><td>DXF không mang đơn vị; đặt sai Unit khi đọc</td><td>Sửa Unit trong Reader Options; ghi đơn vị trong tên file</td></tr>
+<tr><td>Hình bị thiếu trên mask</td><td>Polyline hở, LINE rời, HATCH, TEXT</td><td>QSELECT Closed = No; PEDIT → Close; BOUNDARY</td></tr>
+<tr><td>Hình bị tô ngược hoặc lỗ biến mất</td><td>Hình lồng nhau bị gộp; sai cực tính</td><td>Dùng biên tự chạm hoặc hai layer; kiểm tra bản thử</td></tr>
+<tr><td>Hình méo, kết quả lạ</td><td>Polyline tự cắt</td><td>Vẽ lại thành các đa giác không cắt nhau</td></tr>
+<tr><td>Hình tròn thành đa giác thô</td><td>Độ chính xác cung quá thấp khi chuyển</td><td>Dùng POLYGON 64 cạnh hoặc tăng số điểm đường tròn</td></tr>
+<tr><td>Có đối tượng ở rất xa thiết kế</td><td>Đối tượng lạc khi vẽ nhầm</td><td>ZOOM Extents, xóa đối tượng thừa</td></tr>
+<tr><td>Block bị biến dạng</td><td>Block chèn với tỉ lệ x ≠ y, hoặc block ngoài (xref)</td><td>Chèn tỉ lệ 1:1, bind hoặc explode xref</td></tr>
+</table></div>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>KLayout, <a href="https://www.klayout.de/" target="_blank" rel="noopener">trang chủ và tài liệu</a>; diễn đàn <a href="https://klayout.de/forum/discussion/comment/11874/" target="_blank" rel="noopener">AutoCAD .dwg → .dxf → .gds</a>.</li>
+<li>UCSB Nanofab, <a href="https://wiki.nanofab.ucsb.edu/wiki/KLayout_Design_Tips" target="_blank" rel="noopener">KLayout design tips</a>.</li>
+<li>University of Florida NRF, <a href="https://nrf.aux.eng.ufl.edu/_files/documents/4218.pdf" target="_blank" rel="noopener">Mask design guidelines</a> (chuyển DXF bằng LinkCAD).</li>
+<li>University of Utah Nanofab, <a href="https://www.nanofab.utah.edu/wp-content/uploads/2022/12/Heidelberg-uPG-SOP-2018.pdf" target="_blank" rel="noopener">Heidelberg µPG 101 SOP</a>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A drawing is only useful if it reaches the mask writer intact. This last lesson covers exporting DXF, converting to GDSII with KLayout, checking, ordering the mask and fixing common errors.</p>
+
+<h2 id="e-s1">1. Prepare the export copy</h2>
+<ol>
+<li>Save the original <code>.dwg</code>; work on a copy for export.</li>
+<li>Delete or turn off non-printing layers (<code>DIM</code>, <code>NOTE</code>, and <code>FRAME</code> if the mask shop does not need it).</li>
+<li>If the converter does not support blocks: <code>EXPLODE</code> the blocks <em>once</em> (break the blocks only, not the polylines inside).</li>
+<li>Rerun the checklist: QSELECT open polylines, OVERKILL, PURGE, AUDIT.</li>
+</ol>
+
+<h2 id="e-s2">2. Export DXF</h2>
+<pre><code>SAVEAS
+  Files of type: AutoCAD 2000/LT2000 DXF (*.dxf)
+  (or AutoCAD R12/LT2 DXF if an older converter requires it)</code></pre>
+<p>Put the unit and version in the file name, e.g. <code>Ga2O3_SBD_v3_um.dxf</code>.</p>
+
+<h2 id="e-s3">3. Convert to GDSII with KLayout</h2>
+<p>KLayout is a free, open-source layout tool recommended by most cleanrooms.</p>
+<ol>
+<li><strong>File → Reader Options → DXF</strong> before opening the file:
+<ul>
+<li><em>Unit</em>: the size of one drawing unit in µm (1 if you drew in µm, 1000 if in mm).</li>
+<li>Polyline mode: create polygons from closed polylines.</li>
+<li>Points per full circle: large enough (e.g. 64) if the drawing contains CIRCLEs.</li>
+</ul></li>
+<li><strong>File → Open</strong> the DXF. Immediately check dimensions with the ruler (key K): the die must be 2000 µm, not 2 µm or 2 m.</li>
+<li>DXF layers appear by name. Assign a GDS layer number to each (e.g. OHMIC → 1/0, SCHOTTKY → 2/0) in the layer properties editor.</li>
+<li><strong>File → Save As</strong> → GDS2 format.</li>
+<li>Reopen the saved GDS and inspect each layer.</li>
+</ol>
+<p>Menu names may differ slightly between KLayout versions; check the documentation of yours. Another common commercial tool is <strong>LinkCAD</strong>, often run by cleanroom staff; you only need to state units and layers.</p>
+
+<h2 id="e-s4">4. Ordering the mask</h2>
+<p>Information to state clearly for the mask shop or cleanroom staff:</p>
+<div class="tablewrap"><table>
+<tr><th>Item</th><th>Example</th></tr>
+<tr><td>File format and units</td><td>GDSII, 1 nm database unit, designed in µm</td></tr>
+<tr><td>Plate size and material</td><td>5 inch, soda-lime, Cr</td></tr>
+<tr><td>Which layer on which plate</td><td>GDS 1/0 → mask 1; GDS 2/0 → mask 2</td></tr>
+<tr><td>Polarity per plate</td><td>Mask 1: dark field (lift-off, positive resist); mask 2: dark field</td></tr>
+<tr><td>Reading orientation</td><td>Right-reading from the chrome side, or mirrored</td></tr>
+<tr><td>Critical dimension and tolerance</td><td>CD 5 µm ± 0.5 µm</td></tr>
+</table></div>
+<p>Always request and carefully check the <strong>PDF proof</strong>: which areas are dark, which clear, whether holes are right, whether labels read correctly.</p>
+
+<h2 id="e-s5">5. Common errors and fixes</h2>
+<div class="tablewrap"><table>
+<tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+<tr><td>Design 1000× too big or small</td><td>DXF carries no units; wrong Unit when reading</td><td>Fix Unit in Reader Options; put the unit in the file name</td></tr>
+<tr><td>Shapes missing on the mask</td><td>Open polylines, loose LINEs, HATCH, TEXT</td><td>QSELECT Closed = No; PEDIT → Close; BOUNDARY</td></tr>
+<tr><td>Fill inverted or holes gone</td><td>Nested shapes merged; wrong polarity</td><td>Use a self-touching boundary or two layers; check the proof</td></tr>
+<tr><td>Distorted shapes, odd results</td><td>Self-intersecting polylines</td><td>Redraw as non-crossing polygons</td></tr>
+<tr><td>Circles become coarse polygons</td><td>Arc precision too low on conversion</td><td>Use 64-sided POLYGONs or raise points per circle</td></tr>
+<tr><td>Objects far from the design</td><td>Stray objects drawn by mistake</td><td>ZOOM Extents, delete strays</td></tr>
+<tr><td>Distorted blocks</td><td>Blocks inserted with x ≠ y scale, or external references</td><td>Insert at 1:1, bind or explode xrefs</td></tr>
+</table></div>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>KLayout, <a href="https://www.klayout.de/" target="_blank" rel="noopener">home page and documentation</a>; forum thread <a href="https://klayout.de/forum/discussion/comment/11874/" target="_blank" rel="noopener">AutoCAD .dwg → .dxf → .gds</a>.</li>
+<li>UCSB Nanofab, <a href="https://wiki.nanofab.ucsb.edu/wiki/KLayout_Design_Tips" target="_blank" rel="noopener">KLayout design tips</a>.</li>
+<li>University of Florida NRF, <a href="https://nrf.aux.eng.ufl.edu/_files/documents/4218.pdf" target="_blank" rel="noopener">Mask design guidelines</a> (DXF conversion with LinkCAD).</li>
+<li>University of Utah Nanofab, <a href="https://www.nanofab.utah.edu/wp-content/uploads/2022/12/Heidelberg-uPG-SOP-2018.pdf" target="_blank" rel="noopener">Heidelberg µPG 101 SOP</a>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="cad-tutorial.html">← <span class="l-vi">Thực hành: mask diode Schottky và TLM</span><span class="l-en">Hands-on: a Schottky diode and TLM mask</span></a><a class="n" href="autocad.html"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn từ sách, tài liệu chính thức của nhà phát triển phần mềm và hướng dẫn của các phòng sạch đại học (xem tài liệu tham khảo cuối bài). Hình minh họa được vẽ cho trang này.</span><span class="l-en">Written by Thi-Thanh-Huong Vo from books, official software documentation and university cleanroom guides (see the references at the end). Figures were drawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

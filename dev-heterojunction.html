@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Tiếp giáp dị chất là tiếp giáp giữa hai vật liệu khác nhau. Nhờ chênh lệch vùng cấm, ta có thể "thiết kế" đường đi của electron và lỗ trống: giam chúng lại trong laser bán dẫn, tách chúng ra trong pin mặt trời, hoặc tạo khí electron hai chiều linh động cao trong transistor HEMT.</p>
 
-<h2>1. Ba loại tiếp giáp dị chất</h2>
+<h2 id="v-s1">1. Ba loại tiếp giáp dị chất</h2>
 <p>Hai bán dẫn khác nhau có công thoát, ái lực điện tử và vùng cấm khác nhau. Tùy vị trí tương đối của các mép vùng, có ba kiểu sắp xếp:</p>
 <ul>
 <li><strong>Loại I (straddling)</strong>: vùng cấm hẹp nằm hoàn toàn trong vùng cấm rộng. Cả electron và lỗ trống bị giam trong vật liệu vùng cấm hẹp, như trong giếng lượng tử GaAs/AlGaAs của laser.</li>
@@ -87,7 +87,7 @@
 </ul>
 <figure><svg viewBox="0 0 600 230" class="fig-svg" role="img"><text x="100" y="22" class="nt" text-anchor="middle">Loại I (lồng nhau)</text><rect x="20" y="60" width="75" height="110" fill="var(--s1)" opacity=".18"/><line x1="20" y1="60" x2="95" y2="60" class="s1"/><line x1="20" y1="170" x2="95" y2="170" class="s1"/><rect x="105" y="90" width="75" height="50" fill="var(--s3)" opacity=".18"/><line x1="105" y1="90" x2="180" y2="90" class="s3" style="stroke-dasharray:none"/><line x1="105" y1="140" x2="180" y2="140" class="s3" style="stroke-dasharray:none"/><text x="57" y="215" class="ns" text-anchor="middle">A</text><text x="142" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="22" class="nt" text-anchor="middle">Loại II (so le)</text><rect x="220" y="60" width="75" height="90" fill="var(--s1)" opacity=".18"/><line x1="220" y1="60" x2="295" y2="60" class="s1"/><line x1="220" y1="150" x2="295" y2="150" class="s1"/><rect x="305" y="95" width="75" height="90" fill="var(--s3)" opacity=".18"/><line x1="305" y1="95" x2="380" y2="95" class="s3" style="stroke-dasharray:none"/><line x1="305" y1="185" x2="380" y2="185" class="s3" style="stroke-dasharray:none"/><text x="257" y="215" class="ns" text-anchor="middle">A</text><text x="342" y="215" class="ns" text-anchor="middle">B</text><text x="500" y="22" class="nt" text-anchor="middle">Loại III (khe gãy)</text><rect x="420" y="60" width="75" height="60" fill="var(--s1)" opacity=".18"/><line x1="420" y1="60" x2="495" y2="60" class="s1"/><line x1="420" y1="120" x2="495" y2="120" class="s1"/><rect x="505" y="130" width="75" height="70" fill="var(--s3)" opacity=".18"/><line x1="505" y1="130" x2="580" y2="130" class="s3" style="stroke-dasharray:none"/><line x1="505" y1="200" x2="580" y2="200" class="s3" style="stroke-dasharray:none"/><text x="457" y="215" class="ns" text-anchor="middle">A</text><text x="542" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="44" class="tk" text-anchor="middle">E<tspan baseline-shift="sub" font-size="8">C</tspan> (trên), E<tspan baseline-shift="sub" font-size="8">V</tspan> (dưới)</text></svg><figcaption>Hình 1. Ba kiểu sắp xếp vùng năng lượng của tiếp giáp dị chất.</figcaption></figure>
 
-<h2>2. Dựng giản đồ bằng mô hình ái lực điện tử</h2>
+<h2 id="v-s2">2. Dựng giản đồ bằng mô hình ái lực điện tử</h2>
 <p>Với tiếp giáp phù hợp mạng tinh thể (lattice-matched), EAM dùng các quy tắc sau:</p>
 <ul>
 <li>Ở cân bằng, mức Fermi nằm ngang; mức chân không \(E_{vac}\) liên tục nhưng các mép vùng thì gián đoạn tại mặt tiếp giáp.</li>
@@ -99,16 +99,16 @@ $$\Delta E_C = \chi_1 - \chi_2, \qquad \Delta E_V = (\chi_2 + E_{g2}) - (\chi_1 
 <li>Uốn vùng tổng bằng hiệu công thoát và chia cho hai phía theo pha tạp và hằng số điện môi.</li>
 </ul>
 
-<h2>3. "Khấc" và khí electron hai chiều</h2>
+<h2 id="v-s3">3. "Khấc" và khí electron hai chiều</h2>
 <p>Sự gián đoạn \(\Delta E_C\) cộng với uốn vùng thường tạo một <strong>khấc</strong> (notch), một giếng thế hẹp hình tam giác ở phía vật liệu vùng cấm hẹp, và một <strong>gai</strong> (spike) ở phía bên kia. Khấc có thể bẫy hạt tải; gai cản dòng. Trong tiếp giáp AlGaAs/GaAs pha tạp điều biến, electron từ lớp AlGaAs pha tạp rơi vào khấc trong GaAs không pha tạp, tạo <strong>khí electron hai chiều</strong> (2DEG) tách khỏi các ion tạp chất, nên tán xạ tạp chất giảm mạnh và độ linh động rất cao. Đây là nguyên lý của transistor HEMT.</p>
 
-<h2>4. Giới hạn của EAM</h2>
+<h2 id="v-s4">4. Giới hạn của EAM</h2>
 <p>EAM giả định mặt phân cách lý tưởng. Trong thực tế, lưỡng cực mặt phân cách, trạng thái bề mặt và lệch mạng làm \(\Delta E_C\) thực khác giá trị dự đoán, nên độ lệch vùng thường được đo trực tiếp bằng XPS (phương pháp Kraut) thay vì chỉ tính từ \(\chi\).</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Ga₂O₃ có nhiều tiếp giáp dị chất quan trọng: β-(AlₓGa₁₋ₓ)₂O₃/Ga₂O₃ tạo 2DEG cho HEMT; NiO/Ga₂O₃ tạo diode p-n dị chất có điện áp đánh thủng vài kV; và các hệ loại II như Ga₂O₃ với bán dẫn vùng cấm hẹp hơn được dùng cho cảm biến quang tự cấp nguồn. Độ lệch vùng giữa các cặp này thường được xác định bằng XPS.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s5">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chương 5.</li>
 <li>H. Kroemer, "Nobel Lecture: Quasielectric fields and band offsets: teaching electrons new tricks," <em>Reviews of Modern Physics</em> 73, 783 (2001).</li>
@@ -118,7 +118,7 @@ $$\Delta E_C = \chi_1 - \chi_2, \qquad \Delta E_V = (\chi_2 + E_{g2}) - (\chi_1 
 <div class="l-en">
 <p class="lead">A heterojunction is a junction between two different materials. Bandgap differences let us "design" the paths of electrons and holes: confining them in semiconductor lasers, separating them in solar cells, or forming a high-mobility two-dimensional electron gas in HEMTs.</p>
 
-<h2>1. Three types of heterojunction</h2>
+<h2 id="e-s1">1. Three types of heterojunction</h2>
 <p>Two different semiconductors have different work functions, electron affinities and bandgaps. Depending on the relative positions of the band edges, there are three alignments:</p>
 <ul>
 <li><strong>Type I (straddling)</strong>: the narrow gap lies entirely within the wide gap. Both electrons and holes are confined in the narrow-gap material, as in GaAs/AlGaAs laser quantum wells.</li>
@@ -127,7 +127,7 @@ $$\Delta E_C = \chi_1 - \chi_2, \qquad \Delta E_V = (\chi_2 + E_{g2}) - (\chi_1 
 </ul>
 <figure><svg viewBox="0 0 600 230" class="fig-svg" role="img"><text x="100" y="22" class="nt" text-anchor="middle">Type I (straddling)</text><rect x="20" y="60" width="75" height="110" fill="var(--s1)" opacity=".18"/><line x1="20" y1="60" x2="95" y2="60" class="s1"/><line x1="20" y1="170" x2="95" y2="170" class="s1"/><rect x="105" y="90" width="75" height="50" fill="var(--s3)" opacity=".18"/><line x1="105" y1="90" x2="180" y2="90" class="s3" style="stroke-dasharray:none"/><line x1="105" y1="140" x2="180" y2="140" class="s3" style="stroke-dasharray:none"/><text x="57" y="215" class="ns" text-anchor="middle">A</text><text x="142" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="22" class="nt" text-anchor="middle">Type II (staggered)</text><rect x="220" y="60" width="75" height="90" fill="var(--s1)" opacity=".18"/><line x1="220" y1="60" x2="295" y2="60" class="s1"/><line x1="220" y1="150" x2="295" y2="150" class="s1"/><rect x="305" y="95" width="75" height="90" fill="var(--s3)" opacity=".18"/><line x1="305" y1="95" x2="380" y2="95" class="s3" style="stroke-dasharray:none"/><line x1="305" y1="185" x2="380" y2="185" class="s3" style="stroke-dasharray:none"/><text x="257" y="215" class="ns" text-anchor="middle">A</text><text x="342" y="215" class="ns" text-anchor="middle">B</text><text x="500" y="22" class="nt" text-anchor="middle">Type III (broken gap)</text><rect x="420" y="60" width="75" height="60" fill="var(--s1)" opacity=".18"/><line x1="420" y1="60" x2="495" y2="60" class="s1"/><line x1="420" y1="120" x2="495" y2="120" class="s1"/><rect x="505" y="130" width="75" height="70" fill="var(--s3)" opacity=".18"/><line x1="505" y1="130" x2="580" y2="130" class="s3" style="stroke-dasharray:none"/><line x1="505" y1="200" x2="580" y2="200" class="s3" style="stroke-dasharray:none"/><text x="457" y="215" class="ns" text-anchor="middle">A</text><text x="542" y="215" class="ns" text-anchor="middle">B</text><text x="300" y="44" class="tk" text-anchor="middle">E<tspan baseline-shift="sub" font-size="8">C</tspan> (top), E<tspan baseline-shift="sub" font-size="8">V</tspan> (bottom)</text></svg><figcaption>Figure 1. The three band alignments of heterojunctions.</figcaption></figure>
 
-<h2>2. Building the diagram with the electron affinity model</h2>
+<h2 id="e-s2">2. Building the diagram with the electron affinity model</h2>
 <p>For a lattice-matched junction, the EAM uses these rules:</p>
 <ul>
 <li>In equilibrium the Fermi level is flat; the vacuum level \(E_{vac}\) is continuous but the band edges are discontinuous at the interface.</li>
@@ -139,16 +139,16 @@ $$\Delta E_C = \chi_1 - \chi_2, \qquad \Delta E_V = (\chi_2 + E_{g2}) - (\chi_1 
 <li>The total band bending equals the work-function difference and is shared between the two sides according to doping and permittivity.</li>
 </ul>
 
-<h2>3. The "notch" and the two-dimensional electron gas</h2>
+<h2 id="e-s3">3. The "notch" and the two-dimensional electron gas</h2>
 <p>The discontinuity \(\Delta E_C\) together with band bending often forms a <strong>notch</strong>, a narrow triangular potential well on the narrow-gap side, and a <strong>spike</strong> on the other side. The notch can trap carriers; the spike impedes current. In a modulation-doped AlGaAs/GaAs junction, electrons from the doped AlGaAs fall into the notch in undoped GaAs, forming a <strong>two-dimensional electron gas</strong> (2DEG) separated from the dopant ions, so impurity scattering drops sharply and mobility is very high. This is the principle of the HEMT.</p>
 
-<h2>4. Limits of the EAM</h2>
+<h2 id="e-s4">4. Limits of the EAM</h2>
 <p>The EAM assumes an ideal interface. In reality, interface dipoles, interface states and lattice mismatch make the actual \(\Delta E_C\) differ from the prediction, so band offsets are usually measured directly by XPS (Kraut's method) rather than calculated only from \(\chi\).</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>Ga₂O₃ has several important heterojunctions: β-(AlₓGa₁₋ₓ)₂O₃/Ga₂O₃ forms a 2DEG for HEMTs; NiO/Ga₂O₃ forms p-n heterojunction diodes with kV-class breakdown; and type-II systems pairing Ga₂O₃ with narrower-gap semiconductors are used for self-powered photodetectors. The band offsets of these pairs are usually determined by XPS.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s5">References</h2>
 <ol class="refs">
 <li>B. G. Streetman, S. K. Banerjee, <em>Solid State Electronic Devices</em>, 7th ed., Pearson (2015), chapter 5.</li>
 <li>H. Kroemer, "Nobel Lecture: Quasielectric fields and band offsets: teaching electrons new tricks," <em>Reviews of Modern Physics</em> 73, 783 (2001).</li>

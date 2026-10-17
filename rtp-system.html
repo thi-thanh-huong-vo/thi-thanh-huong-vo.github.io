@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Mọi vấn đề của RTP rốt cuộc đều quy về một đại lượng: nhiệt độ của wafer. Đo nó thế nào, giữ nó đồng đều ra sao, và lặp lại nó từ wafer này sang wafer khác là ba thách thức chính của thiết bị RTP.</p>
 
-<h2>1. Các phương pháp gia nhiệt</h2>
+<h2 id="v-s1">1. Các phương pháp gia nhiệt</h2>
 <ul>
 <li><strong>Lò susceptor</strong>: susceptor là vật liệu hấp thụ năng lượng điện từ và chuyển thành nhiệt. Lò thông thường không hợp với ủ thời gian ngắn: wafer nóng từ mép vào trong, và dù thời gian ủ ngắn, các đoạn tăng giảm nhiệt dài vẫn gây khuếch tán đáng kể.</li>
 <li><strong>Lò chuông</strong> (bell-jar furnace): wafer được nâng vào vùng nóng có gradient nhiệt độ theo chiều dọc; nhiệt độ được chọn bằng vị trí.</li>
@@ -86,12 +86,12 @@
 <li><strong>Đèn hồ quang</strong> (arc lamp): phổ ngắn hơn, được Si hấp thụ qua cơ chế vùng cấm.</li>
 </ul>
 
-<h2>2. Đèn halogen tungsten</h2>
+<h2 id="v-s2">2. Đèn halogen tungsten</h2>
 <p>Đèn sợi đốt phát sáng nhờ sợi tungsten bị dòng điện nung tới nhiệt độ rất cao; bóng thủy tinh hoặc thạch anh chứa khí trơ hoặc chân không để sợi không bị oxy hóa. Trong đèn thường, tungsten bay hơi bám lên mặt trong bóng, làm bóng đen dần và sợi mỏng đi đến khi đứt.</p>
 <p>Đèn <strong>halogen</strong> thêm một lượng nhỏ halogen (iốt hoặc brom) vào khí trơ. Tungsten bay hơi kết hợp với halogen tạo halide dễ bay hơi; halide khuếch tán về sợi nóng, bị phân hủy và trả tungsten lại cho sợi. Chu trình tái sinh halogen này kéo dài tuổi thọ đèn và giữ bóng sạch, cho phép sợi làm việc ở nhiệt độ cao hơn.</p>
 <p>Một điểm đáng chú ý: wafer Si không pha tạp ở nhiệt độ phòng chỉ hấp thụ photon có năng lượng lớn hơn vùng cấm (bước sóng dưới khoảng 1,1 µm), nên ban đầu chỉ thu được một phần nhỏ năng lượng tới. Khi wafer nóng lên, hấp thụ hạt tải tự do tăng và quá trình gia nhiệt tăng tốc.</p>
 
-<h2>3. Đo nhiệt độ</h2>
+<h2 id="v-s3">3. Đo nhiệt độ</h2>
 <h3>Cặp nhiệt điện tiếp xúc trực tiếp</h3>
 <ul>
 <li>Phụ thuộc diện tích tiếp xúc nên khó lặp lại.</li>
@@ -110,17 +110,17 @@
 <h3>Đo nhiệt độ bằng âm học</h3>
 <p>Vận tốc âm trong Si thay đổi tuyến tính theo nhiệt độ. Sóng âm được phát qua một chốt đỡ thạch anh và thu ở chốt khác; thời gian truyền cho biết nhiệt độ, không phụ thuộc độ phát xạ.</p>
 
-<h2>4. Thiết kế buồng và độ đồng đều</h2>
+<h2 id="v-s4">4. Thiết kế buồng và độ đồng đều</h2>
 <p>Mép wafer mất nhiệt nhiều hơn vì có thêm diện tích bức xạ ra ngoài, nên công suất chiếu vào vùng mép phải lớn hơn để giữ nhiệt độ đồng đều. Khí N₂ được dùng để làm mát đèn và mặt ngoài ống thạch anh. Hệ RTP thương mại có thể giữ nhiệt độ tâm wafer trong khoảng ±2 °C với quy trình wafer trần như ủ sau cấy, nhưng nhiệt độ tuyệt đối thường kém chắc chắn hơn do sai số độ phát xạ.</p>
 <p>Nếu nhiệt độ trên wafer không đồng đều khi gia nhiệt nhanh, ứng suất nhiệt có thể gây <strong>lệch trượt</strong> (slip dislocation) trong tinh thể. Độ dày wafer và các lớp kim loại cũng ảnh hưởng tới đáp ứng nhiệt.</p>
 
-<h2>5. Lớp phủ bảo vệ khi ủ bán dẫn hợp chất</h2>
+<h2 id="v-s5">5. Lớp phủ bảo vệ khi ủ bán dẫn hợp chất</h2>
 <p>Với GaAs, As dễ bay hơi khỏi bề mặt khi ủ, nên người ta phủ lớp Si₃N₄ hoặc SiOₓNᵧ để ngăn As thoát ra. Si₃N₄ bảo vệ được tới khoảng 900 °C, SiO₂ tới khoảng 850 °C. Lớp phủ có thể khó loại bỏ, và chênh lệch hệ số giãn nở nhiệt có thể gây lệch trượt. Một giải pháp thay thế là ủ không phủ trong susceptor graphite thiết kế riêng, cho bề mặt tốt hơn và ít hạt bụi hơn.</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Ga₂O₃ đối mặt với vấn đề tương tự GaAs: ở nhiệt độ cao, bề mặt có thể mất oxy và tạo các sản phẩm bay hơi như Ga₂O. Vì vậy khí quyển chứa oxy, hoặc lớp phủ bảo vệ như SiO₂ hay SiNₓ, được dùng khi ủ nhiệt độ cao. Đo nhiệt độ bằng hỏa kế cũng khó hơn vì Ga₂O₃ trong suốt trong dải hồng ngoại, nên hỏa kế có thể "nhìn" xuyên qua mẫu thay vì đo bề mặt.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s6">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>R. B. Fair, <em>Rapid Thermal Processing: Science and Technology</em>, Academic Press (1993).</li>
@@ -130,7 +130,7 @@
 <div class="l-en">
 <p class="lead">Every RTP problem ultimately comes down to one quantity: wafer temperature. How to measure it, how to keep it uniform, and how to reproduce it from wafer to wafer are the three main challenges of RTP equipment.</p>
 
-<h2>1. Heating methods</h2>
+<h2 id="e-s1">1. Heating methods</h2>
 <ul>
 <li><strong>Susceptor furnace</strong>: a susceptor is a material that absorbs electromagnetic energy and converts it to heat. Conventional furnaces are ill-suited to short anneals: wafers heat from the edges inward, and even if the anneal is short, the long ramps cause significant diffusion.</li>
 <li><strong>Bell-jar furnace</strong>: the wafer is raised into a heated zone with a vertical temperature gradient; temperature is selected by position.</li>
@@ -138,12 +138,12 @@
 <li><strong>Arc lamps</strong>: shorter-wavelength spectra, absorbed by Si through band-gap absorption.</li>
 </ul>
 
-<h2>2. Tungsten-halogen lamps</h2>
+<h2 id="e-s2">2. Tungsten-halogen lamps</h2>
 <p>An incandescent lamp glows because an electric current heats a tungsten filament to a very high temperature; the glass or quartz bulb holds inert gas or vacuum so the filament does not oxidize. In ordinary lamps, evaporated tungsten deposits on the inner bulb wall, blackening it while the filament thins until it breaks.</p>
 <p>A <strong>halogen</strong> lamp adds a small amount of halogen (iodine or bromine) to the inert gas. Evaporated tungsten combines with the halogen to form volatile halides, which diffuse back to the hot filament, decompose and redeposit the tungsten. This halogen regenerative cycle extends lamp life and keeps the bulb clean, letting the filament run hotter.</p>
 <p>A notable point: an undoped Si wafer at room temperature absorbs only photons above its bandgap (wavelengths below about 1.1 µm), so initially it captures only a small fraction of the incident energy. As the wafer heats up, free-carrier absorption rises and heating accelerates.</p>
 
-<h2>3. Temperature measurement</h2>
+<h2 id="e-s3">3. Temperature measurement</h2>
 <h3>Thermocouples in direct contact</h3>
 <ul>
 <li>Depend on contact area, so repeatability is poor.</li>
@@ -162,17 +162,17 @@
 <h3>Acoustic thermometry</h3>
 <p>The speed of sound in Si varies linearly with temperature. An acoustic wave is launched through one quartz support pin and detected at another; the transit time gives the temperature, independent of emissivity.</p>
 
-<h2>4. Chamber design and uniformity</h2>
+<h2 id="e-s4">4. Chamber design and uniformity</h2>
 <p>The wafer edge loses more heat because it has extra radiating area, so more radiant power must be directed to the edge to keep the temperature uniform. N₂ cools the lamps and the outer surface of the quartz tube. Commercial RTP systems can hold the wafer-center temperature to about ±2 °C for bare-wafer processes such as implant anneals, but the absolute temperature is usually less certain because of emissivity errors.</p>
 <p>If temperature is not uniform across the wafer during fast ramps, thermal stress can create <strong>slip dislocations</strong> in the crystal. Wafer thickness and metal layers also affect the thermal response.</p>
 
-<h2>5. Capping layers for compound semiconductors</h2>
+<h2 id="e-s5">5. Capping layers for compound semiconductors</h2>
 <p>For GaAs, As readily evaporates from the surface during annealing, so Si₃N₄ or SiOₓNᵧ caps are used to prevent As loss. Si₃N₄ protects up to about 900 °C, SiO₂ up to about 850 °C. Caps can be hard to remove, and thermal-expansion mismatch can cause slip. An alternative is capless annealing in a specially designed graphite susceptor, giving better surfaces and fewer particles.</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>Ga₂O₃ faces a problem similar to GaAs: at high temperature the surface can lose oxygen and form volatile species such as Ga₂O. Oxygen-containing ambients or protective caps such as SiO₂ or SiNₓ are therefore used for high-temperature anneals. Pyrometry is also harder because Ga₂O₃ is transparent in the infrared, so a pyrometer may "see" through the sample rather than measuring its surface.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s6">References</h2>
 <ol class="refs">
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000).</li>
 <li>R. B. Fair, <em>Rapid Thermal Processing: Science and Technology</em>, Academic Press (1993).</li>

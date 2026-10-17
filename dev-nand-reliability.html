@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Flash có tuổi thọ hữu hạn. Mỗi lần lập trình và xóa, oxit đường hầm phải chịu điện trường trên 10 MV/cm, gấp đôi mức mà hầu hết linh kiện khác phải chịu. Bài này xét các cơ chế suy giảm độ tin cậy, và vì sao chúng dẫn tới bộ nhớ bẫy điện tích và NAND 3D.</p>
 
-<h2>1. Bốn khía cạnh độ tin cậy</h2>
+<h2 id="v-s1">1. Bốn khía cạnh độ tin cậy</h2>
 <ul>
 <li><strong>Độ bền chu kỳ</strong> (endurance): số chu kỳ lập trình/xóa (P/E) ô chịu được, khoảng 10³–10⁵.</li>
 <li><strong>Khả năng lưu giữ</strong> (retention): thời gian dữ liệu được giữ, mục tiêu 1–10 năm.</li>
@@ -86,23 +86,23 @@
 <li><strong>Nhiễu thao tác</strong> (disturb) lên các ô không được chọn khi đọc hoặc lập trình ô khác; yêu cầu chịu được 10⁵–10⁷ lần đọc.</li>
 </ul>
 
-<h2>2. Bẫy và dòng rò do ứng suất</h2>
+<h2 id="v-s2">2. Bẫy và dòng rò do ứng suất</h2>
 <p>Dưới trường cao, electron nóng tạo cặp điện tử–lỗ trống; cả electron và lỗ trống nóng bị bẫy trong oxit đường hầm, và các trạng thái mặt phân cách mới được sinh ra. Hậu quả quan trọng nhất là <strong>dòng rò do ứng suất</strong> (stress-induced leakage current, SILC): các bẫy trong oxit tạo đường xuyên hầm hỗ trợ bởi bẫy ở điện trường thấp, cho phép điện tích trên FG rò dần ngay cả khi không có điện áp. SILC tích lũy theo chu kỳ P/E là nguyên nhân gốc rễ chính của hỏng hóc lưu giữ.</p>
 
-<h2>3. Độ bền chu kỳ</h2>
+<h2 id="v-s3">3. Độ bền chu kỳ</h2>
 <p>Khi số chu kỳ tăng, điện tích bị bẫy trong oxit làm \(V_{th}\) của cả trạng thái lập trình và xóa dịch, và <strong>cửa sổ \(V_{th}\)</strong> giữa hai trạng thái thu hẹp. Oxit đường hầm dày hơn lại thu hẹp cửa sổ nhiều hơn: oxit dày sinh nhiều lỗ trống hơn, lỗ trống tham gia tạo bẫy, nên bẫy electron cũng tăng. Quanh 1000 chu kỳ còn quan sát được cửa sổ mở rộng tạm thời do bẫy lỗ trống, cũng mạnh hơn ở oxit dày.</p>
 
-<h2>4. Lưu giữ dữ liệu</h2>
+<h2 id="v-s4">4. Lưu giữ dữ liệu</h2>
 <p>Điện tích trên FG mất dần qua SILC, phát xạ nhiệt từ bẫy, và giải bẫy trong oxit, làm \(V_{th}\) của ô lập trình giảm theo thời gian. Quá trình này được gia tốc theo nhiệt độ theo quy luật Arrhenius, nên lưu giữ 10 năm ở nhiệt độ sử dụng thường được kiểm chứng bằng thử nghiệm vài giờ ở nhiệt độ cao, rồi ngoại suy.</p>
 
-<h2>5. Nhiễu thao tác và nhiễu ghép</h2>
+<h2 id="v-s5">5. Nhiễu thao tác và nhiễu ghép</h2>
 <ul>
 <li><strong>Nhiễu lập trình</strong>: các ô không được chọn trên cùng word line hoặc bit line vẫn chịu một phần điện áp cao, nên \(V_{th}\) của chúng tăng nhẹ sau nhiều lần lập trình ô khác.</li>
 <li><strong>Nhiễu ghép giữa các ô</strong>: điện dung ký sinh giữa FG của các ô cạnh nhau khiến điện tích ở một ô làm dịch \(V_{th}\) của ô bên cạnh. Kết quả là phân bố \(V_{th}\) bị kéo rộng ra so với phân bố nội tại, làm thu hẹp khoảng cách giữa các mức.</li>
 </ul>
 <p>Ở mức hệ thống, bộ điều khiển dùng <strong>mã sửa lỗi</strong> (ECC) để sửa lỗi đọc/ghi, và <strong>cân bằng hao mòn</strong> (wear leveling) dựa trên số lần xóa để mọi khối có số chu kỳ P/E đồng đều, tránh dùng tập trung một khối.</p>
 
-<h2>6. Giới hạn của cổng nổi và bộ nhớ bẫy điện tích</h2>
+<h2 id="v-s6">6. Giới hạn của cổng nổi và bộ nhớ bẫy điện tích</h2>
 <p>Khi thu nhỏ ô dưới khoảng 20 nm, cổng nổi gặp hai vấn đề cơ bản:</p>
 <ul>
 <li><strong>Quá ít electron</strong>: điện dung FG nhỏ nên số electron lưu trên mỗi ô chỉ còn vài chục; mất vài electron đã làm dịch \(V_{th}\) đáng kể, và các electron ở vùng ký sinh ngoài FG bắt đầu chi phối.</li>
@@ -113,7 +113,7 @@
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Các phương pháp đánh giá độ tin cậy của flash như ứng suất điện áp, theo dõi dịch \(V_{th}\) và ngoại suy Arrhenius cũng được dùng cho linh kiện Ga₂O₃. Điện trường rất cao mà Ga₂O₃ chịu được đồng nghĩa với ứng suất lớn lên điện môi cổng và lớp thụ động, nên SILC và bẫy trong điện môi là mối lo chính cho độ tin cậy dài hạn của MOSFET Ga₂O₃.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s7">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>A. Modelli, A. Visconti, R. Bez, "Advanced flash memory reliability," <em>Proceedings of the IEEE International Conference on Integrated Circuit Design and Technology</em>, 211 (2004).</li>
 <li>H. Tanaka et al., "Bit cost scalable technology with punch and plug process for ultra high density flash memory," <em>Symposium on VLSI Technology</em>, 14 (2007).</li>
@@ -123,7 +123,7 @@
 <div class="l-en">
 <p class="lead">Flash has a finite lifetime. Every program and erase subjects the tunnel oxide to fields above 10 MV/cm, twice what most other devices face. This lesson covers the reliability degradation mechanisms, and why they led to charge trap memory and 3D NAND.</p>
 
-<h2>1. Four aspects of reliability</h2>
+<h2 id="e-s1">1. Four aspects of reliability</h2>
 <ul>
 <li><strong>Endurance</strong>: the number of program/erase (P/E) cycles a cell survives, about 10³–10⁵.</li>
 <li><strong>Retention</strong>: how long data is kept, targeting 1–10 years.</li>
@@ -131,23 +131,23 @@
 <li><strong>Disturb</strong> of unselected cells while reading or programming others; 10⁵–10⁷ reads must be tolerated.</li>
 </ul>
 
-<h2>2. Traps and stress-induced leakage</h2>
+<h2 id="e-s2">2. Traps and stress-induced leakage</h2>
 <p>Under high field, hot electrons create electron–hole pairs; both hot electrons and holes get trapped in the tunnel oxide, and new interface states are generated. The most important consequence is <strong>stress-induced leakage current</strong> (SILC): oxide traps create trap-assisted tunneling paths at low field, letting FG charge leak away even with no voltage applied. SILC accumulated over P/E cycles is the main root cause of retention failure.</p>
 
-<h2>3. Endurance</h2>
+<h2 id="e-s3">3. Endurance</h2>
 <p>As cycles accumulate, charge trapped in the oxide shifts \(V_{th}\) of both programmed and erased states, and the <strong>\(V_{th}\) window</strong> between them narrows. Thicker tunnel oxides narrow the window more: thicker oxides generate more holes, holes take part in trap generation, so electron trapping is also enhanced. Around 1000 cycles a temporary window widening is also seen from hole trapping, again stronger in thicker oxides.</p>
 
-<h2>4. Data retention</h2>
+<h2 id="e-s4">4. Data retention</h2>
 <p>FG charge is lost gradually through SILC, thermal emission from traps and detrapping in the oxide, lowering \(V_{th}\) of programmed cells over time. The process is accelerated by temperature following an Arrhenius law, so 10-year retention at use temperature is usually verified with hours of high-temperature testing, then extrapolated.</p>
 
-<h2>5. Disturb and interference</h2>
+<h2 id="e-s5">5. Disturb and interference</h2>
 <ul>
 <li><strong>Program disturb</strong>: unselected cells on the same word line or bit line still see part of the high voltage, so their \(V_{th}\) creeps up after many programs of other cells.</li>
 <li><strong>Cell-to-cell interference</strong>: parasitic capacitance between neighboring FGs means charge on one cell shifts the \(V_{th}\) of the next. The \(V_{th}\) distribution is broadened beyond its intrinsic width, shrinking the margin between levels.</li>
 </ul>
 <p>At the system level, the controller uses <strong>error correction codes</strong> (ECC) to fix read/write errors, and <strong>wear leveling</strong> based on erase counts so all blocks see uniform P/E cycling and no block is used intensively.</p>
 
-<h2>6. Limits of the floating gate and charge trap memory</h2>
+<h2 id="e-s6">6. Limits of the floating gate and charge trap memory</h2>
 <p>Scaling cells below about 20 nm runs the floating gate into two fundamental problems:</p>
 <ul>
 <li><strong>Too few electrons</strong>: the small FG capacitance means only a few tens of electrons are stored per cell; losing a few already shifts \(V_{th}\) noticeably, and electrons in parasitic regions outside the FG start to dominate.</li>
@@ -158,7 +158,7 @@
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>Flash reliability methods such as voltage stress, tracking \(V_{th}\) shift and Arrhenius extrapolation are also used for Ga₂O₃ devices. The very high fields Ga₂O₃ can sustain mean heavy stress on gate dielectrics and passivation layers, so SILC and dielectric traps are a main concern for the long-term reliability of Ga₂O₃ MOSFETs.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s7">References</h2>
 <ol class="refs">
 <li>A. Modelli, A. Visconti, R. Bez, "Advanced flash memory reliability," <em>Proceedings of the IEEE International Conference on Integrated Circuit Design and Technology</em>, 211 (2004).</li>
 <li>H. Tanaka et al., "Bit cost scalable technology with punch and plug process for ultra high density flash memory," <em>Symposium on VLSI Technology</em>, 14 (2007).</li>

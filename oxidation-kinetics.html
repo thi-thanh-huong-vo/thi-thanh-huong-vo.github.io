@@ -78,7 +78,7 @@
 <div class="l-vi">
 <p class="lead">Phương trình Deal–Grove có hai số hạng, và tùy độ dày oxide mà số hạng này hay số hạng kia chiếm ưu thế. Hiểu hai chế độ này, cùng cách các hằng số phụ thuộc nhiệt độ, áp suất, định hướng tinh thể và pha tạp, là chìa khóa để thiết kế một bước oxy hóa.</p>
 
-<h2>1. Hai chế độ theo độ dày</h2>
+<h2 id="v-s1">1. Hai chế độ theo độ dày</h2>
 <p>Từ \(x_{ox}^2 + A x_{ox} = B(t + \tau)\):</p>
 <ul>
 <li><strong>Oxide đủ mỏng</strong> (\(t + \tau \ll A^2/4B\)): bỏ qua số hạng bậc hai,
@@ -89,14 +89,14 @@ $$x_{ox}^2 \approx B\,t$$
 Độ dày tăng theo \(\sqrt{t}\); \(B\) gọi là <strong>hằng số tốc độ parabol</strong>.</li>
 </ul>
 
-<h2>2. Giới hạn bởi khuếch tán hay bởi phản ứng</h2>
+<h2 id="v-s2">2. Giới hạn bởi khuếch tán hay bởi phản ứng</h2>
 <p>Hai chế độ trên tương ứng với hai trường hợp giới hạn của nồng độ chất oxy hóa:</p>
 <ul>
 <li><strong>Giới hạn bởi khuếch tán</strong>: khi \(D\) rất nhỏ so với thông lượng mà phản ứng có thể tiêu thụ (\(k_s x_{ox}/D \gg 1\)), chất oxy hóa vừa tới mặt phân cách là bị tiêu thụ ngay: \(C_i \to 0\), còn \(C_0 \to C^*\). Tốc độ do khuếch tán qua oxide quyết định, tức do \(B\).</li>
 <li><strong>Giới hạn bởi phản ứng</strong>: khi \(D\) lớn (oxide mỏng), chất oxy hóa được cung cấp dồi dào tới mặt phân cách: \(C_i \approx C_0 \approx C^*\). Tốc độ do hằng số phản ứng \(k_s\) và \(C_i\) quyết định, tức do \(B/A\).</li>
 </ul>
 
-<h2>3. Hằng số phụ thuộc nhiệt độ</h2>
+<h2 id="v-s3">3. Hằng số phụ thuộc nhiệt độ</h2>
 <p>Cả hai hằng số tuân theo quy luật Arrhenius:</p>
 $$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left(-\frac{E_2}{kT}\right)$$
 <div class="tablewrap"><table>
@@ -110,10 +110,10 @@ $$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left
 <h3>Vì sao oxy hóa ướt nhanh hơn nhiều?</h3>
 <p>Cả \(B\) và \(B/A\) đều tỉ lệ với \(C^* = Hp\). Độ hòa tan (hằng số Henry) của H₂O trong SiO₂ cao hơn O₂ khoảng ba bậc độ lớn, khoảng 3×10¹⁹ so với 5×10¹⁶ cm⁻³ ở 1 atm và 1000 °C, nên dù \(D\) của H₂O nhỏ hơn và \(N_1\) gấp đôi, oxy hóa ướt vẫn nhanh hơn hàng chục lần.</p>
 
-<h2>4. Oxide mỏng và giá trị τ</h2>
+<h2 id="v-s4">4. Oxide mỏng và giá trị τ</h2>
 <p>Mô hình Deal–Grove khớp rất tốt với thực nghiệm, ngoại trừ oxide mỏng dưới khoảng 20 nm mọc trong O₂ khô: giai đoạn đầu mọc nhanh hơn dự đoán. Khi dùng phương trình Deal–Grove cho oxide khô mọc trên Si trần (\(x_i = 0\)), ta "giả định" \(x_i = 25\) nm, tương đương với việc dùng một giá trị \(\tau\) khác 0 để bù cho phần mọc thừa ban đầu. Với oxy hóa ướt thường lấy \(\tau = 0\).</p>
 
-<h2>5. Ảnh hưởng của áp suất</h2>
+<h2 id="v-s5">5. Ảnh hưởng của áp suất</h2>
 <p>Theo mô hình, \(A = 2D(1/k_s + 1/h)\) không phụ thuộc áp suất, còn \(B\) và \(B/A\) đều tỉ lệ với \(C^*\), tức với áp suất riêng phần \(p_g\):</p>
 <ul>
 <li><strong>Oxy hóa ướt</strong>: cả \(B\) và \(B/A\) tỉ lệ tuyến tính với \(p_g\), đúng như mô hình.</li>
@@ -121,21 +121,21 @@ $$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left
 </ul>
 <p>Oxy hóa áp suất cao vì vậy cho phép giảm nhiệt độ hoặc thời gian, hạn chế khuếch tán tạp chất.</p>
 
-<h2>6. Ảnh hưởng của định hướng tinh thể</h2>
+<h2 id="v-s6">6. Ảnh hưởng của định hướng tinh thể</h2>
 <p>Hằng số phản ứng \(k_s = k_{s0}\exp(-E_a/kT)\), với \(k_{s0}\) xấp xỉ tỉ lệ với số liên kết Si sẵn sàng phản ứng trên một đơn vị diện tích. Mặt (111) có nhiều liên kết như vậy hơn mặt (100), nên:</p>
 $$\left(\frac{B}{A}\right)_{(111)} \approx 1{,}68\left(\frac{B}{A}\right)_{(100)}$$
 <p>Hằng số parabol \(B\) <strong>không</strong> phụ thuộc định hướng vì nó mô tả khuếch tán qua oxide vô định hình. Vì vậy ảnh hưởng của định hướng giảm dần khi nhiệt độ cao hoặc thời gian dài, lúc oxide dày và quá trình bị khuếch tán chi phối. Ví dụ, oxy hóa ướt ở 900 °C trong 30 phút cho khoảng 71 nm trên Si (100) nhưng khoảng 109 nm trên Si (111).</p>
 
-<h2>7. Chất nào thực sự phản ứng?</h2>
+<h2 id="v-s7">7. Chất nào thực sự phản ứng?</h2>
 <p>Các thí nghiệm cho thấy chất khuếch tán qua oxide là phân tử O₂ (hoặc H₂O), nhưng phản ứng với Si có thể xảy ra qua một nồng độ nhỏ oxy nguyên tử phân ly ở gần mặt phân cách. Đặt điện trường qua oxide cũng có thể làm thay đổi tốc độ oxy hóa, gợi ý rằng các dạng tích điện có tham gia vào quá trình.</p>
 
-<h2>8. Ảnh hưởng của pha tạp P</h2>
+<h2 id="v-s8">8. Ảnh hưởng của pha tạp P</h2>
 <p>Pha tạp P nặng làm tăng \(B/A\) nhưng hầu như không đổi \(B\). Hằng số tuyến tính tăng nhanh khi nồng độ bề mặt vượt khoảng 10²⁰ cm⁻³, có lẽ do mật độ sai hỏng điểm (vacancy) tăng cho phép giãn nở thể tích dễ hơn tại mặt phân cách. Vì \(B/A\) quan trọng nhất ở oxide mỏng và nhiệt độ thấp, hiệu ứng rõ nhất khi oxy hóa khô ở khoảng 900 °C: vùng pha tạp nặng có thể mọc oxide dày gấp vài lần vùng pha tạp nhẹ.</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Cách tách tốc độ thành phần "phản ứng" và phần "khuếch tán" cũng giúp đọc các dữ liệu phụ thuộc nhiệt độ trong nghiên cứu Ga₂O₃. Khi vẽ một đại lượng theo 1/T (đồ thị Arrhenius) và thấy độ dốc thay đổi giữa hai vùng nhiệt độ, đó thường là dấu hiệu cơ chế chi phối đã chuyển từ cơ chế này sang cơ chế khác, ví dụ dòng rò ngược chuyển từ phát xạ nhiệt điện tử sang dẫn qua bẫy.</p></div>
 
-<h2>Tài liệu tham khảo</h2>
+<h2 id="v-s9">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>B. E. Deal, A. S. Grove, <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chương 6.</li>
@@ -145,7 +145,7 @@ $$\left(\frac{B}{A}\right)_{(111)} \approx 1{,}68\left(\frac{B}{A}\right)_{(100)
 <div class="l-en">
 <p class="lead">The Deal–Grove equation has two terms, and depending on oxide thickness one or the other dominates. Understanding these two regimes, and how the constants depend on temperature, pressure, crystal orientation and doping, is the key to designing an oxidation step.</p>
 
-<h2>1. Two regimes by thickness</h2>
+<h2 id="e-s1">1. Two regimes by thickness</h2>
 <p>From \(x_{ox}^2 + A x_{ox} = B(t + \tau)\):</p>
 <ul>
 <li><strong>Sufficiently thin oxide</strong> (\(t + \tau \ll A^2/4B\)): neglect the quadratic term,
@@ -156,14 +156,14 @@ $$x_{ox}^2 \approx B\,t$$
 Thickness grows as \(\sqrt{t}\); \(B\) is the <strong>parabolic rate constant</strong>.</li>
 </ul>
 
-<h2>2. Diffusion-controlled or reaction-controlled</h2>
+<h2 id="e-s2">2. Diffusion-controlled or reaction-controlled</h2>
 <p>The two regimes correspond to two limiting cases of the oxidant concentration:</p>
 <ul>
 <li><strong>Diffusion-controlled</strong>: when \(D\) is very small compared with what the reaction can consume (\(k_s x_{ox}/D \gg 1\)), oxidant reaching the interface is consumed immediately: \(C_i \to 0\) and \(C_0 \to C^*\). The rate is set by diffusion through the oxide, that is, by \(B\).</li>
 <li><strong>Reaction-controlled</strong>: when \(D\) is large (thin oxide), oxidant is supplied abundantly to the interface: \(C_i \approx C_0 \approx C^*\). The rate is set by the reaction constant \(k_s\) and \(C_i\), that is, by \(B/A\).</li>
 </ul>
 
-<h2>3. Temperature dependence of the constants</h2>
+<h2 id="e-s3">3. Temperature dependence of the constants</h2>
 <p>Both constants follow Arrhenius behavior:</p>
 $$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left(-\frac{E_2}{kT}\right)$$
 <div class="tablewrap"><table>
@@ -177,10 +177,10 @@ $$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left
 <h3>Why is wet oxidation so much faster?</h3>
 <p>Both \(B\) and \(B/A\) are proportional to \(C^* = Hp\). The solubility (Henry's constant) of H₂O in SiO₂ is about three orders of magnitude higher than that of O₂, roughly 3×10¹⁹ versus 5×10¹⁶ cm⁻³ at 1 atm and 1000 °C, so even though H₂O has a smaller \(D\) and \(N_1\) is doubled, wet oxidation is still tens of times faster.</p>
 
-<h2>4. Thin oxides and the value of τ</h2>
+<h2 id="e-s4">4. Thin oxides and the value of τ</h2>
 <p>The Deal–Grove model agrees very well with experiment, except for oxides thinner than about 20 nm grown in dry O₂: the initial stage grows faster than predicted. When using the Deal–Grove equations for dry oxide grown on bare Si (\(x_i = 0\)), one "assumes" \(x_i = 25\) nm, which is equivalent to using a nonzero \(\tau\) to compensate for the excess initial growth. For wet oxidation \(\tau = 0\) is usually used.</p>
 
-<h2>5. Pressure dependence</h2>
+<h2 id="e-s5">5. Pressure dependence</h2>
 <p>In the model, \(A = 2D(1/k_s + 1/h)\) is independent of pressure, while \(B\) and \(B/A\) are both proportional to \(C^*\), that is, to the partial pressure \(p_g\):</p>
 <ul>
 <li><strong>Wet oxidation</strong>: both \(B\) and \(B/A\) scale linearly with \(p_g\), as the model predicts.</li>
@@ -188,21 +188,21 @@ $$B = C_1\exp\!\left(-\frac{E_1}{kT}\right), \qquad \frac{B}{A} = C_2\exp\!\left
 </ul>
 <p>High-pressure oxidation therefore allows lower temperatures or shorter times, limiting dopant diffusion.</p>
 
-<h2>6. Crystal orientation</h2>
+<h2 id="e-s6">6. Crystal orientation</h2>
 <p>The reaction constant is \(k_s = k_{s0}\exp(-E_a/kT)\), with \(k_{s0}\) roughly proportional to the number of Si bonds available for reaction per unit area. The (111) face has more such bonds than (100), so:</p>
 $$\left(\frac{B}{A}\right)_{(111)} \approx 1.68\left(\frac{B}{A}\right)_{(100)}$$
 <p>The parabolic constant \(B\) does <strong>not</strong> depend on orientation, because it describes diffusion through amorphous oxide. The orientation effect therefore fades at high temperature or long times, when the oxide is thick and diffusion dominates. For example, wet oxidation at 900 °C for 30 minutes gives about 71 nm on (100) Si but about 109 nm on (111) Si.</p>
 
-<h2>7. What actually reacts?</h2>
+<h2 id="e-s7">7. What actually reacts?</h2>
 <p>Experiments indicate that the species diffusing through the oxide is molecular O₂ (or H₂O), but the reaction with Si may proceed through a small concentration of atomic oxygen dissociated near the interface. Applying an electric field across the oxide can also change the oxidation rate, suggesting that charged species take part.</p>
 
-<h2>8. Effect of phosphorus doping</h2>
+<h2 id="e-s8">8. Effect of phosphorus doping</h2>
 <p>Heavy P doping raises \(B/A\) but leaves \(B\) nearly unchanged. The linear constant rises rapidly once the surface concentration exceeds about 10²⁰ cm⁻³, probably because a higher point-defect (vacancy) density eases the volume expansion at the interface. Since \(B/A\) matters most for thin oxides and low temperatures, the effect is strongest in dry oxidation around 900 °C: heavily doped regions can grow oxide several times thicker than lightly doped ones.</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>Separating a rate into a "reaction" part and a "diffusion" part also helps when reading temperature-dependent data in Ga₂O₃ research. When a quantity plotted against 1/T (an Arrhenius plot) shows a change of slope between two temperature ranges, it usually means the dominant mechanism has changed, for example reverse leakage switching from thermionic emission to trap-assisted conduction.</p></div>
 
-<h2>References</h2>
+<h2 id="e-s9">References</h2>
 <ol class="refs">
 <li>B. E. Deal, A. S. Grove, <em>Journal of Applied Physics</em> 36, 3770 (1965).</li>
 <li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chapter 6.</li>
