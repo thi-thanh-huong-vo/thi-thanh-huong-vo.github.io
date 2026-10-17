@@ -70,6 +70,10 @@
   pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
   pre code{font-size:1em;white-space:pre}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .anote{font-size:.9rem;color:var(--muted)}
   h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
 </style></head>
 <body>
@@ -158,6 +162,19 @@ Solve {
 <li>Tìm điện áp đánh thủng khi lớp n dày 2 µm và 5 µm, giải thích sự khác nhau bằng hiện tượng xuyên thủng.</li>
 </ol>
 
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p class="anote">Các số dưới đây là tính tay theo mô hình giải tích để bạn có mốc đối chiếu. Kết quả mô phỏng sẽ lệch vài phần trăm đến vài chục phần trăm tùy giá trị \(n_i\), mô hình thu hẹp vùng cấm, lưới và cách trích; khi lệch, hãy giải thích được vì sao.</p>
+<p><strong>1.</strong> Có SRH, n tăng dần về 2 khi V giảm và về 1 khi V tăng; không SRH, n ≈ 1 trên toàn dải (trừ đoạn dòng lớn, nơi điện trở nối tiếp làm n biểu kiến tăng lại). Giảm \(\tau\) 10 lần làm \(J_{gr0}\) tăng 10 lần, nên điện áp chuyển tiếp \(V_x\) dịch lên \(2(kT/q)\ln 10\approx 0{,}12\) V và dòng ngược tăng khoảng 10 lần; dòng khuếch tán của diode ngắn gần như không đổi.</p>
+<p><strong>2.</strong> Với \(N_D=10^{16}\) cm⁻³:</p>
+$$\frac{\mathrm{d}(1/C'^2)}{\mathrm{d}V}=-\frac{2}{q\varepsilon_sN_D}\approx -1{,}2\times10^{15}\ \text{cm}^4\text{F}^{-2}\text{V}^{-1}$$
+<p>\(C'(0)\approx 2{,}9\times10^{-8}\) F/cm² (\(W\approx 0{,}35\ \mu\)m), \(C'(-5\ \text{V})\approx 1{,}2\times10^{-8}\) F/cm² (\(W\approx 0{,}88\ \mu\)m). Đổi điện dung 2D (F/µm) ra F/cm² bằng cách chia cho diện tích của tiếp giáp trên mỗi µm chiều sâu. Trích lại: \(N_D=2/(q\varepsilon_s\,|\text{độ dốc}|)\approx 10^{16}\) cm⁻³, giao điểm với trục V cho \(V_{bi}\approx 0{,}93\text{–}0{,}95\) V (thu hẹp vùng cấm ở phía p⁺ làm giá trị thấp đi một chút). Trừ \(kT/q\) nếu muốn chính xác hơn.</p>
+<p><strong>3.</strong> Tiếp giáp đột ngột đối xứng 10¹⁶/10¹⁶ ở −10 V: \(W\approx 1{,}66\ \mu\)m, \(E_{max}\approx 1{,}3\times10^{5}\) V/cm, đỉnh nằm đúng tại mặt tiếp giáp phẳng. Tiếp giáp Gauss là tiếp giáp một phía (p⁺ ở trên, n 10¹⁶): ở phần phẳng \(E_{max}\approx\sqrt{2qN_D(V_{bi}-V)/\varepsilon_s}\approx 1{,}8\times10^{5}\) V/cm, nhưng giá trị lớn nhất của cả linh kiện nằm ở hai góc cong của tiếp giáp (gần x = 0,5 và 1,5 µm, sâu khoảng 0,1 µm), nơi bán kính cong chỉ cỡ độ sâu tiếp giáp nên điện trường tập trung.</p>
+<p><strong>4.</strong> Lớp n 5 µm: vùng nghèo tại đánh thủng khoảng 2,8 µm, chưa chạm tiếp xúc, nên \(BV\approx 60\) V (tiếp giáp phẳng, công thức Sze–Ng; mô hình ion hóa mặc định cho giá trị cùng cỡ). Lớp n 2 µm: xuyên thủng ở khoảng 30 V, sau đó điện trường gần hình thang. Với trường tới hạn \(E_c\approx 4{,}3\times10^{5}\) V/cm:</p>
+$$BV_{PT}\approx E_cW_n-\frac{qN_DW_n^2}{2\varepsilon_s}\approx 86-31\approx 55\ \text{V}$$
+<p>Tức thấp hơn khoảng 10 %. Trường hợp 2 µm cũng có điện trở nối tiếp nhỏ hơn, đó là đánh đổi của thiết kế xuyên thủng.</p>
+
+</details>
+
 <h2 id="v-s7">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, bài 2: pn junction (non-ideal), Korea Aerospace University.</li>
@@ -245,6 +262,19 @@ Solve {
 <li>Compare the field distribution at −10 V for the abrupt and the Gaussian junction. Where is the peak field?</li>
 <li>Find the breakdown voltage for a 2 µm and a 5 µm n layer and explain the difference through reach-through.</li>
 </ol>
+
+<details class="ans"><summary>Answers and hints</summary>
+<p class="anote">The numbers below are hand calculations from analytical models, given as reference points. Simulation results will differ by a few to a few tens of percent depending on the \(n_i\) value, band-gap narrowing, mesh and extraction method; when they differ, be able to say why.</p>
+<p><strong>1.</strong> With SRH, n rises toward 2 as V falls and goes to 1 as V rises; without SRH, n ≈ 1 over the whole range (except at high current, where series resistance raises the apparent n again). Cutting \(\tau\) by 10 raises \(J_{gr0}\) by 10, so the crossover \(V_x\) moves up by \(2(kT/q)\ln 10\approx 0.12\) V and the reverse current rises about 10 times; the short-diode diffusion current hardly changes.</p>
+<p><strong>2.</strong> For \(N_D=10^{16}\) cm⁻³:</p>
+$$\frac{\mathrm{d}(1/C'^2)}{\mathrm{d}V}=-\frac{2}{q\varepsilon_sN_D}\approx -1.2\times10^{15}\ \text{cm}^4\text{F}^{-2}\text{V}^{-1}$$
+<p>\(C'(0)\approx 2.9\times10^{-8}\) F/cm² (\(W\approx 0.35\ \mu\)m), \(C'(-5\ \text{V})\approx 1.2\times10^{-8}\) F/cm² (\(W\approx 0.88\ \mu\)m). Convert the 2D capacitance (F/µm) to F/cm² by dividing by the junction area per µm of depth. Extracting back: \(N_D=2/(q\varepsilon_s\,|\text{slope}|)\approx 10^{16}\) cm⁻³, and the V-axis intercept gives \(V_{bi}\approx 0.93\text{–}0.95\) V (band-gap narrowing on the p⁺ side lowers it slightly). Subtract \(kT/q\) for a more exact value.</p>
+<p><strong>3.</strong> Symmetric abrupt 10¹⁶/10¹⁶ junction at −10 V: \(W\approx 1.66\ \mu\)m, \(E_{max}\approx 1.3\times10^{5}\) V/cm, peaking right at the flat junction. The Gaussian junction is one-sided (p⁺ on top, n at 10¹⁶): in the flat part \(E_{max}\approx\sqrt{2qN_D(V_{bi}-V)/\varepsilon_s}\approx 1.8\times10^{5}\) V/cm, but the device-wide maximum sits at the two curved corners of the junction (near x = 0.5 and 1.5 µm, about 0.1 µm deep), where the radius of curvature is only about the junction depth, so the field concentrates.</p>
+<p><strong>4.</strong> 5 µm n layer: the depletion width at breakdown is about 2.8 µm, short of the contact, so \(BV\approx 60\) V (planar junction, Sze–Ng formula; the default ionization model gives a similar value). 2 µm n layer: reach-through at about 30 V, after which the field is nearly trapezoidal. With critical field \(E_c\approx 4.3\times10^{5}\) V/cm:</p>
+$$BV_{PT}\approx E_cW_n-\frac{qN_DW_n^2}{2\varepsilon_s}\approx 86-31\approx 55\ \text{V}$$
+<p>That is about 10 % lower. The 2 µm case also has lower series resistance, which is the trade-off of a punch-through design.</p>
+
+</details>
 
 <h2 id="e-s7">References</h2>
 <ol class="refs">

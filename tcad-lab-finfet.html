@@ -70,6 +70,10 @@
   pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
   pre code{font-size:1em;white-space:pre}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .anote{font-size:.9rem;color:var(--muted)}
   h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
 </style></head>
 <body>
@@ -196,6 +200,21 @@
 <li>Mô phỏng nửa vây với mặt đối xứng, so dòng (nhân đôi) với vây đầy đủ, ghi lại thời gian chạy của hai cách.</li>
 </ol>
 
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p class="anote">Các số dưới đây là tính tay theo mô hình giải tích để bạn có mốc đối chiếu. Kết quả mô phỏng sẽ lệch vài phần trăm đến vài chục phần trăm tùy giá trị \(n_i\), mô hình thu hẹp vùng cấm, lưới và cách trích; khi lệch, hãy giải thích được vì sao.</p>
+<p><strong>1.</strong> Trên mặt cắt x = giữa cổng phải thấy: vây Si hình chữ nhật 10 × 30 nm có hai góc trên bo tròn bán kính 2 nm; một lớp SiO₂ dày 1 nm đều ở hai bên và phía trên; lớp poly dày 10 nm bao ngoài; dưới vây là oxide chôn, không có oxide cổng ở mặt dưới. Nếu oxide phủ cả đáy vây hoặc cổng đè lên vây, lệnh boolean đã sai chế độ (ABA thay vì BAB).</p>
+<p><strong>2.</strong> Độ dài đặc trưng của cấu trúc nhiều cổng xấp xỉ \(\lambda\approx\sqrt{\varepsilon_{Si}W_{fin}t_{ox}/(2\varepsilon_{ox})}\) (công thức cho cổng kép; cổng thứ ba ở trên giúp thêm một chút). Với \(t_{ox}=1\) nm và \(L_g=30\) nm:</p>
+<div class="tablewrap"><table>
+<tr><th>W<sub>fin</sub></th><th>\(\lambda\)</th><th>\(L_g/\lambda\)</th><th>Kỳ vọng</th></tr>
+<tr><td>10 nm</td><td>3,9 nm</td><td>7,7</td><td>SS gần 60–65 mV/dec, DIBL nhỏ</td></tr>
+<tr><td>20 nm</td><td>5,5 nm</td><td>5,5</td><td>SS và DIBL bắt đầu xấu đi</td></tr>
+<tr><td>30 nm</td><td>6,7 nm</td><td>4,5</td><td>SS, DIBL tăng rõ</td></tr>
+</table></div>
+<p>Quy tắc kinh nghiệm: giữ \(L_g/\lambda\) lớn hơn khoảng 5–6 thì hiệu ứng kênh ngắn nhỏ (Yan, Ourmazd, Lee, 1992). Giá trị SS, DIBL cụ thể phải lấy từ mô phỏng; xu hướng giảm dần khi vây mỏng đi là điều cần kiểm chứng.</p>
+<p><strong>3.</strong> Dòng của nửa vây nhân hai phải khớp vây đầy đủ trong khoảng 1 %, vì mặt cắt đối xứng có điều kiện biên Neumann tự nhiên giống hệt mặt đối xứng thật. Thời gian chạy giảm hơn hai lần (thường 2–4 lần) vì thời gian giải hệ tuyến tính tăng nhanh hơn tuyến tính theo số nút. Không dùng được cách này khi cấu trúc mất đối xứng (ví dụ cổng lệch hay bẫy chỉ ở một bên).</p>
+
+</details>
+
 <h2 id="v-s7">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, bài 8: FinFET 3D SDE, Korea Aerospace University.</li>
@@ -203,6 +222,7 @@
 <li>K. D. Chabak et al., "Enhancement-mode Ga₂O₃ wrap-gate fin field-effect transistors on native (100) β-Ga₂O₃ substrate with high breakdown voltage," <em>Applied Physics Letters</em> 109, 213501 (2016).</li>
 <li>Z. Hu et al., "Enhancement-mode Ga₂O₃ vertical transistors with breakdown voltage &gt;1 kV," <em>IEEE Electron Device Letters</em> 39, 869 (2018).</li>
 <li>Synopsys, <em>Sentaurus Structure Editor User Guide</em>, các chương về hình học 3D và định nghĩa pha tạp.</li>
+<li>R.-H. Yan, A. Ourmazd, K. F. Lee, "Scaling the Si MOSFET: from bulk to SOI to bulk," <em>IEEE Transactions on Electron Devices</em> 39, 1704 (1992).</li>
 </ol>
 </div>
 <div class="l-en">
@@ -321,6 +341,21 @@
 <li>Simulate half a fin with a symmetry plane, compare its current (doubled) with the full fin and note the run time of each.</li>
 </ol>
 
+<details class="ans"><summary>Answers and hints</summary>
+<p class="anote">The numbers below are hand calculations from analytical models, given as reference points. Simulation results will differ by a few to a few tens of percent depending on the \(n_i\) value, band-gap narrowing, mesh and extraction method; when they differ, be able to say why.</p>
+<p><strong>1.</strong> On the cut at x = gate centre you should see: a 10 × 30 nm rectangular Si fin with its two top corners rounded to 2 nm; a uniform 1 nm SiO₂ layer on both sides and the top; a 10 nm poly layer wrapped outside; buried oxide below the fin, with no gate oxide on the fin bottom. If oxide covers the fin bottom or the gate overwrites the fin, the boolean mode was wrong (ABA instead of BAB).</p>
+<p><strong>2.</strong> The characteristic length of a multi-gate structure is roughly \(\lambda\approx\sqrt{\varepsilon_{Si}W_{fin}t_{ox}/(2\varepsilon_{ox})}\) (the double-gate formula; the third gate on top helps a little more). With \(t_{ox}=1\) nm and \(L_g=30\) nm:</p>
+<div class="tablewrap"><table>
+<tr><th>W<sub>fin</sub></th><th>\(\lambda\)</th><th>\(L_g/\lambda\)</th><th>Expected</th></tr>
+<tr><td>10 nm</td><td>3.9 nm</td><td>7.7</td><td>SS near 60–65 mV/dec, small DIBL</td></tr>
+<tr><td>20 nm</td><td>5.5 nm</td><td>5.5</td><td>SS and DIBL start to degrade</td></tr>
+<tr><td>30 nm</td><td>6.7 nm</td><td>4.5</td><td>SS and DIBL clearly higher</td></tr>
+</table></div>
+<p>Rule of thumb: keep \(L_g/\lambda\) above about 5–6 for small short-channel effects (Yan, Ourmazd, Lee, 1992). Specific SS and DIBL values must come from the simulation; the trend of improvement as the fin thins is what to verify.</p>
+<p><strong>3.</strong> The half-fin current times two should match the full fin within about 1 %, because the cut face has the natural Neumann boundary condition, identical to a true symmetry plane. Run time drops by more than half (typically 2–4 times) because the linear-solve time grows faster than linearly with node count. The trick fails when the structure is not symmetric (e.g. a misaligned gate or traps on one side only).</p>
+
+</details>
+
 <h2 id="e-s7">References</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, lecture 8: FinFET 3D SDE, Korea Aerospace University.</li>
@@ -328,6 +363,7 @@
 <li>K. D. Chabak et al., "Enhancement-mode Ga₂O₃ wrap-gate fin field-effect transistors on native (100) β-Ga₂O₃ substrate with high breakdown voltage," <em>Applied Physics Letters</em> 109, 213501 (2016).</li>
 <li>Z. Hu et al., "Enhancement-mode Ga₂O₃ vertical transistors with breakdown voltage &gt;1 kV," <em>IEEE Electron Device Letters</em> 39, 869 (2018).</li>
 <li>Synopsys, <em>Sentaurus Structure Editor User Guide</em>, chapters on 3D geometry and doping definitions.</li>
+<li>R.-H. Yan, A. Ourmazd, K. F. Lee, "Scaling the Si MOSFET: from bulk to SOI to bulk," <em>IEEE Transactions on Electron Devices</em> 39, 1704 (1992).</li>
 </ol>
 </div>
 <nav class="pager"><a href="tcad-lab-bjt.html">← <span class="l-vi">Thực hành 5: transistor lưỡng cực npn</span><span class="l-en">Lab 5: the npn bipolar transistor</span></a><a class="n" href="tcad-lab-flash.html"><span class="l-vi">Thực hành 7: ô nhớ flash bẫy điện tích</span><span class="l-en">Lab 7: a charge-trap flash cell</span> →</a></nav>

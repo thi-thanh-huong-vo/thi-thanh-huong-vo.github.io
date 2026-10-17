@@ -70,6 +70,10 @@
   pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
   pre code{font-size:1em;white-space:pre}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .anote{font-size:.9rem;color:var(--muted)}
   h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
 </style></head>
 <body>
@@ -231,6 +235,17 @@ Plot {
 <li>Thay đổi khối lượng xuyên hầm trong SiO₂ ±20 % và cho biết kết quả nhạy đến đâu.</li>
 </ol>
 
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p class="anote">Các số dưới đây là tính tay theo mô hình giải tích để bạn có mốc đối chiếu. Kết quả mô phỏng sẽ lệch vài phần trăm đến vài chục phần trăm tùy giá trị \(n_i\), mô hình thu hẹp vùng cấm, lưới và cách trích; khi lệch, hãy giải thích được vì sao.</p>
+<p><strong>1.</strong> Lượng điện tích cần: với oxide chặn 5 nm và nitride 8 nm, \(C_{eff}\approx 4{,}9\times10^{-7}\) F/cm², nên \(\Delta V_T=2\) V cần \(N_t\approx 6\times10^{12}\) cm⁻² (khoảng 1 µC/cm²). Lưu ý giới hạn: bẫy acceptor 10¹⁹ cm⁻³ trong 8 nm chỉ chứa tối đa 8 × 10¹² cm⁻², tức \(\Delta V_T\) bão hòa ở khoảng 2,6 V; mục tiêu 2 V đã gần trần. Ở VG = 10 V, điện trường trong oxide đường hầm (bỏ qua V<sub>FB</sub> và thế bề mặt) vào khoảng 9,0; 8,2; 7,6 MV/cm cho t<sub>ox1</sub> = 2; 3; 4 nm. Theo dòng Fowler–Nordheim \(J=AE^2\exp(-B/E)\) với hằng số Si/SiO₂ điển hình (A ≈ 1,25 × 10⁻⁶ A/V², B ≈ 2,33 × 10⁸ V/cm), mỗi bước giảm 1 MV/cm làm dòng giảm khoảng 30 lần, nên thời gian ghi tăng khoảng một đến hai bậc độ lớn mỗi nm oxide. Chỉ tính FN, thời gian để có 1 µC/cm² vào khoảng 2 ms, 30 ms và 300 ms cho 2; 3; 4 nm. Với 2 nm, xuyên hầm trực tiếp cộng thêm và thường chiếm ưu thế, nên thời gian thực ngắn hơn nhiều (có thể xuống micro giây). Con số chính xác lấy từ mô phỏng: đọc thời điểm ΔV<sub>T</sub> (hoặc điện tích bẫy tích phân) đạt mục tiêu.</p>
+<p><strong>2.</strong> Công thức ở mục 1 giả sử điện tích nằm ở tâm nitride. Tổng quát, với điện tích phân bố \(\rho(x)\) và \(x\) đo từ cổng theo bề dày oxide tương đương:</p>
+$$\Delta V_T=-\frac{1}{\varepsilon_{ox}}\int x_{eq}\,\rho(x)\,dx$$
+<p>Nếu <code>eTrappedCharge</code> dồn về phía oxide 1 (xa cổng), \(\Delta V_T\) thật lớn hơn ước lượng tâm (cỡ 10–30 % với các bề dày ở đây); nếu dồn về phía oxide 2 thì nhỏ hơn. Hai cách tính khớp nhau khi dùng đúng trọng tâm điện tích.</p>
+<p><strong>3.</strong> Sau xóa, VT giảm về gần giá trị ban đầu hoặc thấp hơn (xóa quá) nếu lỗ trống được bắt vào bẫy donor. Trong SONOS, xóa thường chậm hơn ghi vì electron trong mức sâu 1 eV khó thoát ra, và lỗ trống phải vượt rào oxide cao hơn; nên với cùng |V| và thời gian, VT có thể không về hết, để lại một cửa sổ bị thu hẹp.</p>
+<p><strong>4.</strong> Xác suất WKB tỉ lệ \(\exp(-\text{const}\sqrt{m}\,\dots)\), nên số mũ B của dòng FN tỉ lệ \(\sqrt{m}\). Ở 9 MV/cm, \(B/E\approx 26\): tăng m 20 % làm số mũ tăng 9,5 % và dòng giảm khoảng 12 lần; giảm m 20 % làm dòng tăng khoảng 15 lần. Tức thời gian ghi đổi khoảng một bậc độ lớn: đây là lý do phải hiệu chỉnh khối lượng xuyên hầm theo phép đo trước khi dùng mô hình để dự đoán.</p>
+
+</details>
+
 <h2 id="v-s8">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, bài 8: Flash memory TCAD, Korea Aerospace University.</li>
@@ -238,6 +253,7 @@ Plot {
 <li>M. H. White, D. A. Adams, J. Bu, "On the go with SONOS," <em>IEEE Circuits and Devices Magazine</em> 16(4), 22 (2000).</li>
 <li>Z. A. Weinberg, "On tunneling in metal-oxide-silicon structures," <em>Journal of Applied Physics</em> 53, 5052 (1982).</li>
 <li>J. Frenkel, "On pre-breakdown phenomena in insulators and electronic semi-conductors," <em>Physical Review</em> 54, 647 (1938).</li>
+<li>M. Lenzlinger, E. H. Snow, "Fowler-Nordheim tunneling into thermally grown SiO₂," <em>Journal of Applied Physics</em> 40, 278 (1969).</li>
 </ol>
 </div>
 <div class="l-en">
@@ -391,6 +407,17 @@ Plot {
 <li>Change the SiO₂ tunneling mass by ±20 % and report how sensitive the results are.</li>
 </ol>
 
+<details class="ans"><summary>Answers and hints</summary>
+<p class="anote">The numbers below are hand calculations from analytical models, given as reference points. Simulation results will differ by a few to a few tens of percent depending on the \(n_i\) value, band-gap narrowing, mesh and extraction method; when they differ, be able to say why.</p>
+<p><strong>1.</strong> Charge needed: with a 5 nm blocking oxide and 8 nm nitride, \(C_{eff}\approx 4.9\times10^{-7}\) F/cm², so \(\Delta V_T=2\) V needs \(N_t\approx 6\times10^{12}\) cm⁻² (about 1 µC/cm²). Mind the limit: 10¹⁹ cm⁻³ acceptor traps in 8 nm hold at most 8 × 10¹² cm⁻², so \(\Delta V_T\) saturates near 2.6 V; a 2 V target is already close to the ceiling. At VG = 10 V the tunnel-oxide field (ignoring V<sub>FB</sub> and surface potential) is about 9.0, 8.2 and 7.6 MV/cm for t<sub>ox1</sub> = 2, 3, 4 nm. From the Fowler–Nordheim current \(J=AE^2\exp(-B/E)\) with typical Si/SiO₂ constants (A ≈ 1.25 × 10⁻⁶ A/V², B ≈ 2.33 × 10⁸ V/cm), each 1 MV/cm drop cuts the current about 30 times, so program time rises by one to two orders of magnitude per nm of oxide. Counting FN only, the time to pass 1 µC/cm² is about 2 ms, 30 ms and 300 ms for 2, 3 and 4 nm. At 2 nm, direct tunneling adds on top and usually dominates, so the real time is much shorter (possibly microseconds). Take the exact numbers from the simulation: read when ΔV<sub>T</sub> (or the integrated trapped charge) reaches the target.</p>
+<p><strong>2.</strong> The formula in section 1 assumes the charge sits at the nitride centre. In general, for a charge distribution \(\rho(x)\) with \(x\) measured from the gate in equivalent oxide thickness:</p>
+$$\Delta V_T=-\frac{1}{\varepsilon_{ox}}\int x_{eq}\,\rho(x)\,dx$$
+<p>If <code>eTrappedCharge</code> piles up near oxide 1 (far from the gate), the real \(\Delta V_T\) exceeds the centroid estimate (by about 10–30 % for these thicknesses); if it piles up near oxide 2, it is smaller. The two calculations agree once the true charge centroid is used.</p>
+<p><strong>3.</strong> After erase, VT drops back near its initial value, or below it (over-erase) if holes are captured by the donor traps. In SONOS, erase is usually slower than program because electrons in the deep 1 eV level escape with difficulty and holes face a higher oxide barrier; at the same |V| and time, VT may not fully recover, leaving a narrower window.</p>
+<p><strong>4.</strong> The WKB probability goes as \(\exp(-\text{const}\sqrt{m}\,\dots)\), so the FN exponent B scales as \(\sqrt{m}\). At 9 MV/cm, \(B/E\approx 26\): raising m by 20 % raises the exponent by 9.5 % and cuts the current about 12 times; lowering m by 20 % raises it about 15 times. So program time shifts by about an order of magnitude, which is why the tunneling mass must be calibrated against measurements before using the model to predict.</p>
+
+</details>
+
 <h2 id="e-s8">References</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, lecture 8: Flash memory TCAD, Korea Aerospace University.</li>
@@ -398,6 +425,7 @@ Plot {
 <li>M. H. White, D. A. Adams, J. Bu, "On the go with SONOS," <em>IEEE Circuits and Devices Magazine</em> 16(4), 22 (2000).</li>
 <li>Z. A. Weinberg, "On tunneling in metal-oxide-silicon structures," <em>Journal of Applied Physics</em> 53, 5052 (1982).</li>
 <li>J. Frenkel, "On pre-breakdown phenomena in insulators and electronic semi-conductors," <em>Physical Review</em> 54, 647 (1938).</li>
+<li>M. Lenzlinger, E. H. Snow, "Fowler-Nordheim tunneling into thermally grown SiO₂," <em>Journal of Applied Physics</em> 40, 278 (1969).</li>
 </ol>
 </div>
 <nav class="pager"><a href="tcad-lab-finfet.html">← <span class="l-vi">Thực hành 6: FinFET 3D</span><span class="l-en">Lab 6: a 3D FinFET</span></a><a class="n" href="tcad.html"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>

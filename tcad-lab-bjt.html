@@ -70,6 +70,10 @@
   pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
   pre code{font-size:1em;white-space:pre}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .anote{font-size:.9rem;color:var(--muted)}
   h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
 </style></head>
 <body>
@@ -236,6 +240,15 @@ Solve {
 <li>Tắt <code>EffectiveIntrinsicDensity(OldSlotboom)</code> và so sánh β. Vì sao thu hẹp vùng cấm ở emitter quan trọng với BJT?</li>
 </ol>
 
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p class="anote">Các số dưới đây là tính tay theo mô hình giải tích để bạn có mốc đối chiếu. Kết quả mô phỏng sẽ lệch vài phần trăm đến vài chục phần trăm tùy giá trị \(n_i\), mô hình thu hẹp vùng cấm, lưới và cách trích; khi lệch, hãy giải thích được vì sao.</p>
+<p><strong>1.</strong> Tính từ chính các profile Gauss trong file SDE (với \(T_{emit}=T_{base}=T_{col}=0{,}1\ \mu\)m): tiếp giáp E–B ở khoảng 0,10 µm, nơi pha tạp base còn khoảng 1,05 × 10¹⁸ cm⁻³; tiếp giáp B–C ở đúng 0,20 µm vì <code>ValueAtDepth</code> của base bằng pha tạp epi. Base kim loại học dày khoảng 0,10 µm. Vùng nghèo E–B ở VBE ≈ 0 lấn vào base khoảng 0,03–0,035 µm, vùng nghèo B–C lấn vào base thêm khoảng 0,01 µm (phần lớn nằm ở phía epi nhẹ hơn), nên base trung hòa còn khoảng 0,05–0,06 µm. Lưu ý thêm: vùng nghèo B–C phía epi ở VCE = 2 V rộng khoảng 0,27 µm, lớn hơn \(T_{col}=0{,}1\ \mu\)m, nên collector epi bị nghèo hoàn toàn tới lớp chôn; cắt dọc x = 1,0 µm sẽ thấy điều này.</p>
+<p><strong>2.</strong> Base mỏng hơn: số Gummel của base \(Q_B/q=\int N_A\,dx\) nhỏ hơn, nên β tăng (gần tỉ lệ nghịch với \(W_B\) khi hiệu suất phát xạ chiếm ưu thế), nhưng \(V_A\approx Q_B/C_{BC}\) giảm, và với 0,05 µm có nguy cơ xuyên thủng base ở VCE vài volt. Base dày hơn cho chiều ngược lại. Do đó tích \(\beta V_A\) thay đổi ít hơn từng đại lượng riêng lẻ; đó là đánh đổi kinh điển khi thiết kế base.</p>
+<p><strong>3.</strong> Pha tạp base cao làm hiệu suất phát xạ giảm: \(\gamma\approx 1/\left(1+\dfrac{D_EN_BW_B}{D_BN_EW_E}\right)\), và \(\beta\approx (D_BN_EW_E)/(D_EN_BW_B)\) khi chỉ tính phun ngược lỗ trống vào emitter. Tăng \(N_B\) 2 lần làm β giảm khoảng 2 lần (thêm nữa do độ linh động electron trong base giảm). Bù lại, điện trở base nhỏ hơn và \(V_A\) lớn hơn.</p>
+<p><strong>4.</strong> Với mô hình Slotboom cũ, ở 10²⁰ cm⁻³ vùng cấm emitter hẹp đi khoảng \(\Delta E_g=9\text{ mV}\left[\ln\frac{N}{10^{17}}+\sqrt{\ln^2\frac{N}{10^{17}}+0{,}5}\right]\approx 0{,}125\) eV, làm \(n_{i,eff}^2\) trong emitter tăng khoảng \(e^{0{,}125/0{,}0259}\approx 125\) lần. Dòng lỗ trống phun ngược vào emitter tăng tương ứng, nên khi tắt mô hình này β sẽ lớn bất thực, có thể gấp hàng chục lần. Đây là lý do BJT Si cần BGN để mô phỏng đúng β, và vì sao HBT dùng emitter vùng cấm rộng (hay base SiGe).</p>
+
+</details>
+
 <h2 id="v-s6">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, bài 6–7: Bipolar Junction Transistor, Korea Aerospace University.</li>
@@ -243,6 +256,7 @@ Solve {
 <li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chương 5.</li>
 <li>J. W. Slotboom, H. C. de Graaff, <em>Solid-State Electronics</em> 19, 857 (1976).</li>
 <li>Synopsys, <em>Sentaurus Device User Guide</em>, mục Electrode boundary conditions (current mode) và Quasistationary.</li>
+<li>J. W. Slotboom, H. C. de Graaff, "Bandgap narrowing in silicon bipolar transistors," <em>IEEE Transactions on Electron Devices</em> 24, 1123 (1977).</li>
 </ol>
 </div>
 <div class="l-en">
@@ -401,6 +415,15 @@ Solve {
 <li>Turn off <code>EffectiveIntrinsicDensity(OldSlotboom)</code> and compare β. Why does band-gap narrowing in the emitter matter for a BJT?</li>
 </ol>
 
+<details class="ans"><summary>Answers and hints</summary>
+<p class="anote">The numbers below are hand calculations from analytical models, given as reference points. Simulation results will differ by a few to a few tens of percent depending on the \(n_i\) value, band-gap narrowing, mesh and extraction method; when they differ, be able to say why.</p>
+<p><strong>1.</strong> Computed from the Gaussian profiles in the SDE file (with \(T_{emit}=T_{base}=T_{col}=0.1\ \mu\)m): the E–B junction is at about 0.10 µm, where the base doping is still about 1.05 × 10¹⁸ cm⁻³; the B–C junction is at exactly 0.20 µm because the base's <code>ValueAtDepth</code> equals the epi doping. The metallurgical base is about 0.10 µm thick. The E–B depletion region at VBE ≈ 0 takes about 0.03–0.035 µm of the base and the B–C one about another 0.01 µm (most of it lies on the lighter epi side), so the neutral base is about 0.05–0.06 µm. Note also: the B–C depletion on the epi side at VCE = 2 V is about 0.27 µm, more than \(T_{col}=0.1\ \mu\)m, so the epi collector is fully depleted down to the buried layer; the vertical cut at x = 1.0 µm shows it.</p>
+<p><strong>2.</strong> A thinner base has a smaller base Gummel number \(Q_B/q=\int N_A\,dx\), so β rises (roughly as \(1/W_B\) when emitter efficiency dominates), but \(V_A\approx Q_B/C_{BC}\) falls, and at 0.05 µm the base risks punching through at a few volts of VCE. A thicker base does the opposite. The product \(\beta V_A\) therefore changes less than either quantity alone; that is the classic base-design trade-off.</p>
+<p><strong>3.</strong> Higher base doping lowers the emitter efficiency: \(\gamma\approx 1/\left(1+\dfrac{D_EN_BW_B}{D_BN_EW_E}\right)\), and \(\beta\approx (D_BN_EW_E)/(D_EN_BW_B)\) when only hole back-injection into the emitter counts. Doubling \(N_B\) roughly halves β (a bit more, since electron mobility in the base also drops). In return, base resistance falls and \(V_A\) rises.</p>
+<p><strong>4.</strong> With the old Slotboom model, at 10²⁰ cm⁻³ the emitter gap narrows by about \(\Delta E_g=9\text{ mV}\left[\ln\frac{N}{10^{17}}+\sqrt{\ln^2\frac{N}{10^{17}}+0.5}\right]\approx 0.125\) eV, raising \(n_{i,eff}^2\) in the emitter about \(e^{0.125/0.0259}\approx 125\) times. Hole back-injection into the emitter rises accordingly, so with the model off β comes out unrealistically large, possibly tens of times too high. This is why Si BJTs need BGN to simulate β correctly, and why HBTs use a wide-gap emitter (or a SiGe base).</p>
+
+</details>
+
 <h2 id="e-s6">References</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, lectures 6–7: Bipolar Junction Transistor, Korea Aerospace University.</li>
@@ -408,6 +431,7 @@ Solve {
 <li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chapter 5.</li>
 <li>J. W. Slotboom, H. C. de Graaff, <em>Solid-State Electronics</em> 19, 857 (1976).</li>
 <li>Synopsys, <em>Sentaurus Device User Guide</em>, sections on electrode boundary conditions (current mode) and Quasistationary.</li>
+<li>J. W. Slotboom, H. C. de Graaff, "Bandgap narrowing in silicon bipolar transistors," <em>IEEE Transactions on Electron Devices</em> 24, 1123 (1977).</li>
 </ol>
 </div>
 <nav class="pager"><a href="tcad-lab-mosfet-nonideal.html">← <span class="l-vi">Thực hành 4: MOSFET không lý tưởng</span><span class="l-en">Lab 4: the non-ideal MOSFET</span></a><a class="n" href="tcad-lab-finfet.html"><span class="l-vi">Thực hành 6: FinFET 3D</span><span class="l-en">Lab 6: a 3D FinFET</span> →</a></nav>

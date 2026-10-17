@@ -70,6 +70,10 @@
   pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
   pre code{font-size:1em;white-space:pre}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .anote{font-size:.9rem;color:var(--muted)}
   h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
 </style></head>
 <body>
@@ -183,7 +187,7 @@ Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enorma
   ) { Coupled { Poisson Electron Hole } }
 }
 </code></pre>
-<p>Vẽ VT theo \(\sqrt{|V_{BS}|}\): với kênh dài, đường gần thẳng với độ dốc xấp xỉ \(\gamma\). Với kênh ngắn, đường thấp hơn và dịch xuống thêm khi VDS lớn (DIBL); phân cực ngược đế làm vùng nghèo nguồn và máng tách xa nhau ra phía dưới và giảm bớt DIBL.</p>
+<p>Vẽ VT theo \(\sqrt{|V_{BS}|}\): với kênh dài, đường gần thẳng với độ dốc xấp xỉ \(\gamma\). Với kênh ngắn, đường thấp hơn, dốc ít hơn (nguồn và máng chia sẻ một phần điện tích vùng nghèo với cổng) và dịch xuống thêm khi VDS lớn (DIBL).</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>Với MOSFET và tụ MOS Ga₂O₃, điện tích cố định và bẫy mặt phân cách tại lớp Al₂O₃ hay SiO₂ trên Ga₂O₃ là đại lượng được trích từ C–V, giống hệt mục 1. Ví dụ, Zeng, Jia và Singisetti (2016) đo mật độ trạng thái mặt phân cách của tụ SiO₂/β-Ga₂O₃ (−201) lắng đọng ALD. Trong Sentaurus, cùng khối <code>Physics(RegionInterface=...)</code> được dùng, thêm bẫy mặt phân cách phân bố theo năng lượng bên cạnh <code>FixedCharge</code>.</p></div>
@@ -196,6 +200,28 @@ Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enorma
 <li>Với L = 10; 1,5; 0,7 µm, vẽ VT theo \(\sqrt{|V_{BS}|}\) ở VDS nhỏ và lớn; giải thích bằng DIBL và hiệu ứng thân.</li>
 </ol>
 
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p class="anote">Các số dưới đây dùng thiết bị ví dụ của bài (N<sub>A</sub> = 10¹⁶ cm⁻³, t<sub>ox</sub> = 20 nm, cổng poly n⁺) để đối chiếu cách làm. Với thiết bị trong bài tập về nhà của môn học, làm lại đúng các bước này với thông số của đề; trang này không đăng đáp số của đề đó.</p>
+<p><strong>1.</strong> \(V_{FB}=\Phi_{ms}-qQ'_{ss}/C_{ox}\), \(V_T=V_{FB}+2\phi_F+|Q'_{d,max}|/C_{ox}\):</p>
+<div class="tablewrap"><table>
+<tr><th>\(Q'_{ss}\) (cm⁻²)</th><th>\(V_{FB}\) (V)</th><th>\(V_T\) (V)</th></tr>
+<tr><td>0</td><td>−0,91</td><td>+0,07</td></tr>
+<tr><td>10¹¹</td><td>−1,00</td><td>−0,03</td></tr>
+<tr><td>5 × 10¹¹</td><td>−1,37</td><td>−0,40</td></tr>
+<tr><td>10¹²</td><td>−1,83</td><td>−0,86</td></tr>
+</table></div>
+<p>Đọc \(V_{FB}\) trên đường C–V tại \(C=C_{FB}\), với \(C_{FB}=1/(1/C_{ox}+L_D/\varepsilon_s)\) và độ dài Debye \(L_D=\sqrt{\varepsilon_skT/q^2N_A}\approx 41\) nm, cho \(C_{FB}/C_{ox}\approx 0{,}59\). VT ước lượng nơi điện dung bắt đầu tăng trở lại từ cực tiểu (đường tần số thấp) hoặc bằng trích từ ID–VG. Tất cả các đường C–V phải song song, dịch đều 93 mV cho mỗi 10¹¹ cm⁻².</p>
+<p><strong>2.</strong> Ở VG = 0: với \(Q'_{ss}=0\), \(V_T\approx 0{,}07\) V nên bề mặt đang nghèo, gần ngưỡng đảo. Với 10¹¹ cm⁻² (\(V_T\approx-0{,}03\) V) bề mặt vừa chạm ngưỡng đảo; với 5 × 10¹¹ cm⁻², \(V_T&lt;0\) rõ: bề mặt đã đảo, \(E_C\) ở bề mặt nằm gần \(E_F\). Với 10¹² cm⁻², đảo mạnh. Trong oxide, điện trường đổi thêm \(qQ'_{ss}/\varepsilon_{ox}\): khoảng 4,6 × 10⁴; 2,3 × 10⁵; 4,6 × 10⁵ V/cm; vùng năng lượng trong oxide nghiêng mạnh hơn tương ứng.</p>
+<p><strong>3.</strong> Với kênh 2 µm, <code>Enormal</code> ảnh hưởng nhiều nhất: độ linh động hiệu dụng của lớp đảo chỉ khoảng 300–500 cm²/V·s so với khoảng 1200 cm²/V·s trong khối ở 10¹⁶ cm⁻³ (đường cong độ linh động phổ quát, Takagi và cộng sự, 1994), nên dòng giảm khoảng 2–3 lần, rõ nhất ở VG cao. <code>HighFieldSaturation</code> chỉ giảm thêm cỡ 10–25 % vì điện trường dọc trung bình \(V_{DS}/L\approx 2\times10^{4}\) V/cm chỉ ngang trường tới hạn \(v_{sat}/\mu_{eff}\approx 2\text{–}3\times10^{4}\) V/cm; ảnh hưởng này mạnh hơn nhiều ở kênh ngắn. Dấu hiệu: với Enormal, khoảng cách giữa các đường ID–VD ở VG cao co lại; với HFS, VDS,sat nhỏ hơn và đường bão hòa sớm hơn.</p>
+<p><strong>4.</strong> Kênh dài (10 µm), theo \(\Delta V_T=\gamma(\sqrt{2\phi_F-V_{BS}}-\sqrt{2\phi_F})\) với \(\gamma\approx 0{,}33\ \text{V}^{1/2}\):</p>
+<div class="tablewrap"><table>
+<tr><th>\(V_{BS}\) (V)</th><th>0</th><th>−1</th><th>−2</th><th>−4</th><th>−6</th></tr>
+<tr><td>\(\Delta V_T\) (V)</td><td>0</td><td>0,16</td><td>0,27</td><td>0,45</td><td>0,59</td></tr>
+</table></div>
+<p>Đường VT theo \(\sqrt{|V_{BS}|}\) hơi cong lên ở đầu rồi gần thẳng. Kênh 1,5 µm: thấp hơn một chút; kênh 0,7 µm: thấp hơn rõ và VDS = 2 V thấp hơn VDS = 1 V (DIBL). Độ dốc theo \(\sqrt{|V_{BS}|}\) nhỏ hơn kênh dài vì một phần điện tích vùng nghèo dưới cổng thuộc về tiếp giáp nguồn, máng (chia sẻ điện tích). Về ảnh hưởng của phân cực đế lên DIBL: bài giảng nêu phân cực ngược có thể làm giảm DIBL, còn Taur và Ning chỉ ra phân cực ngược làm vùng nghèo sâu hơn và thường làm hiệu ứng kênh ngắn mạnh lên. Hãy đo DIBL = ΔV<sub>T</sub>/ΔV<sub>DS</sub> của kênh 0,7 µm ở từng V<sub>BS</sub> và để số liệu mô phỏng quyết định; ghi lại kết quả cùng giải thích bằng giản đồ vùng.</p>
+
+</details>
+
 <h2 id="v-s6">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, bài 4–5: MOSFET non-ideal, Korea Aerospace University.</li>
@@ -205,6 +231,7 @@ Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enorma
 <li>Z.-H. Liu et al., "Threshold voltage model for deep-submicrometer MOSFETs," <em>IEEE Transactions on Electron Devices</em> 40, 86 (1993).</li>
 <li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009).</li>
 <li>K. Zeng, Y. Jia, U. Singisetti, "Interface state density in atomic layer deposited SiO₂/β-Ga₂O₃ (−201) MOSCAPs," <em>IEEE Electron Device Letters</em> 37, 906 (2016).</li>
+<li>S. Takagi, A. Toriumi, M. Iwase, H. Tango, "On the universality of inversion layer mobility in Si MOSFET's: Part I," <em>IEEE Transactions on Electron Devices</em> 41, 2357 (1994).</li>
 </ol>
 </div>
 <div class="l-en">
@@ -310,7 +337,7 @@ Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enorma
   ) { Coupled { Poisson Electron Hole } }
 }
 </code></pre>
-<p>Plot VT against \(\sqrt{|V_{BS}|}\): for a long channel the line is nearly straight with slope close to \(\gamma\). For short channels it sits lower and drops further at large VDS (DIBL); reverse substrate bias pushes the source and drain depletion regions apart below the surface and reduces DIBL.</p>
+<p>Plot VT against \(\sqrt{|V_{BS}|}\): for a long channel the line is nearly straight with slope close to \(\gamma\). For short channels it sits lower, is less steep (source and drain share part of the depletion charge with the gate) and drops further at large VDS (DIBL).</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>For Ga₂O₃ MOSFETs and MOS capacitors, the fixed charge and interface traps at an Al₂O₃ or SiO₂ layer on Ga₂O₃ are extracted from C–V exactly as in section 1. For example, Zeng, Jia and Singisetti (2016) measured the interface state density of ALD SiO₂/β-Ga₂O₃ (−201) capacitors. In Sentaurus the same <code>Physics(RegionInterface=...)</code> block is used, with energy-distributed interface traps alongside the <code>FixedCharge</code>.</p></div>
@@ -323,6 +350,28 @@ Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enorma
 <li>For L = 10, 1.5, 0.7 µm, plot VT against \(\sqrt{|V_{BS}|}\) at small and large VDS; explain using DIBL and the body effect.</li>
 </ol>
 
+<details class="ans"><summary>Answers and hints</summary>
+<p class="anote">The numbers below use the lesson's example device (N<sub>A</sub> = 10¹⁶ cm⁻³, t<sub>ox</sub> = 20 nm, n⁺ poly gate) to check the method. For the device in the course homework, repeat exactly these steps with its parameters; this page does not post that problem's answers.</p>
+<p><strong>1.</strong> \(V_{FB}=\Phi_{ms}-qQ'_{ss}/C_{ox}\), \(V_T=V_{FB}+2\phi_F+|Q'_{d,max}|/C_{ox}\):</p>
+<div class="tablewrap"><table>
+<tr><th>\(Q'_{ss}\) (cm⁻²)</th><th>\(V_{FB}\) (V)</th><th>\(V_T\) (V)</th></tr>
+<tr><td>0</td><td>−0.91</td><td>+0.07</td></tr>
+<tr><td>10¹¹</td><td>−1.00</td><td>−0.03</td></tr>
+<tr><td>5 × 10¹¹</td><td>−1.37</td><td>−0.40</td></tr>
+<tr><td>10¹²</td><td>−1.83</td><td>−0.86</td></tr>
+</table></div>
+<p>Read \(V_{FB}\) off the C–V curve at \(C=C_{FB}\), with \(C_{FB}=1/(1/C_{ox}+L_D/\varepsilon_s)\) and Debye length \(L_D=\sqrt{\varepsilon_skT/q^2N_A}\approx 41\) nm, giving \(C_{FB}/C_{ox}\approx 0.59\). Estimate VT where the capacitance starts to rise again from its minimum (low-frequency curve) or extract it from ID–VG. All C–V curves should be parallel, shifted by 93 mV per 10¹¹ cm⁻².</p>
+<p><strong>2.</strong> At VG = 0: with \(Q'_{ss}=0\), \(V_T\approx 0.07\) V, so the surface is depleted, close to inversion. With 10¹¹ cm⁻² (\(V_T\approx-0.03\) V) the surface is just at threshold; with 5 × 10¹¹ cm⁻², \(V_T&lt;0\) clearly: the surface is inverted, with \(E_C\) at the surface close to \(E_F\). With 10¹² cm⁻², strongly inverted. In the oxide the field changes by \(qQ'_{ss}/\varepsilon_{ox}\): about 4.6 × 10⁴, 2.3 × 10⁵ and 4.6 × 10⁵ V/cm, and the oxide bands tilt correspondingly more.</p>
+<p><strong>3.</strong> For a 2 µm channel, <code>Enormal</code> matters most: the effective inversion-layer mobility is only about 300–500 cm²/V·s against about 1200 cm²/V·s in bulk at 10¹⁶ cm⁻³ (the universal mobility curve, Takagi et al., 1994), so the current drops 2–3 times, most at high VG. <code>HighFieldSaturation</code> removes only another 10–25 % because the average lateral field \(V_{DS}/L\approx 2\times10^{4}\) V/cm is only comparable to the critical field \(v_{sat}/\mu_{eff}\approx 2\text{–}3\times10^{4}\) V/cm; the effect is much stronger in short channels. Signatures: with Enormal, the spacing between ID–VD curves at high VG shrinks; with HFS, VDS,sat is lower and the curves saturate earlier.</p>
+<p><strong>4.</strong> Long channel (10 µm), from \(\Delta V_T=\gamma(\sqrt{2\phi_F-V_{BS}}-\sqrt{2\phi_F})\) with \(\gamma\approx 0.33\ \text{V}^{1/2}\):</p>
+<div class="tablewrap"><table>
+<tr><th>\(V_{BS}\) (V)</th><th>0</th><th>−1</th><th>−2</th><th>−4</th><th>−6</th></tr>
+<tr><td>\(\Delta V_T\) (V)</td><td>0</td><td>0.16</td><td>0.27</td><td>0.45</td><td>0.59</td></tr>
+</table></div>
+<p>The VT vs \(\sqrt{|V_{BS}|}\) curve bends up slightly at first, then is nearly straight. The 1.5 µm channel sits a little lower; the 0.7 µm channel clearly lower, with VDS = 2 V below VDS = 1 V (DIBL). The slope against \(\sqrt{|V_{BS}|}\) is smaller than for the long channel because part of the depletion charge under the gate belongs to the source and drain junctions (charge sharing). On how substrate bias affects DIBL: the lecture states reverse bias can mitigate DIBL, while Taur and Ning point out that reverse bias deepens the depletion region and usually strengthens short-channel effects. Measure DIBL = ΔV<sub>T</sub>/ΔV<sub>DS</sub> of the 0.7 µm channel at each V<sub>BS</sub> and let the simulation decide; record the result with an explanation from the band diagrams.</p>
+
+</details>
+
 <h2 id="e-s6">References</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, lectures 4–5: MOSFET non-ideal, Korea Aerospace University.</li>
@@ -332,6 +381,7 @@ Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enorma
 <li>Z.-H. Liu et al., "Threshold voltage model for deep-submicrometer MOSFETs," <em>IEEE Transactions on Electron Devices</em> 40, 86 (1993).</li>
 <li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009).</li>
 <li>K. Zeng, Y. Jia, U. Singisetti, "Interface state density in atomic layer deposited SiO₂/β-Ga₂O₃ (−201) MOSCAPs," <em>IEEE Electron Device Letters</em> 37, 906 (2016).</li>
+<li>S. Takagi, A. Toriumi, M. Iwase, H. Tango, "On the universality of inversion layer mobility in Si MOSFET's: Part I," <em>IEEE Transactions on Electron Devices</em> 41, 2357 (1994).</li>
 </ol>
 </div>
 <nav class="pager"><a href="tcad-lab-mosfet.html">← <span class="l-vi">Thực hành 3: MOSFET kênh n</span><span class="l-en">Lab 3: the n-channel MOSFET</span></a><a class="n" href="tcad-lab-bjt.html"><span class="l-vi">Thực hành 5: transistor lưỡng cực npn</span><span class="l-en">Lab 5: the npn bipolar transistor</span> →</a></nav>

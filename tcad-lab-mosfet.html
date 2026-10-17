@@ -70,6 +70,10 @@
   pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
   pre code{font-size:1em;white-space:pre}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .anote{font-size:.9rem;color:var(--muted)}
   h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
 </style></head>
 <body>
@@ -252,6 +256,19 @@ Solve {
 <li>Dựng lại cấu trúc theo cách nửa cấu trúc và <code>tdx</code>; kiểm tra rằng kết quả trùng với cấu trúc đầy đủ.</li>
 </ol>
 
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p class="anote">Các số dưới đây là tính tay theo mô hình giải tích để bạn có mốc đối chiếu. Kết quả mô phỏng sẽ lệch vài phần trăm đến vài chục phần trăm tùy giá trị \(n_i\), mô hình thu hẹp vùng cấm, lưới và cách trích; khi lệch, hãy giải thích được vì sao.</p>
+<p><strong>1.</strong> Với \(N_{sub}=10^{16}\) cm⁻³, \(t_{ox}=20\) nm: \(C_{ox}=1{,}73\times10^{-7}\) F/cm², vùng nghèo cực đại \(W_{d}\approx 0{,}30\ \mu\)m, \(C_d/C_{ox}\approx 0{,}20\), nên kênh dài có \(SS\approx 59{,}5\times1{,}2\approx 71\) mV/decade. Cần nhớ chiều dài kênh hiệu dụng ngắn hơn <code>Lch</code>: với <code>Factor</code> 0,8, nguồn và máng lan ngang khoảng 0,16 µm, trừ khe 50 nm, mỗi bên lấn dưới cổng khoảng 0,11 µm, nên \(L_{eff}\approx L_{ch}-0{,}22\ \mu\)m. Kỳ vọng:</p>
+<ul>
+<li>Lch = 2 µm và 1 µm: VT gần như bằng nhau (khoảng giá trị tính tay ở câu 2), SS khoảng 70–75 mV/decade.</li>
+<li>Lch = 0,5 µm (\(L_{eff}\approx 0{,}28\ \mu\)m, chỉ khoảng một lần \(W_d\)): VT giảm rõ rệt (VT roll-off), SS tăng và phụ thuộc VD. Đây là dấu hiệu kênh ngắn mà bài sau phân tích.</li>
+</ul>
+<p><strong>2.</strong> \(\phi_F=(kT/q)\ln(N_A/n_i)=0{,}347\) V; \(\Phi_{ms}\approx-(E_g/2q+\phi_F)=-0{,}91\) V với cổng poly n⁺ suy biến; \(\sqrt{2\varepsilon_sqN_A\,2\phi_F}/C_{ox}=0{,}28\) V. Cộng lại: \(V_T\approx-0{,}91+0{,}69+0{,}28\approx 0{,}07\) V. Mô phỏng có thể lệch 0,05–0,15 V vì: giá trị \(n_i\) và thu hẹp vùng cấm; nghèo hạt dẫn trong poly; định nghĩa VT (ngoại suy gm hay dòng không đổi); và ở Lch ngắn là hiệu ứng kênh ngắn.</p>
+<p><strong>3.</strong> Điểm thắt kênh lý tưởng ở \(V_{DS,sat}=V_{GS}-V_T\approx 0{,}93;\ 1{,}93;\ 2{,}93\) V cho VG = 1, 2, 3 V. Tính thêm hiệu ứng điện tích thân, \(V_{DS,sat}\approx (V_{GS}-V_T)/m\) với \(m=1+C_d/C_{ox}\approx 1{,}2\), tức khoảng 0,8; 1,6; 2,4 V; bão hòa vận tốc làm các giá trị này nhỏ hơn nữa. Trên file <code>.tdr</code> ở VD &gt; VDS,sat, <code>eDensity</code> của lớp đảo tụt mạnh gần máng: đó là điểm thắt. Dòng bão hòa tăng gần bình phương theo (VG − VT) khi kênh dài.</p>
+<p><strong>4.</strong> Dòng của hai cách dựng phải trùng nhau trong phạm vi sai số lưới (thường dưới 1–2 %). Nếu lệch nhiều hơn: kiểm tra tiếp xúc đã đổi tên đúng (<code>-ren drain=source</code>), lưới tại mặt đối xứng x = 0 có liên tục không, và pha tạp ở tâm kênh có bị cộng đôi khi lấy đối xứng.</p>
+
+</details>
+
 <h2 id="v-s6">Tài liệu tham khảo</h2>
 <ol class="refs">
 <li>J. Hwang, <em>Semiconductor Device Design</em>, bài 3: MOSFET, Korea Aerospace University.</li>
@@ -432,6 +449,19 @@ Solve {
 <li>Plot the ID–VD family at VG = 1, 2, 3 V and mark the pinch-off point.</li>
 <li>Rebuild the structure with the half-structure and <code>tdx</code> technique and check that the results match the full structure.</li>
 </ol>
+
+<details class="ans"><summary>Answers and hints</summary>
+<p class="anote">The numbers below are hand calculations from analytical models, given as reference points. Simulation results will differ by a few to a few tens of percent depending on the \(n_i\) value, band-gap narrowing, mesh and extraction method; when they differ, be able to say why.</p>
+<p><strong>1.</strong> For \(N_{sub}=10^{16}\) cm⁻³, \(t_{ox}=20\) nm: \(C_{ox}=1.73\times10^{-7}\) F/cm², maximum depletion width \(W_{d}\approx 0.30\ \mu\)m, \(C_d/C_{ox}\approx 0.20\), so a long channel has \(SS\approx 59.5\times1.2\approx 71\) mV/decade. Remember the effective channel is shorter than <code>Lch</code>: with <code>Factor</code> 0.8, source and drain spread laterally about 0.16 µm; minus the 50 nm gap, each side reaches about 0.11 µm under the gate, so \(L_{eff}\approx L_{ch}-0.22\ \mu\)m. Expect:</p>
+<ul>
+<li>Lch = 2 µm and 1 µm: nearly equal VT (around the hand value in question 2), SS about 70–75 mV/decade.</li>
+<li>Lch = 0.5 µm (\(L_{eff}\approx 0.28\ \mu\)m, only about one \(W_d\)): a clear VT drop (VT roll-off), higher SS that depends on VD. This is the short-channel signature analysed in the next lab.</li>
+</ul>
+<p><strong>2.</strong> \(\phi_F=(kT/q)\ln(N_A/n_i)=0.347\) V; \(\Phi_{ms}\approx-(E_g/2q+\phi_F)=-0.91\) V for a degenerate n⁺ poly gate; \(\sqrt{2\varepsilon_sqN_A\,2\phi_F}/C_{ox}=0.28\) V. Sum: \(V_T\approx-0.91+0.69+0.28\approx 0.07\) V. The simulation may differ by 0.05–0.15 V because of: the \(n_i\) value and band-gap narrowing; poly depletion; the VT definition (gm extrapolation or constant current); and, at short Lch, short-channel effects.</p>
+<p><strong>3.</strong> Ideal pinch-off at \(V_{DS,sat}=V_{GS}-V_T\approx 0.93,\ 1.93,\ 2.93\) V for VG = 1, 2, 3 V. Including the bulk-charge effect, \(V_{DS,sat}\approx (V_{GS}-V_T)/m\) with \(m=1+C_d/C_{ox}\approx 1.2\), i.e. about 0.8, 1.6, 2.4 V; velocity saturation lowers them further. In the <code>.tdr</code> file at VD &gt; VDS,sat, the inversion-layer <code>eDensity</code> drops sharply near the drain: that is the pinch-off point. For a long channel the saturation current grows roughly as (VG − VT)².</p>
+<p><strong>4.</strong> The currents from the two builds should agree within mesh error (usually under 1–2 %). If they differ more: check the contact was renamed correctly (<code>-ren drain=source</code>), that the mesh is continuous at the symmetry plane x = 0, and that the doping at the channel centre was not counted twice by the mirroring.</p>
+
+</details>
 
 <h2 id="e-s6">References</h2>
 <ol class="refs">

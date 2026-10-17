@@ -70,6 +70,10 @@
   pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
   code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
   pre code{font-size:1em;white-space:pre}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .anote{font-size:.9rem;color:var(--muted)}
   h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
 </style></head>
 <body>
@@ -235,7 +239,7 @@ sdevice -P:GaAs       &gt;&gt; sdevice.par
 <h2 id="v-s5">5. Đọc kết quả và đối chiếu với lý thuyết</h2>
 <p><strong>Giản đồ vùng.</strong> Mở file <code>.tdr</code> ở 0 V trong Sentaurus Visual, cắt một đường dọc theo y và vẽ <code>ConductionBandEnergy</code>, <code>ValenceBandEnergy</code> và hai mức giả Fermi. Ở cân bằng hai mức giả Fermi trùng nhau và phẳng; độ cong của vùng là thế xây dựng:</p>
 <p>$$V_{bi}=\frac{kT}{q}\ln\frac{N_A N_D}{n_i^2}$$</p>
-<p>Bài thực hành của Betti Beneventi cho \(V_{bi}\approx 697\) mV khi \(N_A=N_D=10^{16}\) cm⁻³ và khoảng 937 mV khi tăng lên 10¹⁸ cm⁻³; với Ge (\(n_i\approx 2{,}4\times10^{13}\) cm⁻³) khoảng 434 mV, với GaAs (\(n_i\approx 1{,}8\times10^{6}\) cm⁻³) khoảng 1,29 V. Đó cũng gần đúng là "điện áp mở" đọc được trên đặc tuyến thuận tuyến tính.</p>
+<p>Bài thực hành của Betti Beneventi cho \(V_{bi}\approx 697\) mV khi \(N_A=N_D=10^{16}\) cm⁻³ và khoảng 937 mV khi tăng lên 10¹⁸ cm⁻³; với Ge (\(n_i\approx 2{,}4\times10^{13}\) cm⁻³) và GaAs (\(n_i\approx 1{,}8\times10^{6}\) cm⁻³) bài đó cho khoảng 434 mV và 1,29 V, là các giá trị ứng với pha tạp 10¹⁷ cm⁻³ (ở 10¹⁶ cm⁻³ công thức cho khoảng 0,31 V và 1,16 V). Đó cũng gần đúng là "điện áp mở" đọc được trên đặc tuyến thuận tuyến tính.</p>
 <p><strong>Vùng nghèo.</strong> Với \(N_A=N_D=10^{16}\) cm⁻³ trong Si:</p>
 <p>$$W=\sqrt{\frac{2\varepsilon_s V_{bi}}{q}\left(\frac{1}{N_A}+\frac{1}{N_D}\right)}\approx 0{,}42\ \mu\text{m},\qquad E_{max}=\frac{qN_A x_p}{\varepsilon_s}\approx 3{,}3\times10^{4}\ \text{V/cm}$$</p>
 <p>Vẽ <code>SpaceCharge</code> và <code>ElectricField</code> dọc theo y để so: vùng điện tích là hai khối chữ nhật đối xứng hai bên y = 2 µm, điện trường có dạng tam giác.</p>
@@ -243,7 +247,7 @@ sdevice -P:GaAs       &gt;&gt; sdevice.par
 <p><strong>Mật độ hạt dẫn.</strong> Vẽ <code>eDensity</code> và <code>hDensity</code> ở thang log khi phân cực thuận: phía p, electron thiểu số giảm theo hàm mũ khi đi xa vùng nghèo, đúng như mô hình khuếch tán.</p>
 
 <h2 id="v-s6">6. Trường hợp điện trở</h2>
-<p>Đổi pha tạp lớp trên từ acceptor sang donor (thêm tham số <code>p_type</code> nhận giá trị <code>BoronActiveConcentration</code> hoặc <code>PhosphorusActiveConcentration</code> và đưa nó vào lệnh <code>define-constant-profile</code>). Khi đó toàn khối là n đồng nhất: không còn tiếp giáp, không còn vùng điện tích, chỉ có dòng trôi, nên I-V là đường thẳng và các mức giả Fermi nghiêng đều từ tiếp xúc này sang tiếp xúc kia. Kiểm tra bằng \(R=\rho L/A\): với Si n 10¹⁶ cm⁻³ (\(\rho\approx 0{,}5\ \Omega\cdot\)cm), dài 4 µm, mặt cắt 1 µm × 1 µm, dòng ở 1 V cỡ 5 × 10⁻⁸ A.</p>
+<p>Đổi pha tạp lớp trên từ acceptor sang donor (thêm tham số <code>p_type</code> nhận giá trị <code>BoronActiveConcentration</code> hoặc <code>PhosphorusActiveConcentration</code> và đưa nó vào lệnh <code>define-constant-profile</code>). Khi đó toàn khối là n đồng nhất: không còn tiếp giáp, không còn vùng điện tích, chỉ có dòng trôi, nên I-V là đường thẳng và các mức giả Fermi nghiêng đều từ tiếp xúc này sang tiếp xúc kia. Kiểm tra bằng \(R=\rho L/A\): với Si n 10¹⁶ cm⁻³ (\(\rho\approx 0{,}5\ \Omega\cdot\)cm), dài 4 µm, mặt cắt 1 µm × 1 µm, dòng ở 1 V cỡ 5 × 10⁻⁵ A (trên mỗi µm chiều sâu).</p>
 
 <div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
 <p>β-Ga₂O₃ chưa có pha tạp loại p hiệu quả, nên không có tiếp giáp pn đồng chất như bài này. Diode pn Ga₂O₃ trong thực tế là dị chất, phổ biến nhất là p-NiO/n-Ga₂O₃ (ví dụ Gong và cộng sự, 2020). Quy trình mô phỏng giữ nguyên, chỉ thêm một vùng vật liệu thứ hai với ái lực điện tử, độ rộng vùng cấm riêng và kiểm tra độ lệch vùng tại mặt phân cách trên giản đồ vùng.</p></div>
@@ -255,6 +259,23 @@ sdevice -P:GaAs       &gt;&gt; sdevice.par
 <li>Đo độ dốc nhánh thuận (mV/decade) có và không có SRH ở 0,2 V và 0,5 V.</li>
 <li>Làm trường hợp điện trở, rồi giải thích vì sao các mức giả Fermi là đường thẳng.</li>
 </ol>
+
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p class="anote">Các số dưới đây là tính tay theo mô hình giải tích để bạn có mốc đối chiếu. Kết quả mô phỏng sẽ lệch vài phần trăm đến vài chục phần trăm tùy giá trị \(n_i\), mô hình thu hẹp vùng cấm, lưới và cách trích; khi lệch, hãy giải thích được vì sao.</p>
+<p><strong>1.</strong> \(V_{bi}=(kT/q)\ln(N_AN_D/n_i^2)\), \(kT/q=25{,}85\) mV:</p>
+<div class="tablewrap"><table>
+<tr><th>Trường hợp</th><th>\(n_i\) (cm⁻³)</th><th>\(V_{bi}\)</th></tr>
+<tr><td>Si 10¹⁶/10¹⁶</td><td>1,0 × 10¹⁰ / 1,5 × 10¹⁰</td><td>0,71 V / 0,69 V</td></tr>
+<tr><td>Si 10¹⁸/10¹⁸</td><td>1,0 × 10¹⁰ / 1,5 × 10¹⁰</td><td>0,95 V / 0,93 V</td></tr>
+<tr><td>Ge 10¹⁶/10¹⁶</td><td>2,4 × 10¹³</td><td>0,31 V</td></tr>
+<tr><td>GaAs 10¹⁶/10¹⁶</td><td>1,8 × 10⁶</td><td>1,16 V</td></tr>
+</table></div>
+<p>Trên giản đồ vùng, \(V_{bi}\) là độ chênh của \(E_C\) giữa hai vùng trung hòa (đơn vị eV, chia cho q). Giá trị mô phỏng phụ thuộc \(n_i\) mà Sentaurus dùng (xem <code>Silicon.par</code>) nên có thể lệch vài chục mV so với công thức. Tăng pha tạp 100 lần ở cả hai phía làm \(V_{bi}\) tăng \(2\times(kT/q)\ln 100\approx 0{,}24\) V, đúng với hiệu 0,95 − 0,71.</p>
+<p><strong>2.</strong> Với Si 10¹⁶/10¹⁶ và \(V_{bi}\approx 0{,}71\) V: \(W(0)\approx 0{,}43\ \mu\)m, \(W(-5\ \text{V})\approx 1{,}22\ \mu\)m. Tỉ số \(1{,}22/0{,}43=2{,}83\approx\sqrt{5{,}71/0{,}71}\). Điện trường cực đại tương ứng khoảng 3,3 × 10⁴ và 9,4 × 10⁴ V/cm. Vùng nghèo vẫn nằm gọn trong hai lớp 2 µm nên công thức còn đúng.</p>
+<p><strong>3.</strong> Không có SRH: khoảng 60 mV/decade (n ≈ 1) ở cả 0,2 V và 0,5 V. Có SRH: độ dốc nhỏ hơn ở điện áp thấp. Điện áp chuyển tiếp, nơi dòng tái hợp bằng dòng khuếch tán, là \(V_x=2(kT/q)\ln(J_{gr0}/J_0)\). Ước lượng với thời gian sống mặc định cỡ micro giây và lớp trung hòa ngắn (diode ngắn, \(J_0\approx 4\times10^{-10}\) A/cm², \(J_{gr0}=qn_iW/2\tau\approx 7\times10^{-9}\) A/cm²) cho \(V_x\approx 0{,}15\) V; khi đó n ≈ 1,2 ở 0,2 V và ≈ 1,0 ở 0,5 V. Thời gian sống càng ngắn, \(V_x\) càng cao và vùng n ≈ 2 càng rộng. Dòng ngược cũng tăng khoảng \(J_{gr0}/J_0\) lần (cỡ 20 lần với các số trên).</p>
+<p><strong>4.</strong> Khối n đồng nhất không có điện tích không gian, nên theo Poisson điện trường không đổi; \(n\) cũng không đổi. Khi đó \(J_n=n\mu_n\,\mathrm{d}E_{Fn}/\mathrm{d}x\) không đổi kéo theo \(\mathrm{d}E_{Fn}/\mathrm{d}x\) không đổi, tức \(E_{Fn}\) là đường thẳng; ở hai tiếp xúc ohmic \(E_{Fn}=E_{Fp}\), nên \(E_{Fp}\) cũng thẳng. Dòng: \(\rho=1/(qn\mu_n)\approx 0{,}5\ \Omega\cdot\)cm (với \(\mu_n\approx 1200\) cm²/V·s), \(R=\rho L/A\approx 0{,}5\times4\times10^{-4}/10^{-8}=2\times10^{4}\ \Omega\) (mặt cắt 1 µm × 1 µm = 10⁻⁸ cm²), nên \(I\approx 5\times10^{-5}\) A/µm ở 1 V, tuyến tính theo V.</p>
+
+</details>
 
 <h2 id="v-s8">Tài liệu tham khảo</h2>
 <ol class="refs">
@@ -420,7 +441,7 @@ sdevice -P:GaAs       &gt;&gt; sdevice.par
 <h2 id="e-s5">5. Reading results and checking them against theory</h2>
 <p><strong>Band diagram.</strong> Open the 0 V <code>.tdr</code> file in Sentaurus Visual, cut a line along y and plot <code>ConductionBandEnergy</code>, <code>ValenceBandEnergy</code> and both quasi-Fermi levels. At equilibrium the two quasi-Fermi levels coincide and are flat; the band bending is the built-in potential:</p>
 <p>$$V_{bi}=\frac{kT}{q}\ln\frac{N_A N_D}{n_i^2}$$</p>
-<p>Betti Beneventi's lab gives \(V_{bi}\approx 697\) mV for \(N_A=N_D=10^{16}\) cm⁻³ and about 937 mV at 10¹⁸ cm⁻³; about 434 mV for Ge (\(n_i\approx 2.4\times10^{13}\) cm⁻³) and about 1.29 V for GaAs (\(n_i\approx 1.8\times10^{6}\) cm⁻³). That is also roughly the "turn-on voltage" read from the forward characteristic on a linear scale.</p>
+<p>Betti Beneventi's lab gives \(V_{bi}\approx 697\) mV for \(N_A=N_D=10^{16}\) cm⁻³ and about 937 mV at 10¹⁸ cm⁻³; for Ge (\(n_i\approx 2.4\times10^{13}\) cm⁻³) and GaAs (\(n_i\approx 1.8\times10^{6}\) cm⁻³) that lab gives about 434 mV and 1.29 V, values that correspond to 10¹⁷ cm⁻³ doping (at 10¹⁶ cm⁻³ the formula gives about 0.31 V and 1.16 V). That is also roughly the "turn-on voltage" read from the forward characteristic on a linear scale.</p>
 <p><strong>Depletion region.</strong> For \(N_A=N_D=10^{16}\) cm⁻³ in Si:</p>
 <p>$$W=\sqrt{\frac{2\varepsilon_s V_{bi}}{q}\left(\frac{1}{N_A}+\frac{1}{N_D}\right)}\approx 0.42\ \mu\text{m},\qquad E_{max}=\frac{qN_A x_p}{\varepsilon_s}\approx 3.3\times10^{4}\ \text{V/cm}$$</p>
 <p>Plot <code>SpaceCharge</code> and <code>ElectricField</code> along y to compare: the charge forms two symmetric blocks either side of y = 2 µm and the field is triangular.</p>
@@ -428,7 +449,7 @@ sdevice -P:GaAs       &gt;&gt; sdevice.par
 <p><strong>Carrier densities.</strong> Plot <code>eDensity</code> and <code>hDensity</code> on a log scale under forward bias: on the p side the minority electrons decay exponentially away from the depletion region, as the diffusion model predicts.</p>
 
 <h2 id="e-s6">6. The resistor case</h2>
-<p>Change the top layer from acceptor to donor (add a parameter <code>p_type</code> taking <code>BoronActiveConcentration</code> or <code>PhosphorusActiveConcentration</code> and use it in <code>define-constant-profile</code>). The whole block is then uniform n: no junction, no space charge, only drift, so the I-V is a straight line and the quasi-Fermi levels slope evenly from one contact to the other. Check with \(R=\rho L/A\): for n-Si at 10¹⁶ cm⁻³ (\(\rho\approx 0.5\ \Omega\cdot\)cm), 4 µm long, with a 1 µm × 1 µm cross-section, the current at 1 V is about 5 × 10⁻⁸ A.</p>
+<p>Change the top layer from acceptor to donor (add a parameter <code>p_type</code> taking <code>BoronActiveConcentration</code> or <code>PhosphorusActiveConcentration</code> and use it in <code>define-constant-profile</code>). The whole block is then uniform n: no junction, no space charge, only drift, so the I-V is a straight line and the quasi-Fermi levels slope evenly from one contact to the other. Check with \(R=\rho L/A\): for n-Si at 10¹⁶ cm⁻³ (\(\rho\approx 0.5\ \Omega\cdot\)cm), 4 µm long, with a 1 µm × 1 µm cross-section, the current at 1 V is about 5 × 10⁻⁵ A (per µm of depth).</p>
 
 <div class="box ga"><p class="t">Ga₂O₃ perspective</p>
 <p>β-Ga₂O₃ has no effective p-type doping yet, so a homojunction like this one does not exist. Practical Ga₂O₃ pn diodes are heterojunctions, most often p-NiO/n-Ga₂O₃ (for example Gong et al., 2020). The simulation flow is the same; you add a second material region with its own electron affinity and band gap and check the band offsets at the interface on the band diagram.</p></div>
@@ -440,6 +461,23 @@ sdevice -P:GaAs       &gt;&gt; sdevice.par
 <li>Measure the forward slope (mV/decade) with and without SRH at 0.2 V and 0.5 V.</li>
 <li>Run the resistor case and explain why the quasi-Fermi levels are straight lines.</li>
 </ol>
+
+<details class="ans"><summary>Answers and hints</summary>
+<p class="anote">The numbers below are hand calculations from analytical models, given as reference points. Simulation results will differ by a few to a few tens of percent depending on the \(n_i\) value, band-gap narrowing, mesh and extraction method; when they differ, be able to say why.</p>
+<p><strong>1.</strong> \(V_{bi}=(kT/q)\ln(N_AN_D/n_i^2)\), \(kT/q=25.85\) mV:</p>
+<div class="tablewrap"><table>
+<tr><th>Case</th><th>\(n_i\) (cm⁻³)</th><th>\(V_{bi}\)</th></tr>
+<tr><td>Si 10¹⁶/10¹⁶</td><td>1.0 × 10¹⁰ / 1.5 × 10¹⁰</td><td>0.71 V / 0.69 V</td></tr>
+<tr><td>Si 10¹⁸/10¹⁸</td><td>1.0 × 10¹⁰ / 1.5 × 10¹⁰</td><td>0.95 V / 0.93 V</td></tr>
+<tr><td>Ge 10¹⁶/10¹⁶</td><td>2.4 × 10¹³</td><td>0.31 V</td></tr>
+<tr><td>GaAs 10¹⁶/10¹⁶</td><td>1.8 × 10⁶</td><td>1.16 V</td></tr>
+</table></div>
+<p>On the band diagram, \(V_{bi}\) is the step in \(E_C\) between the two neutral regions (in eV, divided by q). The simulated value depends on the \(n_i\) Sentaurus uses (see <code>Silicon.par</code>), so it can differ from the formula by a few tens of mV. Raising the doping 100 times on both sides adds \(2\times(kT/q)\ln 100\approx 0.24\) V, matching 0.95 − 0.71.</p>
+<p><strong>2.</strong> For Si 10¹⁶/10¹⁶ with \(V_{bi}\approx 0.71\) V: \(W(0)\approx 0.43\ \mu\)m, \(W(-5\ \text{V})\approx 1.22\ \mu\)m. The ratio \(1.22/0.43=2.83\approx\sqrt{5.71/0.71}\). The peak fields are about 3.3 × 10⁴ and 9.4 × 10⁴ V/cm. The depletion region still fits inside the two 2 µm layers, so the formula holds.</p>
+<p><strong>3.</strong> Without SRH: about 60 mV/decade (n ≈ 1) at both 0.2 V and 0.5 V. With SRH the slope is shallower at low bias. The crossover voltage, where recombination and diffusion currents are equal, is \(V_x=2(kT/q)\ln(J_{gr0}/J_0)\). An estimate with default lifetimes of order microseconds and short neutral regions (short diode, \(J_0\approx 4\times10^{-10}\) A/cm², \(J_{gr0}=qn_iW/2\tau\approx 7\times10^{-9}\) A/cm²) gives \(V_x\approx 0.15\) V; then n ≈ 1.2 at 0.2 V and ≈ 1.0 at 0.5 V. The shorter the lifetime, the higher \(V_x\) and the wider the n ≈ 2 range. The reverse current also rises by about \(J_{gr0}/J_0\) (around 20 times with these numbers).</p>
+<p><strong>4.</strong> A uniform n block has no space charge, so by Poisson the field is constant; \(n\) is constant too. Then a constant \(J_n=n\mu_n\,\mathrm{d}E_{Fn}/\mathrm{d}x\) means a constant \(\mathrm{d}E_{Fn}/\mathrm{d}x\), i.e. a straight \(E_{Fn}\); at the two ohmic contacts \(E_{Fn}=E_{Fp}\), so \(E_{Fp}\) is straight too. Current: \(\rho=1/(qn\mu_n)\approx 0.5\ \Omega\cdot\)cm (with \(\mu_n\approx 1200\) cm²/V·s), \(R=\rho L/A\approx 0.5\times4\times10^{-4}/10^{-8}=2\times10^{4}\ \Omega\) (cross-section 1 µm × 1 µm = 10⁻⁸ cm²), so \(I\approx 5\times10^{-5}\) A/µm at 1 V, linear in V.</p>
+
+</details>
 
 <h2 id="e-s8">References</h2>
 <ol class="refs">
