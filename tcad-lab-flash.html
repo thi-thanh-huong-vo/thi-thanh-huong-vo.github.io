@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thực hành 7: ô nhớ flash bẫy điện tích" data-title-en="Lab 7: a charge-trap flash cell">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 7: a charge-trap flash cell · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Nitride material, parameter files, nonlocal meshes, traps with tunneling, initialization, program and read.">
+<meta property="og:title" content="Lab 7: a charge-trap flash cell">
+<meta property="og:description" content="Nitride material, parameter files, nonlocal meshes, traps with tunneling, initialization, program and read.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 7</span><span class="l-en">Part 4 · Lesson 7</span></p>
+  <h1><span class="l-vi">Thực hành 7: ô nhớ flash bẫy điện tích</span><span class="l-en">Lab 7: a charge-trap flash cell</span></h1>
+  <p class="sub"><span class="l-vi">Vật liệu nitride, file tham số, lưới phi cục bộ, bẫy với xuyên hầm, khởi tạo, ghi và đọc.</span><span class="l-en">Nitride material, parameter files, nonlocal meshes, traps with tunneling, initialization, program and read.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Bài cuối của phần thực hành: một ô nhớ flash bẫy điện tích kiểu SONOS (Si–oxide–nitride–oxide–Si). Đây là bài khó nhất vì kết hợp ba thứ mới: một vật liệu không có sẵn tham số, xuyên hầm phi cục bộ qua oxide, và bẫy trong nitride thay đổi theo thời gian.</p>
+
+<h2 id="v-s1">1. Cấu trúc và nguyên lý</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><rect x="60" y="160" width="520" height="110" style="fill:#f4d9d9;stroke:#b04040"/><path d="M60,160 h140 v28 q0,24 -40,24 h-100 z" style="fill:#7d9fe0;stroke:#4060b0"/><path d="M580,160 h-140 v28 q0,24 40,24 h100 z" style="fill:#7d9fe0;stroke:#4060b0"/><rect x="210" y="142" width="220" height="18" style="fill:#eef3c8;stroke:#8a9a30"/><text x="320" y="155.0" class="tk" text-anchor="middle">Oxide 1: đường hầm (1–5 nm)</text><rect x="210" y="108" width="220" height="34" style="fill:#b9e3b0;stroke:#4a8a40"/><text x="320" y="129.0" class="tk" text-anchor="middle">Nitride bẫy điện tích (8 nm)</text><rect x="210" y="90" width="220" height="18" style="fill:#eef3c8;stroke:#8a9a30"/><text x="320" y="103.0" class="tk" text-anchor="middle">Oxide 2: oxide chặn</text><rect x="210" y="64" width="220" height="26" style="fill:#e07d7d;stroke:#b04040"/><text x="320" y="81.0" class="tk" text-anchor="middle">Cổng điều khiển poly n⁺</text><rect x="210" y="58" width="220" height="6" style="fill:#333"/><rect x="60" y="156" width="90" height="4" style="fill:#333"/><rect x="490" y="156" width="90" height="4" style="fill:#333"/><rect x="60" y="270" width="520" height="5" style="fill:#333"/><text x="105" y="150" class="ns" text-anchor="middle">nguồn</text><text x="535" y="150" class="ns" text-anchor="middle">máng</text><text x="320" y="52" class="ns" text-anchor="middle">tiếp xúc cổng điều khiển</text><text x="320" y="240" class="ns" text-anchor="middle">đế Si loại p 5×10¹⁷, dày 600 nm</text><text x="120" y="200" class="ns" text-anchor="middle">n⁺</text><text x="520" y="200" class="ns" text-anchor="middle">n⁺</text><text x="320" y="292" class="ns" text-anchor="middle">tiếp xúc đế · các lớp không theo tỉ lệ</text></svg><figcaption>Hình 1. Ô nhớ flash bẫy điện tích: oxide đường hầm, nitride bẫy điện tích và oxide chặn nằm giữa kênh Si và cổng điều khiển poly n⁺. Các lớp không theo tỉ lệ.</figcaption></figure>
+<p>Thông số trong bài giảng:</p>
+<ul>
+<li>Đế Si dày 600 nm, loại p, pha tạp hằng 5 × 10¹⁷ cm⁻³ (có thể đổi).</li>
+<li>Nguồn và máng n⁺: profile Gauss, đỉnh 10²⁰ cm⁻³, sâu 120 nm, giá trị tại độ sâu bằng pha tạp đế, <code>Factor</code> 0,8.</li>
+<li>Cổng điều khiển poly n⁺ 10²⁰ cm⁻³, dày 5 nm.</li>
+<li>Oxide 1 (đường hầm) và oxide 2 (chặn): SiO₂, dày 1–5 nm (tham số).</li>
+<li>Nitride dày 8 nm, khai báo là vật liệu <code>NitrideAsSemiconductor</code>.</li>
+<li>Bề rộng cổng 100–300 nm (tham số).</li>
+</ul>
+<p><strong>Ghi (program):</strong> điện áp dương lớn trên cổng làm electron từ kênh xuyên hầm qua oxide 1 và bị bẫy trong nitride. Điện tích âm bị giữ làm VT tăng. <strong>Xóa (erase):</strong> điện áp âm đẩy electron ra (và/hoặc kéo lỗ trống vào). <strong>Đọc (read):</strong> đo ID ở VG nhỏ để biết VT cao hay thấp. Với điện tích bẫy \(qN_t\) (cm⁻²) đặt ở tâm lớp nitride:</p>
+<p>$$\Delta V_T\approx\frac{qN_t}{C_{\text{eff}}}$$</p><p>$$C_{\text{eff}}=\frac{\varepsilon_{ox}}{t_{ox2}+(\varepsilon_{ox}/\varepsilon_N)\,t_N/2}$$</p>
+<p>Ví dụ: oxide chặn 5 nm, nitride 8 nm (\(\varepsilon_N\approx 7{,}5\)), \(N_t=5\times10^{12}\) cm⁻² cho \(\Delta V_T\approx 1{,}6\) V.</p>
+
+<h2 id="v-s2">2. Vật liệu và file tham số</h2>
+<p>Nitride được khai báo là <code>NitrideAsSemiconductor</code> để SDevice giải phương trình hạt dẫn trong nó; nhờ vậy mới đặt được bẫy và xuyên hầm vào lớp này. Vật liệu này không có tham số sẵn trong cơ sở dữ liệu, nên cần ba việc:</p>
+<ol>
+<li><strong><code>datexcodes.txt</code></strong>: chép file định nghĩa vật liệu vào thư mục dự án và kiểm tra rằng <code>NitrideAsSemiconductor</code> được khai báo là một chất bán dẫn. File trong thư mục dự án được ưu tiên hơn file hệ thống.</li>
+<li><strong>Tạo <code>sdevice.par</code></strong>: trong SWB, chuột phải công cụ SDevice → <em>Edit Input</em> → <em>Include Materials</em>, chọn Silicon, SiO2, PolySi và NitrideAsSemiconductor. Vật liệu không có tham số sẵn hiện màu đen và chỉ được tạo khối rỗng.</li>
+<li><strong>Viết <code>Nitride.par</code></strong>: tối thiểu gồm hằng số điện môi, độ rộng vùng cấm, ái lực điện tử và khối lượng hiệu dụng. Giá trị Si₃N₄ thường dùng: \(\varepsilon_r\approx 7{,}5\), \(E_g\approx 5\) eV; hãy lấy giá trị từ tài liệu bạn trích dẫn và ghi nguồn.</li>
+</ol>
+<pre><code># sdevice.par -- one block per material, each pulling in its own file
+#define ParFileDir .
+Material = &quot;Silicon&quot; {
+  #includeext &quot;ParFileDir/Silicon.par&quot;
+}
+Material = &quot;SiO2&quot; {
+  #includeext &quot;ParFileDir/SiO2.par&quot;
+}
+Material = &quot;PolySi&quot; {
+  #includeext &quot;ParFileDir/PolySi.par&quot;
+}
+Material = &quot;NitrideAsSemiconductor&quot; {
+  #includeext &quot;ParFileDir/Nitride.par&quot;
+}
+</code></pre>
+<p>Thêm khối khối lượng xuyên hầm vào file của oxide và polysilicon, và kiểm tra khối tương ứng trong <code>Silicon.par</code> (mặc định là 0,32 và 0,16):</p>
+<pre><code>* add (or edit) in SiO2.par and PolySi.par: tunneling masses for barrier tunneling
+BarrierTunneling {
+  mt = 0.36, 0.38        * electron, hole tunneling mass [m0] -- values used in the course
+}
+</code></pre>
+<p>Khối lượng xuyên hầm là tham số hiệu chỉnh: với electron trong SiO₂, các phép đo Fowler–Nordheim cho giá trị quanh 0,4–0,5 m₀ (Weinberg, 1982). Kết quả ghi/xóa rất nhạy với nó, nên hiệu chỉnh trên một đường đo trước khi dự đoán.</p>
+
+<h2 id="v-s3">3. Lưới phi cục bộ và xuyên hầm</h2>
+<pre><code>Math {
+  * a nonlocal mesh is a set of 1D lines normal to an interface, along which the
+  * tunneling probability is integrated; Length is in cm (9e-7 cm = 9 nm)
+  NonLocal &quot;NL_bottom&quot; ( RegionInterface = &quot;R.Ox1/R.Sub&quot;
+                         Length = 9e-7  Digits = 4  EnergyResolution = 1e-4 )
+  NonLocal &quot;NL_top&quot;    ( RegionInterface = &quot;R.Ox2/R.Gate&quot;
+                         Length = 5e-7  Digits = 4  EnergyResolution = 1e-4 )
+  Extrapolate  Derivatives  -RelErrControl  Iterations = 30  Method = ParDiSo
+}
+</code></pre>
+<p>Mô hình xuyên hầm qua rào (<code>BarrierTunneling</code>) tính xác suất xuyên hầm theo xấp xỉ WKB dọc các đường 1D vuông góc với mặt phân cách. Lưới phi cục bộ <code>"NL_bottom"</code> gắn với mặt phân cách oxide 1/đế, <code>"NL_top"</code> với oxide 2/cổng; <code>Length</code> phải dài hơn bề dày rào (oxide và một phần nitride). Chú ý đơn vị cm trong khối này, khác với µm trong SDE. Hướng dẫn sử dụng mô tả bốn thành phần dòng: electron từ vùng dẫn sang vùng dẫn, lỗ trống từ vùng hóa trị sang vùng hóa trị (luôn được tính), và hai thành phần giữa vùng dẫn và vùng hóa trị (chỉ khi bật xuyên hầm vùng–vùng).</p>
+
+<h2 id="v-s4">4. Bẫy trong nitride</h2>
+<pre><code>Physics {
+  * tunneling current through the two oxides, electrons and holes
+  eBarrierTunneling &quot;NL_bottom&quot;   hBarrierTunneling &quot;NL_bottom&quot;
+  eBarrierTunneling &quot;NL_top&quot;      hBarrierTunneling &quot;NL_top&quot;
+}
+Physics ( Material = &quot;Silicon&quot; ) {
+  Mobility ( DopingDependence  HighFieldSaturation )
+  Recombination ( SRH ( DopingDependence ) )
+}
+Physics ( Material = &quot;NitrideAsSemiconductor&quot; ) {
+  Traps (
+    * deep donor 2.5 eV below EC: neutral when filled, +q when empty
+    ( Donor  Level  EnergyMid = 2.5  FromConductionBand  Conc = 1e19
+      eXSection = 1e-13  hXSection = 1e-13
+      eBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      hBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      PooleFrenkel  TrapVolume = 1e-15 )
+    * acceptor 1.0 eV below EC: neutral when empty, -q when filled (stores electrons)
+    ( Acceptor  Level  EnergyMid = 1.0  FromConductionBand  Conc = 1e19
+      eXSection = 1e-13  hXSection = 1e-13
+      eBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      hBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      PooleFrenkel  TrapVolume = 1e-15 )
+  )
+}
+Plot {
+  eDirectTunnel hDirectTunnel  eBarrierTunneling hBarrierTunneling
+  eTrappedCharge hTrappedCharge  NonLocal
+  ConductionBandEnergy ValenceBandEnergy  ElectricField/Vector  SpaceCharge
+}
+</code></pre>
+<ul>
+<li><code>Acceptor</code>: trung hòa khi trống, mang điện −q khi bị chiếm, nên giữ electron khi ghi. <code>Donor</code>: trung hòa khi bị chiếm, +q khi trống.</li>
+<li><code>Level</code>: một mức năng lượng duy nhất, đo từ đáy vùng dẫn (<code>FromConductionBand</code>). <code>Conc</code> tính bằng cm⁻³ khi khai báo theo vùng hay vật liệu.</li>
+<li><code>eBarrierTunneling(NonLocal=...)</code> trong khai báo bẫy cho phép bẫy trao đổi electron trực tiếp với vùng dẫn của Si và cổng bằng xuyên hầm, đó là cơ chế nạp và xả của ô nhớ.</li>
+<li><code>PooleFrenkel</code>: tiết diện bắt tăng theo điện trường do rào Coulomb bị hạ (Frenkel, 1938), quan trọng với dẫn điện trong nitride ở trường lớn.</li>
+</ul>
+
+<h2 id="v-s5">5. Trình tự giải: khởi tạo, ghi, đọc</h2>
+<pre><code>Solve {
+  * --- initial state: traps empty, then a converged equilibrium ---
+  Set ( TrapFilling = Empty )
+  Coupled ( Iterations = 100 ) { Poisson }
+  Coupled ( Iterations = 100 ) { Poisson Electron }
+  Coupled ( Iterations = 100  Digits = 8 ) { Poisson Electron Hole }
+  Plot ( FilePrefix = &quot;n@node@_init&quot; )
+  UnSet ( TrapFilling )                     * from here on traps evolve with time
+
+  * --- program: gate pulse defined as a piecewise-linear voltage (see text) ---
+  NewCurrentPrefix = &quot;prog_&quot;
+  Transient ( InitialTime = 0  FinalTime = @t_prog@
+              InitialStep = 1e-10  MaxStep = 1e-5  MinStep = 1e-16  Increment = 1.5 )
+    { Coupled { Poisson Electron Hole } }
+  Plot ( FilePrefix = &quot;n@node@_prog&quot; )
+
+  * --- read: small VD, sweep VG; keep the stored charge fixed while reading ---
+  Set ( TrapFilling = Frozen )
+  Quasistationary ( Goal { Name = &quot;drain&quot;  Voltage = 0.1 } ) { Coupled { Poisson Electron Hole } }
+  NewCurrentPrefix = &quot;read_&quot;
+  Quasistationary ( InitialStep = 0.01  MaxStep = 0.05  MinStep = 1e-6
+    Goal { Name = &quot;gate&quot;  Voltage = 6 } ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p><strong>Khởi tạo</strong> theo bài giảng: ép bẫy rỗng (<code>TrapFilling = Empty</code>), giải tăng dần từ Poisson tới đủ ba phương trình với độ chính xác cao, lưu trạng thái, rồi bỏ ép để bẫy tự do thay đổi.</p>
+<p><strong>Xung ghi.</strong> Một cách đặt xung là cho điện áp cổng là hàm tuyến tính từng đoạn theo thời gian ngay trong khối <code>Electrode</code>:</p>
+<pre><code>Electrode {
+  { Name = &quot;gate&quot;   Voltage = ( 0 at 0,  @V_prog@ at 1e-7,  @V_prog@ at @t_prog@ ) }
+  { Name = &quot;source&quot; Voltage = 0 }  { Name = &quot;drain&quot; Voltage = 0 }
+  { Name = &quot;substrate&quot; Voltage = 0 }
+}
+</code></pre>
+<p>Cách khác là đặt linh kiện trong mạch hỗn hợp với một nguồn xung. Xóa làm tương tự với điện áp âm. Không dùng <code>Quasistationary</code> để ghi: trong chế độ dừng, bẫy luôn ở trạng thái cân bằng nên không mô tả được động học nạp theo thời gian.</p>
+<p><strong>Đọc.</strong> Khi quét VG để đọc, bẫy không được phép cân bằng lại, nếu không điện tích vừa ghi sẽ biến mất. Đoạn mã dùng <code>TrapFilling = Frozen</code> để giữ nguyên trạng thái chiếm của bẫy; nếu phiên bản của bạn không hỗ trợ, đọc bằng một <code>Transient</code> quét VG rất nhanh (vài micro giây) để lượng nạp xả không đáng kể. VT trước và sau ghi cho cửa sổ nhớ.</p>
+
+<h2 id="v-s6">6. Điều nên vẽ</h2>
+<ul>
+<li>Giản đồ vùng qua chồng lớp tại giữa kênh, trước và trong xung ghi: thấy oxide 1 bị nghiêng mạnh (xuyên hầm trực tiếp khi oxide mỏng, Fowler–Nordheim khi trường lớn).</li>
+<li><code>eTrappedCharge</code> trong nitride theo thời gian: điện tích tập trung gần oxide 1 hay trải đều.</li>
+<li>VT theo thời gian ghi (thang log) với vài giá trị V<sub>prog</sub> và t<sub>ox1</sub>.</li>
+</ul>
+
+<h2 id="v-s7">7. Bài tập</h2>
+<ol>
+<li>Với t<sub>ox1</sub> = 2; 3; 4 nm, tìm thời gian ghi để ΔV<sub>T</sub> = 2 V ở V<sub>prog</sub> = 10 V.</li>
+<li>Tính ΔV<sub>T</sub> từ điện tích bẫy tích phân trong nitride theo công thức ở mục 1 và so với VT đọc được.</li>
+<li>Thêm bước xóa và vẽ chu kỳ ghi–đọc–xóa–đọc.</li>
+<li>Thay đổi khối lượng xuyên hầm trong SiO₂ ±20 % và cho biết kết quả nhạy đến đâu.</li>
+</ol>
+
+<h2 id="v-s8">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, bài 8: Flash memory TCAD, Korea Aerospace University.</li>
+<li>Synopsys, <em>Sentaurus Device User Guide</em>, các chương Tunneling (nonlocal barrier tunneling), Traps and Fixed Charges, Transient.</li>
+<li>M. H. White, D. A. Adams, J. Bu, "On the go with SONOS," <em>IEEE Circuits and Devices Magazine</em> 16(4), 22 (2000).</li>
+<li>Z. A. Weinberg, "On tunneling in metal-oxide-silicon structures," <em>Journal of Applied Physics</em> 53, 5052 (1982).</li>
+<li>J. Frenkel, "On pre-breakdown phenomena in insulators and electronic semi-conductors," <em>Physical Review</em> 54, 647 (1938).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The last lab: a SONOS-type (Si–oxide–nitride–oxide–Si) charge-trap flash cell. It is the hardest one because it combines three new things: a material with no ready-made parameters, nonlocal tunneling through oxides, and time-dependent traps in the nitride.</p>
+
+<h2 id="e-s1">1. Structure and principle</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><rect x="60" y="160" width="520" height="110" style="fill:#f4d9d9;stroke:#b04040"/><path d="M60,160 h140 v28 q0,24 -40,24 h-100 z" style="fill:#7d9fe0;stroke:#4060b0"/><path d="M580,160 h-140 v28 q0,24 40,24 h100 z" style="fill:#7d9fe0;stroke:#4060b0"/><rect x="210" y="142" width="220" height="18" style="fill:#eef3c8;stroke:#8a9a30"/><text x="320" y="155.0" class="tk" text-anchor="middle">Oxide 1: tunnel (1–5 nm)</text><rect x="210" y="108" width="220" height="34" style="fill:#b9e3b0;stroke:#4a8a40"/><text x="320" y="129.0" class="tk" text-anchor="middle">Charge-trapping nitride (8 nm)</text><rect x="210" y="90" width="220" height="18" style="fill:#eef3c8;stroke:#8a9a30"/><text x="320" y="103.0" class="tk" text-anchor="middle">Oxide 2: blocking oxide</text><rect x="210" y="64" width="220" height="26" style="fill:#e07d7d;stroke:#b04040"/><text x="320" y="81.0" class="tk" text-anchor="middle">n⁺ poly control gate</text><rect x="210" y="58" width="220" height="6" style="fill:#333"/><rect x="60" y="156" width="90" height="4" style="fill:#333"/><rect x="490" y="156" width="90" height="4" style="fill:#333"/><rect x="60" y="270" width="520" height="5" style="fill:#333"/><text x="105" y="150" class="ns" text-anchor="middle">source</text><text x="535" y="150" class="ns" text-anchor="middle">drain</text><text x="320" y="52" class="ns" text-anchor="middle">control gate contact</text><text x="320" y="240" class="ns" text-anchor="middle">p-type Si 5×10¹⁷, 600 nm thick</text><text x="120" y="200" class="ns" text-anchor="middle">n⁺</text><text x="520" y="200" class="ns" text-anchor="middle">n⁺</text><text x="320" y="292" class="ns" text-anchor="middle">substrate contact · layers not to scale</text></svg><figcaption>Figure 1. A charge-trap flash cell: tunnel oxide, charge-trapping nitride and blocking oxide between the Si channel and the n⁺ poly control gate. Layers not to scale.</figcaption></figure>
+<p>Numbers from the lecture:</p>
+<ul>
+<li>Si substrate 600 nm thick, p-type, constant 5 × 10¹⁷ cm⁻³ (adjustable).</li>
+<li>n⁺ source and drain: Gaussian, peak 10²⁰ cm⁻³, 120 nm deep, value at depth equal to the substrate doping, <code>Factor</code> 0.8.</li>
+<li>n⁺ poly control gate, 10²⁰ cm⁻³, 5 nm thick.</li>
+<li>Oxide 1 (tunnel) and oxide 2 (blocking): SiO₂, 1–5 nm (parameters).</li>
+<li>8 nm nitride, declared as the material <code>NitrideAsSemiconductor</code>.</li>
+<li>Gate width 100–300 nm (parameter).</li>
+</ul>
+<p><strong>Program:</strong> a large positive gate voltage makes electrons from the channel tunnel through oxide 1 and get trapped in the nitride. The stored negative charge raises VT. <strong>Erase:</strong> a negative voltage pushes electrons out (and/or pulls holes in). <strong>Read:</strong> measure ID at a small VG to tell whether VT is high or low. For trapped charge \(qN_t\) (cm⁻²) at the centre of the nitride:</p>
+<p>$$\Delta V_T\approx\frac{qN_t}{C_{\text{eff}}}$$</p><p>$$C_{\text{eff}}=\frac{\varepsilon_{ox}}{t_{ox2}+(\varepsilon_{ox}/\varepsilon_N)\,t_N/2}$$</p>
+<p>Example: a 5 nm blocking oxide, 8 nm nitride (\(\varepsilon_N\approx 7.5\)) and \(N_t=5\times10^{12}\) cm⁻² give \(\Delta V_T\approx 1.6\) V.</p>
+
+<h2 id="e-s2">2. Materials and parameter files</h2>
+<p>The nitride is declared as <code>NitrideAsSemiconductor</code> so that SDevice solves the carrier equations in it; only then can traps and tunneling be placed in this layer. The material has no parameters in the database, so three things are needed:</p>
+<ol>
+<li><strong><code>datexcodes.txt</code></strong>: copy the material definition file into the project folder and check that <code>NitrideAsSemiconductor</code> is declared as a semiconductor. A file in the project folder takes precedence over the system file.</li>
+<li><strong>Create <code>sdevice.par</code></strong>: in SWB, right-click the SDevice tool → <em>Edit Input</em> → <em>Include Materials</em>, and select Silicon, SiO2, PolySi and NitrideAsSemiconductor. Materials without parameters show in black and get only an empty block.</li>
+<li><strong>Write <code>Nitride.par</code></strong>: at least permittivity, band gap, electron affinity and effective masses. Commonly used Si₃N₄ values: \(\varepsilon_r\approx 7.5\), \(E_g\approx 5\) eV; take values from a source you cite and record it.</li>
+</ol>
+<pre><code># sdevice.par -- one block per material, each pulling in its own file
+#define ParFileDir .
+Material = &quot;Silicon&quot; {
+  #includeext &quot;ParFileDir/Silicon.par&quot;
+}
+Material = &quot;SiO2&quot; {
+  #includeext &quot;ParFileDir/SiO2.par&quot;
+}
+Material = &quot;PolySi&quot; {
+  #includeext &quot;ParFileDir/PolySi.par&quot;
+}
+Material = &quot;NitrideAsSemiconductor&quot; {
+  #includeext &quot;ParFileDir/Nitride.par&quot;
+}
+</code></pre>
+<p>Add a tunneling-mass block to the oxide and polysilicon files, and check the matching block in <code>Silicon.par</code> (defaults 0.32 and 0.16):</p>
+<pre><code>* add (or edit) in SiO2.par and PolySi.par: tunneling masses for barrier tunneling
+BarrierTunneling {
+  mt = 0.36, 0.38        * electron, hole tunneling mass [m0] -- values used in the course
+}
+</code></pre>
+<p>The tunneling mass is a fitting parameter: for electrons in SiO₂, Fowler–Nordheim measurements give about 0.4–0.5 m₀ (Weinberg, 1982). Program/erase results are very sensitive to it, so calibrate on one measured curve before predicting.</p>
+
+<h2 id="e-s3">3. Nonlocal meshes and tunneling</h2>
+<pre><code>Math {
+  * a nonlocal mesh is a set of 1D lines normal to an interface, along which the
+  * tunneling probability is integrated; Length is in cm (9e-7 cm = 9 nm)
+  NonLocal &quot;NL_bottom&quot; ( RegionInterface = &quot;R.Ox1/R.Sub&quot;
+                         Length = 9e-7  Digits = 4  EnergyResolution = 1e-4 )
+  NonLocal &quot;NL_top&quot;    ( RegionInterface = &quot;R.Ox2/R.Gate&quot;
+                         Length = 5e-7  Digits = 4  EnergyResolution = 1e-4 )
+  Extrapolate  Derivatives  -RelErrControl  Iterations = 30  Method = ParDiSo
+}
+</code></pre>
+<p>The barrier tunneling model (<code>BarrierTunneling</code>) computes the tunneling probability in the WKB approximation along 1D lines normal to an interface. The nonlocal mesh <code>"NL_bottom"</code> is attached to the oxide 1/substrate interface and <code>"NL_top"</code> to oxide 2/gate; <code>Length</code> must exceed the barrier thickness (oxide plus part of the nitride). Note the cm units in this block, unlike µm in SDE. The user guide describes four current components: electrons conduction band to conduction band, holes valence band to valence band (always computed), and two between conduction and valence bands (only with band-to-band tunneling on).</p>
+
+<h2 id="e-s4">4. Traps in the nitride</h2>
+<pre><code>Physics {
+  * tunneling current through the two oxides, electrons and holes
+  eBarrierTunneling &quot;NL_bottom&quot;   hBarrierTunneling &quot;NL_bottom&quot;
+  eBarrierTunneling &quot;NL_top&quot;      hBarrierTunneling &quot;NL_top&quot;
+}
+Physics ( Material = &quot;Silicon&quot; ) {
+  Mobility ( DopingDependence  HighFieldSaturation )
+  Recombination ( SRH ( DopingDependence ) )
+}
+Physics ( Material = &quot;NitrideAsSemiconductor&quot; ) {
+  Traps (
+    * deep donor 2.5 eV below EC: neutral when filled, +q when empty
+    ( Donor  Level  EnergyMid = 2.5  FromConductionBand  Conc = 1e19
+      eXSection = 1e-13  hXSection = 1e-13
+      eBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      hBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      PooleFrenkel  TrapVolume = 1e-15 )
+    * acceptor 1.0 eV below EC: neutral when empty, -q when filled (stores electrons)
+    ( Acceptor  Level  EnergyMid = 1.0  FromConductionBand  Conc = 1e19
+      eXSection = 1e-13  hXSection = 1e-13
+      eBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      hBarrierTunneling ( NonLocal = &quot;NL_bottom&quot;  NonLocal = &quot;NL_top&quot; )
+      PooleFrenkel  TrapVolume = 1e-15 )
+  )
+}
+Plot {
+  eDirectTunnel hDirectTunnel  eBarrierTunneling hBarrierTunneling
+  eTrappedCharge hTrappedCharge  NonLocal
+  ConductionBandEnergy ValenceBandEnergy  ElectricField/Vector  SpaceCharge
+}
+</code></pre>
+<ul>
+<li><code>Acceptor</code>: neutral when empty, −q when occupied, so it holds electrons after programming. <code>Donor</code>: neutral when occupied, +q when empty.</li>
+<li><code>Level</code>: a single energy level, measured from the conduction band edge (<code>FromConductionBand</code>). <code>Conc</code> is in cm⁻³ for region or material declarations.</li>
+<li><code>eBarrierTunneling(NonLocal=...)</code> in the trap declaration lets the traps exchange electrons directly with the conduction band of the Si and the gate by tunneling, which is how the cell charges and discharges.</li>
+<li><code>PooleFrenkel</code>: the capture cross-section rises with field because the Coulomb barrier is lowered (Frenkel, 1938), important for conduction in nitride at high field.</li>
+</ul>
+
+<h2 id="e-s5">5. Solve sequence: initialize, program, read</h2>
+<pre><code>Solve {
+  * --- initial state: traps empty, then a converged equilibrium ---
+  Set ( TrapFilling = Empty )
+  Coupled ( Iterations = 100 ) { Poisson }
+  Coupled ( Iterations = 100 ) { Poisson Electron }
+  Coupled ( Iterations = 100  Digits = 8 ) { Poisson Electron Hole }
+  Plot ( FilePrefix = &quot;n@node@_init&quot; )
+  UnSet ( TrapFilling )                     * from here on traps evolve with time
+
+  * --- program: gate pulse defined as a piecewise-linear voltage (see text) ---
+  NewCurrentPrefix = &quot;prog_&quot;
+  Transient ( InitialTime = 0  FinalTime = @t_prog@
+              InitialStep = 1e-10  MaxStep = 1e-5  MinStep = 1e-16  Increment = 1.5 )
+    { Coupled { Poisson Electron Hole } }
+  Plot ( FilePrefix = &quot;n@node@_prog&quot; )
+
+  * --- read: small VD, sweep VG; keep the stored charge fixed while reading ---
+  Set ( TrapFilling = Frozen )
+  Quasistationary ( Goal { Name = &quot;drain&quot;  Voltage = 0.1 } ) { Coupled { Poisson Electron Hole } }
+  NewCurrentPrefix = &quot;read_&quot;
+  Quasistationary ( InitialStep = 0.01  MaxStep = 0.05  MinStep = 1e-6
+    Goal { Name = &quot;gate&quot;  Voltage = 6 } ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p><strong>Initialization</strong> as in the lecture: force the traps empty (<code>TrapFilling = Empty</code>), solve step by step from Poisson to all three equations at high precision, save the state, then release the constraint so the traps evolve freely.</p>
+<p><strong>Program pulse.</strong> One way to apply the pulse is to give the gate a piecewise-linear voltage in time directly in the <code>Electrode</code> block:</p>
+<pre><code>Electrode {
+  { Name = &quot;gate&quot;   Voltage = ( 0 at 0,  @V_prog@ at 1e-7,  @V_prog@ at @t_prog@ ) }
+  { Name = &quot;source&quot; Voltage = 0 }  { Name = &quot;drain&quot; Voltage = 0 }
+  { Name = &quot;substrate&quot; Voltage = 0 }
+}
+</code></pre>
+<p>The alternative is to put the device in a mixed-mode circuit with a pulse source. Erase works the same way with a negative voltage. Do not program with <code>Quasistationary</code>: in steady state the traps are always in equilibrium, so the time-dependent charging cannot be described.</p>
+<p><strong>Read.</strong> While VG is swept to read, the traps must not re-equilibrate, or the stored charge disappears. The code uses <code>TrapFilling = Frozen</code> to keep the trap occupation fixed; if your version does not support it, read with a very fast <code>Transient</code> VG sweep (a few microseconds) so that charging and discharging are negligible. VT before and after programming gives the memory window.</p>
+
+<h2 id="e-s6">6. What to plot</h2>
+<ul>
+<li>The band diagram through the stack at mid-channel, before and during the program pulse: oxide 1 tilts strongly (direct tunneling for thin oxide, Fowler–Nordheim at high field).</li>
+<li><code>eTrappedCharge</code> in the nitride over time: whether the charge sits near oxide 1 or spreads evenly.</li>
+<li>VT against program time (log scale) for a few values of V<sub>prog</sub> and t<sub>ox1</sub>.</li>
+</ul>
+
+<h2 id="e-s7">7. Exercises</h2>
+<ol>
+<li>For t<sub>ox1</sub> = 2, 3, 4 nm, find the program time for ΔV<sub>T</sub> = 2 V at V<sub>prog</sub> = 10 V.</li>
+<li>Compute ΔV<sub>T</sub> from the integrated trapped charge in the nitride with the formula in section 1 and compare with the VT read out.</li>
+<li>Add an erase step and plot a program–read–erase–read cycle.</li>
+<li>Change the SiO₂ tunneling mass by ±20 % and report how sensitive the results are.</li>
+</ol>
+
+<h2 id="e-s8">References</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, lecture 8: Flash memory TCAD, Korea Aerospace University.</li>
+<li>Synopsys, <em>Sentaurus Device User Guide</em>, chapters on Tunneling (nonlocal barrier tunneling), Traps and Fixed Charges, Transient.</li>
+<li>M. H. White, D. A. Adams, J. Bu, "On the go with SONOS," <em>IEEE Circuits and Devices Magazine</em> 16(4), 22 (2000).</li>
+<li>Z. A. Weinberg, "On tunneling in metal-oxide-silicon structures," <em>Journal of Applied Physics</em> 53, 5052 (1982).</li>
+<li>J. Frenkel, "On pre-breakdown phenomena in insulators and electronic semi-conductors," <em>Physical Review</em> 54, 647 (1938).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-lab-finfet.html">← <span class="l-vi">Thực hành 6: FinFET 3D</span><span class="l-en">Lab 6: a 3D FinFET</span></a><a class="n" href="tcad.html"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần Semiconductor Device Design (반도체소자설계) của GS. Jinyoung Hwang, Korea Aerospace University, và bộ bài TCAD Laboratory của G. Betti Beneventi (University of Bologna) dùng trong môn học. Mã lệnh được viết lại và chú thích cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the course Semiconductor Device Design (반도체소자설계) by Prof. Jinyoung Hwang, Korea Aerospace University, and the TCAD Laboratory series by G. Betti Beneventi (University of Bologna) used in the course. The code was rewritten and commented for this page; figures were redrawn.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thực hành 4: MOSFET không lý tưởng" data-title-en="Lab 4: the non-ideal MOSFET">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 4: the non-ideal MOSFET · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Oxide charge and mixed-mode C–V, mobility degradation, DIBL and the body effect.">
+<meta property="og:title" content="Lab 4: the non-ideal MOSFET">
+<meta property="og:description" content="Oxide charge and mixed-mode C–V, mobility degradation, DIBL and the body effect.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 4</span><span class="l-en">Part 4 · Lesson 4</span></p>
+  <h1><span class="l-vi">Thực hành 4: MOSFET không lý tưởng</span><span class="l-en">Lab 4: the non-ideal MOSFET</span></h1>
+  <p class="sub"><span class="l-vi">Điện tích oxide và C–V mixed mode, suy giảm độ linh động, DIBL và hiệu ứng thân.</span><span class="l-en">Oxide charge and mixed-mode C–V, mobility degradation, DIBL and the body effect.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">MOSFET thật lệch khỏi mô hình lý tưởng vì bốn nguyên nhân chính được học trong môn này: điện tích trong oxide, suy giảm độ linh động, hiệu ứng kênh ngắn (DIBL) và hiệu ứng thân. Bài này cho thấy cách đưa từng hiệu ứng vào Sentaurus và cách đọc nó trên kết quả.</p>
+
+<h2 id="v-s1">1. Điện tích bẫy trong oxide \(Q'_{ss}\)</h2>
+<p>Oxide luôn chứa điện tích dương cố định gần mặt phân cách Si/SiO₂. Mô hình hóa đơn giản nhất là gom toàn bộ thành một lớp điện tích \(Q'_{ss}\) (cm⁻²) đúng tại mặt phân cách. Trong SDevice, đó là một "bẫy" loại <code>FixedCharge</code> khai báo theo mặt phân cách giữa hai vùng (Sentaurus Device User Guide, chương Traps and Fixed Charges):</p>
+<pre><code>* fixed charge in the oxide, lumped at the Si/SiO2 interface
+* region names come from SDE: &quot;R.Sub&quot; (silicon) and &quot;R.Gox&quot; (gate oxide)
+Physics ( RegionInterface = &quot;R.Sub/R.Gox&quot; ) {
+  Traps ( ( FixedCharge  Conc = @Qss@ ) )   * cm-2; positive value = positive charge
+}
+</code></pre>
+<p>Dấu của <code>Conc</code> là dấu của điện tích. Ở mặt phân cách, đơn vị là cm⁻²; nếu khai báo theo vùng hay vật liệu thì là cm⁻³. Điện tích dương ở mặt phân cách hút electron về bề mặt, nên MOSFET kênh n mở sớm hơn:</p>
+<p>$$V_T=\Phi_{ms}-\frac{qQ'_{ss}}{C_{ox}}+2\phi_F+\frac{|Q'_{d,max}|}{C_{ox}},\qquad \Delta V_T=-\frac{qQ'_{ss}}{C_{ox}}$$</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="540" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="66.0" y1="255" x2="66.0" y2="260" class="ax"/><text x="66.0" y="275" class="tk" text-anchor="middle">0</text><line x1="160.8" y1="255" x2="160.8" y2="260" class="ax"/><text x="160.8" y="275" class="tk" text-anchor="middle">2</text><line x1="255.60000000000002" y1="255" x2="255.60000000000002" y2="260" class="ax"/><text x="255.60000000000002" y="275" class="tk" text-anchor="middle">4</text><line x1="350.4" y1="255" x2="350.4" y2="260" class="ax"/><text x="350.4" y="275" class="tk" text-anchor="middle">6</text><line x1="445.20000000000005" y1="255" x2="445.20000000000005" y2="260" class="ax"/><text x="445.20000000000005" y="275" class="tk" text-anchor="middle">8</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">10</text><line x1="61" y1="255.0" x2="66" y2="255.0" class="ax"/><line x1="66" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="57" y="259.0" class="tk" text-anchor="end">-1</text><line x1="61" y1="176.66666666666666" x2="66" y2="176.66666666666666" class="ax"/><line x1="66" y1="176.66666666666666" x2="540" y2="176.66666666666666" class="grid"/><text x="57" y="180.66666666666666" class="tk" text-anchor="end">-0.6</text><line x1="61" y1="98.33333333333331" x2="66" y2="98.33333333333331" class="ax"/><line x1="66" y1="98.33333333333331" x2="540" y2="98.33333333333331" class="grid"/><text x="57" y="102.33333333333331" class="tk" text-anchor="end">-0.2</text><line x1="61" y1="20.0" x2="66" y2="20.0" class="ax"/><line x1="66" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="57" y="24.0" class="tk" text-anchor="end">0.2</text><text x="303.0" y="294" class="lab" text-anchor="middle">Q<tspan dy="3" style="font-size:9px">ss</tspan><tspan dy="-3"> </tspan>(×10¹¹ cm⁻²)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">V<tspan dy="3" style="font-size:9px">T</tspan><tspan dy="-3"> </tspan>(V)</text><path d="M66.0,46.4 L113.4,64.6 L303.0,137.3 L540.0,228.2" class="s1" fill="none"/><circle cx="66.0" cy="46.4" r="4" style="fill:var(--s1)"/><text x="74.0" y="38.4" class="tk" text-anchor="start">+0,07</text><circle cx="113.4" cy="64.6" r="4" style="fill:var(--s1)"/><text x="121.4" y="56.6" class="tk" text-anchor="start">-0,03</text><circle cx="303.0" cy="137.3" r="4" style="fill:var(--s1)"/><text x="311.0" y="129.3" class="tk" text-anchor="start">-0,40</text><circle cx="540.0" cy="228.2" r="4" style="fill:var(--s1)"/><text x="532.0" y="212.2" class="tk" text-anchor="end">-0,86</text><text x="265.1" y="35.7" class="ns">N<tspan dy="3" style="font-size:9px">A</tspan><tspan dy="-3"> </tspan>= 10¹⁶ cm⁻³, t<tspan dy="3" style="font-size:9px">ox</tspan><tspan dy="-3"> </tspan>= 20 nm, cổng poly n⁺</text><text x="265.1" y="59.2" class="ns">độ dốc −q/C<tspan dy="3" style="font-size:9px">ox</tspan><tspan dy="-3"> </tspan>≈ −0,93 V trên 10¹² cm⁻²</text></svg><figcaption>Hình 1. Điện áp ngưỡng tính theo công thức trên cho một ví dụ (N<sub>A</sub> = 10¹⁶ cm⁻³, t<sub>ox</sub> = 20 nm, cổng poly n⁺). Mỗi 10¹¹ cm⁻² điện tích dương làm V<sub>T</sub> giảm khoảng 93 mV.</figcaption></figure>
+<p><strong>Ví dụ tính tay</strong> (khác thông số bài tập để bạn tự làm bài tập): \(\phi_F=0{,}347\) V, \(C_{ox}=1{,}73\times10^{-7}\) F/cm², \(|Q'_{d,max}|/C_{ox}=0{,}278\) V, \(\Phi_{ms}\approx-0{,}91\) V, cho \(V_T\approx 0{,}07\) V khi \(Q'_{ss}=0\) và khoảng −0,86 V khi \(Q'_{ss}=10^{12}\) cm⁻². Giá trị \(\varepsilon_{ox}\) lấy trong <code>SiO2.par</code> của dự án để tính tay và mô phỏng dùng cùng một số.</p>
+
+<h3>Mô phỏng C–V</h3>
+<p>Điện dung cổng được tính bằng phân tích tín hiệu nhỏ trong chế độ hỗn hợp (mixed mode): linh kiện đặt trong khối <code>System</code> cùng các nguồn áp, <code>ACCoupled</code> chạy tại mỗi điểm DC.</p>
+<pre><code>* cv_des.cmd -- gate C-V of the MOSFET in mixed mode
+Device MOS {
+  Electrode {
+    { Name = &quot;source&quot;    Voltage = 0 }   { Name = &quot;drain&quot;     Voltage = 0 }
+    { Name = &quot;gate&quot;      Voltage = 0 }   { Name = &quot;substrate&quot; Voltage = 0 }
+  }
+  File { Grid = &quot;@tdr@&quot;  Parameter = &quot;@parameter@&quot;
+         Plot = &quot;n@node@_des.tdr&quot;  Current = &quot;n@node@_des.plt&quot; }
+  Physics { Mobility ( DopingDependence ) EffectiveIntrinsicDensity ( OldSlotboom ) }
+  Physics ( RegionInterface = &quot;R.Sub/R.Gox&quot; ) { Traps ( ( FixedCharge Conc = @Qss@ ) ) }
+}
+File { Output = &quot;n@node@_des.log&quot;  ACExtract = &quot;n@node@_ac&quot; }
+
+System {                                 * the device and four DC voltage sources
+  MOS m1 ( source = s  drain = d  gate = g  substrate = b )
+  Vsource_pset vs ( s 0 ) { dc = 0 }
+  Vsource_pset vd ( d 0 ) { dc = 0 }
+  Vsource_pset vg ( g 0 ) { dc = 0 }
+  Vsource_pset vb ( b 0 ) { dc = 0 }
+}
+Math { Extrapolate  Derivatives  -RelErrControl  Digits = 5  Iterations = 20  Method = ParDiSo }
+
+Solve {
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary ( InitialStep = 0.02  MaxStep = 0.05  MinStep = 1e-5
+    Goal { Parameter = vg.dc  Voltage = -3 }
+  ) { Coupled { Poisson Electron Hole } }
+  * sweep the gate up; at every DC point solve the small-signal AC problem at 1 MHz
+  Quasistationary ( InitialStep = 0.005  MaxStep = 0.01  MinStep = 1e-5
+    Goal { Parameter = vg.dc  Voltage = 3 }
+  ) { ACCoupled ( StartFrequency = 1e6  EndFrequency = 1e6  NumberOfPoints = 1  Decade
+                  Node ( s d g b )  Exclude ( vs vd vg vb ) )
+      { Poisson Electron Hole } }
+}
+</code></pre>
+<p>Điện dung cổng là cột <code>c(g,g)</code> trong file <code>n*_ac_des.plt</code>. Ba điều cần biết khi đọc đường C–V:</p>
+<ul>
+<li>Với \(Q'_{ss}\) dương, cả đường C–V dịch sang trái một lượng \(qQ'_{ss}/C_{ox}\); từ độ dịch điện áp dải phẳng có thể suy ra \(Q'_{ss}\).</li>
+<li>Vì nguồn và máng cung cấp electron, ở phía đảo điện dung quay về \(C_{ox}\) ngay cả ở 1 MHz. Muốn thấy đường C–V tần số cao "kinh điển" (đứng yên ở giá trị nhỏ nhất) thì mô phỏng tụ MOS không có nguồn, máng.</li>
+<li>Cú pháp mixed mode thay đổi chút ít theo phiên bản; nếu báo lỗi, so với ví dụ C–V trong Sentaurus Training.</li>
+</ul>
+<p><strong>Giản đồ vùng qua cấu trúc MOS.</strong> Cắt theo phương y tại giữa kênh, ở VG = 0: khi \(Q'_{ss}\) tăng, vùng năng lượng ở bề mặt Si uốn xuống nhiều hơn (bề mặt tiến gần đến đảo), và điện trường trong oxide đổi độ lớn đúng bằng \(qQ'_{ss}/\varepsilon_{ox}\).</p>
+
+<h2 id="v-s2">2. Suy giảm độ linh động</h2>
+<p>Bài giảng yêu cầu thêm một khối <code>Physics</code> riêng cho vật liệu Silicon, rồi lần lượt bật hai cơ chế:</p>
+<pre><code>* run 1: impurity scattering only (the &quot;ideal&quot; long-channel reference)
+Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence ) }
+
+* run 2: add surface scattering (Lombardi; the default Enormal model)
+Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enormal ) }
+
+* run 3: add velocity saturation in the lateral field
+Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enormal  HighFieldSaturation ) }
+</code></pre>
+<ul>
+<li><strong>Tán xạ bề mặt (Lombardi, <code>Enormal</code>).</strong> Điện trường vuông góc do cổng ép electron sát mặt phân cách, nơi tán xạ do phonon bề mặt và độ nhám bề mặt mạnh. Độ linh động giảm khi VG tăng, nên khoảng cách giữa các đường ID–VD ở VG cao co lại so với mô hình bình phương.</li>
+<li><strong>Bão hòa vận tốc (<code>HighFieldSaturation</code>).</strong> Electron trong Si đạt vận tốc bão hòa khoảng 10⁷ cm/s ở điện trường dọc lớn. Dòng bão hòa giảm, VDS,sat nhỏ hơn \(V_{GS}-V_T\), và với kênh ngắn \(I_{D,sat}\) tăng gần tuyến tính chứ không bình phương theo VGS.</li>
+</ul>
+<p>Thí nghiệm gợi ý: VDS từ 0 đến 4 V, VGS = 0; 0,5; ...; 3 V, vẽ ba họ đường của ba lần chạy trên cùng thang đo.</p>
+
+<h2 id="v-s3">3. Hiệu ứng kênh ngắn và DIBL</h2>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="540" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="66" y1="255" x2="66" y2="260" class="ax"/><text x="66" y="275" class="tk" text-anchor="middle">0</text><line x1="184.5" y1="255" x2="184.5" y2="260" class="ax"/><text x="184.5" y="275" class="tk" text-anchor="middle">0.25</text><line x1="303.0" y1="255" x2="303.0" y2="260" class="ax"/><text x="303.0" y="275" class="tk" text-anchor="middle">0.5</text><line x1="421.5" y1="255" x2="421.5" y2="260" class="ax"/><text x="421.5" y="275" class="tk" text-anchor="middle">0.75</text><line x1="540" y1="255" x2="540" y2="260" class="ax"/><text x="540" y="275" class="tk" text-anchor="middle">1</text><line x1="61" y1="242.6315789473684" x2="66" y2="242.6315789473684" class="ax"/><line x1="66" y1="242.6315789473684" x2="540" y2="242.6315789473684" class="grid"/><text x="57" y="246.6315789473684" class="tk" text-anchor="end">-1</text><line x1="61" y1="180.78947368421052" x2="66" y2="180.78947368421052" class="ax"/><line x1="66" y1="180.78947368421052" x2="540" y2="180.78947368421052" class="grid"/><text x="57" y="184.78947368421052" class="tk" text-anchor="end">-0.5</text><line x1="61" y1="118.94736842105263" x2="66" y2="118.94736842105263" class="ax"/><line x1="66" y1="118.94736842105263" x2="540" y2="118.94736842105263" class="grid"/><text x="57" y="122.94736842105263" class="tk" text-anchor="end">0</text><line x1="61" y1="57.10526315789471" x2="66" y2="57.10526315789471" class="ax"/><line x1="66" y1="57.10526315789471" x2="540" y2="57.10526315789471" class="grid"/><text x="57" y="61.10526315789471" class="tk" text-anchor="end">0.5</text><text x="303.0" y="294" class="lab" text-anchor="middle">Vị trí dọc kênh x/L (nguồn → máng)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">E<tspan dy="3" style="font-size:9px">C</tspan><tspan dy="-3"> </tspan>tương đối (eV)</text><path d="M66.0,118.9 L68.4,115.0 L70.7,111.3 L73.1,107.8 L75.5,104.4 L77.8,101.2 L80.2,98.1 L82.6,95.2 L85.0,92.4 L87.3,89.8 L89.7,87.3 L92.1,84.9 L94.4,82.7 L96.8,80.5 L99.2,78.5 L101.5,76.5 L103.9,74.7 L106.3,72.9 L108.7,71.2 L111.0,69.7 L113.4,68.1 L115.8,66.7 L118.1,65.3 L120.5,64.0 L122.9,62.8 L125.2,61.6 L127.6,60.5 L130.0,59.4 L132.4,58.4 L134.7,57.4 L137.1,56.5 L139.5,55.6 L141.8,54.8 L144.2,54.0 L146.6,53.3 L148.9,52.5 L151.3,51.9 L153.7,51.2 L156.1,50.6 L158.4,50.0 L160.8,49.5 L163.2,48.9 L165.5,48.4 L167.9,48.0 L170.3,47.5 L172.7,47.1 L175.0,46.7 L177.4,46.3 L179.8,45.9 L182.1,45.5 L184.5,45.2 L186.9,44.9 L189.2,44.6 L191.6,44.3 L194.0,44.0 L196.4,43.8 L198.7,43.5 L201.1,43.3 L203.5,43.0 L205.8,42.8 L208.2,42.6 L210.6,42.4 L212.9,42.3 L215.3,42.1 L217.7,41.9 L220.1,41.8 L222.4,41.6 L224.8,41.5 L227.2,41.4 L229.5,41.2 L231.9,41.1 L234.3,41.0 L236.6,40.9 L239.0,40.8 L241.4,40.7 L243.8,40.6 L246.1,40.5 L248.5,40.4 L250.9,40.4 L253.2,40.3 L255.6,40.2 L258.0,40.2 L260.3,40.1 L262.7,40.1 L265.1,40.0 L267.4,40.0 L269.8,39.9 L272.2,39.9 L274.6,39.9 L276.9,39.8 L279.3,39.8 L281.7,39.8 L284.0,39.8 L286.4,39.7 L288.8,39.7 L291.1,39.7 L293.5,39.7 L295.9,39.7 L298.3,39.7 L300.6,39.7 L303.0,39.7 L305.4,39.7 L307.7,39.7 L310.1,39.7 L312.5,39.7 L314.9,39.7 L317.2,39.7 L319.6,39.8 L322.0,39.8 L324.3,39.8 L326.7,39.8 L329.1,39.9 L331.4,39.9 L333.8,40.0 L336.2,40.0 L338.5,40.0 L340.9,40.1 L343.3,40.1 L345.7,40.2 L348.0,40.3 L350.4,40.3 L352.8,40.4 L355.1,40.5 L357.5,40.6 L359.9,40.7 L362.2,40.7 L364.6,40.8 L367.0,40.9 L369.4,41.1 L371.7,41.2 L374.1,41.3 L376.5,41.4 L378.8,41.6 L381.2,41.7 L383.6,41.8 L386.0,42.0 L388.3,42.2 L390.7,42.3 L393.1,42.5 L395.4,42.7 L397.8,42.9 L400.2,43.2 L402.5,43.4 L404.9,43.6 L407.3,43.9 L409.6,44.1 L412.0,44.4 L414.4,44.7 L416.8,45.0 L419.1,45.4 L421.5,45.7 L423.9,46.1 L426.2,46.4 L428.6,46.8 L431.0,47.3 L433.4,47.7 L435.7,48.2 L438.1,48.7 L440.5,49.2 L442.8,49.7 L445.2,50.3 L447.6,50.9 L449.9,51.5 L452.3,52.2 L454.7,52.9 L457.0,53.6 L459.4,54.4 L461.8,55.2 L464.2,56.0 L466.5,56.9 L468.9,57.9 L471.3,58.9 L473.6,59.9 L476.0,61.0 L478.4,62.2 L480.8,63.4 L483.1,64.6 L485.5,66.0 L487.9,67.4 L490.2,68.9 L492.6,70.4 L495.0,72.0 L497.3,73.8 L499.7,75.6 L502.1,77.5 L504.5,79.5 L506.8,81.6 L509.2,83.8 L511.6,86.1 L513.9,88.5 L516.3,91.1 L518.7,93.8 L521.0,96.6 L523.4,99.6 L525.8,102.7 L528.1,106.0 L530.5,109.4 L532.9,113.1 L535.3,116.9 L537.6,120.9 L540.0,125.1" class="s1" fill="none"/><path d="M66.0,118.9 L68.4,118.4 L70.7,117.8 L73.1,117.2 L75.5,116.6 L77.8,116.1 L80.2,115.5 L82.6,115.0 L85.0,114.4 L87.3,113.9 L89.7,113.4 L92.1,112.9 L94.4,112.4 L96.8,111.9 L99.2,111.4 L101.5,110.9 L103.9,110.4 L106.3,109.9 L108.7,109.5 L111.0,109.0 L113.4,108.6 L115.8,108.1 L118.1,107.7 L120.5,107.3 L122.9,106.9 L125.2,106.4 L127.6,106.0 L130.0,105.6 L132.4,105.2 L134.7,104.8 L137.1,104.5 L139.5,104.1 L141.8,103.7 L144.2,103.4 L146.6,103.0 L148.9,102.7 L151.3,102.3 L153.7,102.0 L156.1,101.7 L158.4,101.3 L160.8,101.0 L163.2,100.7 L165.5,100.4 L167.9,100.1 L170.3,99.8 L172.7,99.5 L175.0,99.2 L177.4,99.0 L179.8,98.7 L182.1,98.4 L184.5,98.2 L186.9,97.9 L189.2,97.7 L191.6,97.5 L194.0,97.2 L196.4,97.0 L198.7,96.8 L201.1,96.6 L203.5,96.4 L205.8,96.2 L208.2,96.0 L210.6,95.8 L212.9,95.6 L215.3,95.4 L217.7,95.2 L220.1,95.1 L222.4,94.9 L224.8,94.7 L227.2,94.6 L229.5,94.4 L231.9,94.3 L234.3,94.2 L236.6,94.0 L239.0,93.9 L241.4,93.8 L243.8,93.7 L246.1,93.6 L248.5,93.5 L250.9,93.4 L253.2,93.3 L255.6,93.2 L258.0,93.1 L260.3,93.1 L262.7,93.0 L265.1,92.9 L267.4,92.9 L269.8,92.8 L272.2,92.8 L274.6,92.7 L276.9,92.7 L279.3,92.7 L281.7,92.6 L284.0,92.6 L286.4,92.6 L288.8,92.6 L291.1,92.6 L293.5,92.6 L295.9,92.6 L298.3,92.6 L300.6,92.6 L303.0,92.7 L305.4,92.7 L307.7,92.7 L310.1,92.8 L312.5,92.8 L314.9,92.9 L317.2,92.9 L319.6,93.0 L322.0,93.0 L324.3,93.1 L326.7,93.2 L329.1,93.3 L331.4,93.4 L333.8,93.5 L336.2,93.6 L338.5,93.7 L340.9,93.8 L343.3,93.9 L345.7,94.0 L348.0,94.1 L350.4,94.3 L352.8,94.4 L355.1,94.6 L357.5,94.7 L359.9,94.9 L362.2,95.0 L364.6,95.2 L367.0,95.4 L369.4,95.5 L371.7,95.7 L374.1,95.9 L376.5,96.1 L378.8,96.3 L381.2,96.5 L383.6,96.7 L386.0,96.9 L388.3,97.2 L390.7,97.4 L393.1,97.6 L395.4,97.9 L397.8,98.1 L400.2,98.4 L402.5,98.6 L404.9,98.9 L407.3,99.2 L409.6,99.5 L412.0,99.7 L414.4,100.0 L416.8,100.3 L419.1,100.6 L421.5,100.9 L423.9,101.2 L426.2,101.6 L428.6,101.9 L431.0,102.2 L433.4,102.6 L435.7,102.9 L438.1,103.3 L440.5,103.6 L442.8,104.0 L445.2,104.4 L447.6,104.7 L449.9,105.1 L452.3,105.5 L454.7,105.9 L457.0,106.3 L459.4,106.7 L461.8,107.2 L464.2,107.6 L466.5,108.0 L468.9,108.5 L471.3,108.9 L473.6,109.4 L476.0,109.8 L478.4,110.3 L480.8,110.8 L483.1,111.2 L485.5,111.7 L487.9,112.2 L490.2,112.7 L492.6,113.2 L495.0,113.8 L497.3,114.3 L499.7,114.8 L502.1,115.4 L504.5,115.9 L506.8,116.5 L509.2,117.0 L511.6,117.6 L513.9,118.2 L516.3,118.8 L518.7,119.4 L521.0,120.0 L523.4,120.6 L525.8,121.2 L528.1,121.9 L530.5,122.5 L532.9,123.1 L535.3,123.8 L537.6,124.5 L540.0,125.1" class="s2" fill="none"/><path d="M66.0,118.9 L68.4,118.7 L70.7,118.4 L73.1,118.2 L75.5,117.9 L77.8,117.7 L80.2,117.5 L82.6,117.2 L85.0,117.0 L87.3,116.8 L89.7,116.6 L92.1,116.4 L94.4,116.3 L96.8,116.1 L99.2,115.9 L101.5,115.8 L103.9,115.6 L106.3,115.5 L108.7,115.3 L111.0,115.2 L113.4,115.1 L115.8,115.0 L118.1,114.9 L120.5,114.8 L122.9,114.7 L125.2,114.6 L127.6,114.5 L130.0,114.5 L132.4,114.4 L134.7,114.4 L137.1,114.3 L139.5,114.3 L141.8,114.3 L144.2,114.2 L146.6,114.2 L148.9,114.2 L151.3,114.2 L153.7,114.2 L156.1,114.3 L158.4,114.3 L160.8,114.3 L163.2,114.4 L165.5,114.4 L167.9,114.5 L170.3,114.5 L172.7,114.6 L175.0,114.7 L177.4,114.8 L179.8,114.9 L182.1,115.0 L184.5,115.1 L186.9,115.2 L189.2,115.3 L191.6,115.4 L194.0,115.6 L196.4,115.7 L198.7,115.9 L201.1,116.1 L203.5,116.2 L205.8,116.4 L208.2,116.6 L210.6,116.8 L212.9,117.0 L215.3,117.2 L217.7,117.4 L220.1,117.6 L222.4,117.9 L224.8,118.1 L227.2,118.4 L229.5,118.6 L231.9,118.9 L234.3,119.2 L236.6,119.4 L239.0,119.7 L241.4,120.0 L243.8,120.3 L246.1,120.6 L248.5,121.0 L250.9,121.3 L253.2,121.6 L255.6,122.0 L258.0,122.3 L260.3,122.7 L262.7,123.1 L265.1,123.5 L267.4,123.8 L269.8,124.2 L272.2,124.6 L274.6,125.1 L276.9,125.5 L279.3,125.9 L281.7,126.4 L284.0,126.8 L286.4,127.3 L288.8,127.7 L291.1,128.2 L293.5,128.7 L295.9,129.2 L298.3,129.7 L300.6,130.2 L303.0,130.7 L305.4,131.3 L307.7,131.8 L310.1,132.4 L312.5,132.9 L314.9,133.5 L317.2,134.1 L319.6,134.6 L322.0,135.2 L324.3,135.8 L326.7,136.5 L329.1,137.1 L331.4,137.7 L333.8,138.4 L336.2,139.0 L338.5,139.7 L340.9,140.4 L343.3,141.1 L345.7,141.8 L348.0,142.5 L350.4,143.2 L352.8,143.9 L355.1,144.6 L357.5,145.4 L359.9,146.1 L362.2,146.9 L364.6,147.7 L367.0,148.5 L369.4,149.3 L371.7,150.1 L374.1,150.9 L376.5,151.8 L378.8,152.6 L381.2,153.5 L383.6,154.3 L386.0,155.2 L388.3,156.1 L390.7,157.0 L393.1,157.9 L395.4,158.9 L397.8,159.8 L400.2,160.8 L402.5,161.7 L404.9,162.7 L407.3,163.7 L409.6,164.7 L412.0,165.7 L414.4,166.8 L416.8,167.8 L419.1,168.8 L421.5,169.9 L423.9,171.0 L426.2,172.1 L428.6,173.2 L431.0,174.3 L433.4,175.5 L435.7,176.6 L438.1,177.8 L440.5,178.9 L442.8,180.1 L445.2,181.3 L447.6,182.5 L449.9,183.8 L452.3,185.0 L454.7,186.3 L457.0,187.6 L459.4,188.9 L461.8,190.2 L464.2,191.5 L466.5,192.8 L468.9,194.2 L471.3,195.5 L473.6,196.9 L476.0,198.3 L478.4,199.7 L480.8,201.2 L483.1,202.6 L485.5,204.1 L487.9,205.6 L490.2,207.1 L492.6,208.6 L495.0,210.1 L497.3,211.6 L499.7,213.2 L502.1,214.8 L504.5,216.4 L506.8,218.0 L509.2,219.7 L511.6,221.3 L513.9,223.0 L516.3,224.7 L518.7,226.4 L521.0,228.1 L523.4,229.9 L525.8,231.6 L528.1,233.4 L530.5,235.2 L532.9,237.0 L535.3,238.9 L537.6,240.7 L540.0,242.6" class="s3" fill="none"/><line x1="86" y1="195" x2="110" y2="195" class="s1"/><text x="116" y="199" class="tk">kênh dài, V<tspan dy="3" style="font-size:9px">DS</tspan><tspan dy="-3"> </tspan>= 0,05 V</text><line x1="86" y1="213" x2="110" y2="213" class="s2"/><text x="116" y="217" class="tk">kênh ngắn, V<tspan dy="3" style="font-size:9px">DS</tspan><tspan dy="-3"> </tspan>= 0,05 V</text><line x1="86" y1="231" x2="110" y2="231" class="s3"/><text x="116" y="235" class="tk">kênh ngắn, V<tspan dy="3" style="font-size:9px">DS</tspan><tspan dy="-3"> </tspan>= 1 V</text></svg><figcaption>Hình 2. Đáy vùng dẫn dọc kênh, ở dưới ngưỡng, theo mô hình chuẩn 2D (Liu và cộng sự, 1993) với độ dài đặc trưng λ = 30 nm. Kênh dài giữ nguyên rào nguồn–kênh; kênh ngắn có rào thấp hơn ngay ở VDS nhỏ và rào bị kéo xuống thêm khi VDS tăng: đó là DIBL. Hình minh họa định tính.</figcaption></figure>
+<p>Ở kênh dài, vùng nghèo của tiếp giáp máng chỉ chiếm phần nhỏ của kênh, và rào năng lượng giữa nguồn và kênh do cổng quyết định hoàn toàn. Khi kênh ngắn lại cỡ vài lần độ dài đặc trưng \(\lambda\), điện thế của máng lan tới tận phía nguồn: rào bị hạ (Drain-Induced Barrier Lowering), electron dễ vượt rào hơn, nên VT giảm khi VDS tăng. DIBL được đo bằng \(\Delta V_T/\Delta V_{DS}\) (mV/V) và là nguyên nhân chính làm ID tiếp tục tăng theo VDS ở vùng bão hòa (độ dẫn ra hữu hạn).</p>
+<p><strong>Cách thấy DIBL trong mô phỏng:</strong> lấy hai thiết bị (ví dụ L = 10 µm và 0,7 µm), cùng VG dưới ngưỡng, cắt đường y = 1 nm từ nguồn sang máng ở VDS nhỏ và lớn, rồi vẽ <code>ConductionBandEnergy</code>. Với kênh dài, đỉnh rào không đổi; với kênh ngắn, đỉnh rào hạ xuống.</p>
+
+<h2 id="v-s4">4. Hiệu ứng thân (phân cực đế)</h2>
+<p>Phân cực ngược đế (VBS &lt; 0 với kênh n) làm vùng nghèo dưới kênh rộng ra, điện tích vùng nghèo tăng, nên cần VG lớn hơn để đảo:</p>
+<p>$$\Delta V_T=\gamma\left(\sqrt{2\phi_F-V_{BS}}-\sqrt{2\phi_F}\right),\qquad \gamma=\frac{\sqrt{2\varepsilon_s qN_A}}{C_{ox}}$$</p>
+<p>Với ví dụ ở mục 1, \(\gamma\approx 0{,}33\ \text{V}^{1/2}\) và VBS = −4 V làm VT tăng khoảng 0,44 V. Trình tự giải: đặt VD, đặt VBS, rồi quét VG.</p>
+<pre><code>Solve {
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary ( InitialStep = 0.05  MaxStep = 0.2  MinStep = 1e-5
+    Goal { Name = &quot;drain&quot;      Voltage = @Vd@ }     * e.g. 0.05 V, 1 V, 2 V
+  ) { Coupled { Poisson Electron Hole } }
+  Quasistationary ( InitialStep = 0.05  MaxStep = 0.2  MinStep = 1e-5
+    Goal { Name = &quot;substrate&quot;  Voltage = @Vbs@ }    * 0, -1, -2, -4, -6 V
+  ) { Coupled { Poisson Electron Hole } }
+  NewCurrentPrefix = &quot;idvg_&quot;
+  Quasistationary ( InitialStep = 0.01  MaxStep = 0.02  MinStep = 1e-5
+    Goal { Name = &quot;gate&quot;  Voltage = 3 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p>Vẽ VT theo \(\sqrt{|V_{BS}|}\): với kênh dài, đường gần thẳng với độ dốc xấp xỉ \(\gamma\). Với kênh ngắn, đường thấp hơn và dịch xuống thêm khi VDS lớn (DIBL); phân cực ngược đế làm vùng nghèo nguồn và máng tách xa nhau ra phía dưới và giảm bớt DIBL.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Với MOSFET và tụ MOS Ga₂O₃, điện tích cố định và bẫy mặt phân cách tại lớp Al₂O₃ hay SiO₂ trên Ga₂O₃ là đại lượng được trích từ C–V, giống hệt mục 1. Ví dụ, Zeng, Jia và Singisetti (2016) đo mật độ trạng thái mặt phân cách của tụ SiO₂/β-Ga₂O₃ (−201) lắng đọng ALD. Trong Sentaurus, cùng khối <code>Physics(RegionInterface=...)</code> được dùng, thêm bẫy mặt phân cách phân bố theo năng lượng bên cạnh <code>FixedCharge</code>.</p></div>
+
+<h2 id="v-s5">5. Bài tập</h2>
+<ol>
+<li>Với \(Q'_{ss}\) = 0; 10¹¹; 5 × 10¹¹; 10¹² cm⁻², mô phỏng C–V, ước lượng VT và điện áp dải phẳng từ đường cong, rồi so với công thức.</li>
+<li>Vẽ giản đồ vùng qua cấu trúc MOS ở VG = 0 cho bốn giá trị trên và giải thích sự thay đổi.</li>
+<li>Chạy ba mô hình độ linh động và so sánh họ đặc tuyến ID–VD. Mô hình nào ảnh hưởng nhiều nhất đến \(I_{D,sat}\)? Vì sao?</li>
+<li>Với L = 10; 1,5; 0,7 µm, vẽ VT theo \(\sqrt{|V_{BS}|}\) ở VDS nhỏ và lớn; giải thích bằng DIBL và hiệu ứng thân.</li>
+</ol>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, bài 4–5: MOSFET non-ideal, Korea Aerospace University.</li>
+<li>Synopsys, <em>Sentaurus Device User Guide</em>, các chương Traps and Fixed Charges, Mobility, Mixed-Mode và Small-Signal AC Analysis.</li>
+<li>C. Lombardi et al., <em>IEEE Transactions on Computer-Aided Design</em> 7, 1164 (1988).</li>
+<li>C. Canali et al., "Electron and hole drift velocity measurements in silicon and their empirical relation to electric field and temperature," <em>IEEE Transactions on Electron Devices</em> 22, 1045 (1975).</li>
+<li>Z.-H. Liu et al., "Threshold voltage model for deep-submicrometer MOSFETs," <em>IEEE Transactions on Electron Devices</em> 40, 86 (1993).</li>
+<li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009).</li>
+<li>K. Zeng, Y. Jia, U. Singisetti, "Interface state density in atomic layer deposited SiO₂/β-Ga₂O₃ (−201) MOSCAPs," <em>IEEE Electron Device Letters</em> 37, 906 (2016).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Real MOSFETs depart from the ideal model for four main reasons covered in this course: oxide charge, mobility degradation, short-channel effects (DIBL) and the body effect. This lab shows how to put each into Sentaurus and how to read it in the results.</p>
+
+<h2 id="e-s1">1. Oxide trapped charge \(Q'_{ss}\)</h2>
+<p>An oxide always holds fixed positive charge near the Si/SiO₂ interface. The simplest model lumps it into a sheet \(Q'_{ss}\) (cm⁻²) right at the interface. In SDevice this is a <code>FixedCharge</code> "trap" declared on the interface between two regions (Sentaurus Device User Guide, chapter Traps and Fixed Charges):</p>
+<pre><code>* fixed charge in the oxide, lumped at the Si/SiO2 interface
+* region names come from SDE: &quot;R.Sub&quot; (silicon) and &quot;R.Gox&quot; (gate oxide)
+Physics ( RegionInterface = &quot;R.Sub/R.Gox&quot; ) {
+  Traps ( ( FixedCharge  Conc = @Qss@ ) )   * cm-2; positive value = positive charge
+}
+</code></pre>
+<p>The sign of <code>Conc</code> is the sign of the charge. At an interface the unit is cm⁻²; declared per region or material it is cm⁻³. Positive interface charge attracts electrons to the surface, so an n-channel MOSFET turns on earlier:</p>
+<p>$$V_T=\Phi_{ms}-\frac{qQ'_{ss}}{C_{ox}}+2\phi_F+\frac{|Q'_{d,max}|}{C_{ox}},\qquad \Delta V_T=-\frac{qQ'_{ss}}{C_{ox}}$$</p>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="540" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="66.0" y1="255" x2="66.0" y2="260" class="ax"/><text x="66.0" y="275" class="tk" text-anchor="middle">0</text><line x1="160.8" y1="255" x2="160.8" y2="260" class="ax"/><text x="160.8" y="275" class="tk" text-anchor="middle">2</text><line x1="255.60000000000002" y1="255" x2="255.60000000000002" y2="260" class="ax"/><text x="255.60000000000002" y="275" class="tk" text-anchor="middle">4</text><line x1="350.4" y1="255" x2="350.4" y2="260" class="ax"/><text x="350.4" y="275" class="tk" text-anchor="middle">6</text><line x1="445.20000000000005" y1="255" x2="445.20000000000005" y2="260" class="ax"/><text x="445.20000000000005" y="275" class="tk" text-anchor="middle">8</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">10</text><line x1="61" y1="255.0" x2="66" y2="255.0" class="ax"/><line x1="66" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="57" y="259.0" class="tk" text-anchor="end">-1</text><line x1="61" y1="176.66666666666666" x2="66" y2="176.66666666666666" class="ax"/><line x1="66" y1="176.66666666666666" x2="540" y2="176.66666666666666" class="grid"/><text x="57" y="180.66666666666666" class="tk" text-anchor="end">-0.6</text><line x1="61" y1="98.33333333333331" x2="66" y2="98.33333333333331" class="ax"/><line x1="66" y1="98.33333333333331" x2="540" y2="98.33333333333331" class="grid"/><text x="57" y="102.33333333333331" class="tk" text-anchor="end">-0.2</text><line x1="61" y1="20.0" x2="66" y2="20.0" class="ax"/><line x1="66" y1="20.0" x2="540" y2="20.0" class="grid"/><text x="57" y="24.0" class="tk" text-anchor="end">0.2</text><text x="303.0" y="294" class="lab" text-anchor="middle">Q<tspan dy="3" style="font-size:9px">ss</tspan><tspan dy="-3"> </tspan>(×10¹¹ cm⁻²)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">V<tspan dy="3" style="font-size:9px">T</tspan><tspan dy="-3"> </tspan>(V)</text><path d="M66.0,46.4 L113.4,64.6 L303.0,137.3 L540.0,228.2" class="s1" fill="none"/><circle cx="66.0" cy="46.4" r="4" style="fill:var(--s1)"/><text x="74.0" y="38.4" class="tk" text-anchor="start">+0.07</text><circle cx="113.4" cy="64.6" r="4" style="fill:var(--s1)"/><text x="121.4" y="56.6" class="tk" text-anchor="start">-0.03</text><circle cx="303.0" cy="137.3" r="4" style="fill:var(--s1)"/><text x="311.0" y="129.3" class="tk" text-anchor="start">-0.40</text><circle cx="540.0" cy="228.2" r="4" style="fill:var(--s1)"/><text x="532.0" y="212.2" class="tk" text-anchor="end">-0.86</text><text x="265.1" y="35.7" class="ns">N<tspan dy="3" style="font-size:9px">A</tspan><tspan dy="-3"> </tspan>= 10¹⁶ cm⁻³, t<tspan dy="3" style="font-size:9px">ox</tspan><tspan dy="-3"> </tspan>= 20 nm, n⁺ poly gate</text><text x="265.1" y="59.2" class="ns">slope −q/C<tspan dy="3" style="font-size:9px">ox</tspan><tspan dy="-3"> </tspan>≈ −0.93 V per 10¹² cm⁻²</text></svg><figcaption>Figure 1. Threshold voltage from the formula above for an example (N<sub>A</sub> = 10¹⁶ cm⁻³, t<sub>ox</sub> = 20 nm, n⁺ poly gate). Each 10¹¹ cm⁻² of positive charge lowers V<sub>T</sub> by about 93 mV.</figcaption></figure>
+<p><strong>Hand calculation</strong> (with numbers different from the homework so you can still do it yourself): \(\phi_F=0.347\) V, \(C_{ox}=1.73\times10^{-7}\) F/cm², \(|Q'_{d,max}|/C_{ox}=0.278\) V, \(\Phi_{ms}\approx-0.91\) V, giving \(V_T\approx 0.07\) V at \(Q'_{ss}=0\) and about −0.86 V at \(Q'_{ss}=10^{12}\) cm⁻². Take \(\varepsilon_{ox}\) from the project's <code>SiO2.par</code> so the hand calculation and the simulation use the same number.</p>
+
+<h3>Simulating C–V</h3>
+<p>Gate capacitance is computed by small-signal analysis in mixed mode: the device sits in a <code>System</code> block with voltage sources, and <code>ACCoupled</code> runs at each DC point.</p>
+<pre><code>* cv_des.cmd -- gate C-V of the MOSFET in mixed mode
+Device MOS {
+  Electrode {
+    { Name = &quot;source&quot;    Voltage = 0 }   { Name = &quot;drain&quot;     Voltage = 0 }
+    { Name = &quot;gate&quot;      Voltage = 0 }   { Name = &quot;substrate&quot; Voltage = 0 }
+  }
+  File { Grid = &quot;@tdr@&quot;  Parameter = &quot;@parameter@&quot;
+         Plot = &quot;n@node@_des.tdr&quot;  Current = &quot;n@node@_des.plt&quot; }
+  Physics { Mobility ( DopingDependence ) EffectiveIntrinsicDensity ( OldSlotboom ) }
+  Physics ( RegionInterface = &quot;R.Sub/R.Gox&quot; ) { Traps ( ( FixedCharge Conc = @Qss@ ) ) }
+}
+File { Output = &quot;n@node@_des.log&quot;  ACExtract = &quot;n@node@_ac&quot; }
+
+System {                                 * the device and four DC voltage sources
+  MOS m1 ( source = s  drain = d  gate = g  substrate = b )
+  Vsource_pset vs ( s 0 ) { dc = 0 }
+  Vsource_pset vd ( d 0 ) { dc = 0 }
+  Vsource_pset vg ( g 0 ) { dc = 0 }
+  Vsource_pset vb ( b 0 ) { dc = 0 }
+}
+Math { Extrapolate  Derivatives  -RelErrControl  Digits = 5  Iterations = 20  Method = ParDiSo }
+
+Solve {
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary ( InitialStep = 0.02  MaxStep = 0.05  MinStep = 1e-5
+    Goal { Parameter = vg.dc  Voltage = -3 }
+  ) { Coupled { Poisson Electron Hole } }
+  * sweep the gate up; at every DC point solve the small-signal AC problem at 1 MHz
+  Quasistationary ( InitialStep = 0.005  MaxStep = 0.01  MinStep = 1e-5
+    Goal { Parameter = vg.dc  Voltage = 3 }
+  ) { ACCoupled ( StartFrequency = 1e6  EndFrequency = 1e6  NumberOfPoints = 1  Decade
+                  Node ( s d g b )  Exclude ( vs vd vg vb ) )
+      { Poisson Electron Hole } }
+}
+</code></pre>
+<p>The gate capacitance is the <code>c(g,g)</code> column in <code>n*_ac_des.plt</code>. Three things to know when reading the C–V curve:</p>
+<ul>
+<li>With positive \(Q'_{ss}\) the whole C–V curve shifts left by \(qQ'_{ss}/C_{ox}\); \(Q'_{ss}\) can be inferred from the flat-band voltage shift.</li>
+<li>Because source and drain supply electrons, the capacitance returns to \(C_{ox}\) on the inversion side even at 1 MHz. To see the "textbook" high-frequency curve (which stays at its minimum), simulate a MOS capacitor without source and drain.</li>
+<li>The mixed-mode syntax varies slightly between versions; if it errors, compare with the C–V example in Sentaurus Training.</li>
+</ul>
+<p><strong>Band diagram through the MOS stack.</strong> Cut along y at mid-channel at VG = 0: as \(Q'_{ss}\) grows, the bands at the Si surface bend down further (the surface moves toward inversion), and the oxide field changes by exactly \(qQ'_{ss}/\varepsilon_{ox}\).</p>
+
+<h2 id="e-s2">2. Mobility degradation</h2>
+<p>The lecture asks for a separate <code>Physics</code> block for the Silicon material and then turns on the two mechanisms one at a time:</p>
+<pre><code>* run 1: impurity scattering only (the &quot;ideal&quot; long-channel reference)
+Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence ) }
+
+* run 2: add surface scattering (Lombardi; the default Enormal model)
+Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enormal ) }
+
+* run 3: add velocity saturation in the lateral field
+Physics ( Material = &quot;Silicon&quot; ) { Mobility ( DopingDependence  Enormal  HighFieldSaturation ) }
+</code></pre>
+<ul>
+<li><strong>Surface scattering (Lombardi, <code>Enormal</code>).</strong> The gate's normal field presses electrons against the interface, where surface-phonon and surface-roughness scattering are strong. Mobility falls as VG rises, so the spacing between ID–VD curves at high VG shrinks compared with the square-law model.</li>
+<li><strong>Velocity saturation (<code>HighFieldSaturation</code>).</strong> Electrons in Si reach a saturation velocity of about 10⁷ cm/s at high lateral field. The saturation current drops, VDS,sat falls below \(V_{GS}-V_T\), and for short channels \(I_{D,sat}\) grows almost linearly rather than quadratically with VGS.</li>
+</ul>
+<p>Suggested experiment: VDS from 0 to 4 V, VGS = 0, 0.5, ..., 3 V; plot the three families of curves from the three runs on the same axes.</p>
+
+<h2 id="e-s3">3. Short-channel effects and DIBL</h2>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="540" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="66" y1="255" x2="66" y2="260" class="ax"/><text x="66" y="275" class="tk" text-anchor="middle">0</text><line x1="184.5" y1="255" x2="184.5" y2="260" class="ax"/><text x="184.5" y="275" class="tk" text-anchor="middle">0.25</text><line x1="303.0" y1="255" x2="303.0" y2="260" class="ax"/><text x="303.0" y="275" class="tk" text-anchor="middle">0.5</text><line x1="421.5" y1="255" x2="421.5" y2="260" class="ax"/><text x="421.5" y="275" class="tk" text-anchor="middle">0.75</text><line x1="540" y1="255" x2="540" y2="260" class="ax"/><text x="540" y="275" class="tk" text-anchor="middle">1</text><line x1="61" y1="242.6315789473684" x2="66" y2="242.6315789473684" class="ax"/><line x1="66" y1="242.6315789473684" x2="540" y2="242.6315789473684" class="grid"/><text x="57" y="246.6315789473684" class="tk" text-anchor="end">-1</text><line x1="61" y1="180.78947368421052" x2="66" y2="180.78947368421052" class="ax"/><line x1="66" y1="180.78947368421052" x2="540" y2="180.78947368421052" class="grid"/><text x="57" y="184.78947368421052" class="tk" text-anchor="end">-0.5</text><line x1="61" y1="118.94736842105263" x2="66" y2="118.94736842105263" class="ax"/><line x1="66" y1="118.94736842105263" x2="540" y2="118.94736842105263" class="grid"/><text x="57" y="122.94736842105263" class="tk" text-anchor="end">0</text><line x1="61" y1="57.10526315789471" x2="66" y2="57.10526315789471" class="ax"/><line x1="66" y1="57.10526315789471" x2="540" y2="57.10526315789471" class="grid"/><text x="57" y="61.10526315789471" class="tk" text-anchor="end">0.5</text><text x="303.0" y="294" class="lab" text-anchor="middle">Position along channel x/L (source → drain)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">relative E<tspan dy="3" style="font-size:9px">C</tspan><tspan dy="-3"> </tspan>(eV)</text><path d="M66.0,118.9 L68.4,115.0 L70.7,111.3 L73.1,107.8 L75.5,104.4 L77.8,101.2 L80.2,98.1 L82.6,95.2 L85.0,92.4 L87.3,89.8 L89.7,87.3 L92.1,84.9 L94.4,82.7 L96.8,80.5 L99.2,78.5 L101.5,76.5 L103.9,74.7 L106.3,72.9 L108.7,71.2 L111.0,69.7 L113.4,68.1 L115.8,66.7 L118.1,65.3 L120.5,64.0 L122.9,62.8 L125.2,61.6 L127.6,60.5 L130.0,59.4 L132.4,58.4 L134.7,57.4 L137.1,56.5 L139.5,55.6 L141.8,54.8 L144.2,54.0 L146.6,53.3 L148.9,52.5 L151.3,51.9 L153.7,51.2 L156.1,50.6 L158.4,50.0 L160.8,49.5 L163.2,48.9 L165.5,48.4 L167.9,48.0 L170.3,47.5 L172.7,47.1 L175.0,46.7 L177.4,46.3 L179.8,45.9 L182.1,45.5 L184.5,45.2 L186.9,44.9 L189.2,44.6 L191.6,44.3 L194.0,44.0 L196.4,43.8 L198.7,43.5 L201.1,43.3 L203.5,43.0 L205.8,42.8 L208.2,42.6 L210.6,42.4 L212.9,42.3 L215.3,42.1 L217.7,41.9 L220.1,41.8 L222.4,41.6 L224.8,41.5 L227.2,41.4 L229.5,41.2 L231.9,41.1 L234.3,41.0 L236.6,40.9 L239.0,40.8 L241.4,40.7 L243.8,40.6 L246.1,40.5 L248.5,40.4 L250.9,40.4 L253.2,40.3 L255.6,40.2 L258.0,40.2 L260.3,40.1 L262.7,40.1 L265.1,40.0 L267.4,40.0 L269.8,39.9 L272.2,39.9 L274.6,39.9 L276.9,39.8 L279.3,39.8 L281.7,39.8 L284.0,39.8 L286.4,39.7 L288.8,39.7 L291.1,39.7 L293.5,39.7 L295.9,39.7 L298.3,39.7 L300.6,39.7 L303.0,39.7 L305.4,39.7 L307.7,39.7 L310.1,39.7 L312.5,39.7 L314.9,39.7 L317.2,39.7 L319.6,39.8 L322.0,39.8 L324.3,39.8 L326.7,39.8 L329.1,39.9 L331.4,39.9 L333.8,40.0 L336.2,40.0 L338.5,40.0 L340.9,40.1 L343.3,40.1 L345.7,40.2 L348.0,40.3 L350.4,40.3 L352.8,40.4 L355.1,40.5 L357.5,40.6 L359.9,40.7 L362.2,40.7 L364.6,40.8 L367.0,40.9 L369.4,41.1 L371.7,41.2 L374.1,41.3 L376.5,41.4 L378.8,41.6 L381.2,41.7 L383.6,41.8 L386.0,42.0 L388.3,42.2 L390.7,42.3 L393.1,42.5 L395.4,42.7 L397.8,42.9 L400.2,43.2 L402.5,43.4 L404.9,43.6 L407.3,43.9 L409.6,44.1 L412.0,44.4 L414.4,44.7 L416.8,45.0 L419.1,45.4 L421.5,45.7 L423.9,46.1 L426.2,46.4 L428.6,46.8 L431.0,47.3 L433.4,47.7 L435.7,48.2 L438.1,48.7 L440.5,49.2 L442.8,49.7 L445.2,50.3 L447.6,50.9 L449.9,51.5 L452.3,52.2 L454.7,52.9 L457.0,53.6 L459.4,54.4 L461.8,55.2 L464.2,56.0 L466.5,56.9 L468.9,57.9 L471.3,58.9 L473.6,59.9 L476.0,61.0 L478.4,62.2 L480.8,63.4 L483.1,64.6 L485.5,66.0 L487.9,67.4 L490.2,68.9 L492.6,70.4 L495.0,72.0 L497.3,73.8 L499.7,75.6 L502.1,77.5 L504.5,79.5 L506.8,81.6 L509.2,83.8 L511.6,86.1 L513.9,88.5 L516.3,91.1 L518.7,93.8 L521.0,96.6 L523.4,99.6 L525.8,102.7 L528.1,106.0 L530.5,109.4 L532.9,113.1 L535.3,116.9 L537.6,120.9 L540.0,125.1" class="s1" fill="none"/><path d="M66.0,118.9 L68.4,118.4 L70.7,117.8 L73.1,117.2 L75.5,116.6 L77.8,116.1 L80.2,115.5 L82.6,115.0 L85.0,114.4 L87.3,113.9 L89.7,113.4 L92.1,112.9 L94.4,112.4 L96.8,111.9 L99.2,111.4 L101.5,110.9 L103.9,110.4 L106.3,109.9 L108.7,109.5 L111.0,109.0 L113.4,108.6 L115.8,108.1 L118.1,107.7 L120.5,107.3 L122.9,106.9 L125.2,106.4 L127.6,106.0 L130.0,105.6 L132.4,105.2 L134.7,104.8 L137.1,104.5 L139.5,104.1 L141.8,103.7 L144.2,103.4 L146.6,103.0 L148.9,102.7 L151.3,102.3 L153.7,102.0 L156.1,101.7 L158.4,101.3 L160.8,101.0 L163.2,100.7 L165.5,100.4 L167.9,100.1 L170.3,99.8 L172.7,99.5 L175.0,99.2 L177.4,99.0 L179.8,98.7 L182.1,98.4 L184.5,98.2 L186.9,97.9 L189.2,97.7 L191.6,97.5 L194.0,97.2 L196.4,97.0 L198.7,96.8 L201.1,96.6 L203.5,96.4 L205.8,96.2 L208.2,96.0 L210.6,95.8 L212.9,95.6 L215.3,95.4 L217.7,95.2 L220.1,95.1 L222.4,94.9 L224.8,94.7 L227.2,94.6 L229.5,94.4 L231.9,94.3 L234.3,94.2 L236.6,94.0 L239.0,93.9 L241.4,93.8 L243.8,93.7 L246.1,93.6 L248.5,93.5 L250.9,93.4 L253.2,93.3 L255.6,93.2 L258.0,93.1 L260.3,93.1 L262.7,93.0 L265.1,92.9 L267.4,92.9 L269.8,92.8 L272.2,92.8 L274.6,92.7 L276.9,92.7 L279.3,92.7 L281.7,92.6 L284.0,92.6 L286.4,92.6 L288.8,92.6 L291.1,92.6 L293.5,92.6 L295.9,92.6 L298.3,92.6 L300.6,92.6 L303.0,92.7 L305.4,92.7 L307.7,92.7 L310.1,92.8 L312.5,92.8 L314.9,92.9 L317.2,92.9 L319.6,93.0 L322.0,93.0 L324.3,93.1 L326.7,93.2 L329.1,93.3 L331.4,93.4 L333.8,93.5 L336.2,93.6 L338.5,93.7 L340.9,93.8 L343.3,93.9 L345.7,94.0 L348.0,94.1 L350.4,94.3 L352.8,94.4 L355.1,94.6 L357.5,94.7 L359.9,94.9 L362.2,95.0 L364.6,95.2 L367.0,95.4 L369.4,95.5 L371.7,95.7 L374.1,95.9 L376.5,96.1 L378.8,96.3 L381.2,96.5 L383.6,96.7 L386.0,96.9 L388.3,97.2 L390.7,97.4 L393.1,97.6 L395.4,97.9 L397.8,98.1 L400.2,98.4 L402.5,98.6 L404.9,98.9 L407.3,99.2 L409.6,99.5 L412.0,99.7 L414.4,100.0 L416.8,100.3 L419.1,100.6 L421.5,100.9 L423.9,101.2 L426.2,101.6 L428.6,101.9 L431.0,102.2 L433.4,102.6 L435.7,102.9 L438.1,103.3 L440.5,103.6 L442.8,104.0 L445.2,104.4 L447.6,104.7 L449.9,105.1 L452.3,105.5 L454.7,105.9 L457.0,106.3 L459.4,106.7 L461.8,107.2 L464.2,107.6 L466.5,108.0 L468.9,108.5 L471.3,108.9 L473.6,109.4 L476.0,109.8 L478.4,110.3 L480.8,110.8 L483.1,111.2 L485.5,111.7 L487.9,112.2 L490.2,112.7 L492.6,113.2 L495.0,113.8 L497.3,114.3 L499.7,114.8 L502.1,115.4 L504.5,115.9 L506.8,116.5 L509.2,117.0 L511.6,117.6 L513.9,118.2 L516.3,118.8 L518.7,119.4 L521.0,120.0 L523.4,120.6 L525.8,121.2 L528.1,121.9 L530.5,122.5 L532.9,123.1 L535.3,123.8 L537.6,124.5 L540.0,125.1" class="s2" fill="none"/><path d="M66.0,118.9 L68.4,118.7 L70.7,118.4 L73.1,118.2 L75.5,117.9 L77.8,117.7 L80.2,117.5 L82.6,117.2 L85.0,117.0 L87.3,116.8 L89.7,116.6 L92.1,116.4 L94.4,116.3 L96.8,116.1 L99.2,115.9 L101.5,115.8 L103.9,115.6 L106.3,115.5 L108.7,115.3 L111.0,115.2 L113.4,115.1 L115.8,115.0 L118.1,114.9 L120.5,114.8 L122.9,114.7 L125.2,114.6 L127.6,114.5 L130.0,114.5 L132.4,114.4 L134.7,114.4 L137.1,114.3 L139.5,114.3 L141.8,114.3 L144.2,114.2 L146.6,114.2 L148.9,114.2 L151.3,114.2 L153.7,114.2 L156.1,114.3 L158.4,114.3 L160.8,114.3 L163.2,114.4 L165.5,114.4 L167.9,114.5 L170.3,114.5 L172.7,114.6 L175.0,114.7 L177.4,114.8 L179.8,114.9 L182.1,115.0 L184.5,115.1 L186.9,115.2 L189.2,115.3 L191.6,115.4 L194.0,115.6 L196.4,115.7 L198.7,115.9 L201.1,116.1 L203.5,116.2 L205.8,116.4 L208.2,116.6 L210.6,116.8 L212.9,117.0 L215.3,117.2 L217.7,117.4 L220.1,117.6 L222.4,117.9 L224.8,118.1 L227.2,118.4 L229.5,118.6 L231.9,118.9 L234.3,119.2 L236.6,119.4 L239.0,119.7 L241.4,120.0 L243.8,120.3 L246.1,120.6 L248.5,121.0 L250.9,121.3 L253.2,121.6 L255.6,122.0 L258.0,122.3 L260.3,122.7 L262.7,123.1 L265.1,123.5 L267.4,123.8 L269.8,124.2 L272.2,124.6 L274.6,125.1 L276.9,125.5 L279.3,125.9 L281.7,126.4 L284.0,126.8 L286.4,127.3 L288.8,127.7 L291.1,128.2 L293.5,128.7 L295.9,129.2 L298.3,129.7 L300.6,130.2 L303.0,130.7 L305.4,131.3 L307.7,131.8 L310.1,132.4 L312.5,132.9 L314.9,133.5 L317.2,134.1 L319.6,134.6 L322.0,135.2 L324.3,135.8 L326.7,136.5 L329.1,137.1 L331.4,137.7 L333.8,138.4 L336.2,139.0 L338.5,139.7 L340.9,140.4 L343.3,141.1 L345.7,141.8 L348.0,142.5 L350.4,143.2 L352.8,143.9 L355.1,144.6 L357.5,145.4 L359.9,146.1 L362.2,146.9 L364.6,147.7 L367.0,148.5 L369.4,149.3 L371.7,150.1 L374.1,150.9 L376.5,151.8 L378.8,152.6 L381.2,153.5 L383.6,154.3 L386.0,155.2 L388.3,156.1 L390.7,157.0 L393.1,157.9 L395.4,158.9 L397.8,159.8 L400.2,160.8 L402.5,161.7 L404.9,162.7 L407.3,163.7 L409.6,164.7 L412.0,165.7 L414.4,166.8 L416.8,167.8 L419.1,168.8 L421.5,169.9 L423.9,171.0 L426.2,172.1 L428.6,173.2 L431.0,174.3 L433.4,175.5 L435.7,176.6 L438.1,177.8 L440.5,178.9 L442.8,180.1 L445.2,181.3 L447.6,182.5 L449.9,183.8 L452.3,185.0 L454.7,186.3 L457.0,187.6 L459.4,188.9 L461.8,190.2 L464.2,191.5 L466.5,192.8 L468.9,194.2 L471.3,195.5 L473.6,196.9 L476.0,198.3 L478.4,199.7 L480.8,201.2 L483.1,202.6 L485.5,204.1 L487.9,205.6 L490.2,207.1 L492.6,208.6 L495.0,210.1 L497.3,211.6 L499.7,213.2 L502.1,214.8 L504.5,216.4 L506.8,218.0 L509.2,219.7 L511.6,221.3 L513.9,223.0 L516.3,224.7 L518.7,226.4 L521.0,228.1 L523.4,229.9 L525.8,231.6 L528.1,233.4 L530.5,235.2 L532.9,237.0 L535.3,238.9 L537.6,240.7 L540.0,242.6" class="s3" fill="none"/><line x1="86" y1="195" x2="110" y2="195" class="s1"/><text x="116" y="199" class="tk">long channel, V<tspan dy="3" style="font-size:9px">DS</tspan><tspan dy="-3"> </tspan>= 0.05 V</text><line x1="86" y1="213" x2="110" y2="213" class="s2"/><text x="116" y="217" class="tk">short channel, V<tspan dy="3" style="font-size:9px">DS</tspan><tspan dy="-3"> </tspan>= 0.05 V</text><line x1="86" y1="231" x2="110" y2="231" class="s3"/><text x="116" y="235" class="tk">short channel, V<tspan dy="3" style="font-size:9px">DS</tspan><tspan dy="-3"> </tspan>= 1 V</text></svg><figcaption>Figure 2. Conduction-band edge along the channel, below threshold, from the quasi-2D model (Liu et al., 1993) with characteristic length λ = 30 nm. The long channel keeps its source–channel barrier; the short channel has a lower barrier already at small VDS, and the barrier is pulled down further as VDS rises: that is DIBL. Qualitative illustration.</figcaption></figure>
+<p>In a long channel the drain junction's depletion region takes up only a small part of the channel, and the source–channel barrier is set entirely by the gate. Once the channel is only a few characteristic lengths \(\lambda\) long, the drain potential reaches all the way to the source: the barrier is lowered (Drain-Induced Barrier Lowering), electrons cross it more easily, and VT drops as VDS rises. DIBL is measured as \(\Delta V_T/\Delta V_{DS}\) (mV/V) and is the main reason ID keeps rising with VDS in saturation (finite output conductance).</p>
+<p><strong>Seeing DIBL in simulation:</strong> take two devices (e.g. L = 10 µm and 0.7 µm) at the same subthreshold VG, cut along y = 1 nm from source to drain at small and large VDS, and plot <code>ConductionBandEnergy</code>. In the long channel the barrier peak stays put; in the short channel it drops.</p>
+
+<h2 id="e-s4">4. The body effect (substrate bias)</h2>
+<p>Reverse-biasing the substrate (VBS &lt; 0 for an n channel) widens the depletion region under the channel and raises the depletion charge, so a larger VG is needed to invert:</p>
+<p>$$\Delta V_T=\gamma\left(\sqrt{2\phi_F-V_{BS}}-\sqrt{2\phi_F}\right),\qquad \gamma=\frac{\sqrt{2\varepsilon_s qN_A}}{C_{ox}}$$</p>
+<p>For the example in section 1, \(\gamma\approx 0.33\ \text{V}^{1/2}\) and VBS = −4 V raises VT by about 0.44 V. Solve order: set VD, set VBS, then sweep VG.</p>
+<pre><code>Solve {
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary ( InitialStep = 0.05  MaxStep = 0.2  MinStep = 1e-5
+    Goal { Name = &quot;drain&quot;      Voltage = @Vd@ }     * e.g. 0.05 V, 1 V, 2 V
+  ) { Coupled { Poisson Electron Hole } }
+  Quasistationary ( InitialStep = 0.05  MaxStep = 0.2  MinStep = 1e-5
+    Goal { Name = &quot;substrate&quot;  Voltage = @Vbs@ }    * 0, -1, -2, -4, -6 V
+  ) { Coupled { Poisson Electron Hole } }
+  NewCurrentPrefix = &quot;idvg_&quot;
+  Quasistationary ( InitialStep = 0.01  MaxStep = 0.02  MinStep = 1e-5
+    Goal { Name = &quot;gate&quot;  Voltage = 3 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p>Plot VT against \(\sqrt{|V_{BS}|}\): for a long channel the line is nearly straight with slope close to \(\gamma\). For short channels it sits lower and drops further at large VDS (DIBL); reverse substrate bias pushes the source and drain depletion regions apart below the surface and reduces DIBL.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>For Ga₂O₃ MOSFETs and MOS capacitors, the fixed charge and interface traps at an Al₂O₃ or SiO₂ layer on Ga₂O₃ are extracted from C–V exactly as in section 1. For example, Zeng, Jia and Singisetti (2016) measured the interface state density of ALD SiO₂/β-Ga₂O₃ (−201) capacitors. In Sentaurus the same <code>Physics(RegionInterface=...)</code> block is used, with energy-distributed interface traps alongside the <code>FixedCharge</code>.</p></div>
+
+<h2 id="e-s5">5. Exercises</h2>
+<ol>
+<li>For \(Q'_{ss}\) = 0, 10¹¹, 5 × 10¹¹, 10¹² cm⁻², simulate C–V, estimate VT and the flat-band voltage from the curves, and compare with the formula.</li>
+<li>Plot the band diagram through the MOS stack at VG = 0 for the four values and explain the change.</li>
+<li>Run the three mobility models and compare the ID–VD families. Which model affects \(I_{D,sat}\) most, and why?</li>
+<li>For L = 10, 1.5, 0.7 µm, plot VT against \(\sqrt{|V_{BS}|}\) at small and large VDS; explain using DIBL and the body effect.</li>
+</ol>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, lectures 4–5: MOSFET non-ideal, Korea Aerospace University.</li>
+<li>Synopsys, <em>Sentaurus Device User Guide</em>, chapters Traps and Fixed Charges, Mobility, Mixed-Mode and Small-Signal AC Analysis.</li>
+<li>C. Lombardi et al., <em>IEEE Transactions on Computer-Aided Design</em> 7, 1164 (1988).</li>
+<li>C. Canali et al., "Electron and hole drift velocity measurements in silicon and their empirical relation to electric field and temperature," <em>IEEE Transactions on Electron Devices</em> 22, 1045 (1975).</li>
+<li>Z.-H. Liu et al., "Threshold voltage model for deep-submicrometer MOSFETs," <em>IEEE Transactions on Electron Devices</em> 40, 86 (1993).</li>
+<li>Y. Taur, T. H. Ning, <em>Fundamentals of Modern VLSI Devices</em>, 2nd ed., Cambridge University Press (2009).</li>
+<li>K. Zeng, Y. Jia, U. Singisetti, "Interface state density in atomic layer deposited SiO₂/β-Ga₂O₃ (−201) MOSCAPs," <em>IEEE Electron Device Letters</em> 37, 906 (2016).</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-lab-mosfet.html">← <span class="l-vi">Thực hành 3: MOSFET kênh n</span><span class="l-en">Lab 3: the n-channel MOSFET</span></a><a class="n" href="tcad-lab-bjt.html"><span class="l-vi">Thực hành 5: transistor lưỡng cực npn</span><span class="l-en">Lab 5: the npn bipolar transistor</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần Semiconductor Device Design (반도체소자설계) của GS. Jinyoung Hwang, Korea Aerospace University, và bộ bài TCAD Laboratory của G. Betti Beneventi (University of Bologna) dùng trong môn học. Mã lệnh được viết lại và chú thích cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the course Semiconductor Device Design (반도체소자설계) by Prof. Jinyoung Hwang, Korea Aerospace University, and the TCAD Laboratory series by G. Betti Beneventi (University of Bologna) used in the course. The code was rewritten and commented for this page; figures were redrawn.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

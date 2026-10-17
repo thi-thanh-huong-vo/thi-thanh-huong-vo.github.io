@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thực hành 5: transistor lưỡng cực npn" data-title-en="Lab 5: the npn bipolar transistor">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 5: the npn bipolar transistor · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Buried layer and sinker, the BAB boolean trick, switching the base to current mode, IC–VCE family and Gummel plot.">
+<meta property="og:title" content="Lab 5: the npn bipolar transistor">
+<meta property="og:description" content="Buried layer and sinker, the BAB boolean trick, switching the base to current mode, IC–VCE family and Gummel plot.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 5</span><span class="l-en">Part 4 · Lesson 5</span></p>
+  <h1><span class="l-vi">Thực hành 5: transistor lưỡng cực npn</span><span class="l-en">Lab 5: the npn bipolar transistor</span></h1>
+  <p class="sub"><span class="l-vi">Lớp chôn và sinker, mẹo boolean BAB, chuyển base sang chế độ dòng, họ IC–VCE và đồ thị Gummel.</span><span class="l-en">Buried layer and sinker, the BAB boolean trick, switching the base to current mode, IC–VCE family and Gummel plot.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Transistor lưỡng cực npn kiểu những năm 1970, với lớp chôn n⁺ và vùng sinker để đưa dòng collector lên bề mặt. Bài này giới thiệu hai kỹ thuật mới: chế độ boolean "BAB" khi dựng hình và chuyển điện cực sang chế độ dòng điện khi giải.</p>
+
+<h2 id="v-s1">1. Cấu trúc</h2>
+<figure><svg viewBox="0 0 640 320" class="fig-svg" role="img"><rect x="40" y="150" width="410" height="140" style="fill:#f4d9d9;stroke:#b04040"/><rect x="40" y="60" width="410" height="90" style="fill:#c6d8f4;stroke:#4060b0"/><rect x="70" y="142" width="350" height="30" rx="8" style="fill:#7d9fe0;stroke:#4060b0"/><rect x="340" y="60" width="80" height="90" style="fill:#7d9fe0;stroke:#4060b0"/><path d="M70,60 h190 v28 q0,14 -14,14 h-162 q-14,0 -14,-14 z" style="fill:#f4c6c6;stroke:#b04040"/><path d="M170,60 h60 v12 q0,8 -8,8 h-44 q-8,0 -8,-8 z" style="fill:#7d9fe0;stroke:#4060b0"/><rect x="85" y="55" width="60" height="5" style="fill:#333"/><text x="115.0" y="50" class="nt" text-anchor="middle">B</text><rect x="175" y="55" width="50" height="5" style="fill:#333"/><text x="200.0" y="50" class="nt" text-anchor="middle">E</text><rect x="345" y="55" width="70" height="5" style="fill:#333"/><text x="380.0" y="50" class="nt" text-anchor="middle">C</text><rect x="40" y="290" width="410" height="5" style="fill:#333"/><line x1="200" y1="68" x2="466" y2="66" class="grid" style="stroke:var(--muted)"/><circle cx="200" cy="68" r="2.5" style="fill:var(--ink)"/><text x="470" y="70" class="tk" text-anchor="start">Emitter n⁺ (độ sâu T<tspan dy="3" style="font-size:9px">emit</tspan><tspan dy="-3"> </tspan>)</text><line x1="110" y1="90" x2="466" y2="102" class="grid" style="stroke:var(--muted)"/><circle cx="110" cy="90" r="2.5" style="fill:var(--ink)"/><text x="470" y="106" class="tk" text-anchor="start">Base p (dày T<tspan dy="3" style="font-size:9px">base</tspan><tspan dy="-3"> </tspan>)</text><line x1="160" y1="130" x2="466" y2="138" class="grid" style="stroke:var(--muted)"/><circle cx="160" cy="130" r="2.5" style="fill:var(--ink)"/><text x="470" y="142" class="tk" text-anchor="start">Collector n: lớp epi</text><line x1="290" y1="160" x2="466" y2="174" class="grid" style="stroke:var(--muted)"/><circle cx="290" cy="160" r="2.5" style="fill:var(--ink)"/><text x="470" y="178" class="tk" text-anchor="start">Lớp chôn n⁺</text><line x1="380" y1="110" x2="466" y2="210" class="grid" style="stroke:var(--muted)"/><circle cx="380" cy="110" r="2.5" style="fill:var(--ink)"/><text x="470" y="214" class="tk" text-anchor="start">Sinker n⁺ nối tới collector</text><line x1="240" y1="240" x2="466" y2="246" class="grid" style="stroke:var(--muted)"/><circle cx="240" cy="240" r="2.5" style="fill:var(--ink)"/><text x="470" y="250" class="tk" text-anchor="start">Đế Si loại p</text><text x="245.0" y="312" class="ns" text-anchor="middle">tiếp xúc đế · sơ đồ không theo tỉ lệ</text></svg><figcaption>Hình 1. BJT npn theo bài giảng: emitter n⁺ trong base p, cả hai nằm trong lớp epi n (collector); lớp chôn n⁺ và sinker n⁺ dẫn dòng collector ra tiếp xúc trên bề mặt; các đảo Si được cách ly bằng SiO₂. Sơ đồ không theo tỉ lệ.</figcaption></figure>
+<p>Kích thước theo bài giảng: rộng 2,2 µm; lớp epi dày 0,3 µm = T<sub>emit</sub> + T<sub>base</sub> + T<sub>col</sub>, gồm đảo transistor (x = 0,2–1,2 µm) và đảo sinker (1,5–2,0 µm), xen giữa là SiO₂; đế p dày 2,0 µm. Tiếp xúc base ở 0,3–0,7 µm, emitter 0,9–1,1 µm, collector 1,5–2,0 µm, đế ở cạnh dưới.</p>
+<div class="tablewrap"><table>
+<tr><th>Vùng pha tạp</th><th>Loại, dạng</th><th>Đỉnh (cm⁻³)</th><th>Độ sâu</th><th>Giá trị tại độ sâu</th></tr>
+<tr><td>Epi (collector)</td><td>n, hằng</td><td>5 × 10¹⁶</td><td>cả lớp</td><td></td></tr>
+<tr><td>Đế</td><td>p, hằng</td><td>1 × 10¹⁶</td><td>cả lớp</td><td></td></tr>
+<tr><td>Base</td><td>p, Gauss</td><td>3 × 10¹⁸</td><td>T<sub>emit</sub> + T<sub>base</sub></td><td>pha tạp epi</td></tr>
+<tr><td>Emitter</td><td>n, Gauss</td><td>1 × 10²⁰</td><td>T<sub>emit</sub></td><td>N<sub>A,base</sub>/e ≈ 0,37 N<sub>A,base</sub></td></tr>
+<tr><td>Lớp chôn</td><td>n, Gauss</td><td>5 × 10¹⁹</td><td>300 nm từ đỉnh đế</td><td>pha tạp đế</td></tr>
+<tr><td>Sinker</td><td>n, Gauss</td><td>5 × 10¹⁹</td><td>T<sub>epi</sub> + 200 nm</td><td>1 × 10¹⁷</td></tr>
+</table></div>
+<p>Các Gauss đều có khuếch tán ngang khoảng 20 nm. Các biến SWB: <code>Temit</code>, <code>Tbase</code>, <code>Tcol</code>, <code>Ndepi</code>, <code>Nabase</code>, <code>Ndemit</code>.</p>
+
+<h2 id="v-s2">2. File SDE</h2>
+<pre><code>;; bjt_dvs.cmd -- 1970s-style npn BJT with buried layer and sinker
+;; x = 0..2.2 um, y = 0 at the epi top, growing downward
+(sde:clear)
+(sdegeo:set-default-boolean &quot;BAB&quot;)   ; new regions do NOT overwrite existing ones
+
+;; ---- SWB parameters ----
+(define Temit  @Temit@)     ; emitter depth [um], e.g. 0.1
+(define Tbase  @Tbase@)     ; base thickness [um], e.g. 0.1
+(define Tcol   @Tcol@)      ; collector (epi below base) [um], e.g. 0.1
+(define Ndepi  @Ndepi@)     ; epi = collector doping, e.g. 5e16
+(define Nabase @Nabase@)    ; base peak, e.g. 3e18
+(define Ndemit @Ndemit@)    ; emitter peak, e.g. 1e20
+(define Tepi (+ Temit Tbase Tcol))     ; 0.3 um in the lecture
+(define Hsub 2.0)  (define Wtot 2.2)
+
+;; ---- geometry: silicon islands first, then oxide fills the gaps ----
+(sdegeo:create-rectangle (position 0.2 0 0) (position 1.2 Tepi 0) &quot;Silicon&quot; &quot;R.Epi&quot;)
+(sdegeo:create-rectangle (position 1.5 0 0) (position 2.0 Tepi 0) &quot;Silicon&quot; &quot;R.Sink&quot;)
+(sdegeo:create-rectangle (position 0 Tepi 0) (position Wtot (+ Tepi Hsub) 0) &quot;Silicon&quot; &quot;R.Sub&quot;)
+(sdegeo:create-rectangle (position 0 0 0) (position Wtot Tepi 0) &quot;SiO2&quot; &quot;R.Iso&quot;)  ; BAB: gaps only
+
+;; ---- contacts ----
+(for-each (lambda (x) (sdegeo:insert-vertex (position x 0 0))) (list 0.3 0.7 0.9 1.1))
+(define (contact name x y)
+  (sdegeo:define-contact-set name 4 (color:rgb 1 0 0) &quot;##&quot;)
+  (sdegeo:set-current-contact-set name)
+  (sdegeo:define-2d-contact (find-edge-id (position x y 0)) name))
+(contact &quot;base_contact&quot;      0.5  0)
+(contact &quot;emitter_contact&quot;   1.0  0)
+(contact &quot;collector_contact&quot; 1.75 0)
+(contact &quot;substrate_contact&quot; 1.1  (+ Tepi Hsub))
+
+;; ---- constant doping ----
+(sdedr:define-constant-profile &quot;C.Epi&quot; &quot;PhosphorusActiveConcentration&quot; Ndepi)
+(sdedr:define-constant-profile-region &quot;Pl.Epi&quot;  &quot;C.Epi&quot; &quot;R.Epi&quot;)
+(sdedr:define-constant-profile-region &quot;Pl.Sink&quot; &quot;C.Epi&quot; &quot;R.Sink&quot;)
+(sdedr:define-constant-profile &quot;C.Sub&quot; &quot;BoronActiveConcentration&quot; 1e16)
+(sdedr:define-constant-profile-region &quot;Pl.Sub&quot; &quot;C.Sub&quot; &quot;R.Sub&quot;)
+
+;; ---- Gaussian implants; lateral diffusion ~20 nm ----
+;; vertical sigma = Depth / sqrt(2 ln(Peak/ValueAtDepth)); Factor = 0.02 / sigma
+(define (lat depth peak vad) (/ 0.02 (/ depth (sqrt (* 2 (log (/ peak vad)))))))
+(define (gauss name species peak depth vad x0 x1 y)
+  (sdedr:define-refeval-window (string-append &quot;BL.&quot; name) &quot;Line&quot; (position x0 y 0) (position x1 y 0))
+  (sdedr:define-gaussian-profile (string-append &quot;G.&quot; name) species
+     &quot;PeakPos&quot; 0 &quot;PeakVal&quot; peak &quot;ValueAtDepth&quot; vad &quot;Depth&quot; depth
+     &quot;Gauss&quot; &quot;Factor&quot; (lat depth peak vad))
+  (sdedr:define-analytical-profile-placement (string-append &quot;P.&quot; name)
+     (string-append &quot;G.&quot; name) (string-append &quot;BL.&quot; name) &quot;Symm&quot; &quot;NoReplace&quot; &quot;Eval&quot;))
+;;     name    species                          peak    depth             value-at-depth      x0  x1  y
+(gauss &quot;base&quot;  &quot;BoronActiveConcentration&quot;      Nabase  (+ Temit Tbase)   Ndepi               0.2 1.2 0)
+(gauss &quot;emit&quot;  &quot;PhosphorusActiveConcentration&quot; Ndemit  Temit             (/ Nabase (exp 1))  0.9 1.1 0)
+(gauss &quot;sink&quot;  &quot;PhosphorusActiveConcentration&quot; 5e19    (+ Tepi 0.2)      1e17                1.5 2.0 0)
+(gauss &quot;buri&quot;  &quot;PhosphorusActiveConcentration&quot; 5e19    0.3               1e16                0.2 2.0 Tepi)
+
+;; ---- mesh: follow the doping gradients ----
+(sdedr:define-refinement-size &quot;S.Si&quot; 0.05 0.05 0.002 0.002)
+(sdedr:define-refinement-function &quot;S.Si&quot; &quot;DopingConcentration&quot; &quot;MaxTransDiff&quot; 1)
+(sdedr:define-refinement-material &quot;Ref.Si&quot; &quot;S.Si&quot; &quot;Silicon&quot;)
+(sde:build-mesh &quot;snmesh&quot; &quot;-a -c boxmethod&quot; &quot;n@node@&quot;)
+</code></pre>
+<p><strong>Mẹo "BAB".</strong> Ở chế độ mặc định "ABA", vùng tạo sau đè lên vùng tạo trước. Chế độ "BAB" thì ngược lại: vùng mới chỉ lấp phần còn trống. Nhờ vậy chỉ cần vẽ các đảo Si trước, rồi một hình chữ nhật SiO₂ phủ cả lớp epi; oxide tự lấp vào ba khe cách ly, không phải tính tọa độ từng khe.</p>
+<p><strong>Hàm Scheme tự viết.</strong> Hai hàm <code>contact</code> và <code>gauss</code> gói các lệnh lặp lại. Hàm <code>lat</code> đổi "khuếch tán ngang 20 nm" thành tham số <code>Factor</code>: với profile Gauss, độ lệch chuẩn theo chiều sâu là \(\sigma=\text{Depth}/\sqrt{2\ln(\text{PeakVal}/\text{ValueAtDepth})}\), còn <code>Factor</code> là tỉ lệ độ lan ngang trên \(\sigma\).</p>
+<p><strong>Vì sao emitter có giá trị tại độ sâu bằng N<sub>A,base</sub>/e?</strong> Để tiếp giáp emitter–base nằm gần đúng ở độ sâu T<sub>emit</sub>, nơi base Gauss đã giảm khỏi đỉnh. Mở <code>n*_msh.tdr</code> và cắt dọc tại x = 1,0 µm để kiểm tra vị trí hai tiếp giáp và độ dày base thực.</p>
+
+<h2 id="v-s3">3. Giải trong cấu hình emitter chung</h2>
+<p>Đặc tuyến ra của BJT được vẽ theo dòng base cố định, không phải điện áp base. Nhưng quét thẳng dòng từ 0 rất khó hội tụ, vì dòng là hàm mũ của điện áp. Trình tự trong bài giảng:</p>
+<ol>
+<li>Giải cân bằng.</li>
+<li>Tăng điện áp base lên 0,5–0,6 V (ở chế độ điện áp, dễ hội tụ).</li>
+<li>Chuyển <code>base_contact</code> sang chế độ dòng.</li>
+<li>Tăng dòng base tới giá trị mục tiêu.</li>
+<li>Mở file <code>.plt</code> mới.</li>
+<li>Tăng điện áp collector tới giá trị mục tiêu.</li>
+</ol>
+<pre><code>* bjt_des.cmd -- common-emitter output characteristic IC-VCE at a fixed IB
+Electrode {
+  { Name = &quot;emitter_contact&quot;    Voltage = 0 }
+  { Name = &quot;base_contact&quot;       Voltage = 0 }
+  { Name = &quot;collector_contact&quot;  Voltage = 0 }
+  { Name = &quot;substrate_contact&quot;  Voltage = 0 }
+}
+Physics {
+  Mobility ( DopingDependence  HighFieldSaturation )
+  EffectiveIntrinsicDensity ( OldSlotboom )        * band-gap narrowing (emitter!)
+  Recombination ( SRH ( DopingDependence )  Auger )
+}
+Solve {
+  * 1) equilibrium
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  * 2) bring VBE close to turn-on in voltage mode (easy to converge)
+  Quasistationary ( InitialStep = 0.05  MaxStep = 0.1  MinStep = 1e-5
+    Goal { Name = &quot;base_contact&quot;  Voltage = 0.55 }
+  ) { Coupled { Poisson Electron Hole } }
+  * 3) switch the base to current mode: IB is now the boundary condition
+  Set ( &quot;base_contact&quot;  mode current )
+  * 4) ramp IB to the target (per um of depth in 2D)
+  Quasistationary ( InitialStep = 0.1  Increment = 1.3  MaxStep = 0.2  MinStep = 1e-6
+    Goal { Name = &quot;base_contact&quot;  Current = @Ib@ }
+  ) { Coupled { Poisson Electron Hole } }
+  * 5) new .plt file, then 6) ramp the collector
+  NewCurrentPrefix = &quot;icvce_&quot;
+  Quasistationary ( InitialStep = 0.01  Increment = 1.3  MaxStep = 0.05  MinStep = 1e-6
+    Goal { Name = &quot;collector_contact&quot;  Voltage = @Vce_max@ }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p><code>Increment = 1.3</code> cho bước tăng tối đa 1,3 lần sau mỗi bước hội tụ, êm hơn mặc định. Quy ước dấu của dòng điện cực theo hướng dòng đi vào linh kiện; nếu sau bước 4 mà V<sub>BE</sub> tụt xuống âm, đổi dấu <code>Current</code> trong <code>Goal</code>. Lặp với một cây <code>Ib</code> (ví dụ 4 giá trị) để có họ đặc tuyến.</p>
+
+<h2 id="v-s4">4. Đọc kết quả</h2>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="540" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="66.0" y1="255" x2="66.0" y2="260" class="ax"/><text x="66.0" y="275" class="tk" text-anchor="middle">0</text><line x1="160.8" y1="255" x2="160.8" y2="260" class="ax"/><text x="160.8" y="275" class="tk" text-anchor="middle">1</text><line x1="255.60000000000002" y1="255" x2="255.60000000000002" y2="260" class="ax"/><text x="255.60000000000002" y="275" class="tk" text-anchor="middle">2</text><line x1="350.4" y1="255" x2="350.4" y2="260" class="ax"/><text x="350.4" y="275" class="tk" text-anchor="middle">3</text><line x1="445.20000000000005" y1="255" x2="445.20000000000005" y2="260" class="ax"/><text x="445.20000000000005" y="275" class="tk" text-anchor="middle">4</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">5</text><line x1="61" y1="255.0" x2="66" y2="255.0" class="ax"/><line x1="66" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="57" y="259.0" class="tk" text-anchor="end">0</text><line x1="61" y1="209.80769230769232" x2="66" y2="209.80769230769232" class="ax"/><line x1="66" y1="209.80769230769232" x2="540" y2="209.80769230769232" class="grid"/><text x="57" y="213.80769230769232" class="tk" text-anchor="end">0.5</text><line x1="61" y1="164.61538461538464" x2="66" y2="164.61538461538464" class="ax"/><line x1="66" y1="164.61538461538464" x2="540" y2="164.61538461538464" class="grid"/><text x="57" y="168.61538461538464" class="tk" text-anchor="end">1</text><line x1="61" y1="119.42307692307693" x2="66" y2="119.42307692307693" class="ax"/><line x1="66" y1="119.42307692307693" x2="540" y2="119.42307692307693" class="grid"/><text x="57" y="123.42307692307693" class="tk" text-anchor="end">1.5</text><line x1="61" y1="74.23076923076925" x2="66" y2="74.23076923076925" class="ax"/><line x1="66" y1="74.23076923076925" x2="540" y2="74.23076923076925" class="grid"/><text x="57" y="78.23076923076925" class="tk" text-anchor="end">2</text><line x1="61" y1="29.038461538461547" x2="66" y2="29.038461538461547" class="ax"/><line x1="66" y1="29.038461538461547" x2="540" y2="29.038461538461547" class="grid"/><text x="57" y="33.03846153846155" class="tk" text-anchor="end">2.5</text><text x="303.0" y="294" class="lab" text-anchor="middle">V<tspan dy="3" style="font-size:9px">CE</tspan><tspan dy="-3"> </tspan>(V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">I<tspan dy="3" style="font-size:9px">C</tspan><tspan dy="-3"> </tspan>(mA)</text><path d="M66.0,255.0 L67.9,245.0 L69.8,237.2 L71.7,231.1 L73.6,226.4 L75.5,222.7 L77.4,219.8 L79.3,217.5 L81.2,215.8 L83.1,214.4 L85.0,213.3 L86.9,212.5 L88.8,211.8 L90.6,211.3 L92.5,210.9 L94.4,210.5 L96.3,210.3 L98.2,210.1 L100.1,209.9 L102.0,209.8 L103.9,209.7 L105.8,209.6 L107.7,209.5 L109.6,209.4 L111.5,209.4 L113.4,209.3 L115.3,209.3 L117.2,209.3 L119.1,209.2 L121.0,209.2 L122.9,209.2 L124.8,209.1 L126.7,209.1 L128.6,209.1 L130.5,209.0 L132.4,209.0 L134.3,209.0 L136.2,209.0 L138.0,209.0 L139.9,208.9 L141.8,208.9 L143.7,208.9 L145.6,208.9 L147.5,208.8 L149.4,208.8 L151.3,208.8 L153.2,208.8 L155.1,208.7 L157.0,208.7 L158.9,208.7 L160.8,208.7 L162.7,208.7 L164.6,208.6 L166.5,208.6 L168.4,208.6 L170.3,208.6 L172.2,208.5 L174.1,208.5 L176.0,208.5 L177.9,208.5 L179.8,208.5 L181.7,208.4 L183.6,208.4 L185.4,208.4 L187.3,208.4 L189.2,208.3 L191.1,208.3 L193.0,208.3 L194.9,208.3 L196.8,208.2 L198.7,208.2 L200.6,208.2 L202.5,208.2 L204.4,208.2 L206.3,208.1 L208.2,208.1 L210.1,208.1 L212.0,208.1 L213.9,208.0 L215.8,208.0 L217.7,208.0 L219.6,208.0 L221.5,208.0 L223.4,207.9 L225.3,207.9 L227.2,207.9 L229.1,207.9 L231.0,207.8 L232.8,207.8 L234.7,207.8 L236.6,207.8 L238.5,207.8 L240.4,207.7 L242.3,207.7 L244.2,207.7 L246.1,207.7 L248.0,207.6 L249.9,207.6 L251.8,207.6 L253.7,207.6 L255.6,207.5 L257.5,207.5 L259.4,207.5 L261.3,207.5 L263.2,207.5 L265.1,207.4 L267.0,207.4 L268.9,207.4 L270.8,207.4 L272.7,207.3 L274.6,207.3 L276.5,207.3 L278.4,207.3 L280.2,207.3 L282.1,207.2 L284.0,207.2 L285.9,207.2 L287.8,207.2 L289.7,207.1 L291.6,207.1 L293.5,207.1 L295.4,207.1 L297.3,207.1 L299.2,207.0 L301.1,207.0 L303.0,207.0 L304.9,207.0 L306.8,206.9 L308.7,206.9 L310.6,206.9 L312.5,206.9 L314.4,206.8 L316.3,206.8 L318.2,206.8 L320.1,206.8 L322.0,206.8 L323.9,206.7 L325.8,206.7 L327.6,206.7 L329.5,206.7 L331.4,206.6 L333.3,206.6 L335.2,206.6 L337.1,206.6 L339.0,206.6 L340.9,206.5 L342.8,206.5 L344.7,206.5 L346.6,206.5 L348.5,206.4 L350.4,206.4 L352.3,206.4 L354.2,206.4 L356.1,206.4 L358.0,206.3 L359.9,206.3 L361.8,206.3 L363.7,206.3 L365.6,206.2 L367.5,206.2 L369.4,206.2 L371.3,206.2 L373.2,206.1 L375.0,206.1 L376.9,206.1 L378.8,206.1 L380.7,206.1 L382.6,206.0 L384.5,206.0 L386.4,206.0 L388.3,206.0 L390.2,205.9 L392.1,205.9 L394.0,205.9 L395.9,205.9 L397.8,205.9 L399.7,205.8 L401.6,205.8 L403.5,205.8 L405.4,205.8 L407.3,205.7 L409.2,205.7 L411.1,205.7 L413.0,205.7 L414.9,205.7 L416.8,205.6 L418.7,205.6 L420.6,205.6 L422.4,205.6 L424.3,205.5 L426.2,205.5 L428.1,205.5 L430.0,205.5 L431.9,205.4 L433.8,205.4 L435.7,205.4 L437.6,205.4 L439.5,205.4 L441.4,205.3 L443.3,205.3 L445.2,205.3 L447.1,205.3 L449.0,205.2 L450.9,205.2 L452.8,205.2 L454.7,205.2 L456.6,205.2 L458.5,205.1 L460.4,205.1 L462.3,205.1 L464.2,205.1 L466.1,205.0 L468.0,205.0 L469.8,205.0 L471.7,205.0 L473.6,204.9 L475.5,204.9 L477.4,204.9 L479.3,204.9 L481.2,204.9 L483.1,204.8 L485.0,204.8 L486.9,204.8 L488.8,204.8 L490.7,204.7 L492.6,204.7 L494.5,204.7 L496.4,204.7 L498.3,204.7 L500.2,204.6 L502.1,204.6 L504.0,204.6 L505.9,204.6 L507.8,204.5 L509.7,204.5 L511.6,204.5 L513.5,204.5 L515.4,204.5 L517.2,204.4 L519.1,204.4 L521.0,204.4 L522.9,204.4 L524.8,204.3 L526.7,204.3 L528.6,204.3 L530.5,204.3 L532.4,204.2 L534.3,204.2 L536.2,204.2 L538.1,204.2 L540.0,204.2" class="s1" fill="none"/><path d="M66.0,255.0 L67.9,235.0 L69.8,219.4 L71.7,207.2 L73.6,197.8 L75.5,190.3 L77.4,184.6 L79.3,180.1 L81.2,176.5 L83.1,173.8 L85.0,171.6 L86.9,169.9 L88.8,168.6 L90.6,167.6 L92.5,166.7 L94.4,166.1 L96.3,165.6 L98.2,165.1 L100.1,164.8 L102.0,164.5 L103.9,164.3 L105.8,164.1 L107.7,164.0 L109.6,163.9 L111.5,163.8 L113.4,163.7 L115.3,163.6 L117.2,163.5 L119.1,163.4 L121.0,163.4 L122.9,163.3 L124.8,163.3 L126.7,163.2 L128.6,163.1 L130.5,163.1 L132.4,163.0 L134.3,163.0 L136.2,163.0 L138.0,162.9 L139.9,162.9 L141.8,162.8 L143.7,162.8 L145.6,162.7 L147.5,162.7 L149.4,162.6 L151.3,162.6 L153.2,162.5 L155.1,162.5 L157.0,162.4 L158.9,162.4 L160.8,162.4 L162.7,162.3 L164.6,162.3 L166.5,162.2 L168.4,162.2 L170.3,162.1 L172.2,162.1 L174.1,162.0 L176.0,162.0 L177.9,161.9 L179.8,161.9 L181.7,161.9 L183.6,161.8 L185.4,161.8 L187.3,161.7 L189.2,161.7 L191.1,161.6 L193.0,161.6 L194.9,161.5 L196.8,161.5 L198.7,161.5 L200.6,161.4 L202.5,161.4 L204.4,161.3 L206.3,161.3 L208.2,161.2 L210.1,161.2 L212.0,161.1 L213.9,161.1 L215.8,161.0 L217.7,161.0 L219.6,161.0 L221.5,160.9 L223.4,160.9 L225.3,160.8 L227.2,160.8 L229.1,160.7 L231.0,160.7 L232.8,160.6 L234.7,160.6 L236.6,160.5 L238.5,160.5 L240.4,160.5 L242.3,160.4 L244.2,160.4 L246.1,160.3 L248.0,160.3 L249.9,160.2 L251.8,160.2 L253.7,160.1 L255.6,160.1 L257.5,160.1 L259.4,160.0 L261.3,160.0 L263.2,159.9 L265.1,159.9 L267.0,159.8 L268.9,159.8 L270.8,159.7 L272.7,159.7 L274.6,159.6 L276.5,159.6 L278.4,159.6 L280.2,159.5 L282.1,159.5 L284.0,159.4 L285.9,159.4 L287.8,159.3 L289.7,159.3 L291.6,159.2 L293.5,159.2 L295.4,159.1 L297.3,159.1 L299.2,159.1 L301.1,159.0 L303.0,159.0 L304.9,158.9 L306.8,158.9 L308.7,158.8 L310.6,158.8 L312.5,158.7 L314.4,158.7 L316.3,158.7 L318.2,158.6 L320.1,158.6 L322.0,158.5 L323.9,158.5 L325.8,158.4 L327.6,158.4 L329.5,158.3 L331.4,158.3 L333.3,158.2 L335.2,158.2 L337.1,158.2 L339.0,158.1 L340.9,158.1 L342.8,158.0 L344.7,158.0 L346.6,157.9 L348.5,157.9 L350.4,157.8 L352.3,157.8 L354.2,157.7 L356.1,157.7 L358.0,157.7 L359.9,157.6 L361.8,157.6 L363.7,157.5 L365.6,157.5 L367.5,157.4 L369.4,157.4 L371.3,157.3 L373.2,157.3 L375.0,157.2 L376.9,157.2 L378.8,157.2 L380.7,157.1 L382.6,157.1 L384.5,157.0 L386.4,157.0 L388.3,156.9 L390.2,156.9 L392.1,156.8 L394.0,156.8 L395.9,156.8 L397.8,156.7 L399.7,156.7 L401.6,156.6 L403.5,156.6 L405.4,156.5 L407.3,156.5 L409.2,156.4 L411.1,156.4 L413.0,156.3 L414.9,156.3 L416.8,156.3 L418.7,156.2 L420.6,156.2 L422.4,156.1 L424.3,156.1 L426.2,156.0 L428.1,156.0 L430.0,155.9 L431.9,155.9 L433.8,155.8 L435.7,155.8 L437.6,155.8 L439.5,155.7 L441.4,155.7 L443.3,155.6 L445.2,155.6 L447.1,155.5 L449.0,155.5 L450.9,155.4 L452.8,155.4 L454.7,155.4 L456.6,155.3 L458.5,155.3 L460.4,155.2 L462.3,155.2 L464.2,155.1 L466.1,155.1 L468.0,155.0 L469.8,155.0 L471.7,154.9 L473.6,154.9 L475.5,154.9 L477.4,154.8 L479.3,154.8 L481.2,154.7 L483.1,154.7 L485.0,154.6 L486.9,154.6 L488.8,154.5 L490.7,154.5 L492.6,154.4 L494.5,154.4 L496.4,154.4 L498.3,154.3 L500.2,154.3 L502.1,154.2 L504.0,154.2 L505.9,154.1 L507.8,154.1 L509.7,154.0 L511.6,154.0 L513.5,154.0 L515.4,153.9 L517.2,153.9 L519.1,153.8 L521.0,153.8 L522.9,153.7 L524.8,153.7 L526.7,153.6 L528.6,153.6 L530.5,153.5 L532.4,153.5 L534.3,153.5 L536.2,153.4 L538.1,153.4 L540.0,153.3" class="s1" fill="none"/><path d="M66.0,255.0 L67.9,225.0 L69.8,201.6 L71.7,183.4 L73.6,169.1 L75.5,158.0 L77.4,149.4 L79.3,142.6 L81.2,137.3 L83.1,133.2 L85.0,129.9 L86.9,127.4 L88.8,125.4 L90.6,123.8 L92.5,122.6 L94.4,121.6 L96.3,120.8 L98.2,120.2 L100.1,119.7 L102.0,119.3 L103.9,119.0 L105.8,118.7 L107.7,118.5 L109.6,118.3 L111.5,118.1 L113.4,118.0 L115.3,117.9 L117.2,117.8 L119.1,117.7 L121.0,117.6 L122.9,117.5 L124.8,117.4 L126.7,117.3 L128.6,117.2 L130.5,117.1 L132.4,117.1 L134.3,117.0 L136.2,116.9 L138.0,116.9 L139.9,116.8 L141.8,116.7 L143.7,116.6 L145.6,116.6 L147.5,116.5 L149.4,116.4 L151.3,116.4 L153.2,116.3 L155.1,116.2 L157.0,116.2 L158.9,116.1 L160.8,116.0 L162.7,116.0 L164.6,115.9 L166.5,115.8 L168.4,115.8 L170.3,115.7 L172.2,115.6 L174.1,115.6 L176.0,115.5 L177.9,115.4 L179.8,115.4 L181.7,115.3 L183.6,115.2 L185.4,115.2 L187.3,115.1 L189.2,115.0 L191.1,114.9 L193.0,114.9 L194.9,114.8 L196.8,114.7 L198.7,114.7 L200.6,114.6 L202.5,114.5 L204.4,114.5 L206.3,114.4 L208.2,114.3 L210.1,114.3 L212.0,114.2 L213.9,114.1 L215.8,114.1 L217.7,114.0 L219.6,113.9 L221.5,113.9 L223.4,113.8 L225.3,113.7 L227.2,113.7 L229.1,113.6 L231.0,113.5 L232.8,113.5 L234.7,113.4 L236.6,113.3 L238.5,113.3 L240.4,113.2 L242.3,113.1 L244.2,113.1 L246.1,113.0 L248.0,112.9 L249.9,112.8 L251.8,112.8 L253.7,112.7 L255.6,112.6 L257.5,112.6 L259.4,112.5 L261.3,112.4 L263.2,112.4 L265.1,112.3 L267.0,112.2 L268.9,112.2 L270.8,112.1 L272.7,112.0 L274.6,112.0 L276.5,111.9 L278.4,111.8 L280.2,111.8 L282.1,111.7 L284.0,111.6 L285.9,111.6 L287.8,111.5 L289.7,111.4 L291.6,111.4 L293.5,111.3 L295.4,111.2 L297.3,111.2 L299.2,111.1 L301.1,111.0 L303.0,110.9 L304.9,110.9 L306.8,110.8 L308.7,110.7 L310.6,110.7 L312.5,110.6 L314.4,110.5 L316.3,110.5 L318.2,110.4 L320.1,110.3 L322.0,110.3 L323.9,110.2 L325.8,110.1 L327.6,110.1 L329.5,110.0 L331.4,109.9 L333.3,109.9 L335.2,109.8 L337.1,109.7 L339.0,109.7 L340.9,109.6 L342.8,109.5 L344.7,109.5 L346.6,109.4 L348.5,109.3 L350.4,109.3 L352.3,109.2 L354.2,109.1 L356.1,109.1 L358.0,109.0 L359.9,108.9 L361.8,108.8 L363.7,108.8 L365.6,108.7 L367.5,108.6 L369.4,108.6 L371.3,108.5 L373.2,108.4 L375.0,108.4 L376.9,108.3 L378.8,108.2 L380.7,108.2 L382.6,108.1 L384.5,108.0 L386.4,108.0 L388.3,107.9 L390.2,107.8 L392.1,107.8 L394.0,107.7 L395.9,107.6 L397.8,107.6 L399.7,107.5 L401.6,107.4 L403.5,107.4 L405.4,107.3 L407.3,107.2 L409.2,107.2 L411.1,107.1 L413.0,107.0 L414.9,106.9 L416.8,106.9 L418.7,106.8 L420.6,106.7 L422.4,106.7 L424.3,106.6 L426.2,106.5 L428.1,106.5 L430.0,106.4 L431.9,106.3 L433.8,106.3 L435.7,106.2 L437.6,106.1 L439.5,106.1 L441.4,106.0 L443.3,105.9 L445.2,105.9 L447.1,105.8 L449.0,105.7 L450.9,105.7 L452.8,105.6 L454.7,105.5 L456.6,105.5 L458.5,105.4 L460.4,105.3 L462.3,105.3 L464.2,105.2 L466.1,105.1 L468.0,105.1 L469.8,105.0 L471.7,104.9 L473.6,104.8 L475.5,104.8 L477.4,104.7 L479.3,104.6 L481.2,104.6 L483.1,104.5 L485.0,104.4 L486.9,104.4 L488.8,104.3 L490.7,104.2 L492.6,104.2 L494.5,104.1 L496.4,104.0 L498.3,104.0 L500.2,103.9 L502.1,103.8 L504.0,103.8 L505.9,103.7 L507.8,103.6 L509.7,103.6 L511.6,103.5 L513.5,103.4 L515.4,103.4 L517.2,103.3 L519.1,103.2 L521.0,103.2 L522.9,103.1 L524.8,103.0 L526.7,103.0 L528.6,102.9 L530.5,102.8 L532.4,102.7 L534.3,102.7 L536.2,102.6 L538.1,102.5 L540.0,102.5" class="s1" fill="none"/><path d="M66.0,255.0 L67.9,215.0 L69.8,183.8 L71.7,159.5 L73.6,140.5 L75.5,125.7 L77.4,114.1 L79.3,105.1 L81.2,98.1 L83.1,92.6 L85.0,88.2 L86.9,84.9 L88.8,82.2 L90.6,80.1 L92.5,78.5 L94.4,77.2 L96.3,76.1 L98.2,75.3 L100.1,74.6 L102.0,74.1 L103.9,73.7 L105.8,73.3 L107.7,73.0 L109.6,72.7 L111.5,72.5 L113.4,72.3 L115.3,72.2 L117.2,72.0 L119.1,71.9 L121.0,71.7 L122.9,71.6 L124.8,71.5 L126.7,71.4 L128.6,71.3 L130.5,71.2 L132.4,71.1 L134.3,71.0 L136.2,70.9 L138.0,70.8 L139.9,70.7 L141.8,70.6 L143.7,70.5 L145.6,70.4 L147.5,70.3 L149.4,70.3 L151.3,70.2 L153.2,70.1 L155.1,70.0 L157.0,69.9 L158.9,69.8 L160.8,69.7 L162.7,69.6 L164.6,69.5 L166.5,69.4 L168.4,69.4 L170.3,69.3 L172.2,69.2 L174.1,69.1 L176.0,69.0 L177.9,68.9 L179.8,68.8 L181.7,68.7 L183.6,68.6 L185.4,68.5 L187.3,68.4 L189.2,68.4 L191.1,68.3 L193.0,68.2 L194.9,68.1 L196.8,68.0 L198.7,67.9 L200.6,67.8 L202.5,67.7 L204.4,67.6 L206.3,67.5 L208.2,67.5 L210.1,67.4 L212.0,67.3 L213.9,67.2 L215.8,67.1 L217.7,67.0 L219.6,66.9 L221.5,66.8 L223.4,66.7 L225.3,66.6 L227.2,66.5 L229.1,66.5 L231.0,66.4 L232.8,66.3 L234.7,66.2 L236.6,66.1 L238.5,66.0 L240.4,65.9 L242.3,65.8 L244.2,65.7 L246.1,65.6 L248.0,65.6 L249.9,65.5 L251.8,65.4 L253.7,65.3 L255.6,65.2 L257.5,65.1 L259.4,65.0 L261.3,64.9 L263.2,64.8 L265.1,64.7 L267.0,64.7 L268.9,64.6 L270.8,64.5 L272.7,64.4 L274.6,64.3 L276.5,64.2 L278.4,64.1 L280.2,64.0 L282.1,63.9 L284.0,63.8 L285.9,63.7 L287.8,63.7 L289.7,63.6 L291.6,63.5 L293.5,63.4 L295.4,63.3 L297.3,63.2 L299.2,63.1 L301.1,63.0 L303.0,62.9 L304.9,62.8 L306.8,62.8 L308.7,62.7 L310.6,62.6 L312.5,62.5 L314.4,62.4 L316.3,62.3 L318.2,62.2 L320.1,62.1 L322.0,62.0 L323.9,61.9 L325.8,61.8 L327.6,61.8 L329.5,61.7 L331.4,61.6 L333.3,61.5 L335.2,61.4 L337.1,61.3 L339.0,61.2 L340.9,61.1 L342.8,61.0 L344.7,60.9 L346.6,60.9 L348.5,60.8 L350.4,60.7 L352.3,60.6 L354.2,60.5 L356.1,60.4 L358.0,60.3 L359.9,60.2 L361.8,60.1 L363.7,60.0 L365.6,60.0 L367.5,59.9 L369.4,59.8 L371.3,59.7 L373.2,59.6 L375.0,59.5 L376.9,59.4 L378.8,59.3 L380.7,59.2 L382.6,59.1 L384.5,59.0 L386.4,59.0 L388.3,58.9 L390.2,58.8 L392.1,58.7 L394.0,58.6 L395.9,58.5 L397.8,58.4 L399.7,58.3 L401.6,58.2 L403.5,58.1 L405.4,58.1 L407.3,58.0 L409.2,57.9 L411.1,57.8 L413.0,57.7 L414.9,57.6 L416.8,57.5 L418.7,57.4 L420.6,57.3 L422.4,57.2 L424.3,57.1 L426.2,57.1 L428.1,57.0 L430.0,56.9 L431.9,56.8 L433.8,56.7 L435.7,56.6 L437.6,56.5 L439.5,56.4 L441.4,56.3 L443.3,56.2 L445.2,56.2 L447.1,56.1 L449.0,56.0 L450.9,55.9 L452.8,55.8 L454.7,55.7 L456.6,55.6 L458.5,55.5 L460.4,55.4 L462.3,55.3 L464.2,55.2 L466.1,55.2 L468.0,55.1 L469.8,55.0 L471.7,54.9 L473.6,54.8 L475.5,54.7 L477.4,54.6 L479.3,54.5 L481.2,54.4 L483.1,54.3 L485.0,54.3 L486.9,54.2 L488.8,54.1 L490.7,54.0 L492.6,53.9 L494.5,53.8 L496.4,53.7 L498.3,53.6 L500.2,53.5 L502.1,53.4 L504.0,53.4 L505.9,53.3 L507.8,53.2 L509.7,53.1 L511.6,53.0 L513.5,52.9 L515.4,52.8 L517.2,52.7 L519.1,52.6 L521.0,52.5 L522.9,52.4 L524.8,52.4 L526.7,52.3 L528.6,52.2 L530.5,52.1 L532.4,52.0 L534.3,51.9 L536.2,51.8 L538.1,51.7 L540.0,51.6" class="s1" fill="none"/><text x="536.0" y="198.2" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 5 µA</text><text x="536.0" y="147.3" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 10 µA</text><text x="536.0" y="96.5" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 15 µA</text><text x="536.0" y="45.6" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 20 µA</text><text x="103.9" y="33.6" class="ns">β = 100, V<tspan dy="3" style="font-size:9px">A</tspan><tspan dy="-3"> </tspan>= 40 V (hiệu ứng Early làm I<tspan dy="3" style="font-size:9px">C</tspan><tspan dy="-3"> </tspan>dốc lên)</text></svg><figcaption>Hình 2. Dạng họ đặc tuyến ra I<sub>C</sub>–V<sub>CE</sub> của BJT với β = 100 và điện áp Early 40 V (dựng giải tích để minh họa).</figcaption></figure>
+<ul>
+<li><strong>Hệ số khuếch đại</strong> \(\beta=I_C/I_B\) đo ở vùng tích cực (V<sub>CE</sub> khoảng 2 V).</li>
+<li><strong>Vùng bão hòa</strong> ở V<sub>CE</sub> &lt; khoảng 0,2 V: cả hai tiếp giáp đều phân cực thuận.</li>
+<li><strong>Hiệu ứng Early.</strong> V<sub>CE</sub> tăng làm vùng nghèo base–collector lấn vào base, base trung hòa mỏng đi, \(I_C\) tăng. Ngoại suy các đường về phía V<sub>CE</sub> âm, chúng gặp nhau gần \(-V_A\). Base mỏng hoặc pha tạp nhẹ thì V<sub>A</sub> nhỏ.</li>
+<li><strong>Đồ thị Gummel</strong>: V<sub>CE</sub> cố định, quét V<sub>BE</sub> ở chế độ điện áp, vẽ I<sub>C</sub> và I<sub>B</sub> trên thang log. β là khoảng cách giữa hai đường; β giảm ở dòng thấp (tái hợp trong vùng nghèo E–B) và ở dòng cao (bơm hạt dẫn mạnh, điện trở base).</li>
+</ul>
+<pre><code>* Gummel plot: VCE fixed, sweep VBE in voltage mode
+Solve {
+  Coupled { Poisson }  Coupled { Poisson Electron Hole }
+  Quasistationary ( Goal { Name = &quot;collector_contact&quot;  Voltage = 2 } )
+    { Coupled { Poisson Electron Hole } }
+  NewCurrentPrefix = &quot;gummel_&quot;
+  Quasistationary ( InitialStep = 0.01  MaxStep = 0.02  MinStep = 1e-6
+    Goal { Name = &quot;base_contact&quot;  Voltage = 1.0 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+
+<h2 id="v-s5">5. Bài tập</h2>
+<ol>
+<li>Vẽ phân bố pha tạp dọc x = 1,0 µm; đo độ sâu các tiếp giáp E–B, B–C và độ dày base trung hòa.</li>
+<li>Thay đổi <code>Tbase</code> (0,05; 0,1; 0,15 µm) và vẽ β, V<sub>A</sub> theo T<sub>base</sub>.</li>
+<li>Thay đổi <code>Nabase</code> và giải thích vì sao β giảm khi base pha tạp nặng (hiệu suất phát xạ).</li>
+<li>Tắt <code>EffectiveIntrinsicDensity(OldSlotboom)</code> và so sánh β. Vì sao thu hẹp vùng cấm ở emitter quan trọng với BJT?</li>
+</ol>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, bài 6–7: Bipolar Junction Transistor, Korea Aerospace University.</li>
+<li>J. M. Early, "Effects of space-charge layer widening in junction transistors," <em>Proceedings of the IRE</em> 40, 1401 (1952).</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chương 5.</li>
+<li>J. W. Slotboom, H. C. de Graaff, <em>Solid-State Electronics</em> 19, 857 (1976).</li>
+<li>Synopsys, <em>Sentaurus Device User Guide</em>, mục Electrode boundary conditions (current mode) và Quasistationary.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">A 1970s-style npn bipolar transistor, with an n⁺ buried layer and a sinker that brings the collector current back to the surface. This lab introduces two new techniques: the "BAB" boolean mode when building geometry, and switching an electrode to current mode when solving.</p>
+
+<h2 id="e-s1">1. Structure</h2>
+<figure><svg viewBox="0 0 640 320" class="fig-svg" role="img"><rect x="40" y="150" width="410" height="140" style="fill:#f4d9d9;stroke:#b04040"/><rect x="40" y="60" width="410" height="90" style="fill:#c6d8f4;stroke:#4060b0"/><rect x="70" y="142" width="350" height="30" rx="8" style="fill:#7d9fe0;stroke:#4060b0"/><rect x="340" y="60" width="80" height="90" style="fill:#7d9fe0;stroke:#4060b0"/><path d="M70,60 h190 v28 q0,14 -14,14 h-162 q-14,0 -14,-14 z" style="fill:#f4c6c6;stroke:#b04040"/><path d="M170,60 h60 v12 q0,8 -8,8 h-44 q-8,0 -8,-8 z" style="fill:#7d9fe0;stroke:#4060b0"/><rect x="85" y="55" width="60" height="5" style="fill:#333"/><text x="115.0" y="50" class="nt" text-anchor="middle">B</text><rect x="175" y="55" width="50" height="5" style="fill:#333"/><text x="200.0" y="50" class="nt" text-anchor="middle">E</text><rect x="345" y="55" width="70" height="5" style="fill:#333"/><text x="380.0" y="50" class="nt" text-anchor="middle">C</text><rect x="40" y="290" width="410" height="5" style="fill:#333"/><line x1="200" y1="68" x2="466" y2="66" class="grid" style="stroke:var(--muted)"/><circle cx="200" cy="68" r="2.5" style="fill:var(--ink)"/><text x="470" y="70" class="tk" text-anchor="start">Emitter n⁺ (depth T<tspan dy="3" style="font-size:9px">emit</tspan><tspan dy="-3"> </tspan>)</text><line x1="110" y1="90" x2="466" y2="102" class="grid" style="stroke:var(--muted)"/><circle cx="110" cy="90" r="2.5" style="fill:var(--ink)"/><text x="470" y="106" class="tk" text-anchor="start">Base p (thickness T<tspan dy="3" style="font-size:9px">base</tspan><tspan dy="-3"> </tspan>)</text><line x1="160" y1="130" x2="466" y2="138" class="grid" style="stroke:var(--muted)"/><circle cx="160" cy="130" r="2.5" style="fill:var(--ink)"/><text x="470" y="142" class="tk" text-anchor="start">Collector n: epi layer</text><line x1="290" y1="160" x2="466" y2="174" class="grid" style="stroke:var(--muted)"/><circle cx="290" cy="160" r="2.5" style="fill:var(--ink)"/><text x="470" y="178" class="tk" text-anchor="start">n⁺ buried layer</text><line x1="380" y1="110" x2="466" y2="210" class="grid" style="stroke:var(--muted)"/><circle cx="380" cy="110" r="2.5" style="fill:var(--ink)"/><text x="470" y="214" class="tk" text-anchor="start">n⁺ sinker to collector</text><line x1="240" y1="240" x2="466" y2="246" class="grid" style="stroke:var(--muted)"/><circle cx="240" cy="240" r="2.5" style="fill:var(--ink)"/><text x="470" y="250" class="tk" text-anchor="start">p-type Si substrate</text><text x="245.0" y="312" class="ns" text-anchor="middle">substrate contact · not to scale</text></svg><figcaption>Figure 1. The npn BJT of the lecture: an n⁺ emitter in a p base, both in the n epi layer (collector); the n⁺ buried layer and n⁺ sinker carry the collector current to a surface contact; the Si islands are isolated by SiO₂. Not to scale.</figcaption></figure>
+<p>Dimensions from the lecture: 2.2 µm wide; a 0.3 µm epi layer = T<sub>emit</sub> + T<sub>base</sub> + T<sub>col</sub>, consisting of a transistor island (x = 0.2–1.2 µm) and a sinker island (1.5–2.0 µm) separated by SiO₂; a 2.0 µm p substrate. Base contact at 0.3–0.7 µm, emitter 0.9–1.1 µm, collector 1.5–2.0 µm, substrate on the bottom edge.</p>
+<div class="tablewrap"><table>
+<tr><th>Doped region</th><th>Type, shape</th><th>Peak (cm⁻³)</th><th>Depth</th><th>Value at depth</th></tr>
+<tr><td>Epi (collector)</td><td>n, constant</td><td>5 × 10¹⁶</td><td>whole layer</td><td></td></tr>
+<tr><td>Substrate</td><td>p, constant</td><td>1 × 10¹⁶</td><td>whole layer</td><td></td></tr>
+<tr><td>Base</td><td>p, Gaussian</td><td>3 × 10¹⁸</td><td>T<sub>emit</sub> + T<sub>base</sub></td><td>epi doping</td></tr>
+<tr><td>Emitter</td><td>n, Gaussian</td><td>1 × 10²⁰</td><td>T<sub>emit</sub></td><td>N<sub>A,base</sub>/e ≈ 0.37 N<sub>A,base</sub></td></tr>
+<tr><td>Buried layer</td><td>n, Gaussian</td><td>5 × 10¹⁹</td><td>300 nm from the substrate top</td><td>substrate doping</td></tr>
+<tr><td>Sinker</td><td>n, Gaussian</td><td>5 × 10¹⁹</td><td>T<sub>epi</sub> + 200 nm</td><td>1 × 10¹⁷</td></tr>
+</table></div>
+<p>All Gaussians have about 20 nm of lateral diffusion. SWB variables: <code>Temit</code>, <code>Tbase</code>, <code>Tcol</code>, <code>Ndepi</code>, <code>Nabase</code>, <code>Ndemit</code>.</p>
+
+<h2 id="e-s2">2. The SDE file</h2>
+<pre><code>;; bjt_dvs.cmd -- 1970s-style npn BJT with buried layer and sinker
+;; x = 0..2.2 um, y = 0 at the epi top, growing downward
+(sde:clear)
+(sdegeo:set-default-boolean &quot;BAB&quot;)   ; new regions do NOT overwrite existing ones
+
+;; ---- SWB parameters ----
+(define Temit  @Temit@)     ; emitter depth [um], e.g. 0.1
+(define Tbase  @Tbase@)     ; base thickness [um], e.g. 0.1
+(define Tcol   @Tcol@)      ; collector (epi below base) [um], e.g. 0.1
+(define Ndepi  @Ndepi@)     ; epi = collector doping, e.g. 5e16
+(define Nabase @Nabase@)    ; base peak, e.g. 3e18
+(define Ndemit @Ndemit@)    ; emitter peak, e.g. 1e20
+(define Tepi (+ Temit Tbase Tcol))     ; 0.3 um in the lecture
+(define Hsub 2.0)  (define Wtot 2.2)
+
+;; ---- geometry: silicon islands first, then oxide fills the gaps ----
+(sdegeo:create-rectangle (position 0.2 0 0) (position 1.2 Tepi 0) &quot;Silicon&quot; &quot;R.Epi&quot;)
+(sdegeo:create-rectangle (position 1.5 0 0) (position 2.0 Tepi 0) &quot;Silicon&quot; &quot;R.Sink&quot;)
+(sdegeo:create-rectangle (position 0 Tepi 0) (position Wtot (+ Tepi Hsub) 0) &quot;Silicon&quot; &quot;R.Sub&quot;)
+(sdegeo:create-rectangle (position 0 0 0) (position Wtot Tepi 0) &quot;SiO2&quot; &quot;R.Iso&quot;)  ; BAB: gaps only
+
+;; ---- contacts ----
+(for-each (lambda (x) (sdegeo:insert-vertex (position x 0 0))) (list 0.3 0.7 0.9 1.1))
+(define (contact name x y)
+  (sdegeo:define-contact-set name 4 (color:rgb 1 0 0) &quot;##&quot;)
+  (sdegeo:set-current-contact-set name)
+  (sdegeo:define-2d-contact (find-edge-id (position x y 0)) name))
+(contact &quot;base_contact&quot;      0.5  0)
+(contact &quot;emitter_contact&quot;   1.0  0)
+(contact &quot;collector_contact&quot; 1.75 0)
+(contact &quot;substrate_contact&quot; 1.1  (+ Tepi Hsub))
+
+;; ---- constant doping ----
+(sdedr:define-constant-profile &quot;C.Epi&quot; &quot;PhosphorusActiveConcentration&quot; Ndepi)
+(sdedr:define-constant-profile-region &quot;Pl.Epi&quot;  &quot;C.Epi&quot; &quot;R.Epi&quot;)
+(sdedr:define-constant-profile-region &quot;Pl.Sink&quot; &quot;C.Epi&quot; &quot;R.Sink&quot;)
+(sdedr:define-constant-profile &quot;C.Sub&quot; &quot;BoronActiveConcentration&quot; 1e16)
+(sdedr:define-constant-profile-region &quot;Pl.Sub&quot; &quot;C.Sub&quot; &quot;R.Sub&quot;)
+
+;; ---- Gaussian implants; lateral diffusion ~20 nm ----
+;; vertical sigma = Depth / sqrt(2 ln(Peak/ValueAtDepth)); Factor = 0.02 / sigma
+(define (lat depth peak vad) (/ 0.02 (/ depth (sqrt (* 2 (log (/ peak vad)))))))
+(define (gauss name species peak depth vad x0 x1 y)
+  (sdedr:define-refeval-window (string-append &quot;BL.&quot; name) &quot;Line&quot; (position x0 y 0) (position x1 y 0))
+  (sdedr:define-gaussian-profile (string-append &quot;G.&quot; name) species
+     &quot;PeakPos&quot; 0 &quot;PeakVal&quot; peak &quot;ValueAtDepth&quot; vad &quot;Depth&quot; depth
+     &quot;Gauss&quot; &quot;Factor&quot; (lat depth peak vad))
+  (sdedr:define-analytical-profile-placement (string-append &quot;P.&quot; name)
+     (string-append &quot;G.&quot; name) (string-append &quot;BL.&quot; name) &quot;Symm&quot; &quot;NoReplace&quot; &quot;Eval&quot;))
+;;     name    species                          peak    depth             value-at-depth      x0  x1  y
+(gauss &quot;base&quot;  &quot;BoronActiveConcentration&quot;      Nabase  (+ Temit Tbase)   Ndepi               0.2 1.2 0)
+(gauss &quot;emit&quot;  &quot;PhosphorusActiveConcentration&quot; Ndemit  Temit             (/ Nabase (exp 1))  0.9 1.1 0)
+(gauss &quot;sink&quot;  &quot;PhosphorusActiveConcentration&quot; 5e19    (+ Tepi 0.2)      1e17                1.5 2.0 0)
+(gauss &quot;buri&quot;  &quot;PhosphorusActiveConcentration&quot; 5e19    0.3               1e16                0.2 2.0 Tepi)
+
+;; ---- mesh: follow the doping gradients ----
+(sdedr:define-refinement-size &quot;S.Si&quot; 0.05 0.05 0.002 0.002)
+(sdedr:define-refinement-function &quot;S.Si&quot; &quot;DopingConcentration&quot; &quot;MaxTransDiff&quot; 1)
+(sdedr:define-refinement-material &quot;Ref.Si&quot; &quot;S.Si&quot; &quot;Silicon&quot;)
+(sde:build-mesh &quot;snmesh&quot; &quot;-a -c boxmethod&quot; &quot;n@node@&quot;)
+</code></pre>
+<p><strong>The "BAB" trick.</strong> In the default "ABA" mode a later region overwrites an earlier one. "BAB" is the reverse: a new region only fills what is still empty. So you draw the Si islands first, then one SiO₂ rectangle across the whole epi layer; the oxide fills the three isolation gaps by itself, with no need to work out each gap's coordinates.</p>
+<p><strong>Home-made Scheme functions.</strong> The <code>contact</code> and <code>gauss</code> functions wrap repeated commands. The <code>lat</code> function turns "20 nm lateral diffusion" into the <code>Factor</code> parameter: for a Gaussian the vertical standard deviation is \(\sigma=\text{Depth}/\sqrt{2\ln(\text{PeakVal}/\text{ValueAtDepth})}\), and <code>Factor</code> is the ratio of lateral spread to \(\sigma\).</p>
+<p><strong>Why is the emitter's value at depth N<sub>A,base</sub>/e?</strong> So that the emitter–base junction lands near depth T<sub>emit</sub>, where the base Gaussian has already dropped below its peak. Open <code>n*_msh.tdr</code> and cut vertically at x = 1.0 µm to check where both junctions are and how thick the base really is.</p>
+
+<h2 id="e-s3">3. Solving in common-emitter configuration</h2>
+<p>A BJT's output characteristics are plotted at fixed base current, not base voltage. But ramping current directly from zero converges poorly, because current is exponential in voltage. The sequence from the lecture:</p>
+<ol>
+<li>Solve equilibrium.</li>
+<li>Raise the base voltage to 0.5–0.6 V (in voltage mode, which converges easily).</li>
+<li>Switch <code>base_contact</code> to current mode.</li>
+<li>Ramp the base current to the target.</li>
+<li>Open a new <code>.plt</code> file.</li>
+<li>Ramp the collector voltage to the target.</li>
+</ol>
+<pre><code>* bjt_des.cmd -- common-emitter output characteristic IC-VCE at a fixed IB
+Electrode {
+  { Name = &quot;emitter_contact&quot;    Voltage = 0 }
+  { Name = &quot;base_contact&quot;       Voltage = 0 }
+  { Name = &quot;collector_contact&quot;  Voltage = 0 }
+  { Name = &quot;substrate_contact&quot;  Voltage = 0 }
+}
+Physics {
+  Mobility ( DopingDependence  HighFieldSaturation )
+  EffectiveIntrinsicDensity ( OldSlotboom )        * band-gap narrowing (emitter!)
+  Recombination ( SRH ( DopingDependence )  Auger )
+}
+Solve {
+  * 1) equilibrium
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  * 2) bring VBE close to turn-on in voltage mode (easy to converge)
+  Quasistationary ( InitialStep = 0.05  MaxStep = 0.1  MinStep = 1e-5
+    Goal { Name = &quot;base_contact&quot;  Voltage = 0.55 }
+  ) { Coupled { Poisson Electron Hole } }
+  * 3) switch the base to current mode: IB is now the boundary condition
+  Set ( &quot;base_contact&quot;  mode current )
+  * 4) ramp IB to the target (per um of depth in 2D)
+  Quasistationary ( InitialStep = 0.1  Increment = 1.3  MaxStep = 0.2  MinStep = 1e-6
+    Goal { Name = &quot;base_contact&quot;  Current = @Ib@ }
+  ) { Coupled { Poisson Electron Hole } }
+  * 5) new .plt file, then 6) ramp the collector
+  NewCurrentPrefix = &quot;icvce_&quot;
+  Quasistationary ( InitialStep = 0.01  Increment = 1.3  MaxStep = 0.05  MinStep = 1e-6
+    Goal { Name = &quot;collector_contact&quot;  Voltage = @Vce_max@ }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p><code>Increment = 1.3</code> lets the step grow by at most 1.3 times after each converged step, gentler than the default. The sign convention takes electrode current as flowing into the device; if V<sub>BE</sub> goes negative after step 4, flip the sign of <code>Current</code> in the <code>Goal</code>. Repeat with a tree of <code>Ib</code> values (e.g. four) to get a family of curves.</p>
+
+<h2 id="e-s4">4. Reading the results</h2>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="540" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="66.0" y1="255" x2="66.0" y2="260" class="ax"/><text x="66.0" y="275" class="tk" text-anchor="middle">0</text><line x1="160.8" y1="255" x2="160.8" y2="260" class="ax"/><text x="160.8" y="275" class="tk" text-anchor="middle">1</text><line x1="255.60000000000002" y1="255" x2="255.60000000000002" y2="260" class="ax"/><text x="255.60000000000002" y="275" class="tk" text-anchor="middle">2</text><line x1="350.4" y1="255" x2="350.4" y2="260" class="ax"/><text x="350.4" y="275" class="tk" text-anchor="middle">3</text><line x1="445.20000000000005" y1="255" x2="445.20000000000005" y2="260" class="ax"/><text x="445.20000000000005" y="275" class="tk" text-anchor="middle">4</text><line x1="540.0" y1="255" x2="540.0" y2="260" class="ax"/><text x="540.0" y="275" class="tk" text-anchor="middle">5</text><line x1="61" y1="255.0" x2="66" y2="255.0" class="ax"/><line x1="66" y1="255.0" x2="540" y2="255.0" class="grid"/><text x="57" y="259.0" class="tk" text-anchor="end">0</text><line x1="61" y1="209.80769230769232" x2="66" y2="209.80769230769232" class="ax"/><line x1="66" y1="209.80769230769232" x2="540" y2="209.80769230769232" class="grid"/><text x="57" y="213.80769230769232" class="tk" text-anchor="end">0.5</text><line x1="61" y1="164.61538461538464" x2="66" y2="164.61538461538464" class="ax"/><line x1="66" y1="164.61538461538464" x2="540" y2="164.61538461538464" class="grid"/><text x="57" y="168.61538461538464" class="tk" text-anchor="end">1</text><line x1="61" y1="119.42307692307693" x2="66" y2="119.42307692307693" class="ax"/><line x1="66" y1="119.42307692307693" x2="540" y2="119.42307692307693" class="grid"/><text x="57" y="123.42307692307693" class="tk" text-anchor="end">1.5</text><line x1="61" y1="74.23076923076925" x2="66" y2="74.23076923076925" class="ax"/><line x1="66" y1="74.23076923076925" x2="540" y2="74.23076923076925" class="grid"/><text x="57" y="78.23076923076925" class="tk" text-anchor="end">2</text><line x1="61" y1="29.038461538461547" x2="66" y2="29.038461538461547" class="ax"/><line x1="66" y1="29.038461538461547" x2="540" y2="29.038461538461547" class="grid"/><text x="57" y="33.03846153846155" class="tk" text-anchor="end">2.5</text><text x="303.0" y="294" class="lab" text-anchor="middle">V<tspan dy="3" style="font-size:9px">CE</tspan><tspan dy="-3"> </tspan>(V)</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">I<tspan dy="3" style="font-size:9px">C</tspan><tspan dy="-3"> </tspan>(mA)</text><path d="M66.0,255.0 L67.9,245.0 L69.8,237.2 L71.7,231.1 L73.6,226.4 L75.5,222.7 L77.4,219.8 L79.3,217.5 L81.2,215.8 L83.1,214.4 L85.0,213.3 L86.9,212.5 L88.8,211.8 L90.6,211.3 L92.5,210.9 L94.4,210.5 L96.3,210.3 L98.2,210.1 L100.1,209.9 L102.0,209.8 L103.9,209.7 L105.8,209.6 L107.7,209.5 L109.6,209.4 L111.5,209.4 L113.4,209.3 L115.3,209.3 L117.2,209.3 L119.1,209.2 L121.0,209.2 L122.9,209.2 L124.8,209.1 L126.7,209.1 L128.6,209.1 L130.5,209.0 L132.4,209.0 L134.3,209.0 L136.2,209.0 L138.0,209.0 L139.9,208.9 L141.8,208.9 L143.7,208.9 L145.6,208.9 L147.5,208.8 L149.4,208.8 L151.3,208.8 L153.2,208.8 L155.1,208.7 L157.0,208.7 L158.9,208.7 L160.8,208.7 L162.7,208.7 L164.6,208.6 L166.5,208.6 L168.4,208.6 L170.3,208.6 L172.2,208.5 L174.1,208.5 L176.0,208.5 L177.9,208.5 L179.8,208.5 L181.7,208.4 L183.6,208.4 L185.4,208.4 L187.3,208.4 L189.2,208.3 L191.1,208.3 L193.0,208.3 L194.9,208.3 L196.8,208.2 L198.7,208.2 L200.6,208.2 L202.5,208.2 L204.4,208.2 L206.3,208.1 L208.2,208.1 L210.1,208.1 L212.0,208.1 L213.9,208.0 L215.8,208.0 L217.7,208.0 L219.6,208.0 L221.5,208.0 L223.4,207.9 L225.3,207.9 L227.2,207.9 L229.1,207.9 L231.0,207.8 L232.8,207.8 L234.7,207.8 L236.6,207.8 L238.5,207.8 L240.4,207.7 L242.3,207.7 L244.2,207.7 L246.1,207.7 L248.0,207.6 L249.9,207.6 L251.8,207.6 L253.7,207.6 L255.6,207.5 L257.5,207.5 L259.4,207.5 L261.3,207.5 L263.2,207.5 L265.1,207.4 L267.0,207.4 L268.9,207.4 L270.8,207.4 L272.7,207.3 L274.6,207.3 L276.5,207.3 L278.4,207.3 L280.2,207.3 L282.1,207.2 L284.0,207.2 L285.9,207.2 L287.8,207.2 L289.7,207.1 L291.6,207.1 L293.5,207.1 L295.4,207.1 L297.3,207.1 L299.2,207.0 L301.1,207.0 L303.0,207.0 L304.9,207.0 L306.8,206.9 L308.7,206.9 L310.6,206.9 L312.5,206.9 L314.4,206.8 L316.3,206.8 L318.2,206.8 L320.1,206.8 L322.0,206.8 L323.9,206.7 L325.8,206.7 L327.6,206.7 L329.5,206.7 L331.4,206.6 L333.3,206.6 L335.2,206.6 L337.1,206.6 L339.0,206.6 L340.9,206.5 L342.8,206.5 L344.7,206.5 L346.6,206.5 L348.5,206.4 L350.4,206.4 L352.3,206.4 L354.2,206.4 L356.1,206.4 L358.0,206.3 L359.9,206.3 L361.8,206.3 L363.7,206.3 L365.6,206.2 L367.5,206.2 L369.4,206.2 L371.3,206.2 L373.2,206.1 L375.0,206.1 L376.9,206.1 L378.8,206.1 L380.7,206.1 L382.6,206.0 L384.5,206.0 L386.4,206.0 L388.3,206.0 L390.2,205.9 L392.1,205.9 L394.0,205.9 L395.9,205.9 L397.8,205.9 L399.7,205.8 L401.6,205.8 L403.5,205.8 L405.4,205.8 L407.3,205.7 L409.2,205.7 L411.1,205.7 L413.0,205.7 L414.9,205.7 L416.8,205.6 L418.7,205.6 L420.6,205.6 L422.4,205.6 L424.3,205.5 L426.2,205.5 L428.1,205.5 L430.0,205.5 L431.9,205.4 L433.8,205.4 L435.7,205.4 L437.6,205.4 L439.5,205.4 L441.4,205.3 L443.3,205.3 L445.2,205.3 L447.1,205.3 L449.0,205.2 L450.9,205.2 L452.8,205.2 L454.7,205.2 L456.6,205.2 L458.5,205.1 L460.4,205.1 L462.3,205.1 L464.2,205.1 L466.1,205.0 L468.0,205.0 L469.8,205.0 L471.7,205.0 L473.6,204.9 L475.5,204.9 L477.4,204.9 L479.3,204.9 L481.2,204.9 L483.1,204.8 L485.0,204.8 L486.9,204.8 L488.8,204.8 L490.7,204.7 L492.6,204.7 L494.5,204.7 L496.4,204.7 L498.3,204.7 L500.2,204.6 L502.1,204.6 L504.0,204.6 L505.9,204.6 L507.8,204.5 L509.7,204.5 L511.6,204.5 L513.5,204.5 L515.4,204.5 L517.2,204.4 L519.1,204.4 L521.0,204.4 L522.9,204.4 L524.8,204.3 L526.7,204.3 L528.6,204.3 L530.5,204.3 L532.4,204.2 L534.3,204.2 L536.2,204.2 L538.1,204.2 L540.0,204.2" class="s1" fill="none"/><path d="M66.0,255.0 L67.9,235.0 L69.8,219.4 L71.7,207.2 L73.6,197.8 L75.5,190.3 L77.4,184.6 L79.3,180.1 L81.2,176.5 L83.1,173.8 L85.0,171.6 L86.9,169.9 L88.8,168.6 L90.6,167.6 L92.5,166.7 L94.4,166.1 L96.3,165.6 L98.2,165.1 L100.1,164.8 L102.0,164.5 L103.9,164.3 L105.8,164.1 L107.7,164.0 L109.6,163.9 L111.5,163.8 L113.4,163.7 L115.3,163.6 L117.2,163.5 L119.1,163.4 L121.0,163.4 L122.9,163.3 L124.8,163.3 L126.7,163.2 L128.6,163.1 L130.5,163.1 L132.4,163.0 L134.3,163.0 L136.2,163.0 L138.0,162.9 L139.9,162.9 L141.8,162.8 L143.7,162.8 L145.6,162.7 L147.5,162.7 L149.4,162.6 L151.3,162.6 L153.2,162.5 L155.1,162.5 L157.0,162.4 L158.9,162.4 L160.8,162.4 L162.7,162.3 L164.6,162.3 L166.5,162.2 L168.4,162.2 L170.3,162.1 L172.2,162.1 L174.1,162.0 L176.0,162.0 L177.9,161.9 L179.8,161.9 L181.7,161.9 L183.6,161.8 L185.4,161.8 L187.3,161.7 L189.2,161.7 L191.1,161.6 L193.0,161.6 L194.9,161.5 L196.8,161.5 L198.7,161.5 L200.6,161.4 L202.5,161.4 L204.4,161.3 L206.3,161.3 L208.2,161.2 L210.1,161.2 L212.0,161.1 L213.9,161.1 L215.8,161.0 L217.7,161.0 L219.6,161.0 L221.5,160.9 L223.4,160.9 L225.3,160.8 L227.2,160.8 L229.1,160.7 L231.0,160.7 L232.8,160.6 L234.7,160.6 L236.6,160.5 L238.5,160.5 L240.4,160.5 L242.3,160.4 L244.2,160.4 L246.1,160.3 L248.0,160.3 L249.9,160.2 L251.8,160.2 L253.7,160.1 L255.6,160.1 L257.5,160.1 L259.4,160.0 L261.3,160.0 L263.2,159.9 L265.1,159.9 L267.0,159.8 L268.9,159.8 L270.8,159.7 L272.7,159.7 L274.6,159.6 L276.5,159.6 L278.4,159.6 L280.2,159.5 L282.1,159.5 L284.0,159.4 L285.9,159.4 L287.8,159.3 L289.7,159.3 L291.6,159.2 L293.5,159.2 L295.4,159.1 L297.3,159.1 L299.2,159.1 L301.1,159.0 L303.0,159.0 L304.9,158.9 L306.8,158.9 L308.7,158.8 L310.6,158.8 L312.5,158.7 L314.4,158.7 L316.3,158.7 L318.2,158.6 L320.1,158.6 L322.0,158.5 L323.9,158.5 L325.8,158.4 L327.6,158.4 L329.5,158.3 L331.4,158.3 L333.3,158.2 L335.2,158.2 L337.1,158.2 L339.0,158.1 L340.9,158.1 L342.8,158.0 L344.7,158.0 L346.6,157.9 L348.5,157.9 L350.4,157.8 L352.3,157.8 L354.2,157.7 L356.1,157.7 L358.0,157.7 L359.9,157.6 L361.8,157.6 L363.7,157.5 L365.6,157.5 L367.5,157.4 L369.4,157.4 L371.3,157.3 L373.2,157.3 L375.0,157.2 L376.9,157.2 L378.8,157.2 L380.7,157.1 L382.6,157.1 L384.5,157.0 L386.4,157.0 L388.3,156.9 L390.2,156.9 L392.1,156.8 L394.0,156.8 L395.9,156.8 L397.8,156.7 L399.7,156.7 L401.6,156.6 L403.5,156.6 L405.4,156.5 L407.3,156.5 L409.2,156.4 L411.1,156.4 L413.0,156.3 L414.9,156.3 L416.8,156.3 L418.7,156.2 L420.6,156.2 L422.4,156.1 L424.3,156.1 L426.2,156.0 L428.1,156.0 L430.0,155.9 L431.9,155.9 L433.8,155.8 L435.7,155.8 L437.6,155.8 L439.5,155.7 L441.4,155.7 L443.3,155.6 L445.2,155.6 L447.1,155.5 L449.0,155.5 L450.9,155.4 L452.8,155.4 L454.7,155.4 L456.6,155.3 L458.5,155.3 L460.4,155.2 L462.3,155.2 L464.2,155.1 L466.1,155.1 L468.0,155.0 L469.8,155.0 L471.7,154.9 L473.6,154.9 L475.5,154.9 L477.4,154.8 L479.3,154.8 L481.2,154.7 L483.1,154.7 L485.0,154.6 L486.9,154.6 L488.8,154.5 L490.7,154.5 L492.6,154.4 L494.5,154.4 L496.4,154.4 L498.3,154.3 L500.2,154.3 L502.1,154.2 L504.0,154.2 L505.9,154.1 L507.8,154.1 L509.7,154.0 L511.6,154.0 L513.5,154.0 L515.4,153.9 L517.2,153.9 L519.1,153.8 L521.0,153.8 L522.9,153.7 L524.8,153.7 L526.7,153.6 L528.6,153.6 L530.5,153.5 L532.4,153.5 L534.3,153.5 L536.2,153.4 L538.1,153.4 L540.0,153.3" class="s1" fill="none"/><path d="M66.0,255.0 L67.9,225.0 L69.8,201.6 L71.7,183.4 L73.6,169.1 L75.5,158.0 L77.4,149.4 L79.3,142.6 L81.2,137.3 L83.1,133.2 L85.0,129.9 L86.9,127.4 L88.8,125.4 L90.6,123.8 L92.5,122.6 L94.4,121.6 L96.3,120.8 L98.2,120.2 L100.1,119.7 L102.0,119.3 L103.9,119.0 L105.8,118.7 L107.7,118.5 L109.6,118.3 L111.5,118.1 L113.4,118.0 L115.3,117.9 L117.2,117.8 L119.1,117.7 L121.0,117.6 L122.9,117.5 L124.8,117.4 L126.7,117.3 L128.6,117.2 L130.5,117.1 L132.4,117.1 L134.3,117.0 L136.2,116.9 L138.0,116.9 L139.9,116.8 L141.8,116.7 L143.7,116.6 L145.6,116.6 L147.5,116.5 L149.4,116.4 L151.3,116.4 L153.2,116.3 L155.1,116.2 L157.0,116.2 L158.9,116.1 L160.8,116.0 L162.7,116.0 L164.6,115.9 L166.5,115.8 L168.4,115.8 L170.3,115.7 L172.2,115.6 L174.1,115.6 L176.0,115.5 L177.9,115.4 L179.8,115.4 L181.7,115.3 L183.6,115.2 L185.4,115.2 L187.3,115.1 L189.2,115.0 L191.1,114.9 L193.0,114.9 L194.9,114.8 L196.8,114.7 L198.7,114.7 L200.6,114.6 L202.5,114.5 L204.4,114.5 L206.3,114.4 L208.2,114.3 L210.1,114.3 L212.0,114.2 L213.9,114.1 L215.8,114.1 L217.7,114.0 L219.6,113.9 L221.5,113.9 L223.4,113.8 L225.3,113.7 L227.2,113.7 L229.1,113.6 L231.0,113.5 L232.8,113.5 L234.7,113.4 L236.6,113.3 L238.5,113.3 L240.4,113.2 L242.3,113.1 L244.2,113.1 L246.1,113.0 L248.0,112.9 L249.9,112.8 L251.8,112.8 L253.7,112.7 L255.6,112.6 L257.5,112.6 L259.4,112.5 L261.3,112.4 L263.2,112.4 L265.1,112.3 L267.0,112.2 L268.9,112.2 L270.8,112.1 L272.7,112.0 L274.6,112.0 L276.5,111.9 L278.4,111.8 L280.2,111.8 L282.1,111.7 L284.0,111.6 L285.9,111.6 L287.8,111.5 L289.7,111.4 L291.6,111.4 L293.5,111.3 L295.4,111.2 L297.3,111.2 L299.2,111.1 L301.1,111.0 L303.0,110.9 L304.9,110.9 L306.8,110.8 L308.7,110.7 L310.6,110.7 L312.5,110.6 L314.4,110.5 L316.3,110.5 L318.2,110.4 L320.1,110.3 L322.0,110.3 L323.9,110.2 L325.8,110.1 L327.6,110.1 L329.5,110.0 L331.4,109.9 L333.3,109.9 L335.2,109.8 L337.1,109.7 L339.0,109.7 L340.9,109.6 L342.8,109.5 L344.7,109.5 L346.6,109.4 L348.5,109.3 L350.4,109.3 L352.3,109.2 L354.2,109.1 L356.1,109.1 L358.0,109.0 L359.9,108.9 L361.8,108.8 L363.7,108.8 L365.6,108.7 L367.5,108.6 L369.4,108.6 L371.3,108.5 L373.2,108.4 L375.0,108.4 L376.9,108.3 L378.8,108.2 L380.7,108.2 L382.6,108.1 L384.5,108.0 L386.4,108.0 L388.3,107.9 L390.2,107.8 L392.1,107.8 L394.0,107.7 L395.9,107.6 L397.8,107.6 L399.7,107.5 L401.6,107.4 L403.5,107.4 L405.4,107.3 L407.3,107.2 L409.2,107.2 L411.1,107.1 L413.0,107.0 L414.9,106.9 L416.8,106.9 L418.7,106.8 L420.6,106.7 L422.4,106.7 L424.3,106.6 L426.2,106.5 L428.1,106.5 L430.0,106.4 L431.9,106.3 L433.8,106.3 L435.7,106.2 L437.6,106.1 L439.5,106.1 L441.4,106.0 L443.3,105.9 L445.2,105.9 L447.1,105.8 L449.0,105.7 L450.9,105.7 L452.8,105.6 L454.7,105.5 L456.6,105.5 L458.5,105.4 L460.4,105.3 L462.3,105.3 L464.2,105.2 L466.1,105.1 L468.0,105.1 L469.8,105.0 L471.7,104.9 L473.6,104.8 L475.5,104.8 L477.4,104.7 L479.3,104.6 L481.2,104.6 L483.1,104.5 L485.0,104.4 L486.9,104.4 L488.8,104.3 L490.7,104.2 L492.6,104.2 L494.5,104.1 L496.4,104.0 L498.3,104.0 L500.2,103.9 L502.1,103.8 L504.0,103.8 L505.9,103.7 L507.8,103.6 L509.7,103.6 L511.6,103.5 L513.5,103.4 L515.4,103.4 L517.2,103.3 L519.1,103.2 L521.0,103.2 L522.9,103.1 L524.8,103.0 L526.7,103.0 L528.6,102.9 L530.5,102.8 L532.4,102.7 L534.3,102.7 L536.2,102.6 L538.1,102.5 L540.0,102.5" class="s1" fill="none"/><path d="M66.0,255.0 L67.9,215.0 L69.8,183.8 L71.7,159.5 L73.6,140.5 L75.5,125.7 L77.4,114.1 L79.3,105.1 L81.2,98.1 L83.1,92.6 L85.0,88.2 L86.9,84.9 L88.8,82.2 L90.6,80.1 L92.5,78.5 L94.4,77.2 L96.3,76.1 L98.2,75.3 L100.1,74.6 L102.0,74.1 L103.9,73.7 L105.8,73.3 L107.7,73.0 L109.6,72.7 L111.5,72.5 L113.4,72.3 L115.3,72.2 L117.2,72.0 L119.1,71.9 L121.0,71.7 L122.9,71.6 L124.8,71.5 L126.7,71.4 L128.6,71.3 L130.5,71.2 L132.4,71.1 L134.3,71.0 L136.2,70.9 L138.0,70.8 L139.9,70.7 L141.8,70.6 L143.7,70.5 L145.6,70.4 L147.5,70.3 L149.4,70.3 L151.3,70.2 L153.2,70.1 L155.1,70.0 L157.0,69.9 L158.9,69.8 L160.8,69.7 L162.7,69.6 L164.6,69.5 L166.5,69.4 L168.4,69.4 L170.3,69.3 L172.2,69.2 L174.1,69.1 L176.0,69.0 L177.9,68.9 L179.8,68.8 L181.7,68.7 L183.6,68.6 L185.4,68.5 L187.3,68.4 L189.2,68.4 L191.1,68.3 L193.0,68.2 L194.9,68.1 L196.8,68.0 L198.7,67.9 L200.6,67.8 L202.5,67.7 L204.4,67.6 L206.3,67.5 L208.2,67.5 L210.1,67.4 L212.0,67.3 L213.9,67.2 L215.8,67.1 L217.7,67.0 L219.6,66.9 L221.5,66.8 L223.4,66.7 L225.3,66.6 L227.2,66.5 L229.1,66.5 L231.0,66.4 L232.8,66.3 L234.7,66.2 L236.6,66.1 L238.5,66.0 L240.4,65.9 L242.3,65.8 L244.2,65.7 L246.1,65.6 L248.0,65.6 L249.9,65.5 L251.8,65.4 L253.7,65.3 L255.6,65.2 L257.5,65.1 L259.4,65.0 L261.3,64.9 L263.2,64.8 L265.1,64.7 L267.0,64.7 L268.9,64.6 L270.8,64.5 L272.7,64.4 L274.6,64.3 L276.5,64.2 L278.4,64.1 L280.2,64.0 L282.1,63.9 L284.0,63.8 L285.9,63.7 L287.8,63.7 L289.7,63.6 L291.6,63.5 L293.5,63.4 L295.4,63.3 L297.3,63.2 L299.2,63.1 L301.1,63.0 L303.0,62.9 L304.9,62.8 L306.8,62.8 L308.7,62.7 L310.6,62.6 L312.5,62.5 L314.4,62.4 L316.3,62.3 L318.2,62.2 L320.1,62.1 L322.0,62.0 L323.9,61.9 L325.8,61.8 L327.6,61.8 L329.5,61.7 L331.4,61.6 L333.3,61.5 L335.2,61.4 L337.1,61.3 L339.0,61.2 L340.9,61.1 L342.8,61.0 L344.7,60.9 L346.6,60.9 L348.5,60.8 L350.4,60.7 L352.3,60.6 L354.2,60.5 L356.1,60.4 L358.0,60.3 L359.9,60.2 L361.8,60.1 L363.7,60.0 L365.6,60.0 L367.5,59.9 L369.4,59.8 L371.3,59.7 L373.2,59.6 L375.0,59.5 L376.9,59.4 L378.8,59.3 L380.7,59.2 L382.6,59.1 L384.5,59.0 L386.4,59.0 L388.3,58.9 L390.2,58.8 L392.1,58.7 L394.0,58.6 L395.9,58.5 L397.8,58.4 L399.7,58.3 L401.6,58.2 L403.5,58.1 L405.4,58.1 L407.3,58.0 L409.2,57.9 L411.1,57.8 L413.0,57.7 L414.9,57.6 L416.8,57.5 L418.7,57.4 L420.6,57.3 L422.4,57.2 L424.3,57.1 L426.2,57.1 L428.1,57.0 L430.0,56.9 L431.9,56.8 L433.8,56.7 L435.7,56.6 L437.6,56.5 L439.5,56.4 L441.4,56.3 L443.3,56.2 L445.2,56.2 L447.1,56.1 L449.0,56.0 L450.9,55.9 L452.8,55.8 L454.7,55.7 L456.6,55.6 L458.5,55.5 L460.4,55.4 L462.3,55.3 L464.2,55.2 L466.1,55.2 L468.0,55.1 L469.8,55.0 L471.7,54.9 L473.6,54.8 L475.5,54.7 L477.4,54.6 L479.3,54.5 L481.2,54.4 L483.1,54.3 L485.0,54.3 L486.9,54.2 L488.8,54.1 L490.7,54.0 L492.6,53.9 L494.5,53.8 L496.4,53.7 L498.3,53.6 L500.2,53.5 L502.1,53.4 L504.0,53.4 L505.9,53.3 L507.8,53.2 L509.7,53.1 L511.6,53.0 L513.5,52.9 L515.4,52.8 L517.2,52.7 L519.1,52.6 L521.0,52.5 L522.9,52.4 L524.8,52.4 L526.7,52.3 L528.6,52.2 L530.5,52.1 L532.4,52.0 L534.3,51.9 L536.2,51.8 L538.1,51.7 L540.0,51.6" class="s1" fill="none"/><text x="536.0" y="198.2" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 5 µA</text><text x="536.0" y="147.3" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 10 µA</text><text x="536.0" y="96.5" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 15 µA</text><text x="536.0" y="45.6" class="tk" text-anchor="end">I<tspan dy="3" style="font-size:9px">B</tspan><tspan dy="-3"> </tspan>= 20 µA</text><text x="103.9" y="33.6" class="ns">β = 100, V<tspan dy="3" style="font-size:9px">A</tspan><tspan dy="-3"> </tspan>= 40 V (Early effect tilts I<tspan dy="3" style="font-size:9px">C</tspan><tspan dy="-3"> </tspan>upward)</text></svg><figcaption>Figure 2. The shape of the I<sub>C</sub>–V<sub>CE</sub> output family of a BJT with β = 100 and an Early voltage of 40 V (drawn analytically for illustration).</figcaption></figure>
+<ul>
+<li><strong>Current gain</strong> \(\beta=I_C/I_B\), measured in the active region (V<sub>CE</sub> around 2 V).</li>
+<li><strong>Saturation region</strong> at V<sub>CE</sub> below about 0.2 V: both junctions are forward-biased.</li>
+<li><strong>Early effect.</strong> Higher V<sub>CE</sub> pushes the base–collector depletion region into the base, the neutral base narrows and \(I_C\) rises. Extrapolated back to negative V<sub>CE</sub>, the curves meet near \(-V_A\). A thin or lightly doped base gives a small V<sub>A</sub>.</li>
+<li><strong>Gummel plot</strong>: fixed V<sub>CE</sub>, sweep V<sub>BE</sub> in voltage mode, plot I<sub>C</sub> and I<sub>B</sub> on a log scale. β is the gap between the two curves; it falls at low current (recombination in the E–B depletion region) and at high current (high injection, base resistance).</li>
+</ul>
+<pre><code>* Gummel plot: VCE fixed, sweep VBE in voltage mode
+Solve {
+  Coupled { Poisson }  Coupled { Poisson Electron Hole }
+  Quasistationary ( Goal { Name = &quot;collector_contact&quot;  Voltage = 2 } )
+    { Coupled { Poisson Electron Hole } }
+  NewCurrentPrefix = &quot;gummel_&quot;
+  Quasistationary ( InitialStep = 0.01  MaxStep = 0.02  MinStep = 1e-6
+    Goal { Name = &quot;base_contact&quot;  Voltage = 1.0 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+
+<h2 id="e-s5">5. Exercises</h2>
+<ol>
+<li>Plot the doping along x = 1.0 µm; measure the E–B and B–C junction depths and the neutral base width.</li>
+<li>Vary <code>Tbase</code> (0.05, 0.1, 0.15 µm) and plot β and V<sub>A</sub> against T<sub>base</sub>.</li>
+<li>Vary <code>Nabase</code> and explain why β falls when the base is heavily doped (emitter efficiency).</li>
+<li>Turn off <code>EffectiveIntrinsicDensity(OldSlotboom)</code> and compare β. Why does band-gap narrowing in the emitter matter for a BJT?</li>
+</ol>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, lectures 6–7: Bipolar Junction Transistor, Korea Aerospace University.</li>
+<li>J. M. Early, "Effects of space-charge layer widening in junction transistors," <em>Proceedings of the IRE</em> 40, 1401 (1952).</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chapter 5.</li>
+<li>J. W. Slotboom, H. C. de Graaff, <em>Solid-State Electronics</em> 19, 857 (1976).</li>
+<li>Synopsys, <em>Sentaurus Device User Guide</em>, sections on electrode boundary conditions (current mode) and Quasistationary.</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-lab-mosfet-nonideal.html">← <span class="l-vi">Thực hành 4: MOSFET không lý tưởng</span><span class="l-en">Lab 4: the non-ideal MOSFET</span></a><a class="n" href="tcad-lab-finfet.html"><span class="l-vi">Thực hành 6: FinFET 3D</span><span class="l-en">Lab 6: a 3D FinFET</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần Semiconductor Device Design (반도체소자설계) của GS. Jinyoung Hwang, Korea Aerospace University, và bộ bài TCAD Laboratory của G. Betti Beneventi (University of Bologna) dùng trong môn học. Mã lệnh được viết lại và chú thích cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the course Semiconductor Device Design (반도체소자설계) by Prof. Jinyoung Hwang, Korea Aerospace University, and the TCAD Laboratory series by G. Betti Beneventi (University of Bologna) used in the course. The code was rewritten and commented for this page; figures were redrawn.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

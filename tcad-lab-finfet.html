@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thực hành 6: FinFET 3D" data-title-en="Lab 6: a 3D FinFET">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 6: a 3D FinFET · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="3D SDE commands, a tri-gate built with BAB, face contacts, doping and mesh in 3D.">
+<meta property="og:title" content="Lab 6: a 3D FinFET">
+<meta property="og:description" content="3D SDE commands, a tri-gate built with BAB, face contacts, doping and mesh in 3D.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 6</span><span class="l-en">Part 4 · Lesson 6</span></p>
+  <h1><span class="l-vi">Thực hành 6: FinFET 3D</span><span class="l-en">Lab 6: a 3D FinFET</span></h1>
+  <p class="sub"><span class="l-vi">Lệnh SDE 3D, cổng bao ba mặt bằng BAB, tiếp xúc theo mặt, pha tạp và lưới trong không gian.</span><span class="l-en">3D SDE commands, a tri-gate built with BAB, face contacts, doping and mesh in 3D.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Chuyển từ 2D sang 3D: dựng một FinFET cổng bao ba mặt trên SOI. Các lệnh SDE gần như giữ nguyên tên, chỉ thêm một chiều; điều khác thật sự là cách chọn mặt để làm tiếp xúc, cách đặt pha tạp trong không gian và chi phí tính toán.</p>
+
+<h2 id="v-s1">1. Vì sao FinFET</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><path d="M80,200 h420 v40 h-420 z" style="fill:#d9dde3;stroke:#667"/><path d="M80,200 l96.0,-56.0 h420 l-96.0,56.0 z" style="fill:#d9dde3;stroke:#667;opacity:.85"/><path d="M500,200 l96.0,-56.0 v40 l-96.0,56.0 z" style="fill:#d9dde3;stroke:#667;opacity:.7"/><path d="M140,110 h320 v90 h-320 z" style="fill:#c6d8f4;stroke:#4060b0"/><path d="M140,110 l18.0,-10.5 h320 l-18.0,10.5 z" style="fill:#c6d8f4;stroke:#4060b0;opacity:.85"/><path d="M460,110 l18.0,-10.5 v90 l-18.0,10.5 z" style="fill:#c6d8f4;stroke:#4060b0;opacity:.7"/><path d="M250,70 h100 v140 h-100 z" style="fill:#a8b0bd;stroke:#556"/><path d="M250,70 l90.0,-52.5 h100 l-90.0,52.5 z" style="fill:#a8b0bd;stroke:#556;opacity:.85"/><path d="M350,70 l90.0,-52.5 v140 l-90.0,52.5 z" style="fill:#a8b0bd;stroke:#556;opacity:.7"/><text x="560" y="215" class="tk" text-anchor="start">đế / oxide chôn</text><text x="110" y="150" class="tk" text-anchor="end">nguồn</text><text x="520" y="90" class="tk" text-anchor="start">máng</text><text x="240" y="60" class="tk" text-anchor="end">cổng bao ba mặt</text><text x="300" y="280" class="ns" text-anchor="middle">vây Si: rộng W<tspan dy="3" style="font-size:9px">fin</tspan><tspan dy="-3"> </tspan>, cao H<tspan dy="3" style="font-size:9px">fin</tspan><tspan dy="-3"> </tspan></text></svg><figcaption>Hình 1. FinFET cổng bao ba mặt: vây Si nằm trên oxide chôn, cổng bao hai mặt bên và mặt trên của vây; nguồn và máng ở hai đầu vây. Sơ đồ không theo tỉ lệ.</figcaption></figure>
+<p>Bài trước cho thấy kênh ngắn mất kiểm soát vì máng "với" tới nguồn. FinFET giải quyết bằng hình học: kênh là một vây Si hẹp, cổng bao quanh nhiều mặt nên điện thế của cổng chi phối toàn bộ kênh. Độ dài đặc trưng \(\lambda\) giảm theo bề rộng vây, nên với vây đủ mỏng, kênh rất ngắn vẫn giữ được độ dốc dưới ngưỡng gần 60 mV/decade và DIBL nhỏ (Hisamoto và cộng sự, 2000).</p>
+
+<h2 id="v-s2">2. Các lệnh 3D trong SDE</h2>
+<div class="tablewrap"><table>
+<tr><th>Việc</th><th>2D</th><th>3D</th></tr>
+<tr><td>Khối cơ bản</td><td><code>sdegeo:create-rectangle</code></td><td><code>sdegeo:create-cuboid</code> (hai góc đối diện); ngoài ra có hình trụ, cầu, ellipsoid</td></tr>
+<tr><td>Bo tròn</td><td><code>sdegeo:fillet-2d</code> trên đỉnh</td><td><code>sdegeo:fillet</code> trên danh sách cạnh hoặc đỉnh</td></tr>
+<tr><td>Tiếp xúc</td><td><code>define-2d-contact</code> + <code>find-edge-id</code></td><td><code>set-contact</code> + <code>find-face-id</code></td></tr>
+<tr><td>Cửa sổ pha tạp hằng</td><td><code>"Rectangle"</code></td><td><code>"Cuboid"</code></td></tr>
+<tr><td>Chuẩn của profile giải tích</td><td>một đoạn thẳng (<code>"Line"</code>)</td><td>một mặt phẳng (<code>"Rectangle"</code> nằm trong một mặt tọa độ)</td></tr>
+<tr><td>Kích thước lưới</td><td>4 số: xmax ymax xmin ymin</td><td>6 số: xmax ymax zmax xmin ymin zmin</td></tr>
+</table></div>
+
+<h2 id="v-s3">3. File SDE hoàn chỉnh</h2>
+<pre><code>;; fin_dvs.cmd -- SOI tri-gate FinFET in 3D
+;; x = along the channel (source -&gt; drain), y = across the fin, z = up
+(sde:clear)
+
+(define Lg   @Lg@)       ; gate length [um], e.g. 0.03
+(define Wf   @Wfin@)     ; fin width   [um], e.g. 0.01
+(define Hf   @Hfin@)     ; fin height  [um], e.g. 0.03
+(define Lsd  0.04)       ; source / drain extension length
+(define Tox  0.001)      ; gate oxide 1 nm
+(define Tg   0.01)       ; gate electrode thickness around the fin
+(define Tbox 0.05)       ; buried oxide
+(define Wb   0.03)       ; BOX margin on each side of the fin
+(define Lt  (+ Lsd Lg Lsd))
+(define X0  Lsd) (define X1 (+ Lsd Lg))
+
+;; ---- 1) fin and BOX ----
+(sdegeo:set-default-boolean &quot;ABA&quot;)
+(sdegeo:create-cuboid (position 0 0 0) (position Lt Wf Hf) &quot;Silicon&quot; &quot;R.Fin&quot;)
+(sdegeo:create-cuboid (position 0 (- Wb) (- Tbox)) (position Lt (+ Wf Wb) 0) &quot;SiO2&quot; &quot;R.Box&quot;)
+
+;; ---- 2) round the two top edges of the fin (radius 2 nm) ----
+(sdegeo:fillet (list (find-edge-id (position (/ Lt 2) 0  Hf))
+                     (find-edge-id (position (/ Lt 2) Wf Hf))) 0.002)
+
+;; ---- 3) gate oxide and gate wrap the fin: BAB fills only empty space ----
+(sdegeo:set-default-boolean &quot;BAB&quot;)
+(sdegeo:create-cuboid (position X0 (- Tox) 0) (position X1 (+ Wf Tox) (+ Hf Tox)) &quot;SiO2&quot; &quot;R.Gox&quot;)
+(sdegeo:create-cuboid (position X0 (- (+ Tox Tg)) 0)
+                      (position X1 (+ Wf Tox Tg) (+ Hf Tox Tg)) &quot;PolySi&quot; &quot;R.Gate&quot;)
+
+;; ---- 4) contacts on faces ----
+(define (face-contact name x y z)
+  (sdegeo:define-contact-set name 4 (color:rgb 1 0 0) &quot;##&quot;)
+  (sdegeo:set-current-contact-set name)
+  (sdegeo:set-contact (find-face-id (position x y z)) name))
+(face-contact &quot;source&quot; 0  (/ Wf 2) (/ Hf 2))
+(face-contact &quot;drain&quot;  Lt (/ Wf 2) (/ Hf 2))
+(face-contact &quot;gate&quot;   (/ Lt 2) (/ Wf 2) (+ Hf Tox Tg))
+(face-contact &quot;back&quot;   (/ Lt 2) (/ Wf 2) (- Tbox))
+
+;; ---- 5) doping ----
+(sdedr:define-constant-profile &quot;C.Ch&quot; &quot;BoronActiveConcentration&quot; 1e16)
+(sdedr:define-constant-profile-region &quot;Pl.Ch&quot; &quot;C.Ch&quot; &quot;R.Fin&quot;)
+(sdedr:define-constant-profile &quot;C.Gate&quot; &quot;PhosphorusActiveConcentration&quot; 1e20)
+(sdedr:define-constant-profile-region &quot;Pl.Gate&quot; &quot;C.Gate&quot; &quot;R.Gate&quot;)
+;; source / drain: constant n+ in cuboid windows
+(sdedr:define-constant-profile &quot;C.SD&quot; &quot;ArsenicActiveConcentration&quot; 5e19)
+(sdedr:define-refeval-window &quot;W.S&quot; &quot;Cuboid&quot; (position 0 0 0)  (position X0 Wf Hf))
+(sdedr:define-refeval-window &quot;W.D&quot; &quot;Cuboid&quot; (position X1 0 0) (position Lt Wf Hf))
+(sdedr:define-constant-profile-placement &quot;Pl.S&quot; &quot;C.SD&quot; &quot;W.S&quot;)
+(sdedr:define-constant-profile-placement &quot;Pl.D&quot; &quot;C.SD&quot; &quot;W.D&quot;)
+;; optional: an analytical profile in 3D starts from a 2D reference plane
+;; (sdedr:define-refeval-window &quot;Pln.S&quot; &quot;Rectangle&quot; (position 0 0 Hf) (position X0 Wf Hf))
+;; (sdedr:define-gaussian-profile &quot;G.S&quot; &quot;ArsenicActiveConcentration&quot;
+;;    &quot;PeakPos&quot; 0 &quot;PeakVal&quot; 1e20 &quot;ValueAtDepth&quot; 1e16 &quot;Depth&quot; 0.03 &quot;Gauss&quot; &quot;Factor&quot; 0.5)
+;; (sdedr:define-analytical-profile-placement &quot;PG.S&quot; &quot;G.S&quot; &quot;Pln.S&quot; &quot;Negative&quot; &quot;NoReplace&quot; &quot;Eval&quot;)
+
+;; ---- 6) mesh: six numbers = xmax ymax zmax xmin ymin zmin ----
+(sdedr:define-refinement-size &quot;S.All&quot; 0.01 0.01 0.01 0.002 0.002 0.002)
+(sdedr:define-refinement-material &quot;Ref.Si&quot; &quot;S.All&quot; &quot;Silicon&quot;)
+(sdedr:define-refeval-window &quot;W.Ch&quot; &quot;Cuboid&quot; (position (- X0 0.005) 0 0) (position (+ X1 0.005) Wf Hf))
+(sdedr:define-refinement-size &quot;S.Ch&quot; 0.003 0.002 0.003 0.001 0.0005 0.001)
+(sdedr:define-refinement-function &quot;S.Ch&quot; &quot;DopingConcentration&quot; &quot;MaxTransDiff&quot; 1)
+(sdedr:define-refinement-placement &quot;Ref.Ch&quot; &quot;S.Ch&quot; &quot;W.Ch&quot;)
+(sde:build-mesh &quot;snmesh&quot; &quot;-a -c boxmethod&quot; &quot;n@node@&quot;)
+</code></pre>
+<p>Thứ tự dựng hình quan trọng:</p>
+<ul>
+<li>Bo tròn mép vây <strong>trước</strong> khi thêm oxide và cổng; nếu không, cạnh cần bo đã thành cạnh trong giữa hai vùng và <code>find-edge-id</code> có thể chọn nhầm.</li>
+<li>Oxide cổng và cổng được tạo ở chế độ "BAB" (đã gặp ở bài BJT): khối oxide to hơn vây một lớp t<sub>ox</sub> nhưng chỉ lấp phần trống quanh vây, khối cổng lại chỉ lấp phần trống quanh oxide. Ba lệnh cuboid cho ra một cổng bao ba mặt đúng hình học.</li>
+<li><code>find-face-id</code> phải trúng một điểm nằm trên mặt cần chọn, không phải trên cạnh. Lấy tâm của mặt là an toàn nhất.</li>
+<li>Profile giải tích trong 3D dùng mặt chuẩn. Hướng <code>"Positive"</code> hay <code>"Negative"</code> quyết định profile đi vào phía nào của mặt; sau khi chạy, luôn kiểm tra trong Sentaurus Visual rằng pha tạp đi vào trong vây.</li>
+</ul>
+
+<h2 id="v-s4">4. Lưới và thời gian chạy</h2>
+<p>Số nút trong 3D tăng rất nhanh: làm mịn gấp đôi theo cả ba chiều là gấp tám lần số nút, và thời gian giải tăng còn nhanh hơn. Vài nguyên tắc:</p>
+<ul>
+<li>Chỉ làm mịn nơi cần: kênh dưới cổng, lớp oxide (ít nhất ba ô theo chiều dày), các mép tiếp giáp. Vùng nguồn, máng pha tạp đều và oxide chôn có thể thô.</li>
+<li>Tận dụng đối xứng: vây đối xứng qua mặt y = W<sub>fin</sub>/2, nên có thể mô phỏng nửa vây (mặt cắt là biên phản xạ, điều kiện Neumann mặc định) rồi nhân đôi dòng.</li>
+<li>Bắt đầu bằng lưới thô để kiểm tra hình học và hội tụ, chỉ làm mịn khi mọi thứ đã chạy.</li>
+<li>Kiểm tra số đỉnh và chất lượng phần tử trong log của mesher trước khi chạy SDevice.</li>
+</ul>
+
+<h2 id="v-s5">5. Mô phỏng điện</h2>
+<p>File SDevice giống MOSFET 2D (đổi tên tiếp xúc thành <code>source</code>, <code>drain</code>, <code>gate</code>, <code>back</code>). Hai khác biệt: dòng điện trong 3D là ampe thật, không còn "trên mỗi µm" và không cần <code>AreaFactor</code>; và vây rất mỏng nên hiệu ứng lượng tử làm VT tăng, có thể thêm mô hình hiệu chỉnh lượng tử (ví dụ density-gradient) khi bề rộng vây dưới khoảng 10 nm.</p>
+<p>Chuẩn hóa dòng theo bề rộng hiệu dụng \(W_{eff}=2H_{fin}+W_{fin}\) khi so với MOSFET phẳng.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Hình học vây cũng là một cách để có Ga₂O₃ thường tắt (enhancement mode) mà không cần lớp p: khi vây đủ hẹp, hiệu số công thoát của cổng làm nghèo hoàn toàn kênh n ở V<sub>G</sub> = 0. Chabak và cộng sự (2016) báo cáo FinFET Ga₂O₃ cổng bao trên đế (100) nguyên bản; Hu và cộng sự (2018) làm transistor vây dọc Ga₂O₃ với điện áp đánh thủng trên 1 kV. Cấu trúc SDE ở trên là điểm khởi đầu tốt: thay vật liệu vây, bỏ oxide chôn và đổi tiếp xúc máng xuống mặt dưới cho cấu trúc dọc.</p></div>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>Dựng cấu trúc, mở <code>n*_msh.tdr</code>, cắt mặt x = giữa cổng để kiểm tra lớp oxide bao đều ba mặt và mép vây đã được bo.</li>
+<li>Quét W<sub>fin</sub> = 10; 20; 30 nm và so sánh SS và DIBL.</li>
+<li>Mô phỏng nửa vây với mặt đối xứng, so dòng (nhân đôi) với vây đầy đủ, ghi lại thời gian chạy của hai cách.</li>
+</ol>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, bài 8: FinFET 3D SDE, Korea Aerospace University.</li>
+<li>D. Hisamoto et al., "FinFET—a self-aligned double-gate MOSFET scalable to 20 nm," <em>IEEE Transactions on Electron Devices</em> 47, 2320 (2000).</li>
+<li>K. D. Chabak et al., "Enhancement-mode Ga₂O₃ wrap-gate fin field-effect transistors on native (100) β-Ga₂O₃ substrate with high breakdown voltage," <em>Applied Physics Letters</em> 109, 213501 (2016).</li>
+<li>Z. Hu et al., "Enhancement-mode Ga₂O₃ vertical transistors with breakdown voltage &gt;1 kV," <em>IEEE Electron Device Letters</em> 39, 869 (2018).</li>
+<li>Synopsys, <em>Sentaurus Structure Editor User Guide</em>, các chương về hình học 3D và định nghĩa pha tạp.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Moving from 2D to 3D: building a tri-gate FinFET on SOI. The SDE commands keep almost the same names with one more dimension; what really changes is how you pick faces for contacts, how you place doping in space, and the computational cost.</p>
+
+<h2 id="e-s1">1. Why FinFETs</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><path d="M80,200 h420 v40 h-420 z" style="fill:#d9dde3;stroke:#667"/><path d="M80,200 l96.0,-56.0 h420 l-96.0,56.0 z" style="fill:#d9dde3;stroke:#667;opacity:.85"/><path d="M500,200 l96.0,-56.0 v40 l-96.0,56.0 z" style="fill:#d9dde3;stroke:#667;opacity:.7"/><path d="M140,110 h320 v90 h-320 z" style="fill:#c6d8f4;stroke:#4060b0"/><path d="M140,110 l18.0,-10.5 h320 l-18.0,10.5 z" style="fill:#c6d8f4;stroke:#4060b0;opacity:.85"/><path d="M460,110 l18.0,-10.5 v90 l-18.0,10.5 z" style="fill:#c6d8f4;stroke:#4060b0;opacity:.7"/><path d="M250,70 h100 v140 h-100 z" style="fill:#a8b0bd;stroke:#556"/><path d="M250,70 l90.0,-52.5 h100 l-90.0,52.5 z" style="fill:#a8b0bd;stroke:#556;opacity:.85"/><path d="M350,70 l90.0,-52.5 v140 l-90.0,52.5 z" style="fill:#a8b0bd;stroke:#556;opacity:.7"/><text x="560" y="215" class="tk" text-anchor="start">substrate / buried oxide</text><text x="110" y="150" class="tk" text-anchor="end">source</text><text x="520" y="90" class="tk" text-anchor="start">drain</text><text x="240" y="60" class="tk" text-anchor="end">tri-gate</text><text x="300" y="280" class="ns" text-anchor="middle">Si fin: width W<tspan dy="3" style="font-size:9px">fin</tspan><tspan dy="-3"> </tspan>, height H<tspan dy="3" style="font-size:9px">fin</tspan><tspan dy="-3"> </tspan></text></svg><figcaption>Figure 1. A tri-gate FinFET: the Si fin sits on buried oxide, the gate wraps both sidewalls and the top of the fin; source and drain are at the two ends of the fin. Not to scale.</figcaption></figure>
+<p>The previous lab showed that a short channel loses control because the drain "reaches" the source. A FinFET fixes this with geometry: the channel is a narrow Si fin and the gate wraps several faces, so the gate potential dominates the whole channel. The characteristic length \(\lambda\) shrinks with fin width, so a thin enough fin keeps a subthreshold swing near 60 mV/decade and small DIBL even for very short channels (Hisamoto et al., 2000).</p>
+
+<h2 id="e-s2">2. 3D commands in SDE</h2>
+<div class="tablewrap"><table>
+<tr><th>Task</th><th>2D</th><th>3D</th></tr>
+<tr><td>Basic solid</td><td><code>sdegeo:create-rectangle</code></td><td><code>sdegeo:create-cuboid</code> (two opposite corners); cylinders, spheres and ellipsoids also exist</td></tr>
+<tr><td>Rounding</td><td><code>sdegeo:fillet-2d</code> on vertices</td><td><code>sdegeo:fillet</code> on a list of edges or vertices</td></tr>
+<tr><td>Contacts</td><td><code>define-2d-contact</code> + <code>find-edge-id</code></td><td><code>set-contact</code> + <code>find-face-id</code></td></tr>
+<tr><td>Constant-doping window</td><td><code>"Rectangle"</code></td><td><code>"Cuboid"</code></td></tr>
+<tr><td>Reference for an analytical profile</td><td>a line segment (<code>"Line"</code>)</td><td>a plane (<code>"Rectangle"</code> lying in a coordinate plane)</td></tr>
+<tr><td>Mesh size</td><td>4 numbers: xmax ymax xmin ymin</td><td>6 numbers: xmax ymax zmax xmin ymin zmin</td></tr>
+</table></div>
+
+<h2 id="e-s3">3. A complete SDE file</h2>
+<pre><code>;; fin_dvs.cmd -- SOI tri-gate FinFET in 3D
+;; x = along the channel (source -&gt; drain), y = across the fin, z = up
+(sde:clear)
+
+(define Lg   @Lg@)       ; gate length [um], e.g. 0.03
+(define Wf   @Wfin@)     ; fin width   [um], e.g. 0.01
+(define Hf   @Hfin@)     ; fin height  [um], e.g. 0.03
+(define Lsd  0.04)       ; source / drain extension length
+(define Tox  0.001)      ; gate oxide 1 nm
+(define Tg   0.01)       ; gate electrode thickness around the fin
+(define Tbox 0.05)       ; buried oxide
+(define Wb   0.03)       ; BOX margin on each side of the fin
+(define Lt  (+ Lsd Lg Lsd))
+(define X0  Lsd) (define X1 (+ Lsd Lg))
+
+;; ---- 1) fin and BOX ----
+(sdegeo:set-default-boolean &quot;ABA&quot;)
+(sdegeo:create-cuboid (position 0 0 0) (position Lt Wf Hf) &quot;Silicon&quot; &quot;R.Fin&quot;)
+(sdegeo:create-cuboid (position 0 (- Wb) (- Tbox)) (position Lt (+ Wf Wb) 0) &quot;SiO2&quot; &quot;R.Box&quot;)
+
+;; ---- 2) round the two top edges of the fin (radius 2 nm) ----
+(sdegeo:fillet (list (find-edge-id (position (/ Lt 2) 0  Hf))
+                     (find-edge-id (position (/ Lt 2) Wf Hf))) 0.002)
+
+;; ---- 3) gate oxide and gate wrap the fin: BAB fills only empty space ----
+(sdegeo:set-default-boolean &quot;BAB&quot;)
+(sdegeo:create-cuboid (position X0 (- Tox) 0) (position X1 (+ Wf Tox) (+ Hf Tox)) &quot;SiO2&quot; &quot;R.Gox&quot;)
+(sdegeo:create-cuboid (position X0 (- (+ Tox Tg)) 0)
+                      (position X1 (+ Wf Tox Tg) (+ Hf Tox Tg)) &quot;PolySi&quot; &quot;R.Gate&quot;)
+
+;; ---- 4) contacts on faces ----
+(define (face-contact name x y z)
+  (sdegeo:define-contact-set name 4 (color:rgb 1 0 0) &quot;##&quot;)
+  (sdegeo:set-current-contact-set name)
+  (sdegeo:set-contact (find-face-id (position x y z)) name))
+(face-contact &quot;source&quot; 0  (/ Wf 2) (/ Hf 2))
+(face-contact &quot;drain&quot;  Lt (/ Wf 2) (/ Hf 2))
+(face-contact &quot;gate&quot;   (/ Lt 2) (/ Wf 2) (+ Hf Tox Tg))
+(face-contact &quot;back&quot;   (/ Lt 2) (/ Wf 2) (- Tbox))
+
+;; ---- 5) doping ----
+(sdedr:define-constant-profile &quot;C.Ch&quot; &quot;BoronActiveConcentration&quot; 1e16)
+(sdedr:define-constant-profile-region &quot;Pl.Ch&quot; &quot;C.Ch&quot; &quot;R.Fin&quot;)
+(sdedr:define-constant-profile &quot;C.Gate&quot; &quot;PhosphorusActiveConcentration&quot; 1e20)
+(sdedr:define-constant-profile-region &quot;Pl.Gate&quot; &quot;C.Gate&quot; &quot;R.Gate&quot;)
+;; source / drain: constant n+ in cuboid windows
+(sdedr:define-constant-profile &quot;C.SD&quot; &quot;ArsenicActiveConcentration&quot; 5e19)
+(sdedr:define-refeval-window &quot;W.S&quot; &quot;Cuboid&quot; (position 0 0 0)  (position X0 Wf Hf))
+(sdedr:define-refeval-window &quot;W.D&quot; &quot;Cuboid&quot; (position X1 0 0) (position Lt Wf Hf))
+(sdedr:define-constant-profile-placement &quot;Pl.S&quot; &quot;C.SD&quot; &quot;W.S&quot;)
+(sdedr:define-constant-profile-placement &quot;Pl.D&quot; &quot;C.SD&quot; &quot;W.D&quot;)
+;; optional: an analytical profile in 3D starts from a 2D reference plane
+;; (sdedr:define-refeval-window &quot;Pln.S&quot; &quot;Rectangle&quot; (position 0 0 Hf) (position X0 Wf Hf))
+;; (sdedr:define-gaussian-profile &quot;G.S&quot; &quot;ArsenicActiveConcentration&quot;
+;;    &quot;PeakPos&quot; 0 &quot;PeakVal&quot; 1e20 &quot;ValueAtDepth&quot; 1e16 &quot;Depth&quot; 0.03 &quot;Gauss&quot; &quot;Factor&quot; 0.5)
+;; (sdedr:define-analytical-profile-placement &quot;PG.S&quot; &quot;G.S&quot; &quot;Pln.S&quot; &quot;Negative&quot; &quot;NoReplace&quot; &quot;Eval&quot;)
+
+;; ---- 6) mesh: six numbers = xmax ymax zmax xmin ymin zmin ----
+(sdedr:define-refinement-size &quot;S.All&quot; 0.01 0.01 0.01 0.002 0.002 0.002)
+(sdedr:define-refinement-material &quot;Ref.Si&quot; &quot;S.All&quot; &quot;Silicon&quot;)
+(sdedr:define-refeval-window &quot;W.Ch&quot; &quot;Cuboid&quot; (position (- X0 0.005) 0 0) (position (+ X1 0.005) Wf Hf))
+(sdedr:define-refinement-size &quot;S.Ch&quot; 0.003 0.002 0.003 0.001 0.0005 0.001)
+(sdedr:define-refinement-function &quot;S.Ch&quot; &quot;DopingConcentration&quot; &quot;MaxTransDiff&quot; 1)
+(sdedr:define-refinement-placement &quot;Ref.Ch&quot; &quot;S.Ch&quot; &quot;W.Ch&quot;)
+(sde:build-mesh &quot;snmesh&quot; &quot;-a -c boxmethod&quot; &quot;n@node@&quot;)
+</code></pre>
+<p>The build order matters:</p>
+<ul>
+<li>Round the fin edges <strong>before</strong> adding oxide and gate; otherwise the edge to round has become an internal edge between two regions and <code>find-edge-id</code> may pick the wrong one.</li>
+<li>Gate oxide and gate are created in "BAB" mode (seen in the BJT lab): the oxide cuboid is one t<sub>ox</sub> larger than the fin but only fills the empty space around it, and the gate cuboid only fills the space around the oxide. Three cuboid commands give a geometrically correct tri-gate.</li>
+<li><code>find-face-id</code> must hit a point on the face, not on an edge. The face centre is the safest choice.</li>
+<li>In 3D an analytical profile uses a reference plane. <code>"Positive"</code> or <code>"Negative"</code> sets which side of the plane the profile enters; after the run, always check in Sentaurus Visual that the doping goes into the fin.</li>
+</ul>
+
+<h2 id="e-s4">4. Mesh and run time</h2>
+<p>Node count grows fast in 3D: halving the spacing in all three directions gives eight times as many nodes, and solve time grows even faster. Some rules:</p>
+<ul>
+<li>Refine only where needed: the channel under the gate, the oxide (at least three cells through its thickness), the junction edges. The uniformly doped source and drain and the buried oxide can be coarse.</li>
+<li>Use symmetry: the fin is symmetric about y = W<sub>fin</sub>/2, so you can simulate half a fin (the cut face is a reflecting boundary, the default Neumann condition) and double the current.</li>
+<li>Start with a coarse mesh to check geometry and convergence; refine only once everything runs.</li>
+<li>Check the vertex count and element quality in the mesher log before running SDevice.</li>
+</ul>
+
+<h2 id="e-s5">5. Electrical simulation</h2>
+<p>The SDevice file is the same as for the 2D MOSFET (with contacts <code>source</code>, <code>drain</code>, <code>gate</code>, <code>back</code>). Two differences: in 3D the current is in real amperes, no longer "per µm", and no <code>AreaFactor</code> is needed; and the fin is so thin that quantum confinement raises VT, so a quantum-correction model (for example density gradient) can be added when the fin is narrower than about 10 nm.</p>
+<p>Normalize current by the effective width \(W_{eff}=2H_{fin}+W_{fin}\) when comparing with a planar MOSFET.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Fin geometry is also a route to normally-off (enhancement-mode) Ga₂O₃ without a p layer: in a narrow enough fin the gate work-function difference fully depletes the n channel at V<sub>G</sub> = 0. Chabak et al. (2016) reported wrap-gate Ga₂O₃ FinFETs on native (100) substrates; Hu et al. (2018) made vertical Ga₂O₃ fin transistors with breakdown above 1 kV. The SDE structure above is a good starting point: change the fin material, drop the buried oxide and move the drain contact to the bottom face for a vertical device.</p></div>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>Build the structure, open <code>n*_msh.tdr</code> and cut the plane x = gate centre to check that the oxide wraps all three faces evenly and that the fin edges are rounded.</li>
+<li>Sweep W<sub>fin</sub> = 10, 20, 30 nm and compare SS and DIBL.</li>
+<li>Simulate half a fin with a symmetry plane, compare its current (doubled) with the full fin and note the run time of each.</li>
+</ol>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, lecture 8: FinFET 3D SDE, Korea Aerospace University.</li>
+<li>D. Hisamoto et al., "FinFET—a self-aligned double-gate MOSFET scalable to 20 nm," <em>IEEE Transactions on Electron Devices</em> 47, 2320 (2000).</li>
+<li>K. D. Chabak et al., "Enhancement-mode Ga₂O₃ wrap-gate fin field-effect transistors on native (100) β-Ga₂O₃ substrate with high breakdown voltage," <em>Applied Physics Letters</em> 109, 213501 (2016).</li>
+<li>Z. Hu et al., "Enhancement-mode Ga₂O₃ vertical transistors with breakdown voltage &gt;1 kV," <em>IEEE Electron Device Letters</em> 39, 869 (2018).</li>
+<li>Synopsys, <em>Sentaurus Structure Editor User Guide</em>, chapters on 3D geometry and doping definitions.</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-lab-bjt.html">← <span class="l-vi">Thực hành 5: transistor lưỡng cực npn</span><span class="l-en">Lab 5: the npn bipolar transistor</span></a><a class="n" href="tcad-lab-flash.html"><span class="l-vi">Thực hành 7: ô nhớ flash bẫy điện tích</span><span class="l-en">Lab 7: a charge-trap flash cell</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần Semiconductor Device Design (반도체소자설계) của GS. Jinyoung Hwang, Korea Aerospace University, và bộ bài TCAD Laboratory của G. Betti Beneventi (University of Bologna) dùng trong môn học. Mã lệnh được viết lại và chú thích cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the course Semiconductor Device Design (반도체소자설계) by Prof. Jinyoung Hwang, Korea Aerospace University, and the TCAD Laboratory series by G. Betti Beneventi (University of Bologna) used in the course. The code was rewritten and commented for this page; figures were redrawn.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

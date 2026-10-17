@@ -104,7 +104,7 @@
 </header>
 <div class="l-vi">
 
-<p class="lead">TCAD cho phép nhìn vào bên trong linh kiện: điện trường đạt cực đại ở đâu, bẫy nào đang nạp điện, dòng đi theo đường nào. Tám bài này hướng dẫn người mới bắt đầu từ vật lý nền tảng đến vận hành Synopsys Sentaurus, với ví dụ xuyên suốt là diode Schottky Ga₂O₃.</p>
+<p class="lead">TCAD cho phép nhìn vào bên trong linh kiện: điện trường đạt cực đại ở đâu, bẫy nào đang nạp điện, dòng đi theo đường nào. Tám bài đầu hướng dẫn người mới bắt đầu từ vật lý nền tảng đến vận hành Synopsys Sentaurus, với ví dụ xuyên suốt là diode Schottky Ga₂O₃. Phần 4 gồm bảy bài thực hành theo học phần <em>Semiconductor Device Design</em> của GS. Jinyoung Hwang (Korea Aerospace University): tiếp giáp pn, MOSFET, BJT, FinFET 3D và ô nhớ flash.</p>
 <div class="ls-search" data-scope="tcad"><input type="search" data-vi="Tìm kiếm… (vd: Quasistationary, mesh)" data-en="Search… (e.g. Quasistationary, mesh)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
 <p class="box" style="text-align:left">Các đoạn mã được viết lại để minh họa, không sao chép từ tài liệu của Synopsys. Từ khóa có thể khác giữa các phiên bản; luôn đối chiếu với hướng dẫn sử dụng đi kèm phần mềm.</p>
 <h2>Phần 1. Nền tảng</h2>
@@ -124,12 +124,23 @@
   <li><a href="tcad-breakdown-cv.html">Đánh thủng, dòng rò, C-V và nhiệt độ</a><span>Tích phân ion hóa và tiêu chí trường tới hạn, cơ chế dòng rò, phân tích AC và quét nhiệt độ.</span></li>
   <li><a href="tcad-visual-debug.html">Sentaurus Visual và xử lý lỗi hội tụ</a><span>Vẽ và trích xuất bằng Tcl, danh sách xử lý khi không hội tụ và thói quen làm việc tốt.</span></li>
 </ol>
+<h2>Phần 4. Thực hành Sentaurus (môn Semiconductor Device Design)</h2>
+<ol class="toc">
+  <li><a href="tcad-lab-pn.html">Thực hành 1: tiếp giáp pn lý tưởng</a><span>Cây thí nghiệm SWB, file SDE và SDevice hoàn chỉnh, giản đồ vùng, thế xây dựng, I-V và trường hợp điện trở.</span></li>
+  <li><a href="tcad-lab-pn-nonideal.html">Thực hành 2: pn không lý tưởng và đánh thủng</a><span>SRH và hệ số lý tưởng, điện trở nối tiếp, p⁺n một phía, tiếp giáp Gauss, đánh thủng thác lũ và xuyên thủng.</span></li>
+  <li><a href="tcad-lab-mosfet.html">Thực hành 3: MOSFET kênh n</a><span>Cấu trúc tham số hóa, chèn đỉnh cho tiếp xúc, kỹ thuật nửa cấu trúc, ID–VG, ID–VD, VT và SS.</span></li>
+  <li><a href="tcad-lab-mosfet-nonideal.html">Thực hành 4: MOSFET không lý tưởng</a><span>Điện tích oxide và C–V mixed mode, suy giảm độ linh động, DIBL và hiệu ứng thân.</span></li>
+  <li><a href="tcad-lab-bjt.html">Thực hành 5: transistor lưỡng cực npn</a><span>Lớp chôn và sinker, mẹo boolean BAB, chuyển base sang chế độ dòng, họ IC–VCE và đồ thị Gummel.</span></li>
+  <li><a href="tcad-lab-finfet.html">Thực hành 6: FinFET 3D</a><span>Lệnh SDE 3D, cổng bao ba mặt bằng BAB, tiếp xúc theo mặt, pha tạp và lưới trong không gian.</span></li>
+  <li><a href="tcad-lab-flash.html">Thực hành 7: ô nhớ flash bẫy điện tích</a><span>Vật liệu nitride, file tham số, lưới phi cục bộ, bẫy với xuyên hầm, khởi tạo, ghi và đọc.</span></li>
+</ol>
 <div class="res"><h2>Sách và tài liệu tham khảo</h2>
 <h3>Tài liệu Sentaurus</h3><ul>
 <li>Synopsys, <em>Sentaurus Workbench / Structure Editor / Device / Visual User Guides</em> và module <em>Sentaurus Training</em>: đi kèm phần mềm, là nguồn chính xác nhất cho cú pháp theo phiên bản.</li>
 <li>UC Berkeley EECS, <a href="https://inst.eecs.berkeley.edu/~ee232/sp15/Tutorials/Sentaurus_Instructional_Connection.pdf" target="_blank" rel="noopener">Sentaurus instructional connection</a>.</li>
 <li>D. W. Parent, <a href="https://ee.kpi.ua/~yv/edu/ok/book/sentaurus_2_eng.pdf" target="_blank" rel="noopener">Sentaurus TCAD student guide</a>.</li>
-<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Synopsys TCAD Sentaurus training modules</a>.</li></ul>
+<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Synopsys TCAD Sentaurus training modules</a>.</li>
+<li>J. Hwang, <em>Semiconductor Device Design</em> (반도체소자설계), Korea Aerospace University; G. Betti Beneventi, <em>TCAD Laboratory</em>, University of Bologna (cơ sở của Phần 4).</li></ul>
 <h3>Sách</h3><ul>
 <li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
 <li>D. Vasileska, S. M. Goodnick, G. Klimeck, <em>Computational Electronics: Semiclassical and Quantum Device Modeling and Simulation</em>, CRC Press (2010).</li>
@@ -143,7 +154,7 @@
 </div>
 <div class="l-en">
 
-<p class="lead">TCAD lets you look inside a device: where the field peaks, which traps are charging, which path the current takes. These eight lessons take beginners from the underlying physics to running Synopsys Sentaurus, with a Ga₂O₃ Schottky diode as the running example.</p>
+<p class="lead">TCAD lets you look inside a device: where the field peaks, which traps are charging, which path the current takes. The first eight lessons take beginners from the underlying physics to running Synopsys Sentaurus, with a Ga₂O₃ Schottky diode as the running example. Part 4 has seven hands-on labs following the course <em>Semiconductor Device Design</em> by Prof. Jinyoung Hwang (Korea Aerospace University): pn junctions, MOSFETs, BJTs, a 3D FinFET and a flash memory cell.</p>
 <div class="ls-search" data-scope="tcad"><input type="search" data-vi="Tìm kiếm… (vd: Quasistationary, mesh)" data-en="Search… (e.g. Quasistationary, mesh)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
 <p class="box" style="text-align:left">The code examples are written from scratch for illustration, not copied from Synopsys documentation. Keywords may differ between versions; always check the user guides shipped with your software.</p>
 <h2>Part 1. Foundations</h2>
@@ -163,12 +174,23 @@
   <li><a href="tcad-breakdown-cv.html">Breakdown, leakage, C-V and temperature</a><span>Ionization integral and critical-field criterion, leakage mechanisms, AC analysis and temperature sweeps.</span></li>
   <li><a href="tcad-visual-debug.html">Sentaurus Visual and fixing convergence</a><span>Plotting and extraction with Tcl, a convergence checklist and good working habits.</span></li>
 </ol>
+<h2>Part 4. Sentaurus labs (Semiconductor Device Design course)</h2>
+<ol class="toc">
+  <li><a href="tcad-lab-pn.html">Lab 1: the ideal pn junction</a><span>The SWB tree, complete SDE and SDevice files, band diagram, built-in potential, I-V and the resistor case.</span></li>
+  <li><a href="tcad-lab-pn-nonideal.html">Lab 2: non-ideal pn junctions and breakdown</a><span>SRH and the ideality factor, series resistance, one-sided p⁺n, Gaussian junctions, avalanche breakdown and reach-through.</span></li>
+  <li><a href="tcad-lab-mosfet.html">Lab 3: the n-channel MOSFET</a><span>A parameterized structure, vertices for contacts, the half-structure technique, ID–VG, ID–VD, VT and SS.</span></li>
+  <li><a href="tcad-lab-mosfet-nonideal.html">Lab 4: the non-ideal MOSFET</a><span>Oxide charge and mixed-mode C–V, mobility degradation, DIBL and the body effect.</span></li>
+  <li><a href="tcad-lab-bjt.html">Lab 5: the npn bipolar transistor</a><span>Buried layer and sinker, the BAB boolean trick, switching the base to current mode, IC–VCE family and Gummel plot.</span></li>
+  <li><a href="tcad-lab-finfet.html">Lab 6: a 3D FinFET</a><span>3D SDE commands, a tri-gate built with BAB, face contacts, doping and mesh in 3D.</span></li>
+  <li><a href="tcad-lab-flash.html">Lab 7: a charge-trap flash cell</a><span>Nitride material, parameter files, nonlocal meshes, traps with tunneling, initialization, program and read.</span></li>
+</ol>
 <div class="res"><h2>Books and references</h2>
 <h3>Sentaurus documentation</h3><ul>
 <li>Synopsys, <em>Sentaurus Workbench / Structure Editor / Device / Visual User Guides</em> và module <em>Sentaurus Training</em>: shipped with the software, the most accurate source for version-specific syntax.</li>
 <li>UC Berkeley EECS, <a href="https://inst.eecs.berkeley.edu/~ee232/sp15/Tutorials/Sentaurus_Instructional_Connection.pdf" target="_blank" rel="noopener">Sentaurus instructional connection</a>.</li>
 <li>D. W. Parent, <a href="https://ee.kpi.ua/~yv/edu/ok/book/sentaurus_2_eng.pdf" target="_blank" rel="noopener">Sentaurus TCAD student guide</a>.</li>
-<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Synopsys TCAD Sentaurus training modules</a>.</li></ul>
+<li>CMC Microsystems, <a href="https://cmc.ca/sn-synopsys-tcad-sentaurus-training-modules" target="_blank" rel="noopener">Synopsys TCAD Sentaurus training modules</a>.</li>
+<li>J. Hwang, <em>Semiconductor Device Design</em> (반도체소자설계), Korea Aerospace University; G. Betti Beneventi, <em>TCAD Laboratory</em>, University of Bologna (basis of Part 4).</li></ul>
 <h3>Books</h3><ul>
 <li>S. Selberherr, <em>Analysis and Simulation of Semiconductor Devices</em>, Springer (1984).</li>
 <li>D. Vasileska, S. M. Goodnick, G. Klimeck, <em>Computational Electronics: Semiclassical and Quantum Device Modeling and Simulation</em>, CRC Press (2010).</li>

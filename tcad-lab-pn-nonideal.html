@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thực hành 2: pn không lý tưởng và đánh thủng" data-title-en="Lab 2: non-ideal pn junctions and breakdown">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 2: non-ideal pn junctions and breakdown · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="SRH and the ideality factor, series resistance, one-sided p⁺n, Gaussian junctions, avalanche breakdown and reach-through.">
+<meta property="og:title" content="Lab 2: non-ideal pn junctions and breakdown">
+<meta property="og:description" content="SRH and the ideality factor, series resistance, one-sided p⁺n, Gaussian junctions, avalanche breakdown and reach-through.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 2</span><span class="l-en">Part 4 · Lesson 2</span></p>
+  <h1><span class="l-vi">Thực hành 2: pn không lý tưởng và đánh thủng</span><span class="l-en">Lab 2: non-ideal pn junctions and breakdown</span></h1>
+  <p class="sub"><span class="l-vi">SRH và hệ số lý tưởng, điện trở nối tiếp, p⁺n một phía, tiếp giáp Gauss, đánh thủng thác lũ và xuyên thủng.</span><span class="l-en">SRH and the ideality factor, series resistance, one-sided p⁺n, Gaussian junctions, avalanche breakdown and reach-through.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Diode lý tưởng của bài trước chỉ có dòng khuếch tán. Bài này lần lượt thêm các hiệu ứng làm diode thật khác sách: tái hợp trong vùng nghèo, điện trở nối tiếp, pha tạp không đối xứng, pha tạp biến đổi dần và đánh thủng thác lũ.</p>
+
+<h2 id="v-s1">1. Tái hợp SRH và hệ số lý tưởng</h2>
+<figure><svg viewBox="0 0 560 320" class="fig-svg" role="img"><line x1="66" y1="275" x2="540" y2="275" class="ax"/><line x1="66" y1="275" x2="66" y2="20" class="ax"/><line x1="66.0" y1="275" x2="66.0" y2="280" class="ax"/><text x="66.0" y="295" class="tk" text-anchor="middle">0</text><line x1="160.8" y1="275" x2="160.8" y2="280" class="ax"/><text x="160.8" y="295" class="tk" text-anchor="middle">0.2</text><line x1="255.60000000000002" y1="275" x2="255.60000000000002" y2="280" class="ax"/><text x="255.60000000000002" y="295" class="tk" text-anchor="middle">0.4</text><line x1="350.4" y1="275" x2="350.4" y2="280" class="ax"/><text x="350.4" y="295" class="tk" text-anchor="middle">0.6</text><line x1="445.20000000000005" y1="275" x2="445.20000000000005" y2="280" class="ax"/><text x="445.20000000000005" y="295" class="tk" text-anchor="middle">0.8</text><line x1="540.0" y1="275" x2="540.0" y2="280" class="ax"/><text x="540.0" y="295" class="tk" text-anchor="middle">1</text><line x1="61" y1="275.0" x2="66" y2="275.0" class="ax"/><line x1="66" y1="275.0" x2="540" y2="275.0" class="grid"/><text x="57" y="279.0" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-12</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="220.35714285714286" x2="66" y2="220.35714285714286" class="ax"/><line x1="66" y1="220.35714285714286" x2="540" y2="220.35714285714286" class="grid"/><text x="57" y="224.35714285714286" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-9</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="165.71428571428572" x2="66" y2="165.71428571428572" class="ax"/><line x1="66" y1="165.71428571428572" x2="540" y2="165.71428571428572" class="grid"/><text x="57" y="169.71428571428572" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-6</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="111.07142857142856" x2="66" y2="111.07142857142856" class="ax"/><line x1="66" y1="111.07142857142856" x2="540" y2="111.07142857142856" class="grid"/><text x="57" y="115.07142857142856" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-3</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="56.428571428571445" x2="66" y2="56.428571428571445" class="ax"/><line x1="66" y1="56.428571428571445" x2="540" y2="56.428571428571445" class="grid"/><text x="57" y="60.428571428571445" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">0</tspan><tspan dy="6"> </tspan></text><text x="303.0" y="314" class="lab" text-anchor="middle">Điện áp thuận (V)</text><text x="14" y="147.5" class="lab" text-anchor="middle" transform="rotate(-90 14 147.5)">Mật độ dòng (A/cm²)</text><path d="M89.7,255.5 L94.4,252.0 L99.2,248.6 L103.9,245.4 L108.7,242.2 L113.4,239.1 L118.1,236.0 L122.9,232.9 L127.6,229.8 L132.4,226.7 L137.1,223.6 L141.8,220.6 L146.6,217.5 L151.3,214.4 L156.1,211.4 L160.8,208.3 L165.5,205.3 L170.3,202.2 L175.0,199.1 L179.8,196.1 L184.5,193.0 L189.2,190.0 L194.0,186.9 L198.7,183.8 L203.5,180.8 L208.2,177.7 L212.9,174.7 L217.7,171.6 L222.4,168.5 L227.2,165.5 L231.9,162.4 L236.6,159.4 L241.4,156.3 L246.1,153.2 L250.9,150.2 L255.6,147.1 L260.3,144.1 L265.1,141.0 L269.8,137.9 L274.6,134.9 L279.3,131.8 L284.0,128.8 L288.8,125.7 L293.5,122.6 L298.3,119.6 L303.0,116.5 L307.7,113.5 L312.5,110.4 L317.2,107.3 L322.0,104.3 L326.7,101.2 L331.4,98.2 L336.2,95.1 L340.9,92.0 L345.7,89.0 L350.4,85.9 L355.1,82.9 L359.9,79.8 L364.6,76.7 L369.4,73.7 L374.1,70.6 L378.8,67.6 L383.6,64.5 L388.3,61.4 L393.1,58.4 L397.8,55.3 L402.5,52.2 L407.3,49.2 L412.0,46.1 L416.8,43.1 L421.5,40.0 L426.2,36.9 L431.0,33.9 L435.7,30.8 L440.5,27.8 L445.2,24.7 L449.9,21.6" class="s1" fill="none"/><path d="M89.7,189.6 L94.4,187.2 L99.2,185.1 L103.9,183.1 L108.7,181.2 L113.4,179.4 L118.1,177.6 L122.9,175.9 L127.6,174.2 L132.4,172.6 L137.1,170.9 L141.8,169.3 L146.6,167.7 L151.3,166.1 L156.1,164.6 L160.8,163.0 L165.5,161.4 L170.3,159.9 L175.0,158.3 L179.8,156.8 L184.5,155.2 L189.2,153.6 L194.0,152.1 L198.7,150.5 L203.5,149.0 L208.2,147.4 L212.9,145.8 L217.7,144.3 L222.4,142.7 L227.2,141.1 L231.9,139.5 L236.6,137.8 L241.4,136.2 L246.1,134.5 L250.9,132.8 L255.6,131.1 L260.3,129.4 L265.1,127.6 L269.8,125.8 L274.6,123.9 L279.3,121.9 L284.0,119.9 L288.8,117.9 L293.5,115.7 L298.3,113.5 L303.0,111.2 L307.7,108.9 L312.5,106.5 L317.2,104.0 L322.0,101.4 L326.7,98.8 L331.4,96.1 L336.2,93.4 L340.9,90.6 L345.7,87.8 L350.4,84.9 L355.1,82.0 L359.9,79.1 L364.6,76.1 L369.4,73.2 L374.1,70.2 L378.8,67.2 L383.6,64.2 L388.3,61.2 L393.1,58.2 L397.8,55.2 L402.5,52.1 L407.3,49.1 L412.0,46.0 L416.8,43.0 L421.5,40.0 L426.2,36.9 L431.0,33.8 L435.7,30.8 L440.5,27.7 L445.2,24.7 L449.9,21.6" class="s2" fill="none"/><path d="M89.7,189.6 L94.4,187.2 L99.2,185.1 L103.9,183.1 L108.7,181.2 L113.4,179.4 L118.1,177.6 L122.9,175.9 L127.6,174.2 L132.4,172.6 L137.1,170.9 L141.8,169.3 L146.6,167.7 L151.3,166.1 L156.1,164.6 L160.8,163.0 L165.5,161.4 L170.3,159.9 L175.0,158.3 L179.8,156.8 L184.5,155.2 L189.2,153.6 L194.0,152.1 L198.7,150.5 L203.5,149.0 L208.2,147.4 L212.9,145.8 L217.7,144.3 L222.4,142.7 L227.2,141.1 L231.9,139.5 L236.6,137.8 L241.4,136.2 L246.1,134.6 L250.9,132.9 L255.6,131.2 L260.3,129.4 L265.1,127.6 L269.8,125.8 L274.6,123.9 L279.3,122.0 L284.0,120.1 L288.8,118.0 L293.5,116.0 L298.3,113.8 L303.0,111.7 L307.7,109.5 L312.5,107.3 L317.2,105.0 L322.0,102.9 L326.7,100.7 L331.4,98.7 L336.2,96.7 L340.9,94.9 L345.7,93.2 L350.4,91.6 L355.1,90.1 L359.9,88.8 L364.6,87.5 L369.4,86.4 L374.1,85.4 L378.8,84.4 L383.6,83.5 L388.3,82.7 L393.1,81.9 L397.8,81.2 L402.5,80.5 L407.3,79.9 L412.0,79.3 L416.8,78.8 L421.5,78.2 L426.2,77.7 L431.0,77.3 L435.7,76.8 L440.5,76.4 L445.2,76.0 L449.9,75.6 L454.7,75.2 L459.4,74.8 L464.2,74.5 L468.9,74.1 L473.6,73.8 L478.4,73.5 L483.1,73.2 L487.9,72.9 L492.6,72.6 L497.3,72.4 L502.1,72.1 L506.8,71.8 L511.6,71.6 L516.3,71.3 L521.0,71.1 L525.8,70.9 L530.5,70.6 L535.3,70.4 L540.0,70.2" class="s3" fill="none"/><line x1="256" y1="205" x2="280" y2="205" class="s1"/><text x="286" y="209" class="tk">lý tưởng, n = 1 (60 mV/dec)</text><line x1="256" y1="223" x2="280" y2="223" class="s2"/><text x="286" y="227" class="tk">+ SRH trong vùng nghèo (n → 2)</text><line x1="256" y1="241" x2="280" y2="241" class="s3"/><text x="286" y="245" class="tk">+ điện trở nối tiếp</text></svg><figcaption>Hình 1. Đặc tuyến thuận tính giải tích: chỉ dòng khuếch tán (n = 1), thêm dòng tái hợp trong vùng nghèo (n → 2 ở điện áp thấp) và thêm điện trở nối tiếp. Thông số chọn để minh họa.</figcaption></figure>
+<p>Khi bật <code>SRH</code>, electron và lỗ trống tái hợp qua mức bẫy ngay trong vùng nghèo. Theo Sah, Noyce và Shockley, dòng này tỉ lệ với \(\exp(qV/2kT)\), nên ở điện áp thấp đường log I–V có độ dốc khoảng 120 mV/decade (n ≈ 2); lên cao hơn, dòng khuếch tán (n = 1) chiếm ưu thế:</p>
+<p>$$J\approx J_{0}\left(e^{qV/kT}-1\right)+\frac{qn_iW}{2\tau}\left(e^{qV/2kT}-1\right)$$</p>
+<p>Ở phân cực ngược, dòng sinh trong vùng nghèo \(qn_iW/2\tau\) tăng theo \(W\propto\sqrt{V_{bi}-V}\), nên dòng ngược không bão hòa phẳng như mô hình lý tưởng. Thời gian sống \(\tau\) nằm trong khối <code>Scharfetter</code> của <code>Silicon.par</code>; đổi nó và chạy lại để thấy dòng ngược thay đổi tỉ lệ nghịch với \(\tau\). Thêm <code>SRH(DopingDependence)</code> để \(\tau\) giảm ở vùng pha tạp cao.</p>
+<p><strong>Cách đo n trong Inspect:</strong> lấy hai điểm trên nhánh thuận cách nhau một decade dòng, \(n=\Delta V/(2{,}303\,kT/q)\). Vẽ n theo V để thấy vùng chuyển tiếp từ 2 về 1.</p>
+
+<h2 id="v-s2">2. Điện trở nối tiếp</h2>
+<p>Ở dòng lớn, một phần điện áp rơi trên các vùng trung hòa và tiếp xúc: \(V=V_j+IR_s\). Trên thang log, đường cong bị uốn xuống. Ước lượng \(R_s\) bằng độ lệch \(\Delta V\) giữa đường đo và đường thẳng ngoại suy ở cùng dòng, \(R_s=\Delta V/I\); làm ở hai dòng khác nhau để kiểm tra \(\Delta V\) tỉ lệ với I. Làm dày lớp n hoặc giảm pha tạp, \(R_s\) tăng theo.</p>
+
+<h2 id="v-s3">3. Tiếp giáp một phía p⁺n</h2>
+<p>Thay lớp p bằng lớp p⁺ 10²⁰ cm⁻³ dày 0,2 µm, giữ lớp n 10¹⁶ cm⁻³ dày 2 µm. Vì \(N_A\gg N_D\), gần như toàn bộ vùng nghèo nằm ở phía n:</p>
+<p>$$W\approx\sqrt{\frac{2\varepsilon_s(V_{bi}-V)}{qN_D}},\qquad \frac{1}{C^2}=\frac{2(V_{bi}-V)}{q\varepsilon_s N_D A^2}$$</p>
+<p>Đây là cấu trúc dùng để đo pha tạp bằng C-V: độ dốc của \(1/C^2\) theo V cho \(N_D\), giao điểm với trục V cho \(V_{bi}\) (khoảng 0,93 V ở đây). Với pha tạp 10²⁰ cm⁻³, cần bật thu hẹp vùng cấm (<code>EffectiveIntrinsicDensity(OldSlotboom)</code>) và thống kê Fermi–Dirac (<code>Fermi</code>) để phía p⁺ được mô tả đúng. Cách thiết lập mô phỏng điện dung được trình bày trong bài <a href="tcad-lab-mosfet-nonideal.html">MOSFET không lý tưởng</a>.</p>
+
+<h2 id="v-s4">4. Tiếp giáp biến đổi dần (Gauss)</h2>
+<p>Tiếp giáp thật được tạo bằng khuếch tán hoặc cấy ion, nên pha tạp giảm dần từ bề mặt. Cấu trúc trong bài giảng: khối Si 2 × 2 µm pha tạp n 10¹⁶ cm⁻³, profile Gauss loại p có đỉnh 10²⁰ cm⁻³ tại bề mặt, sâu 100 nm, đi vào qua cửa sổ rộng 1 µm; tiếp xúc p dài 1 µm ở trên, tiếp xúc n phủ cả cạnh dưới.</p>
+<pre><code>;; graded junction: Gaussian p+ diffusion into a 2 x 2 um n-type block
+(define W 2.0)  (define H 2.0)
+(sdegeo:create-rectangle (position 0 0 0) (position W H 0) &quot;Silicon&quot; &quot;R.Si&quot;)
+
+;; background donors everywhere
+(sdedr:define-constant-profile &quot;C.n&quot; &quot;PhosphorusActiveConcentration&quot; 1e16)
+(sdedr:define-constant-profile-region &quot;Pl.n&quot; &quot;C.n&quot; &quot;R.Si&quot;)
+
+;; the p+ diffusion enters through a 1 um window centred on the top edge
+(sdedr:define-refeval-window &quot;BL.p&quot; &quot;Line&quot; (position 0.5 0 0) (position 1.5 0 0))
+(sdedr:define-gaussian-profile &quot;G.p&quot; &quot;BoronActiveConcentration&quot;
+   &quot;PeakPos&quot; 0  &quot;PeakVal&quot; 1e20       ; peak at the surface
+   &quot;ValueAtDepth&quot; 1e16 &quot;Depth&quot; 0.1   ; equals the background -&gt; junction at 100 nm
+   &quot;Gauss&quot; &quot;Factor&quot; 0.8)             ; lateral spread = 0.8 x vertical spread
+(sdedr:define-analytical-profile-placement &quot;Pl.p&quot; &quot;G.p&quot; &quot;BL.p&quot; &quot;Symm&quot; &quot;NoReplace&quot; &quot;Eval&quot;)
+
+;; the mesh follows the doping: refine wherever log10(N) changes by &gt; 1 per cell
+(sdedr:define-refinement-size &quot;S.Si&quot; 0.1 0.1 0.002 0.002)
+(sdedr:define-refinement-function &quot;S.Si&quot; &quot;DopingConcentration&quot; &quot;MaxTransDiff&quot; 1)
+(sdedr:define-refinement-region &quot;Ref.Si&quot; &quot;S.Si&quot; &quot;R.Si&quot;)
+</code></pre>
+<p>Hai tham số cần hiểu: <code>ValueAtDepth</code> đặt bằng pha tạp nền thì tiếp giáp kim loại học nằm đúng tại <code>Depth</code>; <code>Factor</code> là tỉ lệ độ khuếch tán ngang so với chiều sâu, làm profile tràn ra ngoài cửa sổ và tạo các góc cong ở hai đầu tiếp giáp. Lệnh <code>define-refinement-function</code> với <code>MaxTransDiff 1</code> tự làm mịn lưới nơi pha tạp thay đổi mạnh, rất tiện cho tiếp giáp cong.</p>
+<p>So với tiếp giáp đột ngột cùng pha tạp nền, điện dung ở 0 V nhỏ hơn và điện trường lớn nhất tập trung ở góc cong, chứ không ở phần phẳng.</p>
+
+<h2 id="v-s5">5. Đánh thủng thác lũ</h2>
+<p>Bật mô hình ion hóa va chạm rồi quét ngược tới khi dòng tăng vọt:</p>
+<pre><code>Physics {
+  Mobility ( DopingDependence HighFieldSaturation )
+  EffectiveIntrinsicDensity ( OldSlotboom )   * band-gap narrowing for the p+ side
+  Recombination ( SRH  Avalanche )             * impact ionization (default model)
+}
+Math {
+  * stop the sweep once the reverse current reaches 1 uA/um
+  BreakCriteria { Current ( Contact = &quot;n_contact&quot;  AbsVal = 1e-6 ) }
+}
+Solve {
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary (
+    InitialStep = 0.01  MaxStep = 0.05  MinStep = 1e-6  Increment = 1.3
+    Goal { Name = &quot;p_contact&quot;  Voltage = -100 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p>Với tiếp giáp phẳng p⁺n Si một phía, Sze và Ng cho ước lượng \(BV\approx 60\,(E_g/1{,}1)^{3/2}(N_D/10^{16})^{-3/4}\) V, tức khoảng 60 V ở 10¹⁶ cm⁻³. Nhưng lớp n ở đây chỉ dày 2 µm: vùng nghèo chạm tới tiếp xúc n ở khoảng 30 V (xuyên thủng, <em>reach-through</em>), sau đó điện trường không còn tam giác mà gần hình thang, nên đánh thủng xảy ra sớm hơn 60 V. Đây là bài tập tốt để thấy mô phỏng khác công thức ở đâu và vì sao. Với tiếp giáp Gauss, góc cong làm điện trường tập trung và hạ thêm điện áp đánh thủng.</p>
+<p>Điểm chạy được: trong file <code>.tdr</code> tại điểm cuối, vẽ <code>ImpactIonization</code> (hay <code>eAvalanche</code>) để thấy vùng ion hóa nằm ở đâu.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Ga₂O₃ có trường tới hạn ước tính khoảng 8 MV/cm, lớn hơn Si khoảng 25 lần, nhưng chính vì vậy mà sự tập trung điện trường ở góc và mép điện cực quyết định điện áp đánh thủng thực tế. Bài tập "góc cong của tiếp giáp Gauss" ở trên là bản đơn giản của bài toán kết thúc mép (field plate, cấy ion cách điện, NiO bảo vệ mép) trong diode Ga₂O₃. Hệ số ion hóa va chạm của Ga₂O₃ vẫn đang được hiệu chỉnh; xem bài <a href="tcad-breakdown-cv.html">Đánh thủng, dòng rò, C-V</a>.</p></div>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>Vẽ hệ số lý tưởng n theo điện áp cho trường hợp có và không có SRH; cho \(\tau\) thay đổi 10 lần và nhận xét.</li>
+<li>Với tiếp giáp p⁺n, mô phỏng C-V từ −5 đến 0 V, vẽ \(1/C^2\) và trích \(N_D\), \(V_{bi}\).</li>
+<li>So sánh phân bố điện trường ở −10 V của tiếp giáp đột ngột và tiếp giáp Gauss. Điện trường lớn nhất nằm ở đâu?</li>
+<li>Tìm điện áp đánh thủng khi lớp n dày 2 µm và 5 µm, giải thích sự khác nhau bằng hiện tượng xuyên thủng.</li>
+</ol>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, bài 2: pn junction (non-ideal), Korea Aerospace University.</li>
+<li>C.-T. Sah, R. N. Noyce, W. Shockley, "Carrier generation and recombination in p-n junctions and p-n junction characteristics," <em>Proceedings of the IRE</em> 45, 1228 (1957).</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chương 2 (đánh thủng tiếp giáp).</li>
+<li>R. van Overstraeten, H. de Man, "Measurement of the ionization rates in diffused silicon p-n junctions," <em>Solid-State Electronics</em> 13, 583 (1970).</li>
+<li>J. W. Slotboom, H. C. de Graaff, "Measurements of bandgap narrowing in Si bipolar transistors," <em>Solid-State Electronics</em> 19, 857 (1976).</li>
+<li>B. J. Baliga, <em>Fundamentals of Power Semiconductor Devices</em>, 2nd ed., Springer (2019), chương về kết thúc mép.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The ideal diode of the previous lab has only diffusion current. This lab adds, one at a time, the effects that make a real diode differ from the textbook: recombination in the depletion region, series resistance, asymmetric doping, graded doping and avalanche breakdown.</p>
+
+<h2 id="e-s1">1. SRH recombination and the ideality factor</h2>
+<figure><svg viewBox="0 0 560 320" class="fig-svg" role="img"><line x1="66" y1="275" x2="540" y2="275" class="ax"/><line x1="66" y1="275" x2="66" y2="20" class="ax"/><line x1="66.0" y1="275" x2="66.0" y2="280" class="ax"/><text x="66.0" y="295" class="tk" text-anchor="middle">0</text><line x1="160.8" y1="275" x2="160.8" y2="280" class="ax"/><text x="160.8" y="295" class="tk" text-anchor="middle">0.2</text><line x1="255.60000000000002" y1="275" x2="255.60000000000002" y2="280" class="ax"/><text x="255.60000000000002" y="295" class="tk" text-anchor="middle">0.4</text><line x1="350.4" y1="275" x2="350.4" y2="280" class="ax"/><text x="350.4" y="295" class="tk" text-anchor="middle">0.6</text><line x1="445.20000000000005" y1="275" x2="445.20000000000005" y2="280" class="ax"/><text x="445.20000000000005" y="295" class="tk" text-anchor="middle">0.8</text><line x1="540.0" y1="275" x2="540.0" y2="280" class="ax"/><text x="540.0" y="295" class="tk" text-anchor="middle">1</text><line x1="61" y1="275.0" x2="66" y2="275.0" class="ax"/><line x1="66" y1="275.0" x2="540" y2="275.0" class="grid"/><text x="57" y="279.0" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-12</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="220.35714285714286" x2="66" y2="220.35714285714286" class="ax"/><line x1="66" y1="220.35714285714286" x2="540" y2="220.35714285714286" class="grid"/><text x="57" y="224.35714285714286" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-9</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="165.71428571428572" x2="66" y2="165.71428571428572" class="ax"/><line x1="66" y1="165.71428571428572" x2="540" y2="165.71428571428572" class="grid"/><text x="57" y="169.71428571428572" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-6</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="111.07142857142856" x2="66" y2="111.07142857142856" class="ax"/><line x1="66" y1="111.07142857142856" x2="540" y2="111.07142857142856" class="grid"/><text x="57" y="115.07142857142856" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-3</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="56.428571428571445" x2="66" y2="56.428571428571445" class="ax"/><line x1="66" y1="56.428571428571445" x2="540" y2="56.428571428571445" class="grid"/><text x="57" y="60.428571428571445" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">0</tspan><tspan dy="6"> </tspan></text><text x="303.0" y="314" class="lab" text-anchor="middle">Forward voltage (V)</text><text x="14" y="147.5" class="lab" text-anchor="middle" transform="rotate(-90 14 147.5)">Current density (A/cm²)</text><path d="M89.7,255.5 L94.4,252.0 L99.2,248.6 L103.9,245.4 L108.7,242.2 L113.4,239.1 L118.1,236.0 L122.9,232.9 L127.6,229.8 L132.4,226.7 L137.1,223.6 L141.8,220.6 L146.6,217.5 L151.3,214.4 L156.1,211.4 L160.8,208.3 L165.5,205.3 L170.3,202.2 L175.0,199.1 L179.8,196.1 L184.5,193.0 L189.2,190.0 L194.0,186.9 L198.7,183.8 L203.5,180.8 L208.2,177.7 L212.9,174.7 L217.7,171.6 L222.4,168.5 L227.2,165.5 L231.9,162.4 L236.6,159.4 L241.4,156.3 L246.1,153.2 L250.9,150.2 L255.6,147.1 L260.3,144.1 L265.1,141.0 L269.8,137.9 L274.6,134.9 L279.3,131.8 L284.0,128.8 L288.8,125.7 L293.5,122.6 L298.3,119.6 L303.0,116.5 L307.7,113.5 L312.5,110.4 L317.2,107.3 L322.0,104.3 L326.7,101.2 L331.4,98.2 L336.2,95.1 L340.9,92.0 L345.7,89.0 L350.4,85.9 L355.1,82.9 L359.9,79.8 L364.6,76.7 L369.4,73.7 L374.1,70.6 L378.8,67.6 L383.6,64.5 L388.3,61.4 L393.1,58.4 L397.8,55.3 L402.5,52.2 L407.3,49.2 L412.0,46.1 L416.8,43.1 L421.5,40.0 L426.2,36.9 L431.0,33.9 L435.7,30.8 L440.5,27.8 L445.2,24.7 L449.9,21.6" class="s1" fill="none"/><path d="M89.7,189.6 L94.4,187.2 L99.2,185.1 L103.9,183.1 L108.7,181.2 L113.4,179.4 L118.1,177.6 L122.9,175.9 L127.6,174.2 L132.4,172.6 L137.1,170.9 L141.8,169.3 L146.6,167.7 L151.3,166.1 L156.1,164.6 L160.8,163.0 L165.5,161.4 L170.3,159.9 L175.0,158.3 L179.8,156.8 L184.5,155.2 L189.2,153.6 L194.0,152.1 L198.7,150.5 L203.5,149.0 L208.2,147.4 L212.9,145.8 L217.7,144.3 L222.4,142.7 L227.2,141.1 L231.9,139.5 L236.6,137.8 L241.4,136.2 L246.1,134.5 L250.9,132.8 L255.6,131.1 L260.3,129.4 L265.1,127.6 L269.8,125.8 L274.6,123.9 L279.3,121.9 L284.0,119.9 L288.8,117.9 L293.5,115.7 L298.3,113.5 L303.0,111.2 L307.7,108.9 L312.5,106.5 L317.2,104.0 L322.0,101.4 L326.7,98.8 L331.4,96.1 L336.2,93.4 L340.9,90.6 L345.7,87.8 L350.4,84.9 L355.1,82.0 L359.9,79.1 L364.6,76.1 L369.4,73.2 L374.1,70.2 L378.8,67.2 L383.6,64.2 L388.3,61.2 L393.1,58.2 L397.8,55.2 L402.5,52.1 L407.3,49.1 L412.0,46.0 L416.8,43.0 L421.5,40.0 L426.2,36.9 L431.0,33.8 L435.7,30.8 L440.5,27.7 L445.2,24.7 L449.9,21.6" class="s2" fill="none"/><path d="M89.7,189.6 L94.4,187.2 L99.2,185.1 L103.9,183.1 L108.7,181.2 L113.4,179.4 L118.1,177.6 L122.9,175.9 L127.6,174.2 L132.4,172.6 L137.1,170.9 L141.8,169.3 L146.6,167.7 L151.3,166.1 L156.1,164.6 L160.8,163.0 L165.5,161.4 L170.3,159.9 L175.0,158.3 L179.8,156.8 L184.5,155.2 L189.2,153.6 L194.0,152.1 L198.7,150.5 L203.5,149.0 L208.2,147.4 L212.9,145.8 L217.7,144.3 L222.4,142.7 L227.2,141.1 L231.9,139.5 L236.6,137.8 L241.4,136.2 L246.1,134.6 L250.9,132.9 L255.6,131.2 L260.3,129.4 L265.1,127.6 L269.8,125.8 L274.6,123.9 L279.3,122.0 L284.0,120.1 L288.8,118.0 L293.5,116.0 L298.3,113.8 L303.0,111.7 L307.7,109.5 L312.5,107.3 L317.2,105.0 L322.0,102.9 L326.7,100.7 L331.4,98.7 L336.2,96.7 L340.9,94.9 L345.7,93.2 L350.4,91.6 L355.1,90.1 L359.9,88.8 L364.6,87.5 L369.4,86.4 L374.1,85.4 L378.8,84.4 L383.6,83.5 L388.3,82.7 L393.1,81.9 L397.8,81.2 L402.5,80.5 L407.3,79.9 L412.0,79.3 L416.8,78.8 L421.5,78.2 L426.2,77.7 L431.0,77.3 L435.7,76.8 L440.5,76.4 L445.2,76.0 L449.9,75.6 L454.7,75.2 L459.4,74.8 L464.2,74.5 L468.9,74.1 L473.6,73.8 L478.4,73.5 L483.1,73.2 L487.9,72.9 L492.6,72.6 L497.3,72.4 L502.1,72.1 L506.8,71.8 L511.6,71.6 L516.3,71.3 L521.0,71.1 L525.8,70.9 L530.5,70.6 L535.3,70.4 L540.0,70.2" class="s3" fill="none"/><line x1="256" y1="205" x2="280" y2="205" class="s1"/><text x="286" y="209" class="tk">ideal, n = 1 (60 mV/dec)</text><line x1="256" y1="223" x2="280" y2="223" class="s2"/><text x="286" y="227" class="tk">+ SRH in depletion region (n → 2)</text><line x1="256" y1="241" x2="280" y2="241" class="s3"/><text x="286" y="245" class="tk">+ series resistance</text></svg><figcaption>Figure 1. Analytical forward characteristics: diffusion current only (n = 1), plus recombination in the depletion region (n → 2 at low bias), plus series resistance. Parameters chosen for illustration.</figcaption></figure>
+<p>With <code>SRH</code> on, electrons and holes recombine through trap levels inside the depletion region. Following Sah, Noyce and Shockley, this current goes as \(\exp(qV/2kT)\), so at low bias the log I–V slope is about 120 mV/decade (n ≈ 2); at higher bias the diffusion current (n = 1) takes over:</p>
+<p>$$J\approx J_{0}\left(e^{qV/kT}-1\right)+\frac{qn_iW}{2\tau}\left(e^{qV/2kT}-1\right)$$</p>
+<p>Under reverse bias, the generation current \(qn_iW/2\tau\) grows with \(W\propto\sqrt{V_{bi}-V}\), so the reverse current does not saturate flat as in the ideal model. The lifetime \(\tau\) is in the <code>Scharfetter</code> block of <code>Silicon.par</code>; change it and rerun to see the reverse current scale as \(1/\tau\). Use <code>SRH(DopingDependence)</code> so that \(\tau\) drops in heavily doped regions.</p>
+<p><strong>Measuring n in Inspect:</strong> take two points on the forward branch one decade of current apart, \(n=\Delta V/(2.303\,kT/q)\). Plot n against V to see the transition from 2 to 1.</p>
+
+<h2 id="e-s2">2. Series resistance</h2>
+<p>At high current part of the voltage drops across the neutral regions and contacts: \(V=V_j+IR_s\). On a log scale the curve bends over. Estimate \(R_s\) from the offset \(\Delta V\) between the simulated curve and the extrapolated straight line at the same current, \(R_s=\Delta V/I\); do it at two currents to check that \(\Delta V\) scales with I. A thicker or more lightly doped n layer raises \(R_s\).</p>
+
+<h2 id="e-s3">3. One-sided p⁺n junction</h2>
+<p>Replace the p layer with a 0.2 µm p⁺ layer at 10²⁰ cm⁻³ and keep the 2 µm n layer at 10¹⁶ cm⁻³. Because \(N_A\gg N_D\), almost all of the depletion region is on the n side:</p>
+<p>$$W\approx\sqrt{\frac{2\varepsilon_s(V_{bi}-V)}{qN_D}},\qquad \frac{1}{C^2}=\frac{2(V_{bi}-V)}{q\varepsilon_s N_D A^2}$$</p>
+<p>This is the structure used to measure doping by C-V: the slope of \(1/C^2\) against V gives \(N_D\), and the intercept on the V axis gives \(V_{bi}\) (about 0.93 V here). At 10²⁰ cm⁻³, turn on band-gap narrowing (<code>EffectiveIntrinsicDensity(OldSlotboom)</code>) and Fermi–Dirac statistics (<code>Fermi</code>) so the p⁺ side is described correctly. The capacitance setup is given in the <a href="tcad-lab-mosfet-nonideal.html">non-ideal MOSFET</a> lab.</p>
+
+<h2 id="e-s4">4. Graded (Gaussian) junction</h2>
+<p>Real junctions are made by diffusion or implantation, so the doping falls off gradually from the surface. The structure in the lecture: a 2 × 2 µm Si block doped n 10¹⁶ cm⁻³, a p-type Gaussian with a 10²⁰ cm⁻³ peak at the surface and 100 nm depth, entering through a 1 µm window; a 1 µm p contact on top and an n contact across the bottom edge.</p>
+<pre><code>;; graded junction: Gaussian p+ diffusion into a 2 x 2 um n-type block
+(define W 2.0)  (define H 2.0)
+(sdegeo:create-rectangle (position 0 0 0) (position W H 0) &quot;Silicon&quot; &quot;R.Si&quot;)
+
+;; background donors everywhere
+(sdedr:define-constant-profile &quot;C.n&quot; &quot;PhosphorusActiveConcentration&quot; 1e16)
+(sdedr:define-constant-profile-region &quot;Pl.n&quot; &quot;C.n&quot; &quot;R.Si&quot;)
+
+;; the p+ diffusion enters through a 1 um window centred on the top edge
+(sdedr:define-refeval-window &quot;BL.p&quot; &quot;Line&quot; (position 0.5 0 0) (position 1.5 0 0))
+(sdedr:define-gaussian-profile &quot;G.p&quot; &quot;BoronActiveConcentration&quot;
+   &quot;PeakPos&quot; 0  &quot;PeakVal&quot; 1e20       ; peak at the surface
+   &quot;ValueAtDepth&quot; 1e16 &quot;Depth&quot; 0.1   ; equals the background -&gt; junction at 100 nm
+   &quot;Gauss&quot; &quot;Factor&quot; 0.8)             ; lateral spread = 0.8 x vertical spread
+(sdedr:define-analytical-profile-placement &quot;Pl.p&quot; &quot;G.p&quot; &quot;BL.p&quot; &quot;Symm&quot; &quot;NoReplace&quot; &quot;Eval&quot;)
+
+;; the mesh follows the doping: refine wherever log10(N) changes by &gt; 1 per cell
+(sdedr:define-refinement-size &quot;S.Si&quot; 0.1 0.1 0.002 0.002)
+(sdedr:define-refinement-function &quot;S.Si&quot; &quot;DopingConcentration&quot; &quot;MaxTransDiff&quot; 1)
+(sdedr:define-refinement-region &quot;Ref.Si&quot; &quot;S.Si&quot; &quot;R.Si&quot;)
+</code></pre>
+<p>Two parameters to understand: setting <code>ValueAtDepth</code> to the background doping puts the metallurgical junction exactly at <code>Depth</code>; <code>Factor</code> is the ratio of lateral to vertical spread, which makes the profile spill out of the window and creates curved corners at both ends of the junction. <code>define-refinement-function</code> with <code>MaxTransDiff 1</code> refines the mesh automatically wherever the doping changes steeply, which is handy for curved junctions.</p>
+<p>Compared with an abrupt junction on the same background, the zero-bias capacitance is lower and the peak field concentrates at the curved corners rather than in the flat part.</p>
+
+<h2 id="e-s5">5. Avalanche breakdown</h2>
+<p>Turn on the impact ionization model and sweep in reverse until the current shoots up:</p>
+<pre><code>Physics {
+  Mobility ( DopingDependence HighFieldSaturation )
+  EffectiveIntrinsicDensity ( OldSlotboom )   * band-gap narrowing for the p+ side
+  Recombination ( SRH  Avalanche )             * impact ionization (default model)
+}
+Math {
+  * stop the sweep once the reverse current reaches 1 uA/um
+  BreakCriteria { Current ( Contact = &quot;n_contact&quot;  AbsVal = 1e-6 ) }
+}
+Solve {
+  Coupled { Poisson }
+  Coupled { Poisson Electron Hole }
+  Quasistationary (
+    InitialStep = 0.01  MaxStep = 0.05  MinStep = 1e-6  Increment = 1.3
+    Goal { Name = &quot;p_contact&quot;  Voltage = -100 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p>For a planar one-sided Si p⁺n junction, Sze and Ng give \(BV\approx 60\,(E_g/1.1)^{3/2}(N_D/10^{16})^{-3/4}\) V, about 60 V at 10¹⁶ cm⁻³. But the n layer here is only 2 µm thick: the depletion region reaches the n contact at about 30 V (reach-through), after which the field is no longer triangular but nearly trapezoidal, so breakdown comes before 60 V. This is a good exercise in seeing where simulation departs from a formula, and why. In the Gaussian junction the curved corners concentrate the field and lower the breakdown voltage further.</p>
+<p>Tip: in the final <code>.tdr</code> file, plot <code>ImpactIonization</code> (or <code>eAvalanche</code>) to see where ionization happens.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Ga₂O₃ has an estimated critical field of about 8 MV/cm, some 25 times that of Si, and precisely for that reason field crowding at corners and electrode edges sets the practical breakdown voltage. The "curved Gaussian junction" exercise above is a simple version of the edge-termination problem (field plates, isolation implants, NiO guard rings) in Ga₂O₃ diodes. Impact ionization coefficients for Ga₂O₃ are still being calibrated; see the <a href="tcad-breakdown-cv.html">Breakdown, leakage, C-V</a> lesson.</p></div>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>Plot the ideality factor n against voltage with and without SRH; change \(\tau\) by a factor of 10 and comment.</li>
+<li>For the p⁺n junction, simulate C-V from −5 to 0 V, plot \(1/C^2\) and extract \(N_D\) and \(V_{bi}\).</li>
+<li>Compare the field distribution at −10 V for the abrupt and the Gaussian junction. Where is the peak field?</li>
+<li>Find the breakdown voltage for a 2 µm and a 5 µm n layer and explain the difference through reach-through.</li>
+</ol>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em>, lecture 2: pn junction (non-ideal), Korea Aerospace University.</li>
+<li>C.-T. Sah, R. N. Noyce, W. Shockley, "Carrier generation and recombination in p-n junctions and p-n junction characteristics," <em>Proceedings of the IRE</em> 45, 1228 (1957).</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chapter 2 (junction breakdown).</li>
+<li>R. van Overstraeten, H. de Man, "Measurement of the ionization rates in diffused silicon p-n junctions," <em>Solid-State Electronics</em> 13, 583 (1970).</li>
+<li>J. W. Slotboom, H. C. de Graaff, "Measurements of bandgap narrowing in Si bipolar transistors," <em>Solid-State Electronics</em> 19, 857 (1976).</li>
+<li>B. J. Baliga, <em>Fundamentals of Power Semiconductor Devices</em>, 2nd ed., Springer (2019), chapter on edge terminations.</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-lab-pn.html">← <span class="l-vi">Thực hành 1: tiếp giáp pn lý tưởng</span><span class="l-en">Lab 1: the ideal pn junction</span></a><a class="n" href="tcad-lab-mosfet.html"><span class="l-vi">Thực hành 3: MOSFET kênh n</span><span class="l-en">Lab 3: the n-channel MOSFET</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần Semiconductor Device Design (반도체소자설계) của GS. Jinyoung Hwang, Korea Aerospace University, và bộ bài TCAD Laboratory của G. Betti Beneventi (University of Bologna) dùng trong môn học. Mã lệnh được viết lại và chú thích cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the course Semiconductor Device Design (반도체소자설계) by Prof. Jinyoung Hwang, Korea Aerospace University, and the TCAD Laboratory series by G. Betti Beneventi (University of Bologna) used in the course. The code was rewritten and commented for this page; figures were redrawn.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

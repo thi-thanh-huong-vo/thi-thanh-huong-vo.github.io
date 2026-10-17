@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Thực hành 1: tiếp giáp pn lý tưởng" data-title-en="Lab 1: the ideal pn junction">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab 1: the ideal pn junction · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The SWB tree, complete SDE and SDevice files, band diagram, built-in potential, I-V and the resistor case.">
+<meta property="og:title" content="Lab 1: the ideal pn junction">
+<meta property="og:description" content="The SWB tree, complete SDE and SDevice files, band diagram, built-in potential, I-V and the resistor case.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:1rem 0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="tcad.html"><span class="l-vi">TCAD với Sentaurus</span><span class="l-en">TCAD with Sentaurus</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 1</span><span class="l-en">Part 4 · Lesson 1</span></p>
+  <h1><span class="l-vi">Thực hành 1: tiếp giáp pn lý tưởng</span><span class="l-en">Lab 1: the ideal pn junction</span></h1>
+  <p class="sub"><span class="l-vi">Cây thí nghiệm SWB, file SDE và SDevice hoàn chỉnh, giản đồ vùng, thế xây dựng, I-V và trường hợp điện trở.</span><span class="l-en">The SWB tree, complete SDE and SDevice files, band diagram, built-in potential, I-V and the resistor case.</span></p>
+</header>
+<div class="l-vi"><div class="box"><p class="t">Về phần thực hành này</p>
+<p>Phần 4 đi theo các bài thực hành của học phần <em>Semiconductor Device Design</em> (GS. Jinyoung Hwang, Korea Aerospace University) và bộ bài TCAD Laboratory của G. Betti Beneventi (University of Bologna) được dùng trong môn học. Cấu trúc, thông số và trình tự giải bám theo bài giảng; mã lệnh được viết lại, chú thích và kiểm tra cú pháp theo tài liệu Sentaurus. Từ khóa có thể khác giữa các phiên bản, nên luôn đối chiếu với hướng dẫn sử dụng đi kèm phiên bản bạn dùng.</p></div>
+<p class="lead">Bài thực hành đầu tiên: dựng một tiếp giáp pn đột ngột, quét đặc tuyến I-V và đọc giản đồ vùng năng lượng. Đây là "hello world" của TCAD, đủ đơn giản để kiểm tra mọi kết quả bằng công thức trong sách.</p>
+
+<h2 id="v-s1">1. Cấu trúc và cây thí nghiệm</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><rect x="40" y="40" width="80" height="100" style="fill:#f4c6c6;stroke:#b04040"/><rect x="40" y="140" width="80" height="100" style="fill:#c6d8f4;stroke:#4060b0"/><text x="80" y="95" class="ns" text-anchor="middle">p 10¹⁶</text><text x="80" y="195" class="ns" text-anchor="middle">n 10¹⁶</text><text x="80" y="28" class="nt" text-anchor="middle">(a) Đột ngột</text><text x="80" y="262" class="ns" text-anchor="middle">1 × 4 µm</text><text x="130" y="143" class="tk" text-anchor="start">y = 2 µm</text><rect x="40" y="36" width="80" height="4" style="fill:#333"/><rect x="40" y="240" width="80" height="4" style="fill:#333"/><rect x="260" y="40" width="80" height="10" style="fill:#e07d7d;stroke:#b04040"/><rect x="260" y="50" width="80" height="190" style="fill:#c6d8f4;stroke:#4060b0"/><text x="300" y="30" class="nt" text-anchor="middle">(b) Một phía p⁺n</text><text x="300" y="150" class="ns" text-anchor="middle">n 10¹⁶</text><text x="350" y="49" class="tk" text-anchor="start">p⁺ 10<tspan dy="-5" style="font-size:9px">20</tspan><tspan dy="5"> </tspan>, 0,2 µm</text><text x="300" y="262" class="ns" text-anchor="middle">n dày 2 µm</text><rect x="260" y="36" width="80" height="4" style="fill:#333"/><rect x="260" y="240" width="80" height="4" style="fill:#333"/><defs><linearGradient id="gv" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e07d7d"/><stop offset="0.25" stop-color="#f4c6c6"/><stop offset="0.45" stop-color="#c6d8f4"/></linearGradient></defs><rect x="430" y="40" width="80" height="200" style="fill:url(#gv);stroke:#4060b0"/><rect x="460" y="36" width="20" height="4" style="fill:#333"/><text x="470" y="28" class="nt" text-anchor="middle">(c) Biến đổi dần</text><text x="470" y="150" class="ns" text-anchor="middle">n 10¹⁶</text><text x="520" y="50" class="tk" text-anchor="start">Gauss, đỉnh 10<tspan dy="-5" style="font-size:9px">20</tspan><tspan dy="5"> </tspan></text><text x="520" y="66" class="tk" text-anchor="start">sâu 100 nm</text><text x="470" y="262" class="ns" text-anchor="middle">cửa sổ pha tạp 1 µm</text><rect x="430" y="240" width="80" height="4" style="fill:#333"/></svg><figcaption>Hình 1. Ba cấu trúc pn dùng trong Phần 4: (a) tiếp giáp đột ngột 1 × 4 µm của bài này, (b) tiếp giáp một phía p⁺n và (c) tiếp giáp biến đổi dần của bài sau. Sơ đồ không theo tỉ lệ.</figcaption></figure>
+<p>Cấu trúc trong bài giảng là một khối 1 µm × 4 µm: lớp p dày 2 µm ở trên (từ y = 0 đến 2 µm), lớp n dày 2 µm ở dưới, cả hai pha tạp 10¹⁶ cm⁻³. Tiếp xúc p ở cạnh trên, tiếp xúc n ở cạnh dưới. Trong Sentaurus Workbench (SWB), tạo dự án gồm một công cụ SDE và một công cụ SDevice, rồi thêm các tham số:</p>
+<div class="tablewrap"><table>
+<tr><th>Tham số</th><th>Giá trị gợi ý</th><th>Dùng ở</th></tr>
+<tr><td><code>material</code></td><td>Silicon, Germanium, GaAs</td><td>SDE</td></tr>
+<tr><td><code>Wp</code>, <code>Wn</code></td><td>2, 2 (µm)</td><td>SDE</td></tr>
+<tr><td><code>NA</code>, <code>ND</code></td><td>1e16; thêm 1e18 để so sánh</td><td>SDE</td></tr>
+<tr><td><code>SRH</code></td><td>0, 1</td><td>SDevice</td></tr>
+<tr><td><code>V_start</code>, <code>V_stop</code></td><td>−5, 1 (V)</td><td>SDevice</td></tr>
+</table></div>
+<p>Mỗi tổ hợp giá trị là một thí nghiệm (một hàng trong cây). Khi tiền xử lý (Ctrl+P), SWB thay mọi chuỗi <code>@tên@</code> trong file lệnh bằng giá trị của hàng đó, nên một file lệnh phục vụ toàn bộ cây.</p>
+
+<h2 id="v-s2">2. File SDE</h2>
+<pre><code>;; pn_dvs.cmd -- ideal step pn junction, 1 um wide, p on top of n
+;; axes: x = width, y = depth (y grows downward)
+(sde:clear)
+(sdegeo:set-default-boolean &quot;ABA&quot;)          ; a new region overwrites old ones
+
+;; ---- parameters taken from the SWB tree ----
+(define MAT  &quot;@material@&quot;)                  ; Silicon, Germanium or GaAs
+(define W    1.0)                           ; width [um]
+(define Wp   @Wp@)                          ; p-layer thickness [um], e.g. 2
+(define Wn   @Wn@)                          ; n-layer thickness [um], e.g. 2
+(define NA   @NA@)                          ; acceptors [cm-3], e.g. 1e16
+(define ND   @ND@)                          ; donors    [cm-3], e.g. 1e16
+(define Ytot (+ Wp Wn))
+
+;; ---- geometry: two rectangles of the same material ----
+(sdegeo:create-rectangle (position 0 0 0)  (position W Wp 0)   MAT &quot;R.p&quot;)
+(sdegeo:create-rectangle (position 0 Wp 0) (position W Ytot 0) MAT &quot;R.n&quot;)
+
+;; ---- contacts: declare a set, make it current, attach it to an edge ----
+(sdegeo:define-contact-set &quot;p_contact&quot; 4 (color:rgb 1 0 0) &quot;##&quot;)
+(sdegeo:define-contact-set &quot;n_contact&quot; 4 (color:rgb 0 0 1) &quot;##&quot;)
+(sdegeo:set-current-contact-set &quot;p_contact&quot;)
+(sdegeo:define-2d-contact (find-edge-id (position (/ W 2) 0 0)) &quot;p_contact&quot;)
+(sdegeo:set-current-contact-set &quot;n_contact&quot;)
+(sdegeo:define-2d-contact (find-edge-id (position (/ W 2) Ytot 0)) &quot;n_contact&quot;)
+
+;; ---- doping: one constant profile per region ----
+(sdedr:define-constant-profile &quot;P.acc&quot; &quot;BoronActiveConcentration&quot; NA)
+(sdedr:define-constant-profile-region &quot;Pl.acc&quot; &quot;P.acc&quot; &quot;R.p&quot;)
+(sdedr:define-constant-profile &quot;P.don&quot; &quot;PhosphorusActiveConcentration&quot; ND)
+(sdedr:define-constant-profile-region &quot;Pl.don&quot; &quot;P.don&quot; &quot;R.n&quot;)
+
+;; ---- mesh: coarse everywhere, fine within +-0.3 um of the junction ----
+;; refinement-size arguments: xmax ymax xmin ymin  [um]
+(sdedr:define-refeval-window &quot;Win.all&quot; &quot;Rectangle&quot; (position 0 0 0) (position W Ytot 0))
+(sdedr:define-refinement-size &quot;Size.all&quot; 0.25 0.2 0.05 0.01)
+(sdedr:define-refinement-placement &quot;Ref.all&quot; &quot;Size.all&quot; &quot;Win.all&quot;)
+(sdedr:define-refeval-window &quot;Win.j&quot; &quot;Rectangle&quot;
+   (position 0 (- Wp 0.3) 0) (position W (+ Wp 0.3) 0))
+(sdedr:define-refinement-size &quot;Size.j&quot; 0.25 0.01 0.05 0.002)
+(sdedr:define-refinement-placement &quot;Ref.j&quot; &quot;Size.j&quot; &quot;Win.j&quot;)
+
+;; ---- build the mesh; n@node@ names the output after this SWB node ----
+(sde:build-mesh &quot;snmesh&quot; &quot;-a -c boxmethod&quot; &quot;n@node@&quot;)
+</code></pre>
+<p>Ba điểm người mới hay vấp:</p>
+<ul>
+<li>Trong SDE, chú thích bắt đầu bằng dấu chấm phẩy <code>;</code>; trong SDevice là dấu sao <code>*</code> hoặc <code>#</code>.</li>
+<li><code>find-edge-id</code> chọn cạnh đi qua điểm cho trước. Nếu điểm rơi đúng vào đỉnh hoặc không nằm trên cạnh nào, tiếp xúc sẽ không được tạo mà không báo lỗi rõ ràng; hãy mở <code>n*_msh.tdr</code> để kiểm tra.</li>
+<li>Tên pha tạp <code>BoronActiveConcentration</code> và <code>PhosphorusActiveConcentration</code> là acceptor và donor trong mọi vật liệu bán dẫn, nên cùng file này chạy được cho Ge và GaAs.</li>
+</ul>
+
+<h2 id="v-s3">3. File SDevice và file tham số</h2>
+<pre><code>* pn_des.cmd -- DC sweep of the pn junction
+File {
+  Grid      = &quot;@tdr@&quot;             * mesh + doping written by SDE for this experiment
+  Parameter = &quot;@parameter@&quot;       * the project parameter file (sdevice.par)
+  Plot      = &quot;n@node@_des.tdr&quot;   * fields, bands and densities (snapshots)
+  Current   = &quot;n@node@_des.plt&quot;   * terminal voltages and currents
+  Output    = &quot;n@node@_des.log&quot;
+}
+
+Electrode {                        * names must match the SDE contact names
+  { Name = &quot;p_contact&quot;  Voltage = 0.0 }
+  { Name = &quot;n_contact&quot;  Voltage = 0.0 }
+}
+
+Physics {
+  AreaFactor = 1                   * 2D current is per um of depth; scale it here
+  Mobility ( DopingDependence )
+  Recombination (
+  #if @SRH@ == 1                   * SWB switch: 0 = ideal diode, 1 = with SRH
+    SRH
+  #endif
+  )
+}
+
+Plot {
+  DopingConcentration  SpaceCharge  ElectricField/Vector  Potential
+  ConductionBandEnergy  ValenceBandEnergy  eQuasiFermiEnergy  hQuasiFermiEnergy
+  eDensity  hDensity  eCurrent/Vector  hCurrent/Vector  SRHRecombination
+}
+
+Math {
+  Extrapolate                      * start each step from an extrapolated guess
+  Derivatives                      * full Jacobian for Newton
+  -RelErrControl
+  Digits     = 5                   * relative error 1e-5
+  Iterations = 20                  * Newton iterations per step
+  Method     = ParDiSo             * direct linear solver
+  CNormPrint                       * print where the error is largest
+}
+
+Solve {
+  Coupled { Poisson }                                   * 1) equilibrium guess
+  Coupled { Poisson Electron Hole }                     * 2) full equilibrium
+
+  Quasistationary (                                     * 3) reverse branch
+    InitialStep = 0.01  MaxStep = 0.05  MinStep = 1e-5
+    Goal { Name = &quot;p_contact&quot;  Voltage = @V_start@ }
+    Plot { Range = (0, 1)  Intervals = 2 }
+  ) { Coupled { Poisson Electron Hole } }
+
+  Quasistationary (                                     * 4) back to 0 V
+    InitialStep = 0.05  MaxStep = 0.1  MinStep = 1e-5
+    Goal { Name = &quot;p_contact&quot;  Voltage = 0 }
+  ) { Coupled { Poisson Electron Hole } }
+
+  NewCurrentPrefix = &quot;fwd_&quot;                             * 5) separate file for the
+  Quasistationary (                                     *    forward branch
+    InitialStep = 0.01  MaxStep = 0.02  MinStep = 1e-5
+    Goal { Name = &quot;p_contact&quot;  Voltage = @V_stop@ }
+    Plot { Range = (0, 1)  Intervals = 10 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p>Một vài lựa chọn đáng chú ý. Khối <code>#if @SRH@ == 1 ... #endif</code> được SWB xử lý trước khi chạy, nên cùng một file cho ra hai phiên bản có và không có tái hợp SRH. <code>AreaFactor</code> nhân dòng điện: mô phỏng 2D cho dòng trên mỗi µm chiều sâu, nên muốn dòng của linh kiện thật thì đặt <code>AreaFactor</code> bằng chiều sâu tính theo µm. Quét ngược trước, về 0 V rồi mới quét thuận giúp mỗi nhánh bắt đầu từ một nghiệm đã hội tụ; <code>NewCurrentPrefix</code> ghi nhánh thuận ra file <code>.plt</code> riêng cho dễ vẽ.</p>
+<p>SWB cần một file tham số, dù rỗng. Muốn xem và sửa tham số mặc định của từng vật liệu thì xuất chúng ra:</p>
+<pre><code># in the project folder, collect default parameters for each material
+sdevice -P:Silicon    &gt;  sdevice.par
+sdevice -P:Germanium  &gt;&gt; sdevice.par
+sdevice -P:GaAs       &gt;&gt; sdevice.par
+# then delete the log header that each call prints, keeping only the
+# blocks  Material = &quot;Silicon&quot; { ... }  and so on
+</code></pre>
+
+<h2 id="v-s4">4. Chạy và kiểm tra hội tụ</h2>
+<ol>
+<li>Ctrl+P để tiền xử lý tất cả các nút.</li>
+<li>Chọn các nút SDE, Ctrl+R để chạy; nút chuyển sang màu vàng là xong.</li>
+<li>Chọn các nút SDevice, Ctrl+R.</li>
+<li>Mở file <code>.out</code> hoặc <code>.log</code> của nút SDevice: mỗi bước in ra sai số chuẩn hóa của từng phương trình; hội tụ khi sai số nhỏ hơn 1. Nhờ <code>CNormPrint</code>, file còn ghi tọa độ nơi sai số lớn nhất, chỗ cần làm mịn lưới nếu bị kẹt.</li>
+</ol>
+
+<h2 id="v-s5">5. Đọc kết quả và đối chiếu với lý thuyết</h2>
+<p><strong>Giản đồ vùng.</strong> Mở file <code>.tdr</code> ở 0 V trong Sentaurus Visual, cắt một đường dọc theo y và vẽ <code>ConductionBandEnergy</code>, <code>ValenceBandEnergy</code> và hai mức giả Fermi. Ở cân bằng hai mức giả Fermi trùng nhau và phẳng; độ cong của vùng là thế xây dựng:</p>
+<p>$$V_{bi}=\frac{kT}{q}\ln\frac{N_A N_D}{n_i^2}$$</p>
+<p>Bài thực hành của Betti Beneventi cho \(V_{bi}\approx 697\) mV khi \(N_A=N_D=10^{16}\) cm⁻³ và khoảng 937 mV khi tăng lên 10¹⁸ cm⁻³; với Ge (\(n_i\approx 2{,}4\times10^{13}\) cm⁻³) khoảng 434 mV, với GaAs (\(n_i\approx 1{,}8\times10^{6}\) cm⁻³) khoảng 1,29 V. Đó cũng gần đúng là "điện áp mở" đọc được trên đặc tuyến thuận tuyến tính.</p>
+<p><strong>Vùng nghèo.</strong> Với \(N_A=N_D=10^{16}\) cm⁻³ trong Si:</p>
+<p>$$W=\sqrt{\frac{2\varepsilon_s V_{bi}}{q}\left(\frac{1}{N_A}+\frac{1}{N_D}\right)}\approx 0{,}42\ \mu\text{m},\qquad E_{max}=\frac{qN_A x_p}{\varepsilon_s}\approx 3{,}3\times10^{4}\ \text{V/cm}$$</p>
+<p>Vẽ <code>SpaceCharge</code> và <code>ElectricField</code> dọc theo y để so: vùng điện tích là hai khối chữ nhật đối xứng hai bên y = 2 µm, điện trường có dạng tam giác.</p>
+<p><strong>Đặc tuyến I-V.</strong> Trong Inspect, đặt <code>p_contact OuterVoltage</code> lên trục x và <code>p_contact TotalCurrent</code> lên trục y, chuyển trục y sang thang log. Phần giữa của nhánh thuận là đường thẳng 60 mV/decade (hệ số lý tưởng n = 1); ở dòng lớn đường cong bị uốn xuống do điện trở nối tiếp. Khi bật SRH, dòng ngược tăng và đoạn điện áp thấp của nhánh thuận dốc ít hơn (xem bài sau).</p>
+<p><strong>Mật độ hạt dẫn.</strong> Vẽ <code>eDensity</code> và <code>hDensity</code> ở thang log khi phân cực thuận: phía p, electron thiểu số giảm theo hàm mũ khi đi xa vùng nghèo, đúng như mô hình khuếch tán.</p>
+
+<h2 id="v-s6">6. Trường hợp điện trở</h2>
+<p>Đổi pha tạp lớp trên từ acceptor sang donor (thêm tham số <code>p_type</code> nhận giá trị <code>BoronActiveConcentration</code> hoặc <code>PhosphorusActiveConcentration</code> và đưa nó vào lệnh <code>define-constant-profile</code>). Khi đó toàn khối là n đồng nhất: không còn tiếp giáp, không còn vùng điện tích, chỉ có dòng trôi, nên I-V là đường thẳng và các mức giả Fermi nghiêng đều từ tiếp xúc này sang tiếp xúc kia. Kiểm tra bằng \(R=\rho L/A\): với Si n 10¹⁶ cm⁻³ (\(\rho\approx 0{,}5\ \Omega\cdot\)cm), dài 4 µm, mặt cắt 1 µm × 1 µm, dòng ở 1 V cỡ 5 × 10⁻⁸ A.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>β-Ga₂O₃ chưa có pha tạp loại p hiệu quả, nên không có tiếp giáp pn đồng chất như bài này. Diode pn Ga₂O₃ trong thực tế là dị chất, phổ biến nhất là p-NiO/n-Ga₂O₃ (ví dụ Gong và cộng sự, 2020). Quy trình mô phỏng giữ nguyên, chỉ thêm một vùng vật liệu thứ hai với ái lực điện tử, độ rộng vùng cấm riêng và kiểm tra độ lệch vùng tại mặt phân cách trên giản đồ vùng.</p></div>
+
+<h2 id="v-s7">7. Bài tập</h2>
+<ol>
+<li>So sánh \(V_{bi}\) đọc từ giản đồ vùng với công thức cho bốn tổ hợp: Si 10¹⁶/10¹⁶, Si 10¹⁸/10¹⁸, Ge và GaAs.</li>
+<li>Từ <code>ElectricField</code>, đo bề rộng vùng nghèo ở 0 V và −5 V, rồi so với \(W\propto\sqrt{V_{bi}-V}\).</li>
+<li>Đo độ dốc nhánh thuận (mV/decade) có và không có SRH ở 0,2 V và 0,5 V.</li>
+<li>Làm trường hợp điện trở, rồi giải thích vì sao các mức giả Fermi là đường thẳng.</li>
+</ol>
+
+<h2 id="v-s8">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em> (반도체소자설계), bài 1: pn junction, Korea Aerospace University.</li>
+<li>G. Betti Beneventi, <em>TCAD Laboratory, Lecture 4: pn junction</em>, ARCES, University of Bologna.</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chương 2.</li>
+<li>H. H. Gong et al., "A 1.86-kV double-layered NiO/β-Ga₂O₃ vertical p–n heterojunction diode," <em>Applied Physics Letters</em> 117, 022104 (2020).</li>
+<li>Synopsys, <em>Sentaurus Structure Editor User Guide</em> và <em>Sentaurus Device User Guide</em>.</li>
+</ol>
+</div>
+<div class="l-en"><div class="box"><p class="t">About this lab series</p>
+<p>Part 4 follows the hands-on labs of the course <em>Semiconductor Device Design</em> (Prof. Jinyoung Hwang, Korea Aerospace University) and the TCAD Laboratory series by G. Betti Beneventi (University of Bologna) used in the course. Structures, numbers and solve sequences follow the lectures; the code was rewritten, commented and checked against the Sentaurus documentation. Keywords can change between versions, so always check the user guide shipped with your version.</p></div>
+<p class="lead">The first lab: build an abrupt pn junction, sweep its I-V characteristic and read the band diagram. This is the "hello world" of TCAD, simple enough that every result can be checked against textbook formulas.</p>
+
+<h2 id="e-s1">1. Structure and experiment tree</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><rect x="40" y="40" width="80" height="100" style="fill:#f4c6c6;stroke:#b04040"/><rect x="40" y="140" width="80" height="100" style="fill:#c6d8f4;stroke:#4060b0"/><text x="80" y="95" class="ns" text-anchor="middle">p 10¹⁶</text><text x="80" y="195" class="ns" text-anchor="middle">n 10¹⁶</text><text x="80" y="28" class="nt" text-anchor="middle">(a) Step</text><text x="80" y="262" class="ns" text-anchor="middle">1 × 4 µm</text><text x="130" y="143" class="tk" text-anchor="start">y = 2 µm</text><rect x="40" y="36" width="80" height="4" style="fill:#333"/><rect x="40" y="240" width="80" height="4" style="fill:#333"/><rect x="260" y="40" width="80" height="10" style="fill:#e07d7d;stroke:#b04040"/><rect x="260" y="50" width="80" height="190" style="fill:#c6d8f4;stroke:#4060b0"/><text x="300" y="30" class="nt" text-anchor="middle">(b) One-sided p⁺n</text><text x="300" y="150" class="ns" text-anchor="middle">n 10¹⁶</text><text x="350" y="49" class="tk" text-anchor="start">p⁺ 10<tspan dy="-5" style="font-size:9px">20</tspan><tspan dy="5"> </tspan>, 0.2 µm</text><text x="300" y="262" class="ns" text-anchor="middle">n 2 µm thick</text><rect x="260" y="36" width="80" height="4" style="fill:#333"/><rect x="260" y="240" width="80" height="4" style="fill:#333"/><defs><linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e07d7d"/><stop offset="0.25" stop-color="#f4c6c6"/><stop offset="0.45" stop-color="#c6d8f4"/></linearGradient></defs><rect x="430" y="40" width="80" height="200" style="fill:url(#ge);stroke:#4060b0"/><rect x="460" y="36" width="20" height="4" style="fill:#333"/><text x="470" y="28" class="nt" text-anchor="middle">(c) Graded</text><text x="470" y="150" class="ns" text-anchor="middle">n 10¹⁶</text><text x="520" y="50" class="tk" text-anchor="start">Gaussian, peak 10<tspan dy="-5" style="font-size:9px">20</tspan><tspan dy="5"> </tspan></text><text x="520" y="66" class="tk" text-anchor="start">depth 100 nm</text><text x="470" y="262" class="ns" text-anchor="middle">1 µm doping window</text><rect x="430" y="240" width="80" height="4" style="fill:#333"/></svg><figcaption>Figure 1. The three pn structures used in Part 4: (a) the 1 × 4 µm step junction of this lab, (b) the one-sided p⁺n junction and (c) the graded junction of the next lab. Not to scale.</figcaption></figure>
+<p>The structure in the lecture is a 1 µm × 4 µm block: a 2 µm p layer on top (y = 0 to 2 µm) and a 2 µm n layer below, both doped 10¹⁶ cm⁻³. The p contact is on the top edge and the n contact on the bottom edge. In Sentaurus Workbench (SWB), create a project with one SDE tool and one SDevice tool and add the parameters:</p>
+<div class="tablewrap"><table>
+<tr><th>Parameter</th><th>Suggested values</th><th>Used in</th></tr>
+<tr><td><code>material</code></td><td>Silicon, Germanium, GaAs</td><td>SDE</td></tr>
+<tr><td><code>Wp</code>, <code>Wn</code></td><td>2, 2 (µm)</td><td>SDE</td></tr>
+<tr><td><code>NA</code>, <code>ND</code></td><td>1e16; add 1e18 for comparison</td><td>SDE</td></tr>
+<tr><td><code>SRH</code></td><td>0, 1</td><td>SDevice</td></tr>
+<tr><td><code>V_start</code>, <code>V_stop</code></td><td>−5, 1 (V)</td><td>SDevice</td></tr>
+</table></div>
+<p>Each combination of values is one experiment (one row in the tree). On preprocessing (Ctrl+P), SWB replaces every <code>@name@</code> string in the command files with that row's value, so a single command file serves the whole tree.</p>
+
+<h2 id="e-s2">2. The SDE file</h2>
+<pre><code>;; pn_dvs.cmd -- ideal step pn junction, 1 um wide, p on top of n
+;; axes: x = width, y = depth (y grows downward)
+(sde:clear)
+(sdegeo:set-default-boolean &quot;ABA&quot;)          ; a new region overwrites old ones
+
+;; ---- parameters taken from the SWB tree ----
+(define MAT  &quot;@material@&quot;)                  ; Silicon, Germanium or GaAs
+(define W    1.0)                           ; width [um]
+(define Wp   @Wp@)                          ; p-layer thickness [um], e.g. 2
+(define Wn   @Wn@)                          ; n-layer thickness [um], e.g. 2
+(define NA   @NA@)                          ; acceptors [cm-3], e.g. 1e16
+(define ND   @ND@)                          ; donors    [cm-3], e.g. 1e16
+(define Ytot (+ Wp Wn))
+
+;; ---- geometry: two rectangles of the same material ----
+(sdegeo:create-rectangle (position 0 0 0)  (position W Wp 0)   MAT &quot;R.p&quot;)
+(sdegeo:create-rectangle (position 0 Wp 0) (position W Ytot 0) MAT &quot;R.n&quot;)
+
+;; ---- contacts: declare a set, make it current, attach it to an edge ----
+(sdegeo:define-contact-set &quot;p_contact&quot; 4 (color:rgb 1 0 0) &quot;##&quot;)
+(sdegeo:define-contact-set &quot;n_contact&quot; 4 (color:rgb 0 0 1) &quot;##&quot;)
+(sdegeo:set-current-contact-set &quot;p_contact&quot;)
+(sdegeo:define-2d-contact (find-edge-id (position (/ W 2) 0 0)) &quot;p_contact&quot;)
+(sdegeo:set-current-contact-set &quot;n_contact&quot;)
+(sdegeo:define-2d-contact (find-edge-id (position (/ W 2) Ytot 0)) &quot;n_contact&quot;)
+
+;; ---- doping: one constant profile per region ----
+(sdedr:define-constant-profile &quot;P.acc&quot; &quot;BoronActiveConcentration&quot; NA)
+(sdedr:define-constant-profile-region &quot;Pl.acc&quot; &quot;P.acc&quot; &quot;R.p&quot;)
+(sdedr:define-constant-profile &quot;P.don&quot; &quot;PhosphorusActiveConcentration&quot; ND)
+(sdedr:define-constant-profile-region &quot;Pl.don&quot; &quot;P.don&quot; &quot;R.n&quot;)
+
+;; ---- mesh: coarse everywhere, fine within +-0.3 um of the junction ----
+;; refinement-size arguments: xmax ymax xmin ymin  [um]
+(sdedr:define-refeval-window &quot;Win.all&quot; &quot;Rectangle&quot; (position 0 0 0) (position W Ytot 0))
+(sdedr:define-refinement-size &quot;Size.all&quot; 0.25 0.2 0.05 0.01)
+(sdedr:define-refinement-placement &quot;Ref.all&quot; &quot;Size.all&quot; &quot;Win.all&quot;)
+(sdedr:define-refeval-window &quot;Win.j&quot; &quot;Rectangle&quot;
+   (position 0 (- Wp 0.3) 0) (position W (+ Wp 0.3) 0))
+(sdedr:define-refinement-size &quot;Size.j&quot; 0.25 0.01 0.05 0.002)
+(sdedr:define-refinement-placement &quot;Ref.j&quot; &quot;Size.j&quot; &quot;Win.j&quot;)
+
+;; ---- build the mesh; n@node@ names the output after this SWB node ----
+(sde:build-mesh &quot;snmesh&quot; &quot;-a -c boxmethod&quot; &quot;n@node@&quot;)
+</code></pre>
+<p>Three points that trip up beginners:</p>
+<ul>
+<li>In SDE a comment starts with a semicolon <code>;</code>; in SDevice it is an asterisk <code>*</code> or <code>#</code>.</li>
+<li><code>find-edge-id</code> picks the edge through the given point. If the point falls exactly on a vertex or on no edge, the contact is silently not created; open <code>n*_msh.tdr</code> to check.</li>
+<li>The species <code>BoronActiveConcentration</code> and <code>PhosphorusActiveConcentration</code> act as acceptor and donor in any semiconductor, so the same file runs for Ge and GaAs.</li>
+</ul>
+
+<h2 id="e-s3">3. The SDevice file and the parameter file</h2>
+<pre><code>* pn_des.cmd -- DC sweep of the pn junction
+File {
+  Grid      = &quot;@tdr@&quot;             * mesh + doping written by SDE for this experiment
+  Parameter = &quot;@parameter@&quot;       * the project parameter file (sdevice.par)
+  Plot      = &quot;n@node@_des.tdr&quot;   * fields, bands and densities (snapshots)
+  Current   = &quot;n@node@_des.plt&quot;   * terminal voltages and currents
+  Output    = &quot;n@node@_des.log&quot;
+}
+
+Electrode {                        * names must match the SDE contact names
+  { Name = &quot;p_contact&quot;  Voltage = 0.0 }
+  { Name = &quot;n_contact&quot;  Voltage = 0.0 }
+}
+
+Physics {
+  AreaFactor = 1                   * 2D current is per um of depth; scale it here
+  Mobility ( DopingDependence )
+  Recombination (
+  #if @SRH@ == 1                   * SWB switch: 0 = ideal diode, 1 = with SRH
+    SRH
+  #endif
+  )
+}
+
+Plot {
+  DopingConcentration  SpaceCharge  ElectricField/Vector  Potential
+  ConductionBandEnergy  ValenceBandEnergy  eQuasiFermiEnergy  hQuasiFermiEnergy
+  eDensity  hDensity  eCurrent/Vector  hCurrent/Vector  SRHRecombination
+}
+
+Math {
+  Extrapolate                      * start each step from an extrapolated guess
+  Derivatives                      * full Jacobian for Newton
+  -RelErrControl
+  Digits     = 5                   * relative error 1e-5
+  Iterations = 20                  * Newton iterations per step
+  Method     = ParDiSo             * direct linear solver
+  CNormPrint                       * print where the error is largest
+}
+
+Solve {
+  Coupled { Poisson }                                   * 1) equilibrium guess
+  Coupled { Poisson Electron Hole }                     * 2) full equilibrium
+
+  Quasistationary (                                     * 3) reverse branch
+    InitialStep = 0.01  MaxStep = 0.05  MinStep = 1e-5
+    Goal { Name = &quot;p_contact&quot;  Voltage = @V_start@ }
+    Plot { Range = (0, 1)  Intervals = 2 }
+  ) { Coupled { Poisson Electron Hole } }
+
+  Quasistationary (                                     * 4) back to 0 V
+    InitialStep = 0.05  MaxStep = 0.1  MinStep = 1e-5
+    Goal { Name = &quot;p_contact&quot;  Voltage = 0 }
+  ) { Coupled { Poisson Electron Hole } }
+
+  NewCurrentPrefix = &quot;fwd_&quot;                             * 5) separate file for the
+  Quasistationary (                                     *    forward branch
+    InitialStep = 0.01  MaxStep = 0.02  MinStep = 1e-5
+    Goal { Name = &quot;p_contact&quot;  Voltage = @V_stop@ }
+    Plot { Range = (0, 1)  Intervals = 10 }
+  ) { Coupled { Poisson Electron Hole } }
+}
+</code></pre>
+<p>A few choices worth noting. The <code>#if @SRH@ == 1 ... #endif</code> block is handled by SWB before the run, so one file yields two versions, with and without SRH recombination. <code>AreaFactor</code> multiplies the current: a 2D simulation gives current per µm of depth, so set <code>AreaFactor</code> to the real depth in µm to get device current. Sweeping reverse first, returning to 0 V and only then sweeping forward makes each branch start from a converged solution; <code>NewCurrentPrefix</code> writes the forward branch to its own <code>.plt</code> file for easy plotting.</p>
+<p>SWB needs a parameter file, even an empty one. To see and edit the default parameters of each material, export them:</p>
+<pre><code># in the project folder, collect default parameters for each material
+sdevice -P:Silicon    &gt;  sdevice.par
+sdevice -P:Germanium  &gt;&gt; sdevice.par
+sdevice -P:GaAs       &gt;&gt; sdevice.par
+# then delete the log header that each call prints, keeping only the
+# blocks  Material = &quot;Silicon&quot; { ... }  and so on
+</code></pre>
+
+<h2 id="e-s4">4. Running and checking convergence</h2>
+<ol>
+<li>Ctrl+P to preprocess all nodes.</li>
+<li>Select the SDE nodes and press Ctrl+R; a node turns yellow when done.</li>
+<li>Select the SDevice nodes and press Ctrl+R.</li>
+<li>Open the SDevice node's <code>.out</code> or <code>.log</code> file: each step prints the normalized error of each equation; it has converged when the error is below 1. With <code>CNormPrint</code> the file also gives the coordinates of the largest error, which is where to refine the mesh if the run gets stuck.</li>
+</ol>
+
+<h2 id="e-s5">5. Reading results and checking them against theory</h2>
+<p><strong>Band diagram.</strong> Open the 0 V <code>.tdr</code> file in Sentaurus Visual, cut a line along y and plot <code>ConductionBandEnergy</code>, <code>ValenceBandEnergy</code> and both quasi-Fermi levels. At equilibrium the two quasi-Fermi levels coincide and are flat; the band bending is the built-in potential:</p>
+<p>$$V_{bi}=\frac{kT}{q}\ln\frac{N_A N_D}{n_i^2}$$</p>
+<p>Betti Beneventi's lab gives \(V_{bi}\approx 697\) mV for \(N_A=N_D=10^{16}\) cm⁻³ and about 937 mV at 10¹⁸ cm⁻³; about 434 mV for Ge (\(n_i\approx 2.4\times10^{13}\) cm⁻³) and about 1.29 V for GaAs (\(n_i\approx 1.8\times10^{6}\) cm⁻³). That is also roughly the "turn-on voltage" read from the forward characteristic on a linear scale.</p>
+<p><strong>Depletion region.</strong> For \(N_A=N_D=10^{16}\) cm⁻³ in Si:</p>
+<p>$$W=\sqrt{\frac{2\varepsilon_s V_{bi}}{q}\left(\frac{1}{N_A}+\frac{1}{N_D}\right)}\approx 0.42\ \mu\text{m},\qquad E_{max}=\frac{qN_A x_p}{\varepsilon_s}\approx 3.3\times10^{4}\ \text{V/cm}$$</p>
+<p>Plot <code>SpaceCharge</code> and <code>ElectricField</code> along y to compare: the charge forms two symmetric blocks either side of y = 2 µm and the field is triangular.</p>
+<p><strong>I-V characteristic.</strong> In Inspect, put <code>p_contact OuterVoltage</code> on the x axis and <code>p_contact TotalCurrent</code> on the y axis, and switch y to log scale. The middle of the forward branch is a straight 60 mV/decade line (ideality factor n = 1); at high current it bends over because of series resistance. With SRH on, the reverse current rises and the low-voltage part of the forward branch is less steep (see the next lab).</p>
+<p><strong>Carrier densities.</strong> Plot <code>eDensity</code> and <code>hDensity</code> on a log scale under forward bias: on the p side the minority electrons decay exponentially away from the depletion region, as the diffusion model predicts.</p>
+
+<h2 id="e-s6">6. The resistor case</h2>
+<p>Change the top layer from acceptor to donor (add a parameter <code>p_type</code> taking <code>BoronActiveConcentration</code> or <code>PhosphorusActiveConcentration</code> and use it in <code>define-constant-profile</code>). The whole block is then uniform n: no junction, no space charge, only drift, so the I-V is a straight line and the quasi-Fermi levels slope evenly from one contact to the other. Check with \(R=\rho L/A\): for n-Si at 10¹⁶ cm⁻³ (\(\rho\approx 0.5\ \Omega\cdot\)cm), 4 µm long, with a 1 µm × 1 µm cross-section, the current at 1 V is about 5 × 10⁻⁸ A.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>β-Ga₂O₃ has no effective p-type doping yet, so a homojunction like this one does not exist. Practical Ga₂O₃ pn diodes are heterojunctions, most often p-NiO/n-Ga₂O₃ (for example Gong et al., 2020). The simulation flow is the same; you add a second material region with its own electron affinity and band gap and check the band offsets at the interface on the band diagram.</p></div>
+
+<h2 id="e-s7">7. Exercises</h2>
+<ol>
+<li>Compare \(V_{bi}\) read from the band diagram with the formula for four cases: Si 10¹⁶/10¹⁶, Si 10¹⁸/10¹⁸, Ge and GaAs.</li>
+<li>From <code>ElectricField</code>, measure the depletion width at 0 V and −5 V and compare with \(W\propto\sqrt{V_{bi}-V}\).</li>
+<li>Measure the forward slope (mV/decade) with and without SRH at 0.2 V and 0.5 V.</li>
+<li>Run the resistor case and explain why the quasi-Fermi levels are straight lines.</li>
+</ol>
+
+<h2 id="e-s8">References</h2>
+<ol class="refs">
+<li>J. Hwang, <em>Semiconductor Device Design</em> (반도체소자설계), lecture 1: pn junction, Korea Aerospace University.</li>
+<li>G. Betti Beneventi, <em>TCAD Laboratory, Lecture 4: pn junction</em>, ARCES, University of Bologna.</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chapter 2.</li>
+<li>H. H. Gong et al., "A 1.86-kV double-layered NiO/β-Ga₂O₃ vertical p–n heterojunction diode," <em>Applied Physics Letters</em> 117, 022104 (2020).</li>
+<li>Synopsys, <em>Sentaurus Structure Editor User Guide</em> and <em>Sentaurus Device User Guide</em>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="tcad-visual-debug.html">← <span class="l-vi">Sentaurus Visual và xử lý lỗi hội tụ</span><span class="l-en">Sentaurus Visual and fixing convergence</span></a><a class="n" href="tcad-lab-pn-nonideal.html"><span class="l-vi">Thực hành 2: pn không lý tưởng và đánh thủng</span><span class="l-en">Lab 2: non-ideal pn junctions and breakdown</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần Semiconductor Device Design (반도체소자설계) của GS. Jinyoung Hwang, Korea Aerospace University, và bộ bài TCAD Laboratory của G. Betti Beneventi (University of Bologna) dùng trong môn học. Mã lệnh được viết lại và chú thích cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the course Semiconductor Device Design (반도체소자설계) by Prof. Jinyoung Hwang, Korea Aerospace University, and the TCAD Laboratory series by G. Betti Beneventi (University of Bologna) used in the course. The code was rewritten and commented for this page; figures were redrawn.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>
