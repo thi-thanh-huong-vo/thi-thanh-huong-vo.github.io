@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Vào ra số: LED, nút nhấn, vòng lặp" data-title-en="Digital I/O: LEDs, buttons, loops">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital I/O: LEDs, buttons, loops · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Breadboards, LED resistor sizing, const and for, INPUT_PULLUP, blinking without delay().">
+<meta property="og:title" content="Digital I/O: LEDs, buttons, loops">
+<meta property="og:description" content="Breadboards, LED resistor sizing, const and for, INPUT_PULLUP, blinking without delay().">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 1</span><span class="l-en">Part 2 · Lesson 1</span></p>
+  <h1><span class="l-vi">Vào ra số: LED, nút nhấn, vòng lặp</span><span class="l-en">Digital I/O: LEDs, buttons, loops</span></h1>
+  <p class="sub"><span class="l-vi">Breadboard, tính điện trở cho LED, const và for, INPUT_PULLUP, nháy LED không dùng delay().</span><span class="l-en">Breadboards, LED resistor sizing, const and for, INPUT_PULLUP, blinking without delay().</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Ra khỏi LED trên bo: nối LED ngoài qua breadboard, tính điện trở hạn dòng, dùng biến, hằng số và vòng lặp <code>for</code>, đọc nút nhấn, và nhấp nháy mà không chặn chương trình bằng <code>delay()</code>.</p>
+
+<h2 id="v-s1">1. Breadboard và LED</h2>
+<p>Breadboard cho phép lắp mạch không cần hàn. Hai hàng dài ở mép (thường có vạch đỏ và xanh) là thanh nguồn và GND, nối thông theo chiều dài; ở giữa, mỗi cột 5 lỗ nối thông với nhau, và rãnh giữa ngăn hai nửa.</p>
+<p>LED có cực: chân dài là <strong>anode</strong> (+), chân ngắn là <strong>cathode</strong> (−). Cắm ngược thì LED không sáng (nhưng không hỏng ở 5 V với điện trở nối tiếp).</p>
+<figure><svg viewBox="0 0 640 220" class="fig-svg" role="img"><rect x="40" y="60" width="90" height="100" rx="6" class="node"/><text x="85" y="100" class="nt" text-anchor="middle">Arduino</text><text x="85" y="118" class="ns" text-anchor="middle">chân 9</text><text x="85" y="150" class="ns" text-anchor="middle">GND</text><path d="M130,90 H220" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><path d="M220,90 l8,-10 l12,20 l12,-20 l12,20 l12,-20 l12,20 l8,-10" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="262" y="70" class="lab" text-anchor="middle">R = 220 Ω</text><path d="M296,90 H380" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><path d="M380,72 V108 L412,90 Z" style="fill:var(--s3);stroke:var(--ink);stroke-width:1.4"/><path d="M412,72 V108" style="stroke:var(--ink);stroke-width:2"/><path d="M398,66 l10,-12 M404,70 l10,-12" style="stroke:var(--s3);stroke-width:1.4"/><text x="380" y="128" class="ns" text-anchor="end">anode (chân dài)</text><text x="416" y="128" class="ns" text-anchor="start">cathode (chân ngắn)</text><path d="M412,90 H520 V150 H130" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="330" y="180" class="lab" text-anchor="middle">I = (5 V − V<tspan dy="3" style="font-size:9px">F</tspan><tspan dy="-3"> </tspan>) / R ≈ (5 − 2) / 220 ≈ 14 mA</text></svg><figcaption>Hình 1. LED ngoài trên chân 9: dòng đi từ chân 9 qua điện trở 220 Ω, qua LED về GND.</figcaption></figure>
+
+<h2 id="v-s2">2. Vì sao cần điện trở</h2>
+<p>LED là một diode: khi đã dẫn, điện áp trên nó gần như không đổi (V<sub>F</sub> khoảng 1,8–2,2 V với LED đỏ, khoảng 3 V với LED xanh dương, trắng), nên dòng chỉ bị giới hạn bởi điện trở nối tiếp:</p>
+<p>$$R=\frac{V_{\text{nguồn}}-V_F}{I}$$</p>
+<p>Chân của ATmega328P chịu tối đa tuyệt đối 40 mA và nên giữ dưới khoảng 20 mA. Với V<sub>F</sub> = 2 V và I = 15 mA, R = 200 Ω; giá trị chuẩn 220 Ω cho khoảng 14 mA.</p>
+<div class="ard-tool" data-tool="res" data-lang="vi"><p class="tt">Tính điện trở cho LED</p><label>V nguồn (V)<input type="number" name="vs" value="5" step="0.1"></label><label>V<sub>F</sub> LED (V)<input type="number" name="vf" value="2.0" step="0.1"></label><label>Dòng mong muốn (mA)<input type="number" name="i" value="15" step="1"></label><p class="out"></p></div>
+
+<h2 id="v-s3">3. Hằng số, biến và vòng lặp</h2>
+<div class="sk"><div class="sk-h"><span class="sk-f">LedPin9.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="LedPin9.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// LedPin9.ino -- blink an external LED on pin 9
+// Circuit: pin 9 -&gt; 220 ohm resistor -&gt; LED anode (long leg); LED cathode -&gt; GND
+const int LED = 9;                 // const: the pin number never changes
+
+void setup() {
+  pinMode(LED, OUTPUT);            // pins are inputs by default
+}
+
+void loop() {
+  digitalWrite(LED, HIGH);         // 5 V
+  delay(500);
+  digitalWrite(LED, LOW);          // 0 V
+  delay(500);
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<p><code>const int LED = 9;</code> khai báo một số nguyên chỉ đọc. Đặt tên cho số chân giúp code dễ đọc và chỉ cần sửa một chỗ khi đổi chân. Kiểu <code>int</code> chứa số nguyên; các kiểu khác hay gặp là <code>long</code>, <code>float</code> (số thực), <code>bool</code>.</p>
+<p>Vòng lặp <code>for</code> lặp một khối lệnh với biến đếm thay đổi. Sketch dưới cho LED nháy với chu kỳ tăng dần từ 100 ms đến 1000 ms:</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">BlinkRates.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="BlinkRates.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// BlinkRates.ino -- a for loop steps the blink period from 100 ms to 1000 ms
+const int LED = 9;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  for (int i = 100; i &lt;= 1000; i = i + 100) {
+    digitalWrite(LED, HIGH);
+    delay(i);                      // on for i milliseconds
+    digitalWrite(LED, LOW);
+    delay(i);                      // off for i milliseconds
+  }                                // after i = 1000, loop() starts again at 100
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<p>Diễn biến: i = 100 thỏa điều kiện i ≤ 1000 nên khối lệnh chạy (sáng 100 ms, tắt 100 ms); cuối vòng i tăng thêm 100; lặp lại tới khi i vượt 1000, lúc đó <code>loop()</code> kết thúc và bắt đầu lại.</p>
+
+<h2 id="v-s4">4. Đọc nút nhấn</h2>
+<p>Chân đầu vào không được nối với gì sẽ "lơ lửng" và đọc ra giá trị ngẫu nhiên. Có hai cách cố định mức của nó khi nút chưa nhấn:</p>
+<ul>
+<li><strong>Điện trở kéo xuống</strong> (pull-down) 10 kΩ ra GND: nút nối chân với 5 V, nhấn thì đọc HIGH.</li>
+<li><strong>Điện trở kéo lên bên trong</strong>: <code>pinMode(2, INPUT_PULLUP)</code> bật điện trở khoảng 20 kΩ lên 5 V có sẵn trong chip; nút nối chân với GND, nhấn thì đọc LOW. Không cần điện trở ngoài.</li>
+</ul>
+<div class="sk"><div class="sk-h"><span class="sk-f">Button.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="Button.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  Button
+
+  Turns on and off a light emitting diode(LED) connected to digital pin 13,
+  when pressing a pushbutton attached to pin 2.
+
+  The circuit:
+  - LED attached from pin 13 to ground through 220 ohm resistor
+  - pushbutton attached to pin 2 from +5V
+  - 10K resistor attached to pin 2 from ground
+
+  - Note: on most Arduinos there is already an LED on the board
+    attached to pin 13.
+
+  created 2005
+  by DojoDave &lt;http://www.0j0.org&gt;
+  modified 30 Aug 2011
+  by Tom Igoe
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/digital/Button/
+*/
+
+// constants won&#x27;t change. They&#x27;re used here to set pin numbers:
+const int buttonPin = 2;  // the number of the pushbutton pin
+const int ledPin = 13;    // the number of the LED pin
+
+// variables will change:
+int buttonState = 0;  // variable for reading the pushbutton status
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(ledPin, OUTPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
+}
+
+void loop() {
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    // turn LED on:
+    digitalWrite(ledPin, HIGH);
+  } else {
+    // turn LED off:
+    digitalWrite(ledPin, LOW);
+  }
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/digital/Button/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+<div class="sk"><div class="sk-h"><span class="sk-f">InputPullupSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="InputPullupSerial.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  Input Pull-up Serial
+
+  This example demonstrates the use of pinMode(INPUT_PULLUP). It reads a digital
+  input on pin 2 and prints the results to the Serial Monitor.
+
+  The circuit:
+  - momentary switch attached from pin 2 to ground
+  - built-in LED on pin 13
+
+  Unlike pinMode(INPUT), there is no pull-down resistor necessary. An internal
+  20K-ohm resistor is pulled to 5V. This configuration causes the input to read
+  HIGH when the switch is open, and LOW when it is closed.
+
+  created 14 Mar 2012
+  by Scott Fitzgerald
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/digital/InputPullupSerial/
+*/
+
+void setup() {
+  //start serial connection
+  Serial.begin(9600);
+  //configure pin 2 as an input and enable the internal pull-up resistor
+  pinMode(2, INPUT_PULLUP);
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  //read the pushbutton value into a variable
+  int sensorVal = digitalRead(2);
+  //print out the value of the pushbutton
+  Serial.println(sensorVal);
+
+  // Keep in mind the pull-up means the pushbutton&#x27;s logic is inverted. It goes
+  // HIGH when it&#x27;s open, and LOW when it&#x27;s pressed. Turn on pin 13 when the
+  // button&#x27;s pressed, and off when it&#x27;s not:
+  if (sensorVal == HIGH) {
+    digitalWrite(13, LOW);
+  } else {
+    digitalWrite(13, HIGH);
+  }
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/digital/InputPullupSerial/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+
+<h2 id="v-s5">5. Nhấp nháy mà không dùng delay()</h2>
+<p><code>delay()</code> làm vi điều khiển đứng yên, không đọc được nút hay cảm biến trong lúc chờ. Cách chuẩn là so sánh thời gian bằng <code>millis()</code> (số mili giây từ lúc khởi động):</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">BlinkWithoutDelay.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="BlinkWithoutDelay.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  Blink without Delay
+
+  Turns on and off a light emitting diode (LED) connected to a digital pin,
+  without using the delay() function. This means that other code can run at the
+  same time without being interrupted by the LED code.
+
+  The circuit:
+  - Use the onboard LED.
+  - Note: Most Arduinos have an on-board LED you can control. On the UNO, MEGA
+    and ZERO it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN
+    is set to the correct LED pin independent of which board is used.
+    If you want to know what pin the on-board LED is connected to on your
+    Arduino model, check the Technical Specs of your board at:
+    https://docs.arduino.cc/hardware/
+
+  created 2005
+  by David A. Mellis
+  modified 8 Feb 2010
+  by Paul Stoffregen
+  modified 11 Nov 2013
+  by Scott Fitzgerald
+  modified 9 Jan 2017
+  by Arturo Guadalupi
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/
+*/
+
+// constants won&#x27;t change. Used here to set a pin number:
+const int ledPin = LED_BUILTIN;  // the number of the LED pin
+
+// Variables will change:
+int ledState = LOW;  // ledState used to set the LED
+
+// Generally, you should use &quot;unsigned long&quot; for variables that hold time
+// The value will quickly become too large for an int to store
+unsigned long previousMillis = 0;  // will store last time LED was updated
+
+// constants won&#x27;t change:
+const long interval = 1000;  // interval at which to blink (milliseconds)
+
+void setup() {
+  // set the digital pin as output:
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  // here is where you&#x27;d put code that needs to be running all the time.
+
+  // check to see if it&#x27;s time to blink the LED; that is, if the difference
+  // between the current time and last time you blinked the LED is bigger than
+  // the interval at which you want to blink the LED.
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - previousMillis &gt;= interval) {
+    // save the last time you blinked the LED
+    previousMillis = currentMillis;
+
+    // if the LED is off turn it on and vice-versa:
+    if (ledState == LOW) {
+      ledState = HIGH;
+    } else {
+      ledState = LOW;
+    }
+
+    // set the LED with the ledState of the variable:
+    digitalWrite(ledPin, ledState);
+  }
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+<p>Đây là nền tảng của mọi dự án có nhiều việc cùng lúc, ví dụ vừa đo khoảng cách vừa điều khiển động cơ.</p>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>LED xanh dương có V<sub>F</sub> = 3,0 V. Với nguồn 5 V và dòng 10 mA, cần điện trở bao nhiêu?</li>
+<li>Viết sketch: mỗi lần nhấn nút (INPUT_PULLUP trên chân 2) thì LED chân 9 đổi trạng thái bật/tắt.</li>
+<li>Trong BlinkWithoutDelay, vì sao viết <code>currentMillis - previousMillis &gt;= interval</code> chứ không phải <code>currentMillis &gt;= previousMillis + interval</code>?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> R = (5 − 3)/0,010 = 200 Ω; chọn 220 Ω (khoảng 9 mA).</p>
+<p><strong>2.</strong> Phát hiện <em>cạnh</em> nhấn (từ HIGH sang LOW), không phải mức, và chống dội phím (bounce) bằng một khoảng chờ ngắn:</p>
+<pre><code>const int BTN = 2, LED = 9;
+bool ledOn = false;
+int lastState = HIGH;
+void setup() { pinMode(BTN, INPUT_PULLUP); pinMode(LED, OUTPUT); }
+void loop() {
+  int s = digitalRead(BTN);
+  if (lastState == HIGH &amp;&amp; s == LOW) {   // just pressed
+    ledOn = !ledOn;
+    digitalWrite(LED, ledOn);
+    delay(30);                            // ignore contact bounce
+  }
+  lastState = s;
+}</code></pre>
+<p><strong>3.</strong> <code>millis()</code> quay vòng về 0 sau khoảng 49,7 ngày (2³² ms). Phép trừ giữa hai số <code>unsigned long</code> vẫn cho đúng khoảng thời gian kể cả khi đã quay vòng; còn phép cộng <code>previousMillis + interval</code> có thể tràn và làm điều kiện sai.</p>
+</details>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>PBL Digital IO</em>, Korea Aerospace University.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chương 2.</li>
+<li>Arduino, ví dụ <a href="https://docs.arduino.cc/built-in-examples/digital/Button/" target="_blank" rel="noopener">Button</a>, <a href="https://docs.arduino.cc/built-in-examples/digital/InputPullupSerial/" target="_blank" rel="noopener">InputPullupSerial</a>, <a href="https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/" target="_blank" rel="noopener">BlinkWithoutDelay</a>.</li>
+<li>Microchip, <em>ATmega328P datasheet</em>, mục Absolute Maximum Ratings (40 mA mỗi chân I/O).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Beyond the on-board LED: wire an external LED on a breadboard, size its current-limiting resistor, use variables, constants and <code>for</code> loops, read a push button, and blink without blocking the program with <code>delay()</code>.</p>
+
+<h2 id="e-s1">1. Breadboard and LED</h2>
+<p>A breadboard lets you build circuits without soldering. The two long rows at the edges (usually marked red and blue) are the power and ground rails, connected along their length; in the middle each column of 5 holes is connected, and the centre gap separates the two halves.</p>
+<p>An LED is polarized: the long leg is the <strong>anode</strong> (+), the short leg the <strong>cathode</strong> (−). Plugged in backwards it stays dark (but is not damaged at 5 V with a series resistor).</p>
+<figure><svg viewBox="0 0 640 220" class="fig-svg" role="img"><rect x="40" y="60" width="90" height="100" rx="6" class="node"/><text x="85" y="100" class="nt" text-anchor="middle">Arduino</text><text x="85" y="118" class="ns" text-anchor="middle">pin 9</text><text x="85" y="150" class="ns" text-anchor="middle">GND</text><path d="M130,90 H220" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><path d="M220,90 l8,-10 l12,20 l12,-20 l12,20 l12,-20 l12,20 l8,-10" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="262" y="70" class="lab" text-anchor="middle">R = 220 Ω</text><path d="M296,90 H380" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><path d="M380,72 V108 L412,90 Z" style="fill:var(--s3);stroke:var(--ink);stroke-width:1.4"/><path d="M412,72 V108" style="stroke:var(--ink);stroke-width:2"/><path d="M398,66 l10,-12 M404,70 l10,-12" style="stroke:var(--s3);stroke-width:1.4"/><text x="380" y="128" class="ns" text-anchor="end">anode (long leg)</text><text x="416" y="128" class="ns" text-anchor="start">cathode (short leg)</text><path d="M412,90 H520 V150 H130" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="330" y="180" class="lab" text-anchor="middle">I = (5 V − V<tspan dy="3" style="font-size:9px">F</tspan><tspan dy="-3"> </tspan>) / R ≈ (5 − 2) / 220 ≈ 14 mA</text></svg><figcaption>Figure 1. An external LED on pin 9: current flows from pin 9 through a 220 Ω resistor and the LED to GND.</figcaption></figure>
+
+<h2 id="e-s2">2. Why the resistor</h2>
+<p>An LED is a diode: once it conducts, its voltage is almost constant (V<sub>F</sub> about 1.8–2.2 V for red, about 3 V for blue and white), so the current is limited only by the series resistor:</p>
+<p>$$R=\frac{V_{\text{supply}}-V_F}{I}$$</p>
+<p>An ATmega328P pin has an absolute maximum of 40 mA and should stay below about 20 mA. With V<sub>F</sub> = 2 V and I = 15 mA, R = 200 Ω; the standard 220 Ω gives about 14 mA.</p>
+<div class="ard-tool" data-tool="res" data-lang="en"><p class="tt">LED resistor calculator</p><label>Supply V (V)<input type="number" name="vs" value="5" step="0.1"></label><label>V<sub>F</sub> LED (V)<input type="number" name="vf" value="2.0" step="0.1"></label><label>Target current (mA)<input type="number" name="i" value="15" step="1"></label><p class="out"></p></div>
+
+<h2 id="e-s3">3. Constants, variables and loops</h2>
+<div class="sk"><div class="sk-h"><span class="sk-f">LedPin9.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="LedPin9.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// LedPin9.ino -- blink an external LED on pin 9
+// Circuit: pin 9 -&gt; 220 ohm resistor -&gt; LED anode (long leg); LED cathode -&gt; GND
+const int LED = 9;                 // const: the pin number never changes
+
+void setup() {
+  pinMode(LED, OUTPUT);            // pins are inputs by default
+}
+
+void loop() {
+  digitalWrite(LED, HIGH);         // 5 V
+  delay(500);
+  digitalWrite(LED, LOW);          // 0 V
+  delay(500);
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<p><code>const int LED = 9;</code> declares a read-only integer. Naming the pin number makes code readable and means a pin change is a one-line edit. An <code>int</code> holds an integer; other common types are <code>long</code>, <code>float</code> (real numbers) and <code>bool</code>.</p>
+<p>A <code>for</code> loop repeats a block while a counter changes. The sketch below blinks with a period growing from 100 ms to 1000 ms:</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">BlinkRates.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="BlinkRates.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// BlinkRates.ino -- a for loop steps the blink period from 100 ms to 1000 ms
+const int LED = 9;
+
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  for (int i = 100; i &lt;= 1000; i = i + 100) {
+    digitalWrite(LED, HIGH);
+    delay(i);                      // on for i milliseconds
+    digitalWrite(LED, LOW);
+    delay(i);                      // off for i milliseconds
+  }                                // after i = 1000, loop() starts again at 100
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<p>Step by step: i = 100 satisfies i ≤ 1000, so the block runs (on 100 ms, off 100 ms); at the end i grows by 100; this repeats until i passes 1000, then <code>loop()</code> ends and starts again.</p>
+
+<h2 id="e-s4">4. Reading a push button</h2>
+<p>An input pin connected to nothing "floats" and reads random values. Two ways to fix its level when the button is not pressed:</p>
+<ul>
+<li>A <strong>pull-down resistor</strong> of 10 kΩ to GND: the button connects the pin to 5 V and reads HIGH when pressed.</li>
+<li>The <strong>internal pull-up</strong>: <code>pinMode(2, INPUT_PULLUP)</code> enables a roughly 20 kΩ resistor to 5 V inside the chip; the button connects the pin to GND and reads LOW when pressed. No external resistor needed.</li>
+</ul>
+<div class="sk"><div class="sk-h"><span class="sk-f">Button.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="Button.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  Button
+
+  Turns on and off a light emitting diode(LED) connected to digital pin 13,
+  when pressing a pushbutton attached to pin 2.
+
+  The circuit:
+  - LED attached from pin 13 to ground through 220 ohm resistor
+  - pushbutton attached to pin 2 from +5V
+  - 10K resistor attached to pin 2 from ground
+
+  - Note: on most Arduinos there is already an LED on the board
+    attached to pin 13.
+
+  created 2005
+  by DojoDave &lt;http://www.0j0.org&gt;
+  modified 30 Aug 2011
+  by Tom Igoe
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/digital/Button/
+*/
+
+// constants won&#x27;t change. They&#x27;re used here to set pin numbers:
+const int buttonPin = 2;  // the number of the pushbutton pin
+const int ledPin = 13;    // the number of the LED pin
+
+// variables will change:
+int buttonState = 0;  // variable for reading the pushbutton status
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(ledPin, OUTPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
+}
+
+void loop() {
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    // turn LED on:
+    digitalWrite(ledPin, HIGH);
+  } else {
+    // turn LED off:
+    digitalWrite(ledPin, LOW);
+  }
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/digital/Button/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+<div class="sk"><div class="sk-h"><span class="sk-f">InputPullupSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="InputPullupSerial.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  Input Pull-up Serial
+
+  This example demonstrates the use of pinMode(INPUT_PULLUP). It reads a digital
+  input on pin 2 and prints the results to the Serial Monitor.
+
+  The circuit:
+  - momentary switch attached from pin 2 to ground
+  - built-in LED on pin 13
+
+  Unlike pinMode(INPUT), there is no pull-down resistor necessary. An internal
+  20K-ohm resistor is pulled to 5V. This configuration causes the input to read
+  HIGH when the switch is open, and LOW when it is closed.
+
+  created 14 Mar 2012
+  by Scott Fitzgerald
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/digital/InputPullupSerial/
+*/
+
+void setup() {
+  //start serial connection
+  Serial.begin(9600);
+  //configure pin 2 as an input and enable the internal pull-up resistor
+  pinMode(2, INPUT_PULLUP);
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  //read the pushbutton value into a variable
+  int sensorVal = digitalRead(2);
+  //print out the value of the pushbutton
+  Serial.println(sensorVal);
+
+  // Keep in mind the pull-up means the pushbutton&#x27;s logic is inverted. It goes
+  // HIGH when it&#x27;s open, and LOW when it&#x27;s pressed. Turn on pin 13 when the
+  // button&#x27;s pressed, and off when it&#x27;s not:
+  if (sensorVal == HIGH) {
+    digitalWrite(13, LOW);
+  } else {
+    digitalWrite(13, HIGH);
+  }
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/digital/InputPullupSerial/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+
+<h2 id="e-s5">5. Blinking without delay()</h2>
+<p><code>delay()</code> freezes the microcontroller; it cannot read a button or sensor while waiting. The standard approach compares times with <code>millis()</code> (milliseconds since start-up):</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">BlinkWithoutDelay.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="BlinkWithoutDelay.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  Blink without Delay
+
+  Turns on and off a light emitting diode (LED) connected to a digital pin,
+  without using the delay() function. This means that other code can run at the
+  same time without being interrupted by the LED code.
+
+  The circuit:
+  - Use the onboard LED.
+  - Note: Most Arduinos have an on-board LED you can control. On the UNO, MEGA
+    and ZERO it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN
+    is set to the correct LED pin independent of which board is used.
+    If you want to know what pin the on-board LED is connected to on your
+    Arduino model, check the Technical Specs of your board at:
+    https://docs.arduino.cc/hardware/
+
+  created 2005
+  by David A. Mellis
+  modified 8 Feb 2010
+  by Paul Stoffregen
+  modified 11 Nov 2013
+  by Scott Fitzgerald
+  modified 9 Jan 2017
+  by Arturo Guadalupi
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/
+*/
+
+// constants won&#x27;t change. Used here to set a pin number:
+const int ledPin = LED_BUILTIN;  // the number of the LED pin
+
+// Variables will change:
+int ledState = LOW;  // ledState used to set the LED
+
+// Generally, you should use &quot;unsigned long&quot; for variables that hold time
+// The value will quickly become too large for an int to store
+unsigned long previousMillis = 0;  // will store last time LED was updated
+
+// constants won&#x27;t change:
+const long interval = 1000;  // interval at which to blink (milliseconds)
+
+void setup() {
+  // set the digital pin as output:
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  // here is where you&#x27;d put code that needs to be running all the time.
+
+  // check to see if it&#x27;s time to blink the LED; that is, if the difference
+  // between the current time and last time you blinked the LED is bigger than
+  // the interval at which you want to blink the LED.
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - previousMillis &gt;= interval) {
+    // save the last time you blinked the LED
+    previousMillis = currentMillis;
+
+    // if the LED is off turn it on and vice-versa:
+    if (ledState == LOW) {
+      ledState = HIGH;
+    } else {
+      ledState = LOW;
+    }
+
+    // set the LED with the ledState of the variable:
+    digitalWrite(ledPin, ledState);
+  }
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+<p>This is the basis of every project that does several things at once, such as measuring distance while driving motors.</p>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>A blue LED has V<sub>F</sub> = 3.0 V. With a 5 V supply and 10 mA, what resistor do you need?</li>
+<li>Write a sketch: each press of a button (INPUT_PULLUP on pin 2) toggles the LED on pin 9.</li>
+<li>In BlinkWithoutDelay, why write <code>currentMillis - previousMillis &gt;= interval</code> rather than <code>currentMillis &gt;= previousMillis + interval</code>?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> R = (5 − 3)/0.010 = 200 Ω; use 220 Ω (about 9 mA).</p>
+<p><strong>2.</strong> Detect the press <em>edge</em> (HIGH to LOW), not the level, and debounce with a short wait:</p>
+<pre><code>const int BTN = 2, LED = 9;
+bool ledOn = false;
+int lastState = HIGH;
+void setup() { pinMode(BTN, INPUT_PULLUP); pinMode(LED, OUTPUT); }
+void loop() {
+  int s = digitalRead(BTN);
+  if (lastState == HIGH &amp;&amp; s == LOW) {   // just pressed
+    ledOn = !ledOn;
+    digitalWrite(LED, ledOn);
+    delay(30);                            // ignore contact bounce
+  }
+  lastState = s;
+}</code></pre>
+<p><strong>3.</strong> <code>millis()</code> wraps back to 0 after about 49.7 days (2³² ms). Subtracting two <code>unsigned long</code> values still gives the right interval across the wrap; the sum <code>previousMillis + interval</code> can overflow and make the test wrong.</p>
+</details>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>PBL Digital IO</em>, Korea Aerospace University.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chapter 2.</li>
+<li>Arduino examples <a href="https://docs.arduino.cc/built-in-examples/digital/Button/" target="_blank" rel="noopener">Button</a>, <a href="https://docs.arduino.cc/built-in-examples/digital/InputPullupSerial/" target="_blank" rel="noopener">InputPullupSerial</a>, <a href="https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/" target="_blank" rel="noopener">BlinkWithoutDelay</a>.</li>
+<li>Microchip, <em>ATmega328P datasheet</em>, Absolute Maximum Ratings (40 mA per I/O pin).</li>
+</ol>
+</div>
+<nav class="pager"><a href="ard-first-program.html">← <span class="l-vi">Chương trình đầu tiên: Blink và Serial</span><span class="l-en">First program: Blink and Serial</span></a><a class="n" href="ard-pwm.html"><span class="l-vi">PWM và analogWrite()</span><span class="l-en">PWM and analogWrite()</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

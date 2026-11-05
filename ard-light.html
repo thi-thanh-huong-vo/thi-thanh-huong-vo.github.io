@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Cảm biến ánh sáng" data-title-en="Light sensors">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Light sensors · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Photoconductive and photovoltaic effects, band-gap cutoff wavelength, solar-blind Ga₂O₃, an automatic night light.">
+<meta property="og:title" content="Light sensors">
+<meta property="og:description" content="Photoconductive and photovoltaic effects, band-gap cutoff wavelength, solar-blind Ga₂O₃, an automatic night light.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 3</span><span class="l-en">Part 3 · Lesson 3</span></p>
+  <h1><span class="l-vi">Cảm biến ánh sáng</span><span class="l-en">Light sensors</span></h1>
+  <p class="sub"><span class="l-vi">Quang dẫn và quang điện áp, bước sóng cắt theo độ rộng vùng cấm, Ga₂O₃ mù mặt trời, đèn ngủ tự động.</span><span class="l-en">Photoconductive and photovoltaic effects, band-gap cutoff wavelength, solar-blind Ga₂O₃, an automatic night light.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Cảm biến quang nối Arduino với vật lý bán dẫn: quang trở, photodiode và phototransistor đều hoạt động nhờ photon tạo ra cặp electron–lỗ trống. Bài này giải thích các cơ chế đó, bước sóng cắt theo độ rộng vùng cấm, và làm một đèn ngủ tự động.</p>
+
+<h2 id="v-s1">1. Ánh sáng: sóng và hạt</h2>
+<p>Ánh sáng là bức xạ điện từ, truyền trong chân không với tốc độ \(c\approx 3\times10^8\) m/s. Như một sóng, nó giao thoa và có màu quyết định bởi bước sóng; như hạt, nó gồm các photon mang năng lượng lượng tử hóa:</p>
+<p>$$E=\frac{hc}{\lambda}\quad\Rightarrow\quad E\,[\text{eV}]\approx\frac{1240}{\lambda\,[\text{nm}]}$$</p>
+<p>với \(h=4{,}135\times10^{-15}\) eV·s. Mắt người ban ngày nhạy nhất ở 555 nm (xanh lá); trong tối, ở khoảng 507 nm. Độ rọi (illuminance, đơn vị lux) là lượng ánh sáng tới một bề mặt; quang thông (luminous flux, lumen) là tổng ánh sáng phát ra từ nguồn.</p>
+
+<h2 id="v-s2">2. Các loại cảm biến quang</h2>
+<div class="tablewrap"><table>
+<tr><th>Hiệu ứng</th><th>Nguyên lý</th><th>Cảm biến</th><th>Vật liệu</th></tr>
+<tr><td>Quang điện ngoài</td><td>Photon bứt electron ra khỏi bề mặt</td><td>Ống quang điện, ống nhân quang</td><td>Ag-O-Cs, Sb-Cs</td></tr>
+<tr><td>Quang dẫn</td><td>Electron hấp thụ photon nhảy lên vùng dẫn, độ dẫn tăng</td><td>Quang trở</td><td>CdS, CdSe, PbS, PbSe</td></tr>
+<tr><td>Quang điện áp (photovoltaic)</td><td>Điện trường của vùng nghèo tách cặp electron–lỗ trống</td><td>Photodiode pn, PIN, APD, phototransistor, pin mặt trời</td><td>Si, Ge, GaAs, InGaAsP</td></tr>
+<tr><td>Quang ion hóa</td><td>Bức xạ ion hóa khí</td><td>Buồng ion hóa, ống Geiger–Müller</td><td>Khí</td></tr>
+</table></div>
+<p>Trong quang trở CdS, ngoài sinh và tái hợp hạt dẫn còn có bẫy: hạt dẫn bị bẫy giữ lại rồi phát xạ nhiệt trở ra, nên quang trở phản ứng chậm (hàng chục đến hàng trăm mili giây). Photodiode nhanh hơn nhiều, phù hợp cho đo lường.</p>
+
+<h2 id="v-s3">3. Bước sóng cắt</h2>
+<p>Photon chỉ tạo được cặp electron–lỗ trống khi năng lượng của nó lớn hơn độ rộng vùng cấm \(E_g\). Vì vậy mỗi vật liệu có một bước sóng cắt phía dài:</p>
+<p>$$\lambda_c\,[\text{nm}]=\frac{1240}{E_g\,[\text{eV}]}$$</p>
+<figure><svg viewBox="0 0 640 260" class="fig-svg" role="img"><line x1="90" y1="215" x2="600" y2="215" class="ax"/><line x1="90.0" y1="215" x2="90.0" y2="220" class="ax"/><text x="90.0" y="234" class="tk" text-anchor="middle">200</text><line x1="166.4" y1="215" x2="166.4" y2="220" class="ax"/><text x="166.4" y="234" class="tk" text-anchor="middle">300</text><line x1="220.5" y1="215" x2="220.5" y2="220" class="ax"/><text x="220.5" y="234" class="tk" text-anchor="middle">400</text><line x1="262.6" y1="215" x2="262.6" y2="220" class="ax"/><text x="262.6" y="234" class="tk" text-anchor="middle">500</text><line x1="325.9" y1="215" x2="325.9" y2="220" class="ax"/><text x="325.9" y="234" class="tk" text-anchor="middle">700</text><line x1="393.1" y1="215" x2="393.1" y2="220" class="ax"/><text x="393.1" y="234" class="tk" text-anchor="middle">1000</text><line x1="469.5" y1="215" x2="469.5" y2="220" class="ax"/><text x="469.5" y="234" class="tk" text-anchor="middle">1500</text><line x1="523.6" y1="215" x2="523.6" y2="220" class="ax"/><text x="523.6" y="234" class="tk" text-anchor="middle">2000</text><line x1="600.0" y1="215" x2="600.0" y2="220" class="ax"/><text x="600.0" y="234" class="tk" text-anchor="middle">3000</text><text x="345.0" y="254" class="lab" text-anchor="middle">Bước sóng (nm), thang log</text><rect x="153.4" y="30" width="67.2" height="185" style="fill:var(--accent-soft)"/><text x="187.0" y="24" class="ns" text-anchor="middle">UV</text><rect x="220.5" y="30" width="105.4" height="185" style="fill:var(--box)"/><text x="273.2" y="24" class="ns" text-anchor="middle">khả kiến</text><rect x="90.0" y="30" width="63.4" height="185" style="fill:var(--accent-soft);opacity:.55"/><text x="121.7" y="24" class="ns" text-anchor="middle">UV-C (mù mặt trời)</text><line x1="90" y1="52" x2="136.2" y2="52" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="142.2" y="56" class="ns" text-anchor="start">β-Ga₂O₃: 256 nm</text><line x1="90" y1="79" x2="203.1" y2="79" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="209.1" y="83" class="ns" text-anchor="start">GaN: 365 nm</text><line x1="90" y1="106" x2="267.2" y2="106" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="273.2" y="110" class="ns" text-anchor="start">CdS: 512 nm</text><line x1="90" y1="133" x2="367.6" y2="133" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="373.6" y="137" class="ns" text-anchor="start">GaAs: 873 nm</text><line x1="90" y1="160" x2="412.3" y2="160" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="418.3" y="164" class="ns" text-anchor="start">Si: 1107 nm</text><line x1="90" y1="187" x2="511.9" y2="187" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="517.9" y="191" class="ns" text-anchor="start">Ge: 1879 nm</text></svg><figcaption>Hình 1. Bước sóng cắt của một số bán dẫn: vật liệu chỉ nhạy với ánh sáng có bước sóng ngắn hơn đầu thanh. Ga₂O₃ chỉ nhạy với tia cực tím sóng ngắn (UV-C), vùng "mù mặt trời".</figcaption></figure>
+<p>Bán dẫn thuần có \(E_g\) nhỏ nhất khoảng 0,1 eV, nên muốn đo hồng ngoại xa hơn khoảng 12 µm phải dùng bán dẫn pha tạp (mức tạp chất cách vùng dẫn vài chục meV, ví dụ Si:As), và phải làm lạnh sâu để triệt nhiễu nhiệt. Ở phía bước sóng ngắn, độ nhạy của photodiode Si giảm vì ánh sáng xanh và UV bị hấp thụ ngay sát bề mặt, nơi hạt dẫn dễ tái hợp; lớp chống phản xạ giúp giữ lại ánh sáng tới.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>β-Ga₂O₃ có \(E_g\approx 4{,}8\) eV, tức \(\lambda_c\approx 255\text{–}260\) nm. Bức xạ Mặt Trời dưới khoảng 280 nm bị tầng ozone hấp thụ gần hết, nên một photodiode Ga₂O₃ gần như không thấy ánh nắng nhưng rất nhạy với UV-C: đó là đầu dò "mù mặt trời" dùng để phát hiện ngọn lửa, phóng điện corona hay theo dõi đèn khử khuẩn. Đây là một trong các ứng dụng chính của Ga₂O₃ bên cạnh linh kiện công suất (Pearton và cộng sự, 2018). Đọc tín hiệu của một photodiode như thế bằng Arduino dùng đúng các kỹ thuật trong bài này, cộng thêm một mạch khuếch đại xuyên trở vì dòng quang rất nhỏ.</p></div>
+
+<h2 id="v-s4">4. Photodiode trong mạch</h2>
+<p>Photodiode có thể dùng ở hai chế độ. <strong>Quang điện áp</strong> (không phân cực): ánh sáng tạo điện áp hở mạch, như pin mặt trời. <strong>Quang dẫn</strong> (phân cực ngược): dòng ngược tỉ lệ tuyến tính với cường độ sáng trên nhiều bậc độ lớn, và đáp ứng nhanh hơn vì vùng nghèo rộng hơn. Dòng quang thường chỉ nA–µA, quá nhỏ để <code>analogRead()</code> đọc trực tiếp; mạch khuếch đại xuyên trở (op-amp với điện trở hồi tiếp) đổi nó thành điện áp. Với dự án đơn giản, phototransistor hoặc quang trở trong cầu chia áp là đủ.</p>
+
+<h2 id="v-s5">5. Đèn ngủ tự động</h2>
+<p>Đèn bật khi tối, tắt khi sáng. Nếu chỉ dùng một ngưỡng, khi độ sáng dao động quanh ngưỡng (hoặc chính đèn chiếu vào cảm biến) đèn sẽ chập chờn. Cách chữa là <strong>trễ</strong> (hysteresis): ngưỡng bật thấp hơn ngưỡng tắt.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">NightLight.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="NightLight.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// NightLight.ino -- switch a lamp on in the dark, with hysteresis so it does not flicker
+// Circuit: 5 V -&gt; LDR -&gt; A0 -&gt; 10 kohm -&gt; GND ; the on-board LED (pin 13) is the &quot;lamp&quot;
+const int LDR = A0;
+const int LAMP = LED_BUILTIN;
+const int ON_BELOW  = 300;         // turn on when the reading drops below this
+const int OFF_ABOVE = 400;         // turn off only when it rises above this
+bool lampOn = false;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LAMP, OUTPUT);
+}
+
+void loop() {
+  int light = analogRead(LDR);
+  if (!lampOn &amp;&amp; light &lt; ON_BELOW) {
+    lampOn = true;
+  } else if (lampOn &amp;&amp; light &gt; OFF_ABOVE) {
+    lampOn = false;
+  }
+  digitalWrite(LAMP, lampOn ? HIGH : LOW);
+  Serial.print(light);
+  Serial.print(&#x27;\t&#x27;);
+  Serial.println(lampOn);
+  delay(100);
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>Tính bước sóng cắt của Si (1,12 eV), GaN (3,4 eV) và β-Ga₂O₃ (4,85 eV). Cái nào phù hợp để làm đầu dò ngọn lửa hoạt động ngoài trời?</li>
+<li>Một LED đỏ 630 nm chiếu vào photodiode Si và photodiode GaN. Cái nào cho tín hiệu? Vì sao?</li>
+<li>Vì sao quang trở CdS không hợp để đếm vật đi qua băng tải nhanh?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> Si: 1240/1,12 ≈ 1107 nm; GaN: ≈ 365 nm; β-Ga₂O₃: ≈ 256 nm. Ngoài trời, Si và GaN đều thấy ánh nắng (khả kiến, UV-A), nên sẽ báo động giả. Ga₂O₃ chỉ thấy UV-C, mà UV-C của Mặt Trời bị ozone chặn trước khi tới mặt đất, nên nó phát hiện được tia UV-C của ngọn lửa mà không bị nắng làm nhiễu.</p>
+<p><strong>2.</strong> Photon 630 nm có năng lượng 1240/630 ≈ 1,97 eV: lớn hơn \(E_g\) của Si (1,12 eV) nhưng nhỏ hơn của GaN (3,4 eV). Chỉ photodiode Si cho tín hiệu.</p>
+<p><strong>3.</strong> Quang trở phản hồi chậm (hàng chục đến hàng trăm ms) do bẫy giữ hạt dẫn rồi nhả ra từ từ. Vật đi qua nhanh hơn thời gian đó sẽ bị bỏ sót. Dùng phototransistor hoặc photodiode (đáp ứng µs) kèm một nguồn sáng, như cặp cảm biến ngắt quang (photo-interrupter).</p>
+</details>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>PBL Photonic sensors</em>, Korea Aerospace University.</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chương 13 (photodetectors).</li>
+<li>S. J. Pearton et al., "A review of Ga₂O₃ materials, processing, and devices," <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chương 3 (cảm biến analog tự làm).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Light sensors connect the Arduino to semiconductor physics: photoresistors, photodiodes and phototransistors all work because photons create electron–hole pairs. This lesson explains the mechanisms, the cutoff wavelength set by the band gap, and builds an automatic night light.</p>
+
+<h2 id="e-s1">1. Light: wave and particle</h2>
+<p>Light is electromagnetic radiation, travelling in vacuum at \(c\approx 3\times10^8\) m/s. As a wave it interferes and its colour is set by its wavelength; as particles it consists of photons carrying quantized energy:</p>
+<p>$$E=\frac{hc}{\lambda}\quad\Rightarrow\quad E\,[\text{eV}]\approx\frac{1240}{\lambda\,[\text{nm}]}$$</p>
+<p>with \(h=4.135\times10^{-15}\) eV·s. The human eye in daylight is most sensitive at 555 nm (green); in the dark, at about 507 nm. Illuminance (lux) is the light arriving at a surface; luminous flux (lumen) is the total light emitted by a source.</p>
+
+<h2 id="e-s2">2. Kinds of light sensor</h2>
+<div class="tablewrap"><table>
+<tr><th>Effect</th><th>Principle</th><th>Sensor</th><th>Materials</th></tr>
+<tr><td>External photoelectric</td><td>A photon knocks an electron out of the surface</td><td>Phototube, photomultiplier</td><td>Ag-O-Cs, Sb-Cs</td></tr>
+<tr><td>Photoconductive</td><td>An electron absorbs a photon and jumps to the conduction band; conductivity rises</td><td>Photoresistor</td><td>CdS, CdSe, PbS, PbSe</td></tr>
+<tr><td>Photovoltaic</td><td>The depletion-region field separates electron–hole pairs</td><td>pn and PIN photodiodes, APDs, phototransistors, solar cells</td><td>Si, Ge, GaAs, InGaAsP</td></tr>
+<tr><td>Photo-ionization</td><td>Radiation ionizes a gas</td><td>Ion chamber, Geiger–Müller tube</td><td>Gas</td></tr>
+</table></div>
+<p>In a CdS photoresistor, besides generation and recombination there are traps: carriers are captured and later thermally re-emitted, so the photoresistor responds slowly (tens to hundreds of milliseconds). Photodiodes are much faster and suit measurement.</p>
+
+<h2 id="e-s3">3. Cutoff wavelength</h2>
+<p>A photon creates an electron–hole pair only if its energy exceeds the band gap \(E_g\). Each material therefore has a long-wavelength cutoff:</p>
+<p>$$\lambda_c\,[\text{nm}]=\frac{1240}{E_g\,[\text{eV}]}$$</p>
+<figure><svg viewBox="0 0 640 260" class="fig-svg" role="img"><line x1="90" y1="215" x2="600" y2="215" class="ax"/><line x1="90.0" y1="215" x2="90.0" y2="220" class="ax"/><text x="90.0" y="234" class="tk" text-anchor="middle">200</text><line x1="166.4" y1="215" x2="166.4" y2="220" class="ax"/><text x="166.4" y="234" class="tk" text-anchor="middle">300</text><line x1="220.5" y1="215" x2="220.5" y2="220" class="ax"/><text x="220.5" y="234" class="tk" text-anchor="middle">400</text><line x1="262.6" y1="215" x2="262.6" y2="220" class="ax"/><text x="262.6" y="234" class="tk" text-anchor="middle">500</text><line x1="325.9" y1="215" x2="325.9" y2="220" class="ax"/><text x="325.9" y="234" class="tk" text-anchor="middle">700</text><line x1="393.1" y1="215" x2="393.1" y2="220" class="ax"/><text x="393.1" y="234" class="tk" text-anchor="middle">1000</text><line x1="469.5" y1="215" x2="469.5" y2="220" class="ax"/><text x="469.5" y="234" class="tk" text-anchor="middle">1500</text><line x1="523.6" y1="215" x2="523.6" y2="220" class="ax"/><text x="523.6" y="234" class="tk" text-anchor="middle">2000</text><line x1="600.0" y1="215" x2="600.0" y2="220" class="ax"/><text x="600.0" y="234" class="tk" text-anchor="middle">3000</text><text x="345.0" y="254" class="lab" text-anchor="middle">Wavelength (nm), log scale</text><rect x="153.4" y="30" width="67.2" height="185" style="fill:var(--accent-soft)"/><text x="187.0" y="24" class="ns" text-anchor="middle">UV</text><rect x="220.5" y="30" width="105.4" height="185" style="fill:var(--box)"/><text x="273.2" y="24" class="ns" text-anchor="middle">visible</text><rect x="90.0" y="30" width="63.4" height="185" style="fill:var(--accent-soft);opacity:.55"/><text x="121.7" y="24" class="ns" text-anchor="middle">UV-C (solar-blind)</text><line x1="90" y1="52" x2="136.2" y2="52" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="142.2" y="56" class="ns" text-anchor="start">β-Ga₂O₃: 256 nm</text><line x1="90" y1="79" x2="203.1" y2="79" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="209.1" y="83" class="ns" text-anchor="start">GaN: 365 nm</text><line x1="90" y1="106" x2="267.2" y2="106" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="273.2" y="110" class="ns" text-anchor="start">CdS: 512 nm</text><line x1="90" y1="133" x2="367.6" y2="133" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="373.6" y="137" class="ns" text-anchor="start">GaAs: 873 nm</text><line x1="90" y1="160" x2="412.3" y2="160" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="418.3" y="164" class="ns" text-anchor="start">Si: 1107 nm</text><line x1="90" y1="187" x2="511.9" y2="187" style="stroke:var(--s1);stroke-width:7;opacity:.75"/><text x="517.9" y="191" class="ns" text-anchor="start">Ge: 1879 nm</text></svg><figcaption>Figure 1. Cutoff wavelengths of some semiconductors: each material responds only to light with wavelengths shorter than the end of its bar. Ga₂O₃ responds only to short-wave ultraviolet (UV-C), the "solar-blind" band.</figcaption></figure>
+<p>Intrinsic semiconductors have band gaps no smaller than about 0.1 eV, so detecting far infrared beyond about 12 µm needs extrinsic (doped) semiconductors, with impurity levels a few tens of meV from the band (e.g. Si:As), cooled deeply to suppress thermal noise. At short wavelengths a Si photodiode loses sensitivity because blue and UV light are absorbed right at the surface, where carriers recombine easily; an anti-reflection coating helps keep the incoming light.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>β-Ga₂O₃ has \(E_g\approx 4.8\) eV, so \(\lambda_c\approx 255\text{–}260\) nm. Sunlight below about 280 nm is almost completely absorbed by the ozone layer, so a Ga₂O₃ photodiode barely sees sunlight yet is very sensitive to UV-C: a "solar-blind" detector for flames, corona discharge or monitoring germicidal lamps. This is one of the main applications of Ga₂O₃ alongside power devices (Pearton et al., 2018). Reading such a photodiode with an Arduino uses exactly the techniques of this lesson, plus a transimpedance amplifier because the photocurrent is tiny.</p></div>
+
+<h2 id="e-s4">4. A photodiode in a circuit</h2>
+<p>A photodiode can be used two ways. <strong>Photovoltaic</strong> (unbiased): light produces an open-circuit voltage, like a solar cell. <strong>Photoconductive</strong> (reverse-biased): the reverse current is linear in light intensity over many decades, and the response is faster because the depletion region is wider. The photocurrent is typically nA–µA, too small for <code>analogRead()</code> directly; a transimpedance amplifier (an op-amp with a feedback resistor) turns it into a voltage. For simple projects a phototransistor or a photoresistor in a divider is enough.</p>
+
+<h2 id="e-s5">5. An automatic night light</h2>
+<p>The lamp turns on in the dark and off in the light. With a single threshold, the lamp flickers when the light level hovers near it (or when the lamp itself shines on the sensor). The cure is <strong>hysteresis</strong>: the turn-on threshold sits below the turn-off threshold.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">NightLight.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="NightLight.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// NightLight.ino -- switch a lamp on in the dark, with hysteresis so it does not flicker
+// Circuit: 5 V -&gt; LDR -&gt; A0 -&gt; 10 kohm -&gt; GND ; the on-board LED (pin 13) is the &quot;lamp&quot;
+const int LDR = A0;
+const int LAMP = LED_BUILTIN;
+const int ON_BELOW  = 300;         // turn on when the reading drops below this
+const int OFF_ABOVE = 400;         // turn off only when it rises above this
+bool lampOn = false;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LAMP, OUTPUT);
+}
+
+void loop() {
+  int light = analogRead(LDR);
+  if (!lampOn &amp;&amp; light &lt; ON_BELOW) {
+    lampOn = true;
+  } else if (lampOn &amp;&amp; light &gt; OFF_ABOVE) {
+    lampOn = false;
+  }
+  digitalWrite(LAMP, lampOn ? HIGH : LOW);
+  Serial.print(light);
+  Serial.print(&#x27;\t&#x27;);
+  Serial.println(lampOn);
+  delay(100);
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>Compute the cutoff wavelengths of Si (1.12 eV), GaN (3.4 eV) and β-Ga₂O₃ (4.85 eV). Which suits an outdoor flame detector?</li>
+<li>A 630 nm red LED shines on a Si photodiode and a GaN photodiode. Which gives a signal? Why?</li>
+<li>Why is a CdS photoresistor a poor choice for counting objects on a fast conveyor?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> Si: 1240/1.12 ≈ 1107 nm; GaN: ≈ 365 nm; β-Ga₂O₃: ≈ 256 nm. Outdoors, Si and GaN both see sunlight (visible, UV-A) and would give false alarms. Ga₂O₃ sees only UV-C, and solar UV-C is blocked by ozone before reaching the ground, so it detects a flame's UV-C without interference from sunlight.</p>
+<p><strong>2.</strong> A 630 nm photon carries 1240/630 ≈ 1.97 eV: more than the band gap of Si (1.12 eV) but less than that of GaN (3.4 eV). Only the Si photodiode gives a signal.</p>
+<p><strong>3.</strong> A photoresistor responds slowly (tens to hundreds of ms) because traps hold carriers and release them gradually. Objects passing faster than that are missed. Use a phototransistor or photodiode (µs response) with a light source, as in a photo-interrupter.</p>
+</details>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>PBL Photonic sensors</em>, Korea Aerospace University.</li>
+<li>S. M. Sze, K. K. Ng, <em>Physics of Semiconductor Devices</em>, 3rd ed., Wiley (2007), chapter 13 (photodetectors).</li>
+<li>S. J. Pearton et al., "A review of Ga₂O₃ materials, processing, and devices," <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chapter 3 (home-made analog sensors).</li>
+</ol>
+</div>
+<nav class="pager"><a href="ard-motors.html">← <span class="l-vi">Động cơ DC và servo</span><span class="l-en">DC motors and servos</span></a><a class="n" href="ard-projects.html"><span class="l-vi">Dự án: bóng bàn tự động và robot hút bụi</span><span class="l-en">Projects: auto ping-pong and robot vacuum</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

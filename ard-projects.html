@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Dự án: bóng bàn tự động và robot hút bụi" data-title-en="Projects: auto ping-pong and robot vacuum">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects: auto ping-pong and robot vacuum · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="A design process, starter code for the two team projects and a debugging table for integration.">
+<meta property="og:title" content="Projects: auto ping-pong and robot vacuum">
+<meta property="og:description" content="A design process, starter code for the two team projects and a debugging table for integration.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 4 · Bài 1</span><span class="l-en">Part 4 · Lesson 1</span></p>
+  <h1><span class="l-vi">Dự án: bóng bàn tự động và robot hút bụi</span><span class="l-en">Projects: auto ping-pong and robot vacuum</span></h1>
+  <p class="sub"><span class="l-vi">Quy trình thiết kế, code khởi đầu cho hai dự án nhóm và bảng gỡ lỗi khi ghép hệ thống.</span><span class="l-en">A design process, starter code for the two team projects and a debugging table for integration.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Hai dự án nhóm của môn học ghép mọi thứ lại: máy đánh bóng bàn tự động (cảm biến siêu âm, servo, LED) và robot hút bụi tự chế (cảm biến siêu âm, động cơ DC). Bài này đưa ra quy trình thiết kế, code khởi đầu cho từng dự án và cách thử từng phần.</p>
+
+<h2 id="v-s1">1. Quy trình thiết kế</h2>
+<ol>
+<li><strong>Yêu cầu và luật chơi</strong>: viết ra máy phải làm gì và không được làm gì. Ví dụ luật 1 của dự án bóng bàn: ở trạng thái chờ, vợt không được chắn đường ray bóng.</li>
+<li><strong>Chia khối</strong>: cảm biến, bộ xử lý, cơ cấu chấp hành, nguồn, khung cơ khí (in 3D).</li>
+<li><strong>Thử từng khối riêng</strong>: đo khoảng cách bằng HC-SR04 trên Serial Monitor; quét servo bằng Sweep; chạy từng động cơ bằng MotorSpeed. Chỉ ghép khi từng phần đã chạy đúng.</li>
+<li><strong>Ghép và chỉnh tham số</strong>: ngưỡng khoảng cách, góc, thời gian. Đặt chúng thành hằng số ở đầu file để dễ chỉnh.</li>
+<li><strong>Thử trong điều kiện thật</strong> và ghi lại kết quả (tỉ lệ đánh trúng, số lần va chạm).</li>
+</ol>
+
+<h2 id="v-s2">2. Dự án 1: máy đánh bóng bàn tự động</h2>
+<p>Bóng lăn xuống một đường ray. Cảm biến siêu âm đặt ở cuối ray; khi bóng tới gần hơn một ngưỡng, servo vung vợt đánh bóng rồi trở về vị trí chờ, LED báo hiệu mỗi lần đánh. Một khoảng "nguội" sau mỗi cú đánh giúp cảm biến không nhìn thấy chính cây vợt hay bóng vừa bật ra mà đánh lần nữa.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">AutoPingPong.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="AutoPingPong.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// AutoPingPong.ino -- hit the ball when the ultrasonic sensor sees it coming
+// HC-SR04: Trig -&gt; 11, Echo -&gt; 10 ; servo signal -&gt; 9 ; status LED -&gt; 13
+#include &lt;Servo.h&gt;
+
+const int TRIG = 11, ECHO = 10;
+const int SERVO_PIN = 9;
+const int LED = LED_BUILTIN;
+const int REST_DEG = 0;            // stand-by angle: must leave the ball rail clear (rule 1)
+const int HIT_DEG  = 70;           // swing angle: tune on your own rig
+const float TRIGGER_CM = 12.0;     // hit when the ball is closer than this
+const unsigned long SWING_MS = 250;     // time the paddle stays out
+const unsigned long COOLDOWN_MS = 600;  // ignore the sensor right after a hit
+
+Servo paddle;
+unsigned long lastHit = 0;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+  pinMode(LED, OUTPUT);
+  paddle.attach(SERVO_PIN);
+  paddle.write(REST_DEG);
+}
+
+void loop() {
+  float d = readCm();
+  bool ready = (millis() - lastHit) &gt; COOLDOWN_MS;
+  if (ready &amp;&amp; d &gt; 0 &amp;&amp; d &lt; TRIGGER_CM) {
+    digitalWrite(LED, HIGH);
+    paddle.write(HIT_DEG);         // swing
+    delay(SWING_MS);
+    paddle.write(REST_DEG);        // back to stand-by
+    digitalWrite(LED, LOW);
+    lastHit = millis();
+    Serial.print(&quot;hit at &quot;);
+    Serial.print(d, 1);
+    Serial.println(&quot; cm&quot;);
+  }
+  delay(20);
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<p>Những thứ cần chỉnh trên máy thật: <code>REST_DEG</code> (vợt nằm ngoài đường ray, theo luật 1), <code>HIT_DEG</code> và <code>SWING_MS</code> (lực và thời điểm đánh), <code>TRIGGER_CM</code> (đánh sớm hay muộn, phụ thuộc tốc độ bóng). Servo tốn khoảng 0,1 s cho 60° với tải nhẹ (tùy loại), nên bóng nhanh cần ngưỡng xa hơn.</p>
+
+<h2 id="v-s3">3. Dự án 2: robot hút bụi tự chế</h2>
+<p>Robot đi thẳng; gặp vật cản thì dừng, lùi, quay một góc ngẫu nhiên rồi đi tiếp. Góc ngẫu nhiên giúp robot không bị kẹt lặp lại cùng một đường giữa hai bức tường, và theo thời gian phủ được phần lớn căn phòng.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">RobotAvoid.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="RobotAvoid.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// RobotAvoid.ino -- robot-vacuum style: go forward; at an obstacle back up and turn
+const int TRIG = 11, ECHO = 10;
+// L9110S / HG7881 dual motor driver
+//   driver   Arduino
+//   A-1A  -&gt; pin 7    left wheel
+//   A-1B  -&gt; pin 6    (PWM ~6)
+//   B-1A  -&gt; pin 4    right wheel
+//   B-1B  -&gt; pin 5    (PWM ~5)
+//   VCC   -&gt; motor battery (+), GND -&gt; battery (-) AND Arduino GND
+const int A_1A = 7, A_1B = 6;
+const int B_1A = 4, B_1B = 5;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void drive(int a1, int a2, int b1, int b2) {
+  digitalWrite(A_1A, a1); digitalWrite(A_1B, a2);
+  digitalWrite(B_1A, b1); digitalWrite(B_1B, b2);
+}
+void forward()  { drive(0, 1, 1, 0); }
+void backward() { drive(1, 0, 0, 1); }
+void turn()     { drive(0, 1, 0, 1); }   // both wheels the same way = spin in place
+void halt()     { drive(0, 0, 0, 0); }
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);  pinMode(ECHO, INPUT);
+  pinMode(A_1A, OUTPUT);  pinMode(A_1B, OUTPUT);
+  pinMode(B_1A, OUTPUT);  pinMode(B_1B, OUTPUT);
+  randomSeed(analogRead(A5));      // an unconnected pin gives a random seed
+}
+
+void loop() {
+  float d = readCm();
+  if (d &gt; 0 &amp;&amp; d &lt; 20) {
+    halt();      delay(150);
+    backward();  delay(300);
+    turn();      delay(random(250, 700));   // turn a random amount
+    halt();      delay(100);
+  } else {
+    forward();
+  }
+  delay(60);
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<p>Hướng phát triển: thêm cảm biến siêu âm thứ hai đặt chéo để biết nên rẽ bên nào; dùng <code>millis()</code> thay cho <code>delay()</code> để vẫn đo khoảng cách trong lúc lùi và quay; phần hút bụi dùng một quạt nhỏ, nên chú ý thiết kế luồng khí (khí động học cơ bản là một yêu cầu của dự án).</p>
+
+<h2 id="v-s4">4. Gỡ lỗi khi ghép hệ thống</h2>
+<div class="tablewrap"><table>
+<tr><th>Triệu chứng</th><th>Nguyên nhân hay gặp</th><th>Cách xử lý</th></tr>
+<tr><td>Arduino tự reset khi động cơ hay servo chạy</td><td>Sụt áp nguồn do dòng khởi động lớn</td><td>Nguồn riêng cho động cơ, GND chung; tụ 100–470 µF gần driver</td></tr>
+<tr><td>Khoảng cách nhảy lung tung, có số 0</td><td>Không có tiếng vọng, đo quá dày, nhiễu điện từ động cơ</td><td>Bỏ qua giá trị 0, lấy trung vị 3–5 lần đo, chu kỳ trên 60 ms</td></tr>
+<tr><td>Một bánh chạy ngược</td><td>Động cơ lắp đối diện hoặc đấu dây ngược</td><td>Đảo hai dây động cơ, hoặc đảo mức IA/IB trong code</td></tr>
+<tr><td>analogWrite trên chân 9, 10 không hoạt động</td><td>Thư viện Servo chiếm Timer1</td><td>Dùng chân PWM khác cho động cơ (3, 5, 6, 11)</td></tr>
+<tr><td>Upload báo lỗi cổng</td><td>Sai cổng, Serial Monitor đang mở ở chương trình khác, cáp chỉ sạc</td><td>Chọn lại Port, đóng chương trình đang chiếm cổng, đổi cáp</td></tr>
+</table></div>
+
+<h2 id="v-s5">5. Bài tập</h2>
+<ol>
+<li>Bóng lăn tới cảm biến với tốc độ 0,5 m/s. Servo cần 0,12 s để vợt tới điểm đánh. Nên đặt <code>TRIGGER_CM</code> bao nhiêu nếu điểm đánh cách cảm biến 3 cm?</li>
+<li>Viết hàm <code>readCmMedian()</code> trả về trung vị của 5 lần đo để chống nhiễu.</li>
+<li>Trong RobotAvoid, vì sao dùng <code>randomSeed(analogRead(A5))</code>?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> Trong 0,12 s bóng đi 0,5 × 0,12 = 6 cm, cộng thêm thời gian đo (cỡ vài ms đến 20 ms mỗi vòng lặp, thêm khoảng 1 cm). Đặt ngưỡng khoảng 3 + 6 + 1 = 10 cm, rồi tinh chỉnh bằng thử nghiệm.</p>
+<p><strong>2.</strong></p>
+<pre><code>float readCmMedian() {
+  float v[5];
+  for (int i = 0; i &lt; 5; i++) { v[i] = readCm(); delay(60); }
+  for (int i = 1; i &lt; 5; i++) {            // insertion sort
+    float x = v[i]; int j = i - 1;
+    while (j &gt;= 0 &amp;&amp; v[j] &gt; x) { v[j + 1] = v[j]; j--; }
+    v[j + 1] = x;
+  }
+  return v[2];                              // the middle value
+}</code></pre>
+<p>Trung vị bỏ được các giá trị sai lẻ tẻ (như −1 khi mất tiếng vọng) tốt hơn trung bình. Đổi lại, mỗi lần đọc mất khoảng 0,3 s, quá chậm cho máy bóng bàn nhưng ổn cho robot chạy chậm.</p>
+<p><strong>3.</strong> <code>random()</code> sinh dãy giả ngẫu nhiên giống hệt nhau mỗi lần khởi động nếu không có hạt giống khác nhau. Chân analog để hở đọc nhiễu điện, mỗi lần một khác, nên dùng làm hạt giống. (Đừng nối gì vào A5 trong dự án này.)</p>
+</details>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>신소재공학설계입문</em> (OT: dự án nhóm máy bóng bàn tự động và robot hút bụi) và <em>Global Engineering Design</em> (Automatic Ping-Pong), Korea Aerospace University.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019).</li>
+<li>Arduino, <a href="https://docs.arduino.cc/language-reference/en/functions/random-numbers/randomSeed/" target="_blank" rel="noopener">randomSeed() reference</a>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The course's two team projects bring everything together: an automatic ping-pong machine (ultrasonic sensor, servo, LED) and a home-made robot vacuum (ultrasonic sensor, DC motors). This lesson gives a design process, starter code for each project and how to test piece by piece.</p>
+
+<h2 id="e-s1">1. A design process</h2>
+<ol>
+<li><strong>Requirements and rules</strong>: write down what the machine must and must not do. For example, rule 1 of the ping-pong project: in stand-by, the paddle must not block the ball rail.</li>
+<li><strong>Split into blocks</strong>: sensors, processor, actuators, power, mechanical frame (3D printed).</li>
+<li><strong>Test each block alone</strong>: read distances from the HC-SR04 on the Serial Monitor; sweep the servo with Sweep; run each motor with MotorSpeed. Combine only once each part works.</li>
+<li><strong>Integrate and tune</strong>: distance thresholds, angles, timings. Make them constants at the top of the file so they are easy to change.</li>
+<li><strong>Test under real conditions</strong> and record the results (hit rate, number of collisions).</li>
+</ol>
+
+<h2 id="e-s2">2. Project 1: an automatic ping-pong machine</h2>
+<p>The ball rolls down a rail. An ultrasonic sensor sits at the end of the rail; when the ball comes closer than a threshold, the servo swings the paddle, then returns to stand-by, and an LED flashes for each hit. A "cool-down" after each hit stops the sensor from seeing the paddle itself or the rebounding ball and swinging again.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">AutoPingPong.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="AutoPingPong.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// AutoPingPong.ino -- hit the ball when the ultrasonic sensor sees it coming
+// HC-SR04: Trig -&gt; 11, Echo -&gt; 10 ; servo signal -&gt; 9 ; status LED -&gt; 13
+#include &lt;Servo.h&gt;
+
+const int TRIG = 11, ECHO = 10;
+const int SERVO_PIN = 9;
+const int LED = LED_BUILTIN;
+const int REST_DEG = 0;            // stand-by angle: must leave the ball rail clear (rule 1)
+const int HIT_DEG  = 70;           // swing angle: tune on your own rig
+const float TRIGGER_CM = 12.0;     // hit when the ball is closer than this
+const unsigned long SWING_MS = 250;     // time the paddle stays out
+const unsigned long COOLDOWN_MS = 600;  // ignore the sensor right after a hit
+
+Servo paddle;
+unsigned long lastHit = 0;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+  pinMode(LED, OUTPUT);
+  paddle.attach(SERVO_PIN);
+  paddle.write(REST_DEG);
+}
+
+void loop() {
+  float d = readCm();
+  bool ready = (millis() - lastHit) &gt; COOLDOWN_MS;
+  if (ready &amp;&amp; d &gt; 0 &amp;&amp; d &lt; TRIGGER_CM) {
+    digitalWrite(LED, HIGH);
+    paddle.write(HIT_DEG);         // swing
+    delay(SWING_MS);
+    paddle.write(REST_DEG);        // back to stand-by
+    digitalWrite(LED, LOW);
+    lastHit = millis();
+    Serial.print(&quot;hit at &quot;);
+    Serial.print(d, 1);
+    Serial.println(&quot; cm&quot;);
+  }
+  delay(20);
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<p>What to tune on the real machine: <code>REST_DEG</code> (paddle clear of the rail, per rule 1), <code>HIT_DEG</code> and <code>SWING_MS</code> (strength and timing of the hit), <code>TRIGGER_CM</code> (hit earlier or later, depending on ball speed). A servo takes about 0.1 s for 60° under light load (model dependent), so a fast ball needs a longer threshold.</p>
+
+<h2 id="e-s3">3. Project 2: a home-made robot vacuum</h2>
+<p>The robot drives straight; at an obstacle it stops, backs up, turns by a random amount and carries on. The random angle keeps the robot from getting stuck repeating the same path between two walls, and over time covers most of the room.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">RobotAvoid.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="RobotAvoid.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// RobotAvoid.ino -- robot-vacuum style: go forward; at an obstacle back up and turn
+const int TRIG = 11, ECHO = 10;
+// L9110S / HG7881 dual motor driver
+//   driver   Arduino
+//   A-1A  -&gt; pin 7    left wheel
+//   A-1B  -&gt; pin 6    (PWM ~6)
+//   B-1A  -&gt; pin 4    right wheel
+//   B-1B  -&gt; pin 5    (PWM ~5)
+//   VCC   -&gt; motor battery (+), GND -&gt; battery (-) AND Arduino GND
+const int A_1A = 7, A_1B = 6;
+const int B_1A = 4, B_1B = 5;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void drive(int a1, int a2, int b1, int b2) {
+  digitalWrite(A_1A, a1); digitalWrite(A_1B, a2);
+  digitalWrite(B_1A, b1); digitalWrite(B_1B, b2);
+}
+void forward()  { drive(0, 1, 1, 0); }
+void backward() { drive(1, 0, 0, 1); }
+void turn()     { drive(0, 1, 0, 1); }   // both wheels the same way = spin in place
+void halt()     { drive(0, 0, 0, 0); }
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);  pinMode(ECHO, INPUT);
+  pinMode(A_1A, OUTPUT);  pinMode(A_1B, OUTPUT);
+  pinMode(B_1A, OUTPUT);  pinMode(B_1B, OUTPUT);
+  randomSeed(analogRead(A5));      // an unconnected pin gives a random seed
+}
+
+void loop() {
+  float d = readCm();
+  if (d &gt; 0 &amp;&amp; d &lt; 20) {
+    halt();      delay(150);
+    backward();  delay(300);
+    turn();      delay(random(250, 700));   // turn a random amount
+    halt();      delay(100);
+  } else {
+    forward();
+  }
+  delay(60);
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<p>Ways to extend it: a second ultrasonic sensor mounted at an angle to decide which way to turn; <code>millis()</code> instead of <code>delay()</code> so distance is still measured while backing and turning; the vacuum itself uses a small fan, so pay attention to the airflow design (basic aerodynamics is part of the project brief).</p>
+
+<h2 id="e-s4">4. Debugging the integrated system</h2>
+<div class="tablewrap"><table>
+<tr><th>Symptom</th><th>Usual cause</th><th>Fix</th></tr>
+<tr><td>The Arduino resets when a motor or servo starts</td><td>Supply sag from the large start-up current</td><td>Separate motor supply with common GND; 100–470 µF capacitor near the driver</td></tr>
+<tr><td>Distances jump around, with zeros</td><td>No echo, measuring too often, motor noise</td><td>Ignore zeros, take the median of 3–5 readings, cycle over 60 ms</td></tr>
+<tr><td>One wheel runs backwards</td><td>Motors mounted facing each other or wired in reverse</td><td>Swap the two motor wires, or swap IA/IB levels in code</td></tr>
+<tr><td>analogWrite on pins 9 and 10 does nothing</td><td>The Servo library uses Timer1</td><td>Use other PWM pins for motors (3, 5, 6, 11)</td></tr>
+<tr><td>Upload fails with a port error</td><td>Wrong port, the port is held by another program, charge-only cable</td><td>Reselect Port, close the program holding the port, change cable</td></tr>
+</table></div>
+
+<h2 id="e-s5">5. Exercises</h2>
+<ol>
+<li>The ball rolls toward the sensor at 0.5 m/s. The servo needs 0.12 s to bring the paddle to the hitting point. What <code>TRIGGER_CM</code> should you use if the hitting point is 3 cm from the sensor?</li>
+<li>Write a function <code>readCmMedian()</code> that returns the median of 5 readings to reject noise.</li>
+<li>In RobotAvoid, why call <code>randomSeed(analogRead(A5))</code>?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> In 0.12 s the ball travels 0.5 × 0.12 = 6 cm, plus the measurement time (a few ms to 20 ms per loop, about another 1 cm). Set the threshold to about 3 + 6 + 1 = 10 cm, then fine-tune by testing.</p>
+<p><strong>2.</strong></p>
+<pre><code>float readCmMedian() {
+  float v[5];
+  for (int i = 0; i &lt; 5; i++) { v[i] = readCm(); delay(60); }
+  for (int i = 1; i &lt; 5; i++) {            // insertion sort
+    float x = v[i]; int j = i - 1;
+    while (j &gt;= 0 &amp;&amp; v[j] &gt; x) { v[j + 1] = v[j]; j--; }
+    v[j + 1] = x;
+  }
+  return v[2];                              // the middle value
+}</code></pre>
+<p>The median rejects isolated bad values (such as −1 when an echo is lost) better than the mean. The cost is about 0.3 s per reading, too slow for the ping-pong machine but fine for a slow robot.</p>
+<p><strong>3.</strong> Without different seeds, <code>random()</code> produces the same pseudo-random sequence after every start-up. An unconnected analog pin reads electrical noise that differs each time, so it makes a good seed. (Leave A5 unconnected in this project.)</p>
+</details>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lectures for <em>신소재공학설계입문</em> (orientation: the automatic ping-pong and robot vacuum team projects) and <em>Global Engineering Design</em> (Automatic Ping-Pong), Korea Aerospace University.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019).</li>
+<li>Arduino, <a href="https://docs.arduino.cc/language-reference/en/functions/random-numbers/randomSeed/" target="_blank" rel="noopener">randomSeed() reference</a>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="ard-light.html">← <span class="l-vi">Cảm biến ánh sáng</span><span class="l-en">Light sensors</span></a><a class="n" href="arduino.html"><span class="l-vi">Mục lục</span><span class="l-en">Contents</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

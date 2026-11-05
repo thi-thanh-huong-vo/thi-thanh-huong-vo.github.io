@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Tín hiệu analog và cảm biến" data-title-en="Analog signals and sensors">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analog signals and sensors · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The 10-bit ADC, potentiometers, map() and constrain(), a TMP36 with an RGB LED, photoresistors.">
+<meta property="og:title" content="Analog signals and sensors">
+<meta property="og:description" content="The 10-bit ADC, potentiometers, map() and constrain(), a TMP36 with an RGB LED, photoresistors.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 3</span><span class="l-en">Part 2 · Lesson 3</span></p>
+  <h1><span class="l-vi">Tín hiệu analog và cảm biến</span><span class="l-en">Analog signals and sensors</span></h1>
+  <p class="sub"><span class="l-vi">ADC 10 bit, biến trở, map() và constrain(), cảm biến nhiệt TMP36 với đèn RGB, quang trở.</span><span class="l-en">The 10-bit ADC, potentiometers, map() and constrain(), a TMP36 with an RGB LED, photoresistors.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Thế giới thật là analog: nhiệt độ, ánh sáng, vị trí thay đổi liên tục. Bài này giải thích cách Arduino chuyển điện áp liên tục thành số bằng bộ chuyển đổi ADC, rồi đọc biến trở, cảm biến nhiệt TMP36 và quang trở.</p>
+
+<h2 id="v-s1">1. Tín hiệu analog và số</h2>
+<p>Tín hiệu số chỉ có hai mức (0 và 5 V). Tín hiệu analog, như một sóng sin, nhận vô số giá trị giữa hai mức. Bộ chuyển đổi analog–số (ADC) chia khoảng điện áp thành \(2^N\) bậc với N là số bit. ADC 3 bit có 2³ = 8 mức (0–7); ADC của Uno có 10 bit, tức 1024 mức (0–1023), mỗi bậc 5 V/1024 ≈ 4,9 mV.</p>
+<figure><svg viewBox="0 0 640 260" class="fig-svg" role="img"><line x1="70" y1="220" x2="590" y2="220" class="ax"/><line x1="70" y1="220" x2="70" y2="40" class="ax"/><line x1="70" y1="220.0" x2="590" y2="220.0" class="grid"/><text x="62" y="224.0" class="tk" text-anchor="end">0</text><line x1="70" y1="194.3" x2="590" y2="194.3" class="grid"/><text x="62" y="198.28571428571428" class="tk" text-anchor="end">1</text><line x1="70" y1="168.6" x2="590" y2="168.6" class="grid"/><text x="62" y="172.57142857142856" class="tk" text-anchor="end">2</text><line x1="70" y1="142.9" x2="590" y2="142.9" class="grid"/><text x="62" y="146.85714285714286" class="tk" text-anchor="end">3</text><line x1="70" y1="117.1" x2="590" y2="117.1" class="grid"/><text x="62" y="121.14285714285714" class="tk" text-anchor="end">4</text><line x1="70" y1="91.4" x2="590" y2="91.4" class="grid"/><text x="62" y="95.42857142857142" class="tk" text-anchor="end">5</text><line x1="70" y1="65.7" x2="590" y2="65.7" class="grid"/><text x="62" y="69.71428571428572" class="tk" text-anchor="end">6</text><line x1="70" y1="40.0" x2="590" y2="40.0" class="grid"/><text x="62" y="44.0" class="tk" text-anchor="end">7</text><polyline points="70.0,130.0 72.6,127.5 75.2,124.9 77.8,122.4 80.4,119.8 83.0,117.3 85.6,114.8 88.2,112.3 90.8,109.9 93.4,107.4 96.0,105.0 98.6,102.6 101.2,100.2 103.8,97.8 106.4,95.5 109.0,93.2 111.6,91.0 114.2,88.8 116.8,86.6 119.4,84.5 122.0,82.4 124.6,80.4 127.2,78.4 129.8,76.4 132.4,74.6 135.0,72.7 137.6,71.0 140.2,69.2 142.8,67.6 145.4,66.0 148.0,64.5 150.6,63.0 153.2,61.6 155.8,60.3 158.4,59.0 161.0,57.8 163.6,56.7 166.2,55.7 168.8,54.7 171.4,53.8 174.0,53.0 176.6,52.2 179.2,51.5 181.8,51.0 184.4,50.4 187.0,50.0 189.6,49.6 192.2,49.4 194.8,49.2 197.4,49.0 200.0,49.0 202.6,49.0 205.2,49.2 207.8,49.4 210.4,49.6 213.0,50.0 215.6,50.4 218.2,51.0 220.8,51.5 223.4,52.2 226.0,53.0 228.6,53.8 231.2,54.7 233.8,55.7 236.4,56.7 239.0,57.8 241.6,59.0 244.2,60.3 246.8,61.6 249.4,63.0 252.0,64.5 254.6,66.0 257.2,67.6 259.8,69.2 262.4,71.0 265.0,72.7 267.6,74.6 270.2,76.4 272.8,78.4 275.4,80.4 278.0,82.4 280.6,84.5 283.2,86.6 285.8,88.8 288.4,91.0 291.0,93.2 293.6,95.5 296.2,97.8 298.8,100.2 301.4,102.6 304.0,105.0 306.6,107.4 309.2,109.9 311.8,112.3 314.4,114.8 317.0,117.3 319.6,119.8 322.2,122.4 324.8,124.9 327.4,127.5 330.0,130.0 332.6,132.5 335.2,135.1 337.8,137.6 340.4,140.2 343.0,142.7 345.6,145.2 348.2,147.7 350.8,150.1 353.4,152.6 356.0,155.0 358.6,157.4 361.2,159.8 363.8,162.2 366.4,164.5 369.0,166.8 371.6,169.0 374.2,171.2 376.8,173.4 379.4,175.5 382.0,177.6 384.6,179.6 387.2,181.6 389.8,183.6 392.4,185.4 395.0,187.3 397.6,189.0 400.2,190.8 402.8,192.4 405.4,194.0 408.0,195.5 410.6,197.0 413.2,198.4 415.8,199.7 418.4,201.0 421.0,202.2 423.6,203.3 426.2,204.3 428.8,205.3 431.4,206.2 434.0,207.0 436.6,207.8 439.2,208.5 441.8,209.0 444.4,209.6 447.0,210.0 449.6,210.4 452.2,210.6 454.8,210.8 457.4,211.0 460.0,211.0 462.6,211.0 465.2,210.8 467.8,210.6 470.4,210.4 473.0,210.0 475.6,209.6 478.2,209.0 480.8,208.5 483.4,207.8 486.0,207.0 488.6,206.2 491.2,205.3 493.8,204.3 496.4,203.3 499.0,202.2 501.6,201.0 504.2,199.7 506.8,198.4 509.4,197.0 512.0,195.5 514.6,194.0 517.2,192.4 519.8,190.8 522.4,189.0 525.0,187.3 527.6,185.4 530.2,183.6 532.8,181.6 535.4,179.6 538.0,177.6 540.6,175.5 543.2,173.4 545.8,171.2 548.4,169.0 551.0,166.8 553.6,164.5 556.2,162.2 558.8,159.8 561.4,157.4 564.0,155.0 566.6,152.6 569.2,150.1 571.8,147.7 574.4,145.2 577.0,142.7 579.6,140.2 582.2,137.6 584.8,135.1 587.4,132.5 590.0,130.0" class="s2" fill="none"/><path d="M70.0,117.1 H102.5 V91.4 H135.0 V65.7 H167.5 V40.0 H200.0 V40.0 H232.5 V65.7 H265.0 V91.4 H297.5 V117.1 H330.0 V142.9 H362.5 V168.6 H395.0 V194.3 H427.5 V220.0 H460.0 V220.0 H492.5 V194.3 H525.0 V168.6 H557.5 V142.9 H590.0" class="s1" fill="none"/><text x="330.0" y="248" class="lab" text-anchor="middle">Thời gian</text><text x="586" y="40" class="ns" text-anchor="end">ADC 3 bit: 2³ = 8 mức (0–7). Uno: 10 bit = 1024 mức</text></svg><figcaption>Hình 1. Lượng tử hóa một tín hiệu analog bằng ADC 3 bit: tín hiệu liên tục (đứt nét) được thay bằng các bậc nguyên từ 0 đến 7.</figcaption></figure>
+<div class="ard-tool" data-tool="adc" data-lang="vi"><p class="tt">Điện áp vào → giá trị ADC</p><label>Điện áp tại chân A0 (V)<input type="number" name="v" value="0.75" step="0.01" min="0" max="5"></label><p class="out"></p></div>
+
+<h2 id="v-s2">2. Đọc biến trở</h2>
+<p>Biến trở có ba chân: hai chân ngoài nối 5 V và GND, chân giữa (con trượt) nối A0. Xoay núm, điện áp ở A0 đi từ 0 đến 5 V.</p>
+<figure><svg viewBox="0 0 640 290" class="fig-svg" role="img"><text x="150" y="26" class="nt" text-anchor="middle">5 V</text><path d="M150,32 V60" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="150" y="240" class="nt" text-anchor="middle">Biến trở</text><text x="450" y="26" class="nt" text-anchor="middle">5 V</text><path d="M450,32 V60" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="450" y="240" class="nt" text-anchor="middle">Quang trở (LDR)</text><rect x="141" y="60" width="18" height="120" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><text x="166" y="124.0" class="lab" text-anchor="start">10 kΩ</text><path d="M150,180 V205" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="150" y="222" class="ns" text-anchor="middle">GND</text><path d="M110,120 H141" style="stroke:var(--accent);stroke-width:2"/><path d="M141,120 l-8,-5 v10 z" style="fill:var(--accent)"/><text x="104" y="124" class="nt" text-anchor="end">A0</text><rect x="441" y="60" width="18" height="55" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><path d="M416,54 l18,14 M412,66 l18,14" style="stroke:var(--s3);stroke-width:1.4"/><text x="466" y="91.5" class="lab" text-anchor="start">R<tspan dy="3" style="font-size:9px">LDR</tspan><tspan dy="-3"> </tspan></text><path d="M450,115 V128" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><rect x="441" y="128" width="18" height="55" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><text x="466" y="159.5" class="lab" text-anchor="start">10 kΩ</text><path d="M450,183 V205" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="450" y="222" class="ns" text-anchor="middle">GND</text><path d="M450,121 H380" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><circle cx="450" cy="121" r="3" style="fill:var(--ink)"/><text x="374" y="125" class="nt" text-anchor="end">A0</text><text x="450" y="266" class="ns" text-anchor="middle">V<tspan dy="3" style="font-size:9px">A0</tspan><tspan dy="-3"> </tspan>= 5 V · 10k / (10k + R<tspan dy="3" style="font-size:9px">LDR</tspan><tspan dy="-3">)</tspan></text><text x="450" y="284" class="ns" text-anchor="middle">sáng → R nhỏ → V lớn</text></svg><figcaption>Hình 2. Trái: biến trở là một cầu chia áp có thể chỉnh. Phải: quang trở và điện trở 10 kΩ tạo cầu chia áp mà điện áp ra tăng khi trời sáng.</figcaption></figure>
+<div class="sk"><div class="sk-h"><span class="sk-f">AnalogReadSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="AnalogReadSerial.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  AnalogReadSerial
+
+  Reads an analog input on pin 0, prints the result to the Serial Monitor.
+  Graphical representation is available using Serial Plotter (Tools &gt; Serial Plotter menu).
+  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/AnalogReadSerial/
+*/
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input on analog pin 0:
+  int sensorValue = analogRead(A0);
+  // print out the value you read:
+  Serial.println(sensorValue);
+  delay(1);  // delay in between reads for stability
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/basics/AnalogReadSerial/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+<div class="sk"><div class="sk-h"><span class="sk-f">ReadAnalogVoltage.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="ReadAnalogVoltage.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  ReadAnalogVoltage
+
+  Reads an analog input on pin 0, converts it to voltage, and prints the result to the Serial Monitor.
+  Graphical representation is available using Serial Plotter (Tools &gt; Serial Plotter menu).
+  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage/
+*/
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input on analog pin 0:
+  int sensorValue = analogRead(A0);
+  // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V):
+  float voltage = sensorValue * (5.0 / 1023.0);
+  // print out the value you read:
+  Serial.println(voltage);
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+<p>Mở <em>Tools → Serial Plotter</em> để xem giá trị dạng đồ thị. Ví dụ chính thức đổi ra volt bằng \(5/1023\); tài liệu của Microchip định nghĩa bậc ADC là \(V_{ref}/1024\). Sai khác chỉ 0,1 %, không đáng kể với hầu hết dự án.</p>
+
+<h2 id="v-s3">3. Ánh xạ sang đầu ra: map() và constrain()</h2>
+<p><code>map(x, 0, 1023, 0, 255)</code> đổi tỉ lệ một giá trị từ khoảng này sang khoảng khác (tính bằng số nguyên). <code>constrain(x, a, b)</code> giữ giá trị trong khoảng [a, b]. Ví dụ dưới dùng biến trở để chỉnh độ sáng LED:</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">AnalogInOutSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="AnalogInOutSerial.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  Analog input, analog output, serial output
+
+  Reads an analog input pin, maps the result to a range from 0 to 255 and uses
+  the result to set the pulse width modulation (PWM) of an output pin.
+  Also prints the results to the Serial Monitor.
+
+  The circuit:
+  - potentiometer connected to analog pin 0.
+    Center pin of the potentiometer goes to the analog pin.
+    side pins of the potentiometer go to +5V and ground
+  - LED connected from digital pin 9 to ground through 220 ohm resistor
+
+  created 29 Dec. 2008
+  modified 9 Apr 2012
+  by Tom Igoe
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/analog/AnalogInOutSerial/
+*/
+
+// These constants won&#x27;t change. They&#x27;re used to give names to the pins used:
+const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
+const int analogOutPin = 9;  // Analog output pin that the LED is attached to
+
+int sensorValue = 0;  // value read from the pot
+int outputValue = 0;  // value output to the PWM (analog out)
+
+void setup() {
+  // initialize serial communications at 9600 bps:
+  Serial.begin(9600);
+}
+
+void loop() {
+  // read the analog in value:
+  sensorValue = analogRead(analogInPin);
+  // map it to the range of the analog out:
+  outputValue = map(sensorValue, 0, 1023, 0, 255);
+  // change the analog out value:
+  analogWrite(analogOutPin, outputValue);
+
+  // print the results to the Serial Monitor:
+  Serial.print(&quot;sensor = &quot;);
+  Serial.print(sensorValue);
+  Serial.print(&quot;\t output = &quot;);
+  Serial.println(outputValue);
+
+  // wait 2 milliseconds before the next loop for the analog-to-digital
+  // converter to settle after the last reading:
+  delay(2);
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/analog/AnalogInOutSerial/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+
+<h2 id="v-s4">4. Cảm biến đóng gói sẵn</h2>
+<ul>
+<li><strong>Cảm biến khoảng cách hồng ngoại Sharp</strong>: dây đỏ 5 V, đen GND, trắng trả về điện áp 0–5 V theo khoảng cách (quan hệ không tuyến tính, cần bảng hiệu chỉnh).</li>
+<li><strong>Gia tốc kế ba trục analog</strong>: ba chân Xout, Yout, Zout cho điện áp theo độ nghiêng và chuyển động; điện thoại dùng cảm biến loại này để xoay màn hình.</li>
+<li><strong>TMP36</strong>: điện áp ra tuyến tính theo nhiệt độ, 10 mV/°C, bằng 0,5 V ở 0 °C (750 mV ở 25 °C). Kéo dài đường thẳng đó thì 0 V ứng với −50 °C và 1,75 V ứng với 125 °C.</li>
+</ul>
+$$T\,[^\circ\text{C}]=\left(V_{out}-0{,}5\right)\times 100$$
+<p>Hệ thống cảnh báo nhiệt độ của bài giảng: đèn RGB xanh lá khi nhiệt độ trong khoảng cho phép, đỏ khi quá nóng, xanh dương khi quá lạnh.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">Tmp36Alert.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="Tmp36Alert.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// Tmp36Alert.ino -- TMP36 temperature sensor with an RGB status LED
+// TMP36: +Vs -&gt; 5 V, Vout -&gt; A0, GND -&gt; GND (flat side facing you: 5V, Vout, GND)
+// Common-cathode RGB LED: R -&gt; pin 9, G -&gt; pin 10, B -&gt; pin 11, each through 220 ohm
+const int TEMP = A0;
+const int RED = 9, GREEN = 10, BLUE = 11;
+const float LOW_C = 18.0;          // below this: blue (too cold)
+const float HIGH_C = 26.0;         // above this: red (too hot)
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+}
+
+void loop() {
+  int raw = analogRead(TEMP);              // 0..1023
+  float volts = raw * (5.0 / 1024.0);      // one ADC step = 5 V / 1024 = 4.9 mV
+  float tempC = (volts - 0.5) * 100.0;     // TMP36: 0.5 V at 0 degC, +10 mV per degC
+
+  Serial.print(tempC, 1);
+  Serial.println(&quot; C&quot;);
+
+  digitalWrite(BLUE,  tempC &lt; LOW_C);
+  digitalWrite(GREEN, tempC &gt;= LOW_C &amp;&amp; tempC &lt;= HIGH_C);
+  digitalWrite(RED,   tempC &gt; HIGH_C);
+  delay(500);
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<p>Wokwi không có TMP36 mà có cảm biến nhiệt NTC; công thức đổi giá trị cho NTC có trong trang tài liệu linh kiện đó của Wokwi.</p>
+
+<h2 id="v-s5">5. Tự làm cảm biến: quang trở</h2>
+<p>Quang trở CdS có điện trở giảm khi được chiếu sáng (từ vài trăm kΩ trong tối xuống vài kΩ dưới đèn phòng, tùy loại). Ghép với một điện trở cố định thành cầu chia áp (Hình 2, phải) là có một cảm biến ánh sáng:</p>
+<p>$$V_{A0}=5\ \text{V}\times\frac{R_{fix}}{R_{fix}+R_{LDR}}$$</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">LightMeter.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="LightMeter.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// LightMeter.ino -- photoresistor voltage divider; the LED gets brighter as it gets darker
+// Circuit: 5 V -&gt; LDR -&gt; A0 -&gt; 10 kohm -&gt; GND ; LED + 220 ohm on pin 9
+const int LDR = A0;
+const int LED = 9;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  int light = analogRead(LDR);              // dark -&gt; small value, bright -&gt; large value
+  int level = map(light, 0, 1023, 255, 0);  // invert: darker -&gt; brighter LED
+  level = constrain(level, 0, 255);         // keep the value inside 0..255
+  analogWrite(LED, level);
+  Serial.println(light);                    // try Tools &gt; Serial Plotter
+  delay(50);
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<p>Chọn \(R_{fix}\) xấp xỉ điện trở của quang trở ở mức sáng bạn quan tâm nhất thì độ nhạy ở đó lớn nhất. Cơ chế vật lý của quang trở (quang dẫn) được bàn kỹ ở bài <a href="ard-light.html">Cảm biến ánh sáng</a>.</p>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>TMP36 cho <code>analogRead()</code> = 153. Nhiệt độ là bao nhiêu? Một bậc ADC tương ứng bao nhiêu °C?</li>
+<li>Quang trở có 20 kΩ trong bóng râm và 2 kΩ dưới đèn. Với \(R_{fix}\) = 10 kΩ, tính hai giá trị ADC.</li>
+<li>Vì sao không nên nối thẳng một chân analog vào điện áp lớn hơn 5 V (ví dụ pin 9 V qua cầu chia áp tính sai)?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> V = 153 × 5/1024 = 0,747 V, T = (0,747 − 0,5) × 100 ≈ 24,7 °C. Một bậc ADC là 4,9 mV, tức khoảng 0,49 °C, nên số đọc nhảy theo bước gần nửa độ. (Muốn mịn hơn: lấy trung bình nhiều lần đọc, hoặc đổi điện áp tham chiếu sang 1,1 V nội bằng <code>analogReference(INTERNAL)</code>, khi đó một bậc khoảng 0,11 °C nhưng chỉ đo được tới khoảng 60 °C.)</p>
+<p><strong>2.</strong> Bóng râm: V = 5 × 10/(10 + 20) = 1,67 V, ADC ≈ 341. Dưới đèn: V = 5 × 10/12 = 4,17 V, ADC ≈ 853.</p>
+<p><strong>3.</strong> Chân ADC có diode bảo vệ nối lên 5 V; điện áp vượt quá khoảng 5,5 V làm dòng chạy qua diode và có thể phá hỏng chân hoặc cả vi điều khiển. Luôn tính lại cầu chia áp để điện áp lớn nhất ở chân không quá 5 V.</p>
+</details>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>PBL Understanding analog and digital</em>, Korea Aerospace University.</li>
+<li>Arduino, ví dụ <a href="https://docs.arduino.cc/built-in-examples/basics/AnalogReadSerial/" target="_blank" rel="noopener">AnalogReadSerial</a>, <a href="https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage/" target="_blank" rel="noopener">ReadAnalogVoltage</a>, <a href="https://docs.arduino.cc/built-in-examples/analog/AnalogInOutSerial/" target="_blank" rel="noopener">AnalogInOutSerial</a>.</li>
+<li>Analog Devices, <em>TMP35/TMP36/TMP37 Low Voltage Temperature Sensors</em>, datasheet (hệ số 10 mV/°C, 750 mV ở 25 °C).</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chương 3.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The real world is analog: temperature, light and position change continuously. This lesson explains how the Arduino turns a continuous voltage into a number with its ADC, then reads a potentiometer, a TMP36 temperature sensor and a photoresistor.</p>
+
+<h2 id="e-s1">1. Analog and digital signals</h2>
+<p>A digital signal has only two levels (0 and 5 V). An analog signal, like a sine wave, takes infinitely many values between them. An analog-to-digital converter (ADC) splits the voltage range into \(2^N\) steps, N being the number of bits. A 3-bit ADC has 2³ = 8 levels (0–7); the Uno's ADC has 10 bits, 1024 levels (0–1023), each step 5 V/1024 ≈ 4.9 mV.</p>
+<figure><svg viewBox="0 0 640 260" class="fig-svg" role="img"><line x1="70" y1="220" x2="590" y2="220" class="ax"/><line x1="70" y1="220" x2="70" y2="40" class="ax"/><line x1="70" y1="220.0" x2="590" y2="220.0" class="grid"/><text x="62" y="224.0" class="tk" text-anchor="end">0</text><line x1="70" y1="194.3" x2="590" y2="194.3" class="grid"/><text x="62" y="198.28571428571428" class="tk" text-anchor="end">1</text><line x1="70" y1="168.6" x2="590" y2="168.6" class="grid"/><text x="62" y="172.57142857142856" class="tk" text-anchor="end">2</text><line x1="70" y1="142.9" x2="590" y2="142.9" class="grid"/><text x="62" y="146.85714285714286" class="tk" text-anchor="end">3</text><line x1="70" y1="117.1" x2="590" y2="117.1" class="grid"/><text x="62" y="121.14285714285714" class="tk" text-anchor="end">4</text><line x1="70" y1="91.4" x2="590" y2="91.4" class="grid"/><text x="62" y="95.42857142857142" class="tk" text-anchor="end">5</text><line x1="70" y1="65.7" x2="590" y2="65.7" class="grid"/><text x="62" y="69.71428571428572" class="tk" text-anchor="end">6</text><line x1="70" y1="40.0" x2="590" y2="40.0" class="grid"/><text x="62" y="44.0" class="tk" text-anchor="end">7</text><polyline points="70.0,130.0 72.6,127.5 75.2,124.9 77.8,122.4 80.4,119.8 83.0,117.3 85.6,114.8 88.2,112.3 90.8,109.9 93.4,107.4 96.0,105.0 98.6,102.6 101.2,100.2 103.8,97.8 106.4,95.5 109.0,93.2 111.6,91.0 114.2,88.8 116.8,86.6 119.4,84.5 122.0,82.4 124.6,80.4 127.2,78.4 129.8,76.4 132.4,74.6 135.0,72.7 137.6,71.0 140.2,69.2 142.8,67.6 145.4,66.0 148.0,64.5 150.6,63.0 153.2,61.6 155.8,60.3 158.4,59.0 161.0,57.8 163.6,56.7 166.2,55.7 168.8,54.7 171.4,53.8 174.0,53.0 176.6,52.2 179.2,51.5 181.8,51.0 184.4,50.4 187.0,50.0 189.6,49.6 192.2,49.4 194.8,49.2 197.4,49.0 200.0,49.0 202.6,49.0 205.2,49.2 207.8,49.4 210.4,49.6 213.0,50.0 215.6,50.4 218.2,51.0 220.8,51.5 223.4,52.2 226.0,53.0 228.6,53.8 231.2,54.7 233.8,55.7 236.4,56.7 239.0,57.8 241.6,59.0 244.2,60.3 246.8,61.6 249.4,63.0 252.0,64.5 254.6,66.0 257.2,67.6 259.8,69.2 262.4,71.0 265.0,72.7 267.6,74.6 270.2,76.4 272.8,78.4 275.4,80.4 278.0,82.4 280.6,84.5 283.2,86.6 285.8,88.8 288.4,91.0 291.0,93.2 293.6,95.5 296.2,97.8 298.8,100.2 301.4,102.6 304.0,105.0 306.6,107.4 309.2,109.9 311.8,112.3 314.4,114.8 317.0,117.3 319.6,119.8 322.2,122.4 324.8,124.9 327.4,127.5 330.0,130.0 332.6,132.5 335.2,135.1 337.8,137.6 340.4,140.2 343.0,142.7 345.6,145.2 348.2,147.7 350.8,150.1 353.4,152.6 356.0,155.0 358.6,157.4 361.2,159.8 363.8,162.2 366.4,164.5 369.0,166.8 371.6,169.0 374.2,171.2 376.8,173.4 379.4,175.5 382.0,177.6 384.6,179.6 387.2,181.6 389.8,183.6 392.4,185.4 395.0,187.3 397.6,189.0 400.2,190.8 402.8,192.4 405.4,194.0 408.0,195.5 410.6,197.0 413.2,198.4 415.8,199.7 418.4,201.0 421.0,202.2 423.6,203.3 426.2,204.3 428.8,205.3 431.4,206.2 434.0,207.0 436.6,207.8 439.2,208.5 441.8,209.0 444.4,209.6 447.0,210.0 449.6,210.4 452.2,210.6 454.8,210.8 457.4,211.0 460.0,211.0 462.6,211.0 465.2,210.8 467.8,210.6 470.4,210.4 473.0,210.0 475.6,209.6 478.2,209.0 480.8,208.5 483.4,207.8 486.0,207.0 488.6,206.2 491.2,205.3 493.8,204.3 496.4,203.3 499.0,202.2 501.6,201.0 504.2,199.7 506.8,198.4 509.4,197.0 512.0,195.5 514.6,194.0 517.2,192.4 519.8,190.8 522.4,189.0 525.0,187.3 527.6,185.4 530.2,183.6 532.8,181.6 535.4,179.6 538.0,177.6 540.6,175.5 543.2,173.4 545.8,171.2 548.4,169.0 551.0,166.8 553.6,164.5 556.2,162.2 558.8,159.8 561.4,157.4 564.0,155.0 566.6,152.6 569.2,150.1 571.8,147.7 574.4,145.2 577.0,142.7 579.6,140.2 582.2,137.6 584.8,135.1 587.4,132.5 590.0,130.0" class="s2" fill="none"/><path d="M70.0,117.1 H102.5 V91.4 H135.0 V65.7 H167.5 V40.0 H200.0 V40.0 H232.5 V65.7 H265.0 V91.4 H297.5 V117.1 H330.0 V142.9 H362.5 V168.6 H395.0 V194.3 H427.5 V220.0 H460.0 V220.0 H492.5 V194.3 H525.0 V168.6 H557.5 V142.9 H590.0" class="s1" fill="none"/><text x="330.0" y="248" class="lab" text-anchor="middle">Time</text><text x="586" y="40" class="ns" text-anchor="end">3-bit ADC: 2³ = 8 levels (0–7). Uno: 10 bit = 1024 levels</text></svg><figcaption>Figure 1. Quantizing an analog signal with a 3-bit ADC: the continuous signal (dashed) is replaced by integer steps from 0 to 7.</figcaption></figure>
+<div class="ard-tool" data-tool="adc" data-lang="en"><p class="tt">Input voltage → ADC value</p><label>Voltage at pin A0 (V)<input type="number" name="v" value="0.75" step="0.01" min="0" max="5"></label><p class="out"></p></div>
+
+<h2 id="e-s2">2. Reading a potentiometer</h2>
+<p>A potentiometer has three legs: the outer two go to 5 V and GND, the middle one (the wiper) to A0. Turning the knob sweeps the voltage at A0 from 0 to 5 V.</p>
+<figure><svg viewBox="0 0 640 290" class="fig-svg" role="img"><text x="150" y="26" class="nt" text-anchor="middle">5 V</text><path d="M150,32 V60" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="150" y="240" class="nt" text-anchor="middle">Potentiometer</text><text x="450" y="26" class="nt" text-anchor="middle">5 V</text><path d="M450,32 V60" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="450" y="240" class="nt" text-anchor="middle">Photoresistor (LDR)</text><rect x="141" y="60" width="18" height="120" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><text x="166" y="124.0" class="lab" text-anchor="start">10 kΩ</text><path d="M150,180 V205" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="150" y="222" class="ns" text-anchor="middle">GND</text><path d="M110,120 H141" style="stroke:var(--accent);stroke-width:2"/><path d="M141,120 l-8,-5 v10 z" style="fill:var(--accent)"/><text x="104" y="124" class="nt" text-anchor="end">A0</text><rect x="441" y="60" width="18" height="55" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><path d="M416,54 l18,14 M412,66 l18,14" style="stroke:var(--s3);stroke-width:1.4"/><text x="466" y="91.5" class="lab" text-anchor="start">R<tspan dy="3" style="font-size:9px">LDR</tspan><tspan dy="-3"> </tspan></text><path d="M450,115 V128" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><rect x="441" y="128" width="18" height="55" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><text x="466" y="159.5" class="lab" text-anchor="start">10 kΩ</text><path d="M450,183 V205" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><text x="450" y="222" class="ns" text-anchor="middle">GND</text><path d="M450,121 H380" style="stroke:var(--ink);stroke-width:1.6;fill:none"/><circle cx="450" cy="121" r="3" style="fill:var(--ink)"/><text x="374" y="125" class="nt" text-anchor="end">A0</text><text x="450" y="266" class="ns" text-anchor="middle">V<tspan dy="3" style="font-size:9px">A0</tspan><tspan dy="-3"> </tspan>= 5 V · 10k / (10k + R<tspan dy="3" style="font-size:9px">LDR</tspan><tspan dy="-3">)</tspan></text><text x="450" y="284" class="ns" text-anchor="middle">bright → small R → high V</text></svg><figcaption>Figure 2. Left: a potentiometer is an adjustable voltage divider. Right: a photoresistor and a 10 kΩ resistor form a divider whose output rises with light.</figcaption></figure>
+<div class="sk"><div class="sk-h"><span class="sk-f">AnalogReadSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="AnalogReadSerial.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  AnalogReadSerial
+
+  Reads an analog input on pin 0, prints the result to the Serial Monitor.
+  Graphical representation is available using Serial Plotter (Tools &gt; Serial Plotter menu).
+  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/AnalogReadSerial/
+*/
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input on analog pin 0:
+  int sensorValue = analogRead(A0);
+  // print out the value you read:
+  Serial.println(sensorValue);
+  delay(1);  // delay in between reads for stability
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/basics/AnalogReadSerial/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+<div class="sk"><div class="sk-h"><span class="sk-f">ReadAnalogVoltage.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="ReadAnalogVoltage.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  ReadAnalogVoltage
+
+  Reads an analog input on pin 0, converts it to voltage, and prints the result to the Serial Monitor.
+  Graphical representation is available using Serial Plotter (Tools &gt; Serial Plotter menu).
+  Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage/
+*/
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // initialize serial communication at 9600 bits per second:
+  Serial.begin(9600);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // read the input on analog pin 0:
+  int sensorValue = analogRead(A0);
+  // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V):
+  float voltage = sensorValue * (5.0 / 1023.0);
+  // print out the value you read:
+  Serial.println(voltage);
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+<p>Open <em>Tools → Serial Plotter</em> to see the values as a graph. The official example converts to volts with \(5/1023\); Microchip's datasheet defines the ADC step as \(V_{ref}/1024\). The difference is only 0.1 %, negligible for most projects.</p>
+
+<h2 id="e-s3">3. Mapping to an output: map() and constrain()</h2>
+<p><code>map(x, 0, 1023, 0, 255)</code> rescales a value from one range to another (in integer arithmetic). <code>constrain(x, a, b)</code> keeps a value inside [a, b]. The example below uses the potentiometer to set LED brightness:</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">AnalogInOutSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="AnalogInOutSerial.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  Analog input, analog output, serial output
+
+  Reads an analog input pin, maps the result to a range from 0 to 255 and uses
+  the result to set the pulse width modulation (PWM) of an output pin.
+  Also prints the results to the Serial Monitor.
+
+  The circuit:
+  - potentiometer connected to analog pin 0.
+    Center pin of the potentiometer goes to the analog pin.
+    side pins of the potentiometer go to +5V and ground
+  - LED connected from digital pin 9 to ground through 220 ohm resistor
+
+  created 29 Dec. 2008
+  modified 9 Apr 2012
+  by Tom Igoe
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/analog/AnalogInOutSerial/
+*/
+
+// These constants won&#x27;t change. They&#x27;re used to give names to the pins used:
+const int analogInPin = A0;  // Analog input pin that the potentiometer is attached to
+const int analogOutPin = 9;  // Analog output pin that the LED is attached to
+
+int sensorValue = 0;  // value read from the pot
+int outputValue = 0;  // value output to the PWM (analog out)
+
+void setup() {
+  // initialize serial communications at 9600 bps:
+  Serial.begin(9600);
+}
+
+void loop() {
+  // read the analog in value:
+  sensorValue = analogRead(analogInPin);
+  // map it to the range of the analog out:
+  outputValue = map(sensorValue, 0, 1023, 0, 255);
+  // change the analog out value:
+  analogWrite(analogOutPin, outputValue);
+
+  // print the results to the Serial Monitor:
+  Serial.print(&quot;sensor = &quot;);
+  Serial.print(sensorValue);
+  Serial.print(&quot;\t output = &quot;);
+  Serial.println(outputValue);
+
+  // wait 2 milliseconds before the next loop for the analog-to-digital
+  // converter to settle after the last reading:
+  delay(2);
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/analog/AnalogInOutSerial/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+
+<h2 id="e-s4">4. Packaged sensors</h2>
+<ul>
+<li><strong>Sharp infrared distance sensor</strong>: red wire 5 V, black GND, white returns 0–5 V depending on distance (a non-linear relation that needs a calibration table).</li>
+<li><strong>Tri-axis analog accelerometer</strong>: Xout, Yout and Zout give voltages that follow tilt and motion; phones use this kind of sensor to rotate the screen.</li>
+<li><strong>TMP36</strong>: output voltage linear in temperature, 10 mV/°C, 0.5 V at 0 °C (750 mV at 25 °C). Extending the line, 0 V corresponds to −50 °C and 1.75 V to 125 °C.</li>
+</ul>
+$$T\,[^\circ\text{C}]=\left(V_{out}-0.5\right)\times 100$$
+<p>The lecture's temperature alert system: an RGB LED glows green when the temperature is in range, red when too hot, blue when too cold.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">Tmp36Alert.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="Tmp36Alert.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// Tmp36Alert.ino -- TMP36 temperature sensor with an RGB status LED
+// TMP36: +Vs -&gt; 5 V, Vout -&gt; A0, GND -&gt; GND (flat side facing you: 5V, Vout, GND)
+// Common-cathode RGB LED: R -&gt; pin 9, G -&gt; pin 10, B -&gt; pin 11, each through 220 ohm
+const int TEMP = A0;
+const int RED = 9, GREEN = 10, BLUE = 11;
+const float LOW_C = 18.0;          // below this: blue (too cold)
+const float HIGH_C = 26.0;         // above this: red (too hot)
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  pinMode(BLUE, OUTPUT);
+}
+
+void loop() {
+  int raw = analogRead(TEMP);              // 0..1023
+  float volts = raw * (5.0 / 1024.0);      // one ADC step = 5 V / 1024 = 4.9 mV
+  float tempC = (volts - 0.5) * 100.0;     // TMP36: 0.5 V at 0 degC, +10 mV per degC
+
+  Serial.print(tempC, 1);
+  Serial.println(&quot; C&quot;);
+
+  digitalWrite(BLUE,  tempC &lt; LOW_C);
+  digitalWrite(GREEN, tempC &gt;= LOW_C &amp;&amp; tempC &lt;= HIGH_C);
+  digitalWrite(RED,   tempC &gt; HIGH_C);
+  delay(500);
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<p>Wokwi has no TMP36 but has an NTC temperature sensor; the conversion formula for the NTC is on Wokwi's documentation page for that part.</p>
+
+<h2 id="e-s5">5. Build your own sensor: the photoresistor</h2>
+<p>A CdS photoresistor's resistance falls under light (from hundreds of kΩ in the dark to a few kΩ under room light, depending on the part). Combined with a fixed resistor in a divider (Figure 2, right) it becomes a light sensor:</p>
+<p>$$V_{A0}=5\ \text{V}\times\frac{R_{fix}}{R_{fix}+R_{LDR}}$$</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">LightMeter.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="LightMeter.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// LightMeter.ino -- photoresistor voltage divider; the LED gets brighter as it gets darker
+// Circuit: 5 V -&gt; LDR -&gt; A0 -&gt; 10 kohm -&gt; GND ; LED + 220 ohm on pin 9
+const int LDR = A0;
+const int LED = 9;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  int light = analogRead(LDR);              // dark -&gt; small value, bright -&gt; large value
+  int level = map(light, 0, 1023, 255, 0);  // invert: darker -&gt; brighter LED
+  level = constrain(level, 0, 255);         // keep the value inside 0..255
+  analogWrite(LED, level);
+  Serial.println(light);                    // try Tools &gt; Serial Plotter
+  delay(50);
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<p>Choosing \(R_{fix}\) close to the photoresistor's resistance at the light level you care about most gives the highest sensitivity there. The physics of the photoresistor (photoconductivity) is covered in the <a href="ard-light.html">Light sensors</a> lesson.</p>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>A TMP36 gives <code>analogRead()</code> = 153. What is the temperature? How many °C is one ADC step?</li>
+<li>A photoresistor is 20 kΩ in shade and 2 kΩ under a lamp. With \(R_{fix}\) = 10 kΩ, compute both ADC readings.</li>
+<li>Why should an analog pin never see more than 5 V (for example a 9 V battery through a miscalculated divider)?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> V = 153 × 5/1024 = 0.747 V, T = (0.747 − 0.5) × 100 ≈ 24.7 °C. One ADC step is 4.9 mV, about 0.49 °C, so readings jump in steps of nearly half a degree. (For finer readings, average several samples, or switch to the internal 1.1 V reference with <code>analogReference(INTERNAL)</code>: one step is then about 0.11 °C, but the range ends near 60 °C.)</p>
+<p><strong>2.</strong> Shade: V = 5 × 10/(10 + 20) = 1.67 V, ADC ≈ 341. Under the lamp: V = 5 × 10/12 = 4.17 V, ADC ≈ 853.</p>
+<p><strong>3.</strong> The ADC pin has protection diodes to 5 V; above about 5.5 V current flows through the diode and can destroy the pin or the whole microcontroller. Always check the divider so the largest pin voltage stays at or below 5 V.</p>
+</details>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>PBL Understanding analog and digital</em>, Korea Aerospace University.</li>
+<li>Arduino examples <a href="https://docs.arduino.cc/built-in-examples/basics/AnalogReadSerial/" target="_blank" rel="noopener">AnalogReadSerial</a>, <a href="https://docs.arduino.cc/built-in-examples/basics/ReadAnalogVoltage/" target="_blank" rel="noopener">ReadAnalogVoltage</a>, <a href="https://docs.arduino.cc/built-in-examples/analog/AnalogInOutSerial/" target="_blank" rel="noopener">AnalogInOutSerial</a>.</li>
+<li>Analog Devices, <em>TMP35/TMP36/TMP37 Low Voltage Temperature Sensors</em>, datasheet (10 mV/°C, 750 mV at 25 °C).</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chapter 3.</li>
+</ol>
+</div>
+<nav class="pager"><a href="ard-pwm.html">← <span class="l-vi">PWM và analogWrite()</span><span class="l-en">PWM and analogWrite()</span></a><a class="n" href="ard-ultrasonic.html"><span class="l-vi">Cảm biến siêu âm HC-SR04</span><span class="l-en">The HC-SR04 ultrasonic sensor</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

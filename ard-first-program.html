@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Chương trình đầu tiên: Blink và Serial" data-title-en="First program: Blink and Serial">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First program: Blink and Serial · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="setup() and loop(), pinMode, digitalWrite, delay, comments and printing to the Serial Monitor.">
+<meta property="og:title" content="First program: Blink and Serial">
+<meta property="og:description" content="setup() and loop(), pinMode, digitalWrite, delay, comments and printing to the Serial Monitor.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 2</span><span class="l-en">Part 1 · Lesson 2</span></p>
+  <h1><span class="l-vi">Chương trình đầu tiên: Blink và Serial</span><span class="l-en">First program: Blink and Serial</span></h1>
+  <p class="sub"><span class="l-vi">setup() và loop(), pinMode, digitalWrite, delay, chú thích và in ra Serial Monitor.</span><span class="l-en">setup() and loop(), pinMode, digitalWrite, delay, comments and printing to the Serial Monitor.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Chương trình Arduino được gọi là <em>sketch</em>. Bài này đi từng dòng qua sketch đầu tiên, Blink, rồi dùng Serial Monitor để Arduino "nói chuyện" với máy tính.</p>
+
+<h2 id="v-s1">1. Blink: chương trình đầu tiên</h2>
+<p>Mở <em>File → Examples → 01.Basics → Blink</em> trong IDE, hoặc dùng bản dưới đây. Bấm nút mũi tên (Upload): LED trên bo (chân 13) sẽ nhấp nháy mỗi giây.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">Blink.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="Blink.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  Blink
+
+  Turns an LED on for one second, then off for one second, repeatedly.
+
+  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
+  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
+  the correct LED pin independent of which board is used.
+  If you want to know what pin the on-board LED is connected to on your Arduino
+  model, check the Technical Specs of your board at:
+  https://docs.arduino.cc/hardware/
+
+  modified 8 May 2014
+  by Scott Fitzgerald
+  modified 2 Sep 2016
+  by Arturo Guadalupi
+  modified 8 Sep 2016
+  by Colby Newman
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/Blink/
+*/
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);  // change state of the LED by setting the pin to the HIGH voltage level
+  delay(1000);                      // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);   // change state of the LED by setting the pin to the LOW voltage level
+  delay(1000);                      // wait for a second
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/basics/Blink/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+
+<h2 id="v-s2">2. Đọc từng phần</h2>
+<ul>
+<li><strong>Chú thích</strong>: đoạn giữa <code>/*</code> và <code>*/</code> là chú thích nhiều dòng; mọi thứ sau <code>//</code> đến hết dòng là chú thích một dòng. Trình biên dịch bỏ qua chúng, chúng chỉ để người đọc hiểu code.</li>
+<li><strong><code>void setup()</code></strong>: chạy <em>một lần</em> khi bật nguồn hay nhấn reset. Đặt ở đây các thiết lập ban đầu: hướng của chân, tốc độ giao tiếp.</li>
+<li><strong><code>void loop()</code></strong>: chạy <em>lặp lại mãi</em> sau <code>setup()</code>. Mọi sketch đều phải có cả hai hàm này.</li>
+<li><strong><code>pinMode(chân, OUTPUT)</code></strong>: mọi chân mặc định là đầu vào; muốn xuất 5 V hay 0 V thì phải đặt là OUTPUT. <code>LED_BUILTIN</code> là tên có sẵn, trình biên dịch đổi thành số chân của LED trên bo (13 trên Uno).</li>
+<li><strong><code>digitalWrite(chân, HIGH/LOW)</code></strong>: đặt chân lên 5 V (HIGH) hoặc 0 V (LOW). Chân giữ trạng thái đó cho đến lệnh kế tiếp.</li>
+<li><strong><code>delay(ms)</code></strong>: dừng chương trình trong số mili giây cho trước. <code>delay(1000)</code> là 1 giây.</li>
+</ul>
+<p>Mỗi câu lệnh kết thúc bằng dấu chấm phẩy; khối lệnh nằm trong dấu ngoặc nhọn. Thiếu một dấu <code>;</code> là lỗi biên dịch phổ biến nhất của người mới.</p>
+
+<h2 id="v-s3">3. Serial Monitor: Arduino in ra máy tính</h2>
+<p>Arduino không có màn hình, nhưng có thể gửi chữ về máy tính qua cổng USB. Đây là công cụ gỡ lỗi quan trọng nhất.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">HelloSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="HelloSerial.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// HelloSerial.ino -- print a message and a running counter to the Serial Monitor
+// Open Tools &gt; Serial Monitor and choose 9600 baud.
+unsigned long count = 0;
+
+void setup() {
+  Serial.begin(9600);              // start serial communication at 9600 bit/s
+  Serial.println(&quot;Hello, Arduino!&quot;);
+}
+
+void loop() {
+  Serial.print(&quot;t = &quot;);
+  Serial.print(count);
+  Serial.println(&quot; s&quot;);
+  count++;
+  delay(1000);                     // wait one second
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<p><code>Serial.begin(9600)</code> mở kết nối với tốc độ 9600 baud (bit mỗi giây). Mở <em>Tools → Serial Monitor</em> và chọn đúng 9600 ở góc dưới; chọn sai tốc độ sẽ thấy ký tự rác. <code>Serial.print()</code> in không xuống dòng, <code>Serial.println()</code> in rồi xuống dòng.</p>
+
+<h2 id="v-s4">4. Quy trình làm việc</h2>
+<ol>
+<li>Viết hoặc dán code.</li>
+<li><strong>Verify</strong> (nút ✓): biên dịch, báo lỗi cú pháp nếu có.</li>
+<li><strong>Upload</strong> (nút →): biên dịch rồi nạp vào bo.</li>
+<li>Mở Serial Monitor nếu sketch có dùng <code>Serial</code>.</li>
+</ol>
+
+<h2 id="v-s5">5. Bài tập</h2>
+<ol>
+<li>Sửa Blink để LED sáng 0,2 s và tắt 0,8 s.</li>
+<li>Sửa Blink để LED nháy tín hiệu SOS (··· −−− ···).</li>
+<li>Trong HelloSerial, biến <code>count</code> khai báo kiểu <code>unsigned long</code>. Nếu đổi thành <code>int</code> thì sau bao lâu có vấn đề?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> Đổi hai lệnh delay thành <code>delay(200);</code> và <code>delay(800);</code>. Chu kỳ vẫn là 1 s.</p>
+<p><strong>2.</strong> Viết một hàm nhấp nháy:</p>
+<pre><code>void flash(int onMs) {
+  digitalWrite(LED_BUILTIN, HIGH); delay(onMs);
+  digitalWrite(LED_BUILTIN, LOW);  delay(200);
+}
+void loop() {
+  for (int i = 0; i &lt; 3; i++) flash(200);   // S: dot dot dot
+  for (int i = 0; i &lt; 3; i++) flash(600);   // O: dash dash dash
+  for (int i = 0; i &lt; 3; i++) flash(200);   // S
+  delay(2000);
+}</code></pre>
+<p><strong>3.</strong> Trên Uno, <code>int</code> là 16 bit có dấu, lớn nhất 32 767. Mỗi giây tăng 1, nên sau 32 767 s (khoảng 9,1 giờ) giá trị tràn thành −32 768. <code>unsigned long</code> (32 bit) chạy được 2³² − 1 s, hơn 136 năm.</p>
+</details>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>PBL Program basic</em>, Korea Aerospace University.</li>
+<li>Arduino, <a href="https://docs.arduino.cc/built-in-examples/basics/Blink/" target="_blank" rel="noopener">Blink</a> và <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener">Language Reference</a>.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chương 1–2.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">An Arduino program is called a <em>sketch</em>. This lesson walks line by line through the first sketch, Blink, then uses the Serial Monitor so the Arduino can "talk" to the computer.</p>
+
+<h2 id="e-s1">1. Blink: the first program</h2>
+<p>Open <em>File → Examples → 01.Basics → Blink</em> in the IDE, or use the copy below. Press the arrow button (Upload): the on-board LED (pin 13) blinks once a second.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">Blink.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="Blink.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  Blink
+
+  Turns an LED on for one second, then off for one second, repeatedly.
+
+  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
+  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
+  the correct LED pin independent of which board is used.
+  If you want to know what pin the on-board LED is connected to on your Arduino
+  model, check the Technical Specs of your board at:
+  https://docs.arduino.cc/hardware/
+
+  modified 8 May 2014
+  by Scott Fitzgerald
+  modified 2 Sep 2016
+  by Arturo Guadalupi
+  modified 8 Sep 2016
+  by Colby Newman
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/Blink/
+*/
+
+// the setup function runs once when you press reset or power the board
+void setup() {
+  // initialize digital pin LED_BUILTIN as an output.
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+// the loop function runs over and over again forever
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);  // change state of the LED by setting the pin to the HIGH voltage level
+  delay(1000);                      // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);   // change state of the LED by setting the pin to the LOW voltage level
+  delay(1000);                      // wait for a second
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/basics/Blink/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+
+<h2 id="e-s2">2. Reading it part by part</h2>
+<ul>
+<li><strong>Comments</strong>: text between <code>/*</code> and <code>*/</code> is a multi-line comment; everything after <code>//</code> to the end of the line is a single-line comment. The compiler ignores them; they are for human readers.</li>
+<li><strong><code>void setup()</code></strong>: runs <em>once</em> at power-up or reset. Put one-time settings here: pin directions, communication speed.</li>
+<li><strong><code>void loop()</code></strong>: runs <em>over and over</em> after <code>setup()</code>. Every sketch must have both functions.</li>
+<li><strong><code>pinMode(pin, OUTPUT)</code></strong>: all pins are inputs by default; to output 5 V or 0 V a pin must be set to OUTPUT. <code>LED_BUILTIN</code> is a predefined name the compiler turns into the pin number of the on-board LED (13 on the Uno).</li>
+<li><strong><code>digitalWrite(pin, HIGH/LOW)</code></strong>: sets the pin to 5 V (HIGH) or 0 V (LOW). The pin stays there until the next command.</li>
+<li><strong><code>delay(ms)</code></strong>: pauses the program for the given number of milliseconds. <code>delay(1000)</code> is one second.</li>
+</ul>
+<p>Every statement ends with a semicolon; blocks of code sit inside curly braces. A missing <code>;</code> is the most common beginner compile error.</p>
+
+<h2 id="e-s3">3. The Serial Monitor: printing to the computer</h2>
+<p>The Arduino has no screen, but it can send text back to the computer over USB. This is the most important debugging tool.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">HelloSerial.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="HelloSerial.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// HelloSerial.ino -- print a message and a running counter to the Serial Monitor
+// Open Tools &gt; Serial Monitor and choose 9600 baud.
+unsigned long count = 0;
+
+void setup() {
+  Serial.begin(9600);              // start serial communication at 9600 bit/s
+  Serial.println(&quot;Hello, Arduino!&quot;);
+}
+
+void loop() {
+  Serial.print(&quot;t = &quot;);
+  Serial.print(count);
+  Serial.println(&quot; s&quot;);
+  count++;
+  delay(1000);                     // wait one second
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<p><code>Serial.begin(9600)</code> opens the link at 9600 baud (bits per second). Open <em>Tools → Serial Monitor</em> and choose 9600 in the corner; the wrong speed shows garbage characters. <code>Serial.print()</code> prints without a new line, <code>Serial.println()</code> prints and then starts a new line.</p>
+
+<h2 id="e-s4">4. The workflow</h2>
+<ol>
+<li>Write or paste the code.</li>
+<li><strong>Verify</strong> (✓ button): compiles and reports any syntax errors.</li>
+<li><strong>Upload</strong> (→ button): compiles and loads the program onto the board.</li>
+<li>Open the Serial Monitor if the sketch uses <code>Serial</code>.</li>
+</ol>
+
+<h2 id="e-s5">5. Exercises</h2>
+<ol>
+<li>Change Blink so the LED is on for 0.2 s and off for 0.8 s.</li>
+<li>Change Blink so the LED flashes SOS (··· −−− ···).</li>
+<li>In HelloSerial, <code>count</code> is declared <code>unsigned long</code>. If it were an <code>int</code>, when would trouble start?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> Change the two delays to <code>delay(200);</code> and <code>delay(800);</code>. The period is still 1 s.</p>
+<p><strong>2.</strong> Write a flash function:</p>
+<pre><code>void flash(int onMs) {
+  digitalWrite(LED_BUILTIN, HIGH); delay(onMs);
+  digitalWrite(LED_BUILTIN, LOW);  delay(200);
+}
+void loop() {
+  for (int i = 0; i &lt; 3; i++) flash(200);   // S: dot dot dot
+  for (int i = 0; i &lt; 3; i++) flash(600);   // O: dash dash dash
+  for (int i = 0; i &lt; 3; i++) flash(200);   // S
+  delay(2000);
+}</code></pre>
+<p><strong>3.</strong> On the Uno an <code>int</code> is a signed 16-bit number with a maximum of 32 767. Counting one per second, it overflows to −32 768 after 32 767 s (about 9.1 hours). An <code>unsigned long</code> (32 bits) lasts 2³² − 1 s, over 136 years.</p>
+</details>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>PBL Program basic</em>, Korea Aerospace University.</li>
+<li>Arduino, <a href="https://docs.arduino.cc/built-in-examples/basics/Blink/" target="_blank" rel="noopener">Blink</a> and the <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener">Language Reference</a>.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chapters 1–2.</li>
+</ol>
+</div>
+<nav class="pager"><a href="ard-intro.html">← <span class="l-vi">Arduino là gì và cần chuẩn bị gì</span><span class="l-en">What Arduino is and what you need</span></a><a class="n" href="ard-digital-io.html"><span class="l-vi">Vào ra số: LED, nút nhấn, vòng lặp</span><span class="l-en">Digital I/O: LEDs, buttons, loops</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

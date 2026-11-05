@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Arduino cho người mới" data-title-en="Arduino for Beginners">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arduino for Beginners · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="An Arduino introduction for beginners: I/O, PWM, sensors, motors and projects, with code you can try right away on Wokwi.">
+<meta property="og:title" content="Arduino for Beginners">
+<meta property="og:description" content="An Arduino introduction for beginners: I/O, PWM, sensors, motors and projects, with code you can try right away on Wokwi.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+  .quizcard{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:1rem 1.2rem;margin:1.75rem 0 .5rem}
+  .quizcard p{margin:0;text-align:left}.quizcard .qt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.15rem;color:var(--accent);margin-bottom:.25rem}
+  .qbtn{background:var(--accent);color:var(--paper)!important;text-decoration:none;padding:.6rem 1rem;border-radius:6px;font-weight:600;white-space:nowrap}
+</style>
+<style>
+  .topics{display:grid;grid-template-columns:1fr;gap:1rem;margin:1.5rem 0}
+  .topic{display:block;border:1px solid var(--rule);border-radius:10px;padding:1.2rem 1.3rem;text-decoration:none!important;color:inherit;text-align:left;transition:border-color .15s}
+  a.topic:hover{border-color:var(--accent)}
+  .topic .tn{font-family:"Source Serif 4",Georgia,serif;font-size:.95rem;color:var(--accent);margin:0}
+  .topic .tt{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:1.3rem;margin:.15rem 0 .35rem;color:var(--ink)}
+  .topic .td{margin:0;text-align:left;color:var(--muted);font-size:.95rem}
+  .topic .tm{margin:.6rem 0 0;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .topic.soon{opacity:.6}
+</style><style>
+  .ls-search{margin:1.25rem 0 1.75rem}
+  .ls-search input{width:100%;box-sizing:border-box;font:inherit;font-size:1rem;padding:.8rem 1rem;border:1px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink)}
+  .ls-search input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+  .ls-results{display:grid;gap:.5rem;margin-top:.6rem}
+  .ls-hit{display:block;border:1px solid var(--rule);border-radius:8px;padding:.7rem .9rem;text-decoration:none!important;color:var(--ink);text-align:left}
+  .ls-hit:hover{border-color:var(--accent)}
+  .ls-tag{display:inline-block;font-size:.72rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:.05rem .4rem;margin-right:.45rem;vertical-align:1px}
+  .ls-t{font-weight:600}.ls-h{display:block;font-size:.9rem;color:var(--accent);margin-top:.15rem}
+  .ls-x{display:block;font-size:.88rem;color:var(--muted);margin-top:.25rem;overflow-wrap:anywhere}
+  .ls-x mark{background:var(--accent-soft);color:var(--ink);font-weight:600;padding:0 .1rem;border-radius:2px}
+  .ls-none{color:var(--muted);text-align:left}
+  .res h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.2rem 0 .4rem}
+  .res ul{padding-left:1.2rem}.res li{margin-bottom:.4rem;text-align:left}
+  .topic .lock{font-size:.85rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="learning.html"><span class="l-vi">Learning Space</span><span class="l-en">Learning Space</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Learning Space · Thư mục 5</span><span class="l-en">Learning Space · Folder 5</span></p>
+  <h1><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></h1>
+  <p class="sub"><span class="l-vi">Nhập môn Arduino cho người mới: vào ra, PWM, cảm biến, động cơ và dự án, kèm code thử được ngay trên Wokwi.</span><span class="l-en">An Arduino introduction for beginners: I/O, PWM, sensors, motors and projects, with code you can try right away on Wokwi.</span></p>
+</header>
+<div class="l-vi">
+
+<p class="lead">Arduino là cách nhanh nhất để biến một ý tưởng thành một thiết bị chạy được: đọc cảm biến, bật đèn, quay động cơ. Chín bài này đi từ chương trình đầu tiên đến hai dự án robot, mỗi bài kèm code thử được ngay, kể cả khi chưa có phần cứng.</p>
+<div class="ls-search" data-scope="ard"><input type="search" data-vi="Tìm kiếm… (vd: pulseIn, PWM, servo)" data-en="Search… (e.g. pulseIn, PWM, servo)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
+<p class="box" style="text-align:left">Mỗi đoạn code có nút Sao chép, Tải .ino và Chạy thử trên Wokwi. Chưa có bo mạch? Mở <a href="https://wokwi.com" target="_blank" rel="noopener">Wokwi</a>, tạo dự án Arduino Uno, dán code và thêm linh kiện. Ví dụ chính thức của Arduino được giữ nguyên (giấy phép CC0); code còn lại viết cho trang này và đã được biên dịch thử cho Uno.</p>
+<h2>Phần 1. Bắt đầu</h2>
+<ol class="toc">
+  <li><a href="ard-intro.html">Arduino là gì và cần chuẩn bị gì</a><span>Cảm biến và cơ cấu chấp hành, bên trong bo mạch, chọn Uno, Mega hay Nano, cài IDE và trình mô phỏng Wokwi.</span></li>
+  <li><a href="ard-first-program.html">Chương trình đầu tiên: Blink và Serial</a><span>setup() và loop(), pinMode, digitalWrite, delay, chú thích và in ra Serial Monitor.</span></li>
+</ol>
+<h2>Phần 2. Vào ra số và analog</h2>
+<ol class="toc">
+  <li><a href="ard-digital-io.html">Vào ra số: LED, nút nhấn, vòng lặp</a><span>Breadboard, tính điện trở cho LED, const và for, INPUT_PULLUP, nháy LED không dùng delay().</span></li>
+  <li><a href="ard-pwm.html">PWM và analogWrite()</a><span>Chu kỳ nhiệm vụ, các chân PWM và tần số, làm LED sáng dần, giới hạn của PWM.</span></li>
+  <li><a href="ard-analog.html">Tín hiệu analog và cảm biến</a><span>ADC 10 bit, biến trở, map() và constrain(), cảm biến nhiệt TMP36 với đèn RGB, quang trở.</span></li>
+</ol>
+<h2>Phần 3. Cảm biến và động cơ</h2>
+<ol class="toc">
+  <li><a href="ard-ultrasonic.html">Cảm biến siêu âm HC-SR04</a><span>Sóng âm, hiệu ứng áp điện, đo thời gian bay, hệ số 58, bù nhiệt độ và ứng dụng.</span></li>
+  <li><a href="ard-motors.html">Động cơ DC và servo</a><span>Vì sao cần driver, cầu H, L9110S, chỉnh tốc độ bằng PWM, servo và xe dừng trước vật cản.</span></li>
+  <li><a href="ard-light.html">Cảm biến ánh sáng</a><span>Quang dẫn và quang điện áp, bước sóng cắt theo độ rộng vùng cấm, Ga₂O₃ mù mặt trời, đèn ngủ tự động.</span></li>
+</ol>
+<h2>Phần 4. Dự án</h2>
+<ol class="toc">
+  <li><a href="ard-projects.html">Dự án: bóng bàn tự động và robot hút bụi</a><span>Quy trình thiết kế, code khởi đầu cho hai dự án nhóm và bảng gỡ lỗi khi ghép hệ thống.</span></li>
+</ol>
+<h2>Thư viện code</h2>
+<p>Toàn bộ 24 sketch trong thư mục, theo thứ tự bài học.</p>
+<div class="tablewrap"><table><tr><th>Sketch</th><th>Bài</th><th>Nguồn</th></tr><tr><td><code>Blink.ino</code></td><td><a href="ard-first-program.html">Chương trình đầu tiên: Blink và Serial</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>HelloSerial.ino</code></td><td><a href="ard-first-program.html">Chương trình đầu tiên: Blink và Serial</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>BlinkWithoutDelay.ino</code></td><td><a href="ard-digital-io.html">Vào ra số: LED, nút nhấn, vòng lặp</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>Button.ino</code></td><td><a href="ard-digital-io.html">Vào ra số: LED, nút nhấn, vòng lặp</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>InputPullupSerial.ino</code></td><td><a href="ard-digital-io.html">Vào ra số: LED, nút nhấn, vòng lặp</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>LedPin9.ino</code></td><td><a href="ard-digital-io.html">Vào ra số: LED, nút nhấn, vòng lặp</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>BlinkRates.ino</code></td><td><a href="ard-digital-io.html">Vào ra số: LED, nút nhấn, vòng lặp</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>Fade.ino</code></td><td><a href="ard-pwm.html">PWM và analogWrite()</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>FadeFor.ino</code></td><td><a href="ard-pwm.html">PWM và analogWrite()</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>AnalogReadSerial.ino</code></td><td><a href="ard-analog.html">Tín hiệu analog và cảm biến</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>ReadAnalogVoltage.ino</code></td><td><a href="ard-analog.html">Tín hiệu analog và cảm biến</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>AnalogInOutSerial.ino</code></td><td><a href="ard-analog.html">Tín hiệu analog và cảm biến</a></td><td>Mã gốc của Arduino, phạm vi công cộng (CC0)</td></tr><tr><td><code>Tmp36Alert.ino</code></td><td><a href="ard-analog.html">Tín hiệu analog và cảm biến</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>LightMeter.ino</code></td><td><a href="ard-analog.html">Tín hiệu analog và cảm biến</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>Ultrasonic.ino</code></td><td><a href="ard-ultrasonic.html">Cảm biến siêu âm HC-SR04</a></td><td>Viết lại từ bài giảng (thêm thời gian chờ cho pulseIn), dùng tự do</td></tr><tr><td><code>UltrasonicLed.ino</code></td><td><a href="ard-ultrasonic.html">Cảm biến siêu âm HC-SR04</a></td><td>Viết lại từ bài giảng (sửa thiếu pinMode cho LED), dùng tự do</td></tr><tr><td><code>Sweep.ino</code></td><td><a href="ard-motors.html">Động cơ DC và servo</a></td><td>Ví dụ của thư viện Servo (Arduino), phạm vi công cộng</td></tr><tr><td><code>MotorSpeed.ino</code></td><td><a href="ard-motors.html">Động cơ DC và servo</a></td><td>Viết lại từ bài giảng, dùng tự do</td></tr><tr><td><code>ManualPwm.ino</code></td><td><a href="ard-motors.html">Động cơ DC và servo</a></td><td>Viết lại từ bài giảng, dùng tự do</td></tr><tr><td><code>ServoPot.ino</code></td><td><a href="ard-motors.html">Động cơ DC và servo</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>ObstacleStop.ino</code></td><td><a href="ard-motors.html">Động cơ DC và servo</a></td><td>Viết lại từ bài giảng, dùng tự do</td></tr><tr><td><code>NightLight.ino</code></td><td><a href="ard-light.html">Cảm biến ánh sáng</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>RobotAvoid.ino</code></td><td><a href="ard-projects.html">Dự án: bóng bàn tự động và robot hút bụi</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr><tr><td><code>AutoPingPong.ino</code></td><td><a href="ard-projects.html">Dự án: bóng bàn tự động và robot hút bụi</a></td><td>Viết cho trang này dựa trên bài giảng, dùng tự do</td></tr></table></div>
+<div class="res"><h2>Tài liệu tham khảo</h2>
+<h3>Chính thức</h3><ul>
+<li>Arduino, <a href="https://docs.arduino.cc/" target="_blank" rel="noopener">Arduino Documentation</a>, <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener">Language Reference</a> và <a href="https://docs.arduino.cc/built-in-examples/" target="_blank" rel="noopener">Built-in Examples</a>.</li>
+<li><a href="https://github.com/arduino/arduino-examples" target="_blank" rel="noopener">arduino/arduino-examples</a> trên GitHub: mã nguồn các ví dụ chính thức, giấy phép CC0.</li>
+<li><a href="https://wokwi.com" target="_blank" rel="noopener">Wokwi</a>: trình mô phỏng Arduino trên trình duyệt; <a href="https://docs.wokwi.com/getting-started/supported-hardware" target="_blank" rel="noopener">danh sách linh kiện hỗ trợ</a>.</li></ul>
+<h3>Sách</h3><ul>
+<li>J. Blum, <em>Exploring Arduino: Tools and Techniques for Engineering Wizardry</em>, 2nd ed., Wiley (2019).</li>
+<li>M. Banzi, M. Shiloh, <em>Getting Started with Arduino</em>, 4th ed., Make Community (2022).</li>
+<li>S. Monk, <em>Programming Arduino: Getting Started with Sketches</em>, 3rd ed., McGraw-Hill (2022).</li></ul>
+<h3>Học phần gốc</h3><ul>
+<li>W. S. Hwang, <em>신소재공학설계입문</em> (Nhập môn thiết kế kỹ thuật vật liệu) và <em>Global Engineering Design</em>, Korea Aerospace University.</li></ul></div>
+<script defer src="search.js?v=2"></script>
+</div>
+<div class="l-en">
+
+<p class="lead">Arduino is the quickest way to turn an idea into a working device: read a sensor, light an LED, spin a motor. These nine lessons go from the first program to two robot projects, each with code you can try right away, even before you own any hardware.</p>
+<div class="ls-search" data-scope="ard"><input type="search" data-vi="Tìm kiếm… (vd: pulseIn, PWM, servo)" data-en="Search… (e.g. pulseIn, PWM, servo)" aria-label="Search" autocomplete="off"><div class="ls-results"></div></div>
+<p class="box" style="text-align:left">Every code block has Copy, Download .ino and Try it on Wokwi buttons. No board yet? Open <a href="https://wokwi.com" target="_blank" rel="noopener">Wokwi</a>, create an Arduino Uno project, paste the code and add the parts. Official Arduino examples are reproduced unchanged (CC0 licence); the rest was written for this page and test-compiled for the Uno.</p>
+<h2>Part 1. Getting started</h2>
+<ol class="toc">
+  <li><a href="ard-intro.html">What Arduino is and what you need</a><span>Sensors and actuators, inside the board, choosing Uno, Mega or Nano, installing the IDE and the Wokwi simulator.</span></li>
+  <li><a href="ard-first-program.html">First program: Blink and Serial</a><span>setup() and loop(), pinMode, digitalWrite, delay, comments and printing to the Serial Monitor.</span></li>
+</ol>
+<h2>Part 2. Digital and analog I/O</h2>
+<ol class="toc">
+  <li><a href="ard-digital-io.html">Digital I/O: LEDs, buttons, loops</a><span>Breadboards, LED resistor sizing, const and for, INPUT_PULLUP, blinking without delay().</span></li>
+  <li><a href="ard-pwm.html">PWM and analogWrite()</a><span>Duty cycle, PWM pins and frequencies, fading an LED, the limits of PWM.</span></li>
+  <li><a href="ard-analog.html">Analog signals and sensors</a><span>The 10-bit ADC, potentiometers, map() and constrain(), a TMP36 with an RGB LED, photoresistors.</span></li>
+</ol>
+<h2>Part 3. Sensors and motors</h2>
+<ol class="toc">
+  <li><a href="ard-ultrasonic.html">The HC-SR04 ultrasonic sensor</a><span>Sound waves, the piezoelectric effect, time of flight, the factor 58, temperature correction and applications.</span></li>
+  <li><a href="ard-motors.html">DC motors and servos</a><span>Why a driver, the H-bridge, the L9110S, PWM speed control, servos and a car that stops at obstacles.</span></li>
+  <li><a href="ard-light.html">Light sensors</a><span>Photoconductive and photovoltaic effects, band-gap cutoff wavelength, solar-blind Ga₂O₃, an automatic night light.</span></li>
+</ol>
+<h2>Part 4. Projects</h2>
+<ol class="toc">
+  <li><a href="ard-projects.html">Projects: auto ping-pong and robot vacuum</a><span>A design process, starter code for the two team projects and a debugging table for integration.</span></li>
+</ol>
+<h2>Code library</h2>
+<p>All 24 sketches in this folder, in lesson order.</p>
+<div class="tablewrap"><table><tr><th>Sketch</th><th>Lesson</th><th>Source</th></tr><tr><td><code>Blink.ino</code></td><td><a href="ard-first-program.html">First program: Blink and Serial</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>HelloSerial.ino</code></td><td><a href="ard-first-program.html">First program: Blink and Serial</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>BlinkWithoutDelay.ino</code></td><td><a href="ard-digital-io.html">Digital I/O: LEDs, buttons, loops</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>Button.ino</code></td><td><a href="ard-digital-io.html">Digital I/O: LEDs, buttons, loops</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>InputPullupSerial.ino</code></td><td><a href="ard-digital-io.html">Digital I/O: LEDs, buttons, loops</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>LedPin9.ino</code></td><td><a href="ard-digital-io.html">Digital I/O: LEDs, buttons, loops</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>BlinkRates.ino</code></td><td><a href="ard-digital-io.html">Digital I/O: LEDs, buttons, loops</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>Fade.ino</code></td><td><a href="ard-pwm.html">PWM and analogWrite()</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>FadeFor.ino</code></td><td><a href="ard-pwm.html">PWM and analogWrite()</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>AnalogReadSerial.ino</code></td><td><a href="ard-analog.html">Analog signals and sensors</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>ReadAnalogVoltage.ino</code></td><td><a href="ard-analog.html">Analog signals and sensors</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>AnalogInOutSerial.ino</code></td><td><a href="ard-analog.html">Analog signals and sensors</a></td><td>Official Arduino example, public domain (CC0)</td></tr><tr><td><code>Tmp36Alert.ino</code></td><td><a href="ard-analog.html">Analog signals and sensors</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>LightMeter.ino</code></td><td><a href="ard-analog.html">Analog signals and sensors</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>Ultrasonic.ino</code></td><td><a href="ard-ultrasonic.html">The HC-SR04 ultrasonic sensor</a></td><td>Rewritten from the lecture (adds a pulseIn timeout), free to use</td></tr><tr><td><code>UltrasonicLed.ino</code></td><td><a href="ard-ultrasonic.html">The HC-SR04 ultrasonic sensor</a></td><td>Rewritten from the lecture (adds the missing pinMode for the LED), free to use</td></tr><tr><td><code>Sweep.ino</code></td><td><a href="ard-motors.html">DC motors and servos</a></td><td>Servo library example (Arduino), public domain</td></tr><tr><td><code>MotorSpeed.ino</code></td><td><a href="ard-motors.html">DC motors and servos</a></td><td>Rewritten from the lecture, free to use</td></tr><tr><td><code>ManualPwm.ino</code></td><td><a href="ard-motors.html">DC motors and servos</a></td><td>Rewritten from the lecture, free to use</td></tr><tr><td><code>ServoPot.ino</code></td><td><a href="ard-motors.html">DC motors and servos</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>ObstacleStop.ino</code></td><td><a href="ard-motors.html">DC motors and servos</a></td><td>Rewritten from the lecture, free to use</td></tr><tr><td><code>NightLight.ino</code></td><td><a href="ard-light.html">Light sensors</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>RobotAvoid.ino</code></td><td><a href="ard-projects.html">Projects: auto ping-pong and robot vacuum</a></td><td>Written for this page from the lectures, free to use</td></tr><tr><td><code>AutoPingPong.ino</code></td><td><a href="ard-projects.html">Projects: auto ping-pong and robot vacuum</a></td><td>Written for this page from the lectures, free to use</td></tr></table></div>
+<div class="res"><h2>References</h2>
+<h3>Official</h3><ul>
+<li>Arduino, <a href="https://docs.arduino.cc/" target="_blank" rel="noopener">Arduino Documentation</a>, <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener">Language Reference</a> và <a href="https://docs.arduino.cc/built-in-examples/" target="_blank" rel="noopener">Built-in Examples</a>.</li>
+<li><a href="https://github.com/arduino/arduino-examples" target="_blank" rel="noopener">arduino/arduino-examples</a> on GitHub: source of the official examples, CC0 licence.</li>
+<li><a href="https://wokwi.com" target="_blank" rel="noopener">Wokwi</a>: an in-browser Arduino simulator; <a href="https://docs.wokwi.com/getting-started/supported-hardware" target="_blank" rel="noopener">supported parts</a>.</li></ul>
+<h3>Books</h3><ul>
+<li>J. Blum, <em>Exploring Arduino: Tools and Techniques for Engineering Wizardry</em>, 2nd ed., Wiley (2019).</li>
+<li>M. Banzi, M. Shiloh, <em>Getting Started with Arduino</em>, 4th ed., Make Community (2022).</li>
+<li>S. Monk, <em>Programming Arduino: Getting Started with Sketches</em>, 3rd ed., McGraw-Hill (2022).</li></ul>
+<h3>The original courses</h3><ul>
+<li>W. S. Hwang, <em>신소재공학설계입문</em> (Introduction to Materials Engineering Design) và <em>Global Engineering Design</em>, Korea Aerospace University.</li></ul></div>
+
+</div>
+<footer><p><span class="l-vi">Nội dung do Thi-Thanh-Huong Vo biên soạn. Nguồn tham khảo được ghi ở trang chủ đề và cuối mỗi bài.</span><span class="l-en">Written by Thi-Thanh-Huong Vo. Sources are credited on each topic page and at the end of every lesson.</span></p></footer>
+</main>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

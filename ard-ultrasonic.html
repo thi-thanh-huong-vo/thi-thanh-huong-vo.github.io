@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Cảm biến siêu âm HC-SR04" data-title-en="The HC-SR04 ultrasonic sensor">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The HC-SR04 ultrasonic sensor · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Sound waves, the piezoelectric effect, time of flight, the factor 58, temperature correction and applications.">
+<meta property="og:title" content="The HC-SR04 ultrasonic sensor">
+<meta property="og:description" content="Sound waves, the piezoelectric effect, time of flight, the factor 58, temperature correction and applications.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 3 · Bài 1</span><span class="l-en">Part 3 · Lesson 1</span></p>
+  <h1><span class="l-vi">Cảm biến siêu âm HC-SR04</span><span class="l-en">The HC-SR04 ultrasonic sensor</span></h1>
+  <p class="sub"><span class="l-vi">Sóng âm, hiệu ứng áp điện, đo thời gian bay, hệ số 58, bù nhiệt độ và ứng dụng.</span><span class="l-en">Sound waves, the piezoelectric effect, time of flight, the factor 58, temperature correction and applications.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Cảm biến siêu âm HC-SR04 là "đôi mắt" của cả hai dự án trong môn học. Bài này đi từ vật lý (sóng âm, hiệu ứng áp điện) đến cách đo khoảng cách bằng thời gian bay của tiếng vọng và code để dùng ngay.</p>
+
+<h2 id="v-s1">1. Sóng âm và siêu âm</h2>
+<p>Sóng là một nhiễu động truyền năng lượng từ điểm này sang điểm khác trong môi trường; các phần tử của môi trường chỉ dao động tại chỗ chứ không đi theo sóng. Sóng âm là <strong>sóng dọc</strong>: phần tử dao động cùng phương truyền, môi trường bị nén và giãn liên tiếp. (Sóng ngang thì dao động vuông góc với phương truyền; sóng mặt nước và sóng Rayleigh trên bề mặt chất rắn là tổ hợp của cả hai.) Tốc độ âm phụ thuộc vào môi trường, qua mô-đun khối và mật độ; trong không khí:</p>
+<p>$$c\approx 331{,}3+0{,}606\,T\ \ \text{m/s}\quad(T\ \text{tính bằng}\ ^\circ\text{C})$$</p>
+<p>tức khoảng 343 m/s ở 20 °C. Âm thanh con người nghe được nằm trong khoảng 20 Hz–20 kHz; trên 20 kHz là siêu âm, dùng để đo khoảng cách, chụp ảnh y tế, kiểm tra không phá hủy, làm sạch.</p>
+
+<h2 id="v-s2">2. Hiệu ứng áp điện: cách tạo và thu siêu âm</h2>
+<p>Vật liệu áp điện (như gốm PZT) sinh điện áp khi bị biến dạng cơ học, và ngược lại biến dạng khi được đặt điện áp. Một biến tử dạng <em>unimorph</em> gồm một đĩa gốm áp điện dán trên tấm kim loại: điện áp xoay chiều làm đĩa uốn lên xuống, một chiếc nón nhỏ gắn ở tâm giúp phát sóng ra không khí hiệu quả. Hiệu ứng này thuận nghịch, nên cùng loại biến tử cũng thu được sóng vọng và biến nó thành điện áp. Biến tử hoạt động tốt nhất ở tần số cộng hưởng; HC-SR04 dùng 40 kHz.</p>
+
+<h2 id="v-s3">3. HC-SR04 đo khoảng cách như thế nào</h2>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><text x="138" y="49" class="nt" text-anchor="end">TRIG</text><line x1="150" y1="55" x2="610" y2="55" class="grid"/><text x="138" y="109" class="nt" text-anchor="end">Sóng siêu âm</text><line x1="150" y1="115" x2="610" y2="115" class="grid"/><text x="138" y="179" class="nt" text-anchor="end">ECHO</text><line x1="150" y1="185" x2="610" y2="185" class="grid"/><path d="M150,55 H190 V30 H215 V55 H610" class="s1" fill="none"/><text x="202" y="22" class="ns" text-anchor="middle">10 µs</text><path d="M235,115 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16" style="stroke:var(--s2);stroke-width:1.6;fill:none"/><text x="270" y="88" class="ns" text-anchor="start">8 xung 40 kHz</text><path d="M150,185 H310 V160 H520 V185 H610" class="s1" fill="none"/><path d="M316,205 H514" class="arr" marker-end="url(#mv)" marker-start="url(#mv)"/><text x="415" y="222" class="ns" text-anchor="middle">t: thời gian khứ hồi → d = t · c / 2 (≈ t/58 cm, t tính bằng µs)</text><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs></svg><figcaption>Hình 1. Giản đồ thời gian của HC-SR04: xung kích 10 µs trên chân TRIG, module phát 8 chu kỳ siêu âm 40 kHz, chân ECHO ở mức cao trong suốt thời gian sóng đi và về.</figcaption></figure>
+<div class="tablewrap"><table>
+<tr><th>Thông số (datasheet)</th><th>Giá trị</th></tr>
+<tr><td>Điện áp, dòng làm việc</td><td>5 V, 15 mA</td></tr>
+<tr><td>Tần số siêu âm</td><td>40 kHz</td></tr>
+<tr><td>Tầm đo</td><td>2 cm đến 4 m</td></tr>
+<tr><td>Góc đo</td><td>15°</td></tr>
+<tr><td>Xung kích</td><td>10 µs mức TTL</td></tr>
+<tr><td>Chu kỳ đo khuyến nghị</td><td>trên 60 ms</td></tr>
+</table></div>
+<p>Thời gian \(t\) là quãng đường đi và về, nên khoảng cách là \(d=c\,t/2\). Với c = 340 m/s và t tính bằng µs:</p>
+<p>$$d\,[\text{cm}]=\frac{340\times10^{2}\times t\times10^{-6}}{2}=\frac{t}{58{,}8}$$</p>
+<p>Datasheet viết \(t/58\); bài giảng dùng \(t/58{,}2\), ứng với c ≈ 343,6 m/s, tức không khí khoảng 21 °C.</p>
+<div class="ard-tool" data-tool="son" data-lang="vi"><p class="tt">Đổi thời gian echo ra khoảng cách</p><label>Độ rộng xung echo (µs)<input type="number" name="t" value="1164" step="1"></label><label>Nhiệt độ không khí (°C)<input type="number" name="T" value="20" step="1"></label><p class="out"></p></div>
+
+<h2 id="v-s4">4. Code</h2>
+<p>Bản dưới viết lại từ bài giảng, thêm một thời gian chờ 30 ms cho <code>pulseIn()</code>: nếu không có vật trong tầm, hàm trả về 0 thay vì treo chương trình tới 1 giây (giá trị chờ mặc định).</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">Ultrasonic.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="Ultrasonic.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// Ultrasonic.ino -- HC-SR04 distance meter
+// HC-SR04: VCC -&gt; 5 V, GND -&gt; GND, Trig -&gt; pin 11, Echo -&gt; pin 10
+const int TRIG = 11;
+const int ECHO = 10;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+}
+
+void loop() {
+  float d = readCm();
+  if (d &lt; 0) {
+    Serial.println(&quot;out of range&quot;);
+  } else {
+    Serial.print(d, 1);
+    Serial.println(&quot; cm&quot;);
+  }
+  delay(100);                      // keep the cycle longer than 60 ms (datasheet)
+}
+</code></pre><p class="sk-s">Nguồn: Viết lại từ bài giảng (thêm thời gian chờ cho pulseIn), dùng tự do</p></div>
+<p>Kết hợp với LED: sáng khi có vật gần hơn 20 cm. Chú ý dòng <code>pinMode(LED, OUTPUT)</code>; bản trong slide thiếu dòng này, khi đó <code>digitalWrite(LED, HIGH)</code> chỉ bật điện trở kéo lên bên trong và LED sáng rất mờ.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">UltrasonicLed.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="UltrasonicLed.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// UltrasonicLed.ino -- light an LED when an object is closer than 20 cm
+const int TRIG = 11;
+const int ECHO = 10;
+const int LED  = 9;                // LED + 220 ohm to GND
+const float WARN_CM = 20.0;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+  pinMode(LED, OUTPUT);            // without this line the LED only glows dimly
+}
+
+void loop() {
+  float d = readCm();
+  Serial.println(d);
+  if (d &gt; 0 &amp;&amp; d &lt; WARN_CM) {
+    digitalWrite(LED, HIGH);
+  } else {
+    digitalWrite(LED, LOW);
+  }
+  delay(100);
+}
+</code></pre><p class="sk-s">Nguồn: Viết lại từ bài giảng (sửa thiếu pinMode cho LED), dùng tự do</p></div>
+
+<h2 id="v-s5">5. Ứng dụng và giới hạn</h2>
+<p>Cảm biến siêu âm dùng trong công nghiệp để đếm vật trên băng tải, kiểm soát độ võng của cuộn giấy hay màng mỏng, phát hiện tấm kính (vật trong suốt mà cảm biến quang khó thấy), đo mực chất lỏng. Ưu điểm là không phụ thuộc màu sắc hay độ trong suốt. Hạn chế: vật mềm hấp thụ âm (vải, bọt), bề mặt nghiêng phản xạ sóng đi chỗ khác, vật quá nhỏ hay quá gần (dưới 2 cm) không đo được, và hai cảm biến cùng tần số đặt gần nhau có thể nhiễu lẫn nhau.</p>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>Echo đo được 1750 µs. Tính khoảng cách theo công thức của datasheet và theo bài giảng.</li>
+<li>Robot chạy ngoài trời ở 35 °C nhưng code vẫn dùng 58,2. Sai số ở 1 m là bao nhiêu?</li>
+<li>Vì sao không nên đo liên tục với chu kỳ 10 ms?</li>
+<li>Sửa hàm <code>readCm()</code> để bù nhiệt độ theo một biến <code>tempC</code>.</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> 1750/58 = 30,2 cm; 1750/58,2 = 30,1 cm.</p>
+<p><strong>2.</strong> Ở 35 °C, c = 331,3 + 0,606 × 35 = 352,5 m/s, tức thực tế 1 cm ứng với 2/0,03525 = 56,7 µs. Vật ở 1 m cho t = 5674 µs; code tính 5674/58,2 = 97,5 cm, đọc thiếu khoảng 2,5 cm (2,5 %).</p>
+<p><strong>3.</strong> Ở tầm 4 m, sóng đi về mất khoảng 23 ms, cộng thêm tiếng vọng nhiều lần từ tường. Nếu kích lần đo mới trước khi tiếng vọng cũ tắt hẳn, cảm biến có thể nhận nhầm tiếng vọng của lần trước và báo khoảng cách sai. Datasheet khuyến nghị chu kỳ trên 60 ms.</p>
+<p><strong>4.</strong> Thay dòng cuối của <code>readCm()</code>:</p>
+<pre><code>float c = 331.3 + 0.606 * tempC;     // m/s
+return t * c / 20000.0;               // t [us] * c [m/s] * 100 / 2 / 1e6 = cm</code></pre>
+<p>Có thể đọc <code>tempC</code> từ TMP36 của bài trước.</p>
+</details>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>PBL Ultrasonic sensors</em> và <em>PBL Ultrasonic sensor lab</em>, Korea Aerospace University.</li>
+<li>ElecFreaks, <a href="https://www.hobbielektronika.hu/cikkek/files/1860/hc-sr04.pdf" target="_blank" rel="noopener"><em>Ultrasonic Ranging Module HC-SR04</em></a>, datasheet.</li>
+<li>D. R. Lide (ed.), <em>CRC Handbook of Chemistry and Physics</em>: tốc độ âm trong không khí theo nhiệt độ.</li>
+<li>Arduino, <a href="https://docs.arduino.cc/language-reference/en/functions/advanced-io/pulseIn/" target="_blank" rel="noopener">pulseIn() reference</a>.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">The HC-SR04 ultrasonic sensor is the "eyes" of both course projects. This lesson goes from the physics (sound waves, the piezoelectric effect) to measuring distance from the time of flight of an echo, with code to use right away.</p>
+
+<h2 id="e-s1">1. Sound and ultrasound</h2>
+<p>A wave is a disturbance that carries energy from point to point through a medium; the particles of the medium only oscillate in place and do not travel with the wave. Sound is a <strong>longitudinal wave</strong>: particles oscillate along the direction of travel, and the medium is compressed and expanded in turn. (In a transverse wave the oscillation is perpendicular to the direction of travel; water waves and Rayleigh waves on a solid surface combine both.) The speed of sound depends on the medium through its bulk modulus and density; in air:</p>
+<p>$$c\approx 331.3+0.606\,T\ \ \text{m/s}\quad(T\ \text{in}\ ^\circ\text{C})$$</p>
+<p>about 343 m/s at 20 °C. Human hearing covers about 20 Hz–20 kHz; above 20 kHz is ultrasound, used for ranging, medical imaging, non-destructive testing and cleaning.</p>
+
+<h2 id="e-s2">2. The piezoelectric effect: making and hearing ultrasound</h2>
+<p>A piezoelectric material (such as PZT ceramic) produces a voltage when mechanically strained and, conversely, strains when a voltage is applied. A <em>unimorph</em> transducer is a piezoelectric ceramic disc bonded to a metal plate: an AC voltage makes the disc flex up and down, and a small cone at its centre couples the sound efficiently into air. The effect is reversible, so the same kind of transducer also picks up the echo and turns it back into a voltage. A transducer works best at its resonance frequency; the HC-SR04 uses 40 kHz.</p>
+
+<h2 id="e-s3">3. How the HC-SR04 measures distance</h2>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><text x="138" y="49" class="nt" text-anchor="end">TRIG</text><line x1="150" y1="55" x2="610" y2="55" class="grid"/><text x="138" y="109" class="nt" text-anchor="end">Ultrasound</text><line x1="150" y1="115" x2="610" y2="115" class="grid"/><text x="138" y="179" class="nt" text-anchor="end">ECHO</text><line x1="150" y1="185" x2="610" y2="185" class="grid"/><path d="M150,55 H190 V30 H215 V55 H610" class="s1" fill="none"/><text x="202" y="22" class="ns" text-anchor="middle">10 µs</text><path d="M235,115 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16 l3,-16 l3,32 l3,-16" style="stroke:var(--s2);stroke-width:1.6;fill:none"/><text x="270" y="88" class="ns" text-anchor="start">8 cycles at 40 kHz</text><path d="M150,185 H310 V160 H520 V185 H610" class="s1" fill="none"/><path d="M316,205 H514" class="arr" marker-end="url(#me)" marker-start="url(#me)"/><text x="415" y="222" class="ns" text-anchor="middle">t: round-trip time → d = t · c / 2 (≈ t/58 cm, t in µs)</text><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs></svg><figcaption>Figure 1. HC-SR04 timing: a 10 µs trigger pulse on TRIG, the module sends eight 40 kHz cycles, and ECHO stays high for the whole out-and-back flight time.</figcaption></figure>
+<div class="tablewrap"><table>
+<tr><th>Parameter (datasheet)</th><th>Value</th></tr>
+<tr><td>Working voltage, current</td><td>5 V, 15 mA</td></tr>
+<tr><td>Ultrasonic frequency</td><td>40 kHz</td></tr>
+<tr><td>Range</td><td>2 cm to 4 m</td></tr>
+<tr><td>Measuring angle</td><td>15°</td></tr>
+<tr><td>Trigger pulse</td><td>10 µs TTL</td></tr>
+<tr><td>Recommended cycle</td><td>over 60 ms</td></tr>
+</table></div>
+<p>The time \(t\) covers the trip out and back, so the distance is \(d=c\,t/2\). With c = 340 m/s and t in µs:</p>
+<p>$$d\,[\text{cm}]=\frac{340\times10^{2}\times t\times10^{-6}}{2}=\frac{t}{58.8}$$</p>
+<p>The datasheet writes \(t/58\); the lecture uses \(t/58.2\), which corresponds to c ≈ 343.6 m/s, air at about 21 °C.</p>
+<div class="ard-tool" data-tool="son" data-lang="en"><p class="tt">Echo time to distance</p><label>Echo pulse width (µs)<input type="number" name="t" value="1164" step="1"></label><label>Air temperature (°C)<input type="number" name="T" value="20" step="1"></label><p class="out"></p></div>
+
+<h2 id="e-s4">4. Code</h2>
+<p>The version below is rewritten from the lecture and adds a 30 ms timeout to <code>pulseIn()</code>: if nothing is in range the function returns 0 instead of stalling the program for up to one second (the default timeout).</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">Ultrasonic.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="Ultrasonic.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// Ultrasonic.ino -- HC-SR04 distance meter
+// HC-SR04: VCC -&gt; 5 V, GND -&gt; GND, Trig -&gt; pin 11, Echo -&gt; pin 10
+const int TRIG = 11;
+const int ECHO = 10;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+}
+
+void loop() {
+  float d = readCm();
+  if (d &lt; 0) {
+    Serial.println(&quot;out of range&quot;);
+  } else {
+    Serial.print(d, 1);
+    Serial.println(&quot; cm&quot;);
+  }
+  delay(100);                      // keep the cycle longer than 60 ms (datasheet)
+}
+</code></pre><p class="sk-s">Source: Rewritten from the lecture (adds a pulseIn timeout), free to use</p></div>
+<p>Adding an LED that lights when something is closer than 20 cm. Note the <code>pinMode(LED, OUTPUT)</code> line; the slide version leaves it out, and then <code>digitalWrite(LED, HIGH)</code> only enables the internal pull-up and the LED glows very dimly.</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">UltrasonicLed.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="UltrasonicLed.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// UltrasonicLed.ino -- light an LED when an object is closer than 20 cm
+const int TRIG = 11;
+const int ECHO = 10;
+const int LED  = 9;                // LED + 220 ohm to GND
+const float WARN_CM = 20.0;
+
+// Send a 10 us trigger pulse and convert the echo time to centimetres.
+// Returns -1 when no echo arrives within 30 ms (nothing in range).
+float readCm() {
+  digitalWrite(TRIG, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long t = pulseIn(ECHO, HIGH, 30000UL);   // echo pulse width [us]
+  if (t == 0) return -1.0;
+  return t / 58.2;                                  // round trip at ~343 m/s
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+  pinMode(LED, OUTPUT);            // without this line the LED only glows dimly
+}
+
+void loop() {
+  float d = readCm();
+  Serial.println(d);
+  if (d &gt; 0 &amp;&amp; d &lt; WARN_CM) {
+    digitalWrite(LED, HIGH);
+  } else {
+    digitalWrite(LED, LOW);
+  }
+  delay(100);
+}
+</code></pre><p class="sk-s">Source: Rewritten from the lecture (adds the missing pinMode for the LED), free to use</p></div>
+
+<h2 id="e-s5">5. Applications and limits</h2>
+<p>Industry uses ultrasonic sensors to count objects on conveyor belts, control the sag of paper and foil rolls, detect glass panes (transparent objects that optical sensors struggle with) and monitor liquid levels. Their advantage is independence from colour and transparency. Limits: soft objects absorb sound (cloth, foam), slanted surfaces reflect the wave elsewhere, very small or very close objects (under 2 cm) cannot be measured, and two sensors on the same frequency close together can interfere.</p>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>The echo lasts 1750 µs. Compute the distance with the datasheet formula and with the lecture's.</li>
+<li>A robot runs outdoors at 35 °C but the code still uses 58.2. What is the error at 1 m?</li>
+<li>Why not measure continuously every 10 ms?</li>
+<li>Modify <code>readCm()</code> to compensate for temperature using a variable <code>tempC</code>.</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> 1750/58 = 30.2 cm; 1750/58.2 = 30.1 cm.</p>
+<p><strong>2.</strong> At 35 °C, c = 331.3 + 0.606 × 35 = 352.5 m/s, so 1 cm really takes 2/0.03525 = 56.7 µs. An object at 1 m gives t = 5674 µs; the code computes 5674/58.2 = 97.5 cm, reading about 2.5 cm (2.5 %) short.</p>
+<p><strong>3.</strong> At 4 m range the round trip takes about 23 ms, plus multiple echoes off walls. Triggering a new measurement before old echoes have died away lets the sensor pick up the previous echo and report a wrong distance. The datasheet recommends a cycle over 60 ms.</p>
+<p><strong>4.</strong> Replace the last line of <code>readCm()</code>:</p>
+<pre><code>float c = 331.3 + 0.606 * tempC;     // m/s
+return t * c / 20000.0;               // t [us] * c [m/s] * 100 / 2 / 1e6 = cm</code></pre>
+<p><code>tempC</code> can come from the TMP36 of the previous lesson.</p>
+</details>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lectures <em>PBL Ultrasonic sensors</em> and <em>PBL Ultrasonic sensor lab</em>, Korea Aerospace University.</li>
+<li>ElecFreaks, <a href="https://www.hobbielektronika.hu/cikkek/files/1860/hc-sr04.pdf" target="_blank" rel="noopener"><em>Ultrasonic Ranging Module HC-SR04</em></a>, datasheet.</li>
+<li>D. R. Lide (ed.), <em>CRC Handbook of Chemistry and Physics</em>: speed of sound in air versus temperature.</li>
+<li>Arduino, <a href="https://docs.arduino.cc/language-reference/en/functions/advanced-io/pulseIn/" target="_blank" rel="noopener">pulseIn() reference</a>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="ard-analog.html">← <span class="l-vi">Tín hiệu analog và cảm biến</span><span class="l-en">Analog signals and sensors</span></a><a class="n" href="ard-motors.html"><span class="l-vi">Động cơ DC và servo</span><span class="l-en">DC motors and servos</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

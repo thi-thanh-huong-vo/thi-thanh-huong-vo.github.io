@@ -9,7 +9,7 @@
   function prep(p){ p.n=[0,1].map(function(k){ return { t:norm(p.t[k]), d:norm(p.d[k]),
       s:p.s[k].map(function(sec){ return {id:sec[0], h:sec[1], x:sec[2], nh:norm(sec[1]), nx:norm(sec[2])}; }) }; }); }
   function lang(){ return document.documentElement.lang==='en'?1:0; }
-  var NAMES={proc:['Chế tạo bán dẫn','Processing'],dev:['Linh kiện','Devices'],nano:['Vật liệu nano','Nanomaterials'],cad:['AutoCAD','AutoCAD'],tcad:['TCAD','TCAD']};
+  var NAMES={proc:['Chế tạo bán dẫn','Processing'],dev:['Linh kiện','Devices'],nano:['Vật liệu nano','Nanomaterials'],cad:['AutoCAD','AutoCAD'],tcad:['TCAD','TCAD'],ard:['Arduino','Arduino']};
   function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function snippet(x,nx,term){ var i=nx.indexOf(term); if(i<0) return esc(x.slice(0,140))+(x.length>140?'…':'');
     var a=Math.max(0,i-60), b=Math.min(x.length,i+term.length+90);

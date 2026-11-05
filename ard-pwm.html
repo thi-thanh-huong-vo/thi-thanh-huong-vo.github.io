@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="PWM và analogWrite()" data-title-en="PWM and analogWrite()">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PWM and analogWrite() · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Duty cycle, PWM pins and frequencies, fading an LED, the limits of PWM.">
+<meta property="og:title" content="PWM and analogWrite()">
+<meta property="og:description" content="Duty cycle, PWM pins and frequencies, fading an LED, the limits of PWM.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 2 · Bài 2</span><span class="l-en">Part 2 · Lesson 2</span></p>
+  <h1><span class="l-vi">PWM và analogWrite()</span><span class="l-en">PWM and analogWrite()</span></h1>
+  <p class="sub"><span class="l-vi">Chu kỳ nhiệm vụ, các chân PWM và tần số, làm LED sáng dần, giới hạn của PWM.</span><span class="l-en">Duty cycle, PWM pins and frequencies, fading an LED, the limits of PWM.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Chân số chỉ có 0 V và 5 V, vậy làm sao cho LED sáng mờ hay động cơ quay chậm? Câu trả lời là điều chế độ rộng xung (PWM): bật tắt rất nhanh và thay đổi tỉ lệ thời gian bật.</p>
+
+<h2 id="v-s1">1. Ý tưởng của PWM</h2>
+<p>PWM tạo một sóng vuông với tần số cố định và thay đổi <strong>chu kỳ nhiệm vụ</strong> (duty cycle), tức phần trăm thời gian ở mức cao trong mỗi chu kỳ. Điện áp trung bình bằng \(D\times 5\) V. LED nhấp nháy nhanh hơn mắt nhìn được nên ta thấy độ sáng trung bình; động cơ có quán tính nên quay theo điện áp trung bình.</p>
+<figure><svg viewBox="0 0 640 260" class="fig-svg" role="img"><path d="M200,70 V35 H225.1 V70 H300 V35 H325.1 V70 H400 V35 H425.1 V70 H500 V35 H525.1 V70 H600" class="s1" fill="none"/><line x1="200" y1="61.2" x2="600" y2="61.2" style="stroke:var(--s3);stroke-width:1.4;stroke-dasharray:5 4"/><text x="185" y="46" class="ns" text-anchor="end"><tspan style="font-family:monospace">analogWrite(9, 64)</tspan></text><text x="185" y="62" class="ns" text-anchor="end">duty 25 % · trung bình 1,25 V</text><path d="M200,140 V105 H249.8 V140 H300 V105 H349.8 V140 H400 V105 H449.8 V140 H500 V105 H549.8 V140 H600" class="s1" fill="none"/><line x1="200" y1="122.6" x2="600" y2="122.6" style="stroke:var(--s3);stroke-width:1.4;stroke-dasharray:5 4"/><text x="185" y="116" class="ns" text-anchor="end"><tspan style="font-family:monospace">analogWrite(9, 127)</tspan></text><text x="185" y="132" class="ns" text-anchor="end">duty 50 % · trung bình 2,5 V</text><path d="M200,210 V175 H274.9 V210 H300 V175 H374.9 V210 H400 V175 H474.9 V210 H500 V175 H574.9 V210 H600" class="s1" fill="none"/><line x1="200" y1="183.8" x2="600" y2="183.8" style="stroke:var(--s3);stroke-width:1.4;stroke-dasharray:5 4"/><text x="185" y="186" class="ns" text-anchor="end"><tspan style="font-family:monospace">analogWrite(9, 191)</tspan></text><text x="185" y="202" class="ns" text-anchor="end">duty 75 % · trung bình 3,75 V</text><text x="400" y="250" class="ns" text-anchor="middle">Chu kỳ ≈ 2,04 ms (490 Hz); đường đứt = điện áp trung bình</text></svg><figcaption>Hình 1. Ba mức PWM trên Uno: giá trị 64, 127 và 191 cho chu kỳ nhiệm vụ khoảng 25 %, 50 % và 75 %.</figcaption></figure>
+
+<h2 id="v-s2">2. analogWrite()</h2>
+<p><code>analogWrite(chân, giá_trị)</code> nhận giá trị 8 bit từ 0 đến 2⁸ − 1 = 255: 0 là luôn tắt, 255 là luôn bật, 127 là khoảng 50 %. Chỉ các chân có dấu ~ làm được: 3, 5, 6, 9, 10, 11 trên Uno. Tần số khoảng 490 Hz, riêng chân 5 và 6 khoảng 980 Hz.</p>
+<div class="ard-tool" data-tool="pwm" data-lang="vi"><p class="tt">Thử PWM</p><label>Giá trị analogWrite (0–255)<input type="range" name="d" min="0" max="255" value="64"></label><label>Tần số (Hz)<input type="number" name="f" value="490" step="10"></label><svg viewBox="0 0 520 85" role="img"><line x1="10" y1="70" x2="510" y2="70" style="stroke:var(--rule)"/><path class="w" d="" style="stroke:var(--s1);stroke-width:2.5;fill:none"/><line class="m" x1="10" x2="510" y1="70" y2="70" style="stroke:var(--s3);stroke-width:1.5;stroke-dasharray:5 4"/></svg><p class="out"></p></div>
+<p>Hai cách làm LED sáng dần rồi tắt dần: dùng hai vòng <code>for</code> (cách trong bài giảng), hoặc tăng giảm một biến mỗi lần <code>loop()</code> chạy (ví dụ Fade chính thức).</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">FadeFor.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="FadeFor.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>// FadeFor.ino -- brighten then dim an LED with analogWrite() inside two for loops
+const int LED = 9;                 // must be a PWM pin (~): 3, 5, 6, 9, 10 or 11 on the Uno
+
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i &lt;= 255; i++) {  // i++ is short for i = i + 1
+    analogWrite(LED, i);            // duty cycle i/255
+    delay(10);
+  }
+  for (int i = 255; i &gt;= 0; i--) {  // i-- is short for i = i - 1
+    analogWrite(LED, i);
+    delay(10);
+  }
+}
+</code></pre><p class="sk-s">Nguồn: Viết cho trang này dựa trên bài giảng, dùng tự do</p></div>
+<div class="sk"><div class="sk-h"><span class="sk-f">Fade.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Đã chép ✓">Sao chép</button><button type="button" class="sk-dl" data-fn="Fade.ino">Tải .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Chạy thử trên Wokwi ↗</a></span></div><pre><code>/*
+  Fade
+
+  This example shows how to fade an LED on pin 9 using the analogWrite()
+  function.
+
+  The analogWrite() function uses PWM, so if you want to change the pin you&#x27;re
+  using, be sure to use another PWM capable pin. On most Arduino, the PWM pins
+  are identified with a &quot;~&quot; sign, like ~3, ~5, ~6, ~9, ~10 and ~11.
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/Fade/
+*/
+
+int led = 9;         // the PWM pin the LED is attached to
+int brightness = 0;  // how bright the LED is
+int fadeAmount = 5;  // how many points to fade the LED by
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // declare pin 9 to be an output:
+  pinMode(led, OUTPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // set the brightness of pin 9:
+  analogWrite(led, brightness);
+
+  // change the brightness for next time through the loop:
+  brightness = brightness + fadeAmount;
+
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness &lt;= 0 || brightness &gt;= 255) {
+    fadeAmount = -fadeAmount;
+  }
+  // wait for 30 milliseconds to see the dimming effect
+  delay(30);
+}
+</code></pre><p class="sk-s">Nguồn: <a href="https://docs.arduino.cc/built-in-examples/basics/Fade/" target="_blank" rel="noopener">Mã gốc của Arduino, phạm vi công cộng (CC0)</a></p></div>
+<p><code>i++</code> là cách viết gọn của <code>i = i + 1</code>; tương tự <code>i--</code> là <code>i = i - 1</code>.</p>
+
+<h2 id="v-s3">3. PWM không phải là analog thật</h2>
+<p>Nhìn bằng dao động ký, chân PWM vẫn chỉ có 0 V và 5 V. Muốn có điện áp một chiều thật (ví dụ để cấp cho một mạch đo), cần thêm bộ lọc thông thấp RC với hằng số thời gian lớn hơn nhiều so với chu kỳ 2 ms, ví dụ 10 kΩ và 10 µF (τ = 0,1 s). Với LED và động cơ thì không cần lọc.</p>
+<p>Độ sáng mắt cảm nhận không tỉ lệ tuyến tính với duty cycle: đi từ 0 lên 30 thấy thay đổi rõ, từ 200 lên 255 gần như không thấy. Muốn sáng dần "đều mắt" thì cho duty tăng theo hàm mũ thay vì tuyến tính.</p>
+
+<h2 id="v-s4">4. Bài tập</h2>
+<ol>
+<li>Tính điện áp trung bình và thời gian ở mức cao trong mỗi chu kỳ khi gọi <code>analogWrite(9, 36)</code>.</li>
+<li>Vì sao <code>analogWrite(13, 128)</code> trên Uno không làm LED trên bo sáng một nửa?</li>
+<li>Viết sketch "nhịp thở": LED chân 9 sáng dần trong 1,5 s rồi tắt dần trong 1,5 s, lặp lại.</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> D = 36/255 = 14,1 %, điện áp trung bình 0,71 V. Chu kỳ ở 490 Hz là 2,04 ms, nên mức cao kéo dài khoảng 0,29 ms. (Đây là giá trị bài giảng dùng để chạy động cơ DC chậm.)</p>
+<p><strong>2.</strong> Chân 13 không nối với bộ định thời PWM. Với chân không PWM, <code>analogWrite()</code> chỉ cho ra LOW nếu giá trị dưới 128 và HIGH nếu từ 128 trở lên, nên LED sáng hẳn.</p>
+<p><strong>3.</strong> 256 bước trong 1500 ms là khoảng 6 ms mỗi bước:</p>
+<pre><code>void loop() {
+  for (int i = 0; i &lt;= 255; i++)  { analogWrite(9, i); delay(6); }
+  for (int i = 255; i &gt;= 0; i--)  { analogWrite(9, i); delay(6); }
+}</code></pre>
+</details>
+
+<h2 id="v-s5">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>PBL Digital IO</em> (PWM), Korea Aerospace University.</li>
+<li>Arduino, <a href="https://reference.arduino.cc/reference/en/language/functions/analog-io/analogwrite" target="_blank" rel="noopener">analogWrite() reference</a> (bảng chân và tần số PWM) và ví dụ <a href="https://docs.arduino.cc/built-in-examples/basics/Fade/" target="_blank" rel="noopener">Fade</a>.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chương 2.</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Digital pins have only 0 V and 5 V, so how do you dim an LED or slow a motor? The answer is pulse-width modulation (PWM): switch very fast and vary the fraction of time the output is on.</p>
+
+<h2 id="e-s1">1. The idea of PWM</h2>
+<p>PWM produces a square wave at a fixed frequency and varies the <strong>duty cycle</strong>, the percentage of each period spent high. The average voltage is \(D\times 5\) V. An LED flickers faster than the eye can see, so we perceive the average brightness; a motor has inertia, so it turns at the average voltage.</p>
+<figure><svg viewBox="0 0 640 260" class="fig-svg" role="img"><path d="M200,70 V35 H225.1 V70 H300 V35 H325.1 V70 H400 V35 H425.1 V70 H500 V35 H525.1 V70 H600" class="s1" fill="none"/><line x1="200" y1="61.2" x2="600" y2="61.2" style="stroke:var(--s3);stroke-width:1.4;stroke-dasharray:5 4"/><text x="185" y="46" class="ns" text-anchor="end"><tspan style="font-family:monospace">analogWrite(9, 64)</tspan></text><text x="185" y="62" class="ns" text-anchor="end">duty 25 % · average 1.25 V</text><path d="M200,140 V105 H249.8 V140 H300 V105 H349.8 V140 H400 V105 H449.8 V140 H500 V105 H549.8 V140 H600" class="s1" fill="none"/><line x1="200" y1="122.6" x2="600" y2="122.6" style="stroke:var(--s3);stroke-width:1.4;stroke-dasharray:5 4"/><text x="185" y="116" class="ns" text-anchor="end"><tspan style="font-family:monospace">analogWrite(9, 127)</tspan></text><text x="185" y="132" class="ns" text-anchor="end">duty 50 % · average 2.5 V</text><path d="M200,210 V175 H274.9 V210 H300 V175 H374.9 V210 H400 V175 H474.9 V210 H500 V175 H574.9 V210 H600" class="s1" fill="none"/><line x1="200" y1="183.8" x2="600" y2="183.8" style="stroke:var(--s3);stroke-width:1.4;stroke-dasharray:5 4"/><text x="185" y="186" class="ns" text-anchor="end"><tspan style="font-family:monospace">analogWrite(9, 191)</tspan></text><text x="185" y="202" class="ns" text-anchor="end">duty 75 % · average 3.75 V</text><text x="400" y="250" class="ns" text-anchor="middle">Period ≈ 2.04 ms (490 Hz); dashed = average voltage</text></svg><figcaption>Figure 1. Three PWM levels on the Uno: values 64, 127 and 191 give duty cycles of about 25 %, 50 % and 75 %.</figcaption></figure>
+
+<h2 id="e-s2">2. analogWrite()</h2>
+<p><code>analogWrite(pin, value)</code> takes an 8-bit value from 0 to 2⁸ − 1 = 255: 0 is always off, 255 always on, 127 about 50 %. Only pins marked ~ can do it: 3, 5, 6, 9, 10, 11 on the Uno. The frequency is about 490 Hz, except about 980 Hz on pins 5 and 6.</p>
+<div class="ard-tool" data-tool="pwm" data-lang="en"><p class="tt">Try PWM</p><label>analogWrite value (0–255)<input type="range" name="d" min="0" max="255" value="64"></label><label>Frequency (Hz)<input type="number" name="f" value="490" step="10"></label><svg viewBox="0 0 520 85" role="img"><line x1="10" y1="70" x2="510" y2="70" style="stroke:var(--rule)"/><path class="w" d="" style="stroke:var(--s1);stroke-width:2.5;fill:none"/><line class="m" x1="10" x2="510" y1="70" y2="70" style="stroke:var(--s3);stroke-width:1.5;stroke-dasharray:5 4"/></svg><p class="out"></p></div>
+<p>Two ways to fade an LED up and down: two <code>for</code> loops (the lecture's version), or changing a variable a little on each pass through <code>loop()</code> (the official Fade example).</p>
+<div class="sk"><div class="sk-h"><span class="sk-f">FadeFor.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="FadeFor.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>// FadeFor.ino -- brighten then dim an LED with analogWrite() inside two for loops
+const int LED = 9;                 // must be a PWM pin (~): 3, 5, 6, 9, 10 or 11 on the Uno
+
+void setup() {
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i &lt;= 255; i++) {  // i++ is short for i = i + 1
+    analogWrite(LED, i);            // duty cycle i/255
+    delay(10);
+  }
+  for (int i = 255; i &gt;= 0; i--) {  // i-- is short for i = i - 1
+    analogWrite(LED, i);
+    delay(10);
+  }
+}
+</code></pre><p class="sk-s">Source: Written for this page from the lectures, free to use</p></div>
+<div class="sk"><div class="sk-h"><span class="sk-f">Fade.ino</span><span class="sk-b"><button type="button" class="sk-copy" data-done="Copied ✓">Copy</button><button type="button" class="sk-dl" data-fn="Fade.ino">Download .ino</button><a class="sk-w" href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noopener">Try it on Wokwi ↗</a></span></div><pre><code>/*
+  Fade
+
+  This example shows how to fade an LED on pin 9 using the analogWrite()
+  function.
+
+  The analogWrite() function uses PWM, so if you want to change the pin you&#x27;re
+  using, be sure to use another PWM capable pin. On most Arduino, the PWM pins
+  are identified with a &quot;~&quot; sign, like ~3, ~5, ~6, ~9, ~10 and ~11.
+
+  This example code is in the public domain.
+
+  https://docs.arduino.cc/built-in-examples/basics/Fade/
+*/
+
+int led = 9;         // the PWM pin the LED is attached to
+int brightness = 0;  // how bright the LED is
+int fadeAmount = 5;  // how many points to fade the LED by
+
+// the setup routine runs once when you press reset:
+void setup() {
+  // declare pin 9 to be an output:
+  pinMode(led, OUTPUT);
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  // set the brightness of pin 9:
+  analogWrite(led, brightness);
+
+  // change the brightness for next time through the loop:
+  brightness = brightness + fadeAmount;
+
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness &lt;= 0 || brightness &gt;= 255) {
+    fadeAmount = -fadeAmount;
+  }
+  // wait for 30 milliseconds to see the dimming effect
+  delay(30);
+}
+</code></pre><p class="sk-s">Source: <a href="https://docs.arduino.cc/built-in-examples/basics/Fade/" target="_blank" rel="noopener">Official Arduino example, public domain (CC0)</a></p></div>
+<p><code>i++</code> is shorthand for <code>i = i + 1</code>; likewise <code>i--</code> is <code>i = i - 1</code>.</p>
+
+<h2 id="e-s3">3. PWM is not true analog</h2>
+<p>On an oscilloscope a PWM pin still shows only 0 V and 5 V. To get a real DC voltage (for example to feed a measurement circuit) add an RC low-pass filter with a time constant much longer than the 2 ms period, e.g. 10 kΩ and 10 µF (τ = 0.1 s). LEDs and motors need no filter.</p>
+<p>Perceived brightness is not linear in duty cycle: going from 0 to 30 is an obvious change, from 200 to 255 is barely visible. For a fade that looks even, raise the duty exponentially rather than linearly.</p>
+
+<h2 id="e-s4">4. Exercises</h2>
+<ol>
+<li>Compute the average voltage and the high time per period for <code>analogWrite(9, 36)</code>.</li>
+<li>Why does <code>analogWrite(13, 128)</code> on the Uno not light the on-board LED at half brightness?</li>
+<li>Write a "breathing" sketch: the LED on pin 9 fades up over 1.5 s and down over 1.5 s, repeatedly.</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> D = 36/255 = 14.1 %, an average of 0.71 V. The period at 490 Hz is 2.04 ms, so the high time is about 0.29 ms. (This is the value the lecture uses to run a DC motor slowly.)</p>
+<p><strong>2.</strong> Pin 13 is not connected to a PWM timer. On a non-PWM pin, <code>analogWrite()</code> outputs LOW for values below 128 and HIGH for 128 and above, so the LED is fully on.</p>
+<p><strong>3.</strong> 256 steps in 1500 ms is about 6 ms per step:</p>
+<pre><code>void loop() {
+  for (int i = 0; i &lt;= 255; i++)  { analogWrite(9, i); delay(6); }
+  for (int i = 255; i &gt;= 0; i--)  { analogWrite(9, i); delay(6); }
+}</code></pre>
+</details>
+
+<h2 id="e-s5">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>PBL Digital IO</em> (PWM), Korea Aerospace University.</li>
+<li>Arduino, <a href="https://reference.arduino.cc/reference/en/language/functions/analog-io/analogwrite" target="_blank" rel="noopener">analogWrite() reference</a> (PWM pin and frequency table) and the <a href="https://docs.arduino.cc/built-in-examples/basics/Fade/" target="_blank" rel="noopener">Fade</a> example.</li>
+<li>J. Blum, <em>Exploring Arduino</em>, 2nd ed., Wiley (2019), chapter 2.</li>
+</ol>
+</div>
+<nav class="pager"><a href="ard-digital-io.html">← <span class="l-vi">Vào ra số: LED, nút nhấn, vòng lặp</span><span class="l-en">Digital I/O: LEDs, buttons, loops</span></a><a class="n" href="ard-analog.html"><span class="l-vi">Tín hiệu analog và cảm biến</span><span class="l-en">Analog signals and sensors</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

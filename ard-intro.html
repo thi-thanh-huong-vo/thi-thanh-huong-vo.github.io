@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Arduino là gì và cần chuẩn bị gì" data-title-en="What Arduino is and what you need">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Arduino is and what you need · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Sensors and actuators, inside the board, choosing Uno, Mega or Nano, installing the IDE and the Wokwi simulator.">
+<meta property="og:title" content="What Arduino is and what you need">
+<meta property="og:description" content="Sensors and actuators, inside the board, choosing Uno, Mega or Nano, installing the IDE and the Wokwi simulator.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+<style>
+  pre{background:var(--box);border:1px solid var(--rule);border-radius:0 0 6px 6px;padding:.85rem 1rem;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;text-align:left}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:.88em}
+  pre code{font-size:1em;white-space:pre}
+  h3{font-family:"Source Serif 4",Georgia,serif;font-size:1.08rem;margin:1.4rem 0 .5rem}
+  .sk{margin:1.1rem 0 1.3rem}
+  .sk-h{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:space-between;align-items:center;background:var(--accent-soft);border:1px solid var(--rule);border-bottom:0;border-radius:6px 6px 0 0;padding:.4rem .6rem}
+  .sk-f{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--accent)}
+  .sk-b{display:flex;flex-wrap:wrap;gap:.35rem}
+  .sk-b button,.sk-b a{font:inherit;font-size:.78rem;padding:.2rem .55rem;border:1px solid var(--accent);border-radius:4px;background:var(--paper);color:var(--accent);cursor:pointer;text-decoration:none;line-height:1.4}
+  .sk-b button:hover,.sk-b a:hover{background:var(--accent);color:var(--paper)}
+  .sk-s{font-size:.8rem;color:var(--muted);margin:.35rem 0 0}
+  details.ans{border:1px solid var(--rule);border-radius:6px;padding:.7rem 1rem;margin:1.2rem 0;background:var(--box)}
+  details.ans summary{cursor:pointer;font-weight:600}
+  details.ans[open] summary{margin-bottom:.6rem}
+  .ard-tool{border:1px solid var(--rule);border-radius:8px;padding:.8rem 1rem;margin:1.2rem 0;background:var(--box)}
+  .ard-tool p.tt{font-weight:600;margin:0 0 .5rem;color:var(--accent)}
+  .ard-tool label{display:inline-flex;flex-direction:column;font-size:.85rem;margin:0 .8rem .5rem 0;color:var(--muted)}
+  .ard-tool input[type=number]{width:7rem;font:inherit;padding:.25rem .4rem;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink)}
+  .ard-tool input[type=range]{width:min(100%,22rem)}
+  .ard-tool .out{font-size:.95rem;margin:.3rem 0 0}
+  .ard-tool svg{width:100%;max-width:520px;height:auto;display:block;margin-top:.4rem}
+</style></head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="arduino.html"><span class="l-vi">Arduino cho người mới</span><span class="l-en">Arduino for Beginners</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 1 · Bài 1</span><span class="l-en">Part 1 · Lesson 1</span></p>
+  <h1><span class="l-vi">Arduino là gì và cần chuẩn bị gì</span><span class="l-en">What Arduino is and what you need</span></h1>
+  <p class="sub"><span class="l-vi">Cảm biến và cơ cấu chấp hành, bên trong bo mạch, chọn Uno, Mega hay Nano, cài IDE và trình mô phỏng Wokwi.</span><span class="l-en">Sensors and actuators, inside the board, choosing Uno, Mega or Nano, installing the IDE and the Wokwi simulator.</span></p>
+</header>
+<div class="l-vi"><div class="box"><p class="t">Cách dùng thư mục này</p>
+<p>Mỗi bài có các đoạn code với ba nút: <strong>Sao chép</strong>, <strong>Tải .ino</strong> (mở được ngay bằng Arduino IDE) và <strong>Chạy thử trên Wokwi</strong> (trình mô phỏng Arduino miễn phí trên trình duyệt: mở dự án Uno mới, dán code vào <code>sketch.ino</code>, thêm linh kiện bằng nút "+", rồi bấm ▶). Dòng "Nguồn" dưới mỗi đoạn code cho biết code lấy từ đâu: ví dụ chính thức của Arduino (phạm vi công cộng, CC0) hoặc code viết cho trang này dựa trên bài giảng. Mọi đoạn code đều đã được biên dịch thử cho Arduino Uno.</p></div>
+<p class="lead">Arduino là một nền tảng mã nguồn mở để làm các dự án điện tử: một bo mạch có vi điều khiển lập trình được, cộng với phần mềm (IDE) để viết và nạp chương trình. Với vài chục nghìn đồng linh kiện, bạn đã có thể đọc cảm biến và điều khiển đèn, động cơ.</p>
+
+<h2 id="v-s1">1. Cảm biến, bộ não và cơ cấu chấp hành</h2>
+<p>Mọi hệ thống tự động đều có ba phần: <strong>cảm biến</strong> (sensor) chuyển đại lượng vật lý thành tín hiệu điện (khoảng cách, nhiệt độ, ánh sáng); <strong>bộ xử lý</strong> quyết định phải làm gì; <strong>cơ cấu chấp hành</strong> (actuator) biến tín hiệu điện thành hành động (đèn sáng, động cơ quay, loa kêu). Arduino đóng vai bộ xử lý. Robot hút bụi là ví dụ quen thuộc: cảm biến siêu âm đo khoảng cách tới vật cản, vi điều khiển quyết định rẽ, động cơ DC kéo bánh xe. Môn học mà thư mục này dựa vào dùng đúng bộ ba đó cho hai dự án nhóm: robot hút bụi tự chế và máy đánh bóng bàn tự động.</p>
+
+<h2 id="v-s2">2. Bên trong một bo Arduino</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><rect x="120" y="40" width="400" height="220" rx="10" class="node"/><rect x="95" y="70" width="50" height="40" rx="3" style="fill:var(--rule);stroke:var(--muted)"/><text x="70" y="94" class="ns" text-anchor="end">USB</text><rect x="95" y="190" width="45" height="45" rx="3" style="fill:var(--rule);stroke:var(--muted)"/><text x="70" y="210" class="ns" text-anchor="end">Nguồn</text><text x="70" y="224" class="ns" text-anchor="end">7–12 V</text><rect x="270" y="120" width="140" height="70" rx="4" style="fill:var(--ink);opacity:.85"/><text x="340" y="152" class="ns" style="fill:var(--paper)" text-anchor="middle">ATmega328P</text><text x="340" y="168" class="ns" style="fill:var(--paper)" text-anchor="middle">vi điều khiển 8 bit</text><rect x="200" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="207" y="74" class="tk" text-anchor="middle" style="font-size:9px">13</text><rect x="222" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="229" y="74" class="tk" text-anchor="middle" style="font-size:9px">12</text><rect x="244" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="251" y="74" class="tk" text-anchor="middle" style="font-size:9px">~11</text><rect x="266" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="273" y="74" class="tk" text-anchor="middle" style="font-size:9px">~10</text><rect x="288" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="295" y="74" class="tk" text-anchor="middle" style="font-size:9px">~9</text><rect x="310" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="317" y="74" class="tk" text-anchor="middle" style="font-size:9px">8</text><rect x="332" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="339" y="74" class="tk" text-anchor="middle" style="font-size:9px">7</text><rect x="354" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="361" y="74" class="tk" text-anchor="middle" style="font-size:9px">~6</text><rect x="376" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="383" y="74" class="tk" text-anchor="middle" style="font-size:9px">~5</text><rect x="398" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="405" y="74" class="tk" text-anchor="middle" style="font-size:9px">4</text><rect x="420" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="427" y="74" class="tk" text-anchor="middle" style="font-size:9px">~3</text><rect x="442" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="449" y="74" class="tk" text-anchor="middle" style="font-size:9px">2</text><rect x="464" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="471" y="74" class="tk" text-anchor="middle" style="font-size:9px">1</text><rect x="486" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="493" y="74" class="tk" text-anchor="middle" style="font-size:9px">0</text><text x="360" y="32" class="ns" text-anchor="middle">Chân số D0–D13 (~ = PWM)</text><rect x="360" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="367" y="234" class="tk" text-anchor="middle" style="font-size:9px">A0</text><rect x="384" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="391" y="234" class="tk" text-anchor="middle" style="font-size:9px">A1</text><rect x="408" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="415" y="234" class="tk" text-anchor="middle" style="font-size:9px">A2</text><rect x="432" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="439" y="234" class="tk" text-anchor="middle" style="font-size:9px">A3</text><rect x="456" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="463" y="234" class="tk" text-anchor="middle" style="font-size:9px">A4</text><rect x="480" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="487" y="234" class="tk" text-anchor="middle" style="font-size:9px">A5</text><text x="424" y="278" class="ns" text-anchor="middle">Chân analog (ADC 10 bit)</text><rect x="190" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="197" y="234" class="tk" text-anchor="middle" style="font-size:9px">5V</text><rect x="220" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="227" y="234" class="tk" text-anchor="middle" style="font-size:9px">3.3V</text><rect x="250" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="257" y="234" class="tk" text-anchor="middle" style="font-size:9px">GND</text><rect x="280" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="287" y="234" class="tk" text-anchor="middle" style="font-size:9px">GND</text><rect x="310" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="317" y="234" class="tk" text-anchor="middle" style="font-size:9px">Vin</text><text x="250" y="278" class="ns" text-anchor="middle">Chân nguồn</text><circle cx="180" cy="110" r="5" style="fill:var(--s3)"/><text x="190" y="114" class="ns" text-anchor="start">LED trên board (chân 13)</text></svg><figcaption>Hình 1. Sơ đồ đơn giản của Arduino Uno: vi điều khiển ATmega328P, cổng USB, giắc nguồn, 14 chân số (6 chân có dấu ~ xuất được PWM), 6 chân analog và các chân nguồn.</figcaption></figure>
+<ul>
+<li><strong>Vi điều khiển</strong> (microcontroller): "bộ não" chạy chương trình. Trên Uno là ATmega328P 8 bit, 16 MHz, 32 KB bộ nhớ chương trình và 2 KB RAM.</li>
+<li><strong>Giao diện lập trình</strong>: cổng USB vừa cấp nguồn vừa nạp chương trình từ máy tính.</li>
+<li><strong>Vào/ra (I/O)</strong>: các chân nối với cảm biến và cơ cấu chấp hành. Chân số chỉ có hai mức 0 V và 5 V; chân analog đọc được điện áp liên tục.</li>
+<li><strong>Nguồn</strong>: 5 V qua USB, hoặc 7–12 V qua giắc nguồn hay chân Vin; bo tự chuyển giữa các nguồn.</li>
+</ul>
+
+<h2 id="v-s3">3. Chọn bo nào</h2>
+<div class="tablewrap"><table>
+<tr><th>Bo</th><th>Vi điều khiển</th><th>Chân I/O</th><th>Khi nào dùng</th></tr>
+<tr><td>Uno</td><td>ATmega328P</td><td>14 số (6 PWM), 6 analog</td><td>Học và làm mẫu; nhiều tài liệu nhất</td></tr>
+<tr><td>Mega 2560</td><td>ATmega2560</td><td>54 số (15 PWM), 16 analog</td><td>Dự án nhiều cảm biến, động cơ; nhiều bộ nhớ hơn</td></tr>
+<tr><td>Nano</td><td>ATmega328</td><td>Như Uno</td><td>Gọn (18 × 45 mm, 7 g), cắm thẳng lên breadboard</td></tr>
+</table></div>
+<p>Uno và Nano chạy cùng code; mọi ví dụ trong thư mục này viết cho Uno.</p>
+
+<h2 id="v-s4">4. Cần chuẩn bị gì</h2>
+<ul>
+<li>Một bo Uno (hoặc Nano) và cáp USB.</li>
+<li>Breadboard, dây cắm, vài LED, điện trở 220 Ω và 10 kΩ, nút nhấn, biến trở 10 kΩ.</li>
+<li>Cảm biến: siêu âm HC-SR04, quang trở, cảm biến nhiệt TMP36. Cơ cấu chấp hành: servo SG90, động cơ DC với mạch driver L9110S (HG7881).</li>
+<li>Chưa có phần cứng? Dùng <a href="https://wokwi.com" target="_blank" rel="noopener">Wokwi</a>: trình mô phỏng có sẵn Uno, LED, nút nhấn, biến trở, quang trở, HC-SR04 và servo.</li>
+</ul>
+
+<h2 id="v-s5">5. Cài Arduino IDE</h2>
+<ol>
+<li>Vào <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">arduino.cc/en/software</a>, tải bản mới nhất cho hệ điều hành của bạn. Trên Windows, chọn bản cài đặt (installer) thay vì file zip để driver được cài kèm.</li>
+<li>Chạy trình cài đặt, giữ các lựa chọn mặc định.</li>
+<li>Cắm Arduino qua USB. Trong IDE, chọn <em>Tools → Board → Arduino Uno</em> và <em>Tools → Port</em> là cổng vừa xuất hiện.</li>
+<li>Muốn khỏi cài đặt, có thể dùng Arduino Cloud Editor trên trình duyệt (cần tài khoản arduino.cc và một plug-in nhỏ để nạp code).</li>
+</ol>
+<p>Nếu không thấy cổng: thử cáp USB khác (nhiều cáp chỉ sạc, không truyền dữ liệu), và với bo Nano giá rẻ dùng chip CH340 thì cần cài driver CH340.</p>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>Kể ba cảm biến và ba cơ cấu chấp hành trong một máy giặt.</li>
+<li>Vì sao Uno chỉ có 6 chân PWM trong khi có 14 chân số?</li>
+<li>Bạn cần đọc 10 cảm biến analog. Chọn Uno hay Mega? Vì sao?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> Cảm biến: mực nước (áp suất), nhiệt độ nước, cảm biến cửa đóng, cảm biến tốc độ lồng. Cơ cấu chấp hành: động cơ lồng giặt, van cấp nước, bơm xả, khóa cửa, bộ gia nhiệt.</p>
+<p><strong>2.</strong> PWM được tạo bằng bộ định thời (timer) phần cứng. ATmega328P có ba timer, mỗi timer điều khiển hai kênh so sánh, tổng cộng 6 kênh, nối cố định với các chân 3, 5, 6, 9, 10, 11.</p>
+<p><strong>3.</strong> Mega: Uno chỉ có 6 chân analog (A0–A5), Mega có 16. (Có thể dùng bộ chọn kênh analog như 74HC4051 với Uno, nhưng mạch phức tạp hơn.)</p>
+</details>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>신소재공학설계입문</em> (Nhập môn thiết kế kỹ thuật vật liệu) và <em>Global Engineering Design</em>, Korea Aerospace University: phần Arduino landscape.</li>
+<li>Arduino, <a href="https://docs.arduino.cc/hardware/uno-rev3/" target="_blank" rel="noopener">UNO R3 documentation</a> và <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">Arduino IDE</a>.</li>
+<li>J. Blum, <em>Exploring Arduino: Tools and Techniques for Engineering Wizardry</em>, 2nd ed., Wiley (2019), chương 1.</li>
+<li><a href="https://docs.wokwi.com/getting-started/supported-hardware" target="_blank" rel="noopener">Wokwi: supported hardware</a>.</li>
+</ol>
+</div>
+<div class="l-en"><div class="box"><p class="t">How to use this folder</p>
+<p>Each lesson has code blocks with three buttons: <strong>Copy</strong>, <strong>Download .ino</strong> (opens directly in the Arduino IDE) and <strong>Try it on Wokwi</strong> (a free in-browser Arduino simulator: open a new Uno project, paste the code into <code>sketch.ino</code>, add parts with the "+" button, then press ▶). The "Source" line under each block says where the code comes from: an official Arduino example (public domain, CC0) or code written for this page from the lectures. Every sketch has been test-compiled for the Arduino Uno.</p></div>
+<p class="lead">Arduino is an open-source platform for electronics projects: a board with a programmable microcontroller, plus software (an IDE) to write and upload programs. With a few dollars of parts you can read sensors and drive lights and motors.</p>
+
+<h2 id="e-s1">1. Sensors, a brain and actuators</h2>
+<p>Every automatic system has three parts: <strong>sensors</strong> turn a physical quantity into an electrical signal (distance, temperature, light); a <strong>processor</strong> decides what to do; <strong>actuators</strong> turn an electrical signal into action (a light turns on, a motor spins, a buzzer sounds). The Arduino is the processor. A robot vacuum is a familiar example: an ultrasonic sensor measures the distance to an obstacle, the microcontroller decides to turn, DC motors drive the wheels. The course behind this folder uses exactly that trio for two team projects: a home-made robot vacuum and an automatic ping-pong machine.</p>
+
+<h2 id="e-s2">2. Inside an Arduino board</h2>
+<figure><svg viewBox="0 0 640 300" class="fig-svg" role="img"><rect x="120" y="40" width="400" height="220" rx="10" class="node"/><rect x="95" y="70" width="50" height="40" rx="3" style="fill:var(--rule);stroke:var(--muted)"/><text x="70" y="94" class="ns" text-anchor="end">USB</text><rect x="95" y="190" width="45" height="45" rx="3" style="fill:var(--rule);stroke:var(--muted)"/><text x="70" y="210" class="ns" text-anchor="end">Power</text><text x="70" y="224" class="ns" text-anchor="end">7–12 V</text><rect x="270" y="120" width="140" height="70" rx="4" style="fill:var(--ink);opacity:.85"/><text x="340" y="152" class="ns" style="fill:var(--paper)" text-anchor="middle">ATmega328P</text><text x="340" y="168" class="ns" style="fill:var(--paper)" text-anchor="middle">8-bit MCU</text><rect x="200" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="207" y="74" class="tk" text-anchor="middle" style="font-size:9px">13</text><rect x="222" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="229" y="74" class="tk" text-anchor="middle" style="font-size:9px">12</text><rect x="244" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="251" y="74" class="tk" text-anchor="middle" style="font-size:9px">~11</text><rect x="266" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="273" y="74" class="tk" text-anchor="middle" style="font-size:9px">~10</text><rect x="288" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="295" y="74" class="tk" text-anchor="middle" style="font-size:9px">~9</text><rect x="310" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="317" y="74" class="tk" text-anchor="middle" style="font-size:9px">8</text><rect x="332" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="339" y="74" class="tk" text-anchor="middle" style="font-size:9px">7</text><rect x="354" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="361" y="74" class="tk" text-anchor="middle" style="font-size:9px">~6</text><rect x="376" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="383" y="74" class="tk" text-anchor="middle" style="font-size:9px">~5</text><rect x="398" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="405" y="74" class="tk" text-anchor="middle" style="font-size:9px">4</text><rect x="420" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="427" y="74" class="tk" text-anchor="middle" style="font-size:9px">~3</text><rect x="442" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="449" y="74" class="tk" text-anchor="middle" style="font-size:9px">2</text><rect x="464" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="471" y="74" class="tk" text-anchor="middle" style="font-size:9px">1</text><rect x="486" y="46" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="493" y="74" class="tk" text-anchor="middle" style="font-size:9px">0</text><text x="360" y="32" class="ns" text-anchor="middle">Digital pins D0–D13 (~ = PWM)</text><rect x="360" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="367" y="234" class="tk" text-anchor="middle" style="font-size:9px">A0</text><rect x="384" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="391" y="234" class="tk" text-anchor="middle" style="font-size:9px">A1</text><rect x="408" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="415" y="234" class="tk" text-anchor="middle" style="font-size:9px">A2</text><rect x="432" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="439" y="234" class="tk" text-anchor="middle" style="font-size:9px">A3</text><rect x="456" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="463" y="234" class="tk" text-anchor="middle" style="font-size:9px">A4</text><rect x="480" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="487" y="234" class="tk" text-anchor="middle" style="font-size:9px">A5</text><text x="424" y="278" class="ns" text-anchor="middle">Analog pins (10-bit ADC)</text><rect x="190" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="197" y="234" class="tk" text-anchor="middle" style="font-size:9px">5V</text><rect x="220" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="227" y="234" class="tk" text-anchor="middle" style="font-size:9px">3.3V</text><rect x="250" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="257" y="234" class="tk" text-anchor="middle" style="font-size:9px">GND</text><rect x="280" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="287" y="234" class="tk" text-anchor="middle" style="font-size:9px">GND</text><rect x="310" y="240" width="14" height="14" style="fill:var(--paper);stroke:var(--muted)"/><text x="317" y="234" class="tk" text-anchor="middle" style="font-size:9px">Vin</text><text x="250" y="278" class="ns" text-anchor="middle">Power pins</text><circle cx="180" cy="110" r="5" style="fill:var(--s3)"/><text x="190" y="114" class="ns" text-anchor="start">on-board LED (pin 13)</text></svg><figcaption>Figure 1. A simplified Arduino Uno: the ATmega328P microcontroller, USB port, power jack, 14 digital pins (the 6 marked ~ can output PWM), 6 analog pins and the power pins.</figcaption></figure>
+<ul>
+<li><strong>Microcontroller</strong>: the "brain" that runs the program. On the Uno it is an 8-bit ATmega328P at 16 MHz with 32 KB of program memory and 2 KB of RAM.</li>
+<li><strong>Programming interface</strong>: the USB port both powers the board and uploads programs from the computer.</li>
+<li><strong>Input/output (I/O)</strong>: the pins that connect to sensors and actuators. Digital pins have only two levels, 0 V and 5 V; analog pins read a continuous voltage.</li>
+<li><strong>Power</strong>: 5 V from USB, or 7–12 V through the power jack or the Vin pin; the board switches between sources by itself.</li>
+</ul>
+
+<h2 id="e-s3">3. Which board</h2>
+<div class="tablewrap"><table>
+<tr><th>Board</th><th>Microcontroller</th><th>I/O pins</th><th>When to use</th></tr>
+<tr><td>Uno</td><td>ATmega328P</td><td>14 digital (6 PWM), 6 analog</td><td>Learning and prototyping; the most documentation</td></tr>
+<tr><td>Mega 2560</td><td>ATmega2560</td><td>54 digital (15 PWM), 16 analog</td><td>Projects with many sensors and motors; more memory</td></tr>
+<tr><td>Nano</td><td>ATmega328</td><td>Same as Uno</td><td>Compact (18 × 45 mm, 7 g), plugs straight into a breadboard</td></tr>
+</table></div>
+<p>The Uno and Nano run the same code; every example in this folder is written for the Uno.</p>
+
+<h2 id="e-s4">4. What you need</h2>
+<ul>
+<li>An Uno (or Nano) board and a USB cable.</li>
+<li>A breadboard, jumper wires, a few LEDs, 220 Ω and 10 kΩ resistors, a push button, a 10 kΩ potentiometer.</li>
+<li>Sensors: HC-SR04 ultrasonic, photoresistor, TMP36 temperature sensor. Actuators: SG90 servo, DC motors with an L9110S (HG7881) driver board.</li>
+<li>No hardware yet? Use <a href="https://wokwi.com" target="_blank" rel="noopener">Wokwi</a>: a simulator with the Uno, LEDs, push buttons, potentiometers, photoresistors, the HC-SR04 and servos built in.</li>
+</ul>
+
+<h2 id="e-s5">5. Installing the Arduino IDE</h2>
+<ol>
+<li>Go to <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">arduino.cc/en/software</a> and download the latest version for your operating system. On Windows choose the installer rather than the zip file so the drivers are installed too.</li>
+<li>Run the installer and keep the default options.</li>
+<li>Plug in the Arduino over USB. In the IDE choose <em>Tools → Board → Arduino Uno</em> and, under <em>Tools → Port</em>, the port that just appeared.</li>
+<li>To skip installation, use the Arduino Cloud Editor in the browser (it needs an arduino.cc account and a small plug-in to upload code).</li>
+</ol>
+<p>If no port appears: try another USB cable (many cables only charge and carry no data), and for cheap Nano clones with a CH340 chip, install the CH340 driver.</p>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>Name three sensors and three actuators in a washing machine.</li>
+<li>Why does the Uno have only 6 PWM pins out of 14 digital pins?</li>
+<li>You need to read 10 analog sensors. Uno or Mega? Why?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> Sensors: water level (pressure), water temperature, door-closed switch, drum speed sensor. Actuators: drum motor, inlet valve, drain pump, door lock, heater.</p>
+<p><strong>2.</strong> PWM is generated by hardware timers. The ATmega328P has three timers, each driving two compare channels, six channels in all, wired permanently to pins 3, 5, 6, 9, 10 and 11.</p>
+<p><strong>3.</strong> Mega: the Uno has only 6 analog pins (A0–A5), the Mega has 16. (An analog multiplexer such as the 74HC4051 works with the Uno, but the circuit is more complex.)</p>
+</details>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lectures for <em>신소재공학설계입문</em> (Introduction to Materials Engineering Design) and <em>Global Engineering Design</em>, Korea Aerospace University: Arduino landscape.</li>
+<li>Arduino, <a href="https://docs.arduino.cc/hardware/uno-rev3/" target="_blank" rel="noopener">UNO R3 documentation</a> and <a href="https://www.arduino.cc/en/software" target="_blank" rel="noopener">Arduino IDE</a>.</li>
+<li>J. Blum, <em>Exploring Arduino: Tools and Techniques for Engineering Wizardry</em>, 2nd ed., Wiley (2019), chapter 1.</li>
+<li><a href="https://docs.wokwi.com/getting-started/supported-hardware" target="_blank" rel="noopener">Wokwi: supported hardware</a>.</li>
+</ol>
+</div>
+<nav class="pager"><a href="arduino.html">← <span class="l-vi">Mục lục</span><span class="l-en">Contents</span></a><a class="n" href="ard-first-program.html"><span class="l-vi">Chương trình đầu tiên: Blink và Serial</span><span class="l-en">First program: Blink and Serial</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần 신소재공학설계입문 (Nhập môn thiết kế kỹ thuật vật liệu) và Global Engineering Design của GS. Wan Sik Hwang, Korea Aerospace University, cùng sách Exploring Arduino của Jeremy Blum. Ví dụ chính thức của Arduino được giữ nguyên theo giấy phép CC0; các đoạn code khác được viết cho trang này; hình minh họa được vẽ lại.</span><span class="l-en">Based on the courses 신소재공학설계입문 (Introduction to Materials Engineering Design) and Global Engineering Design by Prof. Wan Sik Hwang, Korea Aerospace University, and Jeremy Blum's book Exploring Arduino. Official Arduino examples are reproduced unchanged under CC0; other code was written for this page; figures were redrawn.</span></p></footer>
+</main>
+<script>
+(function(){
+  function copyText(t){
+    if(navigator.clipboard&&window.isSecureContext) return navigator.clipboard.writeText(t);
+    return new Promise(function(res){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(a);res();});
+  }
+  document.addEventListener('click',function(ev){
+    var b=ev.target.closest('.sk-copy,.sk-dl'); if(!b) return;
+    var src=b.closest('.sk').querySelector('pre code').textContent;
+    if(b.classList.contains('sk-copy')){
+      var old=b.textContent; copyText(src).then(function(){b.textContent=b.getAttribute('data-done');setTimeout(function(){b.textContent=old},1500)});
+    }else{
+      var blob=new Blob([src],{type:'text/plain'}); var a=document.createElement('a');
+      a.href=URL.createObjectURL(blob); a.download=b.getAttribute('data-fn'); document.body.appendChild(a); a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+  });
+  function num(el,n){var v=parseFloat(el.querySelector('[name='+n+']').value);return isNaN(v)?0:v}
+  var E12=[1,1.2,1.5,1.8,2.2,2.7,3.3,3.9,4.7,5.6,6.8,8.2];
+  function nextE12(r){if(r<=0)return 0;var d=Math.pow(10,Math.floor(Math.log10(r)));for(var i=0;i<E12.length;i++){var v=E12[i]*d;if(v>=r-1e-9)return v}return 10*d}
+  var VI=false;function fmt(x,d){var s=x.toFixed(d);return VI?s.replace('.',','):s}
+  var tools={
+    res:function(el){VI=el.dataset.lang==='vi';var vs=num(el,'vs'),vf=num(el,'vf'),i=num(el,'i')/1000,o=el.querySelector('.out'),vi=el.dataset.lang==='vi';
+      if(i<=0||vs<=vf){o.textContent=vi?'Cần V nguồn > V_F và I > 0.':'Need supply V > V_F and I > 0.';return}
+      var r=(vs-vf)/i,e=nextE12(r),ie=(vs-vf)/e*1000;
+      o.innerHTML=(vi?'R tối thiểu = ':'Minimum R = ')+fmt(r,0)+' Ω → '+(vi?'chọn giá trị E12 kế trên: <b>':'pick the next E12 value up: <b>')+(e>=1000?fmt(e/1000,1)+' kΩ':fmt(e,0)+' Ω')+'</b> → I ≈ '+fmt(ie,1)+' mA, P<sub>R</sub> ≈ '+fmt((vs-vf)*ie,0)+' mW';},
+    pwm:function(el){VI=el.dataset.lang==='vi';var v=num(el,'d'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi',f=num(el,'f')||490;var duty=v/255,per=1000/f;
+      o.innerHTML='analogWrite(pin, '+v+') → duty '+fmt(duty*100,1)+' % · '+(vi?'trung bình ':'average ')+fmt(5*duty,2)+' V · '+(vi?'mức cao ':'high for ')+fmt(per*duty,2)+' ms / '+fmt(per,2)+' ms';
+      var p='M10,70';for(var c=0;c<4;c++){var x=10+c*125,h=125*duty;p+=' V15 H'+(x+h).toFixed(1)+' V70 H'+(x+125)}
+      if(v===0)p='M10,70 H510';if(v===255)p='M10,70 V15 H510';
+      el.querySelector('path.w').setAttribute('d',p);var y=70-55*duty;var l=el.querySelector('line.m');l.setAttribute('y1',y);l.setAttribute('y2',y);},
+    son:function(el){VI=el.dataset.lang==='vi';var t=num(el,'t'),T=num(el,'T'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var c=331.3+0.606*T,d=t*c/20000;
+      o.innerHTML=(vi?'Tốc độ âm thanh ':'Speed of sound ')+fmt(c,1)+' m/s → d = '+fmt(d,1)+' cm · t/'+fmt(58.2,1)+' = '+fmt(t/58.2,1)+' cm';},
+    adc:function(el){VI=el.dataset.lang==='vi';var v=num(el,'v'),o=el.querySelector('.out'),vi=el.dataset.lang==='vi';var n=Math.max(0,Math.min(1023,Math.floor(v/5*1024)));
+      o.innerHTML='analogRead() ≈ <b>'+n+'</b> · '+(vi?'độ phân giải ':'resolution ')+fmt(4.883,2)+' mV/'+(vi?'bước':'step')+' · TMP36: '+fmt((v-0.5)*100,1)+' °C';}
+  };
+  document.querySelectorAll('.ard-tool').forEach(function(el){var f=tools[el.dataset.tool];if(!f)return;el.addEventListener('input',function(){f(el)});f(el)});
+})();
+</script>
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>
