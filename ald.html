@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Lắng đọng lớp nguyên tử (ALD)" data-title-en="Atomic layer deposition (ALD)">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atomic layer deposition (ALD) · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Self-limiting reactions, the TMA/H₂O cycle, the ALD window, advantages, high-k and PVD vs CVD vs ALD.">
+<meta property="og:title" content="Atomic layer deposition (ALD)">
+<meta property="og:description" content="Self-limiting reactions, the TMA/H₂O cycle, the ALD window, advantages, high-k and PVD vs CVD vs ALD.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="processing.html"><span class="l-vi">Công nghệ chế tạo bán dẫn tiên tiến</span><span class="l-en">Advanced Semiconductor Processing Technology</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 8 · Bài 5</span><span class="l-en">Part 8 · Lesson 5</span></p>
+  <h1><span class="l-vi">Lắng đọng lớp nguyên tử (ALD)</span><span class="l-en">Atomic layer deposition (ALD)</span></h1>
+  <p class="sub"><span class="l-vi">Phản ứng tự giới hạn, chu kỳ TMA/H₂O, cửa sổ ALD, ưu điểm, high-k và so sánh PVD, CVD, ALD.</span><span class="l-en">Self-limiting reactions, the TMA/H₂O cycle, the ALD window, advantages, high-k and PVD vs CVD vs ALD.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Lắng đọng lớp nguyên tử (ALD) mọc màng từng lớp một nhờ các phản ứng bề mặt tự giới hạn. Nhờ vậy độ dày được điều khiển bằng cách đếm chu kỳ và màng phủ đều tuyệt đối trên cấu trúc ba chiều sâu. ALD là công nghệ đứng sau điện môi cổng high-k từ năm 2007 và tụ DRAM, NAND 3D ngày nay.</p>
+
+<h2 id="v-s1">1. Định nghĩa và lịch sử</h2>
+<p>ALD là một biến thể của CVD trong đó hai tiền chất không bao giờ có mặt cùng lúc: chúng được đưa vào buồng thành từng xung xen kẽ, ngăn cách bởi bước quét khí trơ. Mỗi xung chỉ phản ứng với các vị trí hoạt động trên bề mặt cho tới khi bề mặt bão hòa, nên quá trình <strong>tự giới hạn</strong>. Một cặp xung (một chu kỳ) cho một lượng màng cố định; độ dày được điều khiển bằng số chu kỳ.</p>
+<p>Ý tưởng xuất hiện từ những năm 1960 ở Liên Xô với tên "molecular layering", và được T. Suntola phát triển độc lập ở Phần Lan năm 1974 với tên "atomic layer epitaxy", ban đầu để làm màn hình phát quang điện. ALD bước vào sản xuất vi mạch quy mô lớn khi Intel đưa điện môi cổng nền hafni (high-k) cùng cổng kim loại vào nút 45 nm năm 2007: so với SiO₂ 1,2 nm, lớp high-k 3,0 nm cho điện dung cao hơn khoảng 60 % và dòng rò cổng giảm hơn 100 lần.</p>
+
+<h2 id="v-s2">2. Chu kỳ TMA/H₂O cho Al₂O₃</h2>
+<figure><svg viewBox="0 0 640 220" class="fig-svg" role="img"><line x1="150" y1="50" x2="590" y2="50" class="grid"/><text x="140" y="46" class="nt" text-anchor="end">TMA</text><rect x="150" y="30" width="55" height="20" style="fill:var(--s1);opacity:.75"/><line x1="150" y1="92" x2="590" y2="92" class="grid"/><text x="140" y="88" class="nt" text-anchor="end">H₂O</text><rect x="370" y="72" width="55" height="20" style="fill:var(--s2);opacity:.75"/><line x1="150" y1="134" x2="590" y2="134" class="grid"/><text x="140" y="130" class="nt" text-anchor="end">Khí quét N₂</text><rect x="205" y="114" width="165" height="20" style="fill:var(--muted);opacity:.75"/><rect x="425" y="114" width="165" height="20" style="fill:var(--muted);opacity:.75"/><text x="177.5" y="185" class="ns" text-anchor="middle">1. xung TMA</text><text x="287.5" y="185" class="ns" text-anchor="middle">2. quét</text><text x="397.5" y="185" class="ns" text-anchor="middle">3. xung H₂O</text><text x="507.5" y="185" class="ns" text-anchor="middle">4. quét</text><path d="M150,198 H590" style="stroke:var(--accent);stroke-width:1.5"/><text x="370" y="214" class="ns" text-anchor="middle">một chu kỳ ≈ 1 Å Al₂O₃</text></svg><figcaption>Hình 1. Một chu kỳ ALD Al₂O₃: xung TMA, quét, xung H₂O, quét. Mỗi chu kỳ cho khoảng 1 Å Al₂O₃.</figcaption></figure>
+<ol>
+<li><strong>Xung TMA</strong>: hơi nước hấp phụ trên hầu hết bề mặt để lại nhóm hydroxyl (trên Si: Si–O–H). Trimethylaluminum Al(CH₃)₃ phản ứng với các nhóm –OH:<br>Si–OH* + Al(CH₃)₃ → Si–O–Al(CH₃)₂* + CH₄<br>TMA không phản ứng với chính nó, nên khi hết –OH thì phản ứng dừng: bề mặt bão hòa.</li>
+<li><strong>Quét</strong>: bơm và khí N₂ đẩy TMA dư và CH₄ ra ngoài.</li>
+<li><strong>Xung H₂O</strong>: nước phản ứng với các nhóm methyl còn lại, tạo cầu Al–O–Al và nhóm –OH mới trên bề mặt:<br>Al–CH₃* + H₂O → Al–OH* + CH₄</li>
+<li><strong>Quét</strong>: loại H₂O dư và CH₄. Bề mặt lại phủ –OH, sẵn sàng cho chu kỳ tiếp theo.</li>
+</ol>
+<p>Phản ứng tổng: 2Al(CH₃)₃ + 3H₂O → Al₂O₃ + 6CH₄. Dấu * chỉ nhóm gắn trên bề mặt.</p>
+<p><strong>Một chu kỳ có đúng một lớp nguyên tử không?</strong> Thường là ít hơn. Với TMA/H₂O, độ dày mỗi chu kỳ (GPC) khoảng 1,1 Å, nhỏ hơn bề dày một lớp Al₂O₃, vì các nhóm methyl lớn che bớt vị trí phản ứng bên cạnh (cản trở không gian) và mật độ –OH có hạn (Puurunen, 2005). Điều quan trọng là GPC <em>không đổi</em> từ chu kỳ này sang chu kỳ khác và ở mọi chỗ trên bề mặt.</p>
+
+<h2 id="v-s3">3. Thiết bị</h2>
+<p>Tiền chất lỏng hay rắn được giữ trong bình điều nhiệt; van tốc độ cao mở trong vài chục ms để đưa một xung hơi vào buồng; khí trơ quét liên tục hoặc theo xung, và bơm hút sản phẩm. Thời gian một chu kỳ từ dưới một giây (buồng nhỏ, đế phẳng) đến hàng chục giây (cấu trúc tỉ lệ cạnh lớn, cần thời gian để tiền chất khuếch tán tới đáy và sản phẩm thoát ra).</p>
+
+<h2 id="v-s4">4. Cửa sổ ALD</h2>
+<figure><svg viewBox="0 0 600 270" class="fig-svg" role="img"><line x1="80" y1="225" x2="560" y2="225" class="ax"/><line x1="80" y1="225" x2="80" y2="30" class="ax"/><rect x="250" y="40" width="150" height="185" style="fill:var(--accent-soft)"/><line x1="80" y1="130" x2="560" y2="130" style="stroke:var(--muted);stroke-dasharray:5 4"/><path d="M250,130 H400" class="s1" fill="none"/><path d="M160,60 L250,130" class="s1"/><path d="M160,200 L250,130" class="s2"/><path d="M400,130 L490,60" class="s1"/><path d="M400,130 L490,200" class="s2"/><text x="155" y="52" class="ns" text-anchor="start">ngưng tụ</text><text x="155" y="218" class="ns" text-anchor="start">phản ứng chưa đủ</text><text x="495" y="52" class="ns" text-anchor="end">tiền chất tự phân hủy (giống CVD)</text><text x="495" y="218" class="ns" text-anchor="end">giải hấp</text><text x="325.0" y="120" class="nt" text-anchor="middle">cửa sổ ALD</text><text x="74" y="134" class="tk" text-anchor="end">1 lớp</text><text x="320.0" y="255" class="lab" text-anchor="middle">Nhiệt độ đế</text><text x="22" y="127.5" class="lab" text-anchor="middle" transform="rotate(-90 22 127.5)">Độ dày mỗi chu kỳ</text></svg><figcaption>Hình 2. Cửa sổ nhiệt độ ALD: GPC không đổi trong một khoảng nhiệt độ. Ngoài cửa sổ, quá trình không còn tự giới hạn.</figcaption></figure>
+<ul>
+<li>Nhiệt độ quá thấp: tiền chất <strong>ngưng tụ</strong> (GPC tăng) hoặc phản ứng <strong>không hoàn toàn</strong> (GPC giảm).</li>
+<li>Nhiệt độ quá cao: tiền chất <strong>tự phân hủy</strong>, mọc như CVD (GPC tăng và mất tính phủ đều), hoặc các nhóm bề mặt <strong>giải hấp</strong> (GPC giảm).</li>
+</ul>
+<p>Với Al₂O₃ từ TMA/H₂O, cửa sổ rộng, khoảng 150–300 °C. Kiểm tra tính tự giới hạn bằng cách tăng thời gian xung: GPC phải tăng rồi bão hòa. Dữ liệu trong bài giảng cho SiO₂ ALD tăng cường plasma (tiền chất TDMAS với plasma O₂) có đúng dạng đó: GPC bão hòa khoảng 0,07 nm/chu kỳ khi nhiệt độ đạt khoảng 200 °C và khi thời gian plasma đủ dài; GPC theo thời gian xung TDMAS bão hòa sau vài giây.</p>
+
+<h2 id="v-s5">5. Ưu điểm</h2>
+<ul>
+<li><strong>Phủ đều</strong> (conformal) gần như tuyệt đối, cả trên rãnh có tỉ lệ sâu/rộng hàng trăm, thậm chí hơn 1000:1; bề mặt phẳng ở mức nguyên tử.</li>
+<li><strong>Điều khiển độ dày</strong> ở mức angstrom bằng số chu kỳ; màng siêu mỏng dưới 5 nm liền, không lỗ kim.</li>
+<li><strong>Nhiệt độ thấp, ứng suất thấp</strong>, bám dính tốt, phủ được cả đế nhạy cảm (polymer, thậm chí Teflon).</li>
+<li><strong>Kỹ thuật vật liệu</strong>: màng nano nhiều lớp xen kẽ (nanolaminate), màng pha tạp bằng cách chèn một chu kỳ chất pha tạp sau mỗi N chu kỳ chính, phủ ba chiều lên ống nano và hạt.</li>
+</ul>
+<p>Nhược điểm chính là chậm (cỡ 100 nm/giờ hay ít hơn), nên ALD dùng cho màng mỏng, quan trọng; tiền chất thường đắt và nhiều loại dễ cháy (TMA tự bốc cháy trong không khí).</p>
+
+<h2 id="v-s6">6. So sánh PVD, CVD và ALD</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>PVD (phún xạ, bay hơi)</th><th>CVD</th><th>ALD</th></tr>
+<tr><td>Cơ chế</td><td>Vật lý, theo đường thẳng</td><td>Phản ứng hóa học liên tục</td><td>Phản ứng bề mặt tự giới hạn, tuần tự</td></tr>
+<tr><td>Phủ bậc</td><td>Kém, phình ở miệng</td><td>Khá đến tốt</td><td>Đều tuyệt đối</td></tr>
+<tr><td>Tốc độ</td><td>Nhanh</td><td>Nhanh đến trung bình</td><td>Chậm</td></tr>
+<tr><td>Điều khiển độ dày</td><td>Theo thời gian</td><td>Theo thời gian, nhiệt độ</td><td>Theo số chu kỳ</td></tr>
+<tr><td>Dùng cho</td><td>Kim loại, rào chắn, lớp mầm</td><td>Điện môi, poly-Si, W</td><td>High-k, lớp lót, tụ, màng siêu mỏng</td></tr>
+</table></div>
+<p>Hình 1 của bài <a href="cvd-teos-nitride.html">TEOS và Si₃N₄</a> so sánh hình dạng màng của ba phương pháp trên cùng một rãnh.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>ALD là phương pháp chuẩn để làm điện môi cổng trên Ga₂O₃: MOSFET Ga₂O₃ chế độ nghèo đầu tiên dùng Al₂O₃ ALD làm oxide cổng (Higashiwaki và cộng sự, 2013), và SiO₂ ALD được dùng để nghiên cứu mật độ trạng thái mặt phân cách (Zeng, Jia, Singisetti, 2016). Nhiệt độ thấp của ALD (khoảng 200–300 °C) không làm suy giảm bề mặt Ga₂O₃, và độ dày điều khiển được từng angstrom giúp đặt đúng điện áp ngưỡng. Mật độ điện tích cố định và bẫy tại mặt phân cách oxide/Ga₂O₃ được trích từ đo C–V như trong bài thực hành <a href="tcad-lab-mosfet-nonideal.html">MOSFET không lý tưởng</a>.</p></div>
+
+<h2 id="v-s7">7. Bài tập</h2>
+<ol>
+<li>Cần 20 nm Al₂O₃ bằng TMA/H₂O với GPC 1,1 Å. Mỗi chu kỳ gồm xung TMA 0,05 s, quét 4 s, xung H₂O 0,05 s, quét 4 s. Cần bao nhiêu chu kỳ và bao lâu?</li>
+<li>Theo số liệu Intel: lớp high-k 3,0 nm cho điện dung lớn hơn 60 % so với SiO₂ 1,2 nm. Tính EOT và hằng số điện môi hiệu dụng của lớp high-k.</li>
+<li>Khi thử một quy trình ALD mới, GPC tăng tuyến tính theo thời gian xung tiền chất mà không bão hòa. Điều đó nói lên gì và cần làm gì?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> 200 Å / 1,1 Å ≈ 182 chu kỳ. Mỗi chu kỳ 8,1 s, tổng khoảng 1474 s ≈ 25 phút (chưa kể thời gian nâng nhiệt). Thời gian quét chiếm gần hết: rút ngắn quét là cách tăng năng suất, miễn là không để hai tiền chất gặp nhau trong pha khí.</p>
+<p><strong>2.</strong> Điện dung tỉ lệ nghịch với EOT: \(\text{EOT}=1{,}2/1{,}6=0{,}75\) nm. \(\kappa_{eff}=3{,}9\times3{,}0/0{,}75\approx15{,}6\). Giá trị này thấp hơn HfO₂ khối (khoảng 20–25) vì lớp high-k thực tế có một lớp SiO₂ mỏng ở mặt phân cách với Si.</p>
+<p><strong>3.</strong> Quá trình không tự giới hạn: nhiều khả năng tiền chất đang tự phân hủy (mọc kiểu CVD, nhiệt độ vượt cửa sổ) hoặc quét không đủ để hai tiền chất gặp nhau trong pha khí. Hạ nhiệt độ đế, kéo dài thời gian quét, rồi đo lại GPC theo thời gian xung và theo nhiệt độ để tìm cửa sổ ALD.</p>
+</details>
+
+<h2 id="v-s8">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>Atomic Layer Deposition (ALD)</em>, Korea Aerospace University.</li>
+<li>S. M. George, "Atomic layer deposition: an overview," <em>Chemical Reviews</em> 110, 111 (2010).</li>
+<li>R. L. Puurunen, "Surface chemistry of atomic layer deposition: a case study for the trimethylaluminum/water process," <em>Journal of Applied Physics</em> 97, 121301 (2005).</li>
+<li>K. Mistry et al., "A 45nm logic technology with high-k + metal gate transistors, strained silicon, 9 Cu interconnect layers, 193nm dry patterning, and 100% Pb-free packaging," <em>IEDM Technical Digest</em> (2007).</li>
+<li>M. Higashiwaki et al., <em>Applied Physics Letters</em> 103, 123511 (2013); K. Zeng, Y. Jia, U. Singisetti, <em>IEEE Electron Device Letters</em> 37, 906 (2016).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Atomic layer deposition (ALD) grows films one layer at a time through self-limiting surface reactions. Thickness is therefore set by counting cycles, and films coat deep three-dimensional structures perfectly evenly. ALD is the technology behind high-k gate dielectrics since 2007 and today's DRAM capacitors and 3D NAND.</p>
+
+<h2 id="e-s1">1. Definition and history</h2>
+<p>ALD is a variant of CVD in which the two precursors are never present at the same time: they enter the chamber as alternating pulses separated by inert-gas purges. Each pulse reacts only with the active sites on the surface until it is saturated, so the process is <strong>self-limiting</strong>. One pair of pulses (one cycle) gives a fixed amount of film; thickness is controlled by the number of cycles.</p>
+<p>The idea appeared in the 1960s in the Soviet Union as "molecular layering" and was developed independently by T. Suntola in Finland in 1974 as "atomic layer epitaxy", initially for electroluminescent displays. ALD entered high-volume chip manufacturing when Intel introduced a hafnium-based high-k gate dielectric with a metal gate at the 45 nm node in 2007: compared with 1.2 nm SiO₂, the 3.0 nm high-k layer gave about 60 % more capacitance and over 100 times less gate leakage.</p>
+
+<h2 id="e-s2">2. The TMA/H₂O cycle for Al₂O₃</h2>
+<figure><svg viewBox="0 0 640 220" class="fig-svg" role="img"><line x1="150" y1="50" x2="590" y2="50" class="grid"/><text x="140" y="46" class="nt" text-anchor="end">TMA</text><rect x="150" y="30" width="55" height="20" style="fill:var(--s1);opacity:.75"/><line x1="150" y1="92" x2="590" y2="92" class="grid"/><text x="140" y="88" class="nt" text-anchor="end">H₂O</text><rect x="370" y="72" width="55" height="20" style="fill:var(--s2);opacity:.75"/><line x1="150" y1="134" x2="590" y2="134" class="grid"/><text x="140" y="130" class="nt" text-anchor="end">N₂ purge</text><rect x="205" y="114" width="165" height="20" style="fill:var(--muted);opacity:.75"/><rect x="425" y="114" width="165" height="20" style="fill:var(--muted);opacity:.75"/><text x="177.5" y="185" class="ns" text-anchor="middle">1. TMA pulse</text><text x="287.5" y="185" class="ns" text-anchor="middle">2. purge</text><text x="397.5" y="185" class="ns" text-anchor="middle">3. H₂O pulse</text><text x="507.5" y="185" class="ns" text-anchor="middle">4. purge</text><path d="M150,198 H590" style="stroke:var(--accent);stroke-width:1.5"/><text x="370" y="214" class="ns" text-anchor="middle">one cycle ≈ 1 Å of Al₂O₃</text></svg><figcaption>Figure 1. One ALD Al₂O₃ cycle: TMA pulse, purge, H₂O pulse, purge. Each cycle gives about 1 Å of Al₂O₃.</figcaption></figure>
+<ol>
+<li><strong>TMA pulse</strong>: water adsorbed on most surfaces leaves hydroxyl groups (on Si: Si–O–H). Trimethylaluminum Al(CH₃)₃ reacts with the –OH groups:<br>Si–OH* + Al(CH₃)₃ → Si–O–Al(CH₃)₂* + CH₄<br>TMA does not react with itself, so once the –OH is used up the reaction stops: the surface is saturated.</li>
+<li><strong>Purge</strong>: pumping and N₂ flow remove excess TMA and CH₄.</li>
+<li><strong>H₂O pulse</strong>: water reacts with the remaining methyl groups, forming Al–O–Al bridges and new surface –OH groups:<br>Al–CH₃* + H₂O → Al–OH* + CH₄</li>
+<li><strong>Purge</strong>: remove excess H₂O and CH₄. The surface is again covered in –OH, ready for the next cycle.</li>
+</ol>
+<p>Overall: 2Al(CH₃)₃ + 3H₂O → Al₂O₃ + 6CH₄. The asterisk marks surface-bound groups.</p>
+<p><strong>Does one cycle give exactly one atomic layer?</strong> Usually less. For TMA/H₂O the growth per cycle (GPC) is about 1.1 Å, less than one Al₂O₃ monolayer, because the bulky methyl groups block neighbouring sites (steric hindrance) and the –OH density is limited (Puurunen, 2005). What matters is that the GPC is <em>constant</em> from cycle to cycle and everywhere on the surface.</p>
+
+<h2 id="e-s3">3. Equipment</h2>
+<p>Liquid or solid precursors are kept in temperature-controlled vessels; high-speed valves open for tens of ms to send a vapor pulse into the chamber; inert gas purges continuously or in pulses, and a pump removes the products. A cycle takes from under a second (small chamber, flat substrate) to tens of seconds (high-aspect-ratio structures, where precursors need time to diffuse to the bottom and products to escape).</p>
+
+<h2 id="e-s4">4. The ALD window</h2>
+<figure><svg viewBox="0 0 600 270" class="fig-svg" role="img"><line x1="80" y1="225" x2="560" y2="225" class="ax"/><line x1="80" y1="225" x2="80" y2="30" class="ax"/><rect x="250" y="40" width="150" height="185" style="fill:var(--accent-soft)"/><line x1="80" y1="130" x2="560" y2="130" style="stroke:var(--muted);stroke-dasharray:5 4"/><path d="M250,130 H400" class="s1" fill="none"/><path d="M160,60 L250,130" class="s1"/><path d="M160,200 L250,130" class="s2"/><path d="M400,130 L490,60" class="s1"/><path d="M400,130 L490,200" class="s2"/><text x="155" y="52" class="ns" text-anchor="start">condensation</text><text x="155" y="218" class="ns" text-anchor="start">incomplete reaction</text><text x="495" y="52" class="ns" text-anchor="end">precursor decomposes (CVD-like)</text><text x="495" y="218" class="ns" text-anchor="end">desorption</text><text x="325.0" y="120" class="nt" text-anchor="middle">ALD window</text><text x="74" y="134" class="tk" text-anchor="end">1 layer</text><text x="320.0" y="255" class="lab" text-anchor="middle">Substrate temperature</text><text x="22" y="127.5" class="lab" text-anchor="middle" transform="rotate(-90 22 127.5)">Growth per cycle</text></svg><figcaption>Figure 2. The ALD temperature window: GPC is constant over a range of temperature. Outside the window the process is no longer self-limiting.</figcaption></figure>
+<ul>
+<li>Too cold: the precursor <strong>condenses</strong> (GPC rises) or the reaction is <strong>incomplete</strong> (GPC falls).</li>
+<li>Too hot: the precursor <strong>decomposes</strong> on its own, growing CVD-like (GPC rises and conformality is lost), or surface groups <strong>desorb</strong> (GPC falls).</li>
+</ul>
+<p>For Al₂O₃ from TMA/H₂O the window is wide, about 150–300 °C. Test self-limitation by lengthening the pulse: GPC must rise and then saturate. The lecture's data for plasma-enhanced ALD SiO₂ (TDMAS precursor with O₂ plasma) show exactly this: GPC saturates at about 0.07 nm/cycle once the temperature reaches about 200 °C and the plasma time is long enough; GPC versus TDMAS dose time saturates after a few seconds.</p>
+
+<h2 id="e-s5">5. Advantages</h2>
+<ul>
+<li><strong>Conformal</strong> coating, nearly perfect, even in trenches with depth/width ratios of hundreds or more than 1000:1; atomically smooth surfaces.</li>
+<li><strong>Thickness control</strong> at the ångström level by cycle count; ultra-thin films under 5 nm that are continuous and pinhole-free.</li>
+<li><strong>Low temperature, low stress</strong>, good adhesion; coats sensitive substrates (polymers, even Teflon).</li>
+<li><strong>Materials engineering</strong>: nanolaminates of alternating layers, doped films by inserting one dopant cycle every N main cycles, 3D coating of nanotubes and particles.</li>
+</ul>
+<p>The main drawback is speed (of order 100 nm per hour or less), so ALD is used for thin, critical films; precursors are often expensive and many are hazardous (TMA ignites spontaneously in air).</p>
+
+<h2 id="e-s6">6. PVD, CVD and ALD compared</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>PVD (sputtering, evaporation)</th><th>CVD</th><th>ALD</th></tr>
+<tr><td>Mechanism</td><td>Physical, line of sight</td><td>Continuous chemical reaction</td><td>Sequential self-limiting surface reactions</td></tr>
+<tr><td>Step coverage</td><td>Poor, overhang at the mouth</td><td>Fair to good</td><td>Perfectly conformal</td></tr>
+<tr><td>Rate</td><td>Fast</td><td>Fast to moderate</td><td>Slow</td></tr>
+<tr><td>Thickness control</td><td>By time</td><td>By time and temperature</td><td>By cycle count</td></tr>
+<tr><td>Used for</td><td>Metals, barriers, seed layers</td><td>Dielectrics, poly-Si, W</td><td>High-k, liners, capacitors, ultra-thin films</td></tr>
+</table></div>
+<p>Figure 1 of the <a href="cvd-teos-nitride.html">TEOS and Si₃N₄</a> lesson compares the film shapes of the three methods in the same trench.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>ALD is the standard way to make gate dielectrics on Ga₂O₃: the first depletion-mode Ga₂O₃ MOSFET used ALD Al₂O₃ as its gate oxide (Higashiwaki et al., 2013), and ALD SiO₂ has been used to study interface state densities (Zeng, Jia, Singisetti, 2016). ALD's low temperature (about 200–300 °C) does not degrade the Ga₂O₃ surface, and ångström-level thickness control helps set the threshold voltage. Fixed charge and traps at the oxide/Ga₂O₃ interface are extracted from C–V measurements as in the <a href="tcad-lab-mosfet-nonideal.html">non-ideal MOSFET</a> lab.</p></div>
+
+<h2 id="e-s7">7. Exercises</h2>
+<ol>
+<li>You need 20 nm of Al₂O₃ from TMA/H₂O with a GPC of 1.1 Å. Each cycle is a 0.05 s TMA pulse, 4 s purge, 0.05 s H₂O pulse, 4 s purge. How many cycles and how long?</li>
+<li>Intel's figures: a 3.0 nm high-k layer gives 60 % more capacitance than 1.2 nm SiO₂. Compute the EOT and the effective dielectric constant of the high-k layer.</li>
+<li>Testing a new ALD process, GPC grows linearly with precursor pulse time without saturating. What does that tell you and what should you do?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> 200 Å / 1.1 Å ≈ 182 cycles. Each cycle is 8.1 s, about 1474 s ≈ 25 minutes in total (not counting heat-up). The purges take nearly all the time: shortening them is the way to raise throughput, as long as the two precursors never meet in the gas phase.</p>
+<p><strong>2.</strong> Capacitance is inversely proportional to EOT: \(\text{EOT}=1.2/1.6=0.75\) nm. \(\kappa_{eff}=3.9\times3.0/0.75\approx15.6\). This is below bulk HfO₂ (about 20–25) because a real high-k stack includes a thin SiO₂ interfacial layer on Si.</p>
+<p><strong>3.</strong> The process is not self-limiting: most likely the precursor is decomposing on its own (CVD-like growth, temperature above the window) or the purge is too short and the two precursors meet in the gas phase. Lower the substrate temperature, lengthen the purge, then re-measure GPC versus pulse time and versus temperature to find the ALD window.</p>
+</details>
+
+<h2 id="e-s8">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>Atomic Layer Deposition (ALD)</em>, Korea Aerospace University.</li>
+<li>S. M. George, "Atomic layer deposition: an overview," <em>Chemical Reviews</em> 110, 111 (2010).</li>
+<li>R. L. Puurunen, "Surface chemistry of atomic layer deposition: a case study for the trimethylaluminum/water process," <em>Journal of Applied Physics</em> 97, 121301 (2005).</li>
+<li>K. Mistry et al., "A 45nm logic technology with high-k + metal gate transistors, strained silicon, 9 Cu interconnect layers, 193nm dry patterning, and 100% Pb-free packaging," <em>IEDM Technical Digest</em> (2007).</li>
+<li>M. Higashiwaki et al., <em>Applied Physics Letters</em> 103, 123511 (2013); K. Zeng, Y. Jia, U. Singisetti, <em>IEEE Electron Device Letters</em> 37, 906 (2016).</li>
+</ol>
+</div>
+<nav class="pager"><a href="sputtering.html">← <span class="l-vi">Phún xạ: nguyên lý và ứng dụng</span><span class="l-en">Sputtering: fundamentals and applications</span></a><a class="n" href="quiz.html"><span class="l-vi">Kiểm tra kiến thức</span><span class="l-en">Test your knowledge</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

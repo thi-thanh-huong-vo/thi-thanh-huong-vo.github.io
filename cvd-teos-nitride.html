@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Ứng dụng CVD: TEOS và Si₃N₄" data-title-en="CVD applications: TEOS and Si₃N₄">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CVD applications: TEOS and Si₃N₄ · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="TEOS step coverage, PSG and BPSG reflow glass, uses and properties of Si₃N₄, PECVD oxide and nitride.">
+<meta property="og:title" content="CVD applications: TEOS and Si₃N₄">
+<meta property="og:description" content="TEOS step coverage, PSG and BPSG reflow glass, uses and properties of Si₃N₄, PECVD oxide and nitride.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="processing.html"><span class="l-vi">Công nghệ chế tạo bán dẫn tiên tiến</span><span class="l-en">Advanced Semiconductor Processing Technology</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 7 · Bài 3</span><span class="l-en">Part 7 · Lesson 3</span></p>
+  <h1><span class="l-vi">Ứng dụng CVD: TEOS và Si₃N₄</span><span class="l-en">CVD applications: TEOS and Si₃N₄</span></h1>
+  <p class="sub"><span class="l-vi">Phủ bậc của TEOS, thủy tinh chảy PSG và BPSG, ứng dụng và tính chất của Si₃N₄, PECVD oxide và nitride.</span><span class="l-en">TEOS step coverage, PSG and BPSG reflow glass, uses and properties of Si₃N₄, PECVD oxide and nitride.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Hai vật liệu CVD nữa không thể thiếu: SiO₂ từ TEOS, với khả năng phủ bậc tốt và các biến thể thủy tinh pha tạp có thể chảy lỏng để làm phẳng bề mặt, và silicon nitride, vật liệu làm mặt nạ, lớp bảo vệ và điện môi.</p>
+
+<h2 id="v-s1">1. TEOS</h2>
+<p>Tetraethoxysilane (TEOS, Si(OC₂H₅)₄) là chất lỏng, được hóa hơi rồi đưa vào lò. Phản ứng tổng: Si(OC₂H₅)₄ → SiO₂ + sản phẩm phụ. LPCVD TEOS chạy ở khoảng 650–750 °C; với plasma (PECVD TEOS) hoặc ozone thì khoảng 400 °C, đủ thấp để làm điện môi giữa các lớp kim loại (IMD).</p>
+<p><strong>Vì sao TEOS phủ bậc tốt?</strong> Phân tử TEOS phân hủy chậm, nghĩa là hệ số dính bám nhỏ: nó va vào bề mặt, bật ra nhiều lần và khuếch tán xa trước khi để lại SiO₂, nên phủ được cả thành và đáy rãnh. SiH₄ thì rất hoạt động, phân hủy ngay chỗ va chạm đầu tiên, nên màng dày ở miệng rãnh và mỏng ở đáy.</p>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><path d="M20,60 H90 V180 H130 V60 H200 V200 H20 Z" style="fill:var(--rule);stroke:var(--muted)"/><path d="M20,60 H92 q4,0 6,6 l0,4 q-2,-2 -6,-2 H20 Z" style="fill:var(--s3);opacity:.85"/><path d="M200,60 H128 q-4,0 -6,6 l0,4 q2,-2 6,-2 H200 Z" style="fill:var(--s3);opacity:.85"/><rect x="20" y="50" width="180" height="10" style="fill:var(--s3);opacity:.85"/><path d="M96,180 h28 v-4 q-14,-4 -28,0 Z" style="fill:var(--s3);opacity:.85"/><path d="M90,70 v60 h2 v-60 z M130,70 v60 h-2 v-60 z" style="fill:var(--s3);opacity:.85"/><text x="110" y="32" class="nt" text-anchor="middle">PVD</text><text x="110" y="220" class="ns" text-anchor="middle">mỏng ở đáy, phình ở miệng</text><path d="M230,60 H300 V180 H340 V60 H410 V200 H230 Z" style="fill:var(--rule);stroke:var(--muted)"/><rect x="230" y="50" width="70" height="10" style="fill:var(--s3);opacity:.85"/><rect x="340" y="50" width="70" height="10" style="fill:var(--s3);opacity:.85"/><path d="M300,50 v130 h6 v-120 q0,-6 2,-10 Z" style="fill:var(--s3);opacity:.85"/><path d="M340,50 v130 h-6 v-120 q0,-6 -2,-10 Z" style="fill:var(--s3);opacity:.85"/><rect x="300" y="174" width="40" height="6" style="fill:var(--s3);opacity:.85"/><text x="320" y="32" class="nt" text-anchor="middle">CVD</text><text x="320" y="220" class="ns" text-anchor="middle">gần đều, mỏng hơn ở đáy</text><path d="M440,60 H510 V180 H550 V60 H620 V200 H440 Z" style="fill:var(--rule);stroke:var(--muted)"/><path d="M440,50 H520 V170 H540 V50 H620 V60 H550 V180 H510 V60 H440 Z" style="fill:var(--s3);opacity:.85"/><text x="530" y="32" class="nt" text-anchor="middle">ALD</text><text x="530" y="220" class="ns" text-anchor="middle">đều tuyệt đối (conformal)</text></svg><figcaption>Hình 1. Hình dạng màng phủ trên một rãnh: PVD (theo đường thẳng, phình ở miệng), CVD (hệ số dính bám càng nhỏ thì càng đều) và ALD (đều tuyệt đối). Sơ đồ định tính.</figcaption></figure>
+
+<h2 id="v-s2">2. Thủy tinh chảy lỏng: PSG và BPSG</h2>
+<p>SiO₂ chứa 6–9 % P có thể được ủ để chảy lỏng (reflow), làm tròn các bậc và làm phẳng bề mặt. Bài giảng cho thấy: P càng nhiều và thời gian ủ ở 1100 °C càng lâu thì bề mặt càng phẳng. Nhưng nồng độ P cao hút ẩm tạo axit phosphoric, ăn mòn dây nhôm.</p>
+<p><strong>BPSG</strong>: thêm boron làm độ nhớt giảm, nhiệt độ hóa mềm thấp hơn. BPSG chứa mỗi loại 2–6 % B và P, lắng đọng ở 400–700 °C bằng đồng oxy hóa SiH₄ với PH₃ và B₂H₆, rồi ủ chảy ở 800 °C trở lên. Nó được dùng làm điện môi trước kim loại (PMD), lấp khe giữa các transistor và lớp kim loại đầu tiên. Phải lắng đọng một lớp Si₃N₄ mỏng trước BPSG để chặn B và P khuếch tán vào poly-Si và vùng hoạt động trong các bước nhiệt sau.</p>
+
+<h2 id="v-s3">3. Si₃N₄ trong vi mạch</h2>
+<ul>
+<li>Mặt nạ cho oxy hóa chọn lọc (LOCOS, xem bài <a href="isolation.html">cách ly</a>) vì O₂ và H₂O khuếch tán rất chậm qua nitride.</li>
+<li>Lớp thụ động hóa và bảo vệ chip; chặn rất tốt ion Na⁺ và hơi ẩm.</li>
+<li>Điện môi cổng hoặc oxynitride (SiOₓNᵧ); điện môi tụ DRAM; điện môi giữa hai lớp poly và lớp bẫy điện tích trong bộ nhớ không bay hơi (xem bài thực hành <a href="tcad-lab-flash.html">flash</a>).</li>
+</ul>
+<p>Hằng số điện môi 6–9 (tùy cách chế tạo), cao hơn SiO₂ (3,9), nên Si₃N₄ không hợp làm điện môi giữa các dây dẫn (tăng điện dung ký sinh). Mọc nitride bằng nhiệt (Si trong NH₃ ở 1000–1100 °C) chỉ được màng rất mỏng (dưới 10 nm) và lẫn oxy, nên trong thực tế nitride được lắng đọng.</p>
+
+<h3>LPCVD và tính chất</h3>
+<p>LPCVD nitride: 3SiH₂Cl₂ + 4NH₃ → Si₃N₄ + 6HCl + 6H₂, ở khoảng 700–800 °C. Tính chất:</p>
+<ul>
+<li>Vô định hình khi vừa lắng đọng, thường chứa nhiều hydro. Hydro có thể thụ động hóa liên kết treo của Si, có lúc được dùng để thụ động hóa linh kiện poly-Si.</li>
+<li>Chiết suất khoảng 2,01, thay đổi theo thành phần; đo bằng ellipsometry để kiểm tra tỉ lệ Si/N.</li>
+<li>Ứng suất kéo lớn (cỡ 1 GPa với LPCVD), nên màng dày hơn khoảng 200 nm có thể nứt.</li>
+</ul>
+
+<h2 id="v-s4">4. PECVD oxide, nitride và a-Si</h2>
+<div class="tablewrap"><table>
+<tr><th>Màng</th><th>Phản ứng</th></tr>
+<tr><td>SiO₂</td><td>SiH₄ + O₂ → SiO₂ + 2H₂ ; SiH₄ + 2N₂O → SiO₂ + 2N₂ + 2H₂</td></tr>
+<tr><td>SiN:H</td><td>SiH₄ + NH₃ → SiNH + 3H₂ ; 2SiH₄ + N₂ → 2SiNH + 3H₂</td></tr>
+<tr><td>a-Si:H</td><td>SiH₄ → Si + 2H₂</td></tr>
+</table></div>
+<p>Ký hiệu SiN:H hay SiNH nhấn mạnh rằng màng PECVD không có thành phần đúng Si₃N₄ và chứa nhiều hydro. Các phương trình được viết ở dạng cân bằng. Với nitride, sản phẩm phụ là H₂ chứ không phải H₂O, vì trong chất phản ứng không có oxy.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Trong linh kiện Ga₂O₃, SiO₂ và SiNₓ lắng đọng bằng PECVD là lớp thụ động hóa và lớp điện môi dưới tấm field plate quen thuộc, và nhiệt độ lắng đọng thấp (khoảng 300 °C) giúp không làm hỏng tiếp xúc Schottky đã có. Khi đọc một quy trình, hãy để ý hàm lượng hydro: tính toán cho thấy hydro là donor nông trong Ga₂O₃ và dễ tạo phức với nút khuyết Ga cùng các khuyết tật loại acceptor, nên lớp phủ giàu hydro có thể làm thay đổi tính chất vùng gần bề mặt (Varley và cộng sự, 2010; Pearton và cộng sự, 2018).</p></div>
+
+<h2 id="v-s5">5. Bài tập</h2>
+<ol>
+<li>Màng PECVD SiNₓ dày 100 nm có chiết suất 1,85, LPCVD Si₃N₄ là 2,01. Màng PECVD giàu Si hay giàu N (hoặc giàu H)?</li>
+<li>Vì sao phải có lớp nitride mỏng dưới BPSG?</li>
+<li>Kiểm tra cân bằng của phản ứng 3SiH₂Cl₂ + 4NH₃ → Si₃N₄ + 6HCl + 6H₂.</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> Chiết suất thấp hơn Si₃N₄ chuẩn cho thấy màng giàu N và/hoặc chứa nhiều H (và có thể lẫn O), mật độ thấp hơn; màng giàu Si thì ngược lại có chiết suất cao hơn 2,0 (tiến về khoảng 3,5–4 của Si). Cần thêm phép đo thành phần (FTIR cho liên kết Si–H, N–H; XPS hay RBS) để kết luận.</p>
+<p><strong>2.</strong> B và P trong BPSG khuếch tán mạnh trong các bước ủ chảy ở 800 °C trở lên. Lớp nitride chặn chúng đi vào cổng poly-Si (thay đổi pha tạp cổng) và vào vùng nguồn–máng hay kênh (thay đổi V<sub>T</sub>, rò).</p>
+<p><strong>3.</strong> Si: 3 = 3. Cl: 6 = 6. N: 4 = 4. H: 3×2 + 4×3 = 18; vế phải 6 (HCl) + 12 (6H₂) = 18. Cân bằng.</p>
+</details>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>CVD applications (TEOS &amp; Si₃N₄)</em>, Korea Aerospace University.</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chương 9.</li>
+<li>W. Kern, V. S. Ban, "Chemical vapor deposition of inorganic thin films," trong J. L. Vossen, W. Kern (eds.), <em>Thin Film Processes</em>, Academic Press (1978).</li>
+<li>J. B. Varley, J. R. Weber, A. Janotti, C. G. Van de Walle, "Oxygen vacancies and donor impurities in β-Ga₂O₃," <em>Applied Physics Letters</em> 97, 142106 (2010).</li>
+<li>S. J. Pearton et al., <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Two more indispensable CVD materials: SiO₂ from TEOS, with its good step coverage and doped-glass variants that flow to planarize the surface, and silicon nitride, the material of masks, protective layers and dielectrics.</p>
+
+<h2 id="e-s1">1. TEOS</h2>
+<p>Tetraethoxysilane (TEOS, Si(OC₂H₅)₄) is a liquid, vaporized and fed to the reactor. Overall reaction: Si(OC₂H₅)₄ → SiO₂ + by-products. LPCVD TEOS runs at about 650–750 °C; with plasma (PECVD TEOS) or ozone, at about 400 °C, low enough for the inter-metal dielectric (IMD).</p>
+<p><strong>Why does TEOS cover steps well?</strong> The TEOS molecule decomposes slowly, i.e. it has a small sticking coefficient: it hits the surface, bounces off many times and diffuses far before leaving SiO₂, so it coats trench walls and bottoms. SiH₄ is very reactive and decomposes at its first impact, so the film is thick at the trench mouth and thin at the bottom.</p>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><path d="M20,60 H90 V180 H130 V60 H200 V200 H20 Z" style="fill:var(--rule);stroke:var(--muted)"/><path d="M20,60 H92 q4,0 6,6 l0,4 q-2,-2 -6,-2 H20 Z" style="fill:var(--s3);opacity:.85"/><path d="M200,60 H128 q-4,0 -6,6 l0,4 q2,-2 6,-2 H200 Z" style="fill:var(--s3);opacity:.85"/><rect x="20" y="50" width="180" height="10" style="fill:var(--s3);opacity:.85"/><path d="M96,180 h28 v-4 q-14,-4 -28,0 Z" style="fill:var(--s3);opacity:.85"/><path d="M90,70 v60 h2 v-60 z M130,70 v60 h-2 v-60 z" style="fill:var(--s3);opacity:.85"/><text x="110" y="32" class="nt" text-anchor="middle">PVD</text><text x="110" y="220" class="ns" text-anchor="middle">thin at bottom, overhang at top</text><path d="M230,60 H300 V180 H340 V60 H410 V200 H230 Z" style="fill:var(--rule);stroke:var(--muted)"/><rect x="230" y="50" width="70" height="10" style="fill:var(--s3);opacity:.85"/><rect x="340" y="50" width="70" height="10" style="fill:var(--s3);opacity:.85"/><path d="M300,50 v130 h6 v-120 q0,-6 2,-10 Z" style="fill:var(--s3);opacity:.85"/><path d="M340,50 v130 h-6 v-120 q0,-6 -2,-10 Z" style="fill:var(--s3);opacity:.85"/><rect x="300" y="174" width="40" height="6" style="fill:var(--s3);opacity:.85"/><text x="320" y="32" class="nt" text-anchor="middle">CVD</text><text x="320" y="220" class="ns" text-anchor="middle">nearly even, thinner at bottom</text><path d="M440,60 H510 V180 H550 V60 H620 V200 H440 Z" style="fill:var(--rule);stroke:var(--muted)"/><path d="M440,50 H520 V170 H540 V50 H620 V60 H550 V180 H510 V60 H440 Z" style="fill:var(--s3);opacity:.85"/><text x="530" y="32" class="nt" text-anchor="middle">ALD</text><text x="530" y="220" class="ns" text-anchor="middle">perfectly conformal</text></svg><figcaption>Figure 1. Film profiles over a trench: PVD (line of sight, overhang at the mouth), CVD (the smaller the sticking coefficient, the more even) and ALD (perfectly conformal). Qualitative sketch.</figcaption></figure>
+
+<h2 id="e-s2">2. Flowing glass: PSG and BPSG</h2>
+<p>SiO₂ containing 6–9 % P can be annealed to flow (reflow), rounding steps and planarizing the surface. The lecture shows that the more P and the longer the anneal at 1100 °C, the smoother the surface. But high P content absorbs moisture to form phosphoric acid, which corrodes aluminium lines.</p>
+<p><strong>BPSG</strong>: adding boron lowers the viscosity and the softening temperature. BPSG holds 2–6 % each of B and P, is deposited at 400–700 °C by co-oxidizing SiH₄ with PH₃ and B₂H₆, and reflowed at 800 °C or above. It serves as the pre-metal dielectric (PMD), filling the gaps between transistors and the first metal level. A thin Si₃N₄ layer must be deposited before BPSG to stop B and P diffusing into the poly-Si and active regions during later thermal steps.</p>
+
+<h2 id="e-s3">3. Si₃N₄ in integrated circuits</h2>
+<ul>
+<li>Mask for selective oxidation (LOCOS, see <a href="isolation.html">isolation</a>), because O₂ and H₂O diffuse very slowly through nitride.</li>
+<li>Passivation and chip protection; an excellent barrier to Na⁺ ions and moisture.</li>
+<li>Gate dielectric or oxynitride (SiOₓNᵧ); DRAM capacitor dielectric; interpoly dielectric and the charge-trapping layer of non-volatile memory (see the <a href="tcad-lab-flash.html">flash lab</a>).</li>
+</ul>
+<p>Its dielectric constant of 6–9 (depending on the method) is higher than SiO₂'s 3.9, so Si₃N₄ is unattractive between interconnects (more parasitic capacitance). Thermally growing nitride (Si in NH₃ at 1000–1100 °C) gives only very thin films (under 10 nm) containing oxygen, so in practice nitride is deposited.</p>
+
+<h3>LPCVD and properties</h3>
+<p>LPCVD nitride: 3SiH₂Cl₂ + 4NH₃ → Si₃N₄ + 6HCl + 6H₂, at about 700–800 °C. Properties:</p>
+<ul>
+<li>Amorphous as deposited, often with a lot of hydrogen. The hydrogen can passivate Si dangling bonds and is sometimes used to passivate poly-Si devices.</li>
+<li>Refractive index about 2.01, varying with composition; measured by ellipsometry to check the Si/N ratio.</li>
+<li>High tensile stress (of order 1 GPa for LPCVD), so films thicker than about 200 nm may crack.</li>
+</ul>
+
+<h2 id="e-s4">4. PECVD oxide, nitride and a-Si</h2>
+<div class="tablewrap"><table>
+<tr><th>Film</th><th>Reaction</th></tr>
+<tr><td>SiO₂</td><td>SiH₄ + O₂ → SiO₂ + 2H₂ ; SiH₄ + 2N₂O → SiO₂ + 2N₂ + 2H₂</td></tr>
+<tr><td>SiN:H</td><td>SiH₄ + NH₃ → SiNH + 3H₂ ; 2SiH₄ + N₂ → 2SiNH + 3H₂</td></tr>
+<tr><td>a-Si:H</td><td>SiH₄ → Si + 2H₂</td></tr>
+</table></div>
+<p>Writing SiN:H or SiNH stresses that PECVD films are not exactly Si₃N₄ and hold a lot of hydrogen. The equations are written balanced. For nitride the by-product is H₂, not H₂O, since the reactants contain no oxygen.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>In Ga₂O₃ devices, PECVD SiO₂ and SiNₓ are the familiar passivation layers and field-plate dielectrics, and the low deposition temperature (about 300 °C) avoids damaging Schottky contacts already in place. When reading a process, watch the hydrogen content: calculations show hydrogen is a shallow donor in Ga₂O₃ that readily forms complexes with Ga vacancies and acceptor-type defects, so a hydrogen-rich cap can change the near-surface properties (Varley et al., 2010; Pearton et al., 2018).</p></div>
+
+<h2 id="e-s5">5. Exercises</h2>
+<ol>
+<li>A 100 nm PECVD SiNₓ film has a refractive index of 1.85, versus 2.01 for LPCVD Si₃N₄. Is the PECVD film Si-rich or N-rich (or H-rich)?</li>
+<li>Why is a thin nitride layer needed under BPSG?</li>
+<li>Check the balance of 3SiH₂Cl₂ + 4NH₃ → Si₃N₄ + 6HCl + 6H₂.</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> An index below stoichiometric Si₃N₄ suggests an N-rich and/or H-rich (possibly O-containing), less dense film; a Si-rich film instead has an index above 2.0 (tending toward 3.5–4 for Si). Composition measurements (FTIR for Si–H and N–H bonds; XPS or RBS) are needed to conclude.</p>
+<p><strong>2.</strong> B and P in BPSG diffuse strongly during reflow anneals at 800 °C or above. The nitride stops them reaching the poly-Si gate (changing its doping) and the source–drain or channel regions (shifting V<sub>T</sub>, adding leakage).</p>
+<p><strong>3.</strong> Si: 3 = 3. Cl: 6 = 6. N: 4 = 4. H: 3×2 + 4×3 = 18; right side 6 (HCl) + 12 (6H₂) = 18. Balanced.</p>
+</details>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>CVD applications (TEOS &amp; Si₃N₄)</em>, Korea Aerospace University.</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chapter 9.</li>
+<li>W. Kern, V. S. Ban, "Chemical vapor deposition of inorganic thin films," in J. L. Vossen, W. Kern (eds.), <em>Thin Film Processes</em>, Academic Press (1978).</li>
+<li>J. B. Varley, J. R. Weber, A. Janotti, C. G. Van de Walle, "Oxygen vacancies and donor impurities in β-Ga₂O₃," <em>Applied Physics Letters</em> 97, 142106 (2010).</li>
+<li>S. J. Pearton et al., <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+</ol>
+</div>
+<nav class="pager"><a href="cvd-sio2-poly.html">← <span class="l-vi">Ứng dụng CVD: poly-Si và SiO₂</span><span class="l-en">CVD applications: poly-Si and SiO₂</span></a><a class="n" href="plasma-basics.html"><span class="l-vi">Plasma: nền tảng và va chạm nguyên tử</span><span class="l-en">Plasma fundamentals and atomic collisions</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

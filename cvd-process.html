@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="CVD: quá trình và đặc điểm" data-title-en="CVD: process and characteristics">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CVD: process and characteristics · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="The Grove model, two growth regimes, APCVD and LPCVD, hot- and cold-wall reactors, thermodynamics and PECVD.">
+<meta property="og:title" content="CVD: process and characteristics">
+<meta property="og:description" content="The Grove model, two growth regimes, APCVD and LPCVD, hot- and cold-wall reactors, thermodynamics and PECVD.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="processing.html"><span class="l-vi">Công nghệ chế tạo bán dẫn tiên tiến</span><span class="l-en">Advanced Semiconductor Processing Technology</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 7 · Bài 1</span><span class="l-en">Part 7 · Lesson 1</span></p>
+  <h1><span class="l-vi">CVD: quá trình và đặc điểm</span><span class="l-en">CVD: process and characteristics</span></h1>
+  <p class="sub"><span class="l-vi">Mô hình Grove, hai chế độ tăng trưởng, APCVD và LPCVD, lò thành nóng và lạnh, nhiệt động học và PECVD.</span><span class="l-en">The Grove model, two growth regimes, APCVD and LPCVD, hot- and cold-wall reactors, thermodynamics and PECVD.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Lắng đọng hóa học từ pha hơi (CVD) tạo màng mỏng bằng phản ứng hóa học của khí trên bề mặt wafer. Hầu hết các lớp điện môi và Si đa tinh thể trong vi mạch, cùng một số kim loại, được làm bằng CVD. Bài này giải thích hai chế độ tăng trưởng, vì sao áp suất và kiểu lò quyết định độ đồng đều, và vai trò của plasma trong PECVD.</p>
+
+<h2 id="v-s1">1. Hai bước nối tiếp và mô hình Grove</h2>
+<p>Giống như oxy hóa nhiệt trong mô hình Deal–Grove, CVD gồm hai bước nối tiếp: khí phản ứng khuếch tán qua <strong>lớp biên</strong> tới bề mặt (thông lượng \(F_1=h_g(C_g-C_s)\)), rồi phản ứng tại bề mặt (thông lượng \(F_2=k_sC_s\)). Ở trạng thái dừng \(F_1=F_2\), và tốc độ lắng đọng là (Grove, 1967):</p>
+$$G=\frac{k_sh_g}{k_s+h_g}\,\frac{C_g}{N}$$
+<p>với \(N\) là số nguyên tử trong một đơn vị thể tích màng. Hằng số phản ứng bề mặt tuân theo Arrhenius, \(k_s=k_0e^{-E_a/kT}\), còn hệ số truyền khối pha khí \(h_g=D_g/\delta\) gần như không đổi theo nhiệt độ. Hai giới hạn:</p>
+<ul>
+<li>\(k_s\ll h_g\) (nhiệt độ thấp): <strong>giới hạn bởi phản ứng bề mặt</strong>, \(G\approx k_sC_g/N\). Tốc độ phụ thuộc mạnh vào nhiệt độ, nên phải giữ nhiệt độ thật đều; bù lại không nhạy với dòng khí.</li>
+<li>\(h_g\ll k_s\) (nhiệt độ cao): <strong>giới hạn bởi vận chuyển khối</strong>, \(G\approx h_gC_g/N\). Tốc độ gần như không đổi theo nhiệt độ nhưng phụ thuộc vào độ dày lớp biên, tức vào hình học lò và dòng khí.</li>
+</ul>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="536" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="121.28844992023886" y1="255" x2="121.28844992023886" y2="260" class="ax"/><text x="121.28844992023886" y="275" class="tk" text-anchor="middle">1200</text><line x1="221.52619879825627" y1="255" x2="221.52619879825627" y2="260" class="ax"/><text x="221.52619879825627" y="275" class="tk" text-anchor="middle">1000</text><line x1="284.4615607552315" y1="255" x2="284.4615607552315" y2="260" class="ax"/><text x="284.4615607552315" y="275" class="tk" text-anchor="middle">900</text><line x1="359.12601220705386" y1="255" x2="359.12601220705386" y2="260" class="ax"/><text x="359.12601220705386" y="275" class="tk" text-anchor="middle">800</text><line x1="449.13536453784104" y1="255" x2="449.13536453784104" y2="260" class="ax"/><text x="449.13536453784104" y="275" class="tk" text-anchor="middle">700</text><line x1="61" y1="255.0" x2="66" y2="255.0" class="ax"/><line x1="66" y1="255.0" x2="536" y2="255.0" class="grid"/><text x="57" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-3</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="187.85714285714286" x2="66" y2="187.85714285714286" class="ax"/><line x1="66" y1="187.85714285714286" x2="536" y2="187.85714285714286" class="grid"/><text x="57" y="191.85714285714286" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-2</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="120.71428571428572" x2="66" y2="120.71428571428572" class="ax"/><line x1="66" y1="120.71428571428572" x2="536" y2="120.71428571428572" class="grid"/><text x="57" y="124.71428571428572" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-1</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="53.571428571428584" x2="66" y2="53.571428571428584" class="ax"/><line x1="66" y1="53.571428571428584" x2="536" y2="53.571428571428584" class="grid"/><text x="57" y="57.571428571428584" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">0</tspan><tspan dy="6"> </tspan></text><text x="301.0" y="294" class="lab" text-anchor="middle">Nhiệt độ (°C), trục theo 1000/T</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Tốc độ lắng đọng (tương đối)</text><path d="M66.0,88.7 L71.9,88.7 L77.7,88.7 L83.6,88.7 L89.5,88.7 L95.4,88.7 L101.2,88.7 L107.1,88.7 L113.0,88.8 L118.9,88.8 L124.7,88.8 L130.6,88.8 L136.5,88.8 L142.4,88.8 L148.2,88.8 L154.1,88.8 L160.0,88.9 L165.9,88.9 L171.8,88.9 L177.6,88.9 L183.5,89.0 L189.4,89.0 L195.3,89.1 L201.1,89.1 L207.0,89.1 L212.9,89.2 L218.7,89.3 L224.6,89.3 L230.5,89.4 L236.4,89.5 L242.3,89.6 L248.1,89.7 L254.0,89.8 L259.9,90.0 L265.8,90.1 L271.6,90.3 L277.5,90.5 L283.4,90.7 L289.2,91.0 L295.1,91.3 L301.0,91.6 L306.9,91.9 L312.8,92.3 L318.6,92.7 L324.5,93.1 L330.4,93.6 L336.2,94.2 L342.1,94.8 L348.0,95.5 L353.9,96.2 L359.8,97.0 L365.6,97.9 L371.5,98.8 L377.4,99.9 L383.2,101.0 L389.1,102.2 L395.0,103.5 L400.9,104.9 L406.8,106.4 L412.6,108.0 L418.5,109.7 L424.4,111.5 L430.2,113.4 L436.1,115.3 L442.0,117.4 L447.9,119.6 L453.8,121.8 L459.6,124.2 L465.5,126.6 L471.4,129.1 L477.2,131.7 L483.1,134.3 L489.0,137.0 L494.9,139.8 L500.7,142.6 L506.6,145.5 L512.5,148.4 L518.4,151.4 L524.2,154.4 L530.1,157.5 L536.0,160.5" class="s1" fill="none"/><path d="M66.0,21.8 L71.9,21.9 L77.7,21.9 L83.6,21.9 L89.5,22.0 L95.4,22.1 L101.2,22.1 L107.1,22.2 L113.0,22.3 L118.9,22.4 L124.7,22.5 L130.6,22.6 L136.5,22.7 L142.4,22.8 L148.2,23.0 L154.1,23.2 L160.0,23.3 L165.9,23.6 L171.8,23.8 L177.6,24.1 L183.5,24.4 L189.4,24.7 L195.3,25.1 L201.1,25.5 L207.0,25.9 L212.9,26.4 L218.7,27.0 L224.6,27.6 L230.5,28.2 L236.4,28.9 L242.3,29.7 L248.1,30.6 L254.0,31.5 L259.9,32.6 L265.8,33.7 L271.6,34.9 L277.5,36.2 L283.4,37.6 L289.2,39.0 L295.1,40.6 L301.0,42.3 L306.9,44.0 L312.8,45.9 L318.6,47.9 L324.5,49.9 L330.4,52.1 L336.2,54.3 L342.1,56.7 L348.0,59.1 L353.9,61.6 L359.8,64.1 L365.6,66.8 L371.5,69.5 L377.4,72.2 L383.2,75.0 L389.1,77.9 L395.0,80.8 L400.9,83.8 L406.8,86.8 L412.6,89.8 L418.5,92.9 L424.4,96.0 L430.2,99.1 L436.1,102.3 L442.0,105.5 L447.9,108.7 L453.8,111.9 L459.6,115.2 L465.5,118.4 L471.4,121.7 L477.2,125.0 L483.1,128.3 L489.0,131.6 L494.9,134.9 L500.7,138.2 L506.6,141.5 L512.5,144.8 L518.4,148.2 L524.2,151.5 L530.1,154.9 L536.0,158.2" class="s2" fill="none"/><line x1="370" y1="32" x2="394" y2="32" class="s1"/><text x="400" y="36" class="tk">h<tspan dy="3" style="font-size:9px">g</tspan><tspan dy="-3"> </tspan>nhỏ (APCVD)</text><line x1="370" y1="50" x2="394" y2="50" class="s2"/><text x="400" y="54" class="tk">h<tspan dy="3" style="font-size:9px">g</tspan><tspan dy="-3"> </tspan>lớn (LPCVD)</text><text x="197.6" y="110.64285714285717" class="ns" text-anchor="middle">giới hạn bởi vận chuyển khối</text><text x="423.1999999999999" y="214.71428571428572" class="ns" text-anchor="middle">giới hạn bởi phản ứng bề mặt</text></svg><figcaption>Hình 1. Tốc độ lắng đọng theo nhiệt độ từ mô hình Grove (cùng nồng độ khí phản ứng). Hạ áp suất làm \(h_g\) tăng nên vùng giới hạn bởi phản ứng bề mặt kéo dài tới nhiệt độ cao hơn. Số liệu minh họa.</figcaption></figure>
+<p>Đồ thị Arrhenius của Si lắng đọng từ các nguồn SiCl₄, SiHCl₃, SiH₂Cl₂ và SiH₄ có đúng dạng này: đường dốc ở nhiệt độ thấp, phẳng ở nhiệt độ cao, và nguồn càng ít Cl thì phản ứng ở nhiệt độ càng thấp.</p>
+
+<h2 id="v-s2">2. APCVD và LPCVD</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>APCVD (áp suất khí quyển)</th><th>LPCVD (áp suất thấp, khoảng 0,1–1 Torr)</th></tr>
+<tr><td>Tốc độ</td><td>Nhanh</td><td>Chậm hơn</td></tr>
+<tr><td>Thiết bị</td><td>Đơn giản, không cần bơm chân không</td><td>Cần bơm; lò ống thành nóng</td></tr>
+<tr><td>Chế độ</td><td>Thường giới hạn bởi vận chuyển khối</td><td>Giới hạn bởi phản ứng bề mặt</td></tr>
+<tr><td>Độ đồng đều</td><td>Kém, phụ thuộc dòng khí</td><td>Tốt; xếp được hàng trăm wafer đứng sát nhau</td></tr>
+<tr><td>Phản ứng pha khí không mong muốn</td><td>Nhiều (tạo hạt bụi)</td><td>Ít</td></tr>
+</table></div>
+<p>Vì sao áp suất thấp lại đồng đều hơn? Hệ số khuếch tán trong khí tỉ lệ nghịch với áp suất, \(D_g\propto 1/P\). Hạ áp suất từ 760 Torr xuống khoảng 1 Torr làm \(D_g\), và do đó \(h_g\), tăng lên hàng trăm lần, nên \(h_g\gg k_s\): tốc độ chỉ còn phụ thuộc nhiệt độ, thứ mà lò ống kiểm soát được rất đều. Khí khuếch tán nhanh cũng lọt được vào khe hẹp giữa các wafer đặt sát nhau.</p>
+
+<h2 id="v-s3">3. Lò thành nóng và thành lạnh</h2>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><defs><marker id="mv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="30" y="60" width="270" height="90" rx="40" style="fill:var(--box);stroke:var(--ink);stroke-width:1.6"/><rect x="55" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="81" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="107" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="133" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="159" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="185" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="211" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="237" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="263" y="78" width="5" height="54" style="fill:var(--s1)"/><path d="M40,48 h250" style="stroke:var(--s3);stroke-width:4;stroke-dasharray:10 5"/><path d="M40,162 h250" style="stroke:var(--s3);stroke-width:4;stroke-dasharray:10 5"/><path d="M8,105 h22" class="arr" marker-end="url(#mv)"/><path d="M300,105 h24" class="arr" marker-end="url(#mv)"/><text x="165" y="26" class="nt" text-anchor="middle">Thành nóng (lò ống LPCVD)</text><text x="165" y="186" class="ns" text-anchor="middle">cuộn nhiệt bao quanh ống; wafer đứng thành hàng</text><text x="165" y="202" class="ns" text-anchor="middle">màng bám cả lên thành ống</text><rect x="360" y="50" width="260" height="110" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><path d="M380,140 L600,118 L600,132 L380,154 Z" style="fill:var(--rule);stroke:var(--muted)"/><rect x="395" y="133.0" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 395 139.0)"/><rect x="447" y="127.8" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 447 133.8)"/><rect x="499" y="122.6" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 499 128.6)"/><rect x="551" y="117.4" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 551 123.4)"/><path d="M392,166 q8,8 16,0 q8,-8 16,0 q8,8 16,0 q8,-8 16,0 q8,8 16,0 q8,-8 16,0" style="stroke:var(--s3);stroke-width:2;fill:none"/><path d="M338,80 h22" class="arr" marker-end="url(#mv)"/><path d="M620,80 h18" class="arr" marker-end="url(#mv)"/><text x="490" y="26" class="nt" text-anchor="middle">Thành lạnh</text><text x="490" y="186" class="ns" text-anchor="middle">chỉ susceptor được nung (cảm ứng hoặc điện trở)</text><text x="490" y="202" class="ns" text-anchor="middle">susceptor nghiêng để lớp biên đều dọc dòng khí</text></svg><figcaption>Hình 2. Lò thành nóng (trái): cả ống được nung, wafer nóng lên nhờ bức xạ từ thành ống. Lò thành lạnh (phải): chỉ đế giữ wafer (susceptor) được nung.</figcaption></figure>
+<ul>
+<li><strong>Thành nóng</strong>: như lò oxy hóa, ống được nung từ bên ngoài, kiểm soát nhiệt độ tốt hơn 1 °C. Nhược điểm: màng bám cả lên thành ống, phải làm sạch định kỳ để tránh bong tróc thành hạt bụi.</li>
+<li><strong>Thành lạnh</strong>: chỉ susceptor được nung, bằng cảm ứng cao tần hoặc điện trở; wafer nằm phẳng trên susceptor, không lắng đọng lên thành. Khí phản ứng cạn dần dọc theo dòng chảy, nên susceptor được đặt nghiêng: tiết diện dòng hẹp lại, vận tốc khí tăng, lớp biên mỏng đi, bù cho nồng độ giảm.</li>
+</ul>
+
+<h2 id="v-s4">4. Nhiệt động học và động học</h2>
+<p>Nhiệt động học cho biết một phản ứng có xảy ra được không và trạng thái cân bằng là gì (qua biến thiên năng lượng tự do Gibbs). Nó không cho biết phản ứng nhanh đến đâu; tốc độ tăng trưởng do động học vận chuyển pha khí và phản ứng khí–rắn quyết định. Vì thế CVD vẫn được xem là một công nghệ thực nghiệm có nhiệt động học làm kim chỉ nam: nhiệt động học loại trừ những gì không thể, còn công thức quy trình được tìm bằng thí nghiệm.</p>
+
+<h2 id="v-s5">5. PECVD: dùng plasma thay cho nhiệt</h2>
+<p>Trong CVD nhiệt, năng lượng phá vỡ liên kết của khí đến từ nhiệt độ cao. PECVD dùng plasma (xem <a href="plasma-basics.html">bài về plasma</a>): electron năng lượng cao va chạm phân ly phân tử khí thành các gốc tự do (radical) rất hoạt động, nên màng mọc được ở khoảng 200–400 °C. Điều này cần thiết khi trên wafer đã có kim loại Al (nóng chảy ở 660 °C) hay khi lắng đọng lên đế nhựa. Nguồn RF được dùng để tránh tích điện trên màng cách điện.</p>
+<ul>
+<li>Gốc tự do có hệ số dính bám lớn nhưng di chuyển dễ dọc bề mặt; bắn phá ion cung cấp động năng cho khuếch tán bề mặt ở nhiệt độ thấp, giúp phủ bậc khá tốt.</li>
+<li>Lắng đọng giới hạn bởi phản ứng bề mặt, nên phải kiểm soát nhiệt độ đế để có độ đồng đều.</li>
+<li>Chất lượng màng kém hơn LPCVD: chứa nhiều hydro (có thể 10–30 % nguyên tử với SiN), mật độ thấp hơn, và có nguy cơ hư hỏng do plasma.</li>
+</ul>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Lớp epitaxy β-Ga₂O₃ chất lượng cao được mọc bằng nhiều biến thể CVD: MOCVD (dùng tiền chất hữu cơ kim loại như TEGa hay TMGa với O₂), HVPE (GaCl và O₂, tốc độ mọc tới vài µm/giờ cho lớp trôi dày) và LPCVD (Ga kim loại và O₂). Mô hình Grove giúp đọc các nghiên cứu này: khi tốc độ mọc gần như không đổi theo nhiệt độ, quá trình đang giới hạn bởi vận chuyển khối, và độ đồng đều phụ thuộc nhiều vào thiết kế dòng khí (Pearton và cộng sự, 2018).</p></div>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>Ở 700 °C một quá trình có \(k_s=0{,}2\) cm/s và \(h_g=5\) cm/s. Chế độ nào chiếm ưu thế? Nếu tăng nhiệt độ làm \(k_s\) tăng 10 lần thì tốc độ tăng bao nhiêu lần?</li>
+<li>Trong lò APCVD, tốc độ ở cuối lò thấp hơn ở đầu lò 20 %. Đề xuất hai cách sửa và giải thích theo mô hình Grove.</li>
+<li>Vì sao không thể dùng LPCVD SiO₂ ở 900 °C để làm lớp cách điện giữa hai lớp nhôm?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> \(k_s\ll h_g\) nên giới hạn bởi phản ứng bề mặt: hệ số \(k_sh_g/(k_s+h_g)=0{,}192\) cm/s, gần bằng \(k_s\). Với \(k_s=2\) cm/s: \(2\times5/7=1{,}43\) cm/s, tăng 7,4 lần, không phải 10 lần vì quá trình bắt đầu chuyển sang giới hạn bởi vận chuyển khối.</p>
+<p><strong>2.</strong> APCVD thường giới hạn bởi vận chuyển khối, nên tốc độ tỉ lệ \(h_gC_g\); \(C_g\) giảm dọc lò vì khí bị tiêu thụ. (a) Đặt susceptor nghiêng hoặc tăng dòng khí để lớp biên mỏng dần về cuối, tăng \(h_g\) bù cho \(C_g\) giảm. (b) Hạ nhiệt độ hay áp suất để chuyển sang chế độ giới hạn bởi phản ứng bề mặt, khi đó tốc độ chỉ phụ thuộc nhiệt độ; hoặc thêm cửa phun khí dọc lò.</p>
+<p><strong>3.</strong> Nhôm nóng chảy ở 660 °C, và tương tác Al–Si đã đáng kể từ khoảng 450–500 °C. Sau khi có kim loại, mọi bước phải ở dưới khoảng 450 °C, nên dùng PECVD SiO₂ hay TEOS (khoảng 400 °C) hoặc SiO₂ từ SiH₄ + O₂ ở nhiệt độ thấp.</p>
+</details>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>CVD process and characteristics</em>, Korea Aerospace University.</li>
+<li>A. S. Grove, <em>Physics and Technology of Semiconductor Devices</em>, Wiley (1967), chương 1 (mô hình tăng trưởng epitaxy).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology: Fundamentals, Practice and Modeling</em>, Prentice Hall (2000), chương 9.</li>
+<li>S. J. Pearton et al., "A review of Ga₂O₃ materials, processing, and devices," <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Chemical vapor deposition (CVD) grows thin films by chemical reactions of gases on the wafer surface. Most dielectrics and polysilicon layers in integrated circuits, plus some metals, are made by CVD. This lesson explains the two growth regimes, why pressure and reactor type set the uniformity, and the role of plasma in PECVD.</p>
+
+<h2 id="e-s1">1. Two steps in series and the Grove model</h2>
+<p>As with thermal oxidation in the Deal–Grove model, CVD has two steps in series: the reactant diffuses through the <strong>boundary layer</strong> to the surface (flux \(F_1=h_g(C_g-C_s)\)), then reacts at the surface (flux \(F_2=k_sC_s\)). In steady state \(F_1=F_2\), and the deposition rate is (Grove, 1967):</p>
+$$G=\frac{k_sh_g}{k_s+h_g}\,\frac{C_g}{N}$$
+<p>where \(N\) is the number of atoms per unit volume of film. The surface reaction constant is Arrhenius-like, \(k_s=k_0e^{-E_a/kT}\), while the gas-phase mass-transfer coefficient \(h_g=D_g/\delta\) is nearly independent of temperature. Two limits:</p>
+<ul>
+<li>\(k_s\ll h_g\) (low temperature): <strong>surface-reaction limited</strong>, \(G\approx k_sC_g/N\). The rate depends strongly on temperature, so the temperature must be very uniform; in return it is insensitive to gas flow.</li>
+<li>\(h_g\ll k_s\) (high temperature): <strong>mass-transport limited</strong>, \(G\approx h_gC_g/N\). The rate is nearly independent of temperature but depends on the boundary-layer thickness, i.e. on reactor geometry and gas flow.</li>
+</ul>
+<figure><svg viewBox="0 0 560 300" class="fig-svg" role="img"><line x1="66" y1="255" x2="536" y2="255" class="ax"/><line x1="66" y1="255" x2="66" y2="20" class="ax"/><line x1="121.28844992023886" y1="255" x2="121.28844992023886" y2="260" class="ax"/><text x="121.28844992023886" y="275" class="tk" text-anchor="middle">1200</text><line x1="221.52619879825627" y1="255" x2="221.52619879825627" y2="260" class="ax"/><text x="221.52619879825627" y="275" class="tk" text-anchor="middle">1000</text><line x1="284.4615607552315" y1="255" x2="284.4615607552315" y2="260" class="ax"/><text x="284.4615607552315" y="275" class="tk" text-anchor="middle">900</text><line x1="359.12601220705386" y1="255" x2="359.12601220705386" y2="260" class="ax"/><text x="359.12601220705386" y="275" class="tk" text-anchor="middle">800</text><line x1="449.13536453784104" y1="255" x2="449.13536453784104" y2="260" class="ax"/><text x="449.13536453784104" y="275" class="tk" text-anchor="middle">700</text><line x1="61" y1="255.0" x2="66" y2="255.0" class="ax"/><line x1="66" y1="255.0" x2="536" y2="255.0" class="grid"/><text x="57" y="259.0" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-3</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="187.85714285714286" x2="66" y2="187.85714285714286" class="ax"/><line x1="66" y1="187.85714285714286" x2="536" y2="187.85714285714286" class="grid"/><text x="57" y="191.85714285714286" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-2</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="120.71428571428572" x2="66" y2="120.71428571428572" class="ax"/><line x1="66" y1="120.71428571428572" x2="536" y2="120.71428571428572" class="grid"/><text x="57" y="124.71428571428572" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">-1</tspan><tspan dy="6"> </tspan></text><line x1="61" y1="53.571428571428584" x2="66" y2="53.571428571428584" class="ax"/><line x1="66" y1="53.571428571428584" x2="536" y2="53.571428571428584" class="grid"/><text x="57" y="57.571428571428584" class="tk" text-anchor="end">10<tspan dy="-6" style="font-size:9px">0</tspan><tspan dy="6"> </tspan></text><text x="301.0" y="294" class="lab" text-anchor="middle">Temperature (°C), axis in 1000/T</text><text x="14" y="137.5" class="lab" text-anchor="middle" transform="rotate(-90 14 137.5)">Deposition rate (relative)</text><path d="M66.0,88.7 L71.9,88.7 L77.7,88.7 L83.6,88.7 L89.5,88.7 L95.4,88.7 L101.2,88.7 L107.1,88.7 L113.0,88.8 L118.9,88.8 L124.7,88.8 L130.6,88.8 L136.5,88.8 L142.4,88.8 L148.2,88.8 L154.1,88.8 L160.0,88.9 L165.9,88.9 L171.8,88.9 L177.6,88.9 L183.5,89.0 L189.4,89.0 L195.3,89.1 L201.1,89.1 L207.0,89.1 L212.9,89.2 L218.7,89.3 L224.6,89.3 L230.5,89.4 L236.4,89.5 L242.3,89.6 L248.1,89.7 L254.0,89.8 L259.9,90.0 L265.8,90.1 L271.6,90.3 L277.5,90.5 L283.4,90.7 L289.2,91.0 L295.1,91.3 L301.0,91.6 L306.9,91.9 L312.8,92.3 L318.6,92.7 L324.5,93.1 L330.4,93.6 L336.2,94.2 L342.1,94.8 L348.0,95.5 L353.9,96.2 L359.8,97.0 L365.6,97.9 L371.5,98.8 L377.4,99.9 L383.2,101.0 L389.1,102.2 L395.0,103.5 L400.9,104.9 L406.8,106.4 L412.6,108.0 L418.5,109.7 L424.4,111.5 L430.2,113.4 L436.1,115.3 L442.0,117.4 L447.9,119.6 L453.8,121.8 L459.6,124.2 L465.5,126.6 L471.4,129.1 L477.2,131.7 L483.1,134.3 L489.0,137.0 L494.9,139.8 L500.7,142.6 L506.6,145.5 L512.5,148.4 L518.4,151.4 L524.2,154.4 L530.1,157.5 L536.0,160.5" class="s1" fill="none"/><path d="M66.0,21.8 L71.9,21.9 L77.7,21.9 L83.6,21.9 L89.5,22.0 L95.4,22.1 L101.2,22.1 L107.1,22.2 L113.0,22.3 L118.9,22.4 L124.7,22.5 L130.6,22.6 L136.5,22.7 L142.4,22.8 L148.2,23.0 L154.1,23.2 L160.0,23.3 L165.9,23.6 L171.8,23.8 L177.6,24.1 L183.5,24.4 L189.4,24.7 L195.3,25.1 L201.1,25.5 L207.0,25.9 L212.9,26.4 L218.7,27.0 L224.6,27.6 L230.5,28.2 L236.4,28.9 L242.3,29.7 L248.1,30.6 L254.0,31.5 L259.9,32.6 L265.8,33.7 L271.6,34.9 L277.5,36.2 L283.4,37.6 L289.2,39.0 L295.1,40.6 L301.0,42.3 L306.9,44.0 L312.8,45.9 L318.6,47.9 L324.5,49.9 L330.4,52.1 L336.2,54.3 L342.1,56.7 L348.0,59.1 L353.9,61.6 L359.8,64.1 L365.6,66.8 L371.5,69.5 L377.4,72.2 L383.2,75.0 L389.1,77.9 L395.0,80.8 L400.9,83.8 L406.8,86.8 L412.6,89.8 L418.5,92.9 L424.4,96.0 L430.2,99.1 L436.1,102.3 L442.0,105.5 L447.9,108.7 L453.8,111.9 L459.6,115.2 L465.5,118.4 L471.4,121.7 L477.2,125.0 L483.1,128.3 L489.0,131.6 L494.9,134.9 L500.7,138.2 L506.6,141.5 L512.5,144.8 L518.4,148.2 L524.2,151.5 L530.1,154.9 L536.0,158.2" class="s2" fill="none"/><line x1="370" y1="32" x2="394" y2="32" class="s1"/><text x="400" y="36" class="tk">small h<tspan dy="3" style="font-size:9px">g</tspan><tspan dy="-3"> </tspan>(APCVD)</text><line x1="370" y1="50" x2="394" y2="50" class="s2"/><text x="400" y="54" class="tk">large h<tspan dy="3" style="font-size:9px">g</tspan><tspan dy="-3"> </tspan>(LPCVD)</text><text x="197.6" y="110.64285714285717" class="ns" text-anchor="middle">mass-transport limited</text><text x="423.1999999999999" y="214.71428571428572" class="ns" text-anchor="middle">surface-reaction limited</text></svg><figcaption>Figure 1. Deposition rate versus temperature from the Grove model (same reactant concentration). Lowering the pressure raises \(h_g\), so the surface-reaction-limited regime extends to higher temperatures. Illustrative numbers.</figcaption></figure>
+<p>Arrhenius plots of Si deposited from SiCl₄, SiHCl₃, SiH₂Cl₂ and SiH₄ have exactly this shape: steep at low temperature, flat at high temperature, and the fewer Cl atoms in the source, the lower the temperature at which it reacts.</p>
+
+<h2 id="e-s2">2. APCVD and LPCVD</h2>
+<div class="tablewrap"><table>
+<tr><th></th><th>APCVD (atmospheric pressure)</th><th>LPCVD (low pressure, about 0.1–1 Torr)</th></tr>
+<tr><td>Rate</td><td>Fast</td><td>Slower</td></tr>
+<tr><td>Equipment</td><td>Simple, no vacuum pump</td><td>Needs pumps; hot-wall tube furnace</td></tr>
+<tr><td>Regime</td><td>Usually mass-transport limited</td><td>Surface-reaction limited</td></tr>
+<tr><td>Uniformity</td><td>Poor, depends on gas flow</td><td>Good; hundreds of wafers can stand close together</td></tr>
+<tr><td>Unwanted gas-phase reactions</td><td>Many (particles)</td><td>Few</td></tr>
+</table></div>
+<p>Why is low pressure more uniform? The gas diffusivity scales inversely with pressure, \(D_g\propto 1/P\). Going from 760 Torr to about 1 Torr raises \(D_g\), and hence \(h_g\), by hundreds of times, so \(h_g\gg k_s\): the rate depends only on temperature, which a tube furnace controls very evenly. Fast gas diffusion also reaches the narrow gaps between closely stacked wafers.</p>
+
+<h2 id="e-s3">3. Hot-wall and cold-wall reactors</h2>
+<figure><svg viewBox="0 0 640 230" class="fig-svg" role="img"><defs><marker id="me" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--accent)"/></marker></defs><rect x="30" y="60" width="270" height="90" rx="40" style="fill:var(--box);stroke:var(--ink);stroke-width:1.6"/><rect x="55" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="81" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="107" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="133" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="159" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="185" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="211" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="237" y="78" width="5" height="54" style="fill:var(--s1)"/><rect x="263" y="78" width="5" height="54" style="fill:var(--s1)"/><path d="M40,48 h250" style="stroke:var(--s3);stroke-width:4;stroke-dasharray:10 5"/><path d="M40,162 h250" style="stroke:var(--s3);stroke-width:4;stroke-dasharray:10 5"/><path d="M8,105 h22" class="arr" marker-end="url(#me)"/><path d="M300,105 h24" class="arr" marker-end="url(#me)"/><text x="165" y="26" class="nt" text-anchor="middle">Hot wall (LPCVD tube)</text><text x="165" y="186" class="ns" text-anchor="middle">heater coils around the tube; wafers stand in a row</text><text x="165" y="202" class="ns" text-anchor="middle">film also coats the tube walls</text><rect x="360" y="50" width="260" height="110" style="fill:var(--paper);stroke:var(--ink);stroke-width:1.6"/><path d="M380,140 L600,118 L600,132 L380,154 Z" style="fill:var(--rule);stroke:var(--muted)"/><rect x="395" y="133.0" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 395 139.0)"/><rect x="447" y="127.8" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 447 133.8)"/><rect x="499" y="122.6" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 499 128.6)"/><rect x="551" y="117.4" width="34" height="5" style="fill:var(--s1)" transform="rotate(-5.7 551 123.4)"/><path d="M392,166 q8,8 16,0 q8,-8 16,0 q8,8 16,0 q8,-8 16,0 q8,8 16,0 q8,-8 16,0" style="stroke:var(--s3);stroke-width:2;fill:none"/><path d="M338,80 h22" class="arr" marker-end="url(#me)"/><path d="M620,80 h18" class="arr" marker-end="url(#me)"/><text x="490" y="26" class="nt" text-anchor="middle">Cold wall</text><text x="490" y="186" class="ns" text-anchor="middle">only the susceptor is heated (induction or resistive)</text><text x="490" y="202" class="ns" text-anchor="middle">tilted susceptor keeps the boundary layer even</text></svg><figcaption>Figure 2. Hot-wall reactor (left): the whole tube is heated and the wafers are heated by radiation from the walls. Cold-wall reactor (right): only the wafer holder (susceptor) is heated.</figcaption></figure>
+<ul>
+<li><strong>Hot wall</strong>: like an oxidation furnace, the tube is heated from outside, with temperature control better than 1 °C. Drawback: film also coats the tube walls, which must be cleaned regularly before flakes become particles.</li>
+<li><strong>Cold wall</strong>: only the susceptor is heated, by RF induction or resistively; the wafers lie flat on it and nothing deposits on the walls. The reactant is depleted along the flow, so the susceptor is tilted: the flow cross-section narrows, the gas speeds up and the boundary layer thins, compensating for the falling concentration.</li>
+</ul>
+
+<h2 id="e-s4">4. Thermodynamics and kinetics</h2>
+<p>Thermodynamics tells whether a reaction can happen and what the equilibrium state is (through the Gibbs free-energy change). It does not tell how fast; the growth rate is set by the kinetics of gas-phase transport and the gas–solid reaction. CVD is therefore regarded as an empirical technology with thermodynamic guidelines: thermodynamics rules out the impossible, and the process recipe is found by experiment.</p>
+
+<h2 id="e-s5">5. PECVD: plasma instead of heat</h2>
+<p>In thermal CVD the energy to break the gas bonds comes from high temperature. PECVD uses a plasma (see the <a href="plasma-basics.html">plasma lesson</a>): energetic electrons dissociate gas molecules into highly reactive radicals, so films grow at about 200–400 °C. This is essential when aluminium (melting at 660 °C) is already on the wafer, or when depositing on plastic substrates. RF power is used to avoid charging of insulating films.</p>
+<ul>
+<li>Radicals have a high sticking coefficient but migrate easily along the surface; ion bombardment supplies the kinetic energy for surface diffusion at low temperature, giving fairly good step coverage.</li>
+<li>Deposition is surface-reaction limited, so the substrate temperature must be controlled for uniformity.</li>
+<li>Film quality is poorer than LPCVD: lots of hydrogen (10–30 at.% in SiN), lower density, and a risk of plasma damage.</li>
+</ul>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>High-quality β-Ga₂O₃ epitaxial layers are grown by several CVD variants: MOCVD (metal-organic precursors such as TEGa or TMGa with O₂), HVPE (GaCl and O₂, growth rates of several µm per hour for thick drift layers) and LPCVD (Ga metal and O₂). The Grove model helps read these studies: when the growth rate barely changes with temperature, the process is mass-transport limited and uniformity depends heavily on gas-flow design (Pearton et al., 2018).</p></div>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>At 700 °C a process has \(k_s=0.2\) cm/s and \(h_g=5\) cm/s. Which regime dominates? If heating raises \(k_s\) tenfold, by how much does the rate rise?</li>
+<li>In an APCVD reactor the rate at the far end is 20 % lower than at the inlet. Suggest two fixes and explain them with the Grove model.</li>
+<li>Why can't LPCVD SiO₂ at 900 °C be used as the insulator between two aluminium layers?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> \(k_s\ll h_g\), so surface-reaction limited: the factor \(k_sh_g/(k_s+h_g)=0.192\) cm/s, close to \(k_s\). With \(k_s=2\) cm/s: \(2\times5/7=1.43\) cm/s, a 7.4-fold rise, not tenfold, because the process starts moving toward mass-transport control.</p>
+<p><strong>2.</strong> APCVD is usually mass-transport limited, so the rate goes as \(h_gC_g\); \(C_g\) falls along the reactor as the gas is consumed. (a) Tilt the susceptor or raise the flow so the boundary layer thins toward the far end, raising \(h_g\) to offset the lower \(C_g\). (b) Lower the temperature or pressure to move into the surface-reaction-limited regime, where the rate depends only on temperature; or add gas injectors along the reactor.</p>
+<p><strong>3.</strong> Aluminium melts at 660 °C, and Al–Si interaction is already significant from about 450–500 °C. Once metal is present, every step must stay below about 450 °C, so PECVD SiO₂ or TEOS (around 400 °C), or low-temperature SiH₄ + O₂ oxide, is used instead.</p>
+</details>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>CVD process and characteristics</em>, Korea Aerospace University.</li>
+<li>A. S. Grove, <em>Physics and Technology of Semiconductor Devices</em>, Wiley (1967), chapter 1 (epitaxial growth model).</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology: Fundamentals, Practice and Modeling</em>, Prentice Hall (2000), chapter 9.</li>
+<li>S. J. Pearton et al., "A review of Ga₂O₃ materials, processing, and devices," <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+</ol>
+</div>
+<nav class="pager"><a href="oxide-calculator.html">← <span class="l-vi">Tính độ dày oxide: bài tập và công cụ</span><span class="l-en">Calculating oxide thickness: worked example and calculator</span></a><a class="n" href="cvd-sio2-poly.html"><span class="l-vi">Ứng dụng CVD: poly-Si và SiO₂</span><span class="l-en">CVD applications: poly-Si and SiO₂</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

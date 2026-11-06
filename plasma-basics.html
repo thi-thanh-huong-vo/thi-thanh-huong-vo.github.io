@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="Plasma: nền tảng và va chạm nguyên tử" data-title-en="Plasma fundamentals and atomic collisions">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plasma fundamentals and atomic collisions · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Quasi-neutrality, hot electrons and cold ions, ionization, excitation, dissociation, Penning, recombination and cross sections.">
+<meta property="og:title" content="Plasma fundamentals and atomic collisions">
+<meta property="og:description" content="Quasi-neutrality, hot electrons and cold ions, ionization, excitation, dissociation, Penning, recombination and cross sections.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="processing.html"><span class="l-vi">Công nghệ chế tạo bán dẫn tiên tiến</span><span class="l-en">Advanced Semiconductor Processing Technology</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 8 · Bài 1</span><span class="l-en">Part 8 · Lesson 1</span></p>
+  <h1><span class="l-vi">Plasma: nền tảng và va chạm nguyên tử</span><span class="l-en">Plasma fundamentals and atomic collisions</span></h1>
+  <p class="sub"><span class="l-vi">Gần trung hòa, electron nóng và ion lạnh, ion hóa, kích thích, phân ly, Penning, tái hợp và tiết diện va chạm.</span><span class="l-en">Quasi-neutrality, hot electrons and cold ions, ionization, excitation, dissociation, Penning, recombination and cross sections.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Plasma có mặt ở gần như mọi bước sau khi tạo transistor: khắc khô, PECVD, phún xạ, tẩy cản quang, làm sạch bề mặt. Bài này giải thích plasma là gì, vì sao electron "nóng" còn ion và khí "lạnh", và các va chạm tạo ra ion, gốc tự do và ánh sáng.</p>
+
+<h2 id="v-s1">1. Plasma là gì</h2>
+<p>Plasma là chất khí bị ion hóa một phần: một số nguyên tử mất ít nhất một electron, để lại ion dương giữa một "biển" electron tự do. Nó có hai tính chất định nghĩa:</p>
+<ul>
+<li><strong>Gần trung hòa</strong> (quasi-neutral): trừ vài vùng biên, mật độ điện tích dương và âm bằng nhau, \(n_i\approx n_e\).</li>
+<li><strong>Hành vi tập thể</strong>: hạt mang điện tương tác qua lực Coulomb tầm xa, nên plasma phản ứng như một khối với điện trường ngoài (ví dụ che chắn điện trường trong khoảng độ dài Debye, xem bài sau).</li>
+</ul>
+<p>Plasma dùng trong chế tạo bán dẫn ion hóa rất yếu: tỉ lệ ion hóa khoảng 10⁻⁵–10⁻⁴ trong plasma ghép điện dung thông thường, và có thể lên tới phần trăm trong các nguồn mật độ cao. Phần lớn chất khí vẫn là nguyên tử, phân tử trung hòa. Điều làm plasma hữu ích là nó tạo ra lượng lớn <strong>gốc tự do</strong> hoạt động hóa học và <strong>ion</strong> có thể được gia tốc tới bề mặt.</p>
+
+<h2 id="v-s2">2. Electron nóng, ion lạnh</h2>
+<p>Nguồn điện truyền năng lượng chủ yếu cho electron vì chúng nhẹ. Va chạm đàn hồi giữa electron và nguyên tử nặng gần như không truyền năng lượng (tỉ lệ cỡ \(2m_e/M\approx 3\times10^{-5}\) với Ar), nên electron giữ được nhiệt độ cao trong khi khí vẫn gần nhiệt độ phòng. Vận tốc nhiệt trung bình \(\bar c=\sqrt{8kT/\pi m}\) cho ví dụ của bài giảng:</p>
+<div class="tablewrap"><table>
+<tr><th>Hạt</th><th>Khối lượng</th><th>Nhiệt độ</th><th>\(\bar c\) (cm/s)</th></tr>
+<tr><td>Nguyên tử Ar trung hòa</td><td>6,6 × 10⁻²³ g</td><td>293 K (≈ 1/40 eV)</td><td>4,0 × 10⁴</td></tr>
+<tr><td>Ion Ar⁺</td><td>6,6 × 10⁻²³ g</td><td>500 K (≈ 0,04 eV)</td><td>5,2 × 10⁴</td></tr>
+<tr><td>Electron</td><td>9,1 × 10⁻²⁸ g</td><td>23 200 K (2 eV)</td><td>9,5 × 10⁷</td></tr>
+</table></div>
+<p>Electron nhanh hơn ion khoảng 2000 lần. Dù \(n_i=n_e\), thông lượng electron tới thành lớn hơn hẳn thông lượng ion, nên bề mặt tích điện âm và một vùng điện tích không gian, gọi là vỏ (sheath), hình thành. Đây là nguồn gốc của năng lượng ion bắn phá bề mặt.</p>
+
+<h2 id="v-s3">3. Va chạm electron với nguyên tử, phân tử</h2>
+<div class="tablewrap"><table>
+<tr><th>Quá trình</th><th>Phản ứng</th><th>Ghi chú</th></tr>
+<tr><td>Ion hóa do va chạm electron</td><td>e⁻ + A → 2e⁻ + A⁺</td><td>Ngưỡng cao nhất, cỡ 10–16 eV. Mỗi lần sinh thêm một electron: quá trình nhân này duy trì plasma.</td></tr>
+<tr><td>Kích thích</td><td>e⁻ + A → e⁻ + A*</td><td>Một số trạng thái kích thích sống lâu (khoảng 1–10 ms): nguyên tử giả bền (metastable).</td></tr>
+<tr><td>Phân ly</td><td>e⁻ + A₂ → e⁻ + 2A</td><td>Ngưỡng thấp hơn ion hóa (0–10 eV); tạo ra gốc tự do, tác nhân chính của khắc và lắng đọng.</td></tr>
+<tr><td>Ion hóa từ trạng thái giả bền</td><td>e⁻ + A* → 2e⁻ + A⁺</td><td>Cần ít năng lượng hơn vì A* đã được kích thích.</td></tr>
+<tr><td>Ion hóa Penning</td><td>A* + B → A + e⁻ + B⁺</td><td>Xảy ra khi năng lượng kích thích của A* lớn hơn năng lượng ion hóa của B.</td></tr>
+<tr><td>Hồi phục</td><td>A* → A + hν</td><td>Phát photon có năng lượng đúng bằng hiệu hai mức: ánh sáng đặc trưng của plasma.</td></tr>
+<tr><td>Bám electron</td><td>e⁻ + A → A⁻</td><td>Ở khí âm điện như SF₆, O₂, Cl₂.</td></tr>
+<tr><td>Tái hợp</td><td>e⁻ + A⁺ + A → A* + A ; A⁺ + A⁻ → 2A</td><td>Tái hợp ba vật hoặc ion–ion; làm mất hạt mang điện.</td></tr>
+</table></div>
+<p>Năng lượng phân ly thường nhỏ hơn năng lượng ion hóa nhiều (ví dụ H₂: 4,5 so với 15,4 eV; O₂: 5,2 so với 12 eV; F₂: 1,6 so với 15,7 eV), nên trong plasma, gốc tự do nhiều hơn ion hàng chục đến hàng nghìn lần.</p>
+<p><strong>Ánh sáng của plasma</strong> là một công cụ đo: phổ phát xạ quang (OES) theo dõi các vạch đặc trưng, ví dụ để phát hiện thời điểm khắc xuyên hết một lớp (endpoint detection).</p>
+
+<h2 id="v-s4">4. Tiết diện va chạm</h2>
+<p>Tiết diện va chạm \(\sigma\) là diện tích hiệu dụng mà electron phải "trúng" để một quá trình xảy ra. Tổng tiết diện gồm đóng góp của tán xạ đàn hồi, kích thích, ion hóa. Nó phụ thuộc mạnh vào năng lượng electron: bằng 0 dưới ngưỡng, tăng lên cực đại (với ion hóa, thường ở khoảng 50–150 eV) rồi giảm. Từ tiết diện suy ra quãng đường tự do trung bình \(\lambda=1/(n_g\sigma)\) và tần số va chạm \(\nu=n_g\sigma v\). Vì electron trong plasma có phân bố năng lượng, chỉ phần đuôi năng lượng cao vượt được ngưỡng ion hóa; tăng \(T_e\) một chút làm tốc độ ion hóa tăng rất mạnh.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>Ga₂O₃ được khắc khô bằng plasma chứa clo (BCl₃, Cl₂, thường pha Ar) trong các nguồn mật độ cao như ICP. Liên kết Ga–O bền nên tốc độ khắc phụ thuộc nhiều vào năng lượng ion; và chính bắn phá ion lại có thể tạo khuyết tật vùng gần bề mặt làm tăng dòng rò của tiếp xúc Schottky khắc trên đó. Đây là đánh đổi giữa thành phần hóa học (gốc Cl) và vật lý (ion) mà bài này giới thiệu (Pearton và cộng sự, 2018).</p></div>
+
+<h2 id="v-s5">5. Bài tập</h2>
+<ol>
+<li>Tính vận tốc nhiệt trung bình của electron có \(T_e\) = 3 eV và của ion Ar⁺ ở 400 K.</li>
+<li>Vì sao plasma O₂ dùng để tẩy cản quang hiệu quả dù chỉ khoảng 10⁻⁵ số phân tử bị ion hóa?</li>
+<li>Thêm một ít Ar vào plasma của một khí có năng lượng ion hóa thấp hơn mức kích thích giả bền của Ar (khoảng 11,5 eV) làm plasma dễ đánh lửa hơn. Cơ chế nào?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> Electron: \(kT=4{,}81\times10^{-19}\) J, nên \(\bar c=\sqrt{8kT/\pi m_e}\approx1{,}16\times10^{6}\) m/s = 1,2 × 10⁸ cm/s. Ar⁺: \(kT=5{,}52\times10^{-21}\) J, \(\bar c=\sqrt{8kT/\pi M}\approx 460\) m/s = 4,6 × 10⁴ cm/s. Tỉ số khoảng 2500.</p>
+<p><strong>2.</strong> Tác nhân tẩy là oxy nguyên tử (gốc O), sinh ra bằng phân ly (ngưỡng khoảng 5 eV) nhiều hơn ion hóa (khoảng 12 eV) rất nhiều. Tỉ lệ phân ly có thể lên tới vài phần trăm, và mỗi gốc O phản ứng với polymer thành CO, CO₂, H₂O bay đi.</p>
+<p><strong>3.</strong> Ion hóa Penning: Ar* giả bền sống lâu, khi va chạm với phân tử B có năng lượng ion hóa thấp hơn 11,5 eV thì ion hóa nó (Ar* + B → Ar + e⁻ + B⁺), tạo thêm electron mà không cần electron năng lượng cao. Hỗn hợp Penning (ví dụ Ne với một ít Ar) có điện áp đánh thủng thấp hơn khí đơn chất.</p>
+</details>
+
+<h2 id="v-s6">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>Plasma Fundamentals and Atomic Collision Processes</em>, Korea Aerospace University.</li>
+<li>M. A. Lieberman, A. J. Lichtenberg, <em>Principles of Plasma Discharges and Materials Processing</em>, 2nd ed., Wiley (2005), chương 1–3.</li>
+<li>B. Chapman, <em>Glow Discharge Processes: Sputtering and Plasma Etching</em>, Wiley (1980).</li>
+<li>S. J. Pearton et al., <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Plasma appears in almost every step after the transistor is built: dry etching, PECVD, sputtering, resist stripping, surface cleaning. This lesson explains what a plasma is, why the electrons are "hot" while the ions and gas stay "cold", and the collisions that create ions, radicals and light.</p>
+
+<h2 id="e-s1">1. What a plasma is</h2>
+<p>A plasma is a partly ionized gas: some atoms have lost at least one electron, leaving positive ions in a "sea" of free electrons. Two properties define it:</p>
+<ul>
+<li><strong>Quasi-neutrality</strong>: apart from a few boundary regions, positive and negative charge densities are equal, \(n_i\approx n_e\).</li>
+<li><strong>Collective behaviour</strong>: charged particles interact through long-range Coulomb forces, so the plasma responds as a whole to external fields (for example screening a field within a Debye length, see the next lesson).</li>
+</ul>
+<p>Processing plasmas are very weakly ionized: a fractional ionization of about 10⁻⁵–10⁻⁴ in an ordinary capacitively coupled plasma, up to percent levels in high-density sources. Most of the gas remains neutral atoms and molecules. What makes plasmas useful is that they produce large amounts of chemically active <strong>radicals</strong> and <strong>ions</strong> that can be accelerated onto a surface.</p>
+
+<h2 id="e-s2">2. Hot electrons, cold ions</h2>
+<p>The power supply hands its energy mostly to the electrons because they are light. Elastic collisions between electrons and heavy atoms transfer almost no energy (a fraction of order \(2m_e/M\approx 3\times10^{-5}\) for Ar), so the electrons stay hot while the gas stays near room temperature. The mean thermal speed \(\bar c=\sqrt{8kT/\pi m}\) for the lecture's example:</p>
+<div class="tablewrap"><table>
+<tr><th>Particle</th><th>Mass</th><th>Temperature</th><th>\(\bar c\) (cm/s)</th></tr>
+<tr><td>Neutral Ar atom</td><td>6.6 × 10⁻²³ g</td><td>293 K (≈ 1/40 eV)</td><td>4.0 × 10⁴</td></tr>
+<tr><td>Ar⁺ ion</td><td>6.6 × 10⁻²³ g</td><td>500 K (≈ 0.04 eV)</td><td>5.2 × 10⁴</td></tr>
+<tr><td>Electron</td><td>9.1 × 10⁻²⁸ g</td><td>23 200 K (2 eV)</td><td>9.5 × 10⁷</td></tr>
+</table></div>
+<p>Electrons are about 2000 times faster than ions. Even with \(n_i=n_e\), the electron flux to a wall far exceeds the ion flux, so surfaces charge negative and a space-charge region, the sheath, forms. This is where the energy of ions bombarding a surface comes from.</p>
+
+<h2 id="e-s3">3. Electron collisions with atoms and molecules</h2>
+<div class="tablewrap"><table>
+<tr><th>Process</th><th>Reaction</th><th>Notes</th></tr>
+<tr><td>Electron-impact ionization</td><td>e⁻ + A → 2e⁻ + A⁺</td><td>The highest threshold, about 10–16 eV. Each event adds an electron: this multiplication sustains the plasma.</td></tr>
+<tr><td>Excitation</td><td>e⁻ + A → e⁻ + A*</td><td>Some excited states live long (about 1–10 ms): metastable atoms.</td></tr>
+<tr><td>Dissociation</td><td>e⁻ + A₂ → e⁻ + 2A</td><td>Lower threshold than ionization (0–10 eV); produces radicals, the main agents of etching and deposition.</td></tr>
+<tr><td>Metastable ionization</td><td>e⁻ + A* → 2e⁻ + A⁺</td><td>Needs less energy because A* is already excited.</td></tr>
+<tr><td>Penning ionization</td><td>A* + B → A + e⁻ + B⁺</td><td>Occurs when the excitation energy of A* exceeds the ionization energy of B.</td></tr>
+<tr><td>Relaxation</td><td>A* → A + hν</td><td>Emits a photon whose energy equals the level spacing: the plasma's characteristic glow.</td></tr>
+<tr><td>Electron attachment</td><td>e⁻ + A → A⁻</td><td>In electronegative gases such as SF₆, O₂, Cl₂.</td></tr>
+<tr><td>Recombination</td><td>e⁻ + A⁺ + A → A* + A ; A⁺ + A⁻ → 2A</td><td>Three-body or ion–ion recombination; removes charge carriers.</td></tr>
+</table></div>
+<p>Dissociation energies are usually far below ionization energies (e.g. H₂: 4.5 versus 15.4 eV; O₂: 5.2 versus 12 eV; F₂: 1.6 versus 15.7 eV), so radicals outnumber ions in a plasma by tens to thousands of times.</p>
+<p><strong>The plasma's light</strong> is a measurement tool: optical emission spectroscopy (OES) follows characteristic lines, for example to detect when an etch has cleared a layer (endpoint detection).</p>
+
+<h2 id="e-s4">4. Collision cross sections</h2>
+<p>The cross section \(\sigma\) is the effective area an electron must "hit" for a process to occur. The total cross section sums elastic scattering, excitation and ionization. It depends strongly on electron energy: zero below threshold, rising to a maximum (for ionization typically around 50–150 eV) and then falling. From it come the mean free path \(\lambda=1/(n_g\sigma)\) and the collision frequency \(\nu=n_g\sigma v\). Because plasma electrons have an energy distribution, only the high-energy tail exceeds the ionization threshold; a small rise in \(T_e\) raises the ionization rate sharply.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>Ga₂O₃ is dry-etched in chlorine-based plasmas (BCl₃, Cl₂, often with Ar) in high-density sources such as ICP. The strong Ga–O bond makes the etch rate depend heavily on ion energy; yet that same ion bombardment can create near-surface defects that raise the leakage of Schottky contacts made on etched surfaces. This is the trade-off between chemistry (Cl radicals) and physics (ions) introduced in this lesson (Pearton et al., 2018).</p></div>
+
+<h2 id="e-s5">5. Exercises</h2>
+<ol>
+<li>Compute the mean thermal speed of electrons with \(T_e\) = 3 eV and of Ar⁺ ions at 400 K.</li>
+<li>Why is an O₂ plasma effective for stripping resist although only about 10⁻⁵ of the molecules are ionized?</li>
+<li>Adding a little Ar to a gas whose ionization energy is below the Ar metastable level (about 11.5 eV) makes the plasma easier to ignite. By what mechanism?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> Electrons: \(kT=4.81\times10^{-19}\) J, so \(\bar c=\sqrt{8kT/\pi m_e}\approx1.16\times10^{6}\) m/s = 1.2 × 10⁸ cm/s. Ar⁺: \(kT=5.52\times10^{-21}\) J, \(\bar c=\sqrt{8kT/\pi M}\approx 460\) m/s = 4.6 × 10⁴ cm/s. A ratio of about 2500.</p>
+<p><strong>2.</strong> The stripping agent is atomic oxygen (O radicals), produced by dissociation (threshold about 5 eV) far more than by ionization (about 12 eV). The dissociation fraction can reach several percent, and each O radical reacts with the polymer to form volatile CO, CO₂ and H₂O.</p>
+<p><strong>3.</strong> Penning ionization: long-lived Ar* metastables colliding with a molecule B whose ionization energy is below 11.5 eV ionize it (Ar* + B → Ar + e⁻ + B⁺), adding electrons without needing high-energy electrons. Penning mixtures (e.g. Ne with a little Ar) break down at lower voltage than either pure gas.</p>
+</details>
+
+<h2 id="e-s6">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>Plasma Fundamentals and Atomic Collision Processes</em>, Korea Aerospace University.</li>
+<li>M. A. Lieberman, A. J. Lichtenberg, <em>Principles of Plasma Discharges and Materials Processing</em>, 2nd ed., Wiley (2005), chapters 1–3.</li>
+<li>B. Chapman, <em>Glow Discharge Processes: Sputtering and Plasma Etching</em>, Wiley (1980).</li>
+<li>S. J. Pearton et al., <em>Applied Physics Reviews</em> 5, 011301 (2018).</li>
+</ol>
+</div>
+<nav class="pager"><a href="cvd-teos-nitride.html">← <span class="l-vi">Ứng dụng CVD: TEOS và Si₃N₄</span><span class="l-en">CVD applications: TEOS and Si₃N₄</span></a><a class="n" href="plasma-discharge.html"><span class="l-vi">Tạo plasma, vỏ Debye và phóng điện</span><span class="l-en">Plasma generation, sheaths and discharges</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>

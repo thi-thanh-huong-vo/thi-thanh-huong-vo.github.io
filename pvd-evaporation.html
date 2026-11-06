@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi" data-title-vi="PVD: bay hơi, PLD và MBE" data-title-en="PVD: evaporation, PLD and MBE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PVD: evaporation, PLD and MBE · Thi-Thanh-Huong Vo</title>
+<meta name="description" content="Thermal and e-beam evaporation, the cosine law, lift-off, pulsed laser deposition and molecular beam epitaxy.">
+<meta property="og:title" content="PVD: evaporation, PLD and MBE">
+<meta property="og:description" content="Thermal and e-beam evaporation, the cosine law, lift-off, pulsed laser deposition and molecular beam epitaxy.">
+<meta property="og:image" content="https://thi-thanh-huong-vo.github.io/og-image.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]})"></script>
+<style>
+  :root{--paper:#fcfcfd;--ink:#1d2230;--muted:#5d6475;--rule:#e3e5ec;--accent:#4a3f8c;--accent-soft:#eeecf7;--band-head:#eeecf6;
+    --s1:#4a3f8c;--s2:#1f77b4;--s3:#c2410c;--box:#f6f5fb;box-sizing:border-box}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}}
+  :root[data-theme="dark"]{--paper:#15171e;--ink:#e6e7ec;--muted:#9ea3b3;--rule:#2b2f3b;--accent:#a99df0;--accent-soft:#252338;--band-head:#1e1c2c;--s1:#a99df0;--s2:#6cb4ee;--s3:#f59e6b;--box:#1c1b28}
+  *,*::before,*::after{box-sizing:inherit}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65;overflow-x:clip}
+  main{max-width:46rem;margin:0 auto;padding:0 1.25rem 4rem}
+  header{margin-inline:calc(50% - 50vw);padding:1.25rem calc(50vw - 50%) 2.25rem;background:var(--band-head)}
+  .topbar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.92rem;margin-bottom:1.5rem}
+  .topbar a{text-decoration:none}
+  .kicker{font-family:"Source Serif 4",Georgia,serif;font-style:italic;color:var(--accent);margin:0 0 .5rem}
+  h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.25}
+  h1{font-size:clamp(1.9rem,6vw,2.6rem);margin:0;font-weight:600}
+  .sub{color:var(--muted);margin:.75rem 0 0;font-size:1.05rem;text-align:left}
+  h2{font-size:1.4rem;margin:2.5rem 0 .75rem;font-weight:600}
+  h3{font-size:1.12rem;margin:1.75rem 0 .5rem;font-weight:600}
+  p,li{text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .lead{font-family:"Source Serif 4",Georgia,serif;font-size:1.12rem;line-height:1.7}
+  .box{background:var(--box);border-left:3px solid var(--accent);padding:.9rem 1.1rem;margin:1.5rem 0;border-radius:0 6px 6px 0}
+  .box p:last-child,.box ul:last-child{margin-bottom:0}
+  .box .t{font-weight:600;color:var(--accent);margin:0 0 .35rem;text-align:left}
+  .ga{border-left-color:#0f766e}.ga .t{color:#0f766e}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ga{border-left-color:#5eead4}:root:not([data-theme="light"]) .ga .t{color:#5eead4}}
+  figure{margin:1.75rem 0}figcaption{color:var(--muted);font-size:.9rem;margin-top:.5rem;text-align:left}
+  .fig-svg{width:100%;height:auto;display:block;font-family:"Public Sans",Arial,sans-serif}
+  .fig-svg .ax{stroke:var(--muted);stroke-width:1}.fig-svg .grid{stroke:var(--rule);stroke-width:1}
+  .fig-svg .tk{fill:var(--muted);font-size:11px}.fig-svg .lab{fill:var(--ink);font-size:12px}
+  .fig-svg .s1{stroke:var(--s1);stroke-width:2.5}.fig-svg .s2{stroke:var(--s2);stroke-width:2.5;stroke-dasharray:7 4}.fig-svg .s3{stroke:var(--s3);stroke-width:2.5;stroke-dasharray:2 4}
+  .fig-svg .node{fill:var(--box);stroke:var(--accent);stroke-width:1.5}.fig-svg .nt{fill:var(--ink);font-size:13px}.fig-svg .ns{fill:var(--muted);font-size:11px}
+  .fig-svg .arr{stroke:var(--accent);stroke-width:2;fill:none}.fig-svg .atom{fill:var(--rule);stroke:var(--muted)}.fig-svg .imp{fill:var(--s3)}.fig-svg .vac{fill:none;stroke:var(--muted);stroke-dasharray:3 3}
+  table{width:100%;border-collapse:collapse;margin:1rem 0 1.5rem;font-size:.95rem}
+  th,td{border-bottom:1px solid var(--rule);padding:.5rem .6rem;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:.88rem}
+  .tablewrap{overflow-x:auto}
+  .katex-display{overflow-x:auto;overflow-y:hidden;padding:.25rem 0}
+  ol.toc{list-style:none;padding:0;margin:0;counter-reset:l}
+  ol.toc li{counter-increment:l;border:1px solid var(--rule);border-radius:8px;padding:1rem 1.1rem 1rem 3.4rem;margin-bottom:.75rem;position:relative;text-align:left}
+  ol.toc li::before{content:counter(l);position:absolute;left:1.1rem;top:.95rem;font-family:"Source Serif 4",serif;font-size:1.5rem;color:var(--accent)}
+  ol.toc a{font-weight:600;font-size:1.05rem;text-decoration:none}ol.toc span{display:block;color:var(--muted);font-size:.93rem;margin-top:.2rem}
+  .pager{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.25rem;border-top:1px solid var(--rule);font-size:.95rem}
+  .pager a{text-decoration:none;max-width:48%}.pager .n{margin-left:auto;text-align:right}
+  .refs{font-size:.9rem;color:var(--muted)}.refs li{text-align:left;margin-bottom:.35rem}
+  footer{margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--rule);color:var(--muted);font-size:.85rem}
+  footer p{text-align:left}
+  html[lang="vi"] .l-en, html[lang="en"] .l-vi{display:none!important}
+  .lang-switch{display:flex;gap:.25rem}
+  .lang-switch button{font:inherit;font-size:.8rem;font-weight:600;padding:.2rem .6rem;min-height:32px;border-radius:6px;cursor:pointer;border:1px solid var(--rule);background:var(--paper);color:var(--muted)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .topright{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="topbar"><a href="index.html">← Thi-Thanh-Huong Vo</a><div class="topright"><a href="processing.html"><span class="l-vi">Công nghệ chế tạo bán dẫn tiên tiến</span><span class="l-en">Advanced Semiconductor Processing Technology</span></a><div class="lang-switch" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="vi">VI</button></div></div></div>
+  <p class="kicker"><span class="l-vi">Phần 8 · Bài 3</span><span class="l-en">Part 8 · Lesson 3</span></p>
+  <h1><span class="l-vi">PVD: bay hơi, PLD và MBE</span><span class="l-en">PVD: evaporation, PLD and MBE</span></h1>
+  <p class="sub"><span class="l-vi">Bay hơi nhiệt và chùm electron, định luật cosin, lift-off, lắng đọng laser xung và epitaxy chùm phân tử.</span><span class="l-en">Thermal and e-beam evaporation, the cosine law, lift-off, pulsed laser deposition and molecular beam epitaxy.</span></p>
+</header>
+<div class="l-vi">
+<p class="lead">Lắng đọng vật lý từ pha hơi (PVD) đưa nguyên tử của vật liệu nguồn sang pha hơi bằng cách vật lý (nung nóng, bắn phá, chiếu laser) rồi cho chúng ngưng tụ trên đế, không cần phản ứng hóa học. Bài này nói về bay hơi nhiệt, bay hơi chùm electron, lắng đọng laser xung (PLD) và epitaxy chùm phân tử (MBE). Phún xạ, phương pháp PVD chính của vi mạch Si, có bài riêng.</p>
+
+<h2 id="v-s1">1. PVD trong chế tạo bán dẫn</h2>
+<div class="tablewrap"><table>
+<tr><th>Phương pháp</th><th>Cách tạo hơi</th><th>Dùng nhiều ở</th></tr>
+<tr><td>Bay hơi nhiệt</td><td>Nung nguồn bằng điện trở</td><td>Phòng thí nghiệm, kim loại có nhiệt độ nóng chảy thấp</td></tr>
+<tr><td>Bay hơi chùm electron</td><td>Chùm electron nung chảy cục bộ</td><td>Tiếp xúc kim loại với lift-off, quang học</td></tr>
+<tr><td>Phún xạ</td><td>Ion bắn phá bia</td><td>Kim loại hóa trong vi mạch Si</td></tr>
+<tr><td>MBE</td><td>Ống phát Knudsen trong chân không siêu cao</td><td>Epitaxy III-V, oxide</td></tr>
+<tr><td>PLD</td><td>Xung laser bóc lớp bia</td><td>Oxide phức tạp, nghiên cứu</td></tr>
+</table></div>
+
+<h2 id="v-s2">2. Bay hơi nhiệt</h2>
+<p>Thuyền hay sợi đốt bằng kim loại chịu nhiệt (W, Ta, Mo) được nung bằng dòng điện tới khi vật liệu nguồn (Al, Au, Ag...) bay hơi trong chân không; dòng hơi bay theo đường thẳng và phủ lên đế. Thông lượng bay hơi tỉ lệ với áp suất hơi \(p_e\) (phương trình Hertz–Knudsen):</p>
+$$\Phi=\frac{p_e}{\sqrt{2\pi mkT}}$$
+<p>Để có tốc độ lắng đọng dùng được, áp suất hơi của nguồn cần khoảng 10⁻² Torr; vì \(p_e\) tăng theo hàm mũ của nhiệt độ, chỉ cần thay đổi vài chục độ là tốc độ đổi nhiều lần. Với vật liệu có nhiệt độ nóng chảy cao (kim loại chịu nhiệt), thuyền nung cũng bay hơi theo, làm bẩn màng và nguồn.</p>
+<p><strong>Chân không và hướng bay.</strong> Áp suất nền khoảng 10⁻⁶ Torr cho quãng đường tự do trung bình cỡ hàng chục mét, lớn hơn nhiều khoảng cách nguồn–đế, nên nguyên tử bay thẳng không va chạm. Hệ quả: phủ bậc kém (vùng khuất không được phủ), nhưng lại rất hợp cho kỹ thuật lift-off. Độ dày trên đế phẳng theo định luật cosin của Knudsen, tỉ lệ \(\cos\theta\cos\varphi/r^2\); muốn đều thì đặt đế trên vòm cầu quay (planetary).</p>
+
+<h2 id="v-s3">3. Bay hơi chùm electron</h2>
+<p>Chùm electron phát từ sợi W, được gia tốc bởi điện áp cỡ 10 kV và bẻ cong bằng từ trường, nung chảy một vùng nhỏ trên bề mặt vật liệu nguồn. Nồi chứa (thường bằng đồng làm mát bằng nước) vẫn lạnh, nên bay hơi được cả kim loại chịu nhiệt và oxide mà không bị nhiễm bẩn từ nồi. Nhược điểm: electron năng lượng cao sinh tia X và electron thứ cấp, có thể làm hỏng wafer và tạo điện tích bẫy trong oxide cổng; thường phải ủ trong khí forming (khoảng 400 °C) sau đó.</p>
+
+<h2 id="v-s4">4. Lắng đọng laser xung (PLD)</h2>
+<p>Xung laser excimer UV (ví dụ KrF 248 nm, khoảng 10–30 ns) chiếu lên bia làm bốc hơi và ion hóa một lớp mỏng, tạo thành "chùm plasma" bay tới đế.</p>
+<ul>
+<li>Ưu điểm: bia gần như bất kỳ vật liệu nào; chuyển nguyên thành phần của vật liệu phức tạp (ví dụ siêu dẫn YBCO); làm việc trong mọi môi trường, từ chân không siêu cao đến vài trăm mTorr khí O₂; epitaxy ở nhiệt độ thấp; vật liệu tới theo từng "đợt", điều khiển được bằng thông số laser.</li>
+<li>Nhược điểm: nhiều hạt và khuyết tật (giọt bắn ra từ bia); khó làm diện tích lớn; cơ chế và sự phụ thuộc vào thông số chưa được hiểu đầy đủ; độ dày không đều (có lúc lại có lợi khi muốn lắng đọng nghiêng).</li>
+</ul>
+
+<h2 id="v-s5">5. Epitaxy chùm phân tử (MBE)</h2>
+<p>Trong chân không siêu cao (khoảng 10⁻¹⁰ Torr), các ống phát Knudsen nung vật liệu nguồn rắn để tạo chùm nguyên tử hay phân tử chiếu lên đế tinh thể được nung nóng. Nguyên tử trên bề mặt sạch di chuyển tự do cho tới khi gặp vị trí đúng trong mạng tinh thể; tăng trưởng xảy ra chủ yếu ở các mép bậc nguyên tử vì ở đó có nhiều liên kết hơn. Tốc độ rất chậm (khoảng 1 µm/giờ, tức cỡ một lớp nguyên tử mỗi giây), nên điều khiển được tới từng lớp; dao động cường độ nhiễu xạ RHEED cho phép đếm từng lớp khi đang mọc. MBE là công cụ của giếng lượng tử, siêu mạng và HEMT.</p>
+
+<div class="box ga"><p class="t">Góc nhìn Ga₂O₃</p>
+<p>MBE là một trong những phương pháp đầu tiên cho màng β-Ga₂O₃ đạt chất lượng linh kiện, dùng Ga kim loại với ozone hay plasma oxy làm nguồn oxy (Sasaki và cộng sự, 2012). Một chi tiết quan trọng: Ga₂O, một oxide bậc thấp dễ bay hơi, hình thành rồi giải hấp khỏi bề mặt, khiến tốc độ mọc giảm khi dư Ga hoặc ở nhiệt độ cao. Còn trong chế tạo linh kiện, bay hơi chùm electron kèm lift-off là cách phổ biến để làm tiếp xúc Schottky (Ni, Pt) và tiếp xúc ohmic (Ti/Au) trên Ga₂O₃, chính nhờ tính định hướng của nó.</p></div>
+
+<h2 id="v-s6">6. Bài tập</h2>
+<ol>
+<li>Ở 10⁻⁶ Torr, ước lượng quãng đường tự do trung bình. Khoảng cách nguồn–đế 50 cm có ổn không? Còn ở 10⁻³ Torr?</li>
+<li>Vì sao lift-off hợp với bay hơi chùm electron mà không hợp với phún xạ?</li>
+<li>Đế phẳng đặt ngay trên nguồn điểm, cách 40 cm. Độ dày ở điểm cách tâm đế 10 cm bằng bao nhiêu phần trăm độ dày ở tâm?</li>
+</ol>
+<details class="ans"><summary>Đáp án và hướng dẫn</summary>
+<p><strong>1.</strong> \(\lambda\approx5\times10^{-3}/10^{-6}=5000\) cm = 50 m, lớn hơn 50 cm rất nhiều: nguyên tử bay thẳng. Ở 10⁻³ Torr, \(\lambda\approx5\) cm: phần lớn nguyên tử va chạm trên đường đi, tán xạ, mất hướng, và màng dễ bị oxy hóa bởi khí dư.</p>
+<p><strong>2.</strong> Lift-off cần màng đứt ở mép cản quang để dung môi lọt vào hòa tan cản quang. Bay hơi có hướng bay thẳng nên không phủ lên thành (nhất là với cản quang có mép lõm, undercut). Phún xạ ở áp suất mTorr có góc tới rộng, phủ cả thành cản quang, làm màng liền và lift-off thất bại hay để lại "tai" kim loại.</p>
+<p><strong>3.</strong> Với nguồn điểm và đế phẳng song song: \(\cos\theta=\cos\varphi=h/r\), nên độ dày tỉ lệ \(h^2/r^4\). \(r=\sqrt{40^2+10^2}=41{,}2\) cm; tỉ số \((40/41{,}2)^4\approx0{,}89\). Độ dày ở mép chỉ khoảng 89 % ở tâm, vì vậy máy bay hơi dùng vòm quay.</p>
+</details>
+
+<h2 id="v-s7">Tài liệu tham khảo</h2>
+<ol class="refs">
+<li>W. S. Hwang, bài giảng <em>Fundamentals of Physical Vapor Deposition (PVD)</em>, Korea Aerospace University.</li>
+<li>M. Ohring, <em>Materials Science of Thin Films: Deposition and Structure</em>, 2nd ed., Academic Press (2002), chương 3 và 8.</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chương 9.</li>
+<li>K. Sasaki, A. Kuramata, T. Masui, E. G. Víllora, K. Shimamura, S. Yamakoshi, "Device-quality β-Ga₂O₃ epitaxial films fabricated by ozone molecular beam epitaxy," <em>Applied Physics Express</em> 5, 035502 (2012).</li>
+</ol>
+</div>
+<div class="l-en">
+<p class="lead">Physical vapor deposition (PVD) brings atoms of a source material into the vapor phase by physical means (heating, bombardment, laser light) and condenses them on a substrate, with no chemical reaction needed. This lesson covers thermal evaporation, electron-beam evaporation, pulsed laser deposition (PLD) and molecular beam epitaxy (MBE). Sputtering, the main PVD method of Si ICs, has its own lesson.</p>
+
+<h2 id="e-s1">1. PVD in semiconductor processing</h2>
+<div class="tablewrap"><table>
+<tr><th>Method</th><th>How the vapor is made</th><th>Mostly used for</th></tr>
+<tr><td>Thermal evaporation</td><td>Resistive heating of the source</td><td>Laboratories, low-melting metals</td></tr>
+<tr><td>E-beam evaporation</td><td>An electron beam melts a spot</td><td>Metal contacts with lift-off, optics</td></tr>
+<tr><td>Sputtering</td><td>Ions bombard a target</td><td>Metallization in Si ICs</td></tr>
+<tr><td>MBE</td><td>Knudsen effusion cells in ultra-high vacuum</td><td>III-V and oxide epitaxy</td></tr>
+<tr><td>PLD</td><td>Laser pulses ablate a target</td><td>Complex oxides, research</td></tr>
+</table></div>
+
+<h2 id="e-s2">2. Thermal evaporation</h2>
+<p>A boat or filament of a refractory metal (W, Ta, Mo) is heated by current until the source material (Al, Au, Ag...) evaporates in vacuum; the vapor stream travels in straight lines and coats the substrate. The evaporation flux is proportional to the vapor pressure \(p_e\) (Hertz–Knudsen equation):</p>
+$$\Phi=\frac{p_e}{\sqrt{2\pi mkT}}$$
+<p>A usable deposition rate needs a source vapor pressure of about 10⁻² Torr; since \(p_e\) rises exponentially with temperature, a few tens of degrees change the rate several-fold. For high-melting materials (refractory metals) the boat itself evaporates too, contaminating the film and the source.</p>
+<p><strong>Vacuum and directionality.</strong> A base pressure of about 10⁻⁶ Torr gives a mean free path of tens of metres, far longer than the source–substrate distance, so atoms fly straight without collisions. Consequences: poor step coverage (shadowed areas are not coated), but an ideal match for lift-off. Thickness on a flat substrate follows Knudsen's cosine law, proportional to \(\cos\theta\cos\varphi/r^2\); for uniformity the substrates sit on a rotating spherical dome (planetary).</p>
+
+<h2 id="e-s3">3. Electron-beam evaporation</h2>
+<p>Electrons from a W filament, accelerated by about 10 kV and bent by a magnetic field, melt a small spot on the source surface. The crucible (usually water-cooled copper) stays cold, so even refractory metals and oxides evaporate without crucible contamination. Drawback: the energetic electrons generate X-rays and secondary electrons that can damage the wafer and create trapped charge in gate oxides; a forming-gas anneal (around 400 °C) is often needed afterwards.</p>
+
+<h2 id="e-s4">4. Pulsed laser deposition (PLD)</h2>
+<p>UV excimer laser pulses (e.g. KrF 248 nm, about 10–30 ns) hit a target, vaporizing and ionizing a thin layer into a "plume" that flies to the substrate.</p>
+<ul>
+<li>Advantages: almost any target material; stoichiometric transfer of complex materials (e.g. the YBCO superconductor); works in any environment, from ultra-high vacuum to hundreds of mTorr of O₂; low-temperature epitaxy; material arrives in "bursts" controlled by the laser parameters.</li>
+<li>Drawbacks: many particulates and defects (droplets ejected from the target); hard to scale to large areas; mechanisms and parameter dependence not fully understood; uneven thickness (sometimes an advantage for tilted deposition).</li>
+</ul>
+
+<h2 id="e-s5">5. Molecular beam epitaxy (MBE)</h2>
+<p>In ultra-high vacuum (about 10⁻¹⁰ Torr), Knudsen effusion cells heat solid sources to make beams of atoms or molecules aimed at a heated crystalline substrate. Atoms on a clean surface move freely until they find their correct lattice site; growth happens mainly at atomic step edges, where there are more bonds. Growth is very slow (about 1 µm/hour, roughly one atomic layer per second), allowing layer-by-layer control; RHEED intensity oscillations count each layer as it grows. MBE is the tool for quantum wells, superlattices and HEMTs.</p>
+
+<div class="box ga"><p class="t">Ga₂O₃ perspective</p>
+<p>MBE was one of the first methods to give device-quality β-Ga₂O₃ films, using Ga metal with ozone or an oxygen plasma as the oxygen source (Sasaki et al., 2012). An important detail is that formation and desorption of volatile Ga₂O at the surface makes the growth rate fall under Ga-rich conditions or at high temperature. In device fabrication, e-beam evaporation with lift-off is the usual way to make Schottky (Ni, Pt) and ohmic (Ti/Au) contacts on Ga₂O₃, precisely because it is directional.</p></div>
+
+<h2 id="e-s6">6. Exercises</h2>
+<ol>
+<li>Estimate the mean free path at 10⁻⁶ Torr. Is a 50 cm source–substrate distance fine? And at 10⁻³ Torr?</li>
+<li>Why does lift-off suit e-beam evaporation but not sputtering?</li>
+<li>A flat substrate sits directly above a point source, 40 cm away. What fraction of the centre thickness is deposited 10 cm off centre?</li>
+</ol>
+<details class="ans"><summary>Answers and hints</summary>
+<p><strong>1.</strong> \(\lambda\approx5\times10^{-3}/10^{-6}=5000\) cm = 50 m, far more than 50 cm: atoms fly straight. At 10⁻³ Torr, \(\lambda\approx5\) cm: most atoms collide on the way, scatter, lose direction, and the film is easily oxidized by residual gas.</p>
+<p><strong>2.</strong> Lift-off needs the film to break at the resist edge so the solvent can reach and dissolve the resist. Evaporation is line-of-sight and does not coat the sidewalls (especially with an undercut resist profile). Sputtering at mTorr pressures has a broad arrival-angle distribution, coats the resist sidewalls and makes a continuous film, so lift-off fails or leaves metal "ears".</p>
+<p><strong>3.</strong> For a point source and a parallel flat substrate, \(\cos\theta=\cos\varphi=h/r\), so thickness goes as \(h^2/r^4\). \(r=\sqrt{40^2+10^2}=41.2\) cm; the ratio is \((40/41.2)^4\approx0.89\). The edge gets only about 89 % of the centre thickness, which is why evaporators use rotating domes.</p>
+</details>
+
+<h2 id="e-s7">References</h2>
+<ol class="refs">
+<li>W. S. Hwang, lecture <em>Fundamentals of Physical Vapor Deposition (PVD)</em>, Korea Aerospace University.</li>
+<li>M. Ohring, <em>Materials Science of Thin Films: Deposition and Structure</em>, 2nd ed., Academic Press (2002), chapters 3 and 8.</li>
+<li>J. D. Plummer, M. D. Deal, P. B. Griffin, <em>Silicon VLSI Technology</em>, Prentice Hall (2000), chapter 9.</li>
+<li>K. Sasaki, A. Kuramata, T. Masui, E. G. Víllora, K. Shimamura, S. Yamakoshi, "Device-quality β-Ga₂O₃ epitaxial films fabricated by ozone molecular beam epitaxy," <em>Applied Physics Express</em> 5, 035502 (2012).</li>
+</ol>
+</div>
+<nav class="pager"><a href="plasma-discharge.html">← <span class="l-vi">Tạo plasma, vỏ Debye và phóng điện</span><span class="l-en">Plasma generation, sheaths and discharges</span></a><a class="n" href="sputtering.html"><span class="l-vi">Phún xạ: nguyên lý và ứng dụng</span><span class="l-en">Sputtering: fundamentals and applications</span> →</a></nav>
+<footer><p><span class="l-vi">Biên soạn dựa trên học phần của GS. Wan Sik Hwang, Korea Aerospace University. Nội dung do Thi-Thanh-Huong Vo viết bằng tiếng Việt. Hình minh họa được vẽ lại cho trang này.</span><span class="l-en">Based on the course by Prof. Wan Sik Hwang, Korea Aerospace University. Written by Thi-Thanh-Huong Vo. Figures were redrawn for this page.</span></p></footer>
+</main>
+
+<script>
+(function(){
+  var T={vi:document.documentElement.dataset.titleVi,en:document.documentElement.dataset.titleEn};
+  function apply(l){document.documentElement.lang=l;document.title=T[l]+' · Thi-Thanh-Huong Vo';
+    document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.lang===l?'true':'false')});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.lang)})});
+  var s='en';try{s=localStorage.getItem('lang')||'en'}catch(e){}
+  apply(s==='vi'?'vi':'en');
+})();
+</script>
+</body>
+</html>
